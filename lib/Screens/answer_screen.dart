@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app_q_n_a/question_tile.dart';
+import 'package:app_q_n_a/item/question_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AnswerScreen extends StatefulWidget {

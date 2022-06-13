@@ -1,10 +1,10 @@
-import 'package:app_q_n_a/filter.dart';
+import 'package:app_q_n_a/Screens/filter.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'login.dart';
-import 'add_question.dart';
-import 'package:app_q_n_a/registration.dart';
-import 'answer_screen.dart';
+import 'Screens/home.dart';
+import 'Screens/login.dart';
+import 'Screens/add_question.dart';
+import 'package:app_q_n_a/Screens/registration.dart';
+import 'Screens/answer_screen.dart';
 void main() {
   runApp( MyApp());
 }

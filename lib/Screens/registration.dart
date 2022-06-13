@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'button.dart';
-import 'input_text.dart';
+import '../item/button.dart';
+import '../item/input_text.dart';
 
 late bool userShow;
 late bool spShow;

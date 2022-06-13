@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:app_q_n_a/question_list.dart';
-import 'header.dart';
+import 'package:app_q_n_a/item/question_list.dart';
+import '../item/header.dart';
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
