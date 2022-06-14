@@ -25,11 +25,11 @@ class MyApp extends StatelessWidget {
       home:
         // Filter(),
       // LoginScreen(),
-      // HomeScreen(),
+      HomeScreen(),
       // RegistrationScreen(),
       // AddQuestion(),
       // AnswerScreen(),
-      Add_Answer_Screen(),
+      // Add_Answer_Screen(),
     );
 
   }

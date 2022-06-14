@@ -17,7 +17,9 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         backgroundColor: Colors.orangeAccent.shade100,
         title: Text('Trả lời'),
         leading: IconButton(
-            onPressed: () {}, icon: Icon(Icons.arrow_back_ios_new_rounded)),
+            onPressed: () {
+              Navigator.pop(context);
+            }, icon: Icon(Icons.arrow_back_ios_new_rounded)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

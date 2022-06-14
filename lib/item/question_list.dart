@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/question_tile.dart';
 
-Widget ListQuestion() {
+Widget ListQuestion({required Function() ontap}) {
   return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -15,7 +15,7 @@ Widget ListQuestion() {
             lop: 7,
             money: 50,
             time: '1h trước',
-            ontap: (){print('hello');},
+            ontap:ontap ,
             question: 'Đây là câu hỏi',
             attach: true,
             attachCount: 1,

@@ -52,7 +52,9 @@ class _AddQuestionState extends State<AddQuestion> {
         backgroundColor: Colors.orangeAccent.shade100,
         title: Text('Đăng câu hỏi'),
         leading: IconButton(
-            onPressed: () {}, icon: Icon(Icons.arrow_back_ios_new_rounded)),
+            onPressed: () {
+              Navigator.pop(context);
+            }, icon: Icon(Icons.arrow_back_ios_new_rounded)),
       ),
       body: SingleChildScrollView(
         child: Padding(

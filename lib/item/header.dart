@@ -1,11 +1,17 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:app_q_n_a/Screens/filter.dart';
+Widget Header(BuildContext context){
 
-Widget Header(){return
+  return
   Row(
     children: [
       FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Filter()));
+          },
           child: Container(
             width: 100,
             child: Row(

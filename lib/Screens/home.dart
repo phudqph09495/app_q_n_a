@@ -1,7 +1,10 @@
+import 'package:app_q_n_a/Screens/answer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_q_n_a/item/question_list.dart';
 import '../item/header.dart';
+import 'add_question.dart';
+import 'add_answer.dart';
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -12,7 +15,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddQuestion()));
+        },
         label: Text('Đặt câu hỏi'),
         icon: Icon(Icons.add),
         
@@ -35,8 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Header(),
-              ListQuestion(),
+             Header(context),
+              ListQuestion(ontap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AnswerScreen()));
+              }),
 
             ],
           ),

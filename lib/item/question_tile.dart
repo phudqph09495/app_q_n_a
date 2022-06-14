@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
 
 Widget QuestionTile(
     {required String mon,
     String? username,
-      required String deadline,
+    required String deadline,
     required int lop,
     required int money,
     required String time,
@@ -46,10 +47,21 @@ Widget QuestionTile(
                     : Text('')
               ],
             ),
-           
-            Text(deadline,style: TextStyle(color: Colors.black.withOpacity(0.3)),),
-            SizedBox(height: 5,),
-            Text(question),
+            Text(
+              deadline,
+              style: TextStyle(color: Colors.black.withOpacity(0.3)),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            ReadMoreText(
+              question,
+              trimLines: 1,
+              colorClickableText: Colors.pink,
+              trimMode: TrimMode.Line,
+              trimCollapsedText: 'Show more',
+              trimExpandedText: 'Show less',
+            ),
             SizedBox(
               height: 10,
             ),
