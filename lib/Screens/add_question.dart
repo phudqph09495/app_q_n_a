@@ -26,7 +26,7 @@ class _AddQuestionState extends State<AddQuestion> {
     'Sử học',
     'Địa lý',
     'Tiếng Anh',
-    'Tin học'
+    'Tin học','GDCD','Công nghệ','Âm nhạc','Mỹ thuật'
   ];
   String lop = 'Lớp 1';
   List<String> lopList = [
@@ -141,7 +141,7 @@ class _AddQuestionState extends State<AddQuestion> {
                     hint: 'Nhập câu hỏi của bạn',
                     controller: ques,
                     height: 130,
-                    maxline: 5),
+                    maxline: null),
                 Row(
                   children: [
                     IconButton(
