@@ -194,12 +194,11 @@ class _AddQuestionState extends State<AddQuestion> {
                         itemBuilder: (BuildContext context, int index) {
                           return Image.file(
                             File(_imageFileList![index].path),
-                            height: 10,
-                            width: 10,
+
                           );
                         })
-                    : Text(''),
-
+                    : SizedBox(),
+SizedBox(height: 30,),
 
 
 

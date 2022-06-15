@@ -49,6 +49,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
               height: 30,
@@ -89,12 +90,11 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                         itemBuilder: (BuildContext context, int index) {
                           return Image.file(
                             File(_imageFileList![index].path),
-                            height: 10,
-                            width: 10,
+
                           );
                         }),
                   )
-                : Text(''),
+                : SizedBox(),
             Button1(
                 colorButton: Colors.orangeAccent,
                 textColor: Colors.white,
