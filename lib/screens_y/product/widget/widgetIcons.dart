@@ -1,23 +1,38 @@
+import 'package:app_q_n_a/item/load_image.dart';
 import 'package:flutter/material.dart';
 
 Widget getProfileView() {
   return Stack(
     children: [
-      const CircleAvatar(
-        radius: 32,
-        backgroundColor: Colors.white,
-        child: Icon(Icons.person_outline_rounded),
+      Container(
+        width: 70,
+        height: 70,
+        margin: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: LoadImage(
+            url:
+                "https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg",
+            width: 70,
+            height: 70,
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
       Positioned(
-          bottom: 1,
-          right: 1,
+          bottom: 0,
+          right: 0,
           child: Container(
-            height: 30,
-            width: 30,
-            child: Icon(
+            height: 20,
+            width: 20,
+            child: const Icon(
               Icons.edit,
               color: Colors.white,
-              size: 20,
+              size: 15,
             ),
             decoration: const BoxDecoration(
               color: Colors.lightGreen,

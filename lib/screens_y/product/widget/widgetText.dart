@@ -1,41 +1,41 @@
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import '../../../screens_y/product/widget/widgetIcons.dart';
 
 Widget getAppBottomView() {
   return Container(
-    padding: const EdgeInsets.only(left: 30, bottom: 20),
+    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
     child: Row(
       children: [
         getProfileView(),
-        Container(
-          margin: const EdgeInsets.only(left: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                'Họ và tên:',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white),
-              ),
-              Text(
-                'Id thành viên',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.white,
+        const SizedBox(width: 10,),
+        Expanded(
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Họ và tên:',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: StyleApp.textStyle700(color: Colors.white,fontSize: 16),
                 ),
-              ),
-              Text(
-                'Điểm',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.white,
+                Text(
+                  'Id thành viên',maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: StyleApp.textStyle700(color: Colors.white,fontSize: 16),
                 ),
-              ),
-            ],
+                Text(
+                  'Điểm',maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: StyleApp.textStyle700(color: Colors.white,fontSize: 16),
+                ),
+              ],
+            ),
           ),
-        )
+        ),
+        const SizedBox(width: 10,),
+        IconButton(onPressed: (){}, icon: const Icon(Icons.settings, color: Colors.white,))
       ],
     ),
   );

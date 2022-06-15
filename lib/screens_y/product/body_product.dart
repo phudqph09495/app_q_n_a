@@ -1,5 +1,6 @@
+import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../navigation/screenNavigation.dart';
 import '../../screens_y/product/widget/widgetText.dart';
 
 class BodyProduct extends StatefulWidget {
@@ -10,134 +11,143 @@ class BodyProduct extends StatefulWidget {
 }
 
 class _BodyProductState extends State<BodyProduct> {
-  bool _expanded = false;
-  var _test = "Full Screen";
   int index = 0;
+
+  List<TitleAccount> titleAccount = [
+    TitleAccount(iconData: CupertinoIcons.person, title: "Trang cá nhân"),
+    TitleAccount(iconData: Icons.edit_outlined, title: "Chỉnh sửa cá nhân"),
+    TitleAccount(iconData: Icons.bookmark_border, title: "Câu hỏi đã lưu"),
+  ];
+
+  List<TitleAccount> titleApp = [
+    TitleAccount(iconData: CupertinoIcons.bubble_left, title: "Hướng dẫn sử dụng"),
+    TitleAccount(iconData: CupertinoIcons.square_list, title: "Điều khoản"),
+    TitleAccount(iconData: Icons.checklist, title: "Nội quy"),
+    TitleAccount(iconData: CupertinoIcons.share, title: "Chia sẻ ứng dụng"),
+    TitleAccount(iconData: CupertinoIcons.star, title: "Bình chọn 5*"),
+    TitleAccount(iconData: CupertinoIcons.chat_bubble, title: "Liên hệ và góp ý"),
+  ];
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black45,
+      backgroundColor: ColorApp.main,
       appBar: AppBar(
-        backgroundColor: Colors.grey,
-        centerTitle: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(1),
-          ),
-        ),
+        backgroundColor: ColorApp.blue00,
         bottom: PreferredSize(
           child: getAppBottomView(),
           preferredSize: const Size.fromHeight(50.0),
         ),
       ),
-      body: Column(
-        children: const [
-          ExpansionTile(
-            iconColor: Colors.white,
-            title: Text(
-              'Cá Nhân',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: ListTileTheme(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                dense: true,
+                child: ExpansionTile(
+                  iconColor: Colors.white,
+                  collapsedIconColor: Colors.white,
+                  title: Text(
+                    'Cá Nhân',
+                    style: StyleApp.textStyle700(
+                        color: Colors.white, fontSize: 16),
+                  ),
+                  children: List.generate(
+                    titleAccount.length,
+                        (index) => _buildItem(
+                      title: titleAccount[index].title,
+                      iconData: titleAccount[index].iconData,
+                    ),
+                  ),
+                ),
               ),
             ),
-            children: [
-              ListTile(
-                title: Text(
-                  'Trang cá nhân',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
+            const SizedBox(
+              height: 12,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: ListTileTheme(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                dense: true,
+                child: ExpansionTile(
+                  iconColor: Colors.white,
+                  collapsedIconColor: Colors.white,
+                  title: Text(
+                    'Về ứng dụng',
+                    style: StyleApp.textStyle700(
+                        color: Colors.white, fontSize: 16),
+                  ),
+                  children: List.generate(
+                    titleApp.length,
+                    (index) => _buildItem(
+                      title: titleApp[index].title,
+                      iconData: titleApp[index].iconData,
+                    ),
+                  ),
                 ),
-                leading: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  'Chỉnh sửa cá nhân',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                ),
-                leading: Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  'Câu hỏi đã lưu',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                ),
-                leading: Icon(
-                  Icons.bookmark,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          ExpansionTile(
-            iconColor: Colors.white,
-            title: Text(
-              'Về Ứng dụng',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
               ),
             ),
-            children: [
-              ListTile(
-                title: Text(
-                  'Hướng dẫn sử dụng',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                ),
-                leading: Icon(
-                  Icons.menu_book,
-                  color: Colors.white,
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  'Nội quy',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                ),
-                leading: Icon(
-                  Icons.animation,
-                  color: Colors.white,
+            const SizedBox(
+              height: 12,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: ListTileTheme(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                dense: true,
+                child: ExpansionTile(
+                  iconColor: Colors.white,
+                  collapsedIconColor: Colors.white,
+                  trailing: const SizedBox(),
+                  leading: const Icon(Icons.logout, color: Colors.white,size: 16),
+                  title: Text(
+                    'Đăng xuất',
+                    style: StyleApp.textStyle700(
+                        color: Colors.white, fontSize: 16),
+                  ),
                 ),
               ),
-              ListTile(
-                title: Text(
-                  'Phiên bản ứng dụng',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                ),
-                leading: Icon(
-                  Icons.alternate_email_rounded,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  _buildItem({required String title, required IconData iconData}) {
+    return ListTile(
+      title: Text(
+        title,
+        style: StyleApp.textStyle500(
+          color: Colors.white,
+        ),
+      ),
+      leading: Icon(
+        iconData,
+        color: Colors.white,
+        size: 16,
+      ),
+    );
+  }
+
+}
+
+class TitleAccount {
+  String title;
+  IconData iconData;
+
+  TitleAccount({required this.iconData, required this.title});
 }
