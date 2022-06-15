@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
@@ -23,10 +24,14 @@ Widget QuestionTile(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                Expanded(child: Text(
                   '$mon - lớp $lop - $moneyđ - $time trước',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
                 ),
                 attach
                     ? Row(
@@ -35,16 +40,21 @@ Widget QuestionTile(
                           Text('$attachCount ')
                         ],
                       )
-                    : Text(''),
+                    : const SizedBox(),
                 first
                     ? Container(
-                        child: Text(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(2)
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 3,vertical: 2),
+                  child: const Text(
                           ' Lần đầu hỏi',
                           style: TextStyle(color: Colors.white),
                         ),
-                        color: Colors.green,
+
                       )
-                    : Text('')
+                    : const SizedBox(),
               ],
             ),
             Text(
@@ -59,6 +69,7 @@ Widget QuestionTile(
               trimLines: 1,
               colorClickableText: Colors.pink,
               trimMode: TrimMode.Line,
+              style: StyleApp.textStyle500(),
               trimCollapsedText: 'Show more',
               trimExpandedText: 'Show less',
             ),

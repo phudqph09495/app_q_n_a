@@ -1,10 +1,13 @@
 import 'package:app_q_n_a/Screens/answer_screen.dart';
+import 'package:app_q_n_a/item/load_image.dart';
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_q_n_a/item/question_list.dart';
 import '../item/header.dart';
 import 'add_question.dart';
 import 'add_answer.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -16,23 +19,52 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddQuestion()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddQuestion()));
         },
         label: Text('Đặt câu hỏi'),
         icon: Icon(Icons.add),
-        
       ),
-      backgroundColor: Colors.orangeAccent,
+      backgroundColor: ColorApp.main,
       appBar: AppBar(
-        backgroundColor: Colors.orangeAccent.shade100,
+        backgroundColor: ColorApp.main,
         elevation: 0,
+        title: LoadImage(
+          url: "https://hoidap247.com/static/img/logo_h247.png",
+          height: 30,
+          fit: BoxFit.fitHeight,
+          alignment: Alignment.centerLeft,
+        ),
+        centerTitle: false,
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            width: 35,
+            height: 35,
+            alignment: Alignment.center,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0)),
+                padding: const EdgeInsets.all(5),
+              ),
+              onPressed: () {
+                print("search");
+              },
+              child: const Icon(
                 Icons.search,
-                color: Colors.black.withOpacity(0.5),
-              ))
+                color: ColorApp.main,
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -40,11 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.all(8.0),
           child: Column(
             children: [
-             Header(context),
-              ListQuestion(ontap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>AnswerScreen()));
-              }),
-
+              Header(context),
+              ListQuestion(
+                ontap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AnswerScreen()));
+                },
+              ),
             ],
           ),
         ),

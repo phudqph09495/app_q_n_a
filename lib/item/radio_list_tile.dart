@@ -4,7 +4,8 @@ class RadioTile extends StatefulWidget {
   var index;
   var groupValue;
   String title;
-  RadioTile({this.index, this.groupValue, required this.title});
+  ValueChanged onChange;
+  RadioTile({this.index, this.groupValue, required this.title, required this.onChange});
   @override
   State<RadioTile> createState() => _RadioTileState();
 }
@@ -18,10 +19,7 @@ class _RadioTileState extends State<RadioTile> {
         value: widget.index,
         title: Container(child: Text(widget.title)),
         groupValue: widget.groupValue,
-        onChanged: (ind) {
-          setState((){
-            widget.groupValue=ind;
-          });
-        });
+        onChanged: widget.onChange
+      ,);
   }
 }

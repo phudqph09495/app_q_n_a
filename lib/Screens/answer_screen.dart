@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/question_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,13 +14,11 @@ class _AnswerScreenState extends State<AnswerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orangeAccent,
+      backgroundColor: ColorApp.main,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.orangeAccent.shade100,
-        title: Text('Trả lời'),
-        leading: IconButton(
-            onPressed: () {}, icon: Icon(Icons.arrow_back_ios_new_rounded)),
+        backgroundColor: ColorApp.main,
+        title:const Text('Trả lời'),
       ),
       body: SingleChildScrollView(
         child: Padding(

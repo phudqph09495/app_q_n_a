@@ -13,37 +13,18 @@ Widget Header(BuildContext context){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>Filter()));
           },
           child: Container(
-            width: 100,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5)
+            ),
+            padding: const  EdgeInsets.symmetric(vertical: 3,horizontal: 7),
+            alignment: Alignment.center,
             child: Row(
-              children: [
+              children: const [
                 Icon(Icons.menu_open_sharp),
                 Text('Lọc câu hỏi')
               ],
             ),
           )),
-      MaterialButton(
-          color: Colors.black.withOpacity(0.1),
-          minWidth: 20,
-          onPressed: () {},
-          child: Text(
-            'X2',
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          )),
-      SizedBox(
-        width: 35,
-      ),
-      FlatButton(
-          onPressed: () {},
-          child: Container(
-            child: Row(
-              children: [
-                Text('Top thành viên'),
-                FaIcon(
-                  FontAwesomeIcons.trophy,
-                  color: Colors.black.withOpacity(0.5),
-                ),
-              ],
-            ),
-          ))
     ],
   );}

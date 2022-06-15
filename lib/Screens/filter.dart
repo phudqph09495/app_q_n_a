@@ -69,19 +69,18 @@ class _FilterState extends State<Filter> {
             padding: EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Filter_List(
+                FilterList(
                     column: 2,
                     list: status,
-                    groupValue: 0,
                     title: 'Trạng thái câu hỏi'),
                 SizedBox(
                   height: 40,
                 ),
-                Filter_List(title: 'Lớp', column: 3, list: lop,groupValue: 0),
+                FilterList(title: 'Lớp', column: 3, list: lop,),
                 SizedBox(
                   height: 40,
                 ),
-                Filter_List(title: 'Môn học', column: 3, list: monList, groupValue: 0),
+                FilterList(title: 'Môn học', column: 3, list: monList, ),
                 SizedBox(height: 100,),
                 Button1(colorButton: Colors.blue, textColor: Colors.white, textButton: 'Lọc tìm kiếm')
               ],

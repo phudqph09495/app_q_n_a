@@ -136,55 +136,8 @@ class _BodyProductState extends State<BodyProduct> {
               ),
             ],
           ),
-
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Trang chủ",
-              backgroundColor: Colors.red),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              label: "Thông báo",
-              backgroundColor: Colors.red),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "Tài khoản",
-              backgroundColor: Colors.red),
-        ],
-        currentIndex: 2,
-      ),
-      // child: SizedBox(
-      //   width: 450,
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //     children: [
-      //       DropdownButton(
-      //         // Initial Value
-      //         value: dropdownvalue,
-      //         // Down Arrow Icon
-      //         icon: const Icon(Icons.keyboard_arrow_down),
-      //
-      //         // Array list of items
-      //         items: items.map((String items) {
-      //           return DropdownMenuItem(
-      //             value: items,
-      //             child: Text(items),
-      //           );
-      //         }).toList(),
-      //         // After selecting the desired option,it will
-      //         // change button value to selected value
-      //         onChanged: (String? newValue) {
-      //           setState(() {
-      //             dropdownvalue = newValue!;
-      //           });
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
