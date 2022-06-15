@@ -1,4 +1,5 @@
 import 'package:app_q_n_a/Screens/answer_screen.dart';
+import 'package:app_q_n_a/Screens/search_screen.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'add_question.dart';
 import 'add_answer.dart';
 
 class HomeScreen extends StatefulWidget {
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -55,6 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onPressed: () {
                 print("search");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SearchScreen()));
+
               },
               child: const Icon(
                 Icons.search,

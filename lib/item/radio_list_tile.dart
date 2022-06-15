@@ -16,10 +16,10 @@ class _RadioTileState extends State<RadioTile> {
     return RadioListTile<int>(
       dense: true,
       toggleable: true,
-        value: widget.index,
-        title: Container(child: Text(widget.title)),
-        groupValue: widget.groupValue,
-        onChanged: widget.onChange
+      value: widget.index,
+      title: Container(child: Text(widget.title)),
+      groupValue: widget.groupValue,
+      onChanged: widget.onChange
       ,);
   }
 }

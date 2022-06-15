@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.orangeAccent.shade100,
@@ -30,9 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 50,
-            ),
+
             Text(
               'Đăng nhập với',
               style: TextStyle(
@@ -47,19 +46,19 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  onPressed: () {},
-                  icon: Image.network(
-                      'http://pngimg.com/uploads/google/google_PNG19635.png'),
-                  iconSize: 60,
+                  onPressed: () {
+
+                  },
+                  icon: Image.asset('images/Google.png',),
+
                 ),
                 SizedBox(
                   width: 70,
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Image.network(
-                      'https://atpsoftware.vn/wp-content/uploads//2021/03/1200px-Facebook_Logo_2019.png'),
-                  iconSize: 60,
+                  icon: Image.asset('images/Facebook.png'),
+
                 ),
               ],
             ),
@@ -71,8 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 18),
             ),
             InputText(
-                hasPass: false, hint: 'Tên đăng nhập', controller: username),
-            InputText(hasPass: true, hint: 'Mật khẩu', controller: password),
+                hasPass: false, hint: 'Tên đăng nhập', controller: username,maxline: 1),
+            InputText(hasPass: true, hint: 'Mật khẩu', controller: password,maxline: 1),
             Row(
               children: [
                 SizedBox(

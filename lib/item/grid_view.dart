@@ -34,7 +34,7 @@ class _FilterListState extends State<FilterList> {
                 widget.title,
                 style: GoogleFonts.nunito(
                     textStyle:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               ),
             ),
             GridView.builder(

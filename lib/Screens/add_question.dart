@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../item/dropdown_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../item/input_text.dart';
@@ -43,6 +46,28 @@ class _AddQuestionState extends State<AddQuestion> {
     'Lớp 11',
     'Lớp 12',
   ];
+  final ImagePicker _picker = ImagePicker();
+  List<XFile>? _imageFileList = [];
+  Future selectImageGallery() async {
+    final List<XFile>? selectedImage = await _picker.pickMultiImage();
+    if (selectedImage!.isNotEmpty) {
+      _imageFileList!.addAll(selectedImage);
+    }
+    setState((){});
+    print(_imageFileList!.length.toString());
+  }
+
+  Future selectImageCamera()async{
+    final image=await _picker.pickImage(source: ImageSource.camera);
+    if (image==null) return;
+    _imageFileList?.add(image);
+    setState((){});
+  }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -147,13 +172,13 @@ class _AddQuestionState extends State<AddQuestion> {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {selectImageCamera();},
                         icon: Icon(
                           Icons.camera_alt,
                           size: 30,
                         )),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {selectImageGallery();},
                         icon: Icon(
                           Icons.image,
                           size: 30,
@@ -161,12 +186,24 @@ class _AddQuestionState extends State<AddQuestion> {
                   ],
                 ),
 
+                _imageFileList!.isNotEmpty
+                    ? GridView.builder(itemCount: _imageFileList!.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Image.file(
+                            File(_imageFileList![index].path),
+                            height: 10,
+                            width: 10,
+                          );
+                        })
+                    : Text(''),
 
 
 
-                SizedBox(
-                  height: 50,
-                ),
+
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

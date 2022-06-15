@@ -1,5 +1,6 @@
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
 
 Widget QuestionTile(
@@ -66,7 +67,8 @@ Widget QuestionTile(
             ),
             ReadMoreText(
               question,
-              trimLines: 1,
+              trimLines: 2,
+
               colorClickableText: Colors.pink,
               trimMode: TrimMode.Line,
               style: StyleApp.textStyle500(),

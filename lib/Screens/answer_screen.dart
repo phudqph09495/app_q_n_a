@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:readmore/readmore.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class AnswerScreen extends StatefulWidget {
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
@@ -22,7 +23,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(8),
+
+          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -35,8 +37,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   deadline: 'Đây là deadline',
                   question: 'Đây là câu hỏi',
                   hasImage: true,
-                  imageQues:
+                  image:
                       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'),
+              SizedBox(height: 10,),
               Button1(
                 ontap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Add_Answer_Screen()));
@@ -44,18 +47,25 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   colorButton: Colors.blue,
                   textColor: Colors.white,
                   textButton: 'Viết câu trả lời'),
+              SizedBox(height: 10,),
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 20,
                   itemBuilder: (context, index) {
-                    return CardWidget(
-                        avatar: 'https://tinypng.com/images/social/website.jpg',
-                        user: 'người trả lời',
-                        time: '12:00 14/06/2022',
-                        deadline: '',
-                        question: 'đây là câu trả lời',
-                        type: false);
+                    return Column(
+                      children: [
+                        CardWidget(
+                            avatar: 'https://tinypng.com/images/social/website.jpg',
+                            user: 'người trả lời',
+                            time: '12:00 14/06/2022',
+                            hasImage: true,
+                            image:'https://tinypng.com/images/social/website.jpg',
+                            question: 'đây là câu trả lời',
+                            type: false),
+                        SizedBox(height: 10,)
+                      ],
+                    );
                   })
             ],
           ),
@@ -69,11 +79,11 @@ Widget CardWidget({
   required String avatar,
   required String user,
   required String time,
-  required String deadline,
+   String? deadline,
   required String question,
   required bool type,
   bool hasImage = false,
-  String? imageQues,
+  String? image,
 }) {
   return Card(
     child: Padding(
@@ -109,14 +119,29 @@ Widget CardWidget({
               ),
             ],
           ),
-          Text(
-            deadline,
+         type? Text(
+            deadline!,
             style: GoogleFonts.nunito(
                 textStyle: TextStyle(
               color: Colors.black,
               fontSize: 16,
             )),
-          ),
+          ):RatingBar.builder(
+           initialRating: 3,
+           minRating: 1,
+           itemSize: 20,
+           direction: Axis.horizontal,
+           allowHalfRating: true,
+           itemCount: 5,
+           itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+           itemBuilder: (context, _) => Icon(
+             Icons.star,
+             color: Colors.amber,
+           ),
+           onRatingUpdate: (rating) {
+             print(rating);
+           },
+         ),
           ReadMoreText(
             question,
             trimLines: 2,
@@ -130,7 +155,7 @@ Widget CardWidget({
               fontSize: 16,
             )),
           ),
-          hasImage ? Image(image: NetworkImage(imageQues!)) : Container(),
+          hasImage ? Image(image: NetworkImage(image!)) : Container(),
           SizedBox(
             height: 10,
           )
