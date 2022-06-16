@@ -4,7 +4,7 @@ import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../screens_y/product/widget/widgetText.dart';
+import '../../widget/widget_info/widgetText.dart';
 
 class BodyProduct extends StatefulWidget {
   const BodyProduct({Key? key}) : super(key: key);
@@ -132,11 +132,10 @@ class _BodyProductState extends State<BodyProduct> {
                 colorButton: Colors.red,
                 textColor: Colors.white,
                 textButton: 'Đăng nhập',
-              ontap: (){
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => LoginScreen()));
-              }
-            ),
+                ontap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                }),
             SizedBox(
               height: 30,
             ),
@@ -144,10 +143,12 @@ class _BodyProductState extends State<BodyProduct> {
                 colorButton: Colors.blue,
                 textColor: Colors.white,
                 textButton: 'Đăng ký',
-            ontap: (){
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => RegistrationScreen()));
-            }),
+                ontap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegistrationScreen()));
+                }),
           ],
         ),
       ),

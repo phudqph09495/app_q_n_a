@@ -2,8 +2,8 @@ import 'package:app_q_n_a/Screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../screens_y/product/body_product.dart';
-import '../screens_y/product/widget/notification.dart';
+import 'Screens_TaiKhoan/body_product.dart';
+import 'Screens_Notification/notification.dart';
 import '../styles/init_style.dart';
 
 class ScreenHome extends StatefulWidget {
@@ -30,10 +30,10 @@ class _ScreenHomeState extends State<ScreenHome> {
           setState(() {});
         },
         elevation: 4,
-        backgroundColor: Colors.white,
+        backgroundColor: ColorApp.main,
         currentIndex: index,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: ColorApp.main,
+        selectedItemColor: ColorApp.whiteF0,
         selectedLabelStyle:
             StyleApp.textStyle400(color: ColorApp.main, fontSize: 12),
         unselectedItemColor: Colors.grey,

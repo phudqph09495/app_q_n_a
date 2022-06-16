@@ -1,7 +1,10 @@
-import 'package:app_q_n_a/screens_y/product/widget/sk_list.dart';
+import 'package:app_q_n_a/widget/DuaTopList.dart';
+import 'package:app_q_n_a/widget/ThongBaoList.dart';
+import 'package:app_q_n_a/widget/inFo_list.dart';
+import 'package:app_q_n_a/widget/sk_list.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/material.dart';
-import '../../../styles/init_style.dart';
+import '../../styles/init_style.dart';
 
 class Notificationbar extends StatefulWidget {
   const Notificationbar({Key? key}) : super(key: key);
@@ -17,7 +20,7 @@ class _NotificationbarState extends State<Notificationbar> {
       length: 4,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: ColorApp.blue00,
+          backgroundColor: ColorApp.main,
           appBar: const PreferredSize(
             preferredSize: Size(double.infinity, 80),
             child: TabBar(
@@ -50,42 +53,45 @@ class _NotificationbarState extends State<Notificationbar> {
           ),
           body: TabBarView(
             children: [
-              Container(
-                child: const Center(
-                  child: Text(
-                    'Người Dùng',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: <Widget>[
+                      inFoList(onTap: () {}),
+                    ],
                   ),
                 ),
-                color: ColorApp.main,
               ),
               SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       skListQuestion(onTap: () {}),
                     ],
                   ),
                 ),
               ),
-              Container(
-                child: const Center(
-                  child: Text(
-                    'Kết quả đua top',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Column(
+                    children: <Widget>[
+                      DuaTopList(onTap: () {}),
+                    ],
                   ),
                 ),
-                color: ColorApp.main,
               ),
-              Container(
-                child: const Center(
-                  child: Text(
-                    'Thông báo',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Column(
+                    children: <Widget>[
+                      ThongBaoList(onTap: () {}),
+                    ],
                   ),
                 ),
-                color: ColorApp.main,
               ),
             ],
           ),
