@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../item/button.dart';
 import '../item/input_text.dart';
+import '../styles/init_style.dart';
 
 late bool userShow;
 late bool spShow;
@@ -31,10 +34,20 @@ TextEditingController confirm=TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-
-        title: Text('Đăng ký'),
-
+        backgroundColor: Colors.white,
+        title: Text(
+          "Đăng ký",
+          style: StyleApp.textStyle700(fontSize: 18),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Platform.isAndroid ? Icons.back_hand : Icons.arrow_back_ios,
+            color: ColorApp.black,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

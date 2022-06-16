@@ -5,6 +5,7 @@ import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
 import '../../Screens/account/profile.dart';
 import '../../widget/widget_info/widgetText.dart';
@@ -26,7 +27,13 @@ class _BodyProductState extends State<BodyProduct> {
         iconData: CupertinoIcons.bubble_left, title: "Hướng dẫn sử dụng"),
     TitleAccount(iconData: CupertinoIcons.square_list, title: "Điều khoản"),
     TitleAccount(iconData: Icons.checklist, title: "Nội quy"),
-    TitleAccount(iconData: CupertinoIcons.share, title: "Chia sẻ ứng dụng"),
+    TitleAccount(
+      iconData: CupertinoIcons.share,
+      title: "Chia sẻ ứng dụng",
+      onTap: () {
+        Share.share("Chia sẽ ứng dụng");
+      },
+    ),
     TitleAccount(iconData: CupertinoIcons.star, title: "Bình chọn 5*"),
     TitleAccount(
         iconData: CupertinoIcons.chat_bubble, title: "Liên hệ và góp ý"),
@@ -60,7 +67,7 @@ class _BodyProductState extends State<BodyProduct> {
       appBar: AppBar(
         backgroundColor: ColorApp.blue00,
         bottom: PreferredSize(
-          child: getAppBottomView(),
+          child: getAppBottomView(context),
           preferredSize: const Size.fromHeight(40.0),
         ),
       ),
@@ -127,7 +134,7 @@ class _BodyProductState extends State<BodyProduct> {
             ),
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.grey82, width: 0.5),
+                  border: Border.all(color: ColorApp.grey82, width: 1),
                   borderRadius: BorderRadius.circular(10)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),

@@ -63,8 +63,8 @@ class EditProfile extends StatelessWidget {
             _buildTitleDrop(
               title: "Lớp",
               listItem: [
-                ModelLocal(id: "nam", name: "Nam"),
-                ModelLocal(id: "nu", name: "Nữ"),
+                ModelLocal(id: "lop-1", name: "Lớp 1"),
+                ModelLocal(id: "lop-2", name: "Lớp 2"),
               ],
             ),
             Text(

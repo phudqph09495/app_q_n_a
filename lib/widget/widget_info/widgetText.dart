@@ -2,12 +2,12 @@ import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'widgetIcons.dart';
 
-Widget getAppBottomView() {
+Widget getAppBottomView(BuildContext context) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
     child: Row(
       children: [
-        getProfileView(),
+        getProfileView(context),
         const SizedBox(
           width: 10,
         ),

@@ -1,4 +1,5 @@
 import 'package:app_q_n_a/Screens/account/edit_account/edit_profile.dart';
+import 'package:app_q_n_a/Screens/account/item/bottom_sheet_avavtar.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,10 @@ class BottomSheetAccount extends StatelessWidget {
               "Thay ảnh đại diện",
               style: StyleApp.textStyle500(),
             ),
+            onTap: (){
+              Navigator.pop(context);
+              showModalBottomSheet(context: context, builder: (context)=>BottomSheetAvatar());
+            },
           ),
           ListTile(
             onTap: (){

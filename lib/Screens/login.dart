@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:app_q_n_a/Screens/forgot_password.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../item/input_text.dart';
 import '../item/button.dart';
+import '../styles/init_style.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -21,26 +24,35 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        centerTitle: true,
-
-        title: Text('Đăng nhập'),
-
+        backgroundColor: Colors.white,
+        title: Text(
+          "Đăng nhập",
+          style: StyleApp.textStyle700(fontSize: 18),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Platform.isAndroid ? Icons.back_hand : Icons.arrow_back_ios,
+            color: ColorApp.black,
+          ),
+        ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(8.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
-            Text(
+            const Text(
               'Đăng nhập với',
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 30),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -53,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   icon: Image.asset('images/Google.png',),
 
                 ),
-                SizedBox(
+                const  SizedBox(
                   width: 70,
                 ),
                 IconButton(
@@ -63,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            Text(
+            const Text(
               'Hoặc',
               style: TextStyle(
                   color: Colors.black,
@@ -74,10 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 hasPass: false, hint: 'Tên đăng nhập', controller: username,maxline: 1),
             InputText(hasPass: true, hint: 'Mật khẩu', controller: password,maxline: 1),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                SizedBox(
-                  width: 230,
-                ),
                 FlatButton(
                     onPressed: () {
                       Navigator.push(
@@ -100,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 colorButton: Colors.blue,
             radius: 10),
             Row(
-
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Nếu chưa có tài khoản'),
                 FlatButton(onPressed: (){
