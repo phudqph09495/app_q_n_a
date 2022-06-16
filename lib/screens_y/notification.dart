@@ -1,7 +1,8 @@
-import 'package:app_q_n_a/screens_y/product/widget/sk_list.dart';
+
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/material.dart';
 import '../styles/init_style.dart';
+import '../widget/sk_list.dart';
 
 class Notificationbar extends StatefulWidget {
   const Notificationbar({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _NotificationbarState extends State<Notificationbar> {
                 padding: EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    skListQuestion(onTap: () {}),
+                    skListQuestion( ontap: () {  }),
                   ],
                 ),
               ),

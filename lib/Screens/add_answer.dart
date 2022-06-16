@@ -40,16 +40,12 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         centerTitle: true,
         backgroundColor: Colors.orangeAccent.shade100,
         title: Text('Trả lời'),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_ios_new_rounded)),
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
           children: [
             SizedBox(
               height: 30,
@@ -84,7 +80,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                     child: GridView.builder(
                         itemCount: _imageFileList!.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
+                            crossAxisCount: 3),
                         shrinkWrap: true,
                         physics: ScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {

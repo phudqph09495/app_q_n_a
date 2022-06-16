@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
 import '../../Screens/account/profile.dart';
-import '../../screens_y/product/widget/widgetText.dart';
+import '../../widget/widget_info/widgetText.dart';
 
 class BodyProduct extends StatefulWidget {
   const BodyProduct({Key? key}) : super(key: key);
