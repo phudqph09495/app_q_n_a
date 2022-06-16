@@ -15,7 +15,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorApp.main,
+
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.main,
@@ -32,8 +32,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   hasPass: false,
                   hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
                   controller: search,
-                  colorBorder: Colors.white,
-                  colorhint: Colors.white,
+                  colorBorder: Colors.black,
+                  colorhint: Colors.black,
                   iconS: true),
               ListView.builder(
                   itemCount: 50,
@@ -44,11 +44,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Divider(
-                          color: Colors.white,
+                          color: Colors.blue,
                         ),
                         Text(
                           'câu hỏi tìm thấy',
-                          style: StyleApp.textStyle700(color: Colors.white),
+                          style: StyleApp.textStyle700(color: Colors.black.withOpacity(0.5)),
                         ),
                         Text('số câu trả lời',
                             style: StyleApp.textStyle700(color: Colors.red)),
@@ -64,16 +64,9 @@ class _SearchScreenState extends State<SearchScreen> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddQuestion()));
         },
-        label: Column(
-          children: [
-            Text('Không tìm thấy?',
-                style:
-                    StyleApp.textStyle600(fontSize: 12, color: Colors.white)),
-            Text(
-              'Đặt câu hỏi',
-              style: StyleApp.textStyle600(fontSize: 20, color: Colors.white),
-            ),
-          ],
+        label: Text(
+          'Đặt câu hỏi',
+          style: StyleApp.textStyle600(fontSize: 20, color: Colors.white),
         ),
         icon: Icon(Icons.add),
       ),

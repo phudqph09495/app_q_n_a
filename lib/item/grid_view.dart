@@ -24,17 +24,17 @@ class _FilterListState extends State<FilterList> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
       child: Container(
-        color: Colors.white,
+        color: Colors.black.withOpacity(0.1),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Text(
                 widget.title,
                 style: GoogleFonts.nunito(
                     textStyle:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               ),
             ),
             GridView.builder(

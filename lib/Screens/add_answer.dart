@@ -36,9 +36,10 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.orangeAccent.shade100,
+
         title: Text('Trả lời'),
 
       ),
@@ -92,7 +93,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                   )
                 : SizedBox(),
             Button1(
-                colorButton: Colors.orangeAccent,
+                colorButton: Colors.black.withOpacity(0.2),
                 textColor: Colors.white,
                 textButton: 'Đăng câu trả lời')
           ],

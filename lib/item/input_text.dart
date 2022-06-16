@@ -33,25 +33,25 @@ Widget InputText({
                   },
                   icon: Icon(
                     Icons.search,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 )
               : null,
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(1),
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: Colors.blue, width: 1),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(1),
+            borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.red, width: 1),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(1),
+            borderRadius: BorderRadius.circular(10),
             borderSide:
                 BorderSide(color: colorBorder.withOpacity(0.2), width: 1),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(1),
+            borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.red, width: 1),
           ),
           hintText: hint,

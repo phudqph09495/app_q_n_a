@@ -32,7 +32,7 @@ TextEditingController confirm=TextEditingController();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.orangeAccent.shade100,
+
         title: Text('Đăng ký'),
 
       ),

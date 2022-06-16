@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.orangeAccent.shade100,
+
         title: Text('Đăng nhập'),
 
       ),
@@ -97,7 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 textColor: Colors.white,
                 textButton: 'Đăng nhập',
-                colorButton: Colors.blue),
+                colorButton: Colors.blue,
+            radius: 10),
             Row(
 
               children: [

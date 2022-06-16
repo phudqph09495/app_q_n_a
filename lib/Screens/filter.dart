@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/item/grid_view.dart';
 import 'package:app_q_n_a/item/button.dart';
+
 class Filter extends StatefulWidget {
   @override
   State<Filter> createState() => _FilterState();
@@ -33,59 +34,62 @@ class _FilterState extends State<Filter> {
     'Sử học',
     'Địa lý',
     'Tiếng Anh',
-    'Tin học','GDCD','Công nghệ','Âm nhạc','Mỹ thuật'
+    'Tin học',
+    'GDCD',
+    'Công nghệ',
+    'Âm nhạc',
+    'Mỹ thuật'
   ];
-   late int value;
-  @override
-  initState() {
-    super.initState();
-    // Add listeners to this class
-  value=0;
-  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.orangeAccent,
-      appBar: AppBar(
-        title: Text(
-          'Lọc tìm kiếm',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Lọc tìm kiếm',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Colors.black.withOpacity(0.01),
         ),
-        backgroundColor: Colors.orangeAccent.shade100,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_outlined,
-              color: Colors.black,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(2.0),
+            child: SingleChildScrollView(
+                child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  FilterList(
+                      column: 2, list: status, title: 'Trạng thái câu hỏi'),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  FilterList(
+                    title: 'Lớp',
+                    column: 3,
+                    list: lop,
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  FilterList(
+                    title: 'Môn học',
+                    column: 3,
+                    list: monList,
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Button1(
+                      ontap: () {},
+                      colorButton: Colors.blue,
+                      textColor: Colors.white,
+                      textButton: 'Lọc tìm kiếm')
+                ],
+              ),
             )),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(2.0),
-          child: SingleChildScrollView(
-              child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                FilterList(
-                    column: 2,
-                    list: status,
-                    title: 'Trạng thái câu hỏi'),
-                SizedBox(
-                  height: 40,
-                ),
-                FilterList(title: 'Lớp', column: 3, list: lop,),
-                SizedBox(
-                  height: 40,
-                ),
-                FilterList(title: 'Môn học', column: 3, list: monList, ),
-                SizedBox(height: 100,),
-                Button1(colorButton: Colors.blue, textColor: Colors.white, textButton: 'Lọc tìm kiếm')
-              ],
-            ),
-          )),
+          ),
         ),
       ),
     );

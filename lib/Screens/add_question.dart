@@ -74,7 +74,7 @@ class _AddQuestionState extends State<AddQuestion> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.orangeAccent.shade100,
+
         title: Text('Đăng câu hỏi'),
 
       ),
@@ -164,7 +164,7 @@ class _AddQuestionState extends State<AddQuestion> {
                     hasPass: false,
                     hint: 'Nhập câu hỏi của bạn',
                     controller: ques,
-                    height: 130,
+
                     maxline: null),
                 Row(
                   children: [
@@ -204,10 +204,10 @@ SizedBox(height: 30,),
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Button1(
-                        colorButton: Colors.orangeAccent,
-                        textColor: Colors.white,
+                        colorButton: Colors.white,
+                        textColor: Colors.blue,
                         textButton: 'Đăng câu hỏi',
-                        width: 200),
+                        width: 200,radius: 10,border: Border.all(color: Colors.blue)),
                   ],
                 )
               ],

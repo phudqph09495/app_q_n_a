@@ -1,4 +1,7 @@
+import 'package:app_q_n_a/Screens/login.dart';
+import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/config/next_page.dart';
+import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +47,8 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: Icons.edit_outlined,
           title: "Chỉnh sửa cá nhân",
           onTap: () {
-            showModalBottomSheet(context: context, builder: (context)=>BottomSheetAccount());
+            showModalBottomSheet(
+                context: context, builder: (context) => BottomSheetAccount());
           }),
       TitleAccount(iconData: Icons.bookmark_border, title: "Câu hỏi đã lưu"),
     ]);
@@ -142,6 +146,26 @@ class _BodyProductState extends State<BodyProduct> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Button1(
+                colorButton: Colors.white,
+                textColor: ColorApp.black,
+                textButton: 'Đăng ký',
+                border: Border.all(color: ColorApp.grey82),
+                radius: 10,ontap: (){ Navigator.push(context,
+                MaterialPageRoute(builder: (context) => RegistrationScreen()));}),
+            SizedBox(
+              height: 20,
+            ),
+            Button1(
+                colorButton: Colors.white,
+                textColor: ColorApp.black,
+                textButton: 'Đăng nhập',
+                border: Border.all(color: ColorApp.grey82),
+                radius: 10,ontap: (){ Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LoginScreen()));})
           ],
         ),
       ),

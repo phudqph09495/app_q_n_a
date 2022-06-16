@@ -62,14 +62,41 @@ class _TopMemberScreenState extends State<TopMemberScreen> {
             ),
             body: TabBarView(
               children: [
-                topMemList(avt: 'https://tinypng.com/images/social/website.jpg', name: 'Đây là tên', score: 1500, ontap: (){}),
-                topMemList(avt: 'https://tinypng.com/images/social/website.jpg', name: 'Đây là tên', score: 1500, ontap: (){}),
-                topMemList(avt: 'https://tinypng.com/images/social/website.jpg', name: 'Đây là tên', score: 1500, ontap: (){}),
-                topMemList(avt: 'https://tinypng.com/images/social/website.jpg', name: 'Đây là tên', score: 1500, ontap: (){}),
-                topMemList(avt: 'https://tinypng.com/images/social/website.jpg', name: 'Đây là tên', score: 1500, ontap: (){}),
-                topMemList(avt: 'https://tinypng.com/images/social/website.jpg', name: 'Đây là tên', score: 1500, ontap: (){}),
-                topMemList(avt: 'https://tinypng.com/images/social/website.jpg', name: 'Đây là tên', score: 1500, ontap: (){}),
-
+                topMemList(
+                    avt: 'https://tinypng.com/images/social/website.jpg',
+                    name: 'Đây là tên',
+                    score: 1500,
+                    ontap: () {}),
+                topMemList(
+                    avt: 'https://tinypng.com/images/social/website.jpg',
+                    name: 'Đây là tên',
+                    score: 1500,
+                    ontap: () {}),
+                topMemList(
+                    avt: 'https://tinypng.com/images/social/website.jpg',
+                    name: 'Đây là tên',
+                    score: 1500,
+                    ontap: () {}),
+                topMemList(
+                    avt: 'https://tinypng.com/images/social/website.jpg',
+                    name: 'Đây là tên',
+                    score: 1500,
+                    ontap: () {}),
+                topMemList(
+                    avt: 'https://tinypng.com/images/social/website.jpg',
+                    name: 'Đây là tên',
+                    score: 1500,
+                    ontap: () {}),
+                topMemList(
+                    avt: 'https://tinypng.com/images/social/website.jpg',
+                    name: 'Đây là tên',
+                    score: 1500,
+                    ontap: () {}),
+                topMemList(
+                    avt: 'https://tinypng.com/images/social/website.jpg',
+                    name: 'Đây là tên',
+                    score: 1500,
+                    ontap: () {}),
               ],
             ),
           ),

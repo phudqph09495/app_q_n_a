@@ -9,6 +9,7 @@ import 'package:app_q_n_a/item/button.dart';
 import 'package:readmore/readmore.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 class AnswerScreen extends StatefulWidget {
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
@@ -18,11 +19,22 @@ class _AnswerScreenState extends State<AnswerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: Button1(
+          colorButton: Colors.blue,
+          textColor: Colors.white,
+          textButton: 'Viết bình luận',
+          ontap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
+          }),
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
-        title: Text('Trả lời', style: StyleApp.textStyle700(fontSize: 18),),
+        title: Text(
+          'Trả lời',
+          style: StyleApp.textStyle700(fontSize: 18),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -35,7 +47,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -50,15 +62,22 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   hasImage: true,
                   image:
                       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Button1(
-                ontap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Add_Answer_Screen()));
-                },
-                  colorButton: Colors.blue,
-                  textColor: Colors.white,
+                  ontap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Add_Answer_Screen()));
+                  },
+                  colorButton: Colors.black.withOpacity(0.1),
+                  textColor: Colors.blue,
                   textButton: 'Viết câu trả lời'),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -67,14 +86,18 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     return Column(
                       children: [
                         CardWidget(
-                            avatar: 'https://tinypng.com/images/social/website.jpg',
+                            avatar:
+                                'https://tinypng.com/images/social/website.jpg',
                             user: 'người trả lời',
                             time: '12:00 14/06/2022',
                             hasImage: true,
-                            image:'https://tinypng.com/images/social/website.jpg',
+                            image:
+                                'https://tinypng.com/images/social/website.jpg',
                             question: 'đây là câu trả lời',
                             type: false),
-                        SizedBox(height: 10,)
+                        SizedBox(
+                          height: 10,
+                        )
                       ],
                     );
                   })
@@ -90,7 +113,7 @@ Widget CardWidget({
   required String avatar,
   required String user,
   required String time,
-   String? deadline,
+  String? deadline,
   required String question,
   required bool type,
   bool hasImage = false,
@@ -111,7 +134,7 @@ Widget CardWidget({
                           fontSize: 20,
                           fontWeight: FontWeight.bold)),
                 )
-              : Text('Câu trả lời',
+              : Text('Trả lời',
                   style: GoogleFonts.nunito(
                       textStyle: TextStyle(
                           color: Colors.black,
@@ -130,29 +153,31 @@ Widget CardWidget({
               ),
             ],
           ),
-         type? Text(
-            deadline!,
-            style: GoogleFonts.nunito(
-                textStyle: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-            )),
-          ):RatingBar.builder(
-           initialRating: 3,
-           minRating: 1,
-           itemSize: 20,
-           direction: Axis.horizontal,
-           allowHalfRating: true,
-           itemCount: 5,
-           itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-           itemBuilder: (context, _) => Icon(
-             Icons.star,
-             color: Colors.amber,
-           ),
-           onRatingUpdate: (rating) {
-             print(rating);
-           },
-         ),
+          type
+              ? Text(
+                  deadline!,
+                  style: GoogleFonts.nunito(
+                      textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  )),
+                )
+              : RatingBar.builder(
+                  initialRating: 3,
+                  minRating: 1,
+                  itemSize: 20,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {
+                    print(rating);
+                  },
+                ),
           ReadMoreText(
             question,
             trimLines: 2,
@@ -166,7 +191,7 @@ Widget CardWidget({
               fontSize: 16,
             )),
           ),
-          hasImage ? Image(image: NetworkImage(image!)) : Container(),
+          hasImage ? ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image(image: NetworkImage(image!))) : Container(),
           SizedBox(
             height: 10,
           )
