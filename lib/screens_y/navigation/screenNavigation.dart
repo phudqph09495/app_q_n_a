@@ -2,7 +2,7 @@ import 'package:app_q_n_a/Screens/home.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/material.dart';
 import '../../screens_y/product/body_product.dart';
-import '../../screens_y/product/widget/notification.dart';
+import '../notification.dart';
 
 class NavigationBarOne extends StatefulWidget {
   const NavigationBarOne({Key? key}) : super(key: key);

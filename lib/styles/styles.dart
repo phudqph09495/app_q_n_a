@@ -4,7 +4,7 @@ import 'colors.dart';
 
 class StyleApp{
   static TextStyle textStyle400({
-    Color color = ColorApp.black,
+    Color color = Colors.black,
     double fontSize = 14,
   }) {
     return GoogleFonts.nunito(
@@ -15,7 +15,7 @@ class StyleApp{
     );
   }
   static TextStyle textStyle500({
-    Color color = ColorApp.black,
+    Color color = Colors.black,
     double fontSize = 14,
   }) {
     return GoogleFonts.nunito(
@@ -27,7 +27,7 @@ class StyleApp{
   }
 
   static TextStyle textStyle600({
-    Color color = ColorApp.black,
+    Color color = Colors.black,
     double fontSize = 14,
   }) {
     return GoogleFonts.nunito(
@@ -39,7 +39,7 @@ class StyleApp{
   }
 
   static TextStyle textStyle700({
-    Color color = ColorApp.black,
+    Color color = Colors.black,
     double fontSize = 14,
   }) {
     return GoogleFonts.nunito(

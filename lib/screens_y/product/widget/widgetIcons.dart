@@ -1,12 +1,13 @@
 import 'package:app_q_n_a/item/load_image.dart';
+import 'package:app_q_n_a/path/image_path.dart';
 import 'package:flutter/material.dart';
 
 Widget getProfileView() {
   return Stack(
     children: [
       Container(
-        width: 70,
-        height: 70,
+        width: 60,
+        height: 60,
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -16,9 +17,9 @@ Widget getProfileView() {
           borderRadius: BorderRadius.circular(10),
           child: LoadImage(
             url:
-                "https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg",
-            width: 70,
-            height: 70,
+                ImagesPath.defultAvatar,
+            width: 60,
+            height: 60,
             fit: BoxFit.cover,
           ),
         ),
