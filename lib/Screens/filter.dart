@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/item/grid_view.dart';
@@ -48,7 +49,7 @@ class _FilterState extends State<Filter> {
         appBar: AppBar(
           title: Text(
             'Lọc tìm kiếm',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: StyleApp.textStyle700(),
           ),
           backgroundColor: Colors.black.withOpacity(0.01),
         ),

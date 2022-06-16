@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,11 +25,14 @@ Widget Button1({
         border: border,
       ),
       alignment: Alignment.center,
-      child: Text(
-        textButton,
-        style: GoogleFonts.nunito(
-            textStyle: TextStyle(fontSize: 16, color: textColor)),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          icon?ImageIcon(AssetImage(IconData!)):SizedBox(),Text(
+            textButton,
+            style: StyleApp.textStyle600(fontSize: 16,color: textColor)),
+        ],
       ),
-    ),
-  );
+      ),
+    );
+
 }

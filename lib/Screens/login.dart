@@ -45,78 +45,93 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Đăng nhập với',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30),
+            Text(
+              'Đăng nhập ',
+              style: StyleApp.textStyle700(fontSize: 30),
             ),
             const SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
-
-                  },
-                  icon: Image.asset('images/Google.png',),
-
-                ),
-                const  SizedBox(
-                  width: 70,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset('images/Facebook.png'),
-
-                ),
-              ],
-            ),
-            const Text(
-              'Hoặc',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
+            InputText(
+                hasPass: false,
+                hint: 'Tên đăng nhập',
+                controller: username,
+                maxline: 1),
+            const SizedBox(
+              height: 20,
             ),
             InputText(
-                hasPass: false, hint: 'Tên đăng nhập', controller: username,maxline: 1),
-            InputText(hasPass: true, hint: 'Mật khẩu', controller: password,maxline: 1),
+                hasPass: true,
+                hint: 'Mật khẩu',
+                controller: password,
+                maxline: 1),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 FlatButton(
                     onPressed: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => ForgotPass()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgotPass()));
                     },
                     child: Text(
                       'Quên mật khẩu',
-                      style: TextStyle(
-                        fontSize: 16,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 1,
-                      ),
+                      style: StyleApp.textStyle700(),
                     )),
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Button1(
-
                 textColor: Colors.white,
                 textButton: 'Đăng nhập',
                 colorButton: Colors.blue,
-            radius: 10),
+                radius: 10),
+            const SizedBox(
+              height: 30,
+            ),
+            Button1(
+                icon: true,
+                IconData: 'images/Google.png',
+                textColor: Colors.black,
+                textButton: 'Đăng nhập với Google',
+                colorButton: Colors.white,
+                border: Border.all(color: Colors.black),
+                radius: 10),
+            const SizedBox(
+              height: 10,
+            ),
+            Button1(
+                icon: true,
+                IconData: 'images/Facebook.png',
+                textColor: Colors.black,
+                textButton: 'Đăng nhập với Facebook',
+                border: Border.all(color: Colors.black),
+                colorButton: Colors.white,
+                radius: 10),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Nếu chưa có tài khoản'),
-                FlatButton(onPressed: (){
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => RegistrationScreen()));
-                }, child: Text('Đăng ký ngay',style: TextStyle(color: Colors.green),))
+                FlatButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegistrationScreen()));
+                    },
+                    child: Text(
+                      'Đăng ký ngay',
+                      style: TextStyle(color: Colors.green),
+                    ))
               ],
             )
           ],

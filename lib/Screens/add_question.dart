@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../item/dropdown_button.dart';
@@ -88,30 +89,18 @@ class _AddQuestionState extends State<AddQuestion> {
               children: [
                 Text(
                   'Môn học',
-                  style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold)),
+                  style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 Dropdown1(val: mon, monList: monList),
                 Text(
                   'Lớp',
-                  style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold)),
+                  style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 Dropdown1(val: lop, monList: lopList),
 
                 Text(
                   'Deadline',
-                  style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold)),
+                  style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
                     hasPass: false,
@@ -139,11 +128,7 @@ class _AddQuestionState extends State<AddQuestion> {
                     }),
                 Text(
                   'Phần thưởng',
-                  style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold)),
+                  style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
                   inputType: TextInputType.number,
@@ -154,11 +139,7 @@ class _AddQuestionState extends State<AddQuestion> {
                 ),
                 Text(
                   'Câu hỏi',
-                  style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold)),
+                  style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
                     hasPass: false,

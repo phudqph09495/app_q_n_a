@@ -12,7 +12,6 @@ import 'add_question.dart';
 import 'add_answer.dart';
 
 class HomeScreen extends StatefulWidget {
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -30,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         label: Text('Đặt câu hỏi'),
         icon: Icon(Icons.add),
       ),
+
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -62,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 print("search");
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SearchScreen()));
-
               },
               child: const Icon(
                 Icons.search,
@@ -81,8 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Header(context),
-
-
               ListQuestion(
                 ontap: () {
                   Navigator.push(context,
