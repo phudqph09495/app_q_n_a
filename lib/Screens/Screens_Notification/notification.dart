@@ -1,12 +1,9 @@
-import 'package:app_q_n_a/Screens/Screens_Notification/Screens_tabBarView/tabBarView.dart';
+import 'package:app_q_n_a/Screens/Screens_Notification/Screens_tabBarView/tab_account.dart';
 import 'package:app_q_n_a/styles/colors.dart';
-import 'package:app_q_n_a/widget/DuaTopList.dart';
-import 'package:app_q_n_a/widget/ThongBaoList.dart';
-import 'package:app_q_n_a/widget/inFo_list.dart';
+import 'package:app_q_n_a/widget/item_notifi.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../styles/init_style.dart';
-import '../../widget/sk_list.dart';
 
 class Notificationbar extends StatefulWidget {
   const Notificationbar({Key? key}) : super(key: key);
@@ -57,7 +54,26 @@ class _NotificationbarState extends State<Notificationbar> {
             ],
           ),
         ),
-        body: const tabBar(),
+        body: TabBarView(
+          children: List.generate(
+            4,
+                (index) => ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+              children: List.generate(
+                5,
+                    (index) => ItemNotifi(
+                  onTap: () => launch('https://hoidap247.com/'),
+                  avatar:
+                  "https://i.pinimg.com/236x/63/eb/99/63eb997f009a82e5e3d3ca00e10002ba.jpg",
+                  sub:
+                  "Ủa j zợ? Nhanh tay vào xem tên mình có trong danh sách nhận quà tháng 5 không nhé!",
+                  time: "8 ngày trước",
+                  title: "Ủa em ? Kết quả đua top tháng 5/2022 nè!",
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

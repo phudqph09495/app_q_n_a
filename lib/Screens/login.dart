@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                           context, MaterialPageRoute(builder: (context) => ForgotPass()));
                     },
-                    child: Text(
+                    child: const Text(
                       'Quên mật khẩu',
                       style: TextStyle(
                         fontSize: 16,

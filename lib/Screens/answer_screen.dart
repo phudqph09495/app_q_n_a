@@ -20,7 +20,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: Button1(
-          colorButton: Colors.blue,
+          colorButton: ColorApp.main,
           textColor: Colors.white,
           textButton: 'Viết bình luận',
           ontap: () {
