@@ -66,7 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
         },
         label: Column(
           children: [
-            Text('Không tìm thấy',
+            Text('Không tìm thấy?',
                 style:
                     StyleApp.textStyle600(fontSize: 12, color: Colors.white)),
             Text(

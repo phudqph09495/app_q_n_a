@@ -16,16 +16,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
+TextEditingController confirm=TextEditingController();
 
-  final keyForm = GlobalKey<FormState>();
-RegistrationUser()async{
-if(keyForm.currentState!.validate()){
-  print('dang ky user thanh cong');
-
-}else{
-  print('abc');
-}
-}
 
   @override
   void initState() {
@@ -48,7 +40,7 @@ if(keyForm.currentState!.validate()){
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
           child: Form(
-            key: keyForm,
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,102 +78,12 @@ if(keyForm.currentState!.validate()){
                   height: 20,
                 ),
                 userShow
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InputText(
-                              hasPass: false,
-                              hint: 'Họ và tên',
-                              controller: name,),
-
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InputText(
-                              hasPass: false,
-                              hint: 'Tên đăng nhập',
-                              controller: username),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InputText(
-                              hasPass: false,
-                              hint: 'Số điện thoại',
-                              controller: phone),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InputText(
-                              hasPass: false, hint: 'Email', controller: email,inputType: TextInputType.emailAddress),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InputText(maxline: 1,
-                              hasPass: true,
-                              hint: 'Password',
-                              controller: password),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Button1(
-                            ontap: (){
-RegistrationUser();
-                            },
-                              colorButton: Colors.blue,
-                              textColor: Colors.white,
-                              textButton: 'Đăng ký User'),
-                          SizedBox(
-                            height: 15,
-                          ),
-                        ],
-                      )
+                    ? formRegistration(name: name, username: username, phone: phone, email: email, password: password, textButton: 'User', colorButton: Colors.blue,confirm: confirm)
                     : SizedBox(
                         height: 0,
                       ),
                 spShow
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InputText(
-                              hasPass: false,
-                              hint: 'Họ và tên',
-                              controller: name),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InputText(
-                              hasPass: false,
-                              hint: 'Tên đăng nhập',
-                              controller: username),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InputText(
-                              hasPass: false,
-                              hint: 'Số điện thoại',
-                              controller: phone),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InputText(
-                              hasPass: false, hint: 'Email', controller: email,inputType: TextInputType.emailAddress),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InputText(
-                            maxline: 1,
-                              hasPass: true,
-                              hint: 'Password',
-                              controller: password),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Button1(
-                              colorButton: Colors.red,
-                              textColor: Colors.white,
-                              textButton: 'Đăng ký Supporter'),
-                        ],
-                      )
+                    ? formRegistration(name: name, username: username, phone: phone, email: email, password: password, textButton: 'Supporter',colorButton: Colors.red,confirm: confirm)
                     : SizedBox(
                         height: 0,
                       )
@@ -192,4 +94,72 @@ RegistrationUser();
       ),
     );
   }
+}
+
+
+Widget formRegistration(
+{
+  required TextEditingController name,
+  required TextEditingController username,
+  required TextEditingController phone,
+  required TextEditingController email,
+  required TextEditingController password,
+  required TextEditingController confirm,
+  required String textButton,
+  required Color colorButton
+
+
+}
+    ){
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      InputText(
+          hasPass: false,
+          hint: 'Họ và tên',
+          controller: name),
+      SizedBox(
+        height: 15,
+      ),
+      InputText(
+          hasPass: false,
+          hint: 'Tên đăng nhập',
+          controller: username),
+      SizedBox(
+        height: 15,
+      ),
+      InputText(
+          hasPass: false,
+          hint: 'Số điện thoại',
+          controller: phone),
+      SizedBox(
+        height: 15,
+      ),
+      InputText(
+          hasPass: false, hint: 'Email', controller: email,inputType: TextInputType.emailAddress),
+      SizedBox(
+        height: 15,
+      ),
+      InputText(
+          maxline: 1,
+          hasPass: true,
+          hint: 'Mật khẩu',
+          controller: password),
+      SizedBox(
+        height: 15,
+      ),
+      InputText(
+          maxline: 1,
+          hasPass: true,
+          hint: ' Nhập lại mật khẩu',
+          controller: confirm),
+      SizedBox(
+        height: 15,
+      ),
+      Button1(
+          colorButton:colorButton ,
+          textColor: Colors.white,
+          textButton: 'Đăng ký $textButton'),
+    ],
+  );
 }
