@@ -42,8 +42,7 @@ if(keyForm.currentState!.validate()){
         centerTitle: true,
         backgroundColor: Colors.orangeAccent.shade100,
         title: Text('Đăng ký'),
-        leading: IconButton(
-            onPressed: () {}, icon: Icon(Icons.arrow_back_ios_new_rounded)),
+
       ),
       body: SingleChildScrollView(
         child: Padding(

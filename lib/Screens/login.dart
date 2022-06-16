@@ -1,3 +1,5 @@
+import 'package:app_q_n_a/Screens/forgot_password.dart';
+import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../item/input_text.dart';
@@ -22,8 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
         centerTitle: true,
         backgroundColor: Colors.orangeAccent.shade100,
         title: Text('Đăng nhập'),
-        leading: IconButton(
-            onPressed: () {}, icon: Icon(Icons.arrow_back_ios_new_rounded)),
+
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
@@ -78,7 +79,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 230,
                 ),
                 FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => ForgotPass()));
+                    },
                     child: Text(
                       'Quên mật khẩu',
                       style: TextStyle(
@@ -98,7 +102,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
               children: [
                 Text('Nếu chưa có tài khoản'),
-                FlatButton(onPressed: (){}, child: Text('Đăng ký ngay',style: TextStyle(color: Colors.green),))
+                FlatButton(onPressed: (){
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => RegistrationScreen()));
+                }, child: Text('Đăng ký ngay',style: TextStyle(color: Colors.green),))
               ],
             )
           ],

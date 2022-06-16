@@ -1,5 +1,6 @@
 
 
+import 'package:app_q_n_a/Screens/top_membem.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,14 +25,16 @@ Widget Header(BuildContext context){
           )),
 
       SizedBox(
-        width: 90,
+        width: 55,
       ),
       FlatButton(
           onPressed: () {},
           child: Container(
             child: Row(
               children: [
-                Text('Top thành viên',style: StyleApp.textStyle700(color: Colors.white,fontSize: 14)),
+                FlatButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TopMemberScreen()));
+                },child: Text('Top thành viên',style: StyleApp.textStyle700(color: Colors.white,fontSize: 14))),
                 FaIcon(
                   FontAwesomeIcons.trophy,
                   color: Colors.white.withOpacity(0.5),

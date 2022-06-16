@@ -1,6 +1,8 @@
 import 'package:app_q_n_a/Screens/answer_screen.dart';
 import 'package:app_q_n_a/Screens/search_screen.dart';
 import 'package:app_q_n_a/item/load_image.dart';
+import 'package:app_q_n_a/item/top_member_list.dart';
+import 'package:app_q_n_a/item/top_member_tile.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -78,6 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Header(context),
+
+
               ListQuestion(
                 ontap: () {
                   Navigator.push(context,

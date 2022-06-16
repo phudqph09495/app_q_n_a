@@ -1,3 +1,6 @@
+import 'package:app_q_n_a/Screens/login.dart';
+import 'package:app_q_n_a/Screens/registration.dart';
+import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,15 +23,15 @@ class _BodyProductState extends State<BodyProduct> {
   ];
 
   List<TitleAccount> titleApp = [
-    TitleAccount(iconData: CupertinoIcons.bubble_left, title: "Hướng dẫn sử dụng"),
+    TitleAccount(
+        iconData: CupertinoIcons.bubble_left, title: "Hướng dẫn sử dụng"),
     TitleAccount(iconData: CupertinoIcons.square_list, title: "Điều khoản"),
     TitleAccount(iconData: Icons.checklist, title: "Nội quy"),
     TitleAccount(iconData: CupertinoIcons.share, title: "Chia sẻ ứng dụng"),
     TitleAccount(iconData: CupertinoIcons.star, title: "Bình chọn 5*"),
-    TitleAccount(iconData: CupertinoIcons.chat_bubble, title: "Liên hệ và góp ý"),
+    TitleAccount(
+        iconData: CupertinoIcons.chat_bubble, title: "Liên hệ và góp ý"),
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,7 @@ class _BodyProductState extends State<BodyProduct> {
                   ),
                   children: List.generate(
                     titleAccount.length,
-                        (index) => _buildItem(
+                    (index) => _buildItem(
                       title: titleAccount[index].title,
                       iconData: titleAccount[index].iconData,
                     ),
@@ -112,7 +115,8 @@ class _BodyProductState extends State<BodyProduct> {
                   iconColor: Colors.white,
                   collapsedIconColor: Colors.white,
                   trailing: const SizedBox(),
-                  leading: const Icon(Icons.logout, color: Colors.white,size: 16),
+                  leading:
+                      const Icon(Icons.logout, color: Colors.white, size: 16),
                   title: Text(
                     'Đăng xuất',
                     style: StyleApp.textStyle700(
@@ -121,6 +125,29 @@ class _BodyProductState extends State<BodyProduct> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 30,
+            ),
+            Button1(
+                colorButton: Colors.red,
+                textColor: Colors.white,
+                textButton: 'Đăng nhập',
+              ontap: (){
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LoginScreen()));
+              }
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Button1(
+                colorButton: Colors.blue,
+                textColor: Colors.white,
+                textButton: 'Đăng ký',
+            ontap: (){
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => RegistrationScreen()));
+            }),
           ],
         ),
       ),
@@ -142,7 +169,6 @@ class _BodyProductState extends State<BodyProduct> {
       ),
     );
   }
-
 }
 
 class TitleAccount {
