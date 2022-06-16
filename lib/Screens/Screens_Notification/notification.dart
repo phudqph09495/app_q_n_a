@@ -1,8 +1,12 @@
-
+import 'package:app_q_n_a/Screens/Screens_Notification/Screens_tabBarView/tabBarView.dart';
 import 'package:app_q_n_a/styles/colors.dart';
+import 'package:app_q_n_a/widget/DuaTopList.dart';
+import 'package:app_q_n_a/widget/ThongBaoList.dart';
+import 'package:app_q_n_a/widget/inFo_list.dart';
 import 'package:flutter/material.dart';
-import '../styles/init_style.dart';
-import '../widget/sk_list.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../styles/init_style.dart';
+import '../../widget/sk_list.dart';
 
 class Notificationbar extends StatefulWidget {
   const Notificationbar({Key? key}) : super(key: key);
@@ -22,7 +26,7 @@ class _NotificationbarState extends State<Notificationbar> {
           backgroundColor: Colors.white,
           centerTitle: false,
           elevation: 0,
-          title:  TabBar(
+          title: TabBar(
             isScrollable: true,
             labelColor: ColorApp.black,
             unselectedLabelStyle: StyleApp.textStyle500(color: ColorApp.grey82),
@@ -51,51 +55,9 @@ class _NotificationbarState extends State<Notificationbar> {
                 ),
               ),
             ],
-
           ),
         ),
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            Container(
-              child: const Center(
-                child: Text(
-                  'Người Dùng',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-              color: Colors.white,
-            ),
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    skListQuestion( ontap: () {  }),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              child: const Center(
-                child: Text(
-                  'Kết quả đua top',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-              color: Colors.white,
-            ),
-            Container(
-              child: const Center(
-                child: Text(
-                  'Thông báo',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-              color: Colors.white,
-            ),
-          ],
-        ),
+        body: const tabBar(),
       ),
     );
   }

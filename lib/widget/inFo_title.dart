@@ -12,9 +12,6 @@ Widget InfoTitle({
 }) {
   return Container(
     child: Card(
-      color: ColorApp.black00,
-      shadowColor: Colors.white,
-      shape: Border.all(width: 1,color: Colors.white),
       child: InkWell(
         onTap: ontap,
         child: Padding(
@@ -38,13 +35,13 @@ Widget InfoTitle({
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: StyleApp.textStyle700(
-                            fontSize: 14, color: ColorApp.whiteF0),
+                            fontSize: 14, color: ColorApp.orangeF8),
                       ),
                       Text(
                         'Id Người Dùng: $Id',
                         overflow: TextOverflow.ellipsis,
                         style: StyleApp.textStyle700(
-                          fontSize: 14,
+                          fontSize: 14, color: ColorApp.black
                         ),
                       ),
                       Text(
@@ -52,7 +49,7 @@ Widget InfoTitle({
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: StyleApp.textStyle700(
-                            fontSize: 14, color: ColorApp.whiteF0),
+                            fontSize: 14,),
                       ),
                     ],
                   ),

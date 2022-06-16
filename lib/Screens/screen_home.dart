@@ -2,7 +2,7 @@ import 'package:app_q_n_a/Screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../screens_y/notification.dart';
+import 'Screens_Notification/notification.dart';
 import '../styles/init_style.dart';
 import 'Screens_TaiKhoan/body_product.dart';
 
