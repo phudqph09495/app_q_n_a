@@ -20,8 +20,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: Button1(
-          colorButton: Colors.black.withOpacity(0.1),
-          textColor: Colors.blue,
+          colorButton: ColorApp.main,
+          textColor: Colors.white,
           textButton: 'Viết bình luận',
           ontap: () {
             Navigator.push(context,
@@ -128,10 +128,18 @@ Widget CardWidget({
           type
               ? Text(
                   'Câu hỏi',
-                  style: StyleApp.textStyle700(fontSize: 20),
+                  style: GoogleFonts.nunito(
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
                 )
               : Text('Trả lời',
-                  style: StyleApp.textStyle700(fontSize: 20)),
+                  style: GoogleFonts.nunito(
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold))),
           Row(
             children: [
               Image(
@@ -141,14 +149,18 @@ Widget CardWidget({
               ),
               Text(
                 '$user       $time',
-                style: StyleApp.textStyle400(),
+                style: TextStyle(color: Colors.black.withOpacity(0.3)),
               ),
             ],
           ),
           type
               ? Text(
                   deadline!,
-                  style: StyleApp.textStyle500(fontSize: 16),
+                  style: GoogleFonts.nunito(
+                      textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  )),
                 )
               : RatingBar.builder(
                   initialRating: 3,
@@ -173,7 +185,11 @@ Widget CardWidget({
             trimMode: TrimMode.Line,
             trimCollapsedText: 'Hiện thêm',
             trimExpandedText: 'Thu gọn',
-            style: StyleApp.textStyle500(fontSize: 16),
+            style: GoogleFonts.nunito(
+                textStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            )),
           ),
           hasImage ? ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image(image: NetworkImage(image!))) : Container(),
           SizedBox(

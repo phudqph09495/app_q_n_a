@@ -37,7 +37,8 @@ class TabUser extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -56,10 +57,13 @@ class TabUser extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Container(
                   color: ColorApp.greyF6,
-                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -93,9 +97,9 @@ class TabUser extends StatelessWidget {
               ],
             ),
           ),
-          _buidRow(title: "Thành viên từ:",content: "10/06/2020"),
-          _buidRow(title: "Số câu trả lời:",content: "20"),
-          _buidRow(title: "Cảnh báo:",content: "1"),
+          _buidRow(title: "Thành viên từ:", content: "10/06/2020"),
+          _buidRow(title: "Số câu trả lời:", content: "20"),
+          _buidRow(title: "Cảnh báo:", content: "1"),
           const SizedBox(height: 10),
           Text(
             "Danh hiệu của bạn".toUpperCase(),
@@ -108,9 +112,16 @@ class TabUser extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(ImagesPath.imageRank1, width: 40,height: 40,),
+              Image.asset(
+                ImagesPath.imageRank1,
+                width: 40,
+                height: 40,
+              ),
               const SizedBox(height: 5),
-              Text("Lính mới", style: StyleApp.textStyle400(),),
+              Text(
+                "Lính mới",
+                style: StyleApp.textStyle400(),
+              ),
             ],
           ),
         ],
@@ -131,7 +142,9 @@ class TabUser extends StatelessWidget {
             title,
             style: StyleApp.textStyle700(),
           ),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,17 +166,28 @@ class TabUser extends StatelessWidget {
     );
   }
 
-  _buidRow({required String title, required String content }){
+  _buidRow({required String title, required String content}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5,),
+      padding: const EdgeInsets.symmetric(
+        vertical: 5,
+      ),
       child: Row(
         children: [
-          Expanded( flex: 2, child: Text(title, style: StyleApp.textStyle700(),)),
+          Expanded(
+              flex: 2,
+              child: Text(
+                title,
+                style: StyleApp.textStyle700(),
+              )),
           const SizedBox(width: 10),
-          Expanded(flex: 5,child: Text(content, style: StyleApp.textStyle400(),)),
+          Expanded(
+              flex: 5,
+              child: Text(
+                content,
+                style: StyleApp.textStyle400(),
+              )),
         ],
       ),
     );
   }
 }
-
