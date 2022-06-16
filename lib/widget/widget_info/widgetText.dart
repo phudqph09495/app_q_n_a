@@ -45,11 +45,12 @@ Widget getAppBottomView() {
           width: 10,
         ),
         IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.white,
-            ))
+          onPressed: () {},
+          icon: const Icon(
+            Icons.settings,
+            color: Colors.white,
+          ),
+        ),
       ],
     ),
   );

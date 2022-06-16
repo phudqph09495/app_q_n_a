@@ -1,13 +1,14 @@
 import 'package:app_q_n_a/widget/ThongBaoTitle.dart';
 import 'package:flutter/material.dart';
 
-Widget ThongBaoList({required Function onTap}) {
+Widget ThongBaoList({required Function() ontap}) {
   return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: 10,
       itemBuilder: (context, index) {
         return ThongBaoTitle(
+          ontap: ontap,
             skTextTren: 'Đua top nhận quà tháng 6/2022',
             thoiGian: '15 ngày trước',
             SkTextDuoi:

@@ -4,6 +4,7 @@ import 'package:app_q_n_a/widget/inFo_list.dart';
 import 'package:app_q_n_a/widget/sk_list.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../styles/init_style.dart';
 
 class Notificationbar extends StatefulWidget {
@@ -58,7 +59,9 @@ class _NotificationbarState extends State<Notificationbar> {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: <Widget>[
-                      inFoList(onTap: () {}),
+                      inFoList(
+                        ontap: () => launch('https://hoidap247.com'),
+                      ),
                     ],
                   ),
                 ),
@@ -68,7 +71,9 @@ class _NotificationbarState extends State<Notificationbar> {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: <Widget>[
-                      skListQuestion(onTap: () {}),
+                      skListQuestion(
+                        ontap: () => launch('https://hoidap247.com'),
+                      ),
                     ],
                   ),
                 ),
@@ -78,7 +83,9 @@ class _NotificationbarState extends State<Notificationbar> {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Column(
                     children: <Widget>[
-                      DuaTopList(onTap: () {}),
+                      DuaTopList(
+                        ontap: () => launch('https://hoidap247.com'),
+                      ),
                     ],
                   ),
                 ),
@@ -88,7 +95,9 @@ class _NotificationbarState extends State<Notificationbar> {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Column(
                     children: <Widget>[
-                      ThongBaoList(onTap: () {}),
+                      ThongBaoList(
+                        ontap: () => launch('https://hoidap247.com'),
+                      ),
                     ],
                   ),
                 ),

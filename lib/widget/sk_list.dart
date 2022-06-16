@@ -1,13 +1,14 @@
 import 'package:app_q_n_a/widget/sk_title.dart';
 import 'package:flutter/material.dart';
 
-Widget skListQuestion({required Function onTap}) {
+Widget skListQuestion({required Function() ontap}) {
   return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: 10,
       itemBuilder: (context, index) {
         return SkquestionTile(
+          ontap: ontap,
             skTextTren: 'BÀI DỰ THI ĐẠI SỨ VĂN HÓA ĐỌC NĂM 2022',
             thoiGian: '14 ngày trước',
             SkTextDuoi:

@@ -2,13 +2,14 @@ import 'package:app_q_n_a/widget/DuaTopTitle.dart';
 import 'package:flutter/material.dart';
 import 'sk_title.dart';
 
-Widget DuaTopList({required Function onTap}) {
+Widget DuaTopList({required Function() ontap}) {
   return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: 10,
       itemBuilder: (context, index) {
         return DuaTopTitle(
+            ontap: ontap,
             skTextTren: 'Ủa em ? Kết quả đua top tháng 5/2022 nè!',
             thoiGian: '8 ngày trước',
             SkTextDuoi:

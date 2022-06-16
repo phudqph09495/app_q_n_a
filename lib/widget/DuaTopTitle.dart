@@ -12,6 +12,7 @@ Widget DuaTopTitle({
     child: Card(
       color: ColorApp.black00,
       shadowColor: Colors.white,
+      shape: Border.all(width: 1, color: Colors.white),
       child: InkWell(
         onTap: ontap,
         child: Padding(
