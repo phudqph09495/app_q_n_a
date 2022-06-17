@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           unselectedWidgetColor: Colors.green,
         ),
+        debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

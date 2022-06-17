@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Button1(
                 icon: true,
-                IconData: 'images/Google.png',
+                imagePath: 'images/Google.png',
                 textColor: Colors.black,
                 textButton: 'Đăng nhập với Google',
                 colorButton: Colors.white,
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Button1(
                 icon: true,
-                IconData: 'images/Facebook.png',
+                imagePath: 'images/Facebook.png',
                 textColor: Colors.black,
                 textButton: 'Đăng nhập với Facebook',
                 border: Border.all(color: Colors.black),

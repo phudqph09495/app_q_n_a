@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget Button1({
-  String? IconData,
+  String? imagePath,
   bool icon = false,
   Function()? ontap,
   double height = 52,
@@ -25,14 +25,14 @@ Widget Button1({
         border: border,
       ),
       alignment: Alignment.center,
-      child: Row(mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          icon?ImageIcon(AssetImage(IconData!)):SizedBox(),Text(
-            textButton,
-            style: StyleApp.textStyle600(fontSize: 16,color: textColor)),
+          icon ? Image.asset(imagePath!) : SizedBox(),
+          Text(textButton,
+              style: StyleApp.textStyle600(fontSize: 16, color: textColor)),
         ],
       ),
-      ),
-    );
-
+    ),
+  );
 }
