@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: ColorApp.main,
+        backgroundColor: ColorApp.orangeF2,
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddQuestion()));
@@ -30,9 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: Icon(Icons.add),
       ),
 
-      backgroundColor: Colors.white,
+      backgroundColor:ColorApp.orangeF8,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorApp.orangeF2,
         elevation: 0,
         title: LoadImage(
           url: "https://hoidap247.com/static/img/logo_h247.png",

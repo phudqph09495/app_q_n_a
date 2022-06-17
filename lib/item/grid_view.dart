@@ -25,7 +25,7 @@ class _FilterListState extends State<FilterList> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
       child: Container(
-        color: Colors.black.withOpacity(0.1),
+        color: ColorApp.whiteF7,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

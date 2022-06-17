@@ -20,17 +20,17 @@ class _AnswerScreenState extends State<AnswerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: Button1(
-          colorButton: ColorApp.main,
+          colorButton: ColorApp.orangeF2,
           textColor: Colors.white,
           textButton: 'Viết bình luận',
           ontap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
           }),
-      backgroundColor: Colors.white,
+      backgroundColor: ColorApp.orangeF8,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: ColorApp.orangeF2,
         title: Text(
           'Trả lời',
           style: StyleApp.textStyle700(fontSize: 18),
@@ -72,7 +72,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         MaterialPageRoute(
                             builder: (context) => Add_Answer_Screen()));
                   },
-                  colorButton: Colors.black.withOpacity(0.1),
+                  colorButton: ColorApp.whiteF7,
                   textColor: Colors.blue,
                   textButton: 'Viết câu trả lời'),
               SizedBox(

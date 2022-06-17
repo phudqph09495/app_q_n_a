@@ -75,7 +75,7 @@ class _AddQuestionState extends State<AddQuestion> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-
+        backgroundColor: ColorApp.orangeF2,
         title: Text('Đăng câu hỏi'),
 
       ),

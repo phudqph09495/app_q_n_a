@@ -14,7 +14,7 @@ class _TopMemberScreenState extends State<TopMemberScreen> {
         length: 7,
         child: SafeArea(
           child: Scaffold(
-            backgroundColor: ColorApp.blue00,
+            backgroundColor: ColorApp.orangeF8,
             appBar: const PreferredSize(
               preferredSize: Size(double.infinity, 80),
               child: TabBar(

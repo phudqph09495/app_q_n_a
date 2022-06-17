@@ -22,9 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.orangeF8,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorApp.orangeF2,
         title: Text(
           "Đăng nhập",
           style: StyleApp.textStyle700(fontSize: 18),
@@ -47,12 +48,15 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Text(
               'Đăng nhập ',
-              style: StyleApp.textStyle700(fontSize: 30),
+              style: StyleApp.textStyle700(fontSize: 30,color: ColorApp.whiteF7),
             ),
             const SizedBox(
               height: 20,
             ),
             InputText(
+
+              colorBorder: ColorApp.whiteF0,
+
                 hasPass: false,
                 hint: 'Tên đăng nhập',
                 controller: username,
@@ -61,6 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 20,
             ),
             InputText(
+              colorBorder: ColorApp.whiteF0,
+
                 hasPass: true,
                 hint: 'Mật khẩu',
                 controller: password,
@@ -130,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Text(
                       'Đăng ký ngay',
-                      style: TextStyle(color: Colors.green),
+                      style: TextStyle(color: ColorApp.whiteF7),
                     ))
               ],
             )

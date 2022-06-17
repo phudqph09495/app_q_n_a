@@ -33,8 +33,9 @@ TextEditingController confirm=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.orangeF8,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorApp.orangeF2,
         title: Text(
           "Đăng ký",
           style: StyleApp.textStyle700(fontSize: 18),

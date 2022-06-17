@@ -8,6 +8,7 @@ Widget TopMemTile({
   required Function() ontap,
 }) {
   return Card(
+    color: ColorApp.orangeF2,
     child: InkWell(
       onTap: ontap,
       child: Padding(

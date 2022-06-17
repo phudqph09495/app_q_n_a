@@ -15,10 +15,10 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+backgroundColor: ColorApp.orangeF8,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorApp.main,
+        backgroundColor: ColorApp.orangeF2,
         title: const Text('Tìm kiếm câu hỏi'),
       ),
       body: SingleChildScrollView(
@@ -33,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
                   controller: search,
                   colorBorder: Colors.black,
-                  colorhint: Colors.black,
+                  colorhint: ColorApp.whiteF7,
                   iconS: true),
               ListView.builder(
                   itemCount: 50,
@@ -48,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         Text(
                           'câu hỏi tìm thấy',
-                          style: StyleApp.textStyle700(color: Colors.black.withOpacity(0.5)),
+                          style: StyleApp.textStyle700(color: ColorApp.whiteF7),
                         ),
                         Text('số câu trả lời',
                             style: StyleApp.textStyle700(color: Colors.red)),
@@ -60,6 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: ColorApp.orangeF2,
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddQuestion()));

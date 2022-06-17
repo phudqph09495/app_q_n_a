@@ -46,12 +46,14 @@ class _FilterState extends State<Filter> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorApp.orangeF8,
         appBar: AppBar(
+
           title: Text(
             'Lọc tìm kiếm',
             style: StyleApp.textStyle700(),
           ),
-          backgroundColor: Colors.black.withOpacity(0.01),
+          backgroundColor: ColorApp.orangeF2,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -84,7 +86,7 @@ class _FilterState extends State<Filter> {
                   ),
                   Button1(
                       ontap: () {},
-                      colorButton: Colors.blue,
+                      colorButton: ColorApp.orangeF2,
                       textColor: Colors.white,
                       textButton: 'Lọc tìm kiếm')
                 ],

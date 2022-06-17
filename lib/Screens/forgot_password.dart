@@ -1,6 +1,7 @@
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/input_text.dart';
+import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
@@ -17,7 +18,7 @@ class _ForgotPassState extends State<ForgotPass> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.orangeAccent.shade100,
+        backgroundColor: ColorApp.orangeF2,
         title: Text('Quên mật khẩu'),
       ),
       body: Padding(

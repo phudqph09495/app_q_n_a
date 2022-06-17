@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/item/button.dart';
@@ -39,7 +40,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
 
       appBar: AppBar(
         centerTitle: true,
-
+        backgroundColor: ColorApp.orangeF2,
         title: Text('Trả lời'),
 
       ),
