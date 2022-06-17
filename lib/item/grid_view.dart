@@ -25,7 +25,7 @@ class _FilterListState extends State<FilterList> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
       child: Container(
-        color: ColorApp.whiteF7,
+        color: ColorApp.orangeF2,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,7 +40,7 @@ class _FilterListState extends State<FilterList> {
               physics: ScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: widget.column, childAspectRatio: 5 / 2),
+                  crossAxisCount: widget.column, childAspectRatio: 3),
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   child: RadioTile(
