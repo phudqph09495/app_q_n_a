@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           MaterialPageRoute(
                               builder: (context) => ForgotPass()));
                     },
-                    child: const Text(
+                    child:  Text(
                       'Quên mật khẩu',
                       style: StyleApp.textStyle700(),
                     )),

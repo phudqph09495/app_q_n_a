@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,9 +33,7 @@ class _FilterListState extends State<FilterList> {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Text(
                 widget.title,
-                style: GoogleFonts.nunito(
-                    textStyle:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                style: StyleApp.textStyle700(fontSize: 18),
               ),
             ),
             GridView.builder(

@@ -128,18 +128,10 @@ Widget CardWidget({
           type
               ? Text(
                   'Câu hỏi',
-                  style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
+                  style: StyleApp.textStyle700(fontSize: 20),
                 )
               : Text('Trả lời',
-                  style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold))),
+                  style: StyleApp.textStyle700(fontSize: 20)),
           Row(
             children: [
               Image(
@@ -156,11 +148,7 @@ Widget CardWidget({
           type
               ? Text(
                   deadline!,
-                  style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                  )),
+                  style: StyleApp.textStyle500(fontSize: 16),
                 )
               : RatingBar.builder(
                   initialRating: 3,
@@ -185,11 +173,7 @@ Widget CardWidget({
             trimMode: TrimMode.Line,
             trimCollapsedText: 'Hiện thêm',
             trimExpandedText: 'Thu gọn',
-            style: GoogleFonts.nunito(
-                textStyle: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-            )),
+            style: StyleApp.textStyle500(fontSize: 16),
           ),
           hasImage ? ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image(image: NetworkImage(image!))) : Container(),
           SizedBox(
