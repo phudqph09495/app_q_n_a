@@ -18,7 +18,7 @@ class BottomSheetAvatar extends StatelessWidget {
             title: Text(
               "Thay đổi ảnh đại diện",
               textAlign: TextAlign.center,
-              style: StyleApp.textStyle500(),
+              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
             ),
           ),
           ListTile(
@@ -32,17 +32,17 @@ class BottomSheetAvatar extends StatelessWidget {
             title: Text(
               "Chọn ảnh có sẳn",
               textAlign: TextAlign.center,
-              style: StyleApp.textStyle700(color: ColorApp.main,fontSize: 16),
+              style: StyleApp.textStyle700(color: ColorApp.orangeF01,fontSize: 16),
             ),
           ),
           ListTile(
             title: Text(
               "Chụp ảnh mới",
               textAlign: TextAlign.center,
-              style: StyleApp.textStyle700(color: ColorApp.main,fontSize: 16),
+              style: StyleApp.textStyle700(color: ColorApp.orangeF01,fontSize: 16),
             ),
           ),
-          Container(width: MediaQuery.of(context).size.width,height: 5,color: ColorApp.whiteF0),
+          Container(width: MediaQuery.of(context).size.width,height: 5,color: ColorApp.orangeF01),
           ListTile(
             onTap: (){
               Navigator.pop(context);
@@ -50,7 +50,7 @@ class BottomSheetAvatar extends StatelessWidget {
             title: Text(
               "Hủy",
               textAlign: TextAlign.center,
-              style: StyleApp.textStyle700(color: ColorApp.main,fontSize: 16),
+              style: StyleApp.textStyle700(color: ColorApp.orangeF01,fontSize: 16),
             ),
           ),
         ],

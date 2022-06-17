@@ -18,7 +18,7 @@ class BottomSheetAccount extends StatelessWidget {
           ListTile(
             title: Text(
               "Thay ảnh đại diện",
-              style: StyleApp.textStyle500(),
+              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
             ),
             onTap: (){
               Navigator.pop(context);
@@ -33,13 +33,13 @@ class BottomSheetAccount extends StatelessWidget {
             },
             title: Text(
               "Thông tin chung",
-              style: StyleApp.textStyle500(),
+              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
             ),
           ),
           ListTile(
             title: Text(
               "Thay đổi mật khẩu",
-              style: StyleApp.textStyle500(),
+              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
             ),
           ),
         ],

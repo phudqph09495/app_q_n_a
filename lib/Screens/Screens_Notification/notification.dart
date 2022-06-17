@@ -18,9 +18,9 @@ class _NotificationbarState extends State<Notificationbar> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorApp.orangeF0,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: ColorApp.orangeF0,
           centerTitle: false,
           elevation: 0,
           title: TabBar(

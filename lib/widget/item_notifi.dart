@@ -36,7 +36,7 @@ class ItemNotifi extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: StyleApp.textStyle700(
-                            fontSize: 16, color: ColorApp.main),
+                            fontSize: 16, color: ColorApp.orangeF01),
                       ),
                       const SizedBox(height: 5),
                       Text(
@@ -51,7 +51,7 @@ class ItemNotifi extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                         style: StyleApp.textStyle400(
-                            fontSize: 12, color: ColorApp.grey82),
+                            fontSize: 12,),
                       ),
                     ],
                   ),

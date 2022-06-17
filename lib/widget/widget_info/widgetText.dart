@@ -21,21 +21,21 @@ Widget getAppBottomView(BuildContext context) {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style:
-                      StyleApp.textStyle700(color: Colors.white, fontSize: 16),
+                      StyleApp.textStyle700(color: ColorApp.orangeF01, fontSize: 16),
                 ),
                 Text(
                   'Id thành viên',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style:
-                      StyleApp.textStyle700(color: Colors.white, fontSize: 16),
+                      StyleApp.textStyle700(color: ColorApp.orangeF01, fontSize: 16),
                 ),
                 Text(
                   'Điểm',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style:
-                      StyleApp.textStyle700(color: Colors.white, fontSize: 16),
+                      StyleApp.textStyle700(color: ColorApp.orangeF01, fontSize: 16),
                 ),
               ],
             ),
@@ -48,7 +48,7 @@ Widget getAppBottomView(BuildContext context) {
           onPressed: () {},
           icon: const Icon(
             Icons.settings,
-            color: Colors.white,
+            color: ColorApp.orangeF01,
           ),
         ),
       ],

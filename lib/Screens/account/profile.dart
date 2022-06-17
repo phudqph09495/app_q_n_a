@@ -16,12 +16,13 @@ class ProfileScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: ColorApp.orangeF0,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: ColorApp.orangeF0,
           centerTitle: false,
           title: Text(
             "Trang Cá Nhân",
-            style: StyleApp.textStyle700(fontSize: 18),
+            style: StyleApp.textStyle700(fontSize: 18,color: ColorApp.orangeF01),
           ),
           leading: IconButton(
             onPressed: () {
@@ -29,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
             },
             icon: Icon(
               Platform.isAndroid ? Icons.back_hand : Icons.arrow_back_ios,
-              color: ColorApp.black,
+              color: ColorApp.orangeF01,
             ),
           ),
         ),
@@ -54,13 +55,13 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Họ và tên",
-                        style: StyleApp.textStyle700(color: ColorApp.main),
+                        style: StyleApp.textStyle700(color: ColorApp.orangeF01),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         "........",
-                        style: StyleApp.textStyle700(color: ColorApp.main),
+                        style: StyleApp.textStyle700(color: ColorApp.orangeF01),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -87,12 +88,12 @@ class ProfileScreen extends StatelessWidget {
             ),
             const Divider(),
             TabBar(
-                indicatorColor: ColorApp.orangeF8,
-                labelColor: ColorApp.orangeF8,
-                unselectedLabelColor: ColorApp.grey82,
-                labelStyle: StyleApp.textStyle500(color: ColorApp.orangeF8),
+                indicatorColor: ColorApp.orangeF01,
+                labelColor: ColorApp.orangeF01,
+                unselectedLabelColor: ColorApp.orangeF01,
+                labelStyle: StyleApp.textStyle500(color: ColorApp.orangeF01),
                 unselectedLabelStyle:
-                    StyleApp.textStyle500(color: ColorApp.grey82),
+                    StyleApp.textStyle500(color: ColorApp.orangeF01),
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: const [
                   Tab(
