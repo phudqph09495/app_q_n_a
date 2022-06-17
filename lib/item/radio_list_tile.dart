@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 
 class RadioTile extends StatefulWidget {
@@ -17,7 +18,7 @@ class _RadioTileState extends State<RadioTile> {
       dense: true,
       toggleable: true,
       value: widget.index,
-      title: Container(child: Text(widget.title)),
+      title: Container(child: Text(widget.title,style: StyleApp.textStyle500(fontSize: 12),)),
       groupValue: widget.groupValue,
       onChanged: widget.onChange
       ,);
