@@ -19,7 +19,7 @@ class _RadioTileState extends State<RadioTile> {
       dense: true,
       toggleable: true,
       value: widget.index,
-      title: Text(widget.title,style: StyleApp.textStyle500(fontSize: 14),),
+      title: Text(widget.title,style: StyleApp.textStyle500(fontSize: 13.5),),
       groupValue: widget.groupValue,
       onChanged: widget.onChange
       ,);
