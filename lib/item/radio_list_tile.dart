@@ -15,10 +15,11 @@ class _RadioTileState extends State<RadioTile> {
   @override
   Widget build(BuildContext context) {
     return RadioListTile<int>(
+      contentPadding: EdgeInsets.zero,
       dense: true,
       toggleable: true,
       value: widget.index,
-      title: Container(child: Text(widget.title,style: StyleApp.textStyle500(fontSize: 12),)),
+      title: Text(widget.title,style: StyleApp.textStyle500(fontSize: 14),),
       groupValue: widget.groupValue,
       onChanged: widget.onChange
       ,);

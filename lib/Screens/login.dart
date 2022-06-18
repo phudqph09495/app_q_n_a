@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pop(context);
           },
           icon: Icon(
-            Platform.isAndroid ? Icons.back_hand : Icons.arrow_back_ios,
+            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
             color: ColorApp.black,
           ),
         ),
@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 20,
             ),
-            Button1(
+            Button1(ontap: (){},
                 textColor: Colors.white,
                 textButton: 'Đăng nhập',
                 colorButton: Colors.blue,
@@ -102,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 30,
             ),
             Button1(
+              ontap: (){},
                 icon: true,
                 imagePath: 'images/Google.png',
                 textColor: Colors.black,
@@ -113,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 10,
             ),
             Button1(
+              ontap: (){},
                 icon: true,
                 imagePath: 'images/Facebook.png',
                 textColor: Colors.black,

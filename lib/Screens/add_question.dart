@@ -73,11 +73,20 @@ class _AddQuestionState extends State<AddQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.orangeF8,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.orangeF2,
-        title: Text('Đăng câu hỏi'),
-
+        title: Text('Đăng câu hỏi',style: StyleApp.textStyle500(fontSize: 18),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+            color: ColorApp.black,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -184,11 +193,13 @@ SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Button1(
-                        colorButton: Colors.white,
-                        textColor: Colors.blue,
+                    Button1(ontap: (){
+
+                    },
+                        colorButton: ColorApp.orangeF2,
+                        textColor: ColorApp.black,
                         textButton: 'Đăng câu hỏi',
-                        width: 200,radius: 10,border: Border.all(color: Colors.blue)),
+                        width: 200,radius: 10,border: Border.all(color: Colors.black)),
                   ],
                 )
               ],

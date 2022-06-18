@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
@@ -46,12 +48,20 @@ class _FilterState extends State<Filter> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorApp.orangeF8,
+        backgroundColor: ColorApp.orangeF2.withOpacity(0.7),
         appBar: AppBar(
-
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+              color: ColorApp.black,
+            ),
+          ),
           title: Text(
             'Lọc tìm kiếm',
-            style: StyleApp.textStyle700(),
+            style: StyleApp.textStyle700(fontSize: 16),
           ),
           backgroundColor: ColorApp.orangeF2,
         ),
@@ -87,7 +97,7 @@ class _FilterState extends State<Filter> {
                   Button1(
                       ontap: () {},
                       colorButton: ColorApp.orangeF2,
-                      textColor: Colors.white,
+                      textColor: Colors.black,
                       textButton: 'Lọc tìm kiếm')
                 ],
               ),

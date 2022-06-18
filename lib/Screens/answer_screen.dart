@@ -22,7 +22,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
       bottomSheet: Button1(
           colorButton: ColorApp.orangeF2,
           textColor: Colors.white,
-          textButton: 'Viết bình luận',
+          textButton: 'Viết câu trả lời',
           ontap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
@@ -40,7 +40,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
             Navigator.pop(context);
           },
           icon: Icon(
-            Platform.isAndroid ? Icons.back_hand : Icons.arrow_back_ios,
+            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
             color: ColorApp.black,
           ),
         ),
@@ -73,8 +73,10 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             builder: (context) => Add_Answer_Screen()));
                   },
                   colorButton: ColorApp.whiteF7,
+                  width: 200,
+                  height: 40,
                   textColor: Colors.blue,
-                  textButton: 'Viết câu trả lời'),
+                  textButton: 'Viết bình luận'),
               SizedBox(
                 height: 10,
               ),
@@ -139,6 +141,7 @@ Widget CardWidget({
                 height: 30,
                 width: 30,
               ),
+              SizedBox(width: 30,),
               Text(
                 '$user       $time',
                 style: TextStyle(color: Colors.black.withOpacity(0.3)),

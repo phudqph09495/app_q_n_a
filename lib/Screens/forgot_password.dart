@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/styles/colors.dart';
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
@@ -19,7 +22,16 @@ class _ForgotPassState extends State<ForgotPass> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.orangeF2,
-        title: Text('Quên mật khẩu'),
+        title: Text('Quên mật khẩu',style: StyleApp.textStyle500(fontSize: 16),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+            color: ColorApp.black,
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
@@ -34,8 +46,8 @@ class _ForgotPassState extends State<ForgotPass> {
               height: 50,
             ),
             Button1(
-                colorButton: Colors.blue,
-                textColor: Colors.white,
+                colorButton: ColorApp.orangeF2,
+                textColor: Colors.black,
                 textButton: 'Khôi phục mật khẩu',
                 ontap: () {
 

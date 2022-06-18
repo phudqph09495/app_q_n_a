@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          unselectedWidgetColor: Colors.green,
+          unselectedWidgetColor: Colors.blue,
         ),
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [

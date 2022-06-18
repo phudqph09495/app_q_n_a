@@ -1,5 +1,7 @@
 import 'package:app_q_n_a/Screens/answer_screen.dart';
+import 'package:app_q_n_a/Screens/filter.dart';
 import 'package:app_q_n_a/Screens/search_screen.dart';
+import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/item/top_member_list.dart';
 import 'package:app_q_n_a/item/top_member_tile.dart';
@@ -29,8 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         label: Text('Đặt câu hỏi'),
         icon: Icon(Icons.add),
       ),
-
-      backgroundColor:ColorApp.orangeF8,
+      backgroundColor: ColorApp.orangeF8,
       appBar: AppBar(
         backgroundColor: ColorApp.orangeF2,
         elevation: 0,
@@ -78,8 +79,22 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Header(context),
+              // Header(context),
+              Button1(
+                colorButton: ColorApp.orangeF2,
+                textColor: ColorApp.black,
+                textButton: 'Lọc câu hỏi',
+                width: 150,
+                height: 35,
+                ontap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) =>Filter()));
+                },
+              ),
+              SizedBox(height: 8,),
               ListQuestion(
                 ontap: () {
                   Navigator.push(context,

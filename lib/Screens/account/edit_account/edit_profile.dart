@@ -27,7 +27,7 @@ class EditProfile extends StatelessWidget {
             Navigator.pop(context);
           },
           icon: Icon(
-            Platform.isAndroid ? Icons.back_hand : Icons.arrow_back_ios,
+            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
             color: ColorApp.black,
           ),
         ),

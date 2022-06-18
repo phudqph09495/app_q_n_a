@@ -92,7 +92,7 @@ color: ColorApp.orangeF2.withOpacity(0.3),
                 ),
                 Button1(
                   height: 30,
-                    width: 70,
+
                     colorButton: Colors.white,
                     textColor: Colors.blue,
                     textButton: 'Trả lời',

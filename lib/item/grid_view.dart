@@ -30,7 +30,7 @@ class _FilterListState extends State<FilterList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 widget.title,
                 style: StyleApp.textStyle700(fontSize: 18),
@@ -40,19 +40,17 @@ class _FilterListState extends State<FilterList> {
               physics: ScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: widget.column, childAspectRatio: 3),
+                  crossAxisCount: widget.column, childAspectRatio: 5/2),
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: RadioTile(
-                    title: widget.list[index],
-                    index: index,
-                    groupValue: value,
-                    onChange: (val) {
-                      setState(() {
-                        value = val;
-                      });
-                    },
-                  ),
+                return RadioTile(
+                  title: widget.list[index],
+                  index: index,
+                  groupValue: value,
+                  onChange: (val) {
+                    setState(() {
+                      value = val;
+                    });
+                  },
                 );
               },
               itemCount: widget.list.length,

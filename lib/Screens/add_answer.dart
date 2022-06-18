@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/styles/colors.dart';
+import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/item/button.dart';
@@ -41,8 +42,16 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.orangeF2,
-        title: Text('Trả lời'),
-
+        title: Text('Trả lời',style: StyleApp.textStyle500(fontSize: 18),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+            color: ColorApp.black,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -93,9 +102,9 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                         }),
                   )
                 : SizedBox(),
-            Button1(
-                colorButton: Colors.black.withOpacity(0.2),
-                textColor: Colors.white,
+            Button1(ontap: (){},
+                colorButton: ColorApp.orangeF2,
+                textColor: Colors.black,
                 textButton: 'Đăng câu trả lời')
           ],
         ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
@@ -19,7 +21,16 @@ backgroundColor: ColorApp.orangeF8,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.orangeF2,
-        title: const Text('Tìm kiếm câu hỏi'),
+        title: Text('Tìm kiếm câu hỏi',style: StyleApp.textStyle700(fontSize: 16),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+            color: ColorApp.black,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -28,7 +39,7 @@ backgroundColor: ColorApp.orangeF8,
             children: [
               InputText(
                 textColor: Colors.white,
-                  maxline: 1,
+                  maxline: null,
                   hasPass: false,
                   hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
                   controller: search,
@@ -40,19 +51,23 @@ backgroundColor: ColorApp.orangeF8,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Divider(
-                          color: Colors.blue,
-                        ),
-                        Text(
-                          'câu hỏi tìm thấy',
-                          style: StyleApp.textStyle700(color: ColorApp.whiteF7),
-                        ),
-                        Text('số câu trả lời',
-                            style: StyleApp.textStyle700(color: Colors.red)),
-                      ],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Divider(
+                            color: Colors.blue,
+                          ),
+                          Text(
+                            'câu hỏi tìm thấy',
+                            style: StyleApp.textStyle700(color: ColorApp.whiteF7),
+
+                          ),SizedBox(height: 10,),
+                          Text('số câu trả lời',
+                              style: StyleApp.textStyle700(color: Colors.red)),
+                        ],
+                      ),
                     );
                   })
             ],
