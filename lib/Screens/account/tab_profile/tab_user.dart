@@ -13,12 +13,12 @@ class TabUser extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            "THông tin chung".toUpperCase(),
-            style: StyleApp.textStyle700(fontSize: 16,color: ColorApp.orangeF01),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+          // Text(
+          //   "THông tin chung".toUpperCase(),
+          //   style: StyleApp.textStyle700(fontSize: 16,color: ColorApp.orangeF01),
+          //   maxLines: 1,
+          //   overflow: TextOverflow.ellipsis,
+          // ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
             width: MediaQuery.of(context).size.width,
@@ -34,68 +34,68 @@ class TabUser extends StatelessWidget {
                     offset: const Offset(0, 1), // changes position of shadow
                   ),
                 ]),
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: _buildItem(
-                            title: "Điểm số",
-                            point: 50,
-                            path: ImagesPath.imageLogo),
-                      ),
-                      Expanded(
-                        child: _buildItem(
-                            title: "5 sao",
-                            point: 50,
-                            path: ImagesPath.imageStar),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  color: ColorApp.greyF6,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: _buildItem(
-                            title: "Cám ơn",
-                            point: 50,
-                            path: ImagesPath.imageLove),
-                      ),
-                      Expanded(
-                        child: _buildItem(
-                            title: "Hay nhất",
-                            point: 5,
-                            path: ImagesPath.imageHuyChuong),
-                      ),
-                      Expanded(
-                        child: _buildItem(
-                            title: "Xác thực",
-                            point: 5,
-                            path: ImagesPath.imageCheck),
-                      ),
-                      Expanded(
-                        child: _buildItem(
-                            title: "Đã giúp",
-                            point: 5,
-                            path: ImagesPath.imageUser),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            // child: Column(
+            //   children: [
+            //     Padding(
+            //       padding:
+            //           const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Expanded(
+            //             child: _buildItem(
+            //                 title: "Điểm số",
+            //                 point: 50,
+            //                 path: ImagesPath.imageLogo),
+            //           ),
+            //           Expanded(
+            //             child: _buildItem(
+            //                 title: "5 sao",
+            //                 point: 50,
+            //                 path: ImagesPath.imageStar),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     const SizedBox(
+            //       height: 5,
+            //     ),
+            //     Container(
+            //       color: ColorApp.greyF6,
+            //       padding:
+            //           const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Expanded(
+            //             child: _buildItem(
+            //                 title: "Cám ơn",
+            //                 point: 50,
+            //                 path: ImagesPath.imageLove),
+            //           ),
+            //           Expanded(
+            //             child: _buildItem(
+            //                 title: "Hay nhất",
+            //                 point: 5,
+            //                 path: ImagesPath.imageHuyChuong),
+            //           ),
+            //           Expanded(
+            //             child: _buildItem(
+            //                 title: "Xác thực",
+            //                 point: 5,
+            //                 path: ImagesPath.imageCheck),
+            //           ),
+            //           Expanded(
+            //             child: _buildItem(
+            //                 title: "Đã giúp",
+            //                 point: 5,
+            //                 path: ImagesPath.imageUser),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ),
           _buidRow(title: "Thành viên từ:", content: "10/06/2020"),
           _buidRow(title: "Số câu trả lời:", content: "20"),

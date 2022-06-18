@@ -9,6 +9,7 @@ import 'package:share/share.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
 import '../../Screens/account/profile.dart';
 import '../../widget/widget_info/widgetText.dart';
+import '../account/tab_profile/tab_answer.dart';
 
 class BodyProduct extends StatefulWidget {
   const BodyProduct({Key? key}) : super(key: key);
@@ -57,7 +58,12 @@ class _BodyProductState extends State<BodyProduct> {
             showModalBottomSheet(
                 context: context, builder: (context) => BottomSheetAccount());
           }),
-      TitleAccount(iconData: Icons.bookmark_border, title: "Câu hỏi đã lưu"),
+      TitleAccount(
+          iconData: CupertinoIcons.bookmark_solid,
+          title: "Câu hỏi đã lưu",
+          onTap: () {
+            PageNavigator.next(context: context, page: ProfileScreen());
+          }),
     ]);
   }
 
@@ -144,8 +150,8 @@ class _BodyProductState extends State<BodyProduct> {
                   iconColor: ColorApp.orangeF01,
                   collapsedIconColor: ColorApp.orangeF01,
                   trailing: const SizedBox(),
-                  leading:
-                      const Icon(Icons.logout, color: ColorApp.orangeF01, size: 16),
+                  leading: const Icon(Icons.logout,
+                      color: ColorApp.orangeF01, size: 16),
                   title: Text(
                     'Đăng xuất',
                     style: StyleApp.textStyle700(
@@ -162,8 +168,13 @@ class _BodyProductState extends State<BodyProduct> {
                 textColor: ColorApp.orangeF01,
                 textButton: 'Đăng ký',
                 border: Border.all(color: ColorApp.orangeF01),
-                radius: 10,ontap: (){ Navigator.push(context,
-                MaterialPageRoute(builder: (context) => RegistrationScreen()));}),
+                radius: 10,
+                ontap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegistrationScreen()));
+                }),
             SizedBox(
               height: 20,
             ),
@@ -172,8 +183,11 @@ class _BodyProductState extends State<BodyProduct> {
                 textColor: ColorApp.orangeF01,
                 textButton: 'Đăng nhập',
                 border: Border.all(color: ColorApp.orangeF01),
-                radius: 10,ontap: (){ Navigator.push(context,
-                MaterialPageRoute(builder: (context) => LoginScreen()));})
+                radius: 10,
+                ontap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                })
           ],
         ),
       ),
