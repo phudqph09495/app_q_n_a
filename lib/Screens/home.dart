@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddQuestion()));
         },
-        label: Text('Đặt câu hỏi'),
+        label: Text('Đặt câu hỏi',style: StyleApp.textStyle600(fontSize: 20, color: Colors.white),),
         icon: Icon(Icons.add),
       ),
       backgroundColor: ColorApp.orangeF8,

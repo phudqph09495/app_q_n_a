@@ -21,7 +21,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
     return Scaffold(
       bottomSheet: Button1(
           colorButton: ColorApp.orangeF2,
-          textColor: Colors.white,
+          textColor: Colors.black,
           textButton: 'Viết câu trả lời',
           ontap: () {
             Navigator.push(context,
