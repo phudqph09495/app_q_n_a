@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:app_q_n_a/Screens/account/tab_profile/tab_answer.dart';
 import 'package:app_q_n_a/Screens/account/tab_profile/tab_question.dart';
 import 'package:app_q_n_a/Screens/account/tab_profile/tab_user.dart';
@@ -16,21 +15,21 @@ class ProfileScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.whiteF0,
         appBar: AppBar(
-          backgroundColor: ColorApp.orangeF0,
+          backgroundColor: ColorApp.whiteF0,
           centerTitle: false,
           title: Text(
             "Trang Cá Nhân",
             style:
-                StyleApp.textStyle700(fontSize: 18, color: ColorApp.orangeF01),
+                StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
           ),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon:const Icon(
-              Icons.arrow_back_ios,
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
               color: ColorApp.orangeF01,
             ),
           ),
@@ -44,8 +43,8 @@ class ProfileScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: ColorApp.orangeF8.withOpacity(0.1),
-                      border: Border.all(color: ColorApp.orangeF8, width: 0.7)),
+                      color: ColorApp.whiteF7.withOpacity(0.1),
+                      border: Border.all(color: ColorApp.black00, width: 0.7)),
                   height: 50,
                   margin: const EdgeInsets.only(left: 40, right: 10),
                   padding: const EdgeInsets.only(
@@ -56,13 +55,13 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Họ và tên",
-                        style: StyleApp.textStyle700(color: ColorApp.orangeF01),
+                        style: StyleApp.textStyle700(color: ColorApp.black),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         "........",
-                        style: StyleApp.textStyle700(color: ColorApp.orangeF01),
+                        style: StyleApp.textStyle700(color: ColorApp.black),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -73,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
-                      border: Border.all(color: ColorApp.orangeF8, width: 0.7)),
+                      border: Border.all(color: ColorApp.black00, width: 0.7)),
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                   child: ClipRRect(
@@ -90,12 +89,12 @@ class ProfileScreen extends StatelessWidget {
             const Divider(),
             TabBar(
                 indicatorColor: ColorApp.orangeF01,
-                labelColor: ColorApp.orangeF01,
-                unselectedLabelColor: ColorApp.orangeF01,
-                labelStyle: StyleApp.textStyle500(color: ColorApp.orangeF01),
+                labelColor: ColorApp.black,
+                unselectedLabelColor: ColorApp.black00,
+                labelStyle: StyleApp.textStyle500(color: ColorApp.whiteF0),
                 unselectedLabelStyle:
-                    StyleApp.textStyle500(color: ColorApp.orangeF01),
-                indicatorSize: TabBarIndicatorSize.label,
+                    StyleApp.textStyle500(color: ColorApp.whiteF0),
+                // indicatorSize: TabBarIndicatorSize.label,
                 tabs: const [
                   Tab(
                     text: "Thông tin",

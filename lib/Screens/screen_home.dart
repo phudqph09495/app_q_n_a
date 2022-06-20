@@ -30,15 +30,15 @@ class _ScreenHomeState extends State<ScreenHome> {
           setState(() {});
         },
         elevation: 4,
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.whiteF0,
         currentIndex: index,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: ColorApp.orangeF01,
         selectedLabelStyle:
-            StyleApp.textStyle400(color: ColorApp.orangeF01, fontSize: 12),
-        unselectedItemColor: ColorApp.main,
+            StyleApp.textStyle400(color: ColorApp.black, fontSize: 12),
+        unselectedItemColor: ColorApp.black,
         unselectedLabelStyle:
-            StyleApp.textStyle400(color: ColorApp.orangeF01, fontSize: 12),
+            StyleApp.textStyle400(color: ColorApp.black, fontSize: 12),
         items: const [
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.home), label: "Trang chủ"),

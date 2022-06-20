@@ -8,13 +8,13 @@ class Question_saved extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorApp.orangeF0,
+      backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.whiteF0,
         centerTitle: false,
         title: Text(
           "Câu hỏi đã lưu",
-          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.orangeF01),
+          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
         ),
         leading: IconButton(
           onPressed: () {

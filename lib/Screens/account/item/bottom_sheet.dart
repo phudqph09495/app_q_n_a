@@ -4,6 +4,8 @@ import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 
+import '../edit_account/change_password.dart';
+
 class BottomSheetAccount extends StatelessWidget {
   const BottomSheetAccount({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class BottomSheetAccount extends StatelessWidget {
           ListTile(
             title: Text(
               "Thay ảnh đại diện",
-              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
+              style: StyleApp.textStyle500(color: ColorApp.black),
             ),
             onTap: (){
               Navigator.pop(context);
@@ -33,14 +35,19 @@ class BottomSheetAccount extends StatelessWidget {
             },
             title: Text(
               "Thông tin chung",
-              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
+              style: StyleApp.textStyle500(color: ColorApp.black),
             ),
           ),
           ListTile(
             title: Text(
               "Thay đổi mật khẩu",
-              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
+              style: StyleApp.textStyle500(color: ColorApp.black),
             ),
+            onTap: (){
+              Navigator.pop(context);
+              PageNavigator.next(context: context, page: ChangePass());
+
+            },
           ),
         ],
       ),

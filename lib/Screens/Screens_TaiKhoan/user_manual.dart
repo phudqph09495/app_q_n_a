@@ -7,13 +7,13 @@ class UserManual extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorApp.orangeF0,
+      backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.whiteF0,
         centerTitle: false,
         title: Text(
           "Hướng dẫn sử dụng",
-          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.orangeF01),
+          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
         ),
         leading: IconButton(
           onPressed: () {
@@ -33,7 +33,7 @@ class UserManual extends StatelessWidget {
             children: [
               const Text(
                 'HƯỚNG DẪN THAM GIA CỘNG ĐỒNG HỎI ĐÁP 247',
-                style: TextStyle(color: ColorApp.orangeF01),
+                style: TextStyle(color: ColorApp.black),
               ),
               const SizedBox(
                 height: 15,
@@ -43,7 +43,7 @@ class UserManual extends StatelessWidget {
                 children: [
                   Container(
                     decoration: const BoxDecoration(
-                      color: ColorApp.blue6D,
+                      color: ColorApp.orangeF01,
                       shape: BoxShape.circle,
                     ),
                     width: 40,
@@ -51,7 +51,7 @@ class UserManual extends StatelessWidget {
                     child: const Center(
                       child: Text(
                         '1',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                   ),

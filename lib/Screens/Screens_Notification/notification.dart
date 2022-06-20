@@ -19,9 +19,9 @@ class _NotificationbarState extends State<Notificationbar> {
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
-          backgroundColor: ColorApp.orangeF0,
+          backgroundColor: ColorApp.whiteF0,
           appBar: AppBar(
-            backgroundColor: ColorApp.orangeF0,
+            backgroundColor: ColorApp.whiteF0,
             title: TabBar(
               labelColor: ColorApp.black,
               unselectedLabelStyle:
@@ -33,13 +33,13 @@ class _NotificationbarState extends State<Notificationbar> {
                 Tab(
                   child: Text(
                     "Sự kiện nóng",
-                    style: TextStyle(color: ColorApp.orangeF01),
+                    style: TextStyle(color: ColorApp.black),
                   ),
                 ),
                 Tab(
                   child: Text(
                     "Thông báo",
-                    style: TextStyle(color: ColorApp.orangeF01),
+                    style: TextStyle(color: ColorApp.black),
                   ),
                 ),
               ],
