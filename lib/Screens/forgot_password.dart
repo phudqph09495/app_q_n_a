@@ -43,9 +43,9 @@ class _ForgotPassState extends State<ForgotPass> {
                 hint: 'Nhập Email đăng ký hoặc tên đăng nhập',
                 controller: forgot),
             SizedBox(
-              height: 50,
+              height: 8,
             ),
-            Button1(
+            Button1(radius: 10,
                 colorButton: ColorApp.orangeF2,
                 textColor: Colors.black,
                 textButton: 'Khôi phục mật khẩu',

@@ -104,8 +104,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
               trimMode: TrimMode.Line,
               trimCollapsedText: 'Hiện thêm',
               trimExpandedText: 'Thu gọn',
-              style: StyleApp.textStyle500(
-                  fontSize: 16, color: ColorApp.black),
+              style: StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
             ),
             widget.hasImage
                 ? ClipRRect(
@@ -118,23 +117,23 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             widget.type
                 ? Container()
                 : Row(
-
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Button1(
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
                         textButton: 'Report',
-                        border:
-                            Border.all(color: ColorApp.black, width: 0.2),
+                        border: Border.all(color: ColorApp.black, width: 0.2),
                         height: 35,
-                      ),SizedBox(width: 10,),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Button1(
                         height: 35,
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
-                        border:
-                            Border.all(color: ColorApp.black, width: 0.2),
+                        border: Border.all(color: ColorApp.black, width: 0.2),
                         textButton: 'Trả lời',
                         ontap: () {
                           setState(() {
@@ -152,10 +151,11 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       InputText(
+                        height: 40,
                         width: 270,
                         maxline: null,
                         controller: reply,
-                        hint: 'Nhâp bình luận',
+                        hint: 'Nhập bình luận....',
                         hasPass: false,
                         iconS: true,
                         suffixIcon: Icon(
@@ -193,8 +193,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                                       trimCollapsedText: 'Hiện thêm',
                                       trimExpandedText: 'Thu gọn',
                                       style: StyleApp.textStyle400(
-                                          fontSize: 16,
-                                          color: ColorApp.black),
+                                          fontSize: 16, color: ColorApp.black),
                                     ),
                                   ),
                                 ],

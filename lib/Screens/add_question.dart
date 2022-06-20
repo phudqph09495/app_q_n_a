@@ -1,22 +1,53 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../item/dropdown_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../item/input_text.dart';
 import '../item/button.dart';
+import 'package:toast/toast.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-int maxline=1;
-bool line=false;
+DateTime? _chosenDateTime;
+
 class AddQuestion extends StatefulWidget {
   @override
   State<AddQuestion> createState() => _AddQuestionState();
 }
 
 class _AddQuestionState extends State<AddQuestion> {
+  void _showDatePicker(ctx) {
+    showCupertinoModalPopup(
+        context: ctx,
+        builder: (_) => Container(
+              height: 500,
+              color: const Color.fromARGB(255, 255, 255, 255),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 400,
+                    child: CupertinoDatePicker(
+                        minuteInterval: 1,
+                        minimumDate: DateTime.now(),
+                        use24hFormat: true,
+                        initialDateTime: DateTime.now(),
+                        onDateTimeChanged: (val) {
+                          setState(() {
+                            _chosenDateTime = val;
+                            deadline.text =
+                                '${_chosenDateTime?.hour}h${_chosenDateTime?.minute}  ${_chosenDateTime?.day}/${_chosenDateTime?.month}/${_chosenDateTime?.year}';
+                          });
+                        }),
+                  ),
+                ],
+              ),
+            ));
+  }
+
   TextEditingController money = TextEditingController();
 
   TextEditingController ques = TextEditingController();
@@ -31,7 +62,11 @@ class _AddQuestionState extends State<AddQuestion> {
     'Sử học',
     'Địa lý',
     'Tiếng Anh',
-    'Tin học','GDCD','Công nghệ','Âm nhạc','Mỹ thuật'
+    'Tin học',
+    'GDCD',
+    'Công nghệ',
+    'Âm nhạc',
+    'Mỹ thuật'
   ];
   String lop = 'Lớp 1';
   List<String> lopList = [
@@ -55,21 +90,16 @@ class _AddQuestionState extends State<AddQuestion> {
     if (selectedImage!.isNotEmpty) {
       _imageFileList!.addAll(selectedImage);
     }
-    setState((){});
+    setState(() {});
     print(_imageFileList!.length.toString());
   }
 
-  Future selectImageCamera()async{
-    final image=await _picker.pickImage(source: ImageSource.camera);
-    if (image==null) return;
+  Future selectImageCamera() async {
+    final image = await _picker.pickImage(source: ImageSource.camera);
+    if (image == null) return;
     _imageFileList?.add(image);
-    setState((){});
+    setState(() {});
   }
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +108,10 @@ class _AddQuestionState extends State<AddQuestion> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
-        title: Text('Đăng câu hỏi',style: StyleApp.textStyle500(fontSize: 18),),
+        title: Text(
+          'Đăng câu hỏi',
+          style: StyleApp.textStyle500(fontSize: 18),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -97,17 +130,31 @@ class _AddQuestionState extends State<AddQuestion> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 5,
+                ),
                 Text(
                   'Môn học',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
-                Dropdown1(val: mon, monList: monList),
+                Dropdown1(
+                  val: mon,
+                  monList: monList,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   'Lớp',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
-                Dropdown1(val: lop, monList: lopList),
-
+                Dropdown1(
+                  val: lop,
+                  monList: lopList,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   'Deadline',
                   style: StyleApp.textStyle700(fontSize: 16),
@@ -118,24 +165,29 @@ class _AddQuestionState extends State<AddQuestion> {
                     controller: deadline,
                     readOnly: true,
                     deadline: () {
-                      showTimePicker(
-                              context: context, initialTime: TimeOfDay.now())
-                          .then((val) {
-                        if (val != null) {
-                          showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1970),
-                                  lastDate: DateTime(2100))
-                              .then((value) {
-                            if (value != null) {
-                              deadline.text =
-                                  "${val.hour}:${val.minute} ngày ${value.day}/${value.month}/${value.year}";
-                            }
-                          });
-                        }
-                      });
+                      _showDatePicker(context);
+
+                      // showTimePicker(
+                      //         context: context, initialTime: TimeOfDay.now())
+                      //     .then((val) {
+                      //   if (val != null) {
+                      //     showDatePicker(
+                      //             context: context,
+                      //             initialDate: DateTime.now(),
+                      //             firstDate: DateTime(1970),
+                      //             lastDate: DateTime(2100))
+                      //         .then((value) {
+                      //       if (value != null) {
+                      //         deadline.text =
+                      //             "${val.hour}:${val.minute} ngày ${value.day}/${value.month}/${value.year}";
+                      //       }
+                      //     });
+                      //   }
+                      // });
                     }),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   'Phần thưởng',
                   style: StyleApp.textStyle700(fontSize: 16),
@@ -145,7 +197,9 @@ class _AddQuestionState extends State<AddQuestion> {
                   hasPass: false,
                   hint: 'Phần thưởng cho người trả lời',
                   controller: money,
-
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Text(
                   'Câu hỏi',
@@ -155,55 +209,56 @@ class _AddQuestionState extends State<AddQuestion> {
                     hasPass: false,
                     hint: 'Nhập câu hỏi của bạn',
                     controller: ques,
-deadline: (){setState((){
-  line=!line;
-  if(line){maxline=10;}else{maxline=1;}
-});},
-                    maxline: maxline),
+                    maxline: null),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {selectImageCamera();},
+                        onPressed: () {
+                          selectImageCamera();
+                        },
                         icon: Icon(
                           Icons.camera_alt,
                           size: 30,
                         )),
                     IconButton(
-                        onPressed: () {selectImageGallery();},
+                        onPressed: () {
+                          selectImageGallery();
+                        },
                         icon: Icon(
                           Icons.image,
                           size: 30,
                         )),
                   ],
                 ),
-
                 _imageFileList!.isNotEmpty
-                    ? GridView.builder(itemCount: _imageFileList!.length,
+                    ? GridView.builder(
+                        itemCount: _imageFileList!.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return Image.file(
                             File(_imageFileList![index].path),
-
                           );
                         })
                     : SizedBox(),
-SizedBox(height: 30,),
-
-
-
-
+                SizedBox(
+                  height: 30,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Button1(ontap: (){
-
-                    },
+                    Button1(
+                        ontap: () {},
                         colorButton: ColorApp.orangeF2,
                         textColor: ColorApp.black,
                         textButton: 'Đăng câu hỏi',
-                        width: 200,radius: 10,border: Border.all(color: Colors.black)),
+                        width: 200,
+                        radius: 10,
+                        border: Border.all(color: Colors.black)),
                   ],
                 )
               ],
