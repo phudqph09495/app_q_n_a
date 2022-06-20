@@ -136,6 +136,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         suffixIcon: Icon(Icons.send),
                       ),
                       ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: 5,
                           itemBuilder: (context, int index) {
