@@ -6,7 +6,8 @@ import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
-
+int maxline=1;
+double height=40;
 class AnswerWidget extends StatefulWidget {
   String avatar;
   String user;
@@ -31,6 +32,8 @@ class AnswerWidget extends StatefulWidget {
       required this.time,
       required this.user});
 
+
+
   @override
   State<AnswerWidget> createState() => _AnswerWidgetState();
 }
@@ -38,7 +41,11 @@ class AnswerWidget extends StatefulWidget {
 class _AnswerWidgetState extends State<AnswerWidget> {
   TextEditingController reply = TextEditingController();
   @override
+
+
+  @override
   Widget build(BuildContext context) {
+
     return Card(
       color: ColorApp.whiteF0,
       child: Padding(
@@ -138,6 +145,10 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         ontap: () {
                           setState(() {
                             widget.reply = !widget.reply;
+                            if(widget.reply==false){
+                              height=40;
+                              maxline=1;
+                            }
                           });
                         },
                       )
@@ -151,9 +162,11 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       InputText(
-                        height: 40,
+                        deadline: (){ setState(() {height=110;maxline=4;});},
                         width: 270,
-                        maxline: null,
+                        inputType: TextInputType.multiline,
+                        maxline: maxline,
+                        height: height,
                         controller: reply,
                         hint: 'Nhập bình luận....',
                         hasPass: false,

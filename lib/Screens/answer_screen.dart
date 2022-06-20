@@ -64,7 +64,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
                   user: 'tran thanh',
                   time: '11:07 7/6/2022',
-                  deadline: 'Đây là deadline',
+                  deadline: 'Còn 3h',
                   question: 'Đây là câu hỏi',
                   hasImage: true,
                   image:

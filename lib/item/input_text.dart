@@ -30,7 +30,7 @@ class _InputTextState extends State<InputText> {
       height:widget.height,
       width: widget.width,
       child: TextFormField(
-
+textInputAction: TextInputAction.newline,
         style: StyleApp.textStyle500(color: widget.textColor),
         onTap: widget.deadline,
         readOnly: widget.readOnly,

@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
 
 class Dropdown1 extends StatefulWidget {
@@ -42,7 +43,7 @@ class _Dropdown1State extends State<Dropdown1> {
             value: value,
             child: Text(
               value,
-              style: TextStyle(color: Colors.black,),
+              style: StyleApp.textStyle400(),
             ),
           );
         }).toList(),

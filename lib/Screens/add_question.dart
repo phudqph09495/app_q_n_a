@@ -13,6 +13,8 @@ import 'package:toast/toast.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 DateTime? _chosenDateTime;
+int maxline=1;
+double height=50;
 
 class AddQuestion extends StatefulWidget {
   @override
@@ -115,6 +117,10 @@ class _AddQuestionState extends State<AddQuestion> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
+            setState((){
+              maxline=1;
+              height=40;
+            });
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
@@ -138,6 +144,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 Dropdown1(
+
                   val: mon,
                   monList: monList,
                 ),
@@ -149,6 +156,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 Dropdown1(
+
                   val: lop,
                   monList: lopList,
                 ),
@@ -160,6 +168,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
+
                     hasPass: false,
                     hint: 'Ngày kết thúc câu hỏi',
                     controller: deadline,
@@ -193,6 +202,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
+
                   inputType: TextInputType.number,
                   hasPass: false,
                   hint: 'Phần thưởng cho người trả lời',
@@ -206,10 +216,15 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
-                    hasPass: false,
+                    inputType: TextInputType.multiline,
+                    maxline: maxline,
+
+                  deadline: (){ setState(() {maxline=4;});},
+
+                  hasPass: false,
                     hint: 'Nhập câu hỏi của bạn',
                     controller: ques,
-                    maxline: null),
+                   ),
                 SizedBox(
                   height: 10,
                 ),
