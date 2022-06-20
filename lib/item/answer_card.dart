@@ -123,12 +123,23 @@ class _AnswerWidgetState extends State<AnswerWidget> {
               widget.type
                   ? Container()
                   : Row(
+
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Button1(
                           colorButton: ColorApp.orangeF0,
                           textColor: ColorApp.orangeF01,
-                          border: Border.all(color: ColorApp.orangeF01,width: 2),
+                          textButton: 'Report',
+                          border:
+                              Border.all(color: ColorApp.orangeF01, width: 2),
+                          height: 35,
+                        ),SizedBox(width: 10,),
+                        Button1(
+                          height: 35,
+                          colorButton: ColorApp.orangeF0,
+                          textColor: ColorApp.orangeF01,
+                          border:
+                              Border.all(color: ColorApp.orangeF01, width: 2),
                           textButton: 'Trả lời',
                           ontap: () {
                             setState(() {
@@ -138,6 +149,9 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         )
                       ],
                     ),
+              SizedBox(
+                height: 5,
+              ),
               widget.reply
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -149,9 +163,8 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                           hint: 'Nhâp bình luận',
                           hasPass: false,
                           iconS: true,
-                          suffixIcon: const Icon(
+                          suffixIcon: Icon(
                             Icons.send,
-                            color: ColorApp.orangeF01,
                           ),
                         ),
                         ListView.builder(
@@ -180,7 +193,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                                       child: ReadMoreText(
                                         'Replyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
                                         trimLines: 2,
-                                        colorClickableText: ColorApp.orangeF01,
+                                        colorClickableText: ColorApp.blue3D,
                                         trimMode: TrimMode.Line,
                                         trimCollapsedText: 'Hiện thêm',
                                         trimExpandedText: 'Thu gọn',

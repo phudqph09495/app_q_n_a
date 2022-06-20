@@ -8,6 +8,7 @@ class InputText extends StatefulWidget {
       double? height;
       double? width;
   bool iconS ;
+  Function()? iconPress;
       TextInputType inputType ;
       Icon? suffixIcon;
    bool hasPass;
@@ -16,7 +17,7 @@ class InputText extends StatefulWidget {
       Color colorBorder ;
   Function()? deadline;
      TextEditingController controller;
-InputText({ this.colorhint=Colors.black45, this.textColor=Colors.black,this.maxline,this.readOnly= false,required this.controller,this.colorBorder= Colors.black,this.inputType= TextInputType.multiline,this.deadline,this.height,required this.hint, required this.hasPass,this.iconS=false,this.suffixIcon,this.width});
+InputText({ this.colorhint=Colors.black45, this.textColor=Colors.black,this.maxline,this.readOnly= false,required this.controller,this.colorBorder= Colors.black,this.inputType= TextInputType.multiline,this.deadline,this.height,required this.hint, required this.hasPass,this.iconS=false,this.suffixIcon,this.width,this.iconPress});
   @override
   State<InputText> createState() => _InputTextState();
 }
@@ -39,7 +40,7 @@ class _InputTextState extends State<InputText> {
             suffixIcon: widget.iconS
                 ? IconButton(
               onPressed: () {
-
+widget.iconPress;
               },
               icon: widget.suffixIcon!,
             )

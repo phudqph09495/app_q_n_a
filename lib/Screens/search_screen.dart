@@ -38,6 +38,7 @@ backgroundColor: ColorApp.orangeF8,
           child: Column(
             children: [
               InputText(
+
                 textColor: Colors.white,
                   maxline: null,
                   hasPass: false,
