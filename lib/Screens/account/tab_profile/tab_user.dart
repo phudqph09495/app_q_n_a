@@ -28,7 +28,7 @@ class TabUser extends StatelessWidget {
                 border: Border.all(color: ColorApp.orangeF01, width: 0.5),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorApp.orangeF01.withOpacity(0.5),
+                    color: ColorApp.whiteF0.withOpacity(0.5),
                     spreadRadius: 1,
                     blurRadius: 1,
                     offset: const Offset(0, 1), // changes position of shadow
@@ -103,7 +103,7 @@ class TabUser extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             "Danh hiệu của bạn".toUpperCase(),
-            style: StyleApp.textStyle700(fontSize: 16,color: ColorApp.orangeF01),
+            style: StyleApp.textStyle700(fontSize: 16,color: ColorApp.black),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -120,7 +120,7 @@ class TabUser extends StatelessWidget {
               const SizedBox(height: 5),
               Text(
                 "Lính mới",
-                style: StyleApp.textStyle400(color: ColorApp.orangeF01),
+                style: StyleApp.textStyle400(color: ColorApp.black),
               ),
             ],
           ),
@@ -140,7 +140,7 @@ class TabUser extends StatelessWidget {
         children: [
           Text(
             title,
-            style: StyleApp.textStyle700(color: ColorApp.orangeF01),
+            style: StyleApp.textStyle700(color: ColorApp.black),
           ),
           const SizedBox(
             height: 5,
@@ -157,7 +157,7 @@ class TabUser extends StatelessWidget {
               const SizedBox(width: 5),
               Text(
                 point.toString(),
-                style: StyleApp.textStyle700(color: ColorApp.orangeF01),
+                style: StyleApp.textStyle700(color: ColorApp.black),
               ),
             ],
           ),
@@ -177,14 +177,14 @@ class TabUser extends StatelessWidget {
               flex: 2,
               child: Text(
                 title,
-                style: StyleApp.textStyle700(color: ColorApp.orangeF01),
+                style: StyleApp.textStyle700(color: ColorApp.black),
               )),
           const SizedBox(width: 10),
           Expanded(
               flex: 5,
               child: Text(
                 content,
-                style: StyleApp.textStyle400(color: ColorApp.orangeF01),
+                style: StyleApp.textStyle400(color: ColorApp.black),
               )),
         ],
       ),

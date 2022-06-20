@@ -56,7 +56,7 @@ class ItemNotifi extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                         style: StyleApp.textStyle400(
-                            fontSize: 12, color: ColorApp.orangeF01),
+                            fontSize: 12, color: ColorApp.black),
                       ),
                     ],
                   ),

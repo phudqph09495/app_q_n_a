@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_Pays/Screens_Pays.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
 import 'package:app_q_n_a/Screens/login.dart';
@@ -98,7 +99,13 @@ class _BodyProductState extends State<BodyProduct> {
         // },
         onTap: () => launch('https://hoidap247.com/'),
       ),
-      TitleAccount(iconData: Icons.wallet, title: "Ví điện tử"),
+      TitleAccount(
+          iconData: Icons.wallet,
+          title: "Ví điện tử",
+          onTap: () {
+            showModalBottomSheet(
+                context: context, builder: (context) => ScreensPays());
+          }),
       TitleAccount(
         iconData: CupertinoIcons.chat_bubble,
         title: "Liên hệ và góp ý",
@@ -110,9 +117,9 @@ class _BodyProductState extends State<BodyProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorApp.orangeF0,
+      backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.whiteF0,
         bottom: PreferredSize(
           child: getAppBottomView(context),
           preferredSize: const Size.fromHeight(40.0),
@@ -124,7 +131,7 @@ class _BodyProductState extends State<BodyProduct> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.grey82, width: 1),
+                  border: Border.all(color: ColorApp.black00, width: 1),
                   borderRadius: BorderRadius.circular(10)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -135,7 +142,7 @@ class _BodyProductState extends State<BodyProduct> {
                   title: Text(
                     'Cá nhân',
                     style: StyleApp.textStyle700(
-                        color: ColorApp.orangeF01, fontSize: 16),
+                        color: ColorApp.black, fontSize: 16),
                   ),
                   children: List.generate(
                     titleAccount.length,
@@ -153,7 +160,7 @@ class _BodyProductState extends State<BodyProduct> {
             ),
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.orangeF01, width: 1),
+                  border: Border.all(color: ColorApp.black00, width: 1),
                   borderRadius: BorderRadius.circular(10)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -164,7 +171,7 @@ class _BodyProductState extends State<BodyProduct> {
                   title: Text(
                     'Về ứng dụng',
                     style: StyleApp.textStyle700(
-                        color: ColorApp.orangeF01, fontSize: 16),
+                        color: ColorApp.black, fontSize: 16),
                   ),
                   children: List.generate(
                     titleApp.length,
@@ -182,7 +189,7 @@ class _BodyProductState extends State<BodyProduct> {
             ),
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.orangeF01, width: 1),
+                  border: Border.all(color: ColorApp.black00, width: 1),
                   borderRadius: BorderRadius.circular(10)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -196,7 +203,7 @@ class _BodyProductState extends State<BodyProduct> {
                   title: Text(
                     'Đăng xuất',
                     style: StyleApp.textStyle700(
-                        color: ColorApp.orangeF01, fontSize: 16),
+                        color: ColorApp.black, fontSize: 16),
                   ),
                 ),
               ),
@@ -205,10 +212,10 @@ class _BodyProductState extends State<BodyProduct> {
               height: 20,
             ),
             Button1(
-                colorButton: ColorApp.orangeF0,
-                textColor: ColorApp.orangeF01,
+                colorButton: ColorApp.whiteF0,
+                textColor: ColorApp.black,
                 textButton: 'Đăng ký',
-                border: Border.all(color: ColorApp.orangeF01),
+                border: Border.all(color: ColorApp.black00),
                 radius: 10,
                 ontap: () {
                   Navigator.push(
@@ -220,10 +227,10 @@ class _BodyProductState extends State<BodyProduct> {
               height: 20,
             ),
             Button1(
-                colorButton: ColorApp.orangeF0,
-                textColor: ColorApp.orangeF01,
+                colorButton: ColorApp.whiteF0,
+                textColor: ColorApp.black,
                 textButton: 'Đăng nhập',
-                border: Border.all(color: ColorApp.orangeF01),
+                border: Border.all(color: ColorApp.black00),
                 radius: 10,
                 ontap: () {
                   Navigator.push(context,
@@ -242,7 +249,7 @@ class _BodyProductState extends State<BodyProduct> {
       title: Text(
         title,
         style: StyleApp.textStyle500(
-          color: ColorApp.orangeF01,
+          color: ColorApp.black,
         ),
       ),
       leading: Icon(

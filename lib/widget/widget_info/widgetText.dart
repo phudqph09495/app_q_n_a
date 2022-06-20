@@ -21,21 +21,21 @@ Widget getAppBottomView(BuildContext context) {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style:
-                      StyleApp.textStyle700(color: ColorApp.orangeF01, fontSize: 16),
+                      StyleApp.textStyle700(color: ColorApp.black, fontSize: 16),
                 ),
                 Text(
                   'Id thành viên',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style:
-                      StyleApp.textStyle700(color: ColorApp.orangeF01, fontSize: 16),
+                      StyleApp.textStyle700(color: ColorApp.black, fontSize: 16),
                 ),
                 Text(
                   'Điểm',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style:
-                      StyleApp.textStyle700(color: ColorApp.orangeF01, fontSize: 16),
+                      StyleApp.textStyle700(color: ColorApp.black, fontSize: 16),
                 ),
               ],
             ),
