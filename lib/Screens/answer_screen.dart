@@ -7,6 +7,7 @@ import 'package:app_q_n_a/item/question_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:readmore/readmore.dart';
+import 'package:app_q_n_a/item/answer_card.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -51,7 +52,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CardWidget(
+              AnswerWidget(
                   type: true,
                   avatar:
                       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
@@ -81,13 +82,15 @@ class _AnswerScreenState extends State<AnswerScreen> {
                 height: 10,
               ),
               ListView.builder(
+
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 20,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        CardWidget(
+                        AnswerWidget(
+                          imageReply: 'https://tinypng.com/images/social/website.jpg',
                             avatar:
                                 'https://tinypng.com/images/social/website.jpg',
                             user: 'người trả lời',
@@ -111,79 +114,4 @@ class _AnswerScreenState extends State<AnswerScreen> {
   }
 }
 
-Widget CardWidget({
-  required String avatar,
-  required String user,
-  required String time,
-  String? deadline,
-  required String question,
-  required bool type,
-  bool hasImage = false,
-  String? image,
-}) {
-  return Card(
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          type
-              ? Text(
-                  'Câu hỏi',
-                  style: StyleApp.textStyle700(fontSize: 20),
-                )
-              : Text('Trả lời',
-                  style: StyleApp.textStyle700(fontSize: 20)),
-          Row(
-            children: [
-              Image(
-                image: NetworkImage(avatar),
-                height: 30,
-                width: 30,
-              ),
-              SizedBox(width: 30,),
-              Text(
-                '$user       $time',
-                style: TextStyle(color: Colors.black.withOpacity(0.3)),
-              ),
-            ],
-          ),
-          type
-              ? Text(
-                  deadline!,
-                  style: StyleApp.textStyle500(fontSize: 16),
-                )
-              : RatingBar.builder(
-                  initialRating: 3,
-                  minRating: 1,
-                  itemSize: 20,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemCount: 5,
-                  itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                  itemBuilder: (context, _) => Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  onRatingUpdate: (rating) {
-                    print(rating);
-                  },
-                ),
-          ReadMoreText(
-            question,
-            trimLines: 2,
-            colorClickableText: Colors.pink,
-            trimMode: TrimMode.Line,
-            trimCollapsedText: 'Hiện thêm',
-            trimExpandedText: 'Thu gọn',
-            style: StyleApp.textStyle500(fontSize: 16),
-          ),
-          hasImage ? ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image(image: NetworkImage(image!))) : Container(),
-          SizedBox(
-            height: 10,
-          )
-        ],
-      ),
-    ),
-  );
-}
+

@@ -6,15 +6,17 @@ class InputText extends StatefulWidget {
       int? maxline;
   bool readOnly;
       double? height;
+      double? width;
   bool iconS ;
       TextInputType inputType ;
+      Icon? suffixIcon;
    bool hasPass;
   String hint;
   Color colorhint;
       Color colorBorder ;
   Function()? deadline;
      TextEditingController controller;
-InputText({ this.colorhint=Colors.black45, this.textColor=Colors.black,this.maxline,this.readOnly= false,required this.controller,this.colorBorder= Colors.black,this.inputType= TextInputType.multiline,this.deadline,this.height,required this.hint, required this.hasPass,this.iconS=false});
+InputText({ this.colorhint=Colors.black45, this.textColor=Colors.black,this.maxline,this.readOnly= false,required this.controller,this.colorBorder= Colors.black,this.inputType= TextInputType.multiline,this.deadline,this.height,required this.hint, required this.hasPass,this.iconS=false,this.suffixIcon,this.width});
   @override
   State<InputText> createState() => _InputTextState();
 }
@@ -24,6 +26,7 @@ class _InputTextState extends State<InputText> {
   Widget build(BuildContext context) {
     return Container(
       height:widget.height,
+      width: widget.width,
       child: TextFormField(
         style: TextStyle(color:widget.textColor),
         onTap: widget.deadline,
@@ -38,10 +41,7 @@ class _InputTextState extends State<InputText> {
               onPressed: () {
 
               },
-              icon: Icon(
-                Icons.search,
-                color: ColorApp.whiteF7,
-              ),
+              icon: widget.suffixIcon!,
             )
                 : null,
             focusedBorder: OutlineInputBorder(

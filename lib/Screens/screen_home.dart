@@ -30,7 +30,7 @@ class _ScreenHomeState extends State<ScreenHome> {
           setState(() {});
         },
         elevation: 4,
-        backgroundColor: ColorApp.orangeF01,
+        backgroundColor: ColorApp.orangeF2,
         currentIndex: index,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: ColorApp.main,
