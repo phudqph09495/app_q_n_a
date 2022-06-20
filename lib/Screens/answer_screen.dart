@@ -20,22 +20,25 @@ class _AnswerScreenState extends State<AnswerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       bottomSheet: Button1(
+
           colorButton: ColorApp.orangeF0,
           textColor: ColorApp.orangeF01,
+          radius: 30,
           border: Border.all(color: ColorApp.orangeF01),
           textButton: 'Viết câu trả lời',
           ontap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
           }),
-      backgroundColor: ColorApp.orangeF0,
+      backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Trả lời',
-          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.orangeF01),
+          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
         ),
         leading: IconButton(
           onPressed: () {
@@ -43,16 +46,18 @@ class _AnswerScreenState extends State<AnswerScreen> {
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-            color: ColorApp.orangeF01,
+            color: ColorApp.black,
           ),
         ),
       ),
       body: SingleChildScrollView(
+
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(height: 5,),
               AnswerWidget(
                   type: true,
                   avatar:
@@ -67,26 +72,24 @@ class _AnswerScreenState extends State<AnswerScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Button1(
-                  ontap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Add_Answer_Screen()));
-                  },
-                  colorButton: ColorApp.orangeF0,
-                  border: Border.all(color: ColorApp.orangeF01),
-                  textColor: ColorApp.orangeF01,
-                  width: 200,
-                  height: 40,
-                  textButton: 'Viết bình luận'),
-              const SizedBox(
-                height: 10,
-              ),
+              // Button1(
+              //     ontap: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => Add_Answer_Screen()));
+              //     },
+              //     colorButton: ColorApp.orangeF0,
+              //     border: Border.all(color: ColorApp.orangeF01),
+              //     textColor: ColorApp.orangeF01,
+              //     width: 200,
+              //     height: 40,
+              //     textButton: 'Viết bình luận'),
+
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 20,
+                  itemCount: 2,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
@@ -107,7 +110,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         )
                       ],
                     );
-                  })
+                  }),SizedBox(height: 20,)
             ],
           ),
         ),

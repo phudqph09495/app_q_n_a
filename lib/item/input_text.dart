@@ -16,6 +16,7 @@ class InputText extends StatefulWidget {
   Color colorhint;
       Color colorBorder ;
   Function()? deadline;
+
      TextEditingController controller;
 InputText({ this.colorhint=Colors.black45, this.textColor=Colors.black,this.maxline,this.readOnly= false,required this.controller,this.colorBorder= Colors.black,this.inputType= TextInputType.multiline,this.deadline,this.height,required this.hint, required this.hasPass,this.iconS=false,this.suffixIcon,this.width,this.iconPress});
   @override
@@ -66,6 +67,7 @@ widget.iconPress;
             hintStyle: StyleApp.textStyle700(color: widget.colorhint)),
         onChanged: (val) {},
         textAlign: TextAlign.left,
+
         obscureText: widget.hasPass,
       ),
     );

@@ -20,9 +20,9 @@ Widget QuestionTile(
   return Card(
     child: Container(
       decoration: BoxDecoration(
-        color: ColorApp.orangeF0.withOpacity(1),
-        border: Border.all(color: ColorApp.orangeF01),
-        borderRadius: BorderRadius.circular(2),
+       color: Colors.grey.withOpacity(0.3),
+
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -38,7 +38,7 @@ Widget QuestionTile(
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: StyleApp.textStyle700(
-                        fontSize: 16, color: ColorApp.orangeF01),
+                        fontSize: 16, color: ColorApp.black),
                   ),
                 ),
                 attach
@@ -52,15 +52,15 @@ Widget QuestionTile(
                 first
                     ? Container(
                         decoration: BoxDecoration(
-                          color: ColorApp.orangeF0,
-                          borderRadius: BorderRadius.circular(2),
-                          border: Border.all(color: ColorApp.orangeF01,width: 1),
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: ColorApp.black,width: 1),
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 3, vertical: 2),
                         child: const Text(
                           ' Lần đầu hỏi',
-                          style: TextStyle(color: ColorApp.orangeF01),
+                          style: TextStyle(color: ColorApp.black),
                         ),
                       )
                     : const SizedBox(),
@@ -78,7 +78,7 @@ Widget QuestionTile(
               trimLines: 2,
               colorClickableText: ColorApp.orangeF0,
               trimMode: TrimMode.Line,
-              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
+              style: StyleApp.textStyle500(color: ColorApp.black),
               trimCollapsedText: 'Xem thêm',
               trimExpandedText: 'Thu nhỏ',
             ),
@@ -98,9 +98,9 @@ Widget QuestionTile(
                 ),
                 Button1(
                   height: 30,
-                  colorButton: ColorApp.orangeF0,
-                  textColor: ColorApp.orangeF01,
-                  border: Border.all(color: ColorApp.orangeF01),
+                  colorButton: Colors.grey.withOpacity(0.5),
+                  textColor: ColorApp.black,
+                  border: Border.all(color: ColorApp.black),
                   textButton: 'Trả lời',
                   ontap: ontap,
                 ),

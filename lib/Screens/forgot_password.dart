@@ -21,7 +21,7 @@ class _ForgotPassState extends State<ForgotPass> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorApp.orangeF2,
+        backgroundColor: ColorApp.whiteF0,
         title: Text('Quên mật khẩu',style: StyleApp.textStyle500(fontSize: 16),),
         leading: IconButton(
           onPressed: () {

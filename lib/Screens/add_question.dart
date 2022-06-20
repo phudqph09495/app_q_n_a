@@ -8,8 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../item/input_text.dart';
 import '../item/button.dart';
 
-bool check = false;
 
+int maxline=1;
+bool line=false;
 class AddQuestion extends StatefulWidget {
   @override
   State<AddQuestion> createState() => _AddQuestionState();
@@ -73,10 +74,10 @@ class _AddQuestionState extends State<AddQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorApp.orangeF8,
+      backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorApp.orangeF2,
+        backgroundColor: ColorApp.whiteF0,
         title: Text('Đăng câu hỏi',style: StyleApp.textStyle500(fontSize: 18),),
         leading: IconButton(
           onPressed: () {
@@ -154,8 +155,11 @@ class _AddQuestionState extends State<AddQuestion> {
                     hasPass: false,
                     hint: 'Nhập câu hỏi của bạn',
                     controller: ques,
-
-                    maxline: null),
+deadline: (){setState((){
+  line=!line;
+  if(line){maxline=10;}else{maxline=1;}
+});},
+                    maxline: maxline),
                 Row(
                   children: [
                     IconButton(

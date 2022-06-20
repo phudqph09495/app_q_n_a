@@ -48,7 +48,7 @@ class _FilterState extends State<Filter> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.whiteF7,
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
@@ -56,54 +56,44 @@ class _FilterState extends State<Filter> {
             },
             icon: Icon(
               Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-              color: ColorApp.orangeF01,
+              color: ColorApp.black,
             ),
           ),
           title: Text(
             'Lọc tìm kiếm',
             style:
-                StyleApp.textStyle700(fontSize: 16, color: ColorApp.orangeF01),
+                StyleApp.textStyle700(fontSize: 16, color: ColorApp.black),
           ),
-          backgroundColor: ColorApp.orangeF0,
+          backgroundColor: ColorApp.whiteF0,
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: SingleChildScrollView(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  FilterList(
-                      column: 2, list: status, title: 'Trạng thái câu hỏi'),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  FilterList(
-                    title: 'Lớp',
-                    column: 3,
-                    list: lop,
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  FilterList(
-                    title: 'Môn học',
-                    column: 3,
-                    list: monList,
-                  ),
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  Button1(
-                      ontap: () {},
-                      colorButton: ColorApp.orangeF0,
-                      textColor: ColorApp.orangeF01,
-                      border: Border.all(color: ColorApp.orangeF01),
-                      textButton: 'Lọc tìm kiếm'),
-                ],
-              ),
-            )),
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+          children: [
+            FilterList(
+                column: 1, list: status, title: 'Trạng thái câu hỏi',space: 10,),
+SizedBox(height: 8,),
+            FilterList(
+              title: 'Lớp',
+              column: 3,
+              list: lop,
+            ),
+            SizedBox(height: 8,),
+            FilterList(
+              title: 'Môn học',
+              column: 3,
+              list: monList,
+            ),
+            SizedBox(height: 8,),
+            Button1(
+                ontap: () {},
+                colorButton: ColorApp.orangeF0,
+                textColor: ColorApp.orangeF01,
+                border: Border.all(color: ColorApp.orangeF01),
+                textButton: 'Lọc tìm kiếm'),
+          ],
+            ),
           ),
         ),
       ),

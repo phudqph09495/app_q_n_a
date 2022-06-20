@@ -16,7 +16,7 @@ Widget ListQuestion({required Function() ontap}) {
             money: 50,
             time: '1h trước',
             ontap:ontap ,
-            question: 'Đây là câu hỏi',
+            question: 'Còn 15 phút',
             attach: true,
             attachCount: 1,
             first: true,

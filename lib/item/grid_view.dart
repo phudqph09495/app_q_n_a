@@ -7,11 +7,12 @@ class FilterList extends StatefulWidget {
   String title;
   int column;
   List<String> list;
-
+double? space;
   FilterList({
     required this.title,
     required this.column,
     required this.list,
+    this.space=3,
   });
 
   @override
@@ -25,25 +26,25 @@ class _FilterListState extends State<FilterList> {
     return ClipRRect(
       child: Container(
         decoration: BoxDecoration(
-          color: ColorApp.orangeF0.withOpacity(1),
-          border: Border.all(color: ColorApp.orangeF01),
+          color: ColorApp.whiteF0,
+          // border: Border.all(color: ColorApp.orangeF01),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 widget.title,
-                style: StyleApp.textStyle700(fontSize: 18,color: ColorApp.orangeF01),
+                style: StyleApp.textStyle700(fontSize: 18,color: ColorApp.black),
               ),
             ),
             GridView.builder(
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: widget.column, childAspectRatio: 5/2),
+                  crossAxisCount: widget.column, childAspectRatio: widget.space!),
               itemBuilder: (BuildContext context, int index) {
                 return RadioTile(
                   title: widget.list[index],

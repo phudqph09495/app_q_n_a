@@ -34,9 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         icon:const Icon(Icons.add,color: ColorApp.orangeF01,),
       ),
-      backgroundColor: ColorApp.orangeF0,
+      backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.whiteF0,
         elevation: 0,
         title: LoadImage(
           url: "https://hoidap247.com/static/img/logo_h247.png",
@@ -46,31 +46,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: false,
         actions: [
-          Container(
-            decoration: const BoxDecoration(
-              color: ColorApp.orangeF01,
-              shape: BoxShape.circle,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.transparent,
+              shadowColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0)),
+              padding: const EdgeInsets.all(5),
             ),
-            width: 35,
-            height: 35,
-            alignment: Alignment.center,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0)),
-                padding: const EdgeInsets.all(5),
-              ),
-              onPressed: () {
-                print("search");
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
-              },
-              child: const Icon(
-                Icons.search,
-                color: ColorApp.orangeF0,
-              ),
+            onPressed: () {
+              print("search");
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchScreen()));
+            },
+            child: const Icon(
+              Icons.search,
+              color: ColorApp.black,
             ),
           ),
           const SizedBox(
@@ -86,10 +77,11 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Header(context),
+
               Button1(
-                colorButton: ColorApp.orangeF0,
-                textColor: ColorApp.orangeF01,
-                border: Border.all(color: ColorApp.orangeF01,width: 2),
+                colorButton: ColorApp.whiteF0,
+                textColor: ColorApp.black,
+                border: Border.all(color: ColorApp.black,width: 1),
                 textButton: 'Lọc câu hỏi',
                 width: 150,
                 height: 35,

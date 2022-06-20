@@ -17,10 +17,10 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: ColorApp.orangeF8,
+backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorApp.orangeF2,
+        backgroundColor: ColorApp.whiteF0,
         title: Text('Tìm kiếm câu hỏi',style: StyleApp.textStyle700(fontSize: 16),),
         leading: IconButton(
           onPressed: () {
@@ -37,39 +37,37 @@ backgroundColor: ColorApp.orangeF8,
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             children: [
+              SizedBox(height: 6,),
               InputText(
 
                 textColor: Colors.white,
                   maxline: null,
                   hasPass: false,
-                  suffixIcon: Icon(Icons.search,color: Colors.white,),
+                  suffixIcon: Icon(Icons.search,color: ColorApp.black,),
                   hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
                   controller: search,
                   colorBorder: Colors.black,
-                  colorhint: ColorApp.whiteF7,
+                  colorhint: ColorApp.grey4F,
                   iconS: true),
               ListView.builder(
                   itemCount: 50,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Divider(
-                            color: Colors.blue,
-                          ),
-                          Text(
-                            'câu hỏi tìm thấy',
-                            style: StyleApp.textStyle700(color: ColorApp.whiteF7),
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Divider(
+                          color: Colors.blue,
+                        ),
+                        Text(
+                          'câu hỏi tìm thấy',
+                          style: StyleApp.textStyle700(color: ColorApp.black),
 
-                          ),SizedBox(height: 10,),
-                          Text('số câu trả lời',
-                              style: StyleApp.textStyle700(color: Colors.red)),
-                        ],
-                      ),
+                        ),
+                        Text('số câu trả lời',
+                            style: StyleApp.textStyle700(color: Colors.red)),
+                      ],
                     );
                   })
             ],
