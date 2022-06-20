@@ -35,7 +35,6 @@ class _BodyProductState extends State<BodyProduct> {
         Share.share("Chia sẽ ứng dụng");
       },
     ),
-    TitleAccount(iconData: CupertinoIcons.star, title: "Bình chọn 5*"),
     TitleAccount(
         iconData: CupertinoIcons.chat_bubble, title: "Liên hệ và góp ý"),
   ];
