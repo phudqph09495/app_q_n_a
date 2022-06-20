@@ -22,14 +22,15 @@ class ProfileScreen extends StatelessWidget {
           centerTitle: false,
           title: Text(
             "Trang Cá Nhân",
-            style: StyleApp.textStyle700(fontSize: 18,color: ColorApp.orangeF01),
+            style:
+                StyleApp.textStyle700(fontSize: 18, color: ColorApp.orangeF01),
           ),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
-              Platform.isAndroid ? Icons.back_hand : Icons.arrow_back_ios,
+            icon:const Icon(
+              Icons.arrow_back_ios,
               color: ColorApp.orangeF01,
             ),
           ),
@@ -108,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
                 ]),
             const Expanded(
               child: TabBarView(
-                children:[
+                children: [
                   TabUser(),
                   Tabquestion(),
                   TabAnswer(),

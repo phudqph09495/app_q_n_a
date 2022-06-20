@@ -38,11 +38,13 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.orangeF2,
-        title: Text('Trả lời',style: StyleApp.textStyle500(fontSize: 18),),
+        title: Text(
+          'Trả lời',
+          style: StyleApp.textStyle500(fontSize: 18),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -56,9 +58,8 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             InputText(
@@ -72,7 +73,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                     onPressed: () {
                       selectImageCamera();
                     },
-                    icon: Icon(
+                    icon:const Icon(
                       Icons.camera_alt,
                       size: 30,
                     )),
@@ -80,7 +81,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                     onPressed: () {
                       selectImageGallery();
                     },
-                    icon: Icon(
+                    icon:const Icon(
                       Icons.image,
                       size: 30,
                     )),
@@ -90,19 +91,19 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                 ? Expanded(
                     child: GridView.builder(
                         itemCount: _imageFileList!.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3),
                         shrinkWrap: true,
                         physics: ScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
                           return Image.file(
                             File(_imageFileList![index].path),
-
                           );
                         }),
                   )
                 : SizedBox(),
-            Button1(ontap: (){},
+            Button1(
+                ontap: () {},
                 colorButton: ColorApp.orangeF2,
                 textColor: Colors.black,
                 textButton: 'Đăng câu trả lời')
