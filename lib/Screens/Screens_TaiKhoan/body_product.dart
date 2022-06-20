@@ -1,3 +1,5 @@
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/config/next_page.dart';
@@ -10,6 +12,7 @@ import '../../Screens/account/item/bottom_sheet.dart';
 import '../../Screens/account/profile.dart';
 import '../../widget/widget_info/widgetText.dart';
 import '../account/tab_profile/tab_answer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BodyProduct extends StatefulWidget {
   const BodyProduct({Key? key}) : super(key: key);
@@ -24,19 +27,21 @@ class _BodyProductState extends State<BodyProduct> {
   List<TitleAccount> titleAccount = [];
 
   List<TitleAccount> titleApp = [
-    TitleAccount(
-        iconData: CupertinoIcons.bubble_left, title: "Hướng dẫn sử dụng"),
-    TitleAccount(iconData: CupertinoIcons.square_list, title: "Điều khoản"),
-    TitleAccount(iconData: Icons.checklist, title: "Nội quy"),
-    TitleAccount(
-      iconData: CupertinoIcons.share,
-      title: "Chia sẻ ứng dụng",
-      onTap: () {
-        Share.share("Chia sẽ ứng dụng");
-      },
-    ),
-    TitleAccount(
-        iconData: CupertinoIcons.chat_bubble, title: "Liên hệ và góp ý"),
+    // TitleAccount(
+    //     iconData: CupertinoIcons.bubble_left, title: "Hướng dẫn sử dụng"),
+    // TitleAccount(iconData: CupertinoIcons.square_list, title: "Điều khoản"),
+    // TitleAccount(iconData: Icons.checklist, title: "Nội quy"),
+    // TitleAccount(
+    //   iconData: CupertinoIcons.share,
+    //   title: "Chia sẻ ứng dụng",
+    //   // onTap: () {
+    //   //   Share.share("Chia sẽ ứng dụng");
+    //   // },
+    //   onTap: () => launch('https://hoidap247.com/'),
+    // ),
+    // TitleAccount(iconData: Icons.wallet, title: "Ví điện tử"),
+    // TitleAccount(
+    //     iconData: CupertinoIcons.chat_bubble, title: "Liên hệ và góp ý"),
   ];
 
   @override
@@ -58,11 +63,47 @@ class _BodyProductState extends State<BodyProduct> {
                 context: context, builder: (context) => BottomSheetAccount());
           }),
       TitleAccount(
-          iconData: CupertinoIcons.bookmark_solid,
-          title: "Câu hỏi đã lưu",
-          onTap: () {
-            PageNavigator.next(context: context, page: ProfileScreen());
-          }),
+        iconData: CupertinoIcons.bookmark_solid,
+        title: "Câu hỏi đã lưu",
+        onTap: () {
+          PageNavigator.next(context: context, page: Question_saved());
+        },
+        // onTap: () => launch('https://hoidap247.com/'),
+      ),
+    ]);
+    titleApp.addAll([
+      TitleAccount(
+        iconData: CupertinoIcons.bubble_left,
+        title: "Hướng dẫn sử dụng",
+        onTap: () {
+          PageNavigator.next(context: context, page: UserManual());
+        },
+      ),
+      TitleAccount(
+        iconData: CupertinoIcons.square_list,
+        title: "Điều khoản",
+        onTap: () =>
+            launch('https://hoidap247.com/cac-dieu-khoan-tren-hoidap247'),
+      ),
+      TitleAccount(
+        iconData: Icons.checklist,
+        title: "Nội quy",
+        onTap: () => launch('https://hoidap247.com/noi-quy'),
+      ),
+      TitleAccount(
+        iconData: CupertinoIcons.share,
+        title: "Chia sẻ ứng dụng",
+        // onTap: () {
+        //   Share.share("Chia sẽ ứng dụng");
+        // },
+        onTap: () => launch('https://hoidap247.com/'),
+      ),
+      TitleAccount(iconData: Icons.wallet, title: "Ví điện tử"),
+      TitleAccount(
+        iconData: CupertinoIcons.chat_bubble,
+        title: "Liên hệ và góp ý",
+        onTap: () => launch('https://hoidap247.com/gop-y'),
+      ),
     ]);
   }
 
@@ -130,6 +171,7 @@ class _BodyProductState extends State<BodyProduct> {
                     (index) => _buildItem(
                       title: titleApp[index].title,
                       iconData: titleApp[index].iconData,
+                      onTap: titleApp[index].onTap,
                     ),
                   ),
                 ),
@@ -159,7 +201,7 @@ class _BodyProductState extends State<BodyProduct> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Button1(
@@ -174,7 +216,7 @@ class _BodyProductState extends State<BodyProduct> {
                       MaterialPageRoute(
                           builder: (context) => RegistrationScreen()));
                 }),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Button1(

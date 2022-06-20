@@ -38,14 +38,13 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorApp.orangeF8,
-
+      backgroundColor: ColorApp.orangeF0,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorApp.orangeF2,
+        backgroundColor: ColorApp.orangeF0,
         title: Text(
           'Trả lời',
-          style: StyleApp.textStyle500(fontSize: 18),
+          style: StyleApp.textStyle500(fontSize: 18, color: ColorApp.orangeF01),
         ),
         leading: IconButton(
           onPressed: () {
@@ -53,7 +52,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-            color: ColorApp.black,
+            color: ColorApp.orangeF01,
           ),
         ),
       ),
@@ -64,27 +63,35 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
             const SizedBox(
               height: 15,
             ),
-            InputText(
-                hasPass: false,
-                hint: 'Nhập câu trả lời của bạn',
-                controller: answer,
-                maxline: null),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: ColorApp.orangeF01, width: 1),
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: InputText(
+                  hasPass: false,
+                  hint: 'Nhập câu trả lời của bạn',
+                  controller: answer,
+                  maxline: null),
+            ),
             Row(
               children: [
                 IconButton(
                     onPressed: () {
                       selectImageCamera();
                     },
-                    icon:const Icon(
+                    icon: const Icon(
                       Icons.camera_alt,
+                      color: ColorApp.orangeF01,
                       size: 30,
                     )),
                 IconButton(
                     onPressed: () {
                       selectImageGallery();
                     },
-                    icon:const Icon(
+                    icon: const Icon(
                       Icons.image,
+                      color: ColorApp.orangeF01,
                       size: 30,
                     )),
               ],
@@ -93,8 +100,9 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                 ? Expanded(
                     child: GridView.builder(
                         itemCount: _imageFileList!.length,
-                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
                         shrinkWrap: true,
                         physics: ScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
@@ -103,12 +111,14 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                           );
                         }),
                   )
-                : SizedBox(),
+                :const SizedBox(),
             Button1(
                 ontap: () {},
-                colorButton: ColorApp.orangeF2,
-                textColor: Colors.black,
-                textButton: 'Đăng câu trả lời')
+                colorButton: ColorApp.orangeF0,
+                textColor: ColorApp.orangeF01,
+                radius: 10,
+                border: Border.all(color: ColorApp.orangeF01),
+                textButton: 'Đăng câu trả lời'),
           ],
         ),
       ),

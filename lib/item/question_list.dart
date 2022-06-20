@@ -5,7 +5,7 @@ import 'package:app_q_n_a/item/question_tile.dart';
 
 Widget ListQuestion({required Function() ontap}) {
   return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: 30,
       itemBuilder: (context, index) {

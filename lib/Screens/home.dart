@@ -23,17 +23,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: ColorApp.orangeF2,
+        backgroundColor: ColorApp.orangeF0,
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddQuestion()));
         },
-        label: Text('Đặt câu hỏi',style: StyleApp.textStyle600(fontSize: 20, color: Colors.white),),
-        icon: Icon(Icons.add),
+        label: Text(
+          'Đặt câu hỏi',
+          style: StyleApp.textStyle600(fontSize: 20, color: ColorApp.orangeF01),
+        ),
+        icon:const Icon(Icons.add,color: ColorApp.orangeF01,),
       ),
-      backgroundColor: ColorApp.orangeF8,
+      backgroundColor: ColorApp.orangeF0,
       appBar: AppBar(
-        backgroundColor: ColorApp.orangeF2,
+        backgroundColor: ColorApp.orangeF0,
         elevation: 0,
         title: LoadImage(
           url: "https://hoidap247.com/static/img/logo_h247.png",
@@ -45,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Container(
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: ColorApp.orangeF01,
               shape: BoxShape.circle,
             ),
             width: 35,
@@ -66,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: const Icon(
                 Icons.search,
-                color: ColorApp.main,
+                color: ColorApp.orangeF0,
               ),
             ),
           ),
@@ -80,21 +83,24 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-           mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Header(context),
               Button1(
-                colorButton: ColorApp.orangeF2,
-                textColor: ColorApp.black,
+                colorButton: ColorApp.orangeF0,
+                textColor: ColorApp.orangeF01,
+                border: Border.all(color: ColorApp.orangeF01,width: 2),
                 textButton: 'Lọc câu hỏi',
                 width: 150,
                 height: 35,
-                ontap: (){
+                ontap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>Filter()));
+                      MaterialPageRoute(builder: (context) => Filter()));
                 },
               ),
-              SizedBox(height: 8,),
+              const SizedBox(
+                height: 8,
+              ),
               ListQuestion(
                 ontap: () {
                   Navigator.push(context,

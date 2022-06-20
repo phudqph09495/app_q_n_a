@@ -23,9 +23,12 @@ class _FilterListState extends State<FilterList> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0),
       child: Container(
-        color: ColorApp.orangeF2,
+        decoration: BoxDecoration(
+          color: ColorApp.orangeF0.withOpacity(1),
+          border: Border.all(color: ColorApp.orangeF01),
+          borderRadius: BorderRadius.circular(5),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,11 +36,11 @@ class _FilterListState extends State<FilterList> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 widget.title,
-                style: StyleApp.textStyle700(fontSize: 18),
+                style: StyleApp.textStyle700(fontSize: 18,color: ColorApp.orangeF01),
               ),
             ),
             GridView.builder(
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: widget.column, childAspectRatio: 5/2),

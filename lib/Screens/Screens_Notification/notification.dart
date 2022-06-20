@@ -33,11 +33,13 @@ class _NotificationbarState extends State<Notificationbar> {
                 Tab(
                   child: Text(
                     "Sự kiện nóng",
+                    style: TextStyle(color: ColorApp.orangeF01),
                   ),
                 ),
                 Tab(
                   child: Text(
                     "Thông báo",
+                    style: TextStyle(color: ColorApp.orangeF01),
                   ),
                 ),
               ],

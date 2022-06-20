@@ -21,20 +21,21 @@ class _AnswerScreenState extends State<AnswerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: Button1(
-          colorButton: ColorApp.orangeF2,
-          textColor: Colors.black,
+          colorButton: ColorApp.orangeF0,
+          textColor: ColorApp.orangeF01,
+          border: Border.all(color: ColorApp.orangeF01),
           textButton: 'Viết câu trả lời',
           ontap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
           }),
-      backgroundColor: ColorApp.orangeF8,
+      backgroundColor: ColorApp.orangeF0,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorApp.orangeF2,
+        backgroundColor: ColorApp.orangeF0,
         title: Text(
           'Trả lời',
-          style: StyleApp.textStyle700(fontSize: 18),
+          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.orangeF01),
         ),
         leading: IconButton(
           onPressed: () {
@@ -42,13 +43,13 @@ class _AnswerScreenState extends State<AnswerScreen> {
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-            color: ColorApp.black,
+            color: ColorApp.orangeF01,
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -63,7 +64,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   hasImage: true,
                   image:
                       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Button1(
@@ -73,16 +74,16 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         MaterialPageRoute(
                             builder: (context) => Add_Answer_Screen()));
                   },
-                  colorButton: ColorApp.whiteF7,
+                  colorButton: ColorApp.orangeF0,
+                  border: Border.all(color: ColorApp.orangeF01),
+                  textColor: ColorApp.orangeF01,
                   width: 200,
                   height: 40,
-                  textColor: Colors.blue,
                   textButton: 'Viết bình luận'),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ListView.builder(
-
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 20,
@@ -90,7 +91,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     return Column(
                       children: [
                         AnswerWidget(
-                          imageReply: 'https://tinypng.com/images/social/website.jpg',
+                            imageReply:
+                                'https://tinypng.com/images/social/website.jpg',
                             avatar:
                                 'https://tinypng.com/images/social/website.jpg',
                             user: 'người trả lời',
@@ -100,7 +102,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                 'https://tinypng.com/images/social/website.jpg',
                             question: 'đây là câu trả lời',
                             type: false),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         )
                       ],
@@ -113,5 +115,3 @@ class _AnswerScreenState extends State<AnswerScreen> {
     );
   }
 }
-
-
