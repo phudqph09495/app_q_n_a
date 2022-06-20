@@ -48,7 +48,7 @@ class _FilterState extends State<Filter> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorApp.orangeF2.withOpacity(0.7),
+        backgroundColor: ColorApp.orangeF0,
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
@@ -56,26 +56,27 @@ class _FilterState extends State<Filter> {
             },
             icon: Icon(
               Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-              color: ColorApp.black,
+              color: ColorApp.orangeF01,
             ),
           ),
           title: Text(
             'Lọc tìm kiếm',
-            style: StyleApp.textStyle700(fontSize: 16),
+            style:
+                StyleApp.textStyle700(fontSize: 16, color: ColorApp.orangeF01),
           ),
-          backgroundColor: ColorApp.orangeF2,
+          backgroundColor: ColorApp.orangeF0,
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(2.0),
+            padding: const EdgeInsets.all(2.0),
             child: SingleChildScrollView(
                 child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
                   FilterList(
                       column: 2, list: status, title: 'Trạng thái câu hỏi'),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   FilterList(
@@ -83,7 +84,7 @@ class _FilterState extends State<Filter> {
                     column: 3,
                     list: lop,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   FilterList(
@@ -91,14 +92,15 @@ class _FilterState extends State<Filter> {
                     column: 3,
                     list: monList,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
                   Button1(
                       ontap: () {},
-                      colorButton: ColorApp.orangeF2,
-                      textColor: Colors.black,
-                      textButton: 'Lọc tìm kiếm')
+                      colorButton: ColorApp.orangeF0,
+                      textColor: ColorApp.orangeF01,
+                      border: Border.all(color: ColorApp.orangeF01),
+                      textButton: 'Lọc tìm kiếm'),
                 ],
               ),
             )),

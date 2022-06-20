@@ -9,7 +9,12 @@ class ItemNotifi extends StatelessWidget {
   String time;
   String sub;
 
-  ItemNotifi({required this.avatar, required this.sub, this.onTap, required this.time, required this.title});
+  ItemNotifi(
+      {required this.avatar,
+      required this.sub,
+      this.onTap,
+      required this.time,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,7 @@ class ItemNotifi extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                         style: StyleApp.textStyle400(
-                            fontSize: 12,),
+                            fontSize: 12, color: ColorApp.orangeF01),
                       ),
                     ],
                   ),
@@ -65,4 +70,3 @@ class ItemNotifi extends StatelessWidget {
     );
   }
 }
-

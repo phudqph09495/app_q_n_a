@@ -19,9 +19,12 @@ Widget QuestionTile(
     int? attachCount}) {
   return Card(
     child: Container(
-color: ColorApp.orangeF2.withOpacity(0.3),
+      decoration: BoxDecoration(
+        color: ColorApp.orangeF0.withOpacity(1),
+        border: Border.all(color: ColorApp.orangeF01),
+        borderRadius: BorderRadius.circular(2),
+      ),
       child: Padding(
-
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,13 +37,14 @@ color: ColorApp.orangeF2.withOpacity(0.3),
                     '$mon - lớp $lop - $moneyđ - $time trước',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: StyleApp.textStyle700(fontSize: 16),
+                    style: StyleApp.textStyle700(
+                        fontSize: 16, color: ColorApp.orangeF01),
                   ),
                 ),
                 attach
                     ? Row(
                         children: [
-                          Icon(Icons.attach_file_rounded),
+                          const Icon(Icons.attach_file_rounded),
                           Text('$attachCount ')
                         ],
                       )
@@ -48,13 +52,15 @@ color: ColorApp.orangeF2.withOpacity(0.3),
                 first
                     ? Container(
                         decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(2)),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+                          color: ColorApp.orangeF0,
+                          borderRadius: BorderRadius.circular(2),
+                          border: Border.all(color: ColorApp.orangeF01,width: 1),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 3, vertical: 2),
                         child: const Text(
                           ' Lần đầu hỏi',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: ColorApp.orangeF01),
                         ),
                       )
                     : const SizedBox(),
@@ -62,21 +68,21 @@ color: ColorApp.orangeF2.withOpacity(0.3),
             ),
             Text(
               deadline,
-              style: TextStyle(color: Colors.black.withOpacity(0.3)),
+              style:const TextStyle(color: ColorApp.grey82),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             ReadMoreText(
               question,
               trimLines: 2,
-              colorClickableText: Colors.pink,
+              colorClickableText: ColorApp.orangeF0,
               trimMode: TrimMode.Line,
-              style: StyleApp.textStyle500(),
+              style: StyleApp.textStyle500(color: ColorApp.orangeF01),
               trimCollapsedText: 'Xem thêm',
               trimExpandedText: 'Thu nhỏ',
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -92,12 +98,12 @@ color: ColorApp.orangeF2.withOpacity(0.3),
                 ),
                 Button1(
                   height: 30,
-
-                    colorButton: Colors.white,
-                    textColor: Colors.blue,
-                    textButton: 'Trả lời',
-                    ontap: ontap,
-                    border: Border.all(color: Colors.blue))
+                  colorButton: ColorApp.orangeF0,
+                  textColor: ColorApp.orangeF01,
+                  border: Border.all(color: ColorApp.orangeF01),
+                  textButton: 'Trả lời',
+                  ontap: ontap,
+                ),
               ],
             ),
           ],
