@@ -127,7 +127,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       InputText(
-                        width: 250,
+                        width: 270,
                         maxline: null,
                         controller: reply,
                         hint: 'Nhâp bình luận',
@@ -136,15 +136,18 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         suffixIcon: Icon(Icons.send),
                       ),
                       ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                          physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: 5,
                           itemBuilder: (context, int index) {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 8),
                               child: Row(
                                 children: [
-                                  SizedBox(width: 120,),
+                                  SizedBox(
+                                    width: 70,
+                                  ),
                                   LoadImage(
                                     url: widget.imageReply,
                                     height: 30,
@@ -154,12 +157,18 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                                     width: 20,
                                   ),
                                   Expanded(
-                                      child: Text(
-                                    'Replyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
-                                    style: StyleApp.textStyle400(),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ))
+                                    flex: 2,
+                                    child: ReadMoreText(
+                                      'Replyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
+                                      trimLines: 2,
+                                      colorClickableText: Colors.blue,
+                                      trimMode: TrimMode.Line,
+                                      trimCollapsedText: 'Hiện thêm',
+                                      trimExpandedText: 'Thu gọn',
+                                      style:
+                                          StyleApp.textStyle400(fontSize: 16),
+                                    ),
+                                  ),
                                 ],
                               ),
                             );

@@ -38,6 +38,8 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.orangeF8,
+
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.orangeF2,
@@ -60,7 +62,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         child: Column(
           children: [
             const SizedBox(
-              height: 30,
+              height: 15,
             ),
             InputText(
                 hasPass: false,
