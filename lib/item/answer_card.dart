@@ -113,13 +113,20 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                       Button1(
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
+                        textButton: 'Report',
+                        ontap: () {},
+                      ),
+                      Button1(
+                        colorButton: ColorApp.whiteF7,
+                        textColor: ColorApp.black,
                         textButton: 'Trả lời',
                         ontap: () {
                           setState(() {
                             widget.reply = !widget.reply;
                           });
                         },
-                      )
+                      ),
+
                     ],
                   ),
             widget.reply
