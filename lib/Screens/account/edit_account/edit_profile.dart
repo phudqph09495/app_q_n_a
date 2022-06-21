@@ -65,6 +65,16 @@ class EditProfile extends StatelessWidget {
               listItem: [
                 ModelLocal(id: "lop-1", name: "Lớp 1"),
                 ModelLocal(id: "lop-2", name: "Lớp 2"),
+                ModelLocal(id: "lop-3", name: "Lớp 3"),
+                ModelLocal(id: "lop-4", name: "Lớp 4"),
+                ModelLocal(id: "lop-5", name: "Lớp 5"),
+                ModelLocal(id: "lop-6", name: "Lớp 6"),
+                ModelLocal(id: "lop-7", name: "Lớp 7"),
+                ModelLocal(id: "lop-8", name: "Lớp 8"),
+                ModelLocal(id: "lop-9", name: "Lớp 9"),
+                ModelLocal(id: "lop-10", name: "Lớp 10"),
+                ModelLocal(id: "lop-11", name: "Lớp 11"),
+                ModelLocal(id: "lop-12", name: "Lớp 12"),
               ],
             ),
             Text(
@@ -86,7 +96,7 @@ class EditProfile extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  style:  ElevatedButton.styleFrom(
+                  style: ElevatedButton.styleFrom(
                     primary: ColorApp.main,
                   ),
                   child: Text(
@@ -99,7 +109,7 @@ class EditProfile extends StatelessWidget {
                 const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {},
-                  style:  ElevatedButton.styleFrom(
+                  style: ElevatedButton.styleFrom(
                     primary: ColorApp.grey4F,
                   ),
                   child: Text(
