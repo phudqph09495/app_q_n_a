@@ -16,9 +16,10 @@ class InputText extends StatefulWidget {
   Color colorhint;
       Color colorBorder ;
   Function()? deadline;
+  bool counter;
 
      TextEditingController controller;
-InputText({ this.colorhint=Colors.black45, this.textColor=Colors.black,this.maxline,this.readOnly= false,required this.controller,this.colorBorder= Colors.black,this.inputType= TextInputType.multiline,this.deadline,this.height,required this.hint, required this.hasPass,this.iconS=false,this.suffixIcon,this.width,this.iconPress});
+InputText({ this.colorhint=Colors.black45, this.textColor=Colors.black,this.maxline,this.readOnly= false,required this.controller,this.colorBorder= Colors.black,this.inputType= TextInputType.multiline,this.deadline,this.height,required this.hint, required this.hasPass,this.iconS=false,this.suffixIcon,this.width,this.iconPress,this.counter=false});
   @override
   State<InputText> createState() => _InputTextState();
 }
@@ -37,6 +38,14 @@ textInputAction: TextInputAction.newline,
         maxLines: widget.maxline,
         keyboardType: widget.inputType,
         controller: widget.controller,
+        maxLength: 5000,
+        buildCounter: (context,
+            {required currentLength, required isFocused, maxLength}) {
+          return widget.counter?  Container(
+            transform: Matrix4.translationValues(0, -kToolbarHeight+30, 0),
+            child: Text("$currentLength/$maxLength kí tự",style: StyleApp.textStyle400(),),
+          ):SizedBox();
+        },
         decoration: InputDecoration(
 
             suffixIcon: widget.iconS

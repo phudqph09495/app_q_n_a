@@ -76,6 +76,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                     borderRadius: BorderRadius.circular(10)
                 ),
                 child: InputText(
+                  counter: true,
                   height: height,
                     hasPass: false,
 deadline: (){ setState(() {height=110;maxline=4;});},

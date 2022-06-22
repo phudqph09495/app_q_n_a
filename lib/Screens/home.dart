@@ -9,7 +9,7 @@ import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_q_n_a/item/question_list.dart';
-import '../item/header.dart';
+
 import 'add_question.dart';
 import 'add_answer.dart';
 

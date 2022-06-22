@@ -11,12 +11,12 @@ Widget ListQuestion({required Function() ontap}) {
       itemBuilder: (context, index) {
         return QuestionTile(
             mon: 'Toán',
-            deadline: 'đây là deadline',
+            deadline: 'còn 15 phút',
             lop: 7,
             money: 50,
             time: '1h trước',
             ontap:ontap ,
-            question: 'Còn 15 phút',
+            question: 'Đây là câu hỏi',
             attach: true,
             attachCount: 1,
             first: true,

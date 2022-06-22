@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/item/grid_view.dart';
+import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
@@ -23,7 +24,8 @@ class AnswerScreen extends StatefulWidget {
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
 
-  List<String> report = ['Spam', 'Trả lời sai', 'Abc'];
+
+  List<String> report = ['Spam', 'Trả lời sai', 'Abc','XYZ','QWE','POI'];
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +121,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
                               builder: (context) => BasicDialogAlert(
                                 title: Text("Báo cáo câu trả lời"),
                                 content: Container(
-                                  height: 300,
-                                  width: 300,
+                                  height: 400,
+                                  width: 400,
                                   child: FilterList(
                                     color: ColorApp.whiteF7,
                                     title: '',

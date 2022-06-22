@@ -106,6 +106,7 @@ class _AddQuestionState extends State<AddQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         centerTitle: true,
@@ -129,6 +130,7 @@ class _AddQuestionState extends State<AddQuestion> {
         ),
       ),
       body: SingleChildScrollView(
+        reverse: true,
         child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Form(
@@ -218,7 +220,7 @@ class _AddQuestionState extends State<AddQuestion> {
                 InputText(
                     inputType: TextInputType.multiline,
                     maxline: maxline,
-
+counter: true,
                   deadline: (){ setState(() {maxline=4;});},
 
                   hasPass: false,
@@ -263,6 +265,7 @@ class _AddQuestionState extends State<AddQuestion> {
                 SizedBox(
                   height: 30,
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
