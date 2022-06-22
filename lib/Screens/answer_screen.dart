@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/item/grid_view.dart';
+import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ import 'package:readmore/readmore.dart';
 import 'package:app_q_n_a/item/answer_card.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:toast/toast.dart';
 
 class AnswerScreen extends StatefulWidget {
   @override
@@ -17,12 +21,15 @@ class AnswerScreen extends StatefulWidget {
 }
 
 class _AnswerScreenState extends State<AnswerScreen> {
+  var groupValue = 0;
+
+  List<String> report = ['Spam', 'Trả lời sai', 'Abc'];
+
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return Scaffold(
-
       bottomSheet: Button1(
-
           colorButton: ColorApp.orangeF0,
           textColor: ColorApp.orangeF01,
           radius: 30,
@@ -51,13 +58,14 @@ class _AnswerScreenState extends State<AnswerScreen> {
         ),
       ),
       body: SingleChildScrollView(
-
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               AnswerWidget(
                   type: true,
                   avatar:
@@ -94,23 +102,74 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     return Column(
                       children: [
                         AnswerWidget(
-                            imageReply:
-                                'https://tinypng.com/images/social/website.jpg',
-                            avatar:
-                                'https://tinypng.com/images/social/website.jpg',
-                            user: 'người trả lời',
-                            time: '12:00 14/06/2022',
-                            hasImage: true,
-                            image:
-                                'https://tinypng.com/images/social/website.jpg',
-                            question: 'đây là câu trả lời',
-                            type: false),
+                          imageReply:
+                              'https://tinypng.com/images/social/website.jpg',
+                          avatar:
+                              'https://tinypng.com/images/social/website.jpg',
+                          user: 'người trả lời',
+                          time: '12:00 14/06/2022',
+                          hasImage: true,
+                          image:
+                              'https://tinypng.com/images/social/website.jpg',
+                          question: 'đây là câu trả lời',
+                          type: false,
+                          report: () {
+                            showPlatformDialog(
+                              context: context,
+                              builder: (context) => BasicDialogAlert(
+                                title: Text("Báo cáo câu trả lời"),
+                                content: Container(
+                                  height: 300,
+                                  width: 300,
+                                  child: FilterList(
+                                    color: ColorApp.whiteF7,
+                                    title: '',
+                                    column: 1,
+                                    list: report,
+                                    space: 5,
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  BasicDialogAction(
+                                    title: Text(
+                                      "Report",
+                                      style: StyleApp.textStyle500(),
+                                    ),
+                                    onPressed: () {
+                                      Toast.show(
+                                          "Ý kiến của bạn đã được ghi nhận",
+                                          duration: 3,
+                                          gravity: Toast.bottom);
+
+                                      Future.delayed(
+                                          Duration(milliseconds: 2000), () {
+                                        Navigator.pop(context);
+                                      });
+                                    },
+                                  ),
+                                  BasicDialogAction(
+                                    title: Text(
+                                      "Trở lại",
+                                      style: StyleApp.textStyle400(),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
                         const SizedBox(
                           height: 10,
                         )
                       ],
                     );
-                  }),SizedBox(height: 20,)
+                  }),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),

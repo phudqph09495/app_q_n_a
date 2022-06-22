@@ -49,6 +49,7 @@ dependencies:
   share: ^2.0.4
   flutter_qr_bar_scanner: ^3.0.2
   qr_code_scanner: ^1.0.0
+  flutter_dialogs: ^2.1.1
 
 
 dev_dependencies:

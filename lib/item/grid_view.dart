@@ -5,10 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FilterList extends StatefulWidget {
   String title;
+  Color? color;
   int column;
   List<String> list;
 double? space;
   FilterList({
+    this.color=ColorApp.whiteF0,
     required this.title,
     required this.column,
     required this.list,
@@ -26,7 +28,7 @@ class _FilterListState extends State<FilterList> {
     return ClipRRect(
       child: Container(
         decoration: BoxDecoration(
-          color: ColorApp.whiteF0,
+          color:widget.color ,
           // border: Border.all(color: ColorApp.orangeF01),
           borderRadius: BorderRadius.circular(5),
         ),

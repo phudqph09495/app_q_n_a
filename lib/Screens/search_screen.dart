@@ -75,16 +75,16 @@ backgroundColor: ColorApp.whiteF7,
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: ColorApp.orangeF2,
+        backgroundColor: ColorApp.orangeF0,
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddQuestion()));
         },
         label: Text(
           'Đặt câu hỏi',
-          style: StyleApp.textStyle600(fontSize: 20, color: Colors.white),
+          style: StyleApp.textStyle600(fontSize: 20, color: ColorApp.orangeF01),
         ),
-        icon: Icon(Icons.add),
+        icon: Icon(Icons.add,color: ColorApp.orangeF01),
       ),
     );
   }

@@ -3,8 +3,8 @@ import 'package:app_q_n_a/Screens/filter.dart';
 import 'package:app_q_n_a/Screens/search_screen.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/load_image.dart';
-import 'package:app_q_n_a/item/top_member_list.dart';
-import 'package:app_q_n_a/item/top_member_tile.dart';
+
+
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Header(context),
+
 
               Button1(
                 colorButton: ColorApp.whiteF0,

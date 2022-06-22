@@ -19,6 +19,7 @@ class AnswerWidget extends StatefulWidget {
   String? image;
   bool reply;
   String imageReply;
+  Function()? report;
 
   AnswerWidget(
       {this.deadline,
@@ -30,7 +31,8 @@ class AnswerWidget extends StatefulWidget {
       this.reply = false,
       this.hasImage = false,
       required this.time,
-      required this.user});
+      required this.user,
+      this.report});
 
 
 
@@ -127,6 +129,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Button1(
+                        ontap: widget.report,
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
                         textButton: 'Report',
