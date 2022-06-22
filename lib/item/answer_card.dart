@@ -6,8 +6,10 @@ import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
-int maxline=1;
-double height=40;
+
+int maxline = 1;
+double height = 40;
+
 class AnswerWidget extends StatefulWidget {
   String avatar;
   String user;
@@ -34,8 +36,6 @@ class AnswerWidget extends StatefulWidget {
       required this.user,
       this.report});
 
-
-
   @override
   State<AnswerWidget> createState() => _AnswerWidgetState();
 }
@@ -43,11 +43,8 @@ class AnswerWidget extends StatefulWidget {
 class _AnswerWidgetState extends State<AnswerWidget> {
   TextEditingController reply = TextEditingController();
   @override
-
-
   @override
   Widget build(BuildContext context) {
-
     return Card(
       color: ColorApp.whiteF0,
       child: Padding(
@@ -123,6 +120,32 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             const SizedBox(
               height: 10,
             ),
+            widget.reply
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InputText(
+                        deadline: () {
+                          setState(() {
+                            height = 110;
+                            maxline = 4;
+                          });
+                        },
+                        width: 270,
+                        inputType: TextInputType.multiline,
+                        maxline: maxline,
+                        height: height,
+                        controller: reply,
+                        hint: 'Nhập bình luận....',
+                        hasPass: false,
+                        iconS: true,
+                        suffixIcon: Icon(
+                          Icons.send,
+                        ),
+                      ),
+                    ],
+                  )
+                : SizedBox(),
             widget.type
                 ? Container()
                 : Row(
@@ -148,9 +171,9 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         ontap: () {
                           setState(() {
                             widget.reply = !widget.reply;
-                            if(widget.reply==false){
-                              height=40;
-                              maxline=1;
+                            if (widget.reply == false) {
+                              height = 40;
+                              maxline = 1;
                             }
                           });
                         },
@@ -164,20 +187,6 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      InputText(
-                        deadline: (){ setState(() {height=110;maxline=4;});},
-                        width: 270,
-                        inputType: TextInputType.multiline,
-                        maxline: maxline,
-                        height: height,
-                        controller: reply,
-                        hint: 'Nhập bình luận....',
-                        hasPass: false,
-                        iconS: true,
-                        suffixIcon: Icon(
-                          Icons.send,
-                        ),
-                      ),
                       ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,

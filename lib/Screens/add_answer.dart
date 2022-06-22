@@ -7,8 +7,8 @@ import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-int maxline=1;
-double height=40;
+
+int maxline = 1;
 
 class Add_Answer_Screen extends StatefulWidget {
   @override
@@ -51,9 +51,8 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            setState((){
-              maxline=1;
-              height=40;
+            setState(() {
+              maxline = 1;
             });
           },
           icon: Icon(
@@ -70,20 +69,18 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
               const SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: ColorApp.orangeF01, width: 1),
-                    borderRadius: BorderRadius.circular(10)
-                ),
-                child: InputText(
-                  counter: true,
-                  height: height,
-                    hasPass: false,
-deadline: (){ setState(() {height=110;maxline=4;});},
-                    hint: 'Nhập câu trả lời của bạn',
-                    controller: answer,
-                    maxline: maxline,
-                inputType: TextInputType.multiline,),
+              InputText(
+                counter: true,
+                hasPass: false,
+                deadline: () {
+                  setState(() {
+                    maxline = 4;
+                  });
+                },
+                hint: 'Nhập câu trả lời của bạn',
+                controller: answer,
+                maxline: maxline,
+                inputType: TextInputType.multiline,
               ),
               Row(
                 children: [
@@ -122,7 +119,7 @@ deadline: (){ setState(() {height=110;maxline=4;});},
                             );
                           }),
                     )
-                  :const SizedBox(),
+                  : const SizedBox(),
               Button1(
                   ontap: () {},
                   colorButton: ColorApp.orangeF0,

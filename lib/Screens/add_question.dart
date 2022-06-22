@@ -41,7 +41,7 @@ class _AddQuestionState extends State<AddQuestion> {
                           setState(() {
                             _chosenDateTime = val;
                             deadline.text =
-                                '${_chosenDateTime?.hour}h${_chosenDateTime?.minute}  ${_chosenDateTime?.day}/${_chosenDateTime?.month}/${_chosenDateTime?.year}';
+                                '${_chosenDateTime?.hour}:${_chosenDateTime?.minute}\'  ${_chosenDateTime?.day}/${_chosenDateTime?.month}/${_chosenDateTime?.year}';
                           });
                         }),
                   ),

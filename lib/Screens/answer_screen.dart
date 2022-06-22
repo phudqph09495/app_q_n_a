@@ -10,7 +10,7 @@ import 'package:app_q_n_a/item/question_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:readmore/readmore.dart';
-import 'package:app_q_n_a/item/answer_card.dart';
+import 'package:app_q_n_a/item/answer_card.dart' as AnswerCard;
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
@@ -38,6 +38,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
           border: Border.all(color: ColorApp.orangeF01),
           textButton: 'Viết câu trả lời',
           ontap: () {
+
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
           }),
@@ -51,6 +52,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
         ),
         leading: IconButton(
           onPressed: () {
+            AnswerCard.height=40;
+            AnswerCard.maxline=1;
             Navigator.pop(context);
           },
           icon: Icon(
@@ -68,7 +71,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
               SizedBox(
                 height: 5,
               ),
-              AnswerWidget(
+              AnswerCard.AnswerWidget(
                   type: true,
                   avatar:
                       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
@@ -103,7 +106,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        AnswerWidget(
+                        AnswerCard.AnswerWidget(
                           imageReply:
                               'https://tinypng.com/images/social/website.jpg',
                           avatar:
