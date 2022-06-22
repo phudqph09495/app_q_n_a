@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +21,9 @@ class UserManual extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: ColorApp.orangeF01,
+          icon: Icon(
+            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+            color: ColorApp.black,
           ),
         ),
       ),
@@ -33,7 +35,8 @@ class UserManual extends StatelessWidget {
             children: [
               const Text(
                 'HƯỚNG DẪN THAM GIA CỘNG ĐỒNG HỎI ĐÁP 247',
-                style: TextStyle(color: ColorApp.black),
+                style: TextStyle(
+                    color: ColorApp.orangeF01, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 15,
@@ -51,14 +54,18 @@ class UserManual extends StatelessWidget {
                     child: const Center(
                       child: Text(
                         '1',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children:const [
-                      Text('HƯỚNG DẪN TĂNG ĐIỂM'),
+                    children: const [
+                      Text(
+                        'HƯỚNG DẪN TĂNG ĐIỂM',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   )
                 ],

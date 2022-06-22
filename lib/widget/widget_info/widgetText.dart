@@ -45,7 +45,9 @@ Widget getAppBottomView(BuildContext context) {
           width: 10,
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+
+          },
           icon: const Icon(
             Icons.settings,
             color: ColorApp.orangeF01,

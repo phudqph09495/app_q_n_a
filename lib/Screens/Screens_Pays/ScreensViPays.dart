@@ -20,7 +20,7 @@ class ViTien extends StatelessWidget {
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-            color: ColorApp.orangeF01,
+            color: ColorApp.black,
           ),
         ),
       ),
@@ -65,14 +65,15 @@ class ViTien extends StatelessWidget {
                             children: const [
                               Text(
                                 'Tiền',
-                                style: TextStyle(fontSize: 16),
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w700),
                               ),
                               Text(
                                 '\$999',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
                                   letterSpacing: 1,
                                   fontSize: 22,
                                 ),
@@ -122,7 +123,10 @@ class ViTien extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
                       child: Text(
                         'Nạp tiền vào ví',
-                        style: TextStyle(fontSize: 18, color: Colors.black),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
                   ),
@@ -145,8 +149,10 @@ class ViTien extends StatelessWidget {
                         ),
                         contentPadding: const EdgeInsets.all(15),
                         hintText: 'Money',
-                        hintStyle:
-                            const TextStyle(fontSize: 16, color: Colors.black),
+                        hintStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700),
                         filled: true,
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -204,7 +210,7 @@ class ViTien extends StatelessWidget {
                           'Proceed',
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                             letterSpacing: 1,
                           ),
                         ),
@@ -229,18 +235,20 @@ class ViTien extends StatelessWidget {
                             children: const [
                               Icon(
                                 Icons.history,
-                                color: ColorApp.orangeF01,
+                                color: ColorApp.black,
                               ),
                               Text(
                                 'Lịch sử giao dịch',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1,
-                                    color: Colors.black),
+                                  fontSize: 16,
+                                  letterSpacing: 1,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                               Icon(
                                 Icons.arrow_forward_ios_outlined,
-                                color: ColorApp.orangeF01,
+                                color: ColorApp.black,
                               ),
                             ],
                           ),
@@ -273,6 +281,7 @@ class ViTien extends StatelessWidget {
               fontSize: 16,
               letterSpacing: 1,
               color: Colors.black,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
