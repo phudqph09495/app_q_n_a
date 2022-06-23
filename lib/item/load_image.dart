@@ -59,7 +59,7 @@ class _LoadImageState extends State<LoadImage> {
           color: Colors.white,
           child: Center(
             child: Image.asset(
-              "assets/images/default.png",
+              "images/default.png",
               width: widget.width,
               height: widget.height,
               fit: widget.fit,

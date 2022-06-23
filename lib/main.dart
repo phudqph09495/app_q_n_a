@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/provider/image_provider.dart';
 import 'package:device_preview/device_preview.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
           Locale('vi'),
         ],
         locale: Locale('vi'),
-        home: ScreenHome(),
+        home: LoginScreen(),
       ),
     );
   }

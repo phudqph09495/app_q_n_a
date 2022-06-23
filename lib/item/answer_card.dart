@@ -190,7 +190,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                       ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 5,
+                          itemCount: 3,
                           itemBuilder: (context, int index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
@@ -211,7 +211,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                                   Expanded(
                                     flex: 2,
                                     child: ReadMoreText(
-                                      'Replyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
+                                      'Câu trả lời rất chính xác',
                                       trimLines: 2,
                                       colorClickableText: ColorApp.blue6D,
                                       trimMode: TrimMode.Line,

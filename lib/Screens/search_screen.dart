@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/Screens/add_question.dart';
+import 'package:app_q_n_a/Screens/answer_screen.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
@@ -54,20 +55,24 @@ backgroundColor: ColorApp.whiteF7,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Divider(
-                          color: Colors.blue,
-                        ),
-                        Text(
-                          'câu hỏi tìm thấy',
-                          style: StyleApp.textStyle700(color: ColorApp.black),
+                    return InkWell(
+                      onTap: (){ Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => AnswerScreen()));},
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Divider(
+                            color: Colors.blue,
+                          ),
+                          Text(
+                            'Đếm số đỉnh, số cạnh của khối bát diện đều.',
+                            style: StyleApp.textStyle700(color: ColorApp.black),
 
-                        ),
-                        Text('số câu trả lời',
-                            style: StyleApp.textStyle700(color: Colors.red)),
-                      ],
+                          ),
+                          Text('số câu trả lời: 2',
+                              style: StyleApp.textStyle700(color: Colors.red)),
+                        ],
+                      ),
                     );
                   })
             ],

@@ -11,16 +11,16 @@ Widget ListQuestion({required Function() ontap}) {
       itemBuilder: (context, index) {
         return QuestionTile(
             mon: 'Toán',
-            deadline: 'còn 15 phút',
-            lop: 7,
+            deadline: 'Còn 3h',
+            lop: 12,
             money: 50,
             time: '1h trước',
             ontap:ontap ,
-            question: 'Đây là câu hỏi',
+            question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
             attach: true,
             attachCount: 1,
             first: true,
             avatar:
-                'https://i.picsum.photos/id/9/250/250.jpg?hmac=tqDH5wEWHDN76mBIWEPzg1in6egMl49qZeguSaH9_VI');
+                '');
       });
 }

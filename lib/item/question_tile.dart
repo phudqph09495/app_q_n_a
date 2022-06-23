@@ -1,4 +1,5 @@
 import 'package:app_q_n_a/item/button.dart';
+import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -90,11 +91,13 @@ Widget QuestionTile(
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image(
-                    image: NetworkImage(avatar),
-                    height: 40,
-                    width: 40,
-                  ),
+                  child:
+                  // Image(
+                  //   image: NetworkImage(avatar),
+                  //   height: 40,
+                  //   width: 40,
+                  // ),
+                  LoadImage(url:'$avatar',height: 40,width: 40,)
                 ),
                 Button1(
                   height: 30,

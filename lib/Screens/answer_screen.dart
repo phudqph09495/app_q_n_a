@@ -25,7 +25,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
 
 
-  List<String> report = ['Spam', 'Trả lời sai', 'Abc','XYZ','QWE','POI'];
+  List<String> report = ['Spam', 'Trả lời sai','Quấy rồi', ];
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +78,10 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   user: 'tran thanh',
                   time: '11:07 7/6/2022',
                   deadline: 'Còn 3h',
-                  question: 'Đây là câu hỏi',
+                  question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
                   hasImage: true,
                   image:
-                      'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'),
+                      'https://img.loigiaihay.com/picture/2021/1116/1.png'),
               const SizedBox(
                 height: 10,
               ),
@@ -111,12 +111,12 @@ class _AnswerScreenState extends State<AnswerScreen> {
                               'https://tinypng.com/images/social/website.jpg',
                           avatar:
                               'https://tinypng.com/images/social/website.jpg',
-                          user: 'người trả lời',
+                          user: 'Nguyen van nam',
                           time: '12:00 14/06/2022',
-                          hasImage: true,
+                          hasImage: false,
                           image:
                               'https://tinypng.com/images/social/website.jpg',
-                          question: 'đây là câu trả lời',
+                          question: 'Khối bát diện đều có 6 đỉnh, 12 cạnh',
                           type: false,
                           report: () {
                             showPlatformDialog(
