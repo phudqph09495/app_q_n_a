@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           Locale('vi'),
         ],
         locale: Locale('vi'),
-        home: LoginScreen(),
+        home: ScreenHome(),
       ),
     );
   }
