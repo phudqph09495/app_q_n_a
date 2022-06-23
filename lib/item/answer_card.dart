@@ -53,11 +53,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             widget.type
-                ? Text(
-                    'Câu hỏi',
-                    style: StyleApp.textStyle700(
-                        fontSize: 20, color: ColorApp.black),
-                  )
+                ? SizedBox()
                 : Text(
                     'Trả lời',
                     style: StyleApp.textStyle700(
@@ -65,28 +61,32 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                   ),
             Row(
               children: [
-                Image(
-                  image: NetworkImage(widget.avatar),
-                  height: 30,
-                  width: 30,
+                Container(
+                  width: 30.0,
+                  height: 30.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover, image: NetworkImage(widget.avatar)),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    color: Colors.white,
+                  ),
                 ),
+
                 const SizedBox(
                   width: 10,
                 ),
-                Text(
-                  '${widget.user}       ${widget.time}',
-                  style: TextStyle(
-                    color: ColorApp.black,
-                  ),
-                ),
+
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [Text('${widget.user}',style: StyleApp.textStyle500(),), Text('${widget.time}',style: StyleApp.textStyle500())],
+                )
+                ,
+          SizedBox(width: 120,),
+          widget.type?Button1(ontap: (){},colorButton: ColorApp.blue6D, textColor: ColorApp.whiteF0, textButton: 'Lưu',height: 35,):SizedBox(),
               ],
             ),
             widget.type
-                ? Text(
-                    widget.deadline!,
-                    style: StyleApp.textStyle500(
-                        fontSize: 16, color: ColorApp.grey82),
-                  )
+                ? SizedBox(height: 20,)
+
                 : RatingBar.builder(
                     initialRating: 3,
                     minRating: 1,
@@ -137,7 +137,6 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         height: height,
                         controller: reply,
                         hint: 'Nhập bình luận....',
-                        hasPass: false,
                         iconS: true,
                         suffixIcon: Icon(
                           Icons.send,
@@ -167,7 +166,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
                         border: Border.all(color: ColorApp.black, width: 0.2),
-                        textButton: 'Trả lời',
+                        textButton: 'Bình luận',
                         ontap: () {
                           setState(() {
                             widget.reply = !widget.reply;

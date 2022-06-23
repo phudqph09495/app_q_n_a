@@ -8,13 +8,15 @@ class FilterList extends StatefulWidget {
   Color? color;
   int column;
   List<String> list;
-double? space;
+  double? space;
+  double? height;
   FilterList({
-    this.color=ColorApp.whiteF0,
+    this.height,
+    this.color = ColorApp.whiteF0,
     required this.title,
     required this.column,
     required this.list,
-    this.space=3,
+    this.space = 3,
   });
 
   @override
@@ -27,26 +29,27 @@ class _FilterListState extends State<FilterList> {
   Widget build(BuildContext context) {
     return ClipRRect(
       child: Container(
+        height:widget.height ,
         decoration: BoxDecoration(
-          color:widget.color ,
+          color: widget.color,
           // border: Border.all(color: ColorApp.orangeF01),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
+
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                widget.title,
-                style: StyleApp.textStyle700(fontSize: 18,color: ColorApp.black),
-              ),
+            (widget.title!='')   ? SizedBox(height: 15,):SizedBox(),
+            Text(
+              widget.title,
+              style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
             ),
             GridView.builder(
-              physics: const ScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: widget.column, childAspectRatio: widget.space!),
+                  crossAxisCount: widget.column,
+                  childAspectRatio: widget.space!),
               itemBuilder: (BuildContext context, int index) {
                 return RadioTile(
                   title: widget.list[index],

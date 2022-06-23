@@ -22,7 +22,7 @@ backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
-        title: Text('Tìm kiếm câu hỏi',style: StyleApp.textStyle700(fontSize: 16),),
+        title: Text('Tìm kiếm câu hỏi',style: StyleApp.textStyle700(fontSize: 18),),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -41,14 +41,14 @@ backgroundColor: ColorApp.whiteF7,
               SizedBox(height: 6,),
               InputText(
 
-                textColor: Colors.white,
+                textColor: Colors.black,
                   maxline: null,
-                  hasPass: false,
-                  suffixIcon: Icon(Icons.search,color: ColorApp.black,),
+action: TextInputAction.search,
+                  suffixIcon: Icon(Icons.close,color: ColorApp.black,),
                   hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
                   controller: search,
                   colorBorder: Colors.black,
-                  colorhint: ColorApp.grey4F,
+                  colorhint: ColorApp.black.withOpacity(0.3 ),
                   iconS: true),
               ListView.builder(
                   itemCount: 50,
@@ -62,15 +62,15 @@ backgroundColor: ColorApp.whiteF7,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Divider(
-                            color: Colors.blue,
+                            color: Colors.black,
                           ),
                           Text(
                             'Đếm số đỉnh, số cạnh của khối bát diện đều.',
-                            style: StyleApp.textStyle700(color: ColorApp.black),
+                            style: StyleApp.textStyle500(color: ColorApp.black),
 
                           ),
                           Text('số câu trả lời: 2',
-                              style: StyleApp.textStyle700(color: Colors.red)),
+                              style: StyleApp.textStyle500(color: Colors.red)),
                         ],
                       ),
                     );

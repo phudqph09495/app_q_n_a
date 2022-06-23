@@ -23,9 +23,11 @@ class AnswerScreen extends StatefulWidget {
 
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
+int money=50;
+int lop=12;
+String mon='Toán';
 
-
-  List<String> report = ['Spam', 'Trả lời sai','Quấy rồi', ];
+  List<String> report = ['Spam', 'Trả lời sai','Quấy rồi','Bắt nạt','Bắt nạt1','Bắt nạt2','Bắt nạt3' ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
           colorButton: ColorApp.orangeF0,
           textColor: ColorApp.orangeF01,
           radius: 30,
-          border: Border.all(color: ColorApp.orangeF01),
+          border: Border.all(color: ColorApp.orangeF0),
           textButton: 'Viết câu trả lời',
           ontap: () {
 
@@ -47,7 +49,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text(
-          'Trả lời',
+          'Môn $mon- Lớp $lop- $money đ',
           style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
         ),
         leading: IconButton(
@@ -124,21 +126,23 @@ class _AnswerScreenState extends State<AnswerScreen> {
                               builder: (context) => BasicDialogAlert(
                                 title: Text("Báo cáo câu trả lời"),
                                 content: Container(
-                                  height: 400,
-                                  width: 400,
-                                  child: FilterList(
-                                    color: ColorApp.whiteF7,
-                                    title: '',
-                                    column: 1,
-                                    list: report,
-                                    space: 5,
+                                  height: 300,
+                                  width: 200,
+                                  child: SingleChildScrollView(
+                                    child: FilterList(
+                                      color: Colors.white,
+                                      title: '',
+                                      column: 1,
+                                      list: report,
+                                      space: 5.5,
+                                    ),
                                   ),
                                 ),
                                 actions: <Widget>[
                                   BasicDialogAction(
                                     title: Text(
                                       "Report",
-                                      style: StyleApp.textStyle500(),
+                                      style: StyleApp.textStyle500(color: Colors.red),
                                     ),
                                     onPressed: () {
                                       Toast.show(

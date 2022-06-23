@@ -16,7 +16,11 @@ class _Dropdown1State extends State<Dropdown1> {
     return Container(
       height: widget.height,
       child: DropdownButtonFormField<String>(
-        hint: Text('Chọn môn học'),
+
+        hint: Align(
+          alignment: Alignment.centerLeft,
+          child: Text('Chọn môn học'),
+        ),
         value: widget.val,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
@@ -36,11 +40,13 @@ class _Dropdown1State extends State<Dropdown1> {
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.red, width: 1),
           ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 15,)
         ),
         onChanged: (state) {},
         items: widget.monList.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
+
             child: Text(
               value,
               style: StyleApp.textStyle400(),

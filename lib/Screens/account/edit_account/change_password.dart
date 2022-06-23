@@ -23,7 +23,7 @@ class _ChangePassState extends State<ChangePass> {
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Đổi mật khẩu',
-          style: StyleApp.textStyle700(fontSize: 16, color: ColorApp.black),
+          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
         ),
         leading: IconButton(
           onPressed: () {
@@ -40,7 +40,7 @@ class _ChangePassState extends State<ChangePass> {
         child: Column(
           children: [
             InputText(
-              hasPass: false,
+
               hint: 'Mật khẩu cũ',
               controller: changePass,
             ),
@@ -48,7 +48,7 @@ class _ChangePassState extends State<ChangePass> {
               height: 10,
             ),
             InputText(
-              hasPass: false,
+
               hint: 'Mật khẩu mới',
               controller: changePass,
             ),
@@ -56,7 +56,7 @@ class _ChangePassState extends State<ChangePass> {
               height: 10,
             ),
             InputText(
-              hasPass: false,
+
               hint: 'Nhập lại mật khẩu mới',
               controller: changePass,
             ),

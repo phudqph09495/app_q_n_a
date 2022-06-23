@@ -71,7 +71,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
               ),
               InputText(
                 counter: true,
-                hasPass: false,
+
                 deadline: () {
                   setState(() {
                     maxline = 4;

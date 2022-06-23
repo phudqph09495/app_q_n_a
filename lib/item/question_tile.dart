@@ -19,9 +19,10 @@ Widget QuestionTile(
     bool attach = false,
     int? attachCount}) {
   return Card(
+    color: ColorApp.whiteF7,
     child: Container(
       decoration: BoxDecoration(
-       color: Colors.grey.withOpacity(0.3),
+       // color: Colors.grey.withOpacity(0.3),
 
         borderRadius: BorderRadius.circular(10),
       ),
@@ -54,7 +55,7 @@ Widget QuestionTile(
                     ? Container(
                         decoration: BoxDecoration(
                           color: Colors.green,
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: ColorApp.black,width: 1),
                         ),
                         padding: const EdgeInsets.symmetric(
@@ -90,7 +91,7 @@ Widget QuestionTile(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(50.0),
                   child:
                   // Image(
                   //   image: NetworkImage(avatar),
@@ -109,6 +110,7 @@ Widget QuestionTile(
                 ),
               ],
             ),
+
           ],
         ),
       ),

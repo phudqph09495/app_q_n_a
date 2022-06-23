@@ -4,7 +4,6 @@ import 'package:app_q_n_a/Screens/search_screen.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 
-
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,11 +29,14 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         label: Text(
           'Đặt câu hỏi',
-          style: StyleApp.textStyle600(fontSize: 20, color: ColorApp.orangeF01),
+          style: StyleApp.textStyle900(fontSize: 16, color: Colors.white),
         ),
-        icon:const Icon(Icons.add,color: ColorApp.orangeF01,),
+        icon: const Icon(
+          Icons.add,
+          color: ColorApp.orangeF01,
+        ),
       ),
-      backgroundColor: ColorApp.whiteF7,
+      backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
         backgroundColor: ColorApp.whiteF0,
         elevation: 0,
@@ -74,21 +76,44 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+
             children: [
-
-
-              Button1(
-                colorButton: ColorApp.whiteF0,
-                textColor: ColorApp.black,
-                border: Border.all(color: ColorApp.black,width: 1),
-                textButton: 'Lọc câu hỏi',
-                width: 150,
+              // Button1(
+              //
+              //   colorButton: ColorApp.whiteF0,
+              //   textColor: ColorApp.black,
+              //   border: Border.all(color: ColorApp.black,width: 1),
+              //   textButton: 'Lọc câu hỏi',
+              //   width: 150,
+              //   height: 35,
+              //   ontap: () {
+              //     Navigator.push(context,
+              //         MaterialPageRoute(builder: (context) => Filter()));
+              //   },
+              // ),
+              Container(
                 height: 35,
-                ontap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Filter()));
-                },
+                width: 160,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorApp.whiteF7,
+                    border: Border.all(color: Colors.black,width: 1)
+                ),
+                child: FlatButton(
+height: 35,
+
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Filter()));
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+
+                      children: [
+                        Icon(Icons.menu_open),
+                        Text('  Lọc câu hỏi',style: StyleApp.textStyle900(fontSize: 16),)
+                      ],
+                    )),
               ),
               const SizedBox(
                 height: 8,

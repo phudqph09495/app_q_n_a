@@ -171,7 +171,7 @@ class _AddQuestionState extends State<AddQuestion> {
                 ),
                 InputText(
 
-                    hasPass: false,
+
                     hint: 'Ngày kết thúc câu hỏi',
                     controller: deadline,
                     readOnly: true,
@@ -206,7 +206,7 @@ class _AddQuestionState extends State<AddQuestion> {
                 InputText(
 
                   inputType: TextInputType.number,
-                  hasPass: false,
+
                   hint: 'Phần thưởng cho người trả lời',
                   controller: money,
                 ),
@@ -223,7 +223,7 @@ class _AddQuestionState extends State<AddQuestion> {
 counter: true,
                   deadline: (){ setState(() {maxline=4;});},
 
-                  hasPass: false,
+
                     hint: 'Nhập câu hỏi của bạn',
                     controller: ques,
                    ),

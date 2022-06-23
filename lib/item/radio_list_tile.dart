@@ -15,6 +15,7 @@ class _RadioTileState extends State<RadioTile> {
   @override
   Widget build(BuildContext context) {
     return RadioListTile<int>(
+      activeColor: ColorApp.orangeF2,
       contentPadding: EdgeInsets.zero,
       dense: true,
       toggleable: true,

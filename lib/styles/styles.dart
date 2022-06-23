@@ -49,4 +49,15 @@ class StyleApp{
       decoration: TextDecoration.none,
     );
   }
+  static TextStyle textStyle900({
+    Color color = Colors.black,
+    double fontSize = 14,
+  }) {
+    return GoogleFonts.nunito(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w900,
+      decoration: TextDecoration.none,
+    );
+  }
 }

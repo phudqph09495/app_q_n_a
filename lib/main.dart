@@ -1,6 +1,7 @@
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/provider/image_provider.dart';
+import 'package:app_q_n_a/styles/colors.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // locale: DevicePreview.locale(context),
         // builder: DevicePreview.appBuilder,
         theme: ThemeData(
-          unselectedWidgetColor: Colors.blue,
+          unselectedWidgetColor: ColorApp.orangeF2,
         ),
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [

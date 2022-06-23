@@ -3,20 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Button1 extends StatefulWidget {
- String? imagePath;
- bool icon;
- Function()? ontap;
-     double height;
- double? width;
-    Color colorButton;
-     double radius;
- Border? border;
-      Color textColor;
- String textButton;
- Button1({this.height=50,this.ontap,required this.colorButton,this.icon=false,required this.textColor,required this.textButton,this.width,this.border,this.imagePath,this.radius=5});
-
-
-
+  String? imagePath;
+  bool icon;
+  Function()? ontap;
+  double height;
+  double? width;
+  double fontSize;
+  Color colorButton;
+  double radius;
+  Border? border;
+  Color textColor;
+bool style;
+  String textButton;
+  Button1(
+      {this.height = 50,
+      this.ontap,
+      required this.colorButton,
+      this.icon = false,
+      required this.textColor,
+      required this.textButton,
+      this.width,
+      this.border,
+      this.imagePath,
+      this.radius = 5,
+      this.fontSize = 14,
+   this.style=true
+      });
 
   @override
   State<Button1> createState() => _Button1State();
@@ -24,15 +36,11 @@ class Button1 extends StatefulWidget {
 
 class _Button1State extends State<Button1> {
   List<Color> _colors = <Color>[
-
     ColorApp.black,
     ColorApp.orangeF0,
     ColorApp.orangeF01,
-   ColorApp.blue3D,
+    ColorApp.blue3D,
     ColorApp.whiteF7,
-
-
-
   ];
   int _currentColorIndex = 0;
   void _incrementColorIndex() {
@@ -43,13 +51,14 @@ class _Button1State extends State<Button1> {
         _currentColorIndex = 0;
       }
 
-      widget.colorButton=_colors[_currentColorIndex];
+      widget.colorButton = _colors[_currentColorIndex];
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:widget.height,
+      height: widget.height,
       width: widget.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.radius),
@@ -57,11 +66,13 @@ class _Button1State extends State<Button1> {
         border: widget.border,
       ),
       alignment: Alignment.center,
-      child: FlatButton(onPressed: widget.ontap,onLongPress: (){
-        setState((){
-_incrementColorIndex();
-        });
-      },
+      child: FlatButton(
+        onPressed: widget.ontap,
+        onLongPress: () {
+          setState(() {
+            _incrementColorIndex();
+          });
+        },
         height: widget.height,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -69,16 +80,15 @@ _incrementColorIndex();
           children: [
             widget.icon ? Image.asset(widget.imagePath!) : SizedBox(),
             Text(widget.textButton,
-                style: StyleApp.textStyle600(fontSize: 16, color: widget.textColor)),
+                style: widget.style?StyleApp.textStyle600(
+                    fontSize: widget.fontSize, color: widget.textColor):StyleApp.textStyle900(
+                    fontSize: widget.fontSize, color: widget.textColor)),
           ],
         ),
       ),
     );
   }
 }
-
-
-
 
 // Widget Button1({
 //   String? imagePath,

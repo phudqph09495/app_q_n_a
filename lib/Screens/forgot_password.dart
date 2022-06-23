@@ -22,7 +22,10 @@ class _ForgotPassState extends State<ForgotPass> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
-        title: Text('Quên mật khẩu',style: StyleApp.textStyle500(fontSize: 16),),
+        title: Text(
+          'Quên mật khẩu',
+          style: StyleApp.textStyle500(fontSize: 18),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -35,33 +38,39 @@ class _ForgotPassState extends State<ForgotPass> {
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
-          child: Column(
+        child: Column(
           children: [
             InputText(
 
-                hasPass: false,
-                hint: 'Nhập Email đăng ký hoặc tên đăng nhập',
+                hint: 'Nhập Email đăng ký',
                 controller: forgot),
             SizedBox(
               height: 8,
             ),
-            Button1(radius: 10,
+            Button1(
+              width: 250,
+                height: 40,
+                radius: 10,
                 colorButton: ColorApp.orangeF2,
                 textColor: Colors.black,
                 textButton: 'Khôi phục mật khẩu',
                 ontap: () {
+                  if (forgot.text != '') {
+                    Toast.show(
+                        "Yêu cầu cấp lại mật khẩu của bạn đã được phê duyệt",
+                        duration: 3,
+                        gravity: Toast.bottom);
 
-                 if(forgot.text!=''){
-                   Toast.show("Yêu cầu cấp lại mật khẩu của bạn đã được phê duyệt", duration: 3, gravity:  Toast.bottom);
-
-                   Future.delayed(Duration(milliseconds: 3500), () {
-                     Navigator.push(
-                         context, MaterialPageRoute(builder: (context) => LoginScreen()));
-                   });
-                 }else{
-                   Toast.show("Hãy nhập email hoặc tên đăng nhập", duration: 3, gravity:  Toast.bottom);
-
-                 }
+                    Future.delayed(Duration(milliseconds: 3500), () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    });
+                  } else {
+                    Toast.show("Hãy nhập email hoặc tên đăng nhập",
+                        duration: 3, gravity: Toast.bottom);
+                  }
                 })
           ],
         ),

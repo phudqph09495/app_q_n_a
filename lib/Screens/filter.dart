@@ -48,6 +48,15 @@ class _FilterState extends State<Filter> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomSheet:  Button1(
+          style: false,
+          fontSize: 18,
+          radius: 30,
+            ontap: () {},
+            colorButton: ColorApp.orangeF0,
+            textColor: Colors.white,
+            border: Border.all(color: ColorApp.orangeF0),
+            textButton: 'Tìm kiếm'),
         backgroundColor: ColorApp.whiteF7,
         appBar: AppBar(
           leading: IconButton(
@@ -60,9 +69,9 @@ class _FilterState extends State<Filter> {
             ),
           ),
           title: Text(
-            'Lọc tìm kiếm',
+            'Lọc câu hỏi',
             style:
-                StyleApp.textStyle700(fontSize: 16, color: ColorApp.black),
+                StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
           ),
           backgroundColor: ColorApp.whiteF0,
         ),
@@ -72,26 +81,21 @@ class _FilterState extends State<Filter> {
             child: Column(
           children: [
             FilterList(
-                column: 1, list: status, title: 'Trạng thái câu hỏi',space: 10,),
+                column: 1, list: status, title: '  Trạng thái câu hỏi',space: 10,),
 SizedBox(height: 8,),
             FilterList(
-              title: 'Lớp',
+              title: '  Lớp',
               column: 3,
               list: lop,
             ),
             SizedBox(height: 8,),
             FilterList(
-              title: 'Môn học',
+              title: '  Môn học',
               column: 3,
               list: monList,
             ),
             SizedBox(height: 8,),
-            Button1(
-                ontap: () {},
-                colorButton: ColorApp.orangeF0,
-                textColor: ColorApp.orangeF01,
-                border: Border.all(color: ColorApp.orangeF01),
-                textButton: 'Lọc tìm kiếm'),
+
           ],
             ),
           ),
