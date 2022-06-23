@@ -1,13 +1,13 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/item/dropdown_button.dart';
 import 'package:flutter/material.dart';
 import '../item/button.dart';
 import '../item/input_text.dart';
 import '../styles/init_style.dart';
 import 'package:toast/toast.dart';
 import 'login.dart';
-late bool userShow;
-late bool spShow;
+
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -24,13 +24,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   final keyForm = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    userShow = false;
-    spShow = false;
-  }
+  String type='Đăng ký User';
+  List<String>typeList=['Đăng ký User','Đăng ký Supporter'];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,40 +58,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Button1(
-                      width: 150,
-                      colorButton: Colors.blue,
-                      textColor: Colors.white,
-                      textButton: 'Trở thành User',
-                      ontap: () {
-                        setState(() {
-                          userShow = !userShow;
-                          spShow = false;
-                          print(userShow);
-                        });
-                      }),
-                  Button1(
-                      width: 200,
-                      colorButton: Colors.red,
-                      textColor: Colors.white,
-                      textButton: 'Trở thành Supporter',
-                      ontap: () {
-                        setState(() {
-                          spShow = !spShow;
-                          userShow = false;
-                          print(userShow);
-                        });
-                      }),
-                ],
-              ),
+
               SizedBox(
-                height: 20,
+                height: 10,
               ),
-              userShow
-                  ? formRegistration(
+              formRegistration(
+                type: type,
+                      typeList: typeList,
                       keyform: keyForm,
                       registration: () {
                         if ((name.text != '') &&
@@ -120,47 +90,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       phone: phone,
                       email: email,
                       password: password,
-                      textButton: 'User',
+
                       colorButton: Colors.blue,
                       confirm: confirm)
-                  : SizedBox(
-                      height: 0,
-                    ),
-              spShow
-                  ? formRegistration(
 
-                      registration: () {
-                        if ((name.text != '') &&
-                            (username.text != '') &&
-                            (phone.text != '') &&
-                            (email.text != '') &&
-                            (password.text != '') &&
-                            (confirm.text != '')) {
-                          print(name.text);
-                          Toast.show("Yêu cầu đăng ký supporter thành công"+"\n"+"Vui lòng làm theo hướng dẫn trong email",
-                              duration: 3, gravity:  Toast.bottom);
-
-
-                          Future.delayed(Duration(milliseconds: 3500), () {
-                            Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => LoginScreen()));
-                          });
-                        }
-                        else{
-                          Toast.show("Vui lòng nhập đủ thông tin", duration: 3, gravity:  Toast.bottom);
-                        }
-                      },
-                      name: name,
-                      username: username,
-                      phone: phone,
-                      email: email,
-                      password: password,
-                      textButton: 'Supporter',
-                      colorButton: Colors.red,
-                      confirm: confirm)
-                  : SizedBox(
-                      height: 0,
-                    )
             ],
           ),
         ),
@@ -170,7 +103,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 }
 
 Widget formRegistration(
+
     {GlobalKey<FormState>? keyform,
+      required String type,
+      required List<String> typeList,
     required Function() registration,
     required TextEditingController name,
     required TextEditingController username,
@@ -178,14 +114,19 @@ Widget formRegistration(
     required TextEditingController email,
     required TextEditingController password,
     required TextEditingController confirm,
-    required String textButton,
+
     required Color colorButton}) {
   return Form(
     key: keyform,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        InputText(hasPass: false, hint: 'Họ và tên', controller: name),
+        Dropdown1(val: type, monList: typeList,
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        InputText(hasPass: false, hint: 'Họ và tên', controller: name,),
         SizedBox(
           height: 15,
         ),
@@ -205,6 +146,7 @@ Widget formRegistration(
         SizedBox(
           height: 15,
         ),
+
         InputText(
             maxline: 1, hasPass: true, hint: 'Mật khẩu', controller: password),
         SizedBox(
@@ -222,7 +164,7 @@ Widget formRegistration(
             ontap: registration,
             colorButton: colorButton,
             textColor: Colors.white,
-            textButton: 'Đăng ký $textButton'),
+            textButton: 'Đăng ký'),
       ],
     ),
   );
