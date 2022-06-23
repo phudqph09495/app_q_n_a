@@ -9,31 +9,25 @@ class TabUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Text(
-          //   "THông tin chung".toUpperCase(),
-          //   style: StyleApp.textStyle700(fontSize: 16,color: ColorApp.orangeF01),
-          //   maxLines: 1,
-          //   overflow: TextOverflow.ellipsis,
-          // ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 10),
+            margin: const EdgeInsets.symmetric(vertical: 7),
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: ColorApp.orangeF01, width: 0.5),
-                boxShadow: [
-                  BoxShadow(
-                    color: ColorApp.whiteF0.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: const Offset(0, 1), // changes position of shadow
-                  ),
-                ]),
+            // decoration: BoxDecoration(
+            //     color: Colors.white,
+            //     borderRadius: BorderRadius.circular(5),
+            //     border: Border.all(color: ColorApp.black, width: 0.5),
+            //     boxShadow: [
+            //       BoxShadow(
+            //         color: ColorApp.whiteF0.withOpacity(0.5),
+            //         spreadRadius: 1,
+            //         blurRadius: 1,
+            //         offset: const Offset(0, 1), // changes position of shadow
+            //       ),
+            //     ]),
             // child: Column(
             //   children: [
             //     Padding(

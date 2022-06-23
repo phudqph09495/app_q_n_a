@@ -122,7 +122,7 @@ class _BodyProductState extends State<BodyProduct> {
         backgroundColor: ColorApp.whiteF0,
         bottom: PreferredSize(
           child: getAppBottomView(context),
-          preferredSize: const Size.fromHeight(40.0),
+          preferredSize: const Size.fromHeight(45.0),
         ),
       ),
       body: SingleChildScrollView(
@@ -137,8 +137,8 @@ class _BodyProductState extends State<BodyProduct> {
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 dense: true,
                 child: ExpansionTile(
-                  iconColor: ColorApp.orangeF01,
-                  collapsedIconColor: ColorApp.orangeF01,
+                  iconColor: ColorApp.black,
+                  collapsedIconColor: ColorApp.black,
                   title: Text(
                     'Cá nhân',
                     style: StyleApp.textStyle700(
@@ -166,8 +166,8 @@ class _BodyProductState extends State<BodyProduct> {
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 dense: true,
                 child: ExpansionTile(
-                  iconColor: ColorApp.orangeF01,
-                  collapsedIconColor: ColorApp.orangeF01,
+                  iconColor: ColorApp.black,
+                  collapsedIconColor: ColorApp.black,
                   title: Text(
                     'Về ứng dụng',
                     style: StyleApp.textStyle700(
@@ -199,7 +199,7 @@ class _BodyProductState extends State<BodyProduct> {
                   collapsedIconColor: ColorApp.orangeF01,
                   trailing: const SizedBox(),
                   leading: const Icon(Icons.logout,
-                      color: ColorApp.orangeF01, size: 16),
+                      color: ColorApp.black, size: 16),
                   title: Text(
                     'Đăng xuất',
                     style: StyleApp.textStyle700(
@@ -254,7 +254,7 @@ class _BodyProductState extends State<BodyProduct> {
       ),
       leading: Icon(
         iconData,
-        color: ColorApp.orangeF01,
+        color: ColorApp.black,
         size: 16,
       ),
     );

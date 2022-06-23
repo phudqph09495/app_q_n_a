@@ -21,8 +21,7 @@ class ProfileScreen extends StatelessWidget {
           centerTitle: false,
           title: Text(
             "Trang Cá Nhân",
-            style:
-                StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
+            style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
           ),
           leading: IconButton(
             onPressed: () {
@@ -94,7 +93,6 @@ class ProfileScreen extends StatelessWidget {
                 labelStyle: StyleApp.textStyle500(color: ColorApp.whiteF0),
                 unselectedLabelStyle:
                     StyleApp.textStyle500(color: ColorApp.whiteF0),
-                // indicatorSize: TabBarIndicatorSize.label,
                 tabs: const [
                   Tab(
                     text: "Thông tin",

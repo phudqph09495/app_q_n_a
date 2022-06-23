@@ -50,7 +50,7 @@ Widget getAppBottomView(BuildContext context) {
           },
           icon: const Icon(
             Icons.settings,
-            color: ColorApp.orangeF01,
+            color: ColorApp.black,
           ),
         ),
       ],
