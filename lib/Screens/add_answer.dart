@@ -40,6 +40,16 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: Button1(
+          colorButton: ColorApp.orangeF0,
+          textColor: ColorApp.orangeF01,
+          radius: 30,
+          border: Border.all(color: ColorApp.orangeF0),
+          textButton: 'Viết câu trả lời',
+          ontap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
+          }),
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         centerTitle: true,
@@ -66,7 +76,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
           child: Column(
             children: [
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               InputText(
                 counter: true,
@@ -110,15 +120,15 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                       File(_imageFileList![index].path),
                     );
                   })
-                  : SizedBox(height: 10),
-              SizedBox(height: 10,),
-              Button1(
-                  ontap: () {},
-                  colorButton: ColorApp.orangeF0,
-                  textColor: ColorApp.orangeF01,
-                  radius: 10,
-                  border: Border.all(color: ColorApp.orangeF0),
-                  textButton: 'Đăng câu trả lời'),
+                  : SizedBox(),
+
+              // Button1(
+              //     ontap: () {},
+              //     colorButton: ColorApp.orangeF0,
+              //     textColor: ColorApp.orangeF01,
+              //     radius: 10,
+              //     border: Border.all(color: ColorApp.orangeF0),
+              //     textButton: 'Đăng câu trả lời'),
             ],
           ),
         ),

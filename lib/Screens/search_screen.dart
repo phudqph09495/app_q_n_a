@@ -90,9 +90,12 @@ action: TextInputAction.search,
         },
         label: Text(
           'Đặt câu hỏi',
-          style: StyleApp.textStyle600(fontSize: 20, color: ColorApp.orangeF01),
+          style: StyleApp.textStyle900(fontSize: 16, color: Colors.white),
         ),
-        icon: Icon(Icons.add,color: ColorApp.orangeF01),
+        icon: const Icon(
+          Icons.add,
+          color: ColorApp.orangeF01,
+        ),
       ),
     );
   }
