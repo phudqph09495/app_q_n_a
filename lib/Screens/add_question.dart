@@ -233,9 +233,19 @@ counter: true,
                     hint: 'Nhập câu hỏi của bạn',
                     controller: ques,
                    ),
-                SizedBox(
-                  height: 10,
-                ),
+                _imageFileList!.isNotEmpty
+                    ? GridView.builder(
+                    itemCount: _imageFileList!.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Image.file(
+                        File(_imageFileList![index].path),
+                      );
+                    })
+                    : SizedBox(),
+
                 Row(
                   children: [
                     IconButton(
@@ -256,20 +266,9 @@ counter: true,
                         )),
                   ],
                 ),
-                _imageFileList!.isNotEmpty
-                    ? GridView.builder(
-                        itemCount: _imageFileList!.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Image.file(
-                            File(_imageFileList![index].path),
-                          );
-                        })
-                    : SizedBox(),
+
                 SizedBox(
-                  height: 50,
+                  height: 100,
                 ),
 
 
