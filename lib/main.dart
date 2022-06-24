@@ -1,4 +1,5 @@
-import 'package:app_q_n_a/Screens/login.dart';
+
+import 'package:app_q_n_a/Screens/comment.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/provider/image_provider.dart';
 import 'package:app_q_n_a/styles/colors.dart';

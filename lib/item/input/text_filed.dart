@@ -54,30 +54,30 @@ class _InputText1State extends State<InputText1> {
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:
-                BorderSide(color: ColorApp.main.withOpacity(0.2), width: 1),
+
+            borderSide: BorderSide(color: ColorApp.orangeF2, width: 2),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-            borderSide: BorderSide(color: widget.borderColor, width: 1),
+            borderSide:  BorderSide(color: Colors.black.withOpacity(0.2), width: 2),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
             borderSide:
-                BorderSide(color: ColorApp.main.withOpacity(0.2), width: 1),
+                BorderSide(color: Colors.red, width: 2),
           ),
           filled: true,
           fillColor: widget.colorBg,
           contentPadding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
           prefixIcon:
-          widget.hasLeading ? Icon(widget.iconData, color: ColorApp.main.withOpacity(0.5)): null,
+          widget.hasLeading ? Icon(widget.iconData, color: ColorApp.black.withOpacity(0.5)): null,
           labelText: widget.label,
           labelStyle:
-          StyleApp.textStyle400(color: ColorApp.main.withOpacity(0.5)),
+          StyleApp.textStyle400(),
           suffixIcon: widget.hasPass
               ? InkWell(
                   onTap: () {
@@ -88,7 +88,7 @@ class _InputText1State extends State<InputText1> {
                       !widget.obscureText
                           ? CupertinoIcons.eye
                           : CupertinoIcons.eye_slash,
-                      color: ColorApp.main.withOpacity(0.5)),
+                      color: ColorApp.black.withOpacity(0.5)),
                 )
               : null,
           errorText: null,

@@ -23,11 +23,10 @@ class InputText extends StatefulWidget {
 
   TextEditingController controller;
   InputText(
-
       {this.colorhint = Colors.black45,
       this.textColor = Colors.black,
       this.maxline,
-        this.action=TextInputAction.newline,
+      this.action = TextInputAction.newline,
       this.readOnly = false,
       required this.controller,
       this.colorBorder = Colors.black,
@@ -35,7 +34,7 @@ class InputText extends StatefulWidget {
       this.deadline,
       this.height,
       required this.hint,
-       this.hasPass=false,
+      this.hasPass = false,
       this.iconS = false,
       this.suffixIcon,
       this.width,
@@ -53,7 +52,7 @@ class _InputTextState extends State<InputText> {
       height: widget.height,
       width: widget.width,
       child: TextFormField(
-        textInputAction:widget.action ,
+        textInputAction: widget.action,
         style: StyleApp.textStyle500(color: widget.textColor),
         onTap: widget.deadline,
         readOnly: widget.readOnly,
@@ -66,22 +65,19 @@ class _InputTextState extends State<InputText> {
           return widget.counter
               ? Container(
                   transform:
-                      Matrix4.translationValues(0, -kToolbarHeight + 30, 0),
+                      Matrix4.translationValues(0, -kToolbarHeight + 25, 0),
                   child: Text(
                     "$currentLength/$maxLength kí tự",
-                    style: StyleApp.textStyle400(),
+                    style: StyleApp.textStyle400(color: widget.colorhint),
                   ),
                 )
               : SizedBox();
         },
         decoration: InputDecoration(
             suffixIcon: widget.iconS
-                ? IconButton(
-                    onPressed: () {
-                      widget.iconPress;
-                    },
-                    icon: widget.suffixIcon!,
-                  )
+                ? InkWell(
+                    onTap: widget.iconPress,
+                    child: widget.suffixIcon!)
                 : null,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -102,13 +98,8 @@ class _InputTextState extends State<InputText> {
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 15),
             hintText: widget.hint,
-            hintStyle: StyleApp.textStyle700(color: widget.colorhint)),
-        onChanged: (val) {
-          if (val != null && widget.validator != null) {
-            return widget.validator!(val);
-          }
-          return null;
-        },
+            hintStyle: StyleApp.textStyle400(color: widget.colorhint)),
+        onChanged: (val) {},
         textAlign: TextAlign.left,
         obscureText: widget.hasPass,
       ),

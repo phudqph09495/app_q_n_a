@@ -8,7 +8,7 @@ import 'package:app_q_n_a/item/button.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-int maxline = 1;
+int maxline = 4;
 
 class Add_Answer_Screen extends StatefulWidget {
   @override
@@ -52,7 +52,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
           onPressed: () {
             Navigator.pop(context);
             setState(() {
-              maxline = 1;
+              maxline = 4;
             });
           },
           icon: Icon(
@@ -62,6 +62,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         ),
       ),
       body: SingleChildScrollView(
+        reverse: true,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -74,7 +75,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
 
                 deadline: () {
                   setState(() {
-                    maxline = 4;
+                    maxline = 6;
                   });
                 },
                 hint: 'Nhập câu trả lời của bạn',
@@ -105,27 +106,24 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                 ],
               ),
               _imageFileList!.isNotEmpty
-                  ? Expanded(
-                      child: GridView.builder(
-                          itemCount: _imageFileList!.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3),
-                          shrinkWrap: true,
-                          physics: ScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return Image.file(
-                              File(_imageFileList![index].path),
-                            );
-                          }),
-                    )
-                  : const SizedBox(),
+                  ? GridView.builder(
+                  itemCount: _imageFileList!.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3),
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Image.file(
+                      File(_imageFileList![index].path),
+                    );
+                  })
+                  : SizedBox(height: 10),
+              SizedBox(height: 10,),
               Button1(
                   ontap: () {},
                   colorButton: ColorApp.orangeF0,
                   textColor: ColorApp.orangeF01,
                   radius: 10,
-                  border: Border.all(color: ColorApp.orangeF01),
+                  border: Border.all(color: ColorApp.orangeF0),
                   textButton: 'Đăng câu trả lời'),
             ],
           ),

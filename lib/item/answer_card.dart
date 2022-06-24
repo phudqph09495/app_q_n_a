@@ -1,3 +1,5 @@
+import 'package:app_q_n_a/Screens/comment.dart';
+import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/item/load_image.dart';
@@ -120,31 +122,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             const SizedBox(
               height: 10,
             ),
-            widget.reply
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InputText(
-                        deadline: () {
-                          setState(() {
-                            height = 110;
-                            maxline = 4;
-                          });
-                        },
-                        width: 270,
-                        inputType: TextInputType.multiline,
-                        maxline: maxline,
-                        height: height,
-                        controller: reply,
-                        hint: 'Nhập bình luận....',
-                        iconS: true,
-                        suffixIcon: Icon(
-                          Icons.send,
-                        ),
-                      ),
-                    ],
-                  )
-                : SizedBox(),
+          
             widget.type
                 ? Container()
                 : Row(
@@ -168,13 +146,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         border: Border.all(color: ColorApp.black, width: 0.2),
                         textButton: 'Bình luận',
                         ontap: () {
-                          setState(() {
-                            widget.reply = !widget.reply;
-                            if (widget.reply == false) {
-                              height = 40;
-                              maxline = 1;
-                            }
-                          });
+                          PageNavigator.next(context: context, page: CommentScreen());
                         },
                       )
                     ],
@@ -182,51 +154,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             SizedBox(
               height: 5,
             ),
-            widget.reply
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 3,
-                          itemBuilder: (context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 8),
-                              child: Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 70,
-                                  ),
-                                  LoadImage(
-                                    url: widget.imageReply,
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: ReadMoreText(
-                                      'Câu trả lời rất chính xác',
-                                      trimLines: 2,
-                                      colorClickableText: ColorApp.blue6D,
-                                      trimMode: TrimMode.Line,
-                                      trimCollapsedText: 'Hiện thêm',
-                                      trimExpandedText: 'Thu gọn',
-                                      style: StyleApp.textStyle400(
-                                          fontSize: 16, color: ColorApp.black),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          })
-                    ],
-                  )
-                : Container()
+            
           ],
         ),
       ),

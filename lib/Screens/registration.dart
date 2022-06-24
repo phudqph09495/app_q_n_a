@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/item/dropdown_button.dart';
+import 'package:app_q_n_a/item/input/text_filed.dart';
+import 'package:app_q_n_a/item/input/text_filed2.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_local.dart';
 import 'package:app_q_n_a/validator.dart';
@@ -27,15 +29,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final keyForm = GlobalKey<FormState>();
   RegistrationVoid() async {
     if (keyForm.currentState!.validate()) {
-      Toast.show("Yêu cầu cấp lại mật khẩu của bạn đã được phê duyệt",
-          duration: 3, gravity: Toast.bottom);
+      Toast.show("Đăng ký thành công",
+          duration: 1, gravity: Toast.bottom);
 
-      Future.delayed(Duration(milliseconds: 3500), () {
+      Future.delayed(Duration(milliseconds: 1500), () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginScreen()));
       });
     } else {
-      Toast.show("Thất bại", duration: 3, gravity: Toast.bottom);
+      Toast.show("Đăng ký thất bại", duration: 1, gravity: Toast.bottom);
     }
   }
 
@@ -62,96 +64,130 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
       ),
       body: SingleChildScrollView(
+        reverse: true,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
           child: Form(
             key: keyForm,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
 
-                LoadImage(
-                  url: "https://hoidap247.com/static/img/logo_h247.png",
-                  height: 30,
-                  fit: BoxFit.fitHeight,
-                  alignment: Alignment.center,
-                ),
-                SizedBox(height: 15,),
-                Text('Đăng ký',style: StyleApp.textStyle700(fontSize: 30,color: ColorApp.orangeF2),),
-                SizedBox(height: 15,),
-                Dropdown1(
+                  LoadImage(
+                    url: "https://hoidap247.com/static/img/logo_h247.png",
+                    height: 30,
+                    fit: BoxFit.fitHeight,
+                    alignment: Alignment.center,
+                  ),
+                  SizedBox(height: 15,),
+                  Text('Đăng ký',style: StyleApp.textStyle700(fontSize: 30,color: ColorApp.orangeF8),),
+                  SizedBox(height: 15,),
+                  Dropdown1(
 
-                  val: type,
-                  monList: typeList,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InputText(
+                    val: type,
+                    monList: typeList,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  InputText1(
+                    label: "Tên đăng nhập",
+                    controller: username,
+                    borderColor: ColorApp.main.withOpacity(0.2),
+                    hasLeading: true,
+                    iconData: Icons.person,
+                    obscureText: false,
+                    hasPass: false,
+                    radius: 10,
+                    width: double.infinity,
                     validator: (val) {
-                      return ValidatorApp.checkNull(
-                          text: val, isTextFiled: true);
+                      return ValidatorApp.checkNull(text: val,isTextFiled: true);
                     },
-
-                    hint: 'Tên đăng nhập',
-                    controller: username),
-                SizedBox(
-                  height: 15,
-                ),
-                InputText(
-                  validator: (val) {
-                    return ValidatorApp.checkPhone(text: val);
-                  },
-
-                  hint: 'Số điện thoại',
-                  controller: phone,
-                  inputType: TextInputType.number,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InputText(
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  InputText1(
+                    label: "Số điện thoại",
+                    controller: phone,
+                    borderColor: ColorApp.main.withOpacity(0.2),
+                    hasLeading: true,
+                    iconData: Icons.phone_android,
+                    obscureText: false,
+                    hasPass: false,
+                    radius: 10,
+                    width: double.infinity,
+                    validator: (val) {
+                      return ValidatorApp.checkPhone(text: val);
+                    },
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  InputText1(
+                    label: "Email",
+                    controller: email,
+                    borderColor: ColorApp.main.withOpacity(0.2),
+                    hasLeading: true,
+                    iconData: Icons.email,
+                    obscureText: false,
+                    hasPass: false,
+                    radius: 10,
+                    width: double.infinity,
                     validator: (val) {
                       return ValidatorApp.checkEmail(text: val);
                     },
-
-                    hint: 'Email',
-                    controller: email,
-                    inputType: TextInputType.emailAddress),
-                SizedBox(
-                  height: 15,
-                ),
-                InputText(
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  InputText1(
+                    label: "Mật khẩu",
+                    controller: password,
+                    borderColor: ColorApp.main.withOpacity(0.2),
+                    hasLeading: true,
+                    iconData: Icons.lock_open,
+                    obscureText: true,
+                    hasPass: true,
+                    radius: 10,
+                    width: double.infinity,
                     validator: (val) {
                       return ValidatorApp.checkPass(
                           text: val, isSign: true, text2: confirm.text);
                     },
-                    maxline: 1,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  InputText1(
+                    label: "Nhập lại mật khẩu",
+                    controller: confirm,
+                    borderColor: ColorApp.main.withOpacity(0.2),
+                    hasLeading: true,
+                    iconData: Icons.lock_open,
+                    obscureText: true,
                     hasPass: true,
-                    hint: 'Mật khẩu',
-                    controller: password),
-                SizedBox(
-                  height: 15,
-                ),
-                InputText(
+                    radius: 10,
+                    width: double.infinity,
                     validator: (val) {
                       return ValidatorApp.checkPass(
                           text: val, isSign: true, text2: password.text);
                     },
-                    maxline: 1,
-                    hasPass: true,
-                    hint: ' Nhập lại mật khẩu',
-                    controller: confirm),
-                SizedBox(
-                  height: 15,
-                ),
-                Button1(
-                    ontap: () {},
-                    colorButton: Colors.blue,
-                    textColor: Colors.white,
-                    textButton: 'Đăng ký'),
-              ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Button1(
+                      ontap: () {
+                        RegistrationVoid();
+                      },
+                      colorButton: Colors.blue,
+                      textColor: Colors.white,
+                      textButton: 'Đăng ký'),
+                ],
+              ),
             ),
           ),
         ),
