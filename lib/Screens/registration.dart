@@ -180,6 +180,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 15,
                   ),
                   Button1(
+                    radius: 10,
                       ontap: () {
                         RegistrationVoid();
                       },

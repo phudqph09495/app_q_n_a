@@ -47,6 +47,9 @@ action: TextInputAction.search,
                   suffixIcon: Icon(Icons.close,color: ColorApp.black,),
                   hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
                   controller: search,
+                  iconPress: (){
+                  search.clear();
+                  },
                   colorBorder: Colors.black,
                   colorhint: ColorApp.black.withOpacity(0.3 ),
                   iconS: true),

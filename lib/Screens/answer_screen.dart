@@ -23,11 +23,25 @@ class AnswerScreen extends StatefulWidget {
 
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
-int money=50;
-int lop=12;
-String mon='Toán';
+  int money = 50;
+  int lop = 12;
+  String mon = 'Toán';
 
-  List<String> report = ['Spam', 'Trả lời sai','Quấy rồi','Bắt nạt','Bắt nạt1','Bắt nạt2','Bắt nạt3' ];
+  List<String> report = [
+    'Spam',
+    'Trả lời sai',
+    'Quấy rồi',
+    'Bắt nạt',
+    'Bắt nạt1',
+    'Bắt nạt2',
+    'Bắt nạt3',
+    'Bắt nạt4',
+    'Bắt nạt5',
+    'Bắt nạt6',
+    'Bắt nạt7',
+    'Bắt nạt8',
+
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +54,6 @@ String mon='Toán';
           border: Border.all(color: ColorApp.orangeF0),
           textButton: 'Viết câu trả lời',
           ontap: () {
-
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
           }),
@@ -54,8 +67,8 @@ String mon='Toán';
         ),
         leading: IconButton(
           onPressed: () {
-            AnswerCard.height=40;
-            AnswerCard.maxline=1;
+            AnswerCard.height = 40;
+            AnswerCard.maxline = 1;
             Navigator.pop(context);
           },
           icon: Icon(
@@ -82,8 +95,7 @@ String mon='Toán';
                   deadline: 'Còn 3h',
                   question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
                   hasImage: true,
-                  image:
-                      'https://img.loigiaihay.com/picture/2021/1116/1.png'),
+                  image: 'https://img.loigiaihay.com/picture/2021/1116/1.png'),
               const SizedBox(
                 height: 10,
               ),
@@ -142,7 +154,8 @@ String mon='Toán';
                                   BasicDialogAction(
                                     title: Text(
                                       "Report",
-                                      style: StyleApp.textStyle500(color: Colors.red),
+                                      style: StyleApp.textStyle500(
+                                          color: Colors.red),
                                     ),
                                     onPressed: () {
                                       Toast.show(
