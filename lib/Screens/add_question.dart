@@ -13,7 +13,7 @@ import 'package:toast/toast.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 DateTime? _chosenDateTime;
-int maxline=1;
+
 double height=50;
 
 class AddQuestion extends StatefulWidget {
@@ -106,21 +106,27 @@ class _AddQuestionState extends State<AddQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet:  Button1(
+          colorButton: ColorApp.orangeF0,
+          textColor: ColorApp.orangeF01,
+          radius: 30,
+          border: Border.all(color: ColorApp.orangeF0),
+          textButton: 'Đăng câu hỏi',
+          ontap: () {
+
+          }),
 
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Đăng câu hỏi',
-          style: StyleApp.textStyle500(fontSize: 18),
+          style: StyleApp.textStyle700(fontSize: 18),
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            setState((){
-              maxline=1;
-              height=40;
-            });
+
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
@@ -196,7 +202,7 @@ class _AddQuestionState extends State<AddQuestion> {
                       // });
                     }),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Text(
                   'Phần thưởng',
@@ -210,7 +216,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   controller: money,
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Text(
                   'Câu hỏi',
@@ -218,17 +224,27 @@ class _AddQuestionState extends State<AddQuestion> {
                 ),
                 InputText(
                     inputType: TextInputType.multiline,
-                    maxline: maxline,
+                    maxline: 6,
 counter: true,
-                  deadline: (){ setState(() {maxline=4;});},
+
 
 
                     hint: 'Nhập câu hỏi của bạn',
                     controller: ques,
                    ),
-                SizedBox(
-                  height: 10,
-                ),
+                _imageFileList!.isNotEmpty
+                    ? GridView.builder(
+                    itemCount: _imageFileList!.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Image.file(
+                        File(_imageFileList![index].path),
+                      );
+                    })
+                    : SizedBox(),
+
                 Row(
                   children: [
                     IconButton(
@@ -249,35 +265,12 @@ counter: true,
                         )),
                   ],
                 ),
-                _imageFileList!.isNotEmpty
-                    ? GridView.builder(
-                        itemCount: _imageFileList!.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Image.file(
-                            File(_imageFileList![index].path),
-                          );
-                        })
-                    : SizedBox(),
+
                 SizedBox(
-                  height: 30,
+                  height: 100,
                 ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Button1(
-                        ontap: () {},
-                        colorButton: ColorApp.orangeF2,
-                        textColor: ColorApp.black,
-                        textButton: 'Đăng câu hỏi',
-                        width: 200,
-                        radius: 10,
-                        border: Border.all(color: Colors.black)),
-                  ],
-                )
+
               ],
             ),
           ),

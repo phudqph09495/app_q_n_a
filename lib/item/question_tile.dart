@@ -102,9 +102,9 @@ Widget QuestionTile(
                 ),
                 Button1(
                   height: 30,
-                  colorButton: Colors.grey.withOpacity(0.5),
+                  colorButton: Colors.white,
                   textColor: ColorApp.black,
-                  border: Border.all(color: ColorApp.black),
+                  border: Border.all(color: ColorApp.orangeF2),
                   textButton: 'Trả lời',
                   ontap: ontap,
                 ),
