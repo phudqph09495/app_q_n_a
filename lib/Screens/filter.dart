@@ -59,6 +59,7 @@ class _FilterState extends State<Filter> {
             textButton: 'Tìm kiếm'),
         backgroundColor: ColorApp.whiteF7,
         appBar: AppBar(
+          centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);

@@ -122,7 +122,7 @@ class _AddQuestionState extends State<AddQuestion> {
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Đăng câu hỏi',
-          style: StyleApp.textStyle500(fontSize: 18),
+          style: StyleApp.textStyle700(fontSize: 18),
         ),
         leading: IconButton(
           onPressed: () {
