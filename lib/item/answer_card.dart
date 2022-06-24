@@ -1,3 +1,5 @@
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/comment.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
@@ -82,8 +84,11 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                   children: [Text('${widget.user}',style: StyleApp.textStyle500(),), Text('${widget.time}',style: StyleApp.textStyle500())],
                 )
                 ,
-          SizedBox(width: 120,),
-          widget.type?Button1(ontap: (){},colorButton: ColorApp.blue6D, textColor: ColorApp.whiteF0, textButton: 'Lưu',height: 35,):SizedBox(),
+          const SizedBox(width: 120,),
+          widget.type?Button1(ontap: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Question_saved()));
+          },colorButton: ColorApp.blue6D, textColor: ColorApp.whiteF0, textButton: 'Lưu',height: 35,):SizedBox(),
               ],
             ),
             widget.type

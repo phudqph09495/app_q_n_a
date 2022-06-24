@@ -109,7 +109,6 @@ class _AddQuestionState extends State<AddQuestion> {
 
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
-        centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Đăng câu hỏi',

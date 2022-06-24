@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_title.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 
@@ -31,10 +32,10 @@ class UserManual extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'HƯỚNG DẪN THAM GIA CỘNG ĐỒNG HỎI ĐÁP 247',
+                'HƯỚNG DẪN THAM GIA CỘNG ĐỒNG HỎI ĐÁP CỦA 247',
                 style: TextStyle(
                     color: ColorApp.orangeF01, fontWeight: FontWeight.bold),
               ),
@@ -61,10 +62,20 @@ class UserManual extends StatelessWidget {
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'HƯỚNG DẪN TĂNG ĐIỂM',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                    children:  [
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        child: TextButton(
+                          onPressed: (){
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => UserTitle()));
+                          },
+                          child: Text(
+                            'HƯỚNG DẪN TĂNG ĐIỂM',
+                            style: TextStyle(color: ColorApp.black),
+                          ),
+                        ),
                       ),
                     ],
                   )

@@ -54,21 +54,28 @@ class _InputText1State extends State<InputText1> {
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-
-            borderSide: BorderSide(color: ColorApp.orangeF2, width: 2),
+            borderSide:
+            const BorderSide(color: ColorApp.black, width: 1),
+            // borderSide: BorderSide(color: ColorApp.orangeF2, width: 2),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:  BorderSide(color: Colors.black.withOpacity(0.2), width: 2),
+            // borderSide:  BorderSide(color: Colors.black.withOpacity(0.2), width: 2),
+            borderSide:
+            const BorderSide(color: ColorApp.black, width: 1),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-            borderSide: const BorderSide(color: Colors.red, width: 2),
+            // borderSide: const BorderSide(color: Colors.red, width: 2),
+            borderSide:
+            const BorderSide(color: ColorApp.black, width: 1),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
+            // borderSide:
+            //     BorderSide(color: Colors.red, width: 2),
             borderSide:
-                BorderSide(color: Colors.red, width: 2),
+            const BorderSide(color: ColorApp.black, width: 1),
           ),
           filled: true,
           fillColor: widget.colorBg,

@@ -2,17 +2,15 @@ import 'package:app_q_n_a/item/load_image.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 
-class ItemNotifi extends StatelessWidget {
+class QuestionWidget extends StatelessWidget {
   Function()? onTap;
-  String avatar;
   String title;
   String time;
-  String sub;
+  String avatar;
 
-  ItemNotifi(
-      {required this.avatar,
-      required this.sub,
-      this.onTap,
+  QuestionWidget(
+      {this.onTap,
+      required this.avatar,
       required this.time,
       required this.title});
 
@@ -28,10 +26,6 @@ class ItemNotifi extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: LoadImage(
-                        url: avatar, height: 50, width: 80, fit: BoxFit.cover)),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(left: 10),
@@ -53,13 +47,13 @@ class ItemNotifi extends StatelessWidget {
                               fontSize: 12, color: ColorApp.grey82),
                         ),
                         const SizedBox(height: 5),
-                        Text(
-                          sub,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          style: StyleApp.textStyle400(
-                              fontSize: 12, color: ColorApp.black),
-                        ),
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: LoadImage(
+                                url: avatar,
+                                height: 120,
+                                width: 120,
+                                fit: BoxFit.cover)),
                       ],
                     ),
                   ),

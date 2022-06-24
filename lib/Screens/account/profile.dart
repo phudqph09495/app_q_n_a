@@ -93,16 +93,39 @@ class ProfileScreen extends StatelessWidget {
                 labelStyle: StyleApp.textStyle500(color: ColorApp.whiteF0),
                 unselectedLabelStyle:
                     StyleApp.textStyle500(color: ColorApp.whiteF0),
-                tabs: const [
-                  Tab(
-                    text: "Thông tin",
-                  ),
-                  Tab(
-                    text: "Câu hỏi",
-                  ),
-                  Tab(
-                    text: "Câu trả lời",
-                  ),
+                indicatorSize: TabBarIndicatorSize.label,
+                isScrollable: true,
+                tabs: [
+                  Row(children: const [
+                    SizedBox(width: 5),
+                    Text(
+                      "Thông Tin",
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ]),
+                  Row(children: const [
+                    SizedBox(width: 5),
+                    Text(
+                      "Câu hỏi",
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ]),
+                  Row(children: const [
+                    SizedBox(width: 5),
+                    Text(
+                      "Câu trả lời",
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ]),
+                  // Tab(
+                  //   text: "Thông tin",
+                  // ),
+                  // Tab(
+                  //   text: "Câu hỏi",
+                  // ),
+                  // Tab(
+                  //   text: "Câu trả lời",
+                  // ),
                 ]),
             const Expanded(
               child: TabBarView(

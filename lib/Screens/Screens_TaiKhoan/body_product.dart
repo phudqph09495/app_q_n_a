@@ -1,23 +1,22 @@
 import 'package:app_q_n_a/Screens/Screens_Pays/Screens_Pays.dart';
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
-import 'package:app_q_n_a/Screens/login.dart';
+import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
+import 'package:toast/toast.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
-import '../../Screens/account/profile.dart';
 import '../../widget/widget_info/widgetText.dart';
-import '../account/tab_profile/tab_answer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share/share.dart';
+import '../account/profile.dart';
 
 class BodyProduct extends StatefulWidget {
-  const BodyProduct({Key? key}) : super(key: key);
-
   @override
   State<BodyProduct> createState() => _BodyProductState();
 }
@@ -54,23 +53,46 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: CupertinoIcons.person,
           title: "Trang cá nhân",
           onTap: () {
-            PageNavigator.next(context: context, page: ProfileScreen());
+            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+                duration: 2, gravity: Toast.bottom);
+            Future.delayed(Duration(milliseconds: 4000), () {
+              PageNavigator.next(context: context, page: ProfileScreen());
+            });
           }),
       TitleAccount(
           iconData: Icons.edit_outlined,
           title: "Chỉnh sửa cá nhân",
           onTap: () {
-            showModalBottomSheet(
-                context: context, builder: (context) => BottomSheetAccount());
+            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+                duration: 2, gravity: Toast.bottom);
+            Future.delayed(Duration(milliseconds: 4000), () {
+              showModalBottomSheet(
+                  context: context, builder: (context) => BottomSheetAccount());
+            });
           }),
       TitleAccount(
         iconData: CupertinoIcons.bookmark_solid,
         title: "Câu hỏi đã lưu",
         onTap: () {
-          PageNavigator.next(context: context, page: Question_saved());
+          Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+              duration: 2, gravity: Toast.bottom);
+          Future.delayed(Duration(milliseconds: 4000), () {
+            PageNavigator.next(context: context, page: Question_saved());
+          });
         },
         // onTap: () => launch('https://hoidap247.com/'),
       ),
+      TitleAccount(
+          iconData: Icons.wallet,
+          title: "Ví điện tử",
+          onTap: () {
+            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+                duration: 2, gravity: Toast.bottom);
+            Future.delayed(Duration(milliseconds: 4000), () {
+              showModalBottomSheet(
+                  context: context, builder: (context) => ScreensPays());
+            });
+          }),
     ]);
     titleApp.addAll([
       TitleAccount(
@@ -83,13 +105,16 @@ class _BodyProductState extends State<BodyProduct> {
       TitleAccount(
         iconData: CupertinoIcons.square_list,
         title: "Điều khoản",
-        onTap: () =>
-            launch('https://hoidap247.com/cac-dieu-khoan-tren-hoidap247'),
+        onTap: () {
+          PageNavigator.next(context: context, page: AddQuestion());
+        },
       ),
       TitleAccount(
         iconData: Icons.checklist,
         title: "Nội quy",
-        onTap: () => launch('https://hoidap247.com/noi-quy'),
+        onTap: () {
+          PageNavigator.next(context: context, page: AddQuestion());
+        },
       ),
       TitleAccount(
         iconData: CupertinoIcons.share,
@@ -97,25 +122,26 @@ class _BodyProductState extends State<BodyProduct> {
         // onTap: () {
         //   Share.share("Chia sẽ ứng dụng");
         // },
-        onTap: () => launch('https://hoidap247.com/'),
+        onTap: (){
+          // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+          //     duration: 2, gravity: Toast.bottom);
+          Share.share(
+              'check out my website https://protocoderspoint.com/');
+        },
       ),
-      TitleAccount(
-          iconData: Icons.wallet,
-          title: "Ví điện tử",
-          onTap: () {
-            showModalBottomSheet(
-                context: context, builder: (context) => ScreensPays());
-          }),
       TitleAccount(
         iconData: CupertinoIcons.chat_bubble,
         title: "Liên hệ và góp ý",
-        onTap: () => launch('https://hoidap247.com/gop-y'),
+        onTap: () {
+          PageNavigator.next(context: context, page: AddQuestion());
+        },
       ),
     ]);
   }
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return Scaffold(
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
@@ -134,7 +160,7 @@ class _BodyProductState extends State<BodyProduct> {
                   border: Border.all(color: ColorApp.black00, width: 1),
                   borderRadius: BorderRadius.circular(10)),
               child: ListTileTheme(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                 dense: true,
                 child: ExpansionTile(
                   iconColor: ColorApp.black,
@@ -163,7 +189,7 @@ class _BodyProductState extends State<BodyProduct> {
                   border: Border.all(color: ColorApp.black00, width: 1),
                   borderRadius: BorderRadius.circular(10)),
               child: ListTileTheme(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                 dense: true,
                 child: ExpansionTile(
                   iconColor: ColorApp.black,
@@ -198,8 +224,14 @@ class _BodyProductState extends State<BodyProduct> {
                   iconColor: ColorApp.orangeF01,
                   collapsedIconColor: ColorApp.orangeF01,
                   trailing: const SizedBox(),
-                  leading: const Icon(Icons.logout,
-                      color: ColorApp.black, size: 16),
+                  leading: const Padding(
+                    padding: EdgeInsets.only(left: 14),
+                    child: Icon(
+                      Icons.logout,
+                      color: ColorApp.black,
+                      size: 16,
+                    ),
+                  ),
                   title: Text(
                     'Đăng xuất',
                     style: StyleApp.textStyle700(
@@ -226,16 +258,16 @@ class _BodyProductState extends State<BodyProduct> {
             const SizedBox(
               height: 20,
             ),
-            Button1(
-                colorButton: ColorApp.whiteF0,
-                textColor: ColorApp.black,
-                textButton: 'Đăng nhập',
-                border: Border.all(color: ColorApp.black00),
-                radius: 10,
-                ontap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
-                })
+            // Button1(
+            //     colorButton: ColorApp.whiteF0,
+            //     textColor: ColorApp.black,
+            //     textButton: 'Đăng nhập',
+            //     border: Border.all(color: ColorApp.black00),
+            //     radius: 10,
+            //     ontap: () {
+            //       Navigator.push(context,
+            //           MaterialPageRoute(builder: (context) => LoginScreen()));
+            //     })
           ],
         ),
       ),
@@ -252,10 +284,13 @@ class _BodyProductState extends State<BodyProduct> {
           color: ColorApp.black,
         ),
       ),
-      leading: Icon(
-        iconData,
-        color: ColorApp.black,
-        size: 16,
+      leading: Padding(
+        padding: EdgeInsets.only(left: 12),
+        child: Icon(
+          iconData,
+          color: ColorApp.black,
+          size: 16,
+        ),
       ),
     );
   }
@@ -268,3 +303,4 @@ class TitleAccount {
 
   TitleAccount({required this.iconData, required this.title, this.onTap});
 }
+

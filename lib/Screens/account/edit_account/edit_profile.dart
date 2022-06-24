@@ -97,7 +97,7 @@ class EditProfile extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    primary: ColorApp.main,
+                    primary: Colors.blue,
                   ),
                   child: Text(
                     "Đồng ý",
@@ -110,7 +110,7 @@ class EditProfile extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    primary: ColorApp.grey4F,
+                    primary: ColorApp.orangeF01,
                   ),
                   child: Text(
                     "Hủy",
@@ -188,7 +188,6 @@ class EditProfile extends StatelessWidget {
                       hint: "--/--/----",
                       onChanged: (val) {},
                       controller: textEditingController,
-                      borderColor: ColorApp.black,
                       radius: 5,
                       readOnly: true,
                       onTap: onTap,
@@ -197,7 +196,7 @@ class EditProfile extends StatelessWidget {
                   : DropItem(
                       listItem: listItem,
                       filled: false,
-                      colorBorder: ColorApp.black,
+                      colorBorder: ColorApp.black00,
                       hint: "--Chọn--",
                       onChanged: (val) {},
                     ),

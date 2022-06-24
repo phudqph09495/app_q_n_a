@@ -9,7 +9,7 @@ class TabUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 22),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -97,7 +97,7 @@ class TabUser extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             "Danh hiệu của bạn".toUpperCase(),
-            style: StyleApp.textStyle700(fontSize: 16,color: ColorApp.black),
+            style: StyleApp.textStyle700(fontSize: 16, color: ColorApp.black),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -171,7 +171,9 @@ class TabUser extends StatelessWidget {
               flex: 2,
               child: Text(
                 title,
-                style: StyleApp.textStyle700(color: ColorApp.black),
+                style: StyleApp.textStyle700(
+                  color: ColorApp.black,
+                ),
               )),
           const SizedBox(width: 10),
           Expanded(

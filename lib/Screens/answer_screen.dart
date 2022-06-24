@@ -59,7 +59,6 @@ class _AnswerScreenState extends State<AnswerScreen> {
           }),
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
-        centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Môn $mon- Lớp $lop- $money đ',
