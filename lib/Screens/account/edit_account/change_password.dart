@@ -36,11 +36,10 @@ class _ChangePassState extends State<ChangePass> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding:const EdgeInsets.all(10.0),
         child: Column(
           children: [
             InputText(
-
               hint: 'Mật khẩu cũ',
               controller: changePass,
             ),
@@ -64,8 +63,8 @@ class _ChangePassState extends State<ChangePass> {
               height: 10,
             ),
             Button1(
-              colorButton: ColorApp.whiteF0,
-              textColor: Colors.black,
+              colorButton:const Color(0xffB0E0E6),
+              textColor: ColorApp.whiteF0,
               border: Border.all(color: ColorApp.black00),
               textButton: 'Đổi mật khẩu',
               ontap: null,

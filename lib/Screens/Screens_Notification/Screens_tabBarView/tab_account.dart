@@ -130,10 +130,10 @@ class ExampleDetailsScreen extends StatelessWidget {
                   user: 'tran thanh',
                   time: '11:07 7/6/2022',
                   deadline: 'Còn 3h',
-                  question: 'Đây là câu hỏi',
+                  question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
                   hasImage: true,
                   image:
-                      'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'),
+                      'https://img.loigiaihay.com/picture/2021/1116/1.png'),
             ],
           ),
         ),
