@@ -8,7 +8,7 @@ import 'package:app_q_n_a/item/button.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-int maxline = 4;
+
 
 class Add_Answer_Screen extends StatefulWidget {
   @override
@@ -51,9 +51,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            setState(() {
-              maxline = 4;
-            });
+
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
@@ -73,14 +71,10 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
               InputText(
                 counter: true,
 
-                deadline: () {
-                  setState(() {
-                    maxline = 6;
-                  });
-                },
+
                 hint: 'Nhập câu trả lời của bạn',
                 controller: answer,
-                maxline: maxline,
+                maxline: 6,
                 inputType: TextInputType.multiline,
               ),
               Row(

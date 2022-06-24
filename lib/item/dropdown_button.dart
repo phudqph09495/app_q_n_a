@@ -14,9 +14,10 @@ class Dropdown1 extends StatefulWidget {
 class _Dropdown1State extends State<Dropdown1> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: widget.height,
+    return SingleChildScrollView(
+      reverse: true,
       child: DropdownButtonFormField<String>(
+        menuMaxHeight: 300,
 
         hint: Align(
           alignment: Alignment.centerLeft,
@@ -46,6 +47,7 @@ class _Dropdown1State extends State<Dropdown1> {
         onChanged: (state) {},
         items: widget.monList.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
+
             value: value,
 
             child: Text(
