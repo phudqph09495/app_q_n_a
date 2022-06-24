@@ -57,7 +57,7 @@ class _FilterState extends State<Filter> {
             textColor: Colors.white,
             border: Border.all(color: ColorApp.orangeF0),
             textButton: 'Tìm kiếm'),
-        backgroundColor: ColorApp.whiteF7,
+        backgroundColor: ColorApp.whiteF0,
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(

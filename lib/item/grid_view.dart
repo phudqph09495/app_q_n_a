@@ -12,7 +12,7 @@ class FilterList extends StatefulWidget {
   double? height;
   FilterList({
     this.height,
-    this.color = ColorApp.whiteF0,
+    this.color = ColorApp.whiteF7,
     required this.title,
     required this.column,
     required this.list,
