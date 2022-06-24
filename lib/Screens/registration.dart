@@ -180,11 +180,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 15,
                   ),
                   Button1(
-                    radius: 10,
+                    radius: 30,
                       ontap: () {
                         RegistrationVoid();
                       },
-                      colorButton: Colors.blue,
+                      colorButton: ColorApp.orangeF2,
                       textColor: Colors.white,
                       textButton: 'Đăng ký'),
                 ],
