@@ -3,6 +3,7 @@ import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
 import 'package:app_q_n_a/Screens/add_question.dart';
+import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
@@ -258,16 +259,16 @@ class _BodyProductState extends State<BodyProduct> {
             const SizedBox(
               height: 20,
             ),
-            // Button1(
-            //     colorButton: ColorApp.whiteF0,
-            //     textColor: ColorApp.black,
-            //     textButton: 'Đăng nhập',
-            //     border: Border.all(color: ColorApp.black00),
-            //     radius: 10,
-            //     ontap: () {
-            //       Navigator.push(context,
-            //           MaterialPageRoute(builder: (context) => LoginScreen()));
-            //     })
+            Button1(
+                colorButton: ColorApp.whiteF0,
+                textColor: ColorApp.black,
+                textButton: 'Đăng nhập',
+                border: Border.all(color: ColorApp.black00),
+                radius: 10,
+                ontap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                })
           ],
         ),
       ),
