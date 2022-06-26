@@ -39,13 +39,22 @@ class _DropItemState extends State<DropItem> {
         child: Text(widget.hint, style: StyleApp.textStyle400(color: ColorApp.grey82),),
       ),
       decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:  BorderSide(color: widget.colorBorder ?? ColorApp.blue1F.withOpacity(0.5), width: 1),
-          ),
           focusedBorder: OutlineInputBorder(
-            borderRadius:  BorderRadius.circular(widget.radius),
-            borderSide: BorderSide(color: widget.colorBorder ?? ColorApp.blue1F.withOpacity(0.5), width: 1),
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: ColorApp.orangeF2, width: 2),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide:
+            BorderSide(color: Colors.black.withOpacity(0.2), width: 2),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
           ),
           fillColor: widget.filled ? ColorApp.blue1F.withOpacity(0.1) : Colors.white,
           filled: widget.filled,

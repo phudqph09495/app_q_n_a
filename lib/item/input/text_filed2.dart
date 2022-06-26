@@ -60,22 +60,22 @@ class _InputText2State extends State<InputText2> {
           hintText: widget.hint,
           hintStyle: StyleApp.textStyle400(color: ColorApp.grey82),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:
-            const BorderSide(color: ColorApp.black, width: 1),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide: BorderSide(color: widget.borderColor, width: 1),
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: ColorApp.orangeF2, width: 2),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(5),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(
+                color: ColorApp.black.withOpacity(0.2), width: 2),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:
-            const BorderSide(color: ColorApp.black, width: 1),
+            borderRadius: BorderRadius.circular(5),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
+
           ),
           contentPadding: const  EdgeInsets.symmetric(horizontal: 15,vertical: 10),
           errorText: null,

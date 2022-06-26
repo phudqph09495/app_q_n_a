@@ -10,6 +10,7 @@ import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
+import 'package:toast/toast.dart';
 
 int maxline = 1;
 double height = 40;
@@ -75,25 +76,45 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                     color: Colors.white,
                   ),
                 ),
-
                 const SizedBox(
                   width: 10,
                 ),
-
-                Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text('${widget.user}',style: StyleApp.textStyle500(),), Text('${widget.time}',style: StyleApp.textStyle500())],
-                )
-                ,
-          const SizedBox(width: 120,),
-          widget.type?Button1(ontap: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Question_saved()));
-          },colorButton: ColorApp.blue6D, textColor: ColorApp.whiteF0, textButton: 'Lưu',height: 35,):SizedBox(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${widget.user}',
+                      style: StyleApp.textStyle500(),
+                    ),
+                    Text('${widget.time}', style: StyleApp.textStyle500())
+                  ],
+                ),
+                const SizedBox(
+                  width: 120,
+                ),
+                widget.type
+                    ? Button1(
+                        ontap: () {
+                          Toast.show(
+                              "Lưu thành công",
+                              gravity: Toast.bottom);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Question_saved()));
+                        },
+                        colorButton: ColorApp.blue6D,
+                        textColor: ColorApp.whiteF0,
+                        textButton: 'Lưu',
+                        height: 35,
+                      )
+                    : SizedBox(),
               ],
             ),
             widget.type
-                ? SizedBox(height: 20,)
-
+                ? SizedBox(
+                    height: 20,
+                  )
                 : RatingBar.builder(
                     initialRating: 3,
                     minRating: 1,
@@ -127,7 +148,6 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             const SizedBox(
               height: 10,
             ),
-          
             widget.type
                 ? Container()
                 : Row(
@@ -151,7 +171,8 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         border: Border.all(color: ColorApp.black, width: 0.2),
                         textButton: 'Bình luận',
                         ontap: () {
-                          PageNavigator.next(context: context, page: CommentScreen());
+                          PageNavigator.next(
+                              context: context, page: CommentScreen());
                         },
                       )
                     ],
@@ -159,7 +180,6 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             SizedBox(
               height: 5,
             ),
-            
           ],
         ),
       ),

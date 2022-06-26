@@ -19,7 +19,7 @@ class _Question_savedState extends State<Question_saved> {
   @override
   void initState() {
     _items = List.generate(
-      10,
+      5,
       (int index) => "Câu $index",
     );
     super.initState();
@@ -32,7 +32,7 @@ class _Question_savedState extends State<Question_saved> {
       detailBuilder: (BuildContext context, int? index, bool tablet) {
         final i = _items[index!];
         return DetailsScreen(
-          body: ExampleDetailsScreen(
+          body: Question_savedStt(
             items: _items,
             row: i,
             tablet: tablet,
@@ -72,8 +72,8 @@ class _Question_savedState extends State<Question_saved> {
   }
 }
 
-class ExampleDetailsScreen extends StatelessWidget {
-  const ExampleDetailsScreen({
+class Question_savedStt extends StatelessWidget {
+  const Question_savedStt({
     Key? key,
     required List<String> items,
     required this.row,
