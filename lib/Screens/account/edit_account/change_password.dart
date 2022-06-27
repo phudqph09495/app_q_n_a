@@ -128,7 +128,7 @@ class _ChangePassState extends State<ChangePass> {
                       ontap: () {
                         ChangPassVoid();
                       },
-                      colorButton: Colors.blue,
+                      colorButton: ColorApp.orangeF2,
                       textColor: Colors.white,
                       textButton: 'Lưu'),
                 ],

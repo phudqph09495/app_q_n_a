@@ -97,7 +97,7 @@ class EditProfile extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
+                    primary: ColorApp.orangeF2,
                   ),
                   child: Text(
                     "Đồng ý",

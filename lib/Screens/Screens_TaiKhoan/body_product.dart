@@ -241,23 +241,23 @@ class _BodyProductState extends State<BodyProduct> {
                 ),
               ),
             ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            // Button1(
+            //     colorButton: ColorApp.whiteF0,
+            //     textColor: ColorApp.black,
+            //     textButton: 'Đăng ký',
+            //     border: Border.all(color: ColorApp.black00),
+            //     radius: 10,
+            //     ontap: () {
+            //       Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //               builder: (context) => RegistrationScreen()));
+            //     }),
             const SizedBox(
-              height: 20,
-            ),
-            Button1(
-                colorButton: ColorApp.whiteF0,
-                textColor: ColorApp.black,
-                textButton: 'Đăng ký',
-                border: Border.all(color: ColorApp.black00),
-                radius: 10,
-                ontap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => RegistrationScreen()));
-                }),
-            const SizedBox(
-              height: 20,
+              height: 12,
             ),
             Button1(
                 colorButton: ColorApp.whiteF0,
