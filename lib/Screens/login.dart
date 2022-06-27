@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   children: [
                     Checkbox(
-
+shape: CircleBorder(),
                         activeColor: ColorApp.orangeF2,
                         value: checkedValue,
                         onChanged: (val) {

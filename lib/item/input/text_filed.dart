@@ -48,10 +48,12 @@ class _InputText1State extends State<InputText1> {
         obscureText: widget.obscureText,
         onChanged: widget.onChanged,
         controller: widget.controller,
+
         keyboardType: widget.keyboardType,
         textAlign: TextAlign.left,
         style: StyleApp.textStyle400(),
         decoration: InputDecoration(
+
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
             // borderSide:
@@ -80,9 +82,13 @@ class _InputText1State extends State<InputText1> {
           filled: true,
           fillColor: widget.colorBg,
 
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+          contentPadding:  EdgeInsets.only(left: 15,top: 10),
+
           prefixIcon:
-          widget.hasLeading ? Icon(widget.iconData, color: ColorApp.black.withOpacity(0.5)): null,
+          widget.hasLeading ? Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Icon(widget.iconData, color: ColorApp.black.withOpacity(0.5)),
+          ): null,
           labelText: widget.label,
           labelStyle:
           StyleApp.textStyle400(),

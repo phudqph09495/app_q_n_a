@@ -195,7 +195,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     );
                   }),
               SizedBox(
-                height: 50,
+                height: 100,
               )
             ],
           ),
