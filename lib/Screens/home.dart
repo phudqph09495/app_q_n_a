@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.orangeF2,
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddQuestion()));
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         icon: const Icon(
           Icons.add,
-          color: ColorApp.orangeF01,
+          color: Colors.white,
         ),
       ),
       backgroundColor: ColorApp.whiteF0,

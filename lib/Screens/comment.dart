@@ -26,22 +26,25 @@ TextEditingController reply=TextEditingController();
 
     return SafeArea(
       child: Scaffold(
-        bottomSheet: InputText(
-          iconPress: () {
+        bottomSheet: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: InputText(
+            iconPress: () {
        setState((){
-         commentList.add(reply.text);
+           commentList.add(reply.text);
        });
        reply.clear();
 
-          },
-          width: double.infinity,
-          inputType: TextInputType.multiline,
-          maxline: null,
-          controller: reply,
-          hint: 'Nhập bình luận....',
-          iconS: true,
-          suffixIcon: Icon(
-            Icons.send,
+            },
+            width: double.infinity,
+            inputType: TextInputType.multiline,
+            maxline: null,
+            controller: reply,
+            hint: 'Nhập bình luận....',
+            iconS: true,
+            suffixIcon: Icon(
+              Icons.send,
+            ),
           ),
         ),
         backgroundColor: ColorApp.whiteF7,
@@ -50,7 +53,7 @@ TextEditingController reply=TextEditingController();
           backgroundColor: ColorApp.whiteF0,
           title: Text(
             'Bình luận',
-            style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
+            style: StyleApp.textStyle700(fontSize: 18, ),
           ),
           leading: IconButton(
             onPressed: () {

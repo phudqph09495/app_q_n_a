@@ -24,7 +24,7 @@ class _ForgotPassState extends State<ForgotPass> {
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Quên mật khẩu',
-          style: StyleApp.textStyle500(fontSize: 18),
+          style: StyleApp.textStyle700(fontSize: 18),
         ),
         leading: IconButton(
           onPressed: () {

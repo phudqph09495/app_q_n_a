@@ -48,18 +48,21 @@ class _FilterState extends State<Filter> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomSheet:  Button1(
-          style: false,
-          fontSize: 18,
-          radius: 30,
-            ontap: () {},
-            colorButton: ColorApp.orangeF0,
-            textColor: Colors.white,
-            border: Border.all(color: ColorApp.orangeF0),
-            textButton: 'Tìm kiếm'),
+        bottomSheet:  Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: Button1(
+            style: false,
+            fontSize: 18,
+            radius: 30,
+              ontap: () {},
+              colorButton: ColorApp.orangeF2,
+              textColor: Colors.white,
+              border: Border.all(color: ColorApp.orangeF2),
+              textButton: 'Tìm kiếm'),
+        ),
         backgroundColor: ColorApp.whiteF0,
         appBar: AppBar(
-          centerTitle: true,
+centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -72,7 +75,7 @@ class _FilterState extends State<Filter> {
           title: Text(
             'Lọc câu hỏi',
             style:
-                StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
+                StyleApp.textStyle700(fontSize: 18, ),
           ),
           backgroundColor: ColorApp.whiteF0,
         ),

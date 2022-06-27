@@ -56,7 +56,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Trả lời',
-          style: StyleApp.textStyle500(fontSize: 18, color: ColorApp.black),
+          style: StyleApp.textStyle700(fontSize: 18, ),
         ),
         leading: IconButton(
           onPressed: () {

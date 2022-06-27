@@ -39,7 +39,7 @@ class _FilterListState extends State<FilterList> {
 
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            (widget.title!='')   ? SizedBox(height: 15,):SizedBox(),
+            (widget.title!='')   ? SizedBox(height: 5,):SizedBox(),
             Text(
               widget.title,
               style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),

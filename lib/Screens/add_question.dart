@@ -14,7 +14,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 DateTime? _chosenDateTime;
 
-double height=50;
+double height = 50;
 
 class AddQuestion extends StatefulWidget {
   @override
@@ -106,18 +106,22 @@ class _AddQuestionState extends State<AddQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet:  Button1(
-          colorButton: ColorApp.orangeF0,
-          textColor: ColorApp.orangeF01,
-          radius: 30,
-          border: Border.all(color: ColorApp.orangeF0),
-          textButton: 'Đăng câu hỏi',
-          ontap: () {
-
-          }),
-
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Button1(
+            colorButton: ColorApp.orangeF2,
+            textColor: ColorApp.whiteF0,
+            radius: 30,
+style: false
+            ,
+            fontSize: 18,
+            border: Border.all(color: ColorApp.orangeF2),
+            textButton: 'Đăng câu hỏi',
+            ontap: () {}),
+      ),
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Đăng câu hỏi',
@@ -126,7 +130,6 @@ class _AddQuestionState extends State<AddQuestion> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
@@ -151,7 +154,6 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 Dropdown1(
-
                   val: mon,
                   monList: monList,
                 ),
@@ -163,7 +165,6 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 Dropdown1(
-
                   val: lop,
                   monList: lopList,
                 ),
@@ -175,31 +176,12 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
-
-
-                    hint: 'Ngày kết thúc câu hỏi',
+                    hint: '    Ngày kết thúc câu hỏi',
                     controller: deadline,
                     readOnly: true,
                     deadline: () {
                       _showDatePicker(context);
 
-                      // showTimePicker(
-                      //         context: context, initialTime: TimeOfDay.now())
-                      //     .then((val) {
-                      //   if (val != null) {
-                      //     showDatePicker(
-                      //             context: context,
-                      //             initialDate: DateTime.now(),
-                      //             firstDate: DateTime(1970),
-                      //             lastDate: DateTime(2100))
-                      //         .then((value) {
-                      //       if (value != null) {
-                      //         deadline.text =
-                      //             "${val.hour}:${val.minute} ngày ${value.day}/${value.month}/${value.year}";
-                      //       }
-                      //     });
-                      //   }
-                      // });
                     }),
                 SizedBox(
                   height: 5,
@@ -209,10 +191,8 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
-
                   inputType: TextInputType.number,
-
-                  hint: 'Phần thưởng cho người trả lời',
+                  hint: '    Phần thưởng cho người trả lời',
                   controller: money,
                 ),
                 SizedBox(
@@ -223,28 +203,24 @@ class _AddQuestionState extends State<AddQuestion> {
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
-                    inputType: TextInputType.multiline,
-                    maxline: 6,
-counter: true,
-
-
-
-                    hint: 'Nhập câu hỏi của bạn',
-                    controller: ques,
-                   ),
+                  inputType: TextInputType.multiline,
+                  maxline: 6,
+                  counter: true,
+                  hint: '\n    Nhập câu hỏi của bạn',
+                  controller: ques,
+                ),
                 _imageFileList!.isNotEmpty
                     ? GridView.builder(
-                    itemCount: _imageFileList!.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3),
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Image.file(
-                        File(_imageFileList![index].path),
-                      );
-                    })
+                        itemCount: _imageFileList!.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Image.file(
+                            File(_imageFileList![index].path),
+                          );
+                        })
                     : SizedBox(),
-
                 Row(
                   children: [
                     IconButton(
@@ -265,12 +241,9 @@ counter: true,
                         )),
                   ],
                 ),
-
                 SizedBox(
                   height: 100,
                 ),
-
-
               ],
             ),
           ),

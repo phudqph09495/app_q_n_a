@@ -91,7 +91,7 @@ Widget QuestionTile(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(50.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   child:
                   // Image(
                   //   image: NetworkImage(avatar),

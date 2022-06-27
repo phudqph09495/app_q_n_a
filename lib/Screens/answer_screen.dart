@@ -47,22 +47,28 @@ class _AnswerScreenState extends State<AnswerScreen> {
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
-      bottomSheet: Button1(
-          colorButton: ColorApp.orangeF0,
-          textColor: ColorApp.orangeF01,
-          radius: 30,
-          border: Border.all(color: ColorApp.orangeF0),
-          textButton: 'Viết câu trả lời',
-          ontap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
-          }),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Button1(
+            colorButton: ColorApp.orangeF2,
+            textColor: ColorApp.whiteF0,
+            radius: 30,
+            fontSize: 18,
+            style: false,
+            border: Border.all(color: ColorApp.orangeF2),
+            textButton: 'Viết câu trả lời',
+            ontap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
+            }),
+      ),
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Môn $mon- Lớp $lop- $money đ',
-          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
+          style: StyleApp.textStyle700(fontSize: 18,),
         ),
         leading: IconButton(
           onPressed: () {
@@ -137,7 +143,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                               builder: (context) => BasicDialogAlert(
                                 title: Text("Báo cáo câu trả lời"),
                                 content: Container(
-                                  height: 300,
+                                  height: 250,
                                   width: 200,
                                   child: SingleChildScrollView(
                                     child: FilterList(
@@ -189,7 +195,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     );
                   }),
               SizedBox(
-                height: 20,
+                height: 50,
               )
             ],
           ),

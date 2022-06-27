@@ -39,10 +39,11 @@ class _ChangePassState extends State<ChangePass> {
     return Scaffold(
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Đổi mật khẩu',
-          style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
+          style: StyleApp.textStyle700(fontSize: 18,),
         ),
         leading: IconButton(
           onPressed: () {

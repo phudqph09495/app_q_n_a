@@ -20,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
 backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
-        centerTitle: true,
+
         backgroundColor: ColorApp.whiteF0,
         title: Text('Tìm kiếm câu hỏi',style: StyleApp.textStyle700(fontSize: 18),),
         leading: IconButton(
@@ -83,7 +83,7 @@ action: TextInputAction.search,
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: ColorApp.orangeF0,
+        backgroundColor: ColorApp.orangeF2,
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddQuestion()));
@@ -94,7 +94,7 @@ action: TextInputAction.search,
         ),
         icon: const Icon(
           Icons.add,
-          color: ColorApp.orangeF01,
+          color: Colors.white,
         ),
       ),
     );

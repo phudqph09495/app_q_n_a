@@ -79,6 +79,7 @@ class _InputText1State extends State<InputText1> {
           ),
           filled: true,
           fillColor: widget.colorBg,
+
           contentPadding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
           prefixIcon:
           widget.hasLeading ? Icon(widget.iconData, color: ColorApp.black.withOpacity(0.5)): null,

@@ -25,7 +25,7 @@ class ColorApp{
   static const Color orangeF2= Color(0xffFFDB00);
   static const Color orangeF0= Color(0xffF5BE41);
   static const Color orangeF01= Color(0xffCF3721);
-
+static const Color red=Color(0xffF70519);
 
   static const LinearGradient linearGradientMain = LinearGradient(colors: [blue1F,blue00]);
   static const LinearGradient linearGradientSale = LinearGradient(colors: [orangeF8,orangeFF]);
