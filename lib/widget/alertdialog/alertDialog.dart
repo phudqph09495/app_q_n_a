@@ -12,15 +12,15 @@ class Screen_Alert extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
         body: const Center(
-          child: MyStatelessWidget(),
+          child: AlertName(),
         ),
       ),
     );
   }
 }
 
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({Key? key}) : super(key: key);
+class AlertName extends StatelessWidget {
+  const AlertName({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +28,20 @@ class MyStatelessWidget extends StatelessWidget {
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: const Text('AlertDialog description'),
+          title: const Text('Thông báo'),
+          content: const Text('Bạn phải đăng nhập mới sử dụng được chức năng này!'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text('Cancel'),
+              child: const Text('Ok'),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
+              child: const Text('Cancel'),
             ),
           ],
         ),
-      ),
-      child: const Text('Show Dialog'),
+      ), child: null!,
     );
   }
 }

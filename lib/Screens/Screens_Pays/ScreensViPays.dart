@@ -8,7 +8,9 @@ class ViTien extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Ví tiền',

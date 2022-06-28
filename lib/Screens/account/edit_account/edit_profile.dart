@@ -15,9 +15,10 @@ class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: false,
+        backgroundColor: ColorApp.whiteF0,
+        centerTitle: true,
         title: Text(
           "Chỉnh sửa thông tin",
           style: StyleApp.textStyle700(fontSize: 18),

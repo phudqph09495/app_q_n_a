@@ -13,7 +13,7 @@ class UserManual extends StatelessWidget {
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
         backgroundColor: ColorApp.whiteF0,
-        centerTitle: false,
+        centerTitle: true,
         title: Text(
           "Hướng dẫn sử dụng",
           style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),

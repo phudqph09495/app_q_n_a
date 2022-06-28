@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: ColorApp.whiteF0,
         appBar: AppBar(
           backgroundColor: ColorApp.whiteF0,
-          centerTitle: false,
+          centerTitle: true,
           title: Text(
             "Trang Cá Nhân",
             style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),

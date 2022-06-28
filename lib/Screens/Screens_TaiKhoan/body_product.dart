@@ -1,6 +1,7 @@
 import 'package:app_q_n_a/Screens/Screens_Pays/Screens_Pays.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/rules.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
 import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/login.dart';
@@ -78,7 +79,7 @@ class _BodyProductState extends State<BodyProduct> {
           Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
               duration: 2, gravity: Toast.bottom);
           Future.delayed(Duration(milliseconds: 4000), () {
-            PageNavigator.next(context: context, page: Question_saved());
+            PageNavigator.next(context: context, page: QuestionSavedSS());
           });
         },
         // onTap: () => launch('https://hoidap247.com/'),
@@ -107,14 +108,14 @@ class _BodyProductState extends State<BodyProduct> {
         iconData: CupertinoIcons.square_list,
         title: "Điều khoản",
         onTap: () {
-          PageNavigator.next(context: context, page: AddQuestion());
+          PageNavigator.next(context: context, page: Rules());
         },
       ),
       TitleAccount(
         iconData: Icons.checklist,
         title: "Nội quy",
         onTap: () {
-          PageNavigator.next(context: context, page: AddQuestion());
+          PageNavigator.next(context: context, page: Rules());
         },
       ),
       TitleAccount(
@@ -134,7 +135,7 @@ class _BodyProductState extends State<BodyProduct> {
         iconData: CupertinoIcons.chat_bubble,
         title: "Liên hệ và góp ý",
         onTap: () {
-          PageNavigator.next(context: context, page: AddQuestion());
+          PageNavigator.next(context: context, page: Rules());
         },
       ),
     ]);

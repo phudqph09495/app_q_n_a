@@ -37,7 +37,7 @@ class _ChangePassState extends State<ChangePass> {
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
-      backgroundColor: ColorApp.whiteF7,
+      backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
