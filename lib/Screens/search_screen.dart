@@ -20,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
 backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
-
+centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text('Tìm kiếm câu hỏi',style: StyleApp.textStyle700(fontSize: 18),),
         leading: IconButton(

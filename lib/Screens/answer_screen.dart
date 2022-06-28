@@ -104,19 +104,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
               const SizedBox(
                 height: 10,
               ),
-              // Button1(
-              //     ontap: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (context) => Add_Answer_Screen()));
-              //     },
-              //     colorButton: ColorApp.orangeF0,
-              //     border: Border.all(color: ColorApp.orangeF01),
-              //     textColor: ColorApp.orangeF01,
-              //     width: 200,
-              //     height: 40,
-              //     textButton: 'Viết bình luận'),
+
 
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -146,6 +134,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                   height: 250,
                                   width: 200,
                                   child: SingleChildScrollView(
+
                                     child: FilterList(
                                       color: Colors.white,
                                       title: '',
