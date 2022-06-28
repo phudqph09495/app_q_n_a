@@ -129,7 +129,10 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             showPlatformDialog(
                               context: context,
                               builder: (context) => BasicDialogAlert(
-                                title: Text("Báo cáo câu trả lời"),
+                                title: Padding(
+                                  padding:  EdgeInsets.symmetric(vertical: 10),
+                                  child: Text("Báo cáo câu trả lời"),
+                                ),
                                 content: Container(
                                   height: 250,
                                   width: 200,
