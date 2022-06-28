@@ -80,7 +80,7 @@ class _NotificationbarState extends State<Notificationbar> {
                       PageNavigator.next(context: context, page: ScreensNew());
                     },
                     avatar:
-                        "https://i.pinimg.com/236x/63/eb/99/63eb997f009a82e5e3d3ca00e10002ba.jpg",
+                        "https://i.pinimg.com/564x/15/17/cf/1517cfa3e1a7d3fb243c85c0eb471791.jpg",
                     sub:
                         'Click để xem ngay đáp án chính xác nhất cuộc thi Bác Hồ Với Thanh Hóa , Thanh Hóa Làm Theo Lời Bác!',
                     time: "8 ngày trước",

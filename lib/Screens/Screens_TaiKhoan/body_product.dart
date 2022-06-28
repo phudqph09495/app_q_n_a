@@ -1,4 +1,6 @@
 import 'package:app_q_n_a/Screens/Screens_Pays/Screens_Pays.dart';
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/dieuKhoan.dart';
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/lienHe.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/rules.dart';
@@ -108,7 +110,7 @@ class _BodyProductState extends State<BodyProduct> {
         iconData: CupertinoIcons.square_list,
         title: "Điều khoản",
         onTap: () {
-          PageNavigator.next(context: context, page: Rules());
+          PageNavigator.next(context: context, page: DieuKhoan());
         },
       ),
       TitleAccount(
@@ -135,7 +137,7 @@ class _BodyProductState extends State<BodyProduct> {
         iconData: CupertinoIcons.chat_bubble,
         title: "Liên hệ và góp ý",
         onTap: () {
-          PageNavigator.next(context: context, page: Rules());
+          PageNavigator.next(context: context, page: LienHe());
         },
       ),
     ]);

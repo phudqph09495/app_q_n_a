@@ -31,7 +31,7 @@ class ItemNotifi extends StatelessWidget {
                 ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: LoadImage(
-                        url: avatar, height: 50, width: 80, fit: BoxFit.cover)),
+                        url: avatar, height: 120, width: 90, fit: BoxFit.cover)),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(left: 10),
@@ -48,6 +48,7 @@ class ItemNotifi extends StatelessWidget {
                         const SizedBox(height: 5),
                         Text(
                           time,
+                          maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: StyleApp.textStyle400(
                               fontSize: 12, color: ColorApp.grey82),

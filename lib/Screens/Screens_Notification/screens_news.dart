@@ -44,6 +44,10 @@ class ScreensNew extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
+                Image.network('https://img.hoidap247.com/picture/news/20220111/large_1641864118734.jpg'),
+                const SizedBox(
+                  height: 15,
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
