@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class Dropdown1 extends StatefulWidget {
   String val;
   List<String> monList;
+  double pad;
   double? height;
-  Dropdown1({required this.val, required this.monList,this.height});
+  Dropdown1({required this.val, required this.monList,this.height,this.pad=15});
   @override
   State<Dropdown1> createState() => _Dropdown1State();
 }
@@ -44,7 +45,7 @@ class _Dropdown1State extends State<Dropdown1> {
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: Colors.red, width: 2),
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 15,)
+            contentPadding: EdgeInsets.only(left: widget.pad,right: 10)
           ),
           onChanged: (state) {},
           items: widget.monList.map<DropdownMenuItem<String>>((String value) {

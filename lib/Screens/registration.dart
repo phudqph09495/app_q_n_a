@@ -99,6 +99,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             height: 15,
                           ),
                           Dropdown1(
+                            pad: 32,
                             val: type,
                             monList: typeList,
                           ),
