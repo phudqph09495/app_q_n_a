@@ -115,10 +115,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     return Column(
                       children: [
                         AnswerCard.AnswerWidget(
-                          imageReply:
-                              'https://tinypng.com/images/social/website.jpg',
+
                           avatar:
-                              'https://tinypng.com/images/social/website.jpg',
+                              '',
                           user: 'Nguyen van nam',
                           time: '12:00 14/06/2022',
                           hasImage: false,

@@ -25,12 +25,12 @@ class AnswerWidget extends StatefulWidget {
   bool hasImage;
   String? image;
   bool reply;
-  String imageReply;
+
   Function()? report;
 
   AnswerWidget(
       {this.deadline,
-      this.imageReply = '',
+
       required this.question,
       required this.avatar,
       required this.type,
