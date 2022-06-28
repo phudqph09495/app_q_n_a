@@ -93,11 +93,7 @@ Widget QuestionTile(
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child:
-                  // Image(
-                  //   image: NetworkImage(avatar),
-                  //   height: 40,
-                  //   width: 40,
-                  // ),
+
                   LoadImage(url:'$avatar',height: 40,width: 40,)
                 ),
                 Button1(

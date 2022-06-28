@@ -66,15 +66,11 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                   ),
             Row(
               children: [
-                Container(
-                  width: 30.0,
-                  height: 30.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover, image: NetworkImage(widget.avatar)),
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    color: Colors.white,
-                  ),
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child:
+
+                    LoadImage(url:widget.avatar,height: 40,width: 40,)
                 ),
                 const SizedBox(
                   width: 10,
@@ -90,7 +86,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                   ],
                 ),
                 const SizedBox(
-                  width: 120,
+                  width: 110,
                 ),
                 widget.type
                     ? Button1(
@@ -158,7 +154,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
                         textButton: 'Report',
-                        border: Border.all(color: ColorApp.black, width: 0.2),
+                        border: Border.all(color: ColorApp.red, width: 1),
                         height: 35,
                       ),
                       SizedBox(
@@ -168,7 +164,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         height: 35,
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
-                        border: Border.all(color: ColorApp.black, width: 0.2),
+                        border: Border.all(color: ColorApp.orangeF2, width: 1),
                         textButton: 'Bình luận',
                         ontap: () {
                           PageNavigator.next(

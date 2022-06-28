@@ -95,7 +95,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
               AnswerCard.AnswerWidget(
                   type: true,
                   avatar:
-                      'https://www.w3schools.com/w3images/avatar2.png',
+                      '',
                   user: 'tran thanh',
                   time: '11:07 7/6/2022',
                   deadline: 'Còn 3h',
