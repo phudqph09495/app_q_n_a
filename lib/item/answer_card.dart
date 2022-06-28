@@ -51,7 +51,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: ColorApp.whiteF0,
+      color: ColorApp.whiteF7,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

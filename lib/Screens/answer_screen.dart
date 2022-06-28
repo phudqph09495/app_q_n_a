@@ -47,6 +47,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
+
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Button1(
@@ -62,7 +63,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
             }),
       ),
-      backgroundColor: ColorApp.whiteF7,
+      backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
