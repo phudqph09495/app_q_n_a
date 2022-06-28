@@ -29,21 +29,27 @@ class _FilterListState extends State<FilterList> {
   Widget build(BuildContext context) {
     return ClipRRect(
       child: Container(
-        height:widget.height ,
+        height: widget.height,
         decoration: BoxDecoration(
           color: widget.color,
           // border: Border.all(color: ColorApp.orangeF01),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
-
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            (widget.title!='')   ? SizedBox(height: 15,):SizedBox(),
-            Text(
-              widget.title,
-              style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),
-            ),
+            (widget.title != '')
+                ? SizedBox(
+                    height: 15,
+                  )
+                : SizedBox(),
+            (widget.title != '')
+                ? Text(
+                    widget.title,
+                    style: StyleApp.textStyle700(
+                        fontSize: 18, color: ColorApp.black),
+                  )
+                : SizedBox(),
             GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

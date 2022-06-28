@@ -38,13 +38,60 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
+        toolbarHeight: 90,
         backgroundColor: ColorApp.whiteF0,
         elevation: 0,
-        title: LoadImage(
-          url: "https://hoidap247.com/static/img/logo_h247.png",
-          height: 30,
-          fit: BoxFit.fitHeight,
-          alignment: Alignment.centerLeft,
+        // title:
+        // LoadImage(
+        //
+        //   url: "https://hoidap247.com/static/img/logo_h247.png",
+        //   height: 30,
+        //   fit: BoxFit.fitHeight,
+        //   alignment: Alignment.centerLeft,
+        // ),
+        flexibleSpace: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 25,
+              ),
+              LoadImage(
+                url: "https://hoidap247.com/static/img/logo_h247.png",
+                height: 30,
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.centerLeft,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                height: 35,
+                width: 160,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorApp.whiteF7,
+                    border: Border.all(color: Colors.black, width: 1)),
+                child: FlatButton(
+                    height: 35,
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Filter()));
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.menu_open),
+                        Text(
+                          '  Lọc câu hỏi',
+                          style: StyleApp.textStyle900(fontSize: 16),
+                        )
+                      ],
+                    )),
+              ),
+            ],
+          ),
         ),
         centerTitle: false,
         actions: [
@@ -76,48 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-
             children: [
-              // Button1(
-              //
-              //   colorButton: ColorApp.whiteF0,
-              //   textColor: ColorApp.black,
-              //   border: Border.all(color: ColorApp.black,width: 1),
-              //   textButton: 'Lọc câu hỏi',
-              //   width: 150,
-              //   height: 35,
-              //   ontap: () {
-              //     Navigator.push(context,
-              //         MaterialPageRoute(builder: (context) => Filter()));
-              //   },
-              // ),
-              Container(
-                height: 35,
-                width: 160,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: ColorApp.whiteF7,
-                    border: Border.all(color: Colors.black,width: 1)
-                ),
-                child: FlatButton(
-height: 35,
 
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Filter()));
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-
-                      children: [
-                        Icon(Icons.menu_open),
-                        Text('  Lọc câu hỏi',style: StyleApp.textStyle900(fontSize: 16),)
-                      ],
-                    )),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
               ListQuestion(
                 ontap: () {
                   Navigator.push(context,
