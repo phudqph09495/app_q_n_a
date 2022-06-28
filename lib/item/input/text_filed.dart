@@ -48,12 +48,10 @@ class _InputText1State extends State<InputText1> {
         obscureText: widget.obscureText,
         onChanged: widget.onChanged,
         controller: widget.controller,
-
         keyboardType: widget.keyboardType,
         textAlign: TextAlign.left,
         style: StyleApp.textStyle400(),
         decoration: InputDecoration(
-
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
             // borderSide:
@@ -62,7 +60,8 @@ class _InputText1State extends State<InputText1> {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:  BorderSide(color: Colors.black.withOpacity(0.2), width: 2),
+            borderSide:
+                BorderSide(color: Colors.black.withOpacity(0.2), width: 2),
             // borderSide:
             // const BorderSide(color: ColorApp.black, width: 1),
           ),
@@ -74,24 +73,22 @@ class _InputText1State extends State<InputText1> {
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:
-                BorderSide(color: Colors.red, width: 2),
+            borderSide: BorderSide(color: Colors.red, width: 2),
             // borderSide:
             // const BorderSide(color: ColorApp.black, width: 1),
           ),
           filled: true,
           fillColor: widget.colorBg,
-
-          contentPadding:  EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-
-          prefixIcon:
-          widget.hasLeading ? Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Icon(widget.iconData, color: ColorApp.black.withOpacity(0.5)),
-          ): null,
+          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          prefixIcon: widget.hasLeading
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Icon(widget.iconData,
+                      color: ColorApp.black.withOpacity(0.5)),
+                )
+              : null,
           labelText: widget.label,
-          labelStyle:
-          StyleApp.textStyle400(),
+          labelStyle: StyleApp.textStyle400(),
           suffixIcon: widget.hasPass
               ? InkWell(
                   onTap: () {

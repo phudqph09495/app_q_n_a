@@ -31,7 +31,7 @@ class InputText2 extends StatefulWidget {
     this.hasLeading = false,
     this.readOnly = false,
     this.validator,
-    this.radius = 20,
+    this.radius = 10,
     this.width = double.infinity,
     this.borderColor = ColorApp.main,
     this.colorBg = Colors.white,
@@ -60,20 +60,20 @@ class _InputText2State extends State<InputText2> {
           hintText: widget.hint,
           hintStyle: StyleApp.textStyle400(color: ColorApp.grey82),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide(color: ColorApp.orangeF2, width: 2),
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: ColorApp.orangeF0, width: 2),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.red, width: 2),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
                 color: ColorApp.black.withOpacity(0.2), width: 2),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.red, width: 2),
 
           ),

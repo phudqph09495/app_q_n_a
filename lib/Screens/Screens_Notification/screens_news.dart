@@ -12,6 +12,7 @@ class ScreensNew extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorApp.whiteF0,
+        centerTitle: true,
         title: Text(
           'Tin tức',
           style: StyleApp.textStyle700(color: ColorApp.black, fontSize: 16),
@@ -51,7 +52,7 @@ class ScreensNew extends StatelessWidget {
                       children: [
                         Container(
                           decoration: const BoxDecoration(
-                            color: Color(0xff87CEFA),
+                            color: ColorApp.orangeF01,
                             shape: BoxShape.circle,
                           ),
                           width: 40,
@@ -74,7 +75,7 @@ class ScreensNew extends StatelessWidget {
                               child: Text(
                                 'khi Người về thăm Thanh Hóa ?',
                                 style: TextStyle(
-                                    color: Color(0xff87CEFA), fontSize: 16),
+                                    color: Colors.black, fontSize: 16),
                               ),
                             ),
                           ],
@@ -142,7 +143,7 @@ class ScreensNew extends StatelessWidget {
                       children: [
                         Container(
                           decoration: const BoxDecoration(
-                            color: Color(0xff87CEFA),
+                            color: ColorApp.orangeF01,
                             shape: BoxShape.circle,
                           ),
                           width: 40,
@@ -165,7 +166,7 @@ class ScreensNew extends StatelessWidget {
                               child: Text(
                                 'khi Người về thăm Thanh Hóa ?',
                                 style: TextStyle(
-                                    color: Color(0xff87CEFA), fontSize: 16),
+                                    color: Colors.black, fontSize: 16),
                               ),
                             ),
                           ],
@@ -233,7 +234,7 @@ class ScreensNew extends StatelessWidget {
                       children: [
                         Container(
                           decoration: const BoxDecoration(
-                            color: Color(0xff87CEFA),
+                            color: ColorApp.orangeF01,
                             shape: BoxShape.circle,
                           ),
                           width: 40,
@@ -256,7 +257,7 @@ class ScreensNew extends StatelessWidget {
                               child: Text(
                                 'khi Người về thăm Thanh Hóa ?',
                                 style: TextStyle(
-                                    color: Color(0xff87CEFA), fontSize: 16),
+                                    color: Colors.black, fontSize: 16),
                               ),
                             ),
                           ],
@@ -321,7 +322,7 @@ class ScreensNew extends StatelessWidget {
                       children: [
                         Container(
                           decoration: const BoxDecoration(
-                            color: Color(0xff87CEFA),
+                            color: ColorApp.orangeF01,
                             shape: BoxShape.circle,
                           ),
                           width: 40,
@@ -344,7 +345,7 @@ class ScreensNew extends StatelessWidget {
                               child: Text(
                                 'khi Người về thăm Thanh Hóa ?',
                                 style: TextStyle(
-                                    color: Color(0xff87CEFA), fontSize: 16),
+                                    color: Colors.black, fontSize: 16),
                               ),
                             ),
                           ],

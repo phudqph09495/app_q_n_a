@@ -58,7 +58,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: const Color(0xffB0E0E6), // background
+                              primary: ColorApp.orangeF2, // background
                               onPrimary: Colors.white,
                               minimumSize:const Size(60, 50),// foreground
                             ),
@@ -77,7 +77,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: const Color(0xffB0E0E6), // background
+                            primary: ColorApp.orangeF2,// background
                             onPrimary: Colors.white,
                             minimumSize:const Size(60, 50),// foreground
                           ),
@@ -109,7 +109,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize:const Size(60, 50),
-                            primary: const Color(0xffB0E0E6), // background
+                            primary: ColorApp.orangeF2, // background
                             onPrimary: Colors.white, // foreground
                           ),
                           onPressed: () async {
@@ -123,7 +123,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: const Color(0xffB0E0E6), // background
+                            primary: ColorApp.orangeF2, // background
                             onPrimary: Colors.white,
                             minimumSize:const Size(60, 50),// foreground
                           ),
