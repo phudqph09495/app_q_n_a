@@ -40,16 +40,20 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: Button1(
-          colorButton: ColorApp.orangeF0,
-          textColor: ColorApp.orangeF01,
-          radius: 30,
-          border: Border.all(color: ColorApp.orangeF0),
-          textButton: 'Viết câu trả lời',
-          ontap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
-          }),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Button1(
+            colorButton: ColorApp.orangeF2,
+            textColor: ColorApp.whiteF0,
+            radius: 30,
+            fontSize: 18,
+            style: false,
+            border: Border.all(color: ColorApp.orangeF2),
+            textButton: 'Viết câu trả lời',
+            ontap: () {
+
+            }),
+      ),
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         centerTitle: true,
