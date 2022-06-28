@@ -104,7 +104,7 @@ class _InputTextState extends State<InputText> {
               // borderSide:
               // const BorderSide(color: ColorApp.black, width: 2),
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 15),
+            contentPadding: EdgeInsets.only(left: 33,top: 15,right: 20),
             hintText: widget.hint,
             hintStyle: StyleApp.textStyle400(color: widget.colorhint)),
         onChanged: (val) {},

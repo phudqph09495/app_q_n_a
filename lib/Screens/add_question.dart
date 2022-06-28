@@ -54,6 +54,7 @@ class _AddQuestionState extends State<AddQuestion> {
 
   TextEditingController ques = TextEditingController();
   TextEditingController deadline = TextEditingController();
+  
   String mon = 'Toán học';
   List<String> monList = [
     'Toán học',
@@ -105,6 +106,7 @@ class _AddQuestionState extends State<AddQuestion> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -176,7 +178,7 @@ style: false
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText(
-                    hint: '    Ngày kết thúc câu hỏi',
+                    hint: 'Ngày kết thúc câu hỏi',
                     controller: deadline,
                     readOnly: true,
                     deadline: () {
@@ -192,7 +194,7 @@ style: false
                 ),
                 InputText(
                   inputType: TextInputType.number,
-                  hint: '    Phần thưởng cho người trả lời',
+                  hint: 'Phần thưởng cho người trả lời',
                   controller: money,
                 ),
                 SizedBox(
@@ -206,7 +208,7 @@ style: false
                   inputType: TextInputType.multiline,
                   maxline: 6,
                   counter: true,
-                  hint: '\n    Nhập câu hỏi của bạn',
+                  hint: 'Nhập câu hỏi của bạn',
                   controller: ques,
                 ),
                 _imageFileList!.isNotEmpty
