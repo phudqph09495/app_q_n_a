@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/item/button.dart';
+import 'package:app_q_n_a/item/input/text_filed.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
@@ -15,6 +17,7 @@ class ForgotPass extends StatefulWidget {
 
 class _ForgotPassState extends State<ForgotPass> {
   TextEditingController forgot = TextEditingController();
+  final keyForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
@@ -38,41 +41,56 @@ class _ForgotPassState extends State<ForgotPass> {
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            InputText(
+        child: Form(
+          key: keyForm,
+          child: Column(
+            children: [
+              SizedBox(height: 10,),
+            InputText1(
+            label: "Nhập email đăng ký",
+            controller: forgot,
+            borderColor: ColorApp.main.withOpacity(0.2),
 
-                hint: 'Nhập Email đăng ký',
-                controller: forgot),
-            SizedBox(
-              height: 8,
-            ),
-            Button1(
-              width: 250,
-                height: 40,
-                radius: 10,
-                colorButton: ColorApp.orangeF2,
-                textColor: Colors.black,
-                textButton: 'Khôi phục mật khẩu',
-                ontap: () {
-                  if (forgot.text != '') {
-                    Toast.show(
-                        "Yêu cầu cấp lại mật khẩu của bạn đã được phê duyệt",
-                        duration: 3,
-                        gravity: Toast.bottom);
+            obscureText: false,
+            hasPass: false,
+            radius: 10,
+            width: double.infinity,
+            validator: (val) {
+              return ValidatorApp.checkEmail(text: val);
+            },
+          ),
+              SizedBox(
+                height: 10,
+              ),
+              Button1(
 
-                    Future.delayed(Duration(milliseconds: 3500), () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
-                    });
-                  } else {
-                    Toast.show("Hãy nhập email hoặc tên đăng nhập",
-                        duration: 3, gravity: Toast.bottom);
-                  }
-                })
-          ],
+                  colorButton: ColorApp.orangeF2,
+                  textColor: ColorApp.whiteF0,
+                  radius: 30,
+                  fontSize: 18,
+                  style: false,
+                  border: Border.all(color: ColorApp.orangeF2),
+                  textButton: 'Khôi phục mật khẩu',
+                  ontap: () {
+                    if (keyForm.currentState!.validate()) {
+                      Toast.show(
+                          "Yêu cầu cấp lại mật khẩu của bạn đã được phê duyệt",
+                          duration: 3,
+                          gravity: Toast.bottom);
+
+                      Future.delayed(Duration(milliseconds: 3500), () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
+                      });
+                    } else {
+                      Toast.show("Hãy nhập email hoặc tên đăng nhập",
+                          duration: 3, gravity: Toast.bottom);
+                    }
+                  }),
+            ],
+          ),
         ),
       ),
     );
