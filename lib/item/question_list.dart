@@ -14,7 +14,7 @@ Widget ListQuestion({required Function() ontap}) {
             deadline: 'Còn 3h',
             lop: 12,
             money: 50,
-            time: '1h trước',
+            time: '1h',
             ontap:ontap ,
             question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
             attach: true,
