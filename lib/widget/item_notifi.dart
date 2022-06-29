@@ -19,7 +19,7 @@ class ItemNotifi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorApp.whiteF7,
+      color: Colors.white,
       child: InkWell(
         onTap: onTap,
         child: Column(
@@ -28,10 +28,13 @@ class ItemNotifi extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: LoadImage(
-                        url: avatar, height: 120, width: 90, fit: BoxFit.cover)),
+                Padding(
+                  padding: EdgeInsets.only(top: 3),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: LoadImage(
+                          url: avatar, height: 120, width: 90, fit: BoxFit.cover)),
+                ),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(left: 10),

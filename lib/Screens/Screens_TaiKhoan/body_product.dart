@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/Screens_Pays.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/dieuKhoan.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/lienHe.dart';
@@ -60,7 +61,7 @@ class _BodyProductState extends State<BodyProduct> {
             Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
                 duration: 2, gravity: Toast.bottom);
             Future.delayed(Duration(milliseconds: 4000), () {
-              PageNavigator.next(context: context, page: ProfileScreen());
+              PageNavigator.next(context: context, page: LoginScreen());
             });
           }),
       TitleAccount(
@@ -69,7 +70,7 @@ class _BodyProductState extends State<BodyProduct> {
           onTap: () {
             Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
                 duration: 2, gravity: Toast.bottom);
-            Future.delayed(Duration(milliseconds: 4000), () {
+            Future.delayed(Duration(milliseconds: 2000), () {
               showModalBottomSheet(
                   context: context, builder: (context) => BottomSheetAccount());
             });
@@ -80,8 +81,8 @@ class _BodyProductState extends State<BodyProduct> {
         onTap: () {
           Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
               duration: 2, gravity: Toast.bottom);
-          Future.delayed(Duration(milliseconds: 4000), () {
-            PageNavigator.next(context: context, page: QuestionSavedSS());
+          Future.delayed(Duration(milliseconds: 2000), () {
+            PageNavigator.next(context: context, page: LoginScreen());
           });
         },
         // onTap: () => launch('https://hoidap247.com/'),
@@ -93,8 +94,10 @@ class _BodyProductState extends State<BodyProduct> {
             Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
                 duration: 2, gravity: Toast.bottom);
             Future.delayed(Duration(milliseconds: 4000), () {
-              showModalBottomSheet(
-                  context: context, builder: (context) => ScreensPays());
+              // showModalBottomSheet(
+              //     context: context, builder: (context) => ViTien());
+              // bên dưới
+              PageNavigator.next(context: context, page: ViTien());
             });
           }),
     ]);
@@ -121,18 +124,24 @@ class _BodyProductState extends State<BodyProduct> {
         },
       ),
       TitleAccount(
-        iconData: CupertinoIcons.share,
-        title: "Chia sẻ ứng dụng",
-        // onTap: () {
-        //   Share.share("Chia sẽ ứng dụng");
-        // },
-        onTap: (){
-          // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-          //     duration: 2, gravity: Toast.bottom);
-          Share.share(
-              'check out my website https://protocoderspoint.com/');
-        },
-      ),
+          iconData: CupertinoIcons.share,
+          title: "Chia sẻ ứng dụng",
+          // onTap: () {
+          //   Share.share("Chia sẽ ứng dụng");
+          // },
+          // Share.share(
+          //     'check out my website https://protocoderspoint.com/');
+          onTap: () {
+            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+                duration: 2, gravity: Toast.bottom);
+            // Future.delayed(Duration(milliseconds: 2000), () {
+            //   showModalBottomSheet(
+            //       context: context, builder: (context) => LoginScreen());
+            // }
+            Future.delayed(Duration(milliseconds: 4000), () {
+              PageNavigator.next(context: context, page: LoginScreen());
+            });
+          }),
       TitleAccount(
         iconData: CupertinoIcons.chat_bubble,
         title: "Liên hệ và góp ý",
@@ -307,4 +316,3 @@ class TitleAccount {
 
   TitleAccount({required this.iconData, required this.title, this.onTap});
 }
-
