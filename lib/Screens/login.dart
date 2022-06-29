@@ -153,6 +153,7 @@ shape: CircleBorder(),
                   ],
                 ),
                 Button1(
+                  border: Border.all(color: ColorApp.orangeF2,width: 0.5),
                   style: false,
                     fontSize: 18,
                     ontap: () {
@@ -169,6 +170,7 @@ shape: CircleBorder(),
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Button1(
+                        border: Border.all(color: ColorApp.orangeF2,width: 0.5),
                         width: 175,
                         ontap: () {},
                         icon: true,
@@ -176,17 +178,17 @@ shape: CircleBorder(),
                         textColor: Colors.black,
                         textButton: 'Google',
                         colorButton: Colors.white,
-                        border: Border.all(color: ColorApp.orangeF2),
+
                         radius: 30),
                     Button1(
-
+                        border: Border.all(color: ColorApp.orangeF2,width: 0.5),
                         width: 175,
                         ontap: () {},
                         icon: true,
                         imagePath: 'images/Facebook.png',
                         textColor: Colors.black,
                         textButton: 'Facebook',
-                        border: Border.all(color: ColorApp.orangeF2),
+
                         colorButton: Colors.white,
                         radius: 30),
                   ],

@@ -81,26 +81,26 @@ class _InputTextState extends State<InputText> {
                 : null,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: ColorApp.orangeF2, width: 2),
+              borderSide: BorderSide(color: ColorApp.orangeF2, width: 0.5),
               // borderSide:
               // const BorderSide(color: ColorApp.black, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red, width: 2),
+              borderSide: const BorderSide(color: Colors.red, width: 0.5),
               // borderSide:
               // const BorderSide(color: ColorApp.black, width: 2),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.colorBorder.withOpacity(0.2), width: 2),
+                  color: widget.colorBorder.withOpacity(0.2), width: 0.5),
               // borderSide:
               // const BorderSide(color: ColorApp.black, width: 2),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red, width: 2),
+              borderSide: const BorderSide(color: Colors.red, width: 0.5),
               // borderSide:
               // const BorderSide(color: ColorApp.black, width: 2),
             ),

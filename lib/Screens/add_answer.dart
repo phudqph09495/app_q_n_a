@@ -48,7 +48,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
             radius: 30,
             fontSize: 18,
             style: false,
-            border: Border.all(color: ColorApp.orangeF2),
+            border: Border.all(color: ColorApp.orangeF2,width: 0.5),
             textButton: 'Viết câu trả lời',
             ontap: () {
 

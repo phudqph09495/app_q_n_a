@@ -57,7 +57,7 @@ class _FilterState extends State<Filter> {
               ontap: () {},
               colorButton: ColorApp.orangeF2,
               textColor: Colors.white,
-              border: Border.all(color: ColorApp.orangeF2),
+              border: Border.all(color: ColorApp.orangeF2,width: 0.5),
               textButton: 'Tìm kiếm'),
         ),
         backgroundColor: ColorApp.whiteF0,

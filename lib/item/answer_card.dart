@@ -30,7 +30,6 @@ class AnswerWidget extends StatefulWidget {
 
   AnswerWidget(
       {this.deadline,
-
       required this.question,
       required this.avatar,
       required this.type,
@@ -68,10 +67,11 @@ class _AnswerWidgetState extends State<AnswerWidget> {
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
-                    child:
-
-                    LoadImage(url:widget.avatar,height: 40,width: 40,)
-                ),
+                    child: LoadImage(
+                      url: widget.avatar,
+                      height: 40,
+                      width: 40,
+                    )),
                 const SizedBox(
                   width: 10,
                 ),
@@ -90,10 +90,9 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                 ),
                 widget.type
                     ? Button1(
+
                         ontap: () {
-                          Toast.show(
-                              "Lưu thành công",
-                              gravity: Toast.bottom);
+                          Toast.show("Lưu thành công", gravity: Toast.bottom);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -147,16 +146,11 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             widget.type
                 ? Container()
                 : Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Button1(
-                        ontap: widget.report,
-                        colorButton: ColorApp.whiteF7,
-                        textColor: ColorApp.black,
-                        textButton: 'Report',
-                        border: Border.all(color: ColorApp.red, width: 1),
-                        height: 35,
-                      ),
+                      IconButton(
+                          onPressed: widget.report,
+                          icon: Image.asset('images/report.png')),
                       SizedBox(
                         width: 10,
                       ),
@@ -164,7 +158,8 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         height: 35,
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
-                        border: Border.all(color: ColorApp.orangeF2, width: 1),
+                        border:
+                            Border.all(color: ColorApp.orangeF2, width: 0.5),
                         textButton: 'Bình luận',
                         ontap: () {
                           PageNavigator.next(

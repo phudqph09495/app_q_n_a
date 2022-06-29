@@ -117,7 +117,7 @@ class _AddQuestionState extends State<AddQuestion> {
 style: false
             ,
             fontSize: 18,
-            border: Border.all(color: ColorApp.orangeF2),
+            border: Border.all(color: ColorApp.orangeF2,width: 0.5),
             textButton: 'Đăng câu hỏi',
             ontap: () {}),
       ),

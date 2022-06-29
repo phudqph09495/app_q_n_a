@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: ColorApp.whiteF7,
-                    border: Border.all(color: Colors.black, width: 1)),
+                    border: Border.all(color: Colors.black, width: 0.5)),
                 child: FlatButton(
                     height: 35,
                     onPressed: () {

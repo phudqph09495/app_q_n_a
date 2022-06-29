@@ -195,6 +195,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             height: 15,
                           ),
                           Button1(
+                              border: Border.all(color: ColorApp.orangeF2,width: 0.5),
                             style: false,
                             fontSize: 18,
                               radius: 30,

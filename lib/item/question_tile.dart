@@ -56,7 +56,7 @@ Widget QuestionTile(
                         decoration: BoxDecoration(
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: ColorApp.black,width: 1),
+                          border: Border.all(color: ColorApp.black,width: 0.5),
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 3, vertical: 2),
@@ -100,7 +100,7 @@ Widget QuestionTile(
                   height: 30,
                   colorButton: Colors.white,
                   textColor: ColorApp.black,
-                  border: Border.all(color: ColorApp.orangeF2),
+                  border: Border.all(color: ColorApp.orangeF2,width: 0.5),
                   textButton: 'Trả lời',
                   ontap: ontap,
                 ),
