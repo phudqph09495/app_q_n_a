@@ -170,8 +170,8 @@ class _BodyProductState extends State<BodyProduct> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.black00, width: 1),
-                  borderRadius: BorderRadius.circular(10)),
+                  border: Border.all(color: ColorApp.black00, width: 0.5),
+                  borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                 dense: true,
@@ -199,8 +199,8 @@ class _BodyProductState extends State<BodyProduct> {
             ),
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.black00, width: 1),
-                  borderRadius: BorderRadius.circular(10)),
+                  border: Border.all(color: ColorApp.black, width: 0.5),
+                  borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                 dense: true,
@@ -228,8 +228,8 @@ class _BodyProductState extends State<BodyProduct> {
             ),
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.black00, width: 1),
-                  borderRadius: BorderRadius.circular(10)),
+                  border: Border.all(color: ColorApp.black, width: 0.5),
+                  borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 dense: true,
@@ -247,7 +247,7 @@ class _BodyProductState extends State<BodyProduct> {
                   ),
                   title: Text(
                     'Đăng xuất',
-                    style: StyleApp.textStyle700(
+                    style: StyleApp.textStyle500(
                         color: ColorApp.black, fontSize: 16),
                   ),
                 ),
@@ -272,11 +272,11 @@ class _BodyProductState extends State<BodyProduct> {
               height: 12,
             ),
             Button1(
-                colorButton: ColorApp.whiteF0,
-                textColor: ColorApp.black,
+                colorButton: ColorApp.orangeF2,
+                textColor: Colors.white,
                 textButton: 'Đăng nhập',
-                border: Border.all(color: ColorApp.black00),
-                radius: 10,
+                radius: 5,
+                style: false,
                 ontap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));

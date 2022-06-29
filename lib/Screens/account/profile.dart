@@ -43,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: ColorApp.whiteF7.withOpacity(0.1),
-                      border: Border.all(color: ColorApp.black00, width: 0.7)),
+                      border: Border.all(color: ColorApp.black00, width: 0.5)),
                   height: 50,
                   margin: const EdgeInsets.only(left: 40, right: 10),
                   padding: const EdgeInsets.only(
@@ -71,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
-                      border: Border.all(color: ColorApp.black00, width: 0.7)),
+                      border: Border.all(color: ColorApp.black00, width: 0.5)),
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                   child: ClipRRect(

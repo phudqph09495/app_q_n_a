@@ -154,7 +154,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
                         textButton: 'Report',
-                        border: Border.all(color: ColorApp.red, width: 1),
+                        border: Border.all(color: ColorApp.red, width: 0.5),
                         height: 35,
                       ),
                       SizedBox(
@@ -164,7 +164,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         height: 35,
                         colorButton: ColorApp.whiteF7,
                         textColor: ColorApp.black,
-                        border: Border.all(color: ColorApp.orangeF2, width: 1),
+                        border: Border.all(color: ColorApp.orangeF2, width: 0.5),
                         textButton: 'Bình luận',
                         ontap: () {
                           PageNavigator.next(

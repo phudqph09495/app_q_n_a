@@ -41,20 +41,20 @@ class _DropItemState extends State<DropItem> {
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: ColorApp.orangeF2, width: 2),
+            borderSide: BorderSide(color: ColorApp.orangeF2, width: 0.5),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.red, width: 2),
+            borderSide: const BorderSide(color: Colors.red, width: 0.5),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide:
-            BorderSide(color: Colors.black.withOpacity(0.2), width: 2),
+            BorderSide(color: Colors.black.withOpacity(0.2), width: 0.5),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.red, width: 2),
+            borderSide: const BorderSide(color: Colors.red, width: 0.5),
           ),
           fillColor: widget.filled ? ColorApp.blue1F.withOpacity(0.1) : Colors.white,
           filled: widget.filled,

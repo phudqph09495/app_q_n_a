@@ -56,7 +56,7 @@ Widget QuestionTile(
                         decoration: BoxDecoration(
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: ColorApp.black,width: 1),
+                          border: Border.all(color: ColorApp.black,width: 0.5),
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 3, vertical: 2),
