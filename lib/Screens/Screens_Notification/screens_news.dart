@@ -77,7 +77,7 @@ class ScreensNew extends StatelessWidget {
                               padding: EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 10),
                               child: Text(
-                                'khi Người về thăm Thanh Hóa ?',
+                                'Khi Người về thăm Thanh Hóa ?',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 16),
                               ),
@@ -168,7 +168,7 @@ class ScreensNew extends StatelessWidget {
                               padding: EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 10),
                               child: Text(
-                                'khi Người về thăm Thanh Hóa ?',
+                                'Tác phẩm “Lời than của Bà Trưng Trắc”?',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 16),
                               ),
@@ -186,7 +186,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'A. Lần thứ ba, năm 1960',
+                            'A. Triệu Quốc Đạt, Bà Triệu',
                             style: TextStyle(
                                 color:  ColorApp.black00, fontSize: 14),
                           ),
@@ -202,7 +202,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'B. Lần thứ hai, năm 1957',
+                            'B. Lê Đại Hành, Lê Lợi',
                             style: TextStyle(
                                 color: Colors.black, fontSize: 14),
                           ),
@@ -218,7 +218,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'C. Lần thứ nhất, năm 1947 ',
+                            'C. Dương Đình Nghệ, Hồ Quý Ly',
                             style: TextStyle(
                                 color: ColorApp.black00, fontSize: 14),
                           ),
@@ -259,7 +259,7 @@ class ScreensNew extends StatelessWidget {
                               padding: EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 10),
                               child: Text(
-                                'khi Người về thăm Thanh Hóa ?',
+                                'Lời dạy của Chủ tịch Hồ Chí Minh, ngày ?',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 16),
                               ),
@@ -277,7 +277,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'A. Lần thứ ba, năm 1960',
+                            'A. Ngày 09/5/2019 ( Mùng 05 tháng 4 Âm lịch )',
                             style: TextStyle(
                                 color:  ColorApp.black00, fontSize: 14),
                           ),
@@ -293,7 +293,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'B. Lần thứ hai, năm 1957',
+                            'B. Ngày 08/5/2019 ( Mùng 04 tháng 4 Âm lịch )',
                             style: TextStyle(
                                 color: Colors.black, fontSize: 14),
                           ),
@@ -309,7 +309,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'C. Lần thứ nhất, năm 1947 ',
+                            'C. Ngày 07/5/2019 ( Mùng 03 tháng 4 Âm lịch )',
                             style: TextStyle(
                                 color: ColorApp.black00, fontSize: 14),
                           ),
@@ -347,7 +347,7 @@ class ScreensNew extends StatelessWidget {
                               padding: EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 10),
                               child: Text(
-                                'khi Người về thăm Thanh Hóa ?',
+                                'Chủ tịch tỉnh Thanh Hóa năm 1947 là ?',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 16),
                               ),
@@ -365,7 +365,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'A. Lần thứ ba, năm 1960',
+                            'A. Lê Chủ',
                             style: TextStyle(
                                 color:  ColorApp.black00, fontSize: 14),
                           ),
@@ -381,7 +381,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'B. Lần thứ hai, năm 1957',
+                            'B. Đặng Thai Mai',
                             style: TextStyle(
                                 color: Colors.black, fontSize: 14),
                           ),
@@ -397,7 +397,7 @@ class ScreensNew extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            'C. Lần thứ nhất, năm 1947 ',
+                            'C. Đặng Việt Châu ',
                             style: TextStyle(
                                 color: ColorApp.black00, fontSize: 14),
                           ),
