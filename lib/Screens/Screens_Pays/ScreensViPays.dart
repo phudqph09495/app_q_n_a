@@ -80,7 +80,6 @@ class ViTien extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ExpansionTile(

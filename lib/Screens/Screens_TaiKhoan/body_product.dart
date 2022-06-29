@@ -6,6 +6,7 @@ import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/rules.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
+import 'package:app_q_n_a/Screens/account/edit_account/edit_profile.dart';
 import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
@@ -60,8 +61,8 @@ class _BodyProductState extends State<BodyProduct> {
           onTap: () {
             Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
                 duration: 2, gravity: Toast.bottom);
-            Future.delayed(Duration(milliseconds: 4000), () {
-              PageNavigator.next(context: context, page: LoginScreen());
+            Future.delayed(Duration(milliseconds: 2000), () {
+              PageNavigator.next(context: context, page: ProfileScreen());
             });
           }),
       TitleAccount(
@@ -82,7 +83,7 @@ class _BodyProductState extends State<BodyProduct> {
           Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
               duration: 2, gravity: Toast.bottom);
           Future.delayed(Duration(milliseconds: 2000), () {
-            PageNavigator.next(context: context, page: LoginScreen());
+            PageNavigator.next(context: context, page: QuestionSavedSS());
           });
         },
         // onTap: () => launch('https://hoidap247.com/'),
@@ -129,8 +130,7 @@ class _BodyProductState extends State<BodyProduct> {
           // onTap: () {
           //   Share.share("Chia sẽ ứng dụng");
           // },
-          // Share.share(
-          //     'check out my website https://protocoderspoint.com/');
+
           onTap: () {
             Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
                 duration: 2, gravity: Toast.bottom);
@@ -139,7 +139,7 @@ class _BodyProductState extends State<BodyProduct> {
             //       context: context, builder: (context) => LoginScreen());
             // }
             Future.delayed(Duration(milliseconds: 4000), () {
-              PageNavigator.next(context: context, page: LoginScreen());
+              Share.share('Chia sẻ ứng dụng với bạn bè tại  https://hoidap.com/');
             });
           }),
       TitleAccount(
