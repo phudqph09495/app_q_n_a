@@ -23,7 +23,8 @@ class ViTien extends StatelessWidget {
             border: Border.all(color: ColorApp.orangeF2),
             textButton: 'Trang chủ',
             ontap: () {
-              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ScreenHome()));
             }),
       ),
       backgroundColor: ColorApp.whiteF0,
@@ -58,12 +59,15 @@ class ViTien extends StatelessWidget {
                   height: 20,
                 ),
                 Button1(
-                    width: 190,
-                    height: 60,
-                    radius: 10,
-                    colorButton: ColorApp.orangeF2,
-                    textColor: Colors.white,
-                    textButton: '1.000.000đ'),
+                  width: 190,
+                  height: 60,
+                  radius: 10,
+                  fontSize: 20,
+                  colorButton: ColorApp.orangeF2,
+                  textColor: Colors.white,
+                  textButton: '1.000.000đ',
+                  style: false,
+                ),
               ],
             ),
           ),
@@ -74,275 +78,303 @@ class ViTien extends StatelessWidget {
                 child: Card(
                   child: Column(
                     children: [
-                      ExpansionTile(
-                        title: Text(
-                          'Lịch sử giao dịch',
-                          style: TextStyle(color: Colors.black),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 5, left: 15, right: 10, bottom: 10),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.network(
-                                      'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
-                                      width: 70,
-                                      height: 70,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                'Chuyển tiền thành công',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              const Text(
-                                                'Ngân hàng Techcombank',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: const [
-                                                  Text(
-                                                    '7h30p  28/06/2022',
-                                                    style: TextStyle(
-                                                        color: ColorApp.black),
-                                                  ),
-                                                  Text(
-                                                    '1.500.000đ',
-                                                    style: TextStyle(
-                                                        color:
-                                                            ColorApp.orangeF01),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(
-                                  height: 2,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Image.network(
-                                      'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
-                                      width: 70,
-                                      height: 70,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                'Chuyển tiền thành công',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              const Text(
-                                                'Ngân hàng Techcombank',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: const [
-                                                  Text(
-                                                    '7h30p  28/06/2022',
-                                                    style: TextStyle(
-                                                        color: ColorApp.black),
-                                                  ),
-                                                  Text(
-                                                    '1.500.000đ',
-                                                    style: TextStyle(
-                                                        color:
-                                                            ColorApp.orangeF01),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(
-                                  height: 2,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Image.network(
-                                      'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
-                                      width: 70,
-                                      height: 70,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                'Chuyển tiền thành công',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              const Text(
-                                                'Ngân hàng Techcombank',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: const [
-                                                  Text(
-                                                    '7h30p  28/06/2022',
-                                                    style: TextStyle(
-                                                        color: ColorApp.black),
-                                                  ),
-                                                  Text(
-                                                    '1.500.000đ',
-                                                    style: TextStyle(
-                                                        color:
-                                                            ColorApp.orangeF01),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(
-                                  height: 2,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Image.network(
-                                      'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
-                                      width: 70,
-                                      height: 70,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                'Chuyển tiền thành công',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              const Text(
-                                                'Ngân hàng Techcombank',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: const [
-                                                  Text(
-                                                    '7h30p  28/06/2022',
-                                                    style: TextStyle(
-                                                        color: ColorApp.black),
-                                                  ),
-                                                  Text(
-                                                    '1.500.000đ',
-                                                    style: TextStyle(
-                                                        color:
-                                                            ColorApp.orangeF01),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                        child: ExpansionTile(
+                          title: Text(
+                            'Lịch sử giao dịch',
+                            style: TextStyle(color: Colors.black),
                           ),
-                        ],
+                          iconColor: ColorApp.orangeF2,
+                          collapsedIconColor: Colors.black,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: 5, left: 15, right: 10, bottom: 10),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.network(
+                                        'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
+                                        width: 70,
+                                        height: 70,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  'Chuyển tiền thành công',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                const Text(
+                                                  'Ngân hàng Techcombank',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: const [
+                                                    Text(
+                                                      '7h30p  28/06/2022',
+                                                      style: TextStyle(
+                                                          color:
+                                                              ColorApp.black),
+                                                    ),
+                                                    Text(
+                                                      '1.500.000đ',
+                                                      style: TextStyle(
+                                                          color: ColorApp
+                                                              .orangeF01),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  const Divider(
+                                    height: 2,
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Image.network(
+                                        'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
+                                        width: 70,
+                                        height: 70,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  'Chuyển tiền thành công',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                const Text(
+                                                  'Ngân hàng Techcombank',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: const [
+                                                    Text(
+                                                      '7h30p  28/06/2022',
+                                                      style: TextStyle(
+                                                          color:
+                                                              ColorApp.black),
+                                                    ),
+                                                    Text(
+                                                      '1.500.000đ',
+                                                      style: TextStyle(
+                                                          color: ColorApp
+                                                              .orangeF01),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  const Divider(
+                                    height: 2,
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Image.network(
+                                        'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
+                                        width: 70,
+                                        height: 70,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  'Chuyển tiền thành công',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                const Text(
+                                                  'Ngân hàng Techcombank',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: const [
+                                                    Text(
+                                                      '7h30p  28/06/2022',
+                                                      style: TextStyle(
+                                                          color:
+                                                              ColorApp.black),
+                                                    ),
+                                                    Text(
+                                                      '1.500.000đ',
+                                                      style: TextStyle(
+                                                          color: ColorApp
+                                                              .orangeF01),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  const Divider(
+                                    height: 2,
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Image.network(
+                                        'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
+                                        width: 70,
+                                        height: 70,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  'Chuyển tiền thành công',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                const Text(
+                                                  'Ngân hàng Techcombank',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: const [
+                                                    Text(
+                                                      '7h30p  28/06/2022',
+                                                      style: TextStyle(
+                                                          color:
+                                                              ColorApp.black),
+                                                    ),
+                                                    Text(
+                                                      '1.500.000đ',
+                                                      style: TextStyle(
+                                                          color: ColorApp
+                                                              .orangeF01),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
