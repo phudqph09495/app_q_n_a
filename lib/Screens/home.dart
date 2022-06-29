@@ -38,17 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 90,
         backgroundColor: ColorApp.whiteF0,
         elevation: 0,
-        // title:
-        // LoadImage(
-        //
-        //   url: "https://hoidap247.com/static/img/logo_h247.png",
-        //   height: 30,
-        //   fit: BoxFit.fitHeight,
-        //   alignment: Alignment.centerLeft,
-        // ),
+
         flexibleSpace: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
