@@ -32,14 +32,12 @@ class _AnswerScreenState extends State<AnswerScreen> {
     'Trả lời sai',
     'Quấy rồi',
     'Bắt nạt',
-    'Bắt nạt1',
-    'Bắt nạt2',
-    'Bắt nạt3',
-    'Bắt nạt4',
-    'Bắt nạt5',
-    'Bắt nạt6',
-    'Bắt nạt7',
-    'Bắt nạt8',
+    'Xúc phạm',
+    'Lạc đề',
+    'Sai chính tả',
+    'Không phù hợp',
+    'Thiếu sáng tạo',
+
 
   ];
 
