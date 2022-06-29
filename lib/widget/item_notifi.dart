@@ -29,7 +29,7 @@ class ItemNotifi extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 3),
+                  padding: EdgeInsets.only(top: 4),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: LoadImage(
@@ -70,7 +70,7 @@ class ItemNotifi extends StatelessWidget {
                 )
               ],
             ),
-            const Divider(color: ColorApp.black),
+            const Divider(color: ColorApp.greyBD),
           ],
         ),
       ),

@@ -33,7 +33,7 @@ class _ScreenHomeState extends State<ScreenHome> {
         backgroundColor: ColorApp.whiteF0,
         currentIndex: index,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: ColorApp.orangeF01,
+        selectedItemColor: Colors.black,
         selectedLabelStyle:
             StyleApp.textStyle400(color: ColorApp.black, fontSize: 12),
         unselectedItemColor: ColorApp.black,
