@@ -73,11 +73,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 60,
                 ),
-                LoadImage(
-                  url: "https://hoidap247.com/static/img/logo_h247.png",
-                  height: 30,
+                // LoadImage(
+                //   url: "https://hoidap247.com/static/img/logo_h247.png",
+                //   height: 30,
+                //   fit: BoxFit.fitHeight,
+                //   alignment: Alignment.center,
+                // ),
+                Image.asset(
+                  'images/logo2.png',
+
                   fit: BoxFit.fitHeight,
-                  alignment: Alignment.center,
+                  alignment: Alignment.centerLeft,
                 ),
                 const SizedBox(
                   height: 20,

@@ -42,18 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
         toolbarHeight: 90,
         backgroundColor: ColorApp.whiteF0,
         elevation: 0,
-
         flexibleSpace: Padding(
-          padding:  EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 25,
+                height: 17,
               ),
-              LoadImage(
-                url: "https://hoidap247.com/static/img/logo_h247.png",
-                height: 30,
+              Image.asset(
+                'images/logo2.png',
+                height: 40,
                 fit: BoxFit.fitHeight,
                 alignment: Alignment.centerLeft,
               ),
@@ -118,7 +117,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               ListQuestion(
                 ontap: () {
                   Navigator.push(context,
