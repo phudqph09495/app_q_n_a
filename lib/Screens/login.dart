@@ -80,13 +80,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 //   alignment: Alignment.center,
                 // ),
                 Image.asset(
-                  'images/logo2.png',
-
+                  'images/logomoi2.png',
+                  width: 255,
+                  height: 78,
                   fit: BoxFit.fitHeight,
                   alignment: Alignment.centerLeft,
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Text(
                   'Đăng nhập',

@@ -44,7 +44,7 @@ class ScreensNew extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Image.network('https://img.hoidap247.com/picture/news/20220111/large_1641864118734.jpg'),
+                Image.network('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/770RueHue.jpg/340px-770RueHue.jpg'),
                 const SizedBox(
                   height: 15,
                 ),

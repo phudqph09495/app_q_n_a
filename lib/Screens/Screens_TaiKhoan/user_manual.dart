@@ -35,7 +35,7 @@ class UserManual extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'HƯỚNG DẪN THAM GIA CỘNG ĐỒNG HỎI ĐÁP CỦA 247',
+                '         HƯỚNG DẪN THAM GIA CỘNG ĐỒNG HỎI ĐÁP',
                 style: TextStyle(
                     color: ColorApp.orangeF01, fontWeight: FontWeight.bold),
               ),

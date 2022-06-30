@@ -79,7 +79,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: 60,
+                            height: 40,
                           ),
                           // LoadImage(
                           //   url: "https://hoidap247.com/static/img/logo_h247.png",
@@ -88,13 +88,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           //   alignment: Alignment.center,
                           // ),
                           Image.asset(
-                            'images/logo2.png',
-
+                            'images/logomoi2.png',
+                              width: 255,
+                            height: 78,
                             fit: BoxFit.fitHeight,
                             alignment: Alignment.centerLeft,
                           ),
                           SizedBox(
-                            height: 15,
+                            height: 10,
                           ),
                           Text(
                             'Đăng ký',

@@ -158,7 +158,7 @@ class _BodyProductState extends State<BodyProduct> {
     return Scaffold(
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
-        backgroundColor: ColorApp.whiteF0,
+        backgroundColor: ColorApp.orangeF2,
         bottom: PreferredSize(
           child: getAppBottomView(context),
           preferredSize: const Size.fromHeight(45.0),
@@ -170,7 +170,7 @@ class _BodyProductState extends State<BodyProduct> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.black00, width: 0.5),
+                  border: Border.all(color: ColorApp.main.withOpacity(0.2)),
                   borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 12),
@@ -199,7 +199,8 @@ class _BodyProductState extends State<BodyProduct> {
             ),
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.black, width: 0.5),
+                  // border: Border.all(color: ColorApp.black, width: 0.5),
+                  border: Border.all(color: ColorApp.main.withOpacity(0.2)),
                   borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 12),
@@ -228,7 +229,8 @@ class _BodyProductState extends State<BodyProduct> {
             ),
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.black, width: 0.5),
+                  // border: Border.all(color: ColorApp.black, width: 0.5),
+                  border: Border.all(color: ColorApp.main.withOpacity(0.2)),
                   borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -272,10 +274,12 @@ class _BodyProductState extends State<BodyProduct> {
               height: 12,
             ),
             Button1(
+                border: Border.all(color: ColorApp.orangeF2,width: 0.5),
                 colorButton: ColorApp.orangeF2,
                 textColor: Colors.white,
                 textButton: 'Đăng nhập',
                 radius: 5,
+                fontSize: 18,
                 style: false,
                 ontap: () {
                   Navigator.push(context,

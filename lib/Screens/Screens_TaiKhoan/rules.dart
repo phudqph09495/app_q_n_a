@@ -38,7 +38,7 @@ class Rules extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  'Nội Quy Hỏi Đáp 247',
+                  'Nội Quy Hỏi Đáp',
                   style: TextStyle(
                       color: ColorApp.orangeF01,
                       fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class Rules extends StatelessWidget {
                         children: const [
                           Expanded(
                             child: Text(
-                              "7. Không đặt tên tài khoản, avatar gây hiểu nhầm là thành viên ban quản trị Hoidap247 hoặc có chứa từ ngữ nhạy cảm.",
+                              "7. Không đặt tên tài khoản, avatar gây hiểu nhầm là thành viên ban quản trị Hoidap hoặc có chứa từ ngữ nhạy cảm.",
                               style: TextStyle(
                                   color: ColorApp.black,
                                   fontSize: 15), // default is .clip
