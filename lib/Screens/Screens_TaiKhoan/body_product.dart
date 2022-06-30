@@ -32,8 +32,7 @@ class _BodyProductState extends State<BodyProduct> {
 
   List<TitleAccount> titleAccount = [];
 
-  List<TitleAccount> titleApp = [
-  ];
+  List<TitleAccount> titleApp = [];
 
   @override
   void initState() {
@@ -44,12 +43,16 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: CupertinoIcons.person,
           title: "Trang cá nhân",
           onTap: () {
+            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+                duration: 2, gravity: Toast.bottom);
             PageNavigator.next(context: context, page: ProfileScreen());
           }),
       TitleAccount(
           iconData: Icons.edit_outlined,
           title: "Chỉnh sửa cá nhân",
           onTap: () {
+            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+                duration: 2, gravity: Toast.bottom);
             showModalBottomSheet(
                 context: context, builder: (context) => BottomSheetAccount());
           }),
@@ -57,6 +60,8 @@ class _BodyProductState extends State<BodyProduct> {
         iconData: CupertinoIcons.bookmark_solid,
         title: "Câu hỏi đã lưu",
         onTap: () {
+          Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+              duration: 2, gravity: Toast.bottom);
           PageNavigator.next(context: context, page: QuestionSavedSS());
         },
       ),
@@ -95,6 +100,8 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: CupertinoIcons.share,
           title: "Chia sẻ ứng dụng",
           onTap: () {
+            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+                duration: 2, gravity: Toast.bottom);
             Share.share('Chia sẻ ứng dụng với bạn bè tại  https://hoidap.com/');
           }),
       TitleAccount(
@@ -125,8 +132,10 @@ class _BodyProductState extends State<BodyProduct> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.main.withOpacity(0.2),width: 0.5),
-                  borderRadius: BorderRadius.circular(5),),
+                border: Border.all(
+                    color: ColorApp.main.withOpacity(0.2), width: 0.5),
+                borderRadius: BorderRadius.circular(5),
+              ),
               child: ListTileTheme(
                 tileColor: Colors.white,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 12),
@@ -156,7 +165,8 @@ class _BodyProductState extends State<BodyProduct> {
             Container(
               decoration: BoxDecoration(
                   // border: Border.all(color: ColorApp.black, width: 0.5),
-                  border: Border.all(color: ColorApp.main.withOpacity(0.2),width: 0.5),
+                  border: Border.all(
+                      color: ColorApp.main.withOpacity(0.2), width: 0.5),
                   borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
                 tileColor: Colors.white,
@@ -187,7 +197,8 @@ class _BodyProductState extends State<BodyProduct> {
             Container(
               decoration: BoxDecoration(
                   // border: Border.all(color: ColorApp.black, width: 0.5),
-                  border: Border.all(color: ColorApp.main.withOpacity(0.2),width: 0.5),
+                  border: Border.all(
+                      color: ColorApp.main.withOpacity(0.2), width: 0.5),
                   borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
                 tileColor: Colors.white,
@@ -232,7 +243,7 @@ class _BodyProductState extends State<BodyProduct> {
               height: 12,
             ),
             Button1(
-                border: Border.all(color: ColorApp.orangeF2,width: 0.5),
+                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
                 colorButton: ColorApp.orangeF2,
                 textColor: Colors.white,
                 textButton: 'Đăng nhập',
