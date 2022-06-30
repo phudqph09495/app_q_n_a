@@ -6,7 +6,6 @@ import '../Screens/Screens_Notification/screens_news.dart';
 import '../config/next_page.dart';
 
 class SuKienNong extends StatelessWidget {
-  const SuKienNong({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

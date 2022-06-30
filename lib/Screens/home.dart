@@ -1,16 +1,12 @@
 import 'package:app_q_n_a/Screens/answer_screen.dart';
 import 'package:app_q_n_a/Screens/filter.dart';
 import 'package:app_q_n_a/Screens/search_screen.dart';
-import 'package:app_q_n_a/item/button.dart';
-import 'package:app_q_n_a/item/load_image.dart';
 
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:app_q_n_a/item/question_list.dart';
 
+import '../item/question_tile.dart';
 import 'add_question.dart';
-import 'add_answer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -38,55 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 90,
-        backgroundColor: ColorApp.whiteF0,
-        elevation: 0,
-        flexibleSpace: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 16,
-              ),
-              Image.asset(
-                'images/backg.png',
-                height: 45,
-                fit: BoxFit.fitHeight,
-                alignment: Alignment.centerLeft,
-              ),
-              SizedBox(
-                height: 2,
-              ),
-              Container(
-                height: 35,
-                width: 160,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: ColorApp.whiteF7,
-                    border: Border.all(color: Colors.black, width: 0.5)),
-                child: FlatButton(
-                    height: 35,
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Filter()));
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.menu_open),
-                        Text(
-                          '  Lọc câu hỏi',
-                          style: StyleApp.textStyle900(fontSize: 16),
-                        )
-                      ],
-                    )),
-              ),
-            ],
-          ),
+        backgroundColor: Colors.white,
+        leading: const SizedBox(),
+        leadingWidth: 0,
+        title: Image.asset(
+          'images/backg.png',
+          height: 45,
+          fit: BoxFit.fitHeight,
+          alignment: Alignment.centerLeft,
         ),
-        centerTitle: false,
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -97,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(5),
             ),
             onPressed: () {
-              print("search");
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SearchScreen()));
             },
@@ -111,21 +66,60 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
             children: [
-              ListQuestion(
-                ontap: () {
+              InkWell(
+                onTap: (){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AnswerScreen()));
+                      MaterialPageRoute(builder: (context) => Filter()));
                 },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black, width: 0.5)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.menu_open),
+                      Text(
+                        ' Lọc câu hỏi',
+                        style: StyleApp.textStyle700(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
-        ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+              children: List.generate(10, (index) => QuestionTile(
+                  mon: 'Toán',
+                  deadline: 'Còn 3h',
+                  lop: 12,
+                  money: 50,
+                  time: '1h',
+                  ontap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AnswerScreen()));
+                  } ,
+                  question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
+                  attach: true,
+                  attachCount: 1,
+                  first: true,
+                  avatar:
+                  '')),
+            ),
+          ),
+        ],
       ),
     );
   }

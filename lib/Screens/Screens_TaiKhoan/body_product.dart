@@ -33,21 +33,6 @@ class _BodyProductState extends State<BodyProduct> {
   List<TitleAccount> titleAccount = [];
 
   List<TitleAccount> titleApp = [
-    // TitleAccount(
-    //     iconData: CupertinoIcons.bubble_left, title: "Hướng dẫn sử dụng"),
-    // TitleAccount(iconData: CupertinoIcons.square_list, title: "Điều khoản"),
-    // TitleAccount(iconData: Icons.checklist, title: "Nội quy"),
-    // TitleAccount(
-    //   iconData: CupertinoIcons.share,
-    //   title: "Chia sẻ ứng dụng",
-    //   // onTap: () {
-    //   //   Share.share("Chia sẽ ứng dụng");
-    //   // },
-    //   onTap: () => launch('https://hoidap247.com/'),
-    // ),
-    // TitleAccount(iconData: Icons.wallet, title: "Ví điện tử"),
-    // TitleAccount(
-    //     iconData: CupertinoIcons.chat_bubble, title: "Liên hệ và góp ý"),
   ];
 
   @override
@@ -59,34 +44,21 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: CupertinoIcons.person,
           title: "Trang cá nhân",
           onTap: () {
-            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-                duration: 2, gravity: Toast.bottom);
-            Future.delayed(Duration(milliseconds: 2000), () {
-              PageNavigator.next(context: context, page: ProfileScreen());
-            });
+            PageNavigator.next(context: context, page: ProfileScreen());
           }),
       TitleAccount(
           iconData: Icons.edit_outlined,
           title: "Chỉnh sửa cá nhân",
           onTap: () {
-            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-                duration: 2, gravity: Toast.bottom);
-            Future.delayed(Duration(milliseconds: 2000), () {
-              showModalBottomSheet(
-                  context: context, builder: (context) => BottomSheetAccount());
-            });
+            showModalBottomSheet(
+                context: context, builder: (context) => BottomSheetAccount());
           }),
       TitleAccount(
         iconData: CupertinoIcons.bookmark_solid,
         title: "Câu hỏi đã lưu",
         onTap: () {
-          Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-              duration: 2, gravity: Toast.bottom);
-          Future.delayed(Duration(milliseconds: 2000), () {
-            PageNavigator.next(context: context, page: QuestionSavedSS());
-          });
+          PageNavigator.next(context: context, page: QuestionSavedSS());
         },
-        // onTap: () => launch('https://hoidap247.com/'),
       ),
       TitleAccount(
           iconData: Icons.wallet,
@@ -94,12 +66,7 @@ class _BodyProductState extends State<BodyProduct> {
           onTap: () {
             Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
                 duration: 2, gravity: Toast.bottom);
-            Future.delayed(Duration(milliseconds: 4000), () {
-              // showModalBottomSheet(
-              //     context: context, builder: (context) => ViTien());
-              // bên dưới
-              PageNavigator.next(context: context, page: ViTien());
-            });
+            PageNavigator.next(context: context, page: ViTien());
           }),
     ]);
     titleApp.addAll([
@@ -127,20 +94,8 @@ class _BodyProductState extends State<BodyProduct> {
       TitleAccount(
           iconData: CupertinoIcons.share,
           title: "Chia sẻ ứng dụng",
-          // onTap: () {
-          //   Share.share("Chia sẽ ứng dụng");
-          // },
-
           onTap: () {
-            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-                duration: 2, gravity: Toast.bottom);
-            // Future.delayed(Duration(milliseconds: 2000), () {
-            //   showModalBottomSheet(
-            //       context: context, builder: (context) => LoginScreen());
-            // }
-            Future.delayed(Duration(milliseconds: 4000), () {
-              Share.share('Chia sẻ ứng dụng với bạn bè tại  https://hoidap.com/');
-            });
+            Share.share('Chia sẻ ứng dụng với bạn bè tại  https://hoidap.com/');
           }),
       TitleAccount(
         iconData: CupertinoIcons.chat_bubble,

@@ -9,7 +9,6 @@ import '../Screens/answer_screen.dart';
 import '../config/next_page.dart';
 
 class ThongBao extends StatelessWidget {
-  const ThongBao({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

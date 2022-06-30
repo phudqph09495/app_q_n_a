@@ -41,18 +41,6 @@ Widget getAppBottomView(BuildContext context) {
             ),
           ),
         ),
-        const SizedBox(
-          width: 10,
-        ),
-        IconButton(
-          onPressed: () {
-
-          },
-          icon: const Icon(
-            Icons.settings,
-            color: ColorApp.black,
-          ),
-        ),
       ],
     ),
   );
