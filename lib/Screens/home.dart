@@ -48,16 +48,16 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 17,
+                height: 16,
               ),
               Image.asset(
                 'images/logo2.png',
-                height: 40,
+                height: 45,
                 fit: BoxFit.fitHeight,
                 alignment: Alignment.centerLeft,
               ),
               SizedBox(
-                height: 5,
+                height: 2,
               ),
               Container(
                 height: 35,
