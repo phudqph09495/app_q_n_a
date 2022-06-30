@@ -56,18 +56,6 @@ class _NotificationbarState extends State<Notificationbar> {
                   )
                 ]),
 
-                // Tab(
-                //   child: Text(
-                //     "Sự kiện nóng",
-                //     style: TextStyle(color: ColorApp.black,fontSize: 16),
-                //   ),
-                // ),
-                // Tab(
-                //   child: Text(
-                //     "Thông báo",
-                //     style: TextStyle(color: ColorApp.black,fontSize: 16),
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -76,28 +64,6 @@ class _NotificationbarState extends State<Notificationbar> {
               SuKienNong(),
               ThongBao(),
             ],
-            // children: List.generate(
-            //   2,
-            //   (index) => ListView(
-            //     padding:
-            //         const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            //     children: List.generate(
-            //       10,
-            //       (index) => ItemNotifi(
-            //         onTap: () {
-            //           PageNavigator.next(context: context, page: ScreensNew());
-            //         },
-            //         avatar:
-            //             "https://i.pinimg.com/564x/15/17/cf/1517cfa3e1a7d3fb243c85c0eb471791.jpg",
-            //         sub:
-            //             'Click để xem ngay đáp án chính xác nhất cuộc thi Bác Hồ Với Thanh Hóa , Thanh Hóa Làm Theo Lời Bác!',
-            //         time: "8 ngày trước",
-            //         title:
-            //             "Đáp án cuộc thi Bác Hồ Với Thanh Hóa Làm Theo Lời Bác!",
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ),
         ),
       ),

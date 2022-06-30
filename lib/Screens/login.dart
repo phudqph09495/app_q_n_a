@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 60,
+                  height: 40,
                 ),
                 // LoadImage(
                 //   url: "https://hoidap247.com/static/img/logo_h247.png",
@@ -80,9 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 //   alignment: Alignment.center,
                 // ),
                 Image.asset(
-                  'images/logomoi2.png',
-                  width: 255,
-                  height: 78,
+                  'images/backg.png',
+                  width: 230,
+                  height: 88,
                   fit: BoxFit.fitHeight,
                   alignment: Alignment.centerLeft,
                 ),

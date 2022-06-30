@@ -88,9 +88,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           //   alignment: Alignment.center,
                           // ),
                           Image.asset(
-                            'images/logomoi2.png',
-                              width: 255,
-                            height: 78,
+                            'images/backg.png',
+                              width: 222,
+                            height: 88,
                             fit: BoxFit.fitHeight,
                             alignment: Alignment.centerLeft,
                           ),

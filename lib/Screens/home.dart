@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 16,
               ),
               Image.asset(
-                'images/logomoii.png',
+                'images/backg.png',
                 height: 45,
                 fit: BoxFit.fitHeight,
                 alignment: Alignment.centerLeft,

@@ -156,7 +156,7 @@ class _BodyProductState extends State<BodyProduct> {
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
-      backgroundColor: ColorApp.whiteF0,
+      backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
         backgroundColor: ColorApp.orangeF2,
         bottom: PreferredSize(
@@ -170,9 +170,10 @@ class _BodyProductState extends State<BodyProduct> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ColorApp.main.withOpacity(0.2)),
-                  borderRadius: BorderRadius.circular(5)),
+                  border: Border.all(color: ColorApp.main.withOpacity(0.2),width: 0.5),
+                  borderRadius: BorderRadius.circular(5),),
               child: ListTileTheme(
+                tileColor: Colors.white,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                 dense: true,
                 child: ExpansionTile(
@@ -200,9 +201,10 @@ class _BodyProductState extends State<BodyProduct> {
             Container(
               decoration: BoxDecoration(
                   // border: Border.all(color: ColorApp.black, width: 0.5),
-                  border: Border.all(color: ColorApp.main.withOpacity(0.2)),
+                  border: Border.all(color: ColorApp.main.withOpacity(0.2),width: 0.5),
                   borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
+                tileColor: Colors.white,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                 dense: true,
                 child: ExpansionTile(
@@ -230,9 +232,10 @@ class _BodyProductState extends State<BodyProduct> {
             Container(
               decoration: BoxDecoration(
                   // border: Border.all(color: ColorApp.black, width: 0.5),
-                  border: Border.all(color: ColorApp.main.withOpacity(0.2)),
+                  border: Border.all(color: ColorApp.main.withOpacity(0.2),width: 0.5),
                   borderRadius: BorderRadius.circular(5)),
               child: ListTileTheme(
+                tileColor: Colors.white,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 dense: true,
                 child: ExpansionTile(
