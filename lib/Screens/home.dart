@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         leadingWidth: 0,
         title: Image.asset(
           'images/backg.png',
-          height: 45,
+          height: 55,
           fit: BoxFit.fitHeight,
           alignment: Alignment.centerLeft,
         ),
@@ -72,13 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             children: [
               InkWell(
-                onTap: (){
+                onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Filter()));
                 },
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -100,23 +102,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-              children: List.generate(10, (index) => QuestionTile(
-                  mon: 'Toán',
-                  deadline: 'Còn 3h',
-                  lop: 12,
-                  money: 50,
-                  time: '1h',
-                  ontap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AnswerScreen()));
-                  } ,
-                  question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
-                  attach: true,
-                  attachCount: 1,
-                  first: true,
-                  avatar:
-                  '')),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              children: List.generate(
+                  10,
+                  (index) => QuestionTile(
+                      mon: 'Toán',
+                      deadline: 'Còn 3h',
+                      lop: 12,
+                      money: 50,
+                      time: '1h',
+                      ontap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AnswerScreen()));
+                      },
+                      question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
+                      attach: true,
+                      attachCount: 1,
+                      first: true,
+                      avatar: '')),
             ),
           ),
         ],

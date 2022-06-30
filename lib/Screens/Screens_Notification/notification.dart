@@ -1,7 +1,7 @@
-
+import 'package:app_q_n_a/item/itemnotifi/listNotifi1.dart';
+import 'package:app_q_n_a/item/itemnotifi/listNotifi2.dart';
 import 'package:app_q_n_a/styles/colors.dart';
-import 'package:app_q_n_a/widget/item_lits_notifi1.dart';
-import 'package:app_q_n_a/widget/item_lits_notifi2.dart';
+
 import 'package:flutter/material.dart';
 import '../../styles/init_style.dart';
 
@@ -26,7 +26,7 @@ class _NotificationbarState extends State<Notificationbar> {
               child: TabBar(
                 labelColor: ColorApp.black,
                 unselectedLabelStyle:
-                StyleApp.textStyle500(color: ColorApp.grey82,fontSize: 16),
+                    StyleApp.textStyle500(color: ColorApp.grey82, fontSize: 16),
                 labelStyle: StyleApp.textStyle700(fontSize: 16),
                 indicatorColor: ColorApp.orangeF01,
                 unselectedLabelColor: ColorApp.grey82,
@@ -38,7 +38,7 @@ class _NotificationbarState extends State<Notificationbar> {
               preferredSize: Size.zero,
             ),
           ),
-          body:  TabBarView(
+          body: TabBarView(
             children: [
               SuKienNong(),
               ThongBao(),

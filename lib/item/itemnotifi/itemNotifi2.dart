@@ -2,14 +2,14 @@ import 'package:app_q_n_a/item/load_image.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 
-class ItemNotifi2 extends StatelessWidget {
+class Notification2 extends StatelessWidget {
   Function()? onTap;
   String avatar;
   String title;
   String time;
   String sub;
 
-  ItemNotifi2(
+  Notification2(
       {required this.avatar,
       required this.sub,
       this.onTap,
@@ -33,13 +33,9 @@ class ItemNotifi2 extends StatelessWidget {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: LoadImage(
-                          //   url: avatar,
-                          //   height: 120,
-                          //   width: 90,
-                          // )),
                           url: avatar,
-                          height: 75,
-                          width: 55,
+                          height: 25,
+                          width: 25,
                           fit: BoxFit.cover)),
                 ),
                 Expanded(
@@ -59,7 +55,7 @@ class ItemNotifi2 extends StatelessWidget {
                         Text(
                           sub,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 3,
                           style: StyleApp.textStyle400(
                               fontSize: 12, color: ColorApp.black),
                         ),

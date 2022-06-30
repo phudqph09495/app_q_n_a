@@ -89,7 +89,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           // ),
                           Image.asset(
                             'images/backg.png',
-                              width: 222,
+                            width: 222,
                             height: 88,
                             fit: BoxFit.fitHeight,
                             alignment: Alignment.centerLeft,
@@ -195,16 +195,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             width: double.infinity,
                             validator: (val) {
                               return ValidatorApp.checkPass(
-                                  text: val, isSign: true, text2: password.text);
+                                  text: val,
+                                  isSign: true,
+                                  text2: password.text);
                             },
                           ),
                           SizedBox(
                             height: 15,
                           ),
                           Button1(
-                              border: Border.all(color: ColorApp.orangeF2,width: 0.5),
-                            style: false,
-                            fontSize: 18,
+                              border: Border.all(
+                                  color: ColorApp.orangeF2, width: 0.5),
+                              style: false,
+                              fontSize: 18,
                               radius: 30,
                               ontap: () {
                                 RegistrationVoid();
