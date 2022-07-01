@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 95,
+        toolbarHeight: 93,
         backgroundColor: ColorApp.whiteF0,
         elevation: 0,
         flexibleSpace: Padding(
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric( horizontal: 10),
               children: List.generate(
                   10,
                   (index) => QuestionTile(
