@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorApp.whiteF0,
         leading: const SizedBox(),
         leadingWidth: 0,
         title: Image.asset(
@@ -72,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             children: [
               InkWell(
+
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Filter()));
