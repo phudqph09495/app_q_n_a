@@ -34,15 +34,55 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 95,
         backgroundColor: ColorApp.whiteF0,
-        leading: const SizedBox(),
-        leadingWidth: 0,
-        title: Image.asset(
-          'images/backg.png',
-          height: 55,
-          fit: BoxFit.fitHeight,
-          alignment: Alignment.centerLeft,
+        elevation: 0,
+        flexibleSpace: Padding(
+          padding: EdgeInsets.only(left: 13,top: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Image.asset(
+                'images/backg2.png',
+                height: 45,
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.centerLeft,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                height: 35,
+                width: 160,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorApp.whiteF7,
+                    border: Border.all(color: Colors.black, width: 0.5)),
+                child: FlatButton(
+                    height: 35,
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Filter()));
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.menu_open),
+                        Text(
+                          '  Lọc câu hỏi',
+                          style: StyleApp.textStyle700(fontSize: 16),
+                        )
+                      ],
+                    )),
+              ),
+            ],
+          ),
         ),
+        centerTitle: false,
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -53,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(5),
             ),
             onPressed: () {
+              print("search");
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SearchScreen()));
             },
@@ -69,41 +110,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              InkWell(
 
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Filter()));
-                },
-                child: Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 0.5)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.menu_open),
-                      Text(
-                        ' Lọc câu hỏi',
-                        style: StyleApp.textStyle700(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               children: List.generate(
                   10,
                   (index) => QuestionTile(
