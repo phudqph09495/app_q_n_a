@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 95,
+        toolbarHeight: 102,
         backgroundColor: ColorApp.whiteF0,
         elevation: 0,
         flexibleSpace: Padding(
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 20,
+                height: 22,
               ),
               Image.asset(
                 'images/backg2.png',
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 alignment: Alignment.centerLeft,
               ),
               SizedBox(
-                height: 5,
+                height: 7,
               ),
               Container(
                 height: 35,
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric( horizontal: 10),
               children: List.generate(
                   10,
                   (index) => QuestionTile(
