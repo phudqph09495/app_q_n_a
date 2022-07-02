@@ -12,8 +12,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 
-int maxline = 1;
-double height = 40;
+
 
 class AnswerWidget extends StatefulWidget {
   String avatar;
