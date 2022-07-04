@@ -12,11 +12,12 @@ import 'package:app_q_n_a/item/question_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:readmore/readmore.dart';
-import 'package:app_q_n_a/item/answer_card.dart' as AnswerCard1;
+import 'package:app_q_n_a/item/answer_card.dart' ;
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:toast/toast.dart';
+import 'package:time_elapsed/time_elapsed.dart';
 
 class AnswerScreen extends StatefulWidget {
   @override
@@ -29,9 +30,12 @@ class _AnswerScreenState extends State<AnswerScreen> {
   int lop = 12;
   String mon = 'Toán';
   int value = 0;
+  DateTime deadline=DateTime.parse("2022-07-04 10:50:00.0000");
 
   @override
   Widget build(BuildContext context) {
+
+
     ToastContext().init(context);
     return Scaffold(
       bottomSheet: Padding(
@@ -79,6 +83,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                 height: 5,
               ),
               QuestionCard(
+                endTime: deadline.millisecondsSinceEpoch,
                 avatar: '',
                 ques: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
                 user: 'tran thanh',
@@ -91,12 +96,21 @@ class _AnswerScreenState extends State<AnswerScreen> {
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 4,
+                itemCount: 3,
                 itemBuilder: (context, index) {
+
                   return Column(
                     children: [
                       AnswerCard(
-                        status: index,
+
+                        status:index,
+
+                        //trạng thái của câu trả lời
+                        //0: chưa đăng nhập
+                        //1: không phải chủ câu hỏi
+                        //2: là chủ câu hỏi
+
+
                         time: '12:00 14/06/2022',
                         user: 'Nguyen van nam',
                         avatar: '',

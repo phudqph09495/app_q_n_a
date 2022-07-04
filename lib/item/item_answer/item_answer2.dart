@@ -183,7 +183,7 @@ class _AnswerCardState extends State<AnswerCard> {
               (widget.imageAns != '')
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
-                      child: Image(image: NetworkImage(widget.imageAns!)))
+                      child: Image(image: NetworkImage(widget.imageAns)))
                   : Container(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
