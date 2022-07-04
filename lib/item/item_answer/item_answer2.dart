@@ -107,8 +107,6 @@ class _AnswerCardState extends State<AnswerCard> {
               widget.status = 3;
             });
           }
-
-          ;
         },
         child: Card(
           color: ColorApp.whiteF7,
@@ -276,7 +274,6 @@ class _AnswerCardState extends State<AnswerCard> {
           ),
         ),
       );
-      ;
     }
   }
 }
