@@ -12,12 +12,14 @@ import 'package:app_q_n_a/item/question_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:readmore/readmore.dart';
-import 'package:app_q_n_a/item/answer_card.dart' ;
+import 'package:app_q_n_a/item/answer_card.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:toast/toast.dart';
 import 'package:time_elapsed/time_elapsed.dart';
+
+
 
 class AnswerScreen extends StatefulWidget {
   @override
@@ -27,15 +29,17 @@ class AnswerScreen extends StatefulWidget {
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
   int money = 50;
+  bool timing = true;
+  DateTime deadline = DateTime.parse("2022-07-05 12:00:00.0000");
   int lop = 12;
   String mon = 'Toán';
   int value = 0;
-  DateTime deadline=DateTime.parse("2022-07-04 10:50:00.0000");
+
+
+  late int value2;
 
   @override
   Widget build(BuildContext context) {
-
-
     ToastContext().init(context);
     return Scaffold(
       bottomSheet: Padding(
@@ -96,20 +100,60 @@ class _AnswerScreenState extends State<AnswerScreen> {
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 3,
+                itemCount: 5,
                 itemBuilder: (context, index) {
-
+                  value2 = index;
                   return Column(
                     children: [
                       AnswerCard(
+                        status: timing ? index : 3,
+                        value: value2,
+                        groupValue: value,
+                        title:
+                             Text(
+                                'Trả tiền',
+                                style: StyleApp.textStyle500(fontSize: 14),
+                              ),
+                        onchanged: (val) {
+                          showPlatformDialog(
+                            context: context,
+                            builder: (context) => BasicDialogAlert(
+                              title: Text("Thanh toán"),
+                              content:
+                                  Text("Xác nhận thanh toán cho người trả lời"),
+                              actions: <Widget>[
+                                BasicDialogAction(
+                                  title: Text("Từ chối"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                BasicDialogAction(
+                                  title: Text("Đồng ý"),
+                                  onPressed: () {
+                                    setState(() {
+                                      Toast.show(
+                                          "Thanh toán thành công",
+                                          duration: 1,
+                                          gravity: Toast.bottom);
 
-                        status:index,
+                                      Future.delayed(Duration(milliseconds: 1500), () {
+                                        Navigator.pop(context);
+                                      });
+                                      value = val;
 
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+
+                        },
                         //trạng thái của câu trả lời
                         //0: chưa đăng nhập
                         //1: không phải chủ câu hỏi
                         //2: là chủ câu hỏi
-
 
                         time: '12:00 14/06/2022',
                         user: 'Nguyen van nam',

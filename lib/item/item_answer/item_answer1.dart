@@ -14,32 +14,30 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:app_q_n_a/Screens/answer_screen.dart'as AnswerScreen;
+import 'package:app_q_n_a/Screens/answer_screen.dart' as AnswerScreen;
 
 class QuestionCard extends StatefulWidget {
   String avatar;
   String user;
   String time;
   String ques;
-int endTime;
+  int endTime;
   String imageques;
   QuestionCard(
-
       {required this.avatar,
       required this.ques,
       required this.user,
       required this.time,
-      this.imageques = '',required this.endTime});
+      this.imageques = '',
+      required this.endTime});
 
   @override
   State<QuestionCard> createState() => _QuestionCardState();
 }
 
 class _QuestionCardState extends State<QuestionCard> {
-
   @override
   Widget build(BuildContext context) {
-
     return Card(
       color: ColorApp.whiteF7,
       child: Padding(
@@ -48,7 +46,6 @@ class _QuestionCardState extends State<QuestionCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
@@ -70,9 +67,9 @@ class _QuestionCardState extends State<QuestionCard> {
                     Text('${widget.time}', style: StyleApp.textStyle500())
                   ],
                 ),
-
-
-                SizedBox(width: 110,),
+                SizedBox(
+                  width: 110,
+                ),
                 Button1(
                   ontap: () {
                     Toast.show("Lưu thành công", gravity: Toast.bottom);
@@ -88,21 +85,49 @@ class _QuestionCardState extends State<QuestionCard> {
                 )
               ],
             ),
-            SizedBox(height: 10,),
-            CountdownTimer(endTime: widget.endTime,
+            SizedBox(
+              height: 10,
+            ),
+            CountdownTimer(
 
+              endTime: widget.endTime,
               widgetBuilder: (_, CurrentRemainingTime? time) {
                 if (time == null) {
 
-                  return Text('Đã hết giờ',style: StyleApp.textStyle500(color: ColorApp.red),);
+                  return Text(
+                    'Đã hết giờ',
+                    style: StyleApp.textStyle500(color: ColorApp.red),
+                  );
+
                 }
-                return Row(children: [Text('Còn ',style: StyleApp.textStyle500(color: ColorApp.blue6D)),
-                  (time.days!=null)?Text('${time.days} ngày',style: StyleApp.textStyle500(color: ColorApp.blue6D)):Text(''),
-                  (time.hours!=null)?Text('${time.hours} giờ',style: StyleApp.textStyle500(color: ColorApp.blue6D)):Text(''),
-                  (time.min!=null)?Text('${time.min} phút',style: StyleApp.textStyle500(color: ColorApp.blue6D)):Text(''),
-                  (time.sec!=null)?Text('${time.sec} giây',style: StyleApp.textStyle500(color: ColorApp.blue6D)):Text(''),
-                ],);
-              },),
+                return Row(
+                  children: [
+                    Text('Còn ',
+                        style: StyleApp.textStyle500(color: ColorApp.blue6D)),
+                    (time.days != null)
+                        ? Text('${time.days} ngày',
+                            style:
+                                StyleApp.textStyle500(color: ColorApp.blue6D))
+                        : Text(''),
+                    (time.hours != null)
+                        ? Text('${time.hours} giờ',
+                            style:
+                                StyleApp.textStyle500(color: ColorApp.blue6D))
+                        : Text(''),
+                    (time.min != null)
+                        ? Text('${time.min} phút',
+                            style:
+                                StyleApp.textStyle500(color: ColorApp.blue6D))
+                        : Text(''),
+                    (time.sec != null)
+                        ? Text('${time.sec} giây',
+                            style:
+                                StyleApp.textStyle500(color: ColorApp.blue6D))
+                        : Text(''),
+                  ],
+                );
+              },
+            ),
             ReadMoreText(
               widget.ques,
               trimLines: 2,

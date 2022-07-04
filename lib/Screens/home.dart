@@ -123,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       money: 50,
                       time: '1h',
                       ontap: () {
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(

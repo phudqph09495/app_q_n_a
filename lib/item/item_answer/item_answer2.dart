@@ -35,15 +35,21 @@ class AnswerCard extends StatefulWidget {
   String answer;
   String imageAns;
   int status;
+  var value;
+  var groupValue;
+  ValueChanged? onchanged;
+  Widget? title;
 
-  AnswerCard({
-    required this.time,
-    required this.user,
-    required this.avatar,
-    required this.answer,
-    this.imageAns = '',
-    this.status = 0,
-  });
+  AnswerCard(
+      {required this.time,
+      required this.user,
+      required this.avatar,
+      required this.answer,
+      this.imageAns = '',
+      this.status = 0,
+      this.value,
+      this.groupValue,
+      this.onchanged,this.title});
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
@@ -238,6 +244,18 @@ class _AnswerCardState extends State<AnswerCard> {
                         );
                       },
                       icon: Image.asset('images/report.png')),
+                  Container(
+                    width: 150,
+                    child: RadioListTile<int>(
+                        activeColor: ColorApp.orangeF2,
+                        contentPadding: EdgeInsets.zero,
+                        dense: true,
+                        toggleable: true,
+                        title: widget.title,
+                        value: widget.value,
+                        groupValue: widget.groupValue,
+                        onChanged: widget.onchanged),
+                  ),
                   Button1(
                     height: 35,
                     colorButton: ColorApp.whiteF7,
