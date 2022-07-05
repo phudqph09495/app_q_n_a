@@ -24,8 +24,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   bool hasPaid = false;
   List<int> i=[0,1,2,2,3,5];
   bool timing = true;
-  DateTime deadline = DateTime.parse("2022-07-05 14:00:00.0000");
-
+  DateTime deadline = DateTime.parse("2022-07-05 22:00:00.0000");
 
   @override
   void initState() {
@@ -47,20 +46,20 @@ class _AnswerScreenState extends State<AnswerScreen> {
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Button1(
-            colorButton: ColorApp.orangeF2,
+            colorButton: timing?ColorApp.orangeF2:Colors.grey.withOpacity(0.5),
             textColor: ColorApp.whiteF0,
             radius: 30,
             fontSize: 18,
             style: false,
-            border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-            textButton: 'Viết câu trả lời',
+            // border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+            textButton: timing?'Viết câu trả lời':'Đã hết thời gian trả lời',
             ontap: () {
               if ((timing == true)&&(hasPaid==false)) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Add_Answer_Screen()));
-              } else if(timing=false) {
+              } else if(timing==false) {
                 Toast.show("Đã hết thời gian trả lời câu hỏi",
                     duration: 1, gravity: Toast.bottom);
               }else if(hasPaid==true){
