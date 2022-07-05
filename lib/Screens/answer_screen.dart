@@ -10,8 +10,6 @@ import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:toast/toast.dart';
 
-
-
 class AnswerScreen extends StatefulWidget {
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
@@ -20,14 +18,14 @@ class AnswerScreen extends StatefulWidget {
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
   int money = 50;
-  bool timing = true;
-  DateTime deadline = DateTime.parse("2022-07-04 12:00:00.0000");
   int lop = 12;
   String mon = 'Toán';
-  int value = 0;
+  int value = -1;
+  bool hasPaid = false;
+  List<int> i=[0,1,2,2,3,5];
+  bool timing = true;
+  DateTime deadline = DateTime.parse("2022-07-05 14:00:00.0000");
 
-
-  late int value2;
 
   @override
   void initState() {
@@ -35,15 +33,13 @@ class _AnswerScreenState extends State<AnswerScreen> {
     super.initState();
     showQuestion();
   }
-
-  showQuestion(){
+  showQuestion() {
     int end = deadline.millisecondsSinceEpoch;
     int now = DateTime.now().millisecondsSinceEpoch;
-    if(now >= end){
+    if (now >= end) {
       timing = false;
     }
   }
-
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
@@ -59,8 +55,18 @@ class _AnswerScreenState extends State<AnswerScreen> {
             border: Border.all(color: ColorApp.orangeF2, width: 0.5),
             textButton: 'Viết câu trả lời',
             ontap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Add_Answer_Screen()));
+              if ((timing == true)&&(hasPaid==false)) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Add_Answer_Screen()));
+              } else if(timing=false) {
+                Toast.show("Đã hết thời gian trả lời câu hỏi",
+                    duration: 1, gravity: Toast.bottom);
+              }else if(hasPaid==true){
+                Toast.show("Câu hỏi đã được trả thưởng",
+                    duration: 1, gravity: Toast.bottom);
+              }
             }),
       ),
       backgroundColor: ColorApp.whiteF0,
@@ -106,57 +112,65 @@ class _AnswerScreenState extends State<AnswerScreen> {
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 5,
+                itemCount: 4,
                 itemBuilder: (context, index) {
-                  value2 = index;
+int value2=index;
                   return AnswerCard(
-                    status: timing ? index : 3,
-                    value: value2,
-                    groupValue: value,
-                    title:
-                    Text(
-                      'Trả tiền',
-                      style: StyleApp.textStyle500(fontSize: 14),
-                    ),
-                    onchanged: (val) {
-                      showPlatformDialog(
-                        context: context,
-                        builder: (context) => BasicDialogAlert(
-                          title: Text("Thanh toán"),
-                          content:
-                          Text("Xác nhận thanh toán cho người trả lời"),
-                          actions: <Widget>[
-                            BasicDialogAction(
-                              title: Text("Từ chối"),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                            BasicDialogAction(
-                              title: Text("Đồng ý"),
-                              onPressed: () {
-                                setState(() {
-                                  Toast.show(
-                                      "Thanh toán thành công",
-                                      duration: 1,
-                                      gravity: Toast.bottom);
-
-                                  Future.delayed(Duration(milliseconds: 1500), () {
-                                    Navigator.pop(context);
-                                  });
-                                  value = val;
-
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+                    status: timing ?i[value2] : 3,
                     //trạng thái của câu trả lời
                     //0: chưa đăng nhập
                     //1: không phải chủ câu hỏi
                     //2: là chủ câu hỏi
+                    //3: hiển thị
+                    value: index,
+                    groupValue: value,
+                    title: Text(
+                      'Trả tiền',
+                      style: StyleApp.textStyle500(fontSize: 14),
+                    ),
+                    onchanged: (val) {
+                      if (hasPaid == false) {
+                        showPlatformDialog(
+                          context: context,
+                          builder: (context) => BasicDialogAlert(
+                            title: Text("Thanh toán"),
+                            content:
+                                Text("Xác nhận thanh toán cho người trả lời"),
+                            actions: <Widget>[
+                              BasicDialogAction(
+                                title: Text("Từ chối"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              BasicDialogAction(
+                                title: Text("Đồng ý"),
+                                onPressed: () {
+                                  setState(() {
+                                    Toast.show("Thanh toán thành công",
+                                        duration: 2, gravity: Toast.bottom);
+
+                                    Future.delayed(Duration(milliseconds: 2000),
+                                        () {
+                                      Navigator.pop(context);
+                                    });
+                                    value = val;
+                                    hasPaid = true;
+                                 i[value2]=3;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      } else {
+                        Toast.show(
+                            "Bạn chỉ có thể thanh toán cho 1 câu trả lời",
+                            duration: 1,
+                            gravity: Toast.bottom);
+                      }
+                    },
+
 
                     time: '12:00 14/06/2022',
                     user: 'Nguyen van nam',

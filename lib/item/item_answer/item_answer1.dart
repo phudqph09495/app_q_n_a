@@ -89,16 +89,13 @@ class _QuestionCardState extends State<QuestionCard> {
               height: 10,
             ),
             CountdownTimer(
-
               endTime: widget.endTime,
               widgetBuilder: (_, CurrentRemainingTime? time) {
                 if (time == null) {
-
                   return Text(
                     'Đã hết giờ',
                     style: StyleApp.textStyle500(color: ColorApp.red),
                   );
-
                 }
                 return Row(
                   children: [

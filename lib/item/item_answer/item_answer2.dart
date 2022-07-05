@@ -49,7 +49,8 @@ class AnswerCard extends StatefulWidget {
       this.status = 0,
       this.value,
       this.groupValue,
-      this.onchanged,this.title});
+      this.onchanged,
+      this.title});
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
@@ -103,6 +104,7 @@ class _AnswerCardState extends State<AnswerCard> {
               ),
             );
           } else if (widget.status == 2) {
+
             setState(() {
               widget.status = 3;
             });
@@ -243,13 +245,24 @@ class _AnswerCardState extends State<AnswerCard> {
                       },
                       icon: Image.asset('images/report.png')),
                   Container(
-                    width: 150,
+                    width: 120,
                     child: RadioListTile<int>(
-                        activeColor: ColorApp.orangeF2,
+                        visualDensity: const VisualDensity(
+                          horizontal: VisualDensity.minimumDensity,
+                          vertical: VisualDensity.minimumDensity,
+                        ),
+                        selectedTileColor: Colors.green,
+                        activeColor: Colors.green,
                         contentPadding: EdgeInsets.zero,
                         dense: true,
                         toggleable: true,
-                        title: widget.title,
+                        title: (widget.value == widget.groupValue)
+                            ? Text(
+                                'Đã trả tiền',
+                                style:
+                                    StyleApp.textStyle500(color: Colors.green),
+                              )
+                            : widget.title,
                         value: widget.value,
                         groupValue: widget.groupValue,
                         onChanged: widget.onchanged),
