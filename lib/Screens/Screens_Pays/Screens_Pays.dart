@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_Pays/ScreensNapTien.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/qrPays.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,12 @@ class ScreensPays extends StatelessWidget {
         children: [
           ListTile(
             title: Text(
-              "Thanh Toán",
+              "Nạp Tiền",
               style: StyleApp.textStyle500(color: ColorApp.black),
             ),
             onTap: () {
               Navigator.pop(context);
-              PageNavigator.next(context: context, page: QrScans());
+              PageNavigator.next(context: context, page: NapTien());
             },
           ),
           ListTile(

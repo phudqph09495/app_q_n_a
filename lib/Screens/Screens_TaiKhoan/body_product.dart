@@ -21,6 +21,7 @@ import '../../widget/widget_info/widgetText.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import '../account/profile.dart';
+import 'ThongKe/ThongKe.dart';
 
 class BodyProduct extends StatefulWidget {
   @override
@@ -71,7 +72,8 @@ class _BodyProductState extends State<BodyProduct> {
           onTap: () {
             Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
                 duration: 2, gravity: Toast.bottom);
-            PageNavigator.next(context: context, page: ViTien());
+            showModalBottomSheet(
+                context: context, builder: (context) => ScreensPays());
           }),
     ]);
     titleApp.addAll([
@@ -109,6 +111,13 @@ class _BodyProductState extends State<BodyProduct> {
         title: "Liên hệ và góp ý",
         onTap: () {
           PageNavigator.next(context: context, page: LienHe());
+        },
+      ),
+      TitleAccount(
+        iconData: CupertinoIcons.chart_bar_alt_fill,
+        title: "Thống kê",
+        onTap: () {
+          PageNavigator.next(context: context, page: ThongKe());
         },
       ),
     ]);

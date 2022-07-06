@@ -22,10 +22,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
   String mon = 'Toán';
   int value = -1;
   bool hasPaid = false;
-  List<int> i=[0,1,2,2,3,5];
+  List<int> i = [0, 1, 2, 2, 3, 5];
   bool timing = true;
-  DateTime deadline = DateTime.parse("2022-07-05 14:00:00.0000");
-
+  DateTime deadline = DateTime.parse("2022-07-06 10:00:00.0000");
 
   @override
   void initState() {
@@ -33,6 +32,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
     super.initState();
     showQuestion();
   }
+
   showQuestion() {
     int end = deadline.millisecondsSinceEpoch;
     int now = DateTime.now().millisecondsSinceEpoch;
@@ -40,6 +40,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
       timing = false;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
@@ -55,15 +56,15 @@ class _AnswerScreenState extends State<AnswerScreen> {
             border: Border.all(color: ColorApp.orangeF2, width: 0.5),
             textButton: 'Viết câu trả lời',
             ontap: () {
-              if ((timing == true)&&(hasPaid==false)) {
+              if ((timing == true) && (hasPaid == false)) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Add_Answer_Screen()));
-              } else if(timing=false) {
+              } else if (timing = false) {
                 Toast.show("Đã hết thời gian trả lời câu hỏi",
                     duration: 1, gravity: Toast.bottom);
-              }else if(hasPaid==true){
+              } else if (hasPaid == true) {
                 Toast.show("Câu hỏi đã được trả thưởng",
                     duration: 1, gravity: Toast.bottom);
               }
@@ -114,9 +115,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
                 shrinkWrap: true,
                 itemCount: 4,
                 itemBuilder: (context, index) {
-int value2=index;
+                  int value2 = index;
                   return AnswerCard(
-                    status: timing ?i[value2] : 3,
+                    status: timing ? i[value2] : 3,
                     //trạng thái của câu trả lời
                     //0: chưa đăng nhập
                     //1: không phải chủ câu hỏi
@@ -156,7 +157,7 @@ int value2=index;
                                     });
                                     value = val;
                                     hasPaid = true;
-                                 i[value2]=3;
+                                    i[value2] = 3;
                                   });
                                 },
                               ),
@@ -170,7 +171,6 @@ int value2=index;
                             gravity: Toast.bottom);
                       }
                     },
-
 
                     time: '12:00 14/06/2022',
                     user: 'Nguyen van nam',
