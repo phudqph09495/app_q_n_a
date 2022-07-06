@@ -1,13 +1,11 @@
 import 'dart:io';
-
-import 'package:app_q_n_a/Screens/Screens_TaiKhoan/body_product.dart';
-import 'package:app_q_n_a/item/input/text_filed2.dart';
-import 'package:app_q_n_a/item/input_text.dart';
+import 'package:app_q_n_a/Screens/login.dart';
+import 'package:app_q_n_a/item/input/text_filed3.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../item/button.dart';
 
 class NapTien extends StatefulWidget {
@@ -66,7 +64,7 @@ class _NapTienState extends State<NapTien> {
                   const SizedBox(
                     height: 10,
                   ),
-                  InputText2(
+                  InputText3(
                     keyboardType: TextInputType.number,
                     controller: Money,
                     hint: 'Nhập số tiền cần nạp',
@@ -127,19 +125,57 @@ class _NapTienState extends State<NapTien> {
                     height: 10,
                   ),
                   Button1(
-                      border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                      colorButton: ColorApp.orangeF2,
-                      textColor: Colors.white,
-                      textButton: 'Xác nhận',
-                      radius: 5,
-                      fontSize: 18,
-                      style: false,
-                      ontap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => BodyProduct()));
-                      })
+                    border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                    colorButton: ColorApp.orangeF2,
+                    textColor: Colors.white,
+                    textButton: 'Xác nhận',
+                    radius: 5,
+                    fontSize: 18,
+                    style: false,
+                    ontap: () {
+                      showPlatformDialog(
+                        context: context,
+                        builder: (context) => BasicDialogAlert(
+                          title: const Text(
+                            "Bạn chưa đăng nhập",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          content: const Text(
+                            "Bạn cần đăng nhập để sử dụng chức năng này",
+                            style:
+                                TextStyle(color: ColorApp.black, fontSize: 14),
+                          ),
+                          actions: <Widget>[
+                            BasicDialogAction(
+                              title: const Text(
+                                "Từ chối",
+                                style: TextStyle(
+                                    color: ColorApp.orangeF01, fontSize: 14),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            BasicDialogAction(
+                              title: const Text(
+                                "Đồng ý",
+                                style: TextStyle(
+                                    color: ColorApp.orangeF2, fontSize: 14),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginScreen()));
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -170,7 +206,7 @@ class _NapTienState extends State<NapTien> {
             child: Column(
               children: const [
                 Text(
-                  'Ảnh giao dịch thàng công trên moble , hoặc nạp tiền từ ngân hàng',
+                  'Ảnh giao dịch thàng công trên mobile , hoặc nạp tiền từ ngân hàng',
                   style: TextStyle(color: ColorApp.black, fontSize: 14),
                 ),
               ],
