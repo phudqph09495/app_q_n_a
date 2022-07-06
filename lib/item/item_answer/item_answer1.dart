@@ -102,22 +102,22 @@ class _QuestionCardState extends State<QuestionCard> {
                     Text('Còn ',
                         style: StyleApp.textStyle500(color: ColorApp.blue6D)),
                     (time.days != null)
-                        ? Text('${time.days} ngày',
+                        ? Text('${time.days} ngày ',
                             style:
                                 StyleApp.textStyle500(color: ColorApp.blue6D))
                         : Text(''),
                     (time.hours != null)
-                        ? Text(' ${time.hours} giờ',
+                        ? Text('${time.hours} giờ ',
                             style:
                                 StyleApp.textStyle500(color: ColorApp.blue6D))
                         : Text(''),
                     (time.min != null)
-                        ? Text(' ${time.min} phút',
+                        ? Text('${time.min} phút ',
                             style:
                                 StyleApp.textStyle500(color: ColorApp.blue6D))
                         : Text(''),
                     (time.sec != null)
-                        ? Text(' ${time.sec} giây',
+                        ? Text('${time.sec} giây',
                             style:
                                 StyleApp.textStyle500(color: ColorApp.blue6D))
                         : Text(''),
