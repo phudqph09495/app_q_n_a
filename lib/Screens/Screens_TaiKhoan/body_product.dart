@@ -75,6 +75,15 @@ class _BodyProductState extends State<BodyProduct> {
             showModalBottomSheet(
                 context: context, builder: (context) => ScreensPays());
           }),
+      TitleAccount(
+        iconData: CupertinoIcons.chart_bar_alt_fill,
+        title: "Thống kê",
+        onTap: () {
+          Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+              duration: 2, gravity: Toast.bottom);
+          PageNavigator.next(context: context, page: ThongKe());
+        },
+      ),
     ]);
     titleApp.addAll([
       TitleAccount(
@@ -111,13 +120,6 @@ class _BodyProductState extends State<BodyProduct> {
         title: "Liên hệ và góp ý",
         onTap: () {
           PageNavigator.next(context: context, page: LienHe());
-        },
-      ),
-      TitleAccount(
-        iconData: CupertinoIcons.chart_bar_alt_fill,
-        title: "Thống kê",
-        onTap: () {
-          PageNavigator.next(context: context, page: ThongKe());
         },
       ),
     ]);

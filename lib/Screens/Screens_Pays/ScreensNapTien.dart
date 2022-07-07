@@ -133,47 +133,47 @@ class _NapTienState extends State<NapTien> {
                     fontSize: 18,
                     style: false,
                     ontap: () {
-                      showPlatformDialog(
-                        context: context,
-                        builder: (context) => BasicDialogAlert(
-                          title: const Text(
-                            "Bạn chưa đăng nhập",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                          content: const Text(
-                            "Bạn cần đăng nhập để sử dụng chức năng này",
-                            style:
-                                TextStyle(color: ColorApp.black, fontSize: 14),
-                          ),
-                          actions: <Widget>[
-                            BasicDialogAction(
-                              title: const Text(
-                                "Từ chối",
-                                style: TextStyle(
-                                    color: ColorApp.orangeF01, fontSize: 14),
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                            BasicDialogAction(
-                              title: const Text(
-                                "Đồng ý",
-                                style: TextStyle(
-                                    color: ColorApp.orangeF2, fontSize: 14),
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginScreen()));
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      );
+                      // showPlatformDialog(
+                      //   context: context,
+                      //   builder: (context) => BasicDialogAlert(
+                      //     title: const Text(
+                      //       "Bạn chưa đăng nhập",
+                      //       style: TextStyle(color: Colors.black, fontSize: 16),
+                      //     ),
+                      //     content: const Text(
+                      //       "Bạn cần đăng nhập để sử dụng chức năng này",
+                      //       style:
+                      //           TextStyle(color: ColorApp.black, fontSize: 14),
+                      //     ),
+                      //     actions: <Widget>[
+                      //       BasicDialogAction(
+                      //         title: const Text(
+                      //           "Từ chối",
+                      //           style: TextStyle(
+                      //               color: ColorApp.orangeF01, fontSize: 14),
+                      //         ),
+                      //         onPressed: () {
+                      //           Navigator.pop(context);
+                      //         },
+                      //       ),
+                      //       BasicDialogAction(
+                      //         title: const Text(
+                      //           "Đồng ý",
+                      //           style: TextStyle(
+                      //               color: ColorApp.orangeF2, fontSize: 14),
+                      //         ),
+                      //         onPressed: () {
+                      //           setState(() {
+                      //             Navigator.push(
+                      //                 context,
+                      //                 MaterialPageRoute(
+                      //                     builder: (context) => LoginScreen()));
+                      //           });
+                      //         },
+                      //       ),
+                      //     ],
+                      //   ),
+                      // );
                     },
                   ),
                 ],

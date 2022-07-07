@@ -1,12 +1,7 @@
 import 'dart:io';
-import 'package:app_q_n_a/Screens/account/tab_profile/tab_answer.dart';
-import 'package:app_q_n_a/Screens/account/tab_profile/tab_question.dart';
-import 'package:app_q_n_a/Screens/account/tab_profile/tab_user.dart';
-import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
-
 import '../../path/image_path.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -86,58 +81,83 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             const Divider(),
-            TabBar(
-                indicatorColor: ColorApp.orangeF01,
-                labelColor: ColorApp.black,
-                unselectedLabelColor: ColorApp.black00,
-                labelStyle: StyleApp.textStyle500(color: ColorApp.whiteF0),
-                unselectedLabelStyle:
-                    StyleApp.textStyle500(color: ColorApp.whiteF0),
-                indicatorSize: TabBarIndicatorSize.label,
-                isScrollable: true,
-                tabs: [
-                  Row(children: const [
-                    SizedBox(width: 5),
-                    Text(
-                      "Thông Tin",
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                  ]),
-                  Row(children: const [
-                    SizedBox(width: 5),
-                    Text(
-                      "Câu hỏi",
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                  ]),
-                  Row(children: const [
-                    SizedBox(width: 5),
-                    Text(
-                      "Câu trả lời",
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                  ]),
-                  // Tab(
-                  //   text: "Thông tin",
-                  // ),
-                  // Tab(
-                  //   text: "Câu hỏi",
-                  // ),
-                  // Tab(
-                  //   text: "Câu trả lời",
-                  // ),
-                ]),
-            const Expanded(
-              child: TabBarView(
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Thông tin',
+              style: TextStyle(color: Colors.black, fontSize: 16),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            _buidRow(title: "Giới thiệu:", content: "Nam"),
+            _buidRow(title: "Ngày sinh:", content: "01/01/2004"),
+            _buidRow(title: "Lớp:", content: "12"),
+            _buidRow(title: "Tỉnh thành:", content: "Hà Nội"),
+            _buidRow(title: "Thành viên từ:", content: "10/06/2022"),
+            Padding(
+              padding: EdgeInsets.all(17),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TabUser(),
-                  Tabquestion(),
-                  TabAnswer(),
+                  Text(
+                    "Danh hiệu của bạn".toUpperCase(),
+                    style: StyleApp.textStyle700(
+                        fontSize: 16, color: ColorApp.black),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 10),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        ImagesPath.imageRank1,
+                        width: 40,
+                        height: 40,
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "Lính mới",
+                        style: StyleApp.textStyle400(color: ColorApp.black),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  _buidRow({required String title, required String content}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 5,
+        horizontal: 15,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+              flex: 2,
+              child: Text(
+                title,
+                style: StyleApp.textStyle700(
+                  color: ColorApp.black,
+                ),
+              )),
+          const SizedBox(width: 10),
+          Expanded(
+              flex: 5,
+              child: Text(
+                content,
+                style: StyleApp.textStyle400(color: ColorApp.black),
+              )),
+        ],
       ),
     );
   }

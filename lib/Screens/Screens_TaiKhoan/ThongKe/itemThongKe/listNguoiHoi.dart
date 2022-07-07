@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/ThongKe/itemThongKe/NguoiHoi.dart';
 import 'package:flutter/material.dart';
 
@@ -7,13 +8,17 @@ class NguoiHoiList extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       children: List.generate(
-        5,
+        10,
         (index) => NguoiHoi(
-            avatar: '',
-            title: '1000',
-            titleMoney: '500',
-            onTap: () {},
-            name: "Trần thanh"),
+          avatar: '',
+          title: '10.000đ',
+          onTap: () {
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => ViTien()));
+          },
+          name: "Trần thanh",
+          titleMoney: 'Bạn là người trả lời chính xác nhất',
+        ),
       ),
     );
   }

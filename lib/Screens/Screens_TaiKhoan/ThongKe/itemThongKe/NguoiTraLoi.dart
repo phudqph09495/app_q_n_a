@@ -58,13 +58,13 @@ class NguoiTraLoi extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Số lần trả lời :',
+                                'Đã chuyển :',
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: ColorApp.grey82),
                               ),
                               const SizedBox(
-                                width: 5,
+                                width: 21,
                               ),
                               Text(
                                 title,
@@ -77,7 +77,7 @@ class NguoiTraLoi extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Số lần nhận thưởng: ',
+                                'Vào tài khoản: ',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
@@ -88,10 +88,10 @@ class NguoiTraLoi extends StatelessWidget {
                               ),
                               Text(
                                 titleMoney,
-                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: StyleApp.textStyle400(
-                                    fontSize: 12, color: Colors.black),
+                                maxLines: 2,
+                                style: StyleApp.textStyle700(
+                                    fontSize: 12, color: ColorApp.black),
                               ),
                             ],
                           ),

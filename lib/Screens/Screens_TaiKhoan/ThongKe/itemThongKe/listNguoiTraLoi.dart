@@ -10,10 +10,10 @@ class NguoiTraLoiList extends StatelessWidget {
         5,
         (index) => NguoiTraLoi(
             avatar: '',
-            title: '800',
-            titleMoney: '400',
+            title: '20.000đ',
+            titleMoney: 'Nguyen Van Nam',
             onTap: () {},
-            name: "Nguyen van nam"),
+            name: "Bạn"),
       ),
     );
   }

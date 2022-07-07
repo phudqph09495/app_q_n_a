@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../../../styles/colors.dart';
 import '../../../styles/styles.dart';
+import '../../account/tab_profile/tab_answer.dart';
+import '../../account/tab_profile/tab_question.dart';
 import 'itemThongKe/listNguoiHoi.dart';
 
 class ThongKe extends StatelessWidget {
@@ -14,7 +16,7 @@ class ThongKe extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 2,
+        length: 4,
         child: Scaffold(
           backgroundColor: ColorApp.whiteF0,
           appBar: AppBar(
@@ -41,9 +43,72 @@ class ThongKe extends StatelessWidget {
                 labelStyle: StyleApp.textStyle700(fontSize: 16),
                 indicatorColor: ColorApp.orangeF01,
                 unselectedLabelColor: ColorApp.grey82,
-                tabs: const [
-                  Tab(text: "Top người hỏi"),
-                  Tab(text: "Top người trả lời"),
+                isScrollable: true,
+                tabs: [
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Câu hỏi',
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                        Text(
+                          '(10)',
+                          style: TextStyle(
+                              fontSize: 15, color: ColorApp.orangeF01),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Câu trả lời',
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                        Text(
+                          '(20)',
+                          style: TextStyle(
+                              fontSize: 15, color: ColorApp.orangeF01),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Nhận thưởng',
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                        Text(
+                          '(10)',
+                          style: TextStyle(
+                              fontSize: 15, color: ColorApp.orangeF01),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Trả thưởng',
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                        Text(
+                          '(5)',
+                          style: TextStyle(
+                              fontSize: 15, color: ColorApp.orangeF01),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               preferredSize: Size.fromHeight(50),
@@ -51,6 +116,8 @@ class ThongKe extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
+              Tabquestion(),
+              TabAnswer(),
               NguoiHoiList(),
               NguoiTraLoiList(),
             ],
