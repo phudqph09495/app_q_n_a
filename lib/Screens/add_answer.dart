@@ -1,12 +1,15 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/item/input/text_filed2.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:toast/toast.dart';
 
 
 
@@ -51,7 +54,16 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
             border: Border.all(color: ColorApp.orangeF2,width: 0.5),
             textButton: 'Viết câu trả lời',
             ontap: () {
+if((answer.text=='')&&(!_imageFileList!.isNotEmpty)){
+  Toast.show("Bạn chưa thêm câu trả lời", duration: 1, gravity: Toast.bottom);
+}else{
 
+  Toast.show("Thêm câu trả lời thành công", duration: 1, gravity: Toast.bottom);
+  Future.delayed(Duration(milliseconds: 1200),(){
+    Navigator.pop(context);
+  });
+
+}
             }),
       ),
       backgroundColor: ColorApp.whiteF7,
@@ -82,14 +94,25 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
               const SizedBox(
                 height: 10,
               ),
-              InputText(
+              // InputText(
+              //   counter: true,
+              //
+              //
+              //   hint: 'Nhập câu trả lời của bạn',
+              //   controller: answer,
+              //   maxline: 6,
+              //   inputType: TextInputType.multiline,
+              // ),
+              InputText2(
                 counter: true,
 
-
                 hint: 'Nhập câu trả lời của bạn',
-                controller: answer,
+                keyboardType: TextInputType.multiline,
                 maxline: 6,
-                inputType: TextInputType.multiline,
+                controller: answer,
+                validator: (val) {
+                  return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                },
               ),
               Row(
                 children: [

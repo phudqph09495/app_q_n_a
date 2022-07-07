@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/item/input/text_filed.dart';
+import 'package:app_q_n_a/item/input/text_filed2.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,8 +17,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 DateTime? _chosenDateTime;
 
-double height = 50;
 
+String _getNumberAddZero(int number) {
+  if (number < 10) {
+    return "0" + number.toString();
+  }
+  return number.toString();
+}
 class AddQuestion extends StatefulWidget {
   @override
   State<AddQuestion> createState() => _AddQuestionState();
@@ -41,7 +49,7 @@ class _AddQuestionState extends State<AddQuestion> {
                           setState(() {
                             _chosenDateTime = val;
                             deadline.text =
-                                '${_chosenDateTime?.hour}:${_chosenDateTime?.minute}\'  ${_chosenDateTime?.day}/${_chosenDateTime?.month}/${_chosenDateTime?.year}';
+                                '${_getNumberAddZero(_chosenDateTime!.hour)}:${_getNumberAddZero(_chosenDateTime!.minute)}\'  ${_getNumberAddZero(_chosenDateTime!.day)}/${_getNumberAddZero(_chosenDateTime!.month)}/${_chosenDateTime?.year}';
                           });
                         }),
                   ),
@@ -54,7 +62,20 @@ class _AddQuestionState extends State<AddQuestion> {
 
   TextEditingController ques = TextEditingController();
   TextEditingController deadline = TextEditingController();
-  
+
+  final keyForm = GlobalKey<FormState>();
+  AddQuesVoid() async {
+    if (keyForm.currentState!.validate()) {
+      Toast.show("Thêm câu hỏi thành công", duration: 1, gravity: Toast.bottom);
+
+      Future.delayed(Duration(milliseconds: 1500), () {
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => ScreenHome()));
+      });
+    } else {
+      Toast.show("Thêm câu hỏi thất bại", duration: 3, gravity: Toast.bottom);
+    }
+  }
   String mon = 'Toán học';
   List<String> monList = [
     'Toán học',
@@ -119,7 +140,12 @@ style: false
             fontSize: 18,
             border: Border.all(color: ColorApp.orangeF2,width: 0.5),
             textButton: 'Đăng câu hỏi',
-            ontap: () {}),
+            ontap: () {
+              AddQuesVoid();
+              print(ques.text);
+              print(deadline.text);
+              print(money.text);
+            }),
       ),
       backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
@@ -144,6 +170,7 @@ style: false
         child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Form(
+            key: keyForm,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,14 +204,19 @@ style: false
                   'Deadline',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
-                InputText(
-                    hint: 'Ngày kết thúc câu hỏi',
-                    controller: deadline,
-                    readOnly: true,
-                    deadline: () {
-                      _showDatePicker(context);
 
-                    }),
+                InputText2(
+                  onTap: (){
+                    _showDatePicker(context);
+                  },
+                  readOnly: true,
+                  hint: 'Ngày kết thúc câu hỏi',
+                  controller: deadline
+                  ,
+                  validator: (val) {
+                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                  },
+                ),
                 SizedBox(
                   height: 5,
                 ),
@@ -192,11 +224,17 @@ style: false
                   'Phần thưởng',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
-                InputText(
-                  inputType: TextInputType.number,
-                  hint: 'Phần thưởng cho người trả lời',
-                  controller: money,
-                ),
+
+              InputText2(
+
+                keyboardType: TextInputType.number,
+                hint: 'Phần thưởng cho người trả lời',
+                controller: money,
+                  validator: (val) {
+                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                  },
+              ),
+
                 SizedBox(
                   height: 5,
                 ),
@@ -204,13 +242,18 @@ style: false
                   'Câu hỏi',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
-                InputText(
-                  inputType: TextInputType.multiline,
-                  maxline: 6,
-                  counter: true,
+                InputText2(
+counter: true,
+
                   hint: 'Nhập câu hỏi của bạn',
+                  keyboardType: TextInputType.multiline,
+                  maxline: 6,
                   controller: ques,
+                  validator: (val) {
+                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                  },
                 ),
+
                 _imageFileList!.isNotEmpty
                     ? GridView.builder(
                         itemCount: _imageFileList!.length,

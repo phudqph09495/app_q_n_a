@@ -107,7 +107,12 @@ class _InputTextState extends State<InputText> {
             contentPadding: EdgeInsets.only(left: 33,top: 15,right: 20),
             hintText: widget.hint,
             hintStyle: StyleApp.textStyle400(color: widget.colorhint)),
-        onChanged: (val) {},
+        onChanged: (val) {
+          if (val != null && widget.validator != null) {
+            return widget.validator!(val);
+          }
+          return null;
+        },
         textAlign: TextAlign.left,
         obscureText: widget.hasPass,
       ),

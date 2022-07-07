@@ -9,8 +9,9 @@ import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:toast/toast.dart';
-
+DateTime deadline = DateTime.parse("2022-07-07 22:00:00.0000");
 class AnswerScreen extends StatefulWidget {
+
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
 }
@@ -24,7 +25,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   bool hasPaid = false;
   List<int> i=[0,1,2,2,3,5];
   bool timing = true;
-  DateTime deadline = DateTime.parse("2022-07-05 22:00:00.0000");
+
 
   @override
   void initState() {
@@ -149,10 +150,7 @@ int value2=index;
                                     Toast.show("Thanh toán thành công",
                                         duration: 2, gravity: Toast.bottom);
 
-                                    Future.delayed(Duration(milliseconds: 2000),
-                                        () {
-                                      Navigator.pop(context);
-                                    });
+                                    Navigator.pop(context);
                                     value = val;
                                     hasPaid = true;
                                  i[value2]=3;

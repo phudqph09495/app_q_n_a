@@ -23,6 +23,7 @@ class QuestionCard extends StatefulWidget {
   String ques;
   int endTime;
   String imageques;
+  bool save=true;
   QuestionCard(
       {required this.avatar,
       required this.ques,
@@ -72,15 +73,19 @@ class _QuestionCardState extends State<QuestionCard> {
                 ),
                 Button1(
                   ontap: () {
+
+                    setState((){
+                      widget.save=!widget.save;
+                    });
                     Toast.show("Lưu thành công", gravity: Toast.bottom);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuestionSavedSS()));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => QuestionSavedSS()));
                   },
-                  colorButton: ColorApp.blue6D,
-                  textColor: ColorApp.whiteF0,
-                  textButton: 'Lưu',
+                  colorButton: widget.save?ColorApp.blue6D:ColorApp.orangeF01,
+                  textColor: widget.save?ColorApp.whiteF0:Colors.black,
+                  textButton:widget.save? 'Lưu':'Bỏ lưu',
                   height: 35,
                 )
               ],

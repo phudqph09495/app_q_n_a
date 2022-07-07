@@ -45,18 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: ColorApp.whiteF7,
       resizeToAvoidBottomInset: false,
-      // appBar: AppBar(
-      //   backgroundColor: ColorApp.whiteF7,
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //     icon: Icon(
-      //       Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-      //       color: ColorApp.black,
-      //     ),
-      //   ),
-      // ),
+
       body: SafeArea(
         child: Stack(
           alignment: Alignment.topLeft,

@@ -20,7 +20,12 @@ class InputText2 extends StatefulWidget {
   String hint;
   Function()? onTap;
 
+  int? maxline;
+  bool counter;
+
   InputText2({
+    this.maxline,
+    this.counter = false,
     this.onTap,
     this.obscureText = false,
     this.keyboardType,
@@ -49,15 +54,34 @@ class _InputText2State extends State<InputText2> {
     return Container(
       width: widget.width,
       child: TextFormField(
+        maxLines: widget.maxline,
         obscureText: widget.obscureText,
         onTap: widget.onTap,
         readOnly: widget.readOnly,
         onChanged: widget.onChanged,
         controller: widget.controller,
+
+        maxLength: 5000,
+        buildCounter: (context,
+            {required currentLength, required isFocused, maxLength}) {
+          return widget.counter
+              ? Container(
+            transform:
+            Matrix4.translationValues(0, -kToolbarHeight + 25, 0),
+            child: Text(
+              "$currentLength/$maxLength kí tự",
+              style: StyleApp.textStyle400(color: Colors.black45),
+            ),
+          )
+              : SizedBox();
+        },
+
+
         keyboardType: widget.keyboardType,
         style: StyleApp.textStyle400(),
         decoration: InputDecoration(
           hintText: widget.hint,
+
           hintStyle: StyleApp.textStyle400(color: ColorApp.grey82),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -77,7 +101,7 @@ class _InputText2State extends State<InputText2> {
             borderSide: const BorderSide(color: Colors.red, width: 0.5),
 
           ),
-          contentPadding: const  EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+          contentPadding: EdgeInsets.only(left: 33,top: 15,right: 20),
           errorText: null,
         ),
         validator: (val) {

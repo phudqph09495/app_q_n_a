@@ -5,8 +5,7 @@ import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
-
-
+import 'package:toast/toast.dart';
 
 class CommentScreen extends StatefulWidget {
   @override
@@ -17,24 +16,24 @@ class _CommentScreenState extends State<CommentScreen> {
   String avatar = '';
   List<String> commentList = [];
 
-TextEditingController reply=TextEditingController();
-
-
+  TextEditingController reply = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         bottomSheet: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: InputText(
             iconPress: () {
-       setState((){
-           commentList.add(reply.text);
-       });
-       reply.clear();
-
+              setState(() {
+                (reply.text != '')
+                    ? commentList.add(reply.text)
+                    : Toast.show("Bạn chưa thêm bình luận",
+                        duration: 1, gravity: Toast.bottom);
+                ;
+              });
+              reply.clear();
             },
             width: double.infinity,
             inputType: TextInputType.multiline,
@@ -53,7 +52,9 @@ TextEditingController reply=TextEditingController();
           backgroundColor: ColorApp.whiteF0,
           title: Text(
             'Bình luận',
-            style: StyleApp.textStyle700(fontSize: 18, ),
+            style: StyleApp.textStyle700(
+              fontSize: 18,
+            ),
           ),
           leading: IconButton(
             onPressed: () {
@@ -92,8 +93,8 @@ TextEditingController reply=TextEditingController();
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-
-                          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 '3 phút trước',
