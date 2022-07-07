@@ -12,15 +12,15 @@ class NguoiTraLoiList extends StatelessWidget {
         5,
         (index) => NguoiTraLoi(
           avatar: '',
-          title: '  20.000đ',
+          title: '20.000đ',
           titleMoney: 'Nguyen Van Nam',
           onTap: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => ViTien()));
           },
           name: "Bạn",
-          content: '  Câu trả lời của bạn rất chính xác!',
-          time: '   7h30p  28/06/2022',
+          content: 'Câu trả lời của bạn rất chính xác!',
+          time: '7h30p  28/06/2022',
         ),
       ),
     );

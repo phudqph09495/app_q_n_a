@@ -40,7 +40,7 @@ class NguoiHoi extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                         child: LoadImage(
                             url: avatar,
-                            height: 70,
+                            height: 72,
                             width: 60,
                             fit: BoxFit.cover),
                       ),
@@ -79,22 +79,6 @@ class NguoiHoi extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Thời gian: ',
-                                overflow: TextOverflow.ellipsis,
-                                style: StyleApp.textStyle400(
-                                    fontSize: 12, color: ColorApp.grey82),
-                              ),
-                              Text(
-                                time,
-                                overflow: TextOverflow.ellipsis,
-                                style: StyleApp.textStyle400(
-                                    fontSize: 12, color: Colors.black),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
                                 'Nội dung: ',
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
@@ -105,6 +89,23 @@ class NguoiHoi extends StatelessWidget {
                               ),
                               Text(
                                 titleMoney,
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Thời gian: ',
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: ColorApp.grey82),
+                              ),
+
+                              Text(
+                                time,
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: Colors.black),

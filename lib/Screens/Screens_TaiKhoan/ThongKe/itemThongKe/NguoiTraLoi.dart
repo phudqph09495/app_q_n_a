@@ -42,8 +42,8 @@ class NguoiTraLoi extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                         child: LoadImage(
                             url: avatar,
-                            height: 75,
-                            width: 60,
+                            height: 90,
+                            width: 65,
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -67,25 +67,11 @@ class NguoiTraLoi extends StatelessWidget {
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: ColorApp.grey82),
                               ),
-                              const SizedBox(),
+                              const SizedBox(
+                                width: 5,
+                              ),
                               Text(
                                 title,
-                                overflow: TextOverflow.ellipsis,
-                                style: StyleApp.textStyle400(
-                                    fontSize: 12, color: Colors.black),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Thời gian: ',
-                                overflow: TextOverflow.ellipsis,
-                                style: StyleApp.textStyle400(
-                                    fontSize: 12, color: ColorApp.grey82),
-                              ),
-                              Text(
-                                time,
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: Colors.black),
@@ -127,6 +113,25 @@ class NguoiTraLoi extends StatelessWidget {
                               ),
                               Text(
                                 content,
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Thời gian: ',
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: ColorApp.grey82),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                time,
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: Colors.black),
