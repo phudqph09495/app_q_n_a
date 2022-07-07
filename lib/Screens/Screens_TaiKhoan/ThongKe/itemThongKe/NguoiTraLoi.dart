@@ -6,12 +6,16 @@ class NguoiTraLoi extends StatelessWidget {
   Function()? onTap;
   String avatar;
   String name;
+  String time;
   String title;
   String titleMoney;
+  String content;
 
   NguoiTraLoi(
       {required this.avatar,
       required this.name,
+      required this.time,
+      required this.content,
       required this.titleMoney,
       this.onTap,
       required this.title});
@@ -38,8 +42,8 @@ class NguoiTraLoi extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                         child: LoadImage(
                             url: avatar,
-                            height: 50,
-                            width: 50,
+                            height: 75,
+                            width: 60,
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -58,16 +62,30 @@ class NguoiTraLoi extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Đã chuyển :',
+                                'Đã chuyển:',
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: ColorApp.grey82),
                               ),
-                              const SizedBox(
-                                width: 21,
-                              ),
+                              const SizedBox(),
                               Text(
                                 title,
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Thời gian: ',
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: ColorApp.grey82),
+                              ),
+                              Text(
+                                time,
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: Colors.black),
@@ -92,6 +110,26 @@ class NguoiTraLoi extends StatelessWidget {
                                 maxLines: 2,
                                 style: StyleApp.textStyle700(
                                     fontSize: 12, color: ColorApp.black),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Nội dung: ',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: ColorApp.grey82),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                content,
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: Colors.black),
                               ),
                             ],
                           ),

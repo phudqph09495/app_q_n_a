@@ -6,6 +6,7 @@ class NguoiHoi extends StatelessWidget {
   Function()? onTap;
   String avatar;
   String name;
+  String time;
   String title;
   String titleMoney;
 
@@ -13,6 +14,7 @@ class NguoiHoi extends StatelessWidget {
       {required this.avatar,
       required this.name,
       required this.titleMoney,
+      required this.time,
       this.onTap,
       required this.title});
 
@@ -38,8 +40,8 @@ class NguoiHoi extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                         child: LoadImage(
                             url: avatar,
-                            height: 50,
-                            width: 50,
+                            height: 70,
+                            width: 60,
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -68,6 +70,22 @@ class NguoiHoi extends StatelessWidget {
                               ),
                               Text(
                                 title,
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Thời gian: ',
+                                overflow: TextOverflow.ellipsis,
+                                style: StyleApp.textStyle400(
+                                    fontSize: 12, color: ColorApp.grey82),
+                              ),
+                              Text(
+                                time,
                                 overflow: TextOverflow.ellipsis,
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: Colors.black),

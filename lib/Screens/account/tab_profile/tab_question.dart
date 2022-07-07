@@ -9,7 +9,7 @@ class Tabquestion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 22),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       children: List.generate(
         10,
         (index) => QuestionTile(
