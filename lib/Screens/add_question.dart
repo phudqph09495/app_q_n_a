@@ -48,11 +48,15 @@ class _AddQuestionState extends State<AddQuestion> {
                         onDateTimeChanged: (val) {
                           setState(() {
                             _chosenDateTime = val;
-                            deadline.text =
-                                '${_getNumberAddZero(_chosenDateTime!.hour)}:${_getNumberAddZero(_chosenDateTime!.minute)}\'  ${_getNumberAddZero(_chosenDateTime!.day)}/${_getNumberAddZero(_chosenDateTime!.month)}/${_chosenDateTime?.year}';
                           });
                         }),
                   ),
+                  CupertinoButton(child: Text('OK'), onPressed: (){
+                    setState((){
+                      deadline.text = '${_getNumberAddZero(_chosenDateTime!.hour)}:${_getNumberAddZero(_chosenDateTime!.minute)}\'  ${_getNumberAddZero(_chosenDateTime!.day)}/${_getNumberAddZero(_chosenDateTime!.month)}/${_chosenDateTime?.year}';
+                    });
+                    Navigator.of(ctx).pop();
+                  })
                 ],
               ),
             ));

@@ -77,7 +77,7 @@ class _QuestionCardState extends State<QuestionCard> {
                     setState((){
                       widget.save=!widget.save;
                     });
-                    Toast.show("Lưu thành công", gravity: Toast.bottom);
+                    Toast.show(widget.save?"Bỏ lưu thành công":"Lưu thành công", gravity: Toast.bottom);
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(
