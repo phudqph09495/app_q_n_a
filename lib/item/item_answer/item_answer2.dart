@@ -245,7 +245,7 @@ class _AnswerCardState extends State<AnswerCard> {
                       },
                       icon: Image.asset('images/report.png')),
                   Container(
-                    width: 120,
+                    width: 140,
                     child: RadioListTile<int>(
                         visualDensity: const VisualDensity(
                           horizontal: VisualDensity.minimumDensity,
