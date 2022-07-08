@@ -71,7 +71,9 @@ class _AddQuestionState extends State<AddQuestion> {
   AddQuesVoid() async {
     if (keyForm.currentState!.validate()) {
       Toast.show("Thêm câu hỏi thành công", duration: 1, gravity: Toast.bottom);
-
+money.clear();
+ques.clear();
+deadline.clear();
       Future.delayed(Duration(milliseconds: 1500), () {
         // Navigator.push(
         //     context, MaterialPageRoute(builder: (context) => ScreenHome()));

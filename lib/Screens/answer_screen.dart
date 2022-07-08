@@ -18,7 +18,7 @@ class AnswerScreen extends StatefulWidget {
 
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
-  int money = 50;
+  int money = 50000;
   int lop = 12;
   String mon = 'Toán';
   int value = -1;

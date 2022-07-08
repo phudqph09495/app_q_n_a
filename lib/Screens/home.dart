@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mon: 'Toán',
                       deadline: 'Còn 3h',
                       lop: 12,
-                      money: 50,
+                      money: 50000,
                       time: '1h',
                       ontap: () {
 
