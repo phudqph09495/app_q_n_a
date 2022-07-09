@@ -11,8 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
 
-
-
 class Add_Answer_Screen extends StatefulWidget {
   @override
   State<Add_Answer_Screen> createState() => _Add_Answer_ScreenState();
@@ -51,19 +49,19 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
             radius: 30,
             fontSize: 18,
             style: false,
-            border: Border.all(color: ColorApp.orangeF2,width: 0.5),
+            border: Border.all(color: ColorApp.orangeF2, width: 0.5),
             textButton: 'Viết câu trả lời',
             ontap: () {
-if((answer.text=='')&&(!_imageFileList!.isNotEmpty)){
-  Toast.show("Bạn chưa thêm câu trả lời", duration: 1, gravity: Toast.bottom);
-}else{
-
-  Toast.show("Thêm câu trả lời thành công", duration: 1, gravity: Toast.bottom);
-  Future.delayed(Duration(milliseconds: 1200),(){
-    Navigator.pop(context);
-  });
-
-}
+              if ((answer.text == '') && (!_imageFileList!.isNotEmpty)) {
+                Toast.show("Bạn chưa thêm câu trả lời",
+                    duration: 1, gravity: Toast.bottom);
+              } else {
+                Toast.show("Thêm câu trả lời thành công",
+                    duration: 1, gravity: Toast.bottom);
+                Future.delayed(Duration(milliseconds: 1200), () {
+                  Navigator.pop(context);
+                });
+              }
             }),
       ),
       backgroundColor: ColorApp.whiteF7,
@@ -72,12 +70,13 @@ if((answer.text=='')&&(!_imageFileList!.isNotEmpty)){
         backgroundColor: ColorApp.whiteF0,
         title: Text(
           'Trả lời',
-          style: StyleApp.textStyle700(fontSize: 18, ),
+          style: StyleApp.textStyle700(
+            fontSize: 18,
+          ),
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
@@ -105,7 +104,6 @@ if((answer.text=='')&&(!_imageFileList!.isNotEmpty)){
               // ),
               InputText2(
                 counter: true,
-
                 hint: 'Nhập câu trả lời của bạn',
                 keyboardType: TextInputType.multiline,
                 maxline: 6,
@@ -138,15 +136,15 @@ if((answer.text=='')&&(!_imageFileList!.isNotEmpty)){
               ),
               _imageFileList!.isNotEmpty
                   ? GridView.builder(
-                  itemCount: _imageFileList!.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3),
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Image.file(
-                      File(_imageFileList![index].path),
-                    );
-                  })
+                      itemCount: _imageFileList!.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Image.file(
+                          File(_imageFileList![index].path),
+                        );
+                      })
                   : SizedBox(),
 
               // Button1(

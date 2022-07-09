@@ -24,7 +24,7 @@ class FilterList extends StatefulWidget {
 }
 
 class _FilterListState extends State<FilterList> {
-  int value = 0;
+  int value = -1;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(

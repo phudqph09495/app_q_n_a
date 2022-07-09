@@ -45,25 +45,25 @@ class _ForgotPassState extends State<ForgotPass> {
           key: keyForm,
           child: Column(
             children: [
-              SizedBox(height: 10,),
-            InputText1(
-            label: "Nhập email đăng ký",
-            controller: forgot,
-            borderColor: ColorApp.main.withOpacity(0.2),
-
-            obscureText: false,
-            hasPass: false,
-            radius: 10,
-            width: double.infinity,
-            validator: (val) {
-              return ValidatorApp.checkEmail(text: val);
-            },
-          ),
+              SizedBox(
+                height: 10,
+              ),
+              InputText1(
+                label: "Nhập email đăng ký",
+                controller: forgot,
+                borderColor: ColorApp.main.withOpacity(0.2),
+                obscureText: false,
+                hasPass: false,
+                radius: 10,
+                width: double.infinity,
+                validator: (val) {
+                  return ValidatorApp.checkEmail(text: val);
+                },
+              ),
               SizedBox(
                 height: 10,
               ),
               Button1(
-
                   colorButton: ColorApp.orangeF2,
                   textColor: ColorApp.whiteF0,
                   radius: 30,
@@ -77,7 +77,7 @@ class _ForgotPassState extends State<ForgotPass> {
                           "Yêu cầu cấp lại mật khẩu của bạn đã được phê duyệt",
                           duration: 3,
                           gravity: Toast.bottom);
-
+                      forgot.clear();
                       Future.delayed(Duration(milliseconds: 3500), () {
                         Navigator.push(
                             context,

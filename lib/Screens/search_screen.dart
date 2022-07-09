@@ -18,11 +18,14 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: ColorApp.whiteF7,
+      backgroundColor: ColorApp.whiteF7,
       appBar: AppBar(
-centerTitle: true,
+        centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
-        title: Text('Tìm kiếm câu hỏi',style: StyleApp.textStyle700(fontSize: 18),),
+        title: Text(
+          'Tìm kiếm câu hỏi',
+          style: StyleApp.textStyle700(fontSize: 18),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -38,20 +41,24 @@ centerTitle: true,
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             children: [
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
               InputText(
-
-                textColor: Colors.black,
+                  textColor: Colors.black,
                   maxline: null,
-action: TextInputAction.search,
-                  suffixIcon: Icon(Icons.close,color: ColorApp.black,),
+                  action: TextInputAction.search,
+                  suffixIcon: Icon(
+                    Icons.close,
+                    color: ColorApp.black,
+                  ),
                   hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
                   controller: search,
-                  iconPress: (){
-                  search.clear();
+                  iconPress: () {
+                    search.clear();
                   },
                   colorBorder: Colors.black,
-                  colorhint: ColorApp.black.withOpacity(0.3 ),
+                  colorhint: ColorApp.black.withOpacity(0.3),
                   iconS: true),
               ListView.builder(
                   itemCount: 50,
@@ -59,8 +66,12 @@ action: TextInputAction.search,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
-                      onTap: (){ Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => AnswerScreen()));},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AnswerScreen()));
+                      },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -70,7 +81,6 @@ action: TextInputAction.search,
                           Text(
                             'Đếm số đỉnh, số cạnh của khối bát diện đều.',
                             style: StyleApp.textStyle500(color: ColorApp.black),
-
                           ),
                           Text('số câu trả lời: 2',
                               style: StyleApp.textStyle500(color: Colors.red)),
