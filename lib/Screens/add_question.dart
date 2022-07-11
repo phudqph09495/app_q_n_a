@@ -147,10 +147,9 @@ style: false
             border: Border.all(color: ColorApp.orangeF2,width: 0.5),
             textButton: 'Đăng câu hỏi',
             ontap: () {
+
               AddQuesVoid();
-              print(ques.text);
-              print(deadline.text);
-              print(money.text);
+
             }),
       ),
       backgroundColor: ColorApp.whiteF7,
@@ -189,6 +188,11 @@ style: false
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 Dropdown1(
+                  onchange: (val){
+                    setState((){
+                      mon=val;
+                    });
+                  },
                   val: mon,
                   monList: monList,
                 ),
@@ -200,6 +204,11 @@ style: false
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 Dropdown1(
+                  onchange: (val){
+                    setState((){
+                     lop=val;
+                    });
+                  },
                   val: lop,
                   monList: lopList,
                 ),
