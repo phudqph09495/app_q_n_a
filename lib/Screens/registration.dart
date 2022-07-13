@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_q_n_a/item/dropdown_button.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
@@ -9,6 +10,7 @@ import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_local.dart';
 import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/material.dart';
+import '../bloc/state_bloc.dart';
 import '../item/button.dart';
 import '../item/input_text.dart';
 import '../styles/init_style.dart';
@@ -33,15 +35,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController confirm = TextEditingController();
   BlocRegistrantion bloc = BlocRegistrantion();
   final keyForm = GlobalKey<FormState>();
+
   RegistrationVoid() async {
     if (keyForm.currentState!.validate()) {
       bloc.add(
           AddDataRegistrantion(
-          username: username.text,
-          email: email.text,
-          phone: phone.text,
-          password: password.text,
-          register_by: EnumRegistrantion.phone.toString()));
+              username: username.text,
+              email: email.text,
+              phone: phone.text,
+              password: password.text,
+              register_by: EnumRegistrantion.phone.toString()));
 
       Toast.show("Đăng ký thành công", duration: 1, gravity: Toast.bottom);
 
@@ -70,7 +73,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 reverse: true,
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
                   child: Form(
                     key: keyForm,
                     child: Center(
@@ -200,16 +203,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           SizedBox(
                             height: 15,
                           ),
-                          Button1(
-                              border: Border.all(
-                                  color: ColorApp.orangeF2, width: 0.5),
-                              style: false,
-                              fontSize: 18,
-                              radius: 30,
-                              ontap: RegistrationVoid,
-                              colorButton: ColorApp.orangeF2,
-                              textColor: Colors.white,
-                              textButton: 'Đăng ký'),
+                          BlocListener(
+                            bloc: bloc,
+                            listener: (_, StateBloc state) {
+                              print(state);
+                            },
+                            child: Button1(
+                                border: Border.all(
+                                    color: ColorApp.orangeF2, width: 0.5),
+                                style: false,
+                                fontSize: 18,
+                                radius: 30,
+                                ontap: RegistrationVoid,
+                                colorButton: ColorApp.orangeF2,
+                                textColor: Colors.white,
+                                textButton: 'Đăng ký'),
+                          ),
                         ],
                       ),
                     ),
