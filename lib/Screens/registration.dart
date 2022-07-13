@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:app_q_n_a/item/dropdown_button.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
 import 'package:app_q_n_a/item/input/text_filed2.dart';
@@ -13,22 +15,34 @@ import '../styles/init_style.dart';
 import 'package:toast/toast.dart';
 import 'login.dart';
 
+import 'package:app_q_n_a/bloc/bloc_registrantion.dart';
+
+enum EnumRegistrantion { username, phone }
+
 class RegistrationScreen extends StatefulWidget {
   @override
   State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  TextEditingController name = TextEditingController();
+
   TextEditingController username = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController confirm = TextEditingController();
-
+  BlocRegistrantion bloc = BlocRegistrantion();
   final keyForm = GlobalKey<FormState>();
   RegistrationVoid() async {
     if (keyForm.currentState!.validate()) {
+      bloc.add(
+          AddDataRegistrantion(
+          username: username.text,
+          email: email.text,
+          phone: phone.text,
+          password: password.text,
+          register_by: EnumRegistrantion.phone.toString()));
+
       Toast.show("Đăng ký thành công", duration: 1, gravity: Toast.bottom);
 
       Future.delayed(Duration(milliseconds: 1500), () {
@@ -48,20 +62,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     ToastContext().init(context);
     return Scaffold(
         backgroundColor: ColorApp.whiteF7,
-        // appBar: AppBar(
-        //   backgroundColor: ColorApp.whiteF0,
-        //
-        //   // leading: IconButton(
-        //   //   onPressed: () {
-        //   //     Navigator.pop(context);
-        //   //     setState(() {});
-        //   //   },
-        //   //   icon: Icon(
-        //   //     Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-        //   //     color: ColorApp.black,
-        //   //   ),
-        //   // ),
-        // ),
         body: SafeArea(
           child: Stack(
             alignment: Alignment.topLeft,
@@ -81,12 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           SizedBox(
                             height: 40,
                           ),
-                          // LoadImage(
-                          //   url: "https://hoidap247.com/static/img/logo_h247.png",
-                          //   height: 30,
-                          //   fit: BoxFit.fitHeight,
-                          //   alignment: Alignment.center,
-                          // ),
+
                           Image.asset(
                             'images/backg.png',
                             width: 222,
@@ -132,6 +127,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             height: 15,
                           ),
                           InputText1(
+                            keyboardType: TextInputType.phone,
                             label: "Số điện thoại",
                             controller: phone,
                             borderColor: ColorApp.main.withOpacity(0.2),
@@ -149,6 +145,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             height: 15,
                           ),
                           InputText1(
+                            keyboardType: TextInputType.emailAddress,
                             label: "Email",
                             controller: email,
                             borderColor: ColorApp.main.withOpacity(0.2),
@@ -209,9 +206,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               style: false,
                               fontSize: 18,
                               radius: 30,
-                              ontap: () {
-                                RegistrationVoid();
-                              },
+                              ontap: RegistrationVoid,
                               colorButton: ColorApp.orangeF2,
                               textColor: Colors.white,
                               textButton: 'Đăng ký'),
