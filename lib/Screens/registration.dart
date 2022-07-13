@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -46,12 +47,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               password: password.text,
               register_by: EnumRegistrantion.phone.toString()));
 
-      Toast.show("Đăng ký thành công", duration: 1, gravity: Toast.bottom);
-
-      Future.delayed(Duration(milliseconds: 1500), () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
-      });
     } else {
       Toast.show("Đăng ký thất bại", duration: 1, gravity: Toast.bottom);
     }
@@ -206,7 +201,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           BlocListener(
                             bloc: bloc,
                             listener: (_, StateBloc state) {
-                              print(state);
+                             CheckLogState.check(context, state: state,
+                             msg: "Đăng ký tài khoản thành công",
+                               success: (){
+                               Navigator.pop(context);
+                               },
+                             );
                             },
                             child: Button1(
                                 border: Border.all(

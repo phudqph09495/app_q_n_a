@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/api_path.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_q_n_a/config/api.dart';
 import 'event_bloc.dart';
@@ -24,15 +25,19 @@ class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
 
         var res =
         await Api.postAsync(endPoint: ApiPath.signup, req: req);
-        if(res['result']){
+        if(res['code'] == 1){
           yield LoadSuccess(
-            data: res,
+            data: res['data'],
           );
         }else{
-          yield LoadFail(error: res['message']);
+          yield LoadFail(error: res['error'] ?? "Lỗi kết nối");
         }
-      } catch (e) {
-        yield LoadFail(error: "");
+      }
+      on DioError catch (e) {
+        yield LoadFail(error: e.error);
+      }
+      catch (e) {
+        yield LoadFail(error: e.toString());
       }
     }
   }
