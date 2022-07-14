@@ -1,6 +1,5 @@
 import 'package:app_q_n_a/models/model_local.dart';
 
-
 abstract class EventBloc {}
 
 class GetData extends EventBloc {}
@@ -14,10 +13,10 @@ class getDataOrder extends EventBloc {
 
   getDataOrder(
       {this.limit = 12,
-        this.page = 1,
-        this.cleanList = false,
-        this.loadMore = false,
-        required this.order_key});
+      this.page = 1,
+      this.cleanList = false,
+      this.loadMore = false,
+      required this.order_key});
 }
 
 class getBanner extends EventBloc {
@@ -30,11 +29,6 @@ class getBanner extends EventBloc {
   });
 }
 
-
-
-
-
-
 class UpdateProfile extends EventBloc {
   String name;
   String email;
@@ -45,10 +39,9 @@ class UpdateProfile extends EventBloc {
     required this.name,
     required this.email,
     required this.gender,
-     this.birthday,
+    this.birthday,
   });
 }
-
 
 class AddDataRegistrantion extends EventBloc {
   String phone;
@@ -57,10 +50,7 @@ class AddDataRegistrantion extends EventBloc {
   String password;
   String email;
 
-
   AddDataRegistrantion({
-
-
     required this.username,
     required this.email,
     required this.phone,
@@ -98,10 +88,3 @@ class ChagePassIsLogin extends EventBloc {
     required this.password,
   });
 }
-
-
-
-
-
-
-

@@ -15,7 +15,7 @@ class SharedPrefs {
   }
 
   static readBool(String key) async {
-    return  _preferences.getBool(key) ??  false;
+    return _preferences.getBool(key) ?? false;
   }
 
   static readList(String key) async {

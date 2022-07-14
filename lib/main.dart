@@ -15,16 +15,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'config/path/share_pref_key.dart';
 import 'config/share_pref.dart';
 import 'item/button/button2.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefs.init();
-  runApp(MyApp());
+
+  final checkLogin = await SharedPrefs.readBool(SharePrefsKey.login);
+  if (checkLogin != true) {
+    SharePrefsKey.removeAllKey();
+  }
+  runApp(MyApp(
+    checkLogin: checkLogin,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  bool? checkLogin;
+  MyApp({this.checkLogin});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
