@@ -26,6 +26,7 @@ class GetToken extends Bloc<EventBloc, StateBloc> {
          var randText = rng.nextInt(1000000000);
          var token = sha1.convert(utf8.encode(randText.toString() + Const.key));
          var res = await Api.getAsync(endPoint: ApiPath.startHome + randText.toString(),tokenStart: token.toString());
+
          if(res["code"] == 1){
            SharedPrefs.saveString(SharePrefsKey.user_token, res['data']['token']);
            yield LoadSuccess(

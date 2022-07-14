@@ -8,18 +8,16 @@ import 'path/share_pref_path.dart';
 import 'share_pref.dart';
 
 class Const {
-  //tai khoan test
-  //0817932159
-  //123456
+
   static final ConvertPrice = NumberFormat("#,##0.##", "vi");
 
-  static const image_host = 'hoidap.nanoweb.vn/static';
+  static const image_host = 'http://hoidap.nanoweb.vn/static';
 
-  static const api_host = 'hoidap.nanoweb.vn/api';
+  static const api_host = 'http://hoidap.nanoweb.vn/api';
 
-  static const domain = "hoidap.nanoweb.vn";
+  static const domain = "http://hoidap.nanoweb.vn";
 
-  static const key = 'key_nanoweb_hoidap_2021_real';
+  static const key = 'key_nanoweb_hoidap_2022_real';
 
   static const int debug = 1;
 
