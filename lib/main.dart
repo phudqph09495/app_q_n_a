@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       Button2(
-                        title: "Tại lải",
+                        title: "Tải lại",
                         radius: 10,
                         onTap: () {
                           context.read<GetToken>().add(GetData());

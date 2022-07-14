@@ -2,13 +2,14 @@ import 'dart:io';
 
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/config/share_pref.dart';
+import 'package:app_q_n_a/models/model_user.dart';
+import 'package:app_q_n_a/widget/items/custom_toast.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:app_q_n_a/item/dropdown_button.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
-import 'package:app_q_n_a/item/input/text_filed2.dart';
-import 'package:app_q_n_a/item/load_image.dart';
-import 'package:app_q_n_a/models/model_local.dart';
 import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/material.dart';
 import '../bloc/state_bloc.dart';
@@ -28,7 +29,6 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-
   TextEditingController username = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -39,17 +39,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   RegistrationVoid() async {
     if (keyForm.currentState!.validate()) {
-      bloc.add(
-          AddDataRegistrantion(
-              username: username.text,
-              email: email.text,
-              phone: phone.text,
-              password: password.text,
-              register_by: EnumRegistrantion.phone.toString()));
-
-    } else {
-      Toast.show("Đăng ký thất bại", duration: 1, gravity: Toast.bottom);
+      bloc.add(AddDataRegistrantion(
+          username: username.text,
+          email: email.text,
+          phone: phone.text,
+          password: password.text,
+          register_by: EnumRegistrantion.phone.toString()));
     }
+  }
+
+  cleanInput() {
+    username.clear();
+    password.clear();
+    phone.clear();
+    confirm.clear();
   }
 
   String type = 'Đăng ký User';
@@ -68,7 +71,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 reverse: true,
                 child: Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
                   child: Form(
                     key: keyForm,
                     child: Center(
@@ -79,7 +82,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           SizedBox(
                             height: 40,
                           ),
-
                           Image.asset(
                             'images/backg.png',
                             width: 222,
@@ -107,7 +109,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             height: 15,
                           ),
                           InputText1(
-                            label: "Tên đăng nhập",
+                            label: "Họ và tên",
                             controller: username,
                             borderColor: ColorApp.main.withOpacity(0.2),
                             hasLeading: true,
@@ -201,12 +203,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           BlocListener(
                             bloc: bloc,
                             listener: (_, StateBloc state) {
-                             CheckLogState.check(context, state: state,
-                             msg: "Đăng ký tài khoản thành công",
-                               success: (){
-                               Navigator.pop(context);
-                               },
-                             );
+                              if (state is LoadFail) print(state.error);
+                              CheckLogState.check(
+                                context,
+                                state: state,
+                                msg: "Đăng ký tài khoản thành công",
+                                success: () {
+                                  Navigator.pop(context);
+                                },
+                              );
                             },
                             child: Button1(
                                 border: Border.all(

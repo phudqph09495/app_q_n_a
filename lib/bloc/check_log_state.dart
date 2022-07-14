@@ -10,6 +10,7 @@ class CheckLogState {
      Function()? success}){
      if(state is Loading){
        DialogItem.showLoading(context: context);
+
      }
      if(state is LoadSuccess){
        DialogItem.hideLoading(context: context);

@@ -3,16 +3,21 @@ import 'dart:io';
 import 'package:app_q_n_a/Screens/forgot_password.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_login.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../bloc/check_log_state.dart';
 import '../item/input_text.dart';
 import '../item/button.dart';
 import '../styles/init_style.dart';
 import 'package:toast/toast.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -25,17 +30,11 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController password = TextEditingController();
 
   bool checkedValue = false;
+  BlocLogin bloc =BlocLogin();
   final keyForm = GlobalKey<FormState>();
   LoginVoid() async {
     if (keyForm.currentState!.validate()) {
-      Toast.show("Đăng nhập thành công", duration: 1, gravity: Toast.bottom);
-
-      Future.delayed(Duration(milliseconds: 1500), () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ScreenHome()));
-      });
-    } else {
-      Toast.show("Đăng nhập thất bại", duration: 3, gravity: Toast.bottom);
+bloc.add(loginApp(email: username.text, password: password.text));
     }
   }
 
@@ -87,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20,
                 ),
                 InputText1(
-                  label: "Tên đăng nhập",
+                  label: "Nhập email hoặc số điện thoại",
                   controller: username,
                   borderColor: ColorApp.main.withOpacity(0.2),
                   hasLeading: true,
@@ -148,17 +147,32 @@ shape: CircleBorder(),
                         )),
                   ],
                 ),
-                Button1(
-                  border: Border.all(color: ColorApp.orangeF2,width: 0.5),
-                  style: false,
-                    fontSize: 18,
-                    ontap: () {
-                      LoginVoid();
-                    },
-                    textColor: Colors.white,
-                    textButton: 'Đăng nhập',
-                    colorButton: ColorApp.orangeF2,
-                    radius: 30),
+                BlocListener(
+                  bloc: bloc,
+                  listener: (_,StateBloc state) {
+                    if (state is LoadFail) print(state.error);
+                    CheckLogState.check(
+                      context,
+                      state: state,
+                      msg: "Đăng nhập thành công",
+                      success: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>ScreenHome()));
+                      },
+                    );
+                  },
+                  child: Button1(
+                    border: Border.all(color: ColorApp.orangeF2,width: 0.5),
+                    style: false,
+                      fontSize: 18,
+                   ontap: LoginVoid,
+                      textColor: Colors.white,
+                      textButton: 'Đăng nhập',
+                      colorButton: ColorApp.orangeF2,
+                      radius: 30),
+                ),
                 const SizedBox(
                   height: 30,
                 ),

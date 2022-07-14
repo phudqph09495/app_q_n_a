@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(5),
               ),
               onPressed: () {
-                print("search");
+
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SearchScreen()));
               },
