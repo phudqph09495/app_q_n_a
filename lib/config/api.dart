@@ -1,5 +1,10 @@
-import 'const.dart';
+import 'dart:io';
+
+import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:dio/dio.dart';
+
+import 'const.dart';
+import 'path/share_pref_path.dart';
 
 final dio = Dio()
   ..interceptors.add(
@@ -45,19 +50,21 @@ final dio = Dio()
     ),
   );
 
-
-class Api{
-  static postAsync({required String endPoint, required Map<String, dynamic> req, String? token}) async {
+class Api {
+  static postAsync({required String endPoint, required Map<String, dynamic> req, bool isToken = true, bool hasForm = true}) async {
     try {
       Map<String, dynamic> headers = Map();
-      if(token != null){
-        headers['Authorization'] = "Bearer " + token;
+      headers['Content-Type'] = "application/json";
+      if(isToken){
+        var token = await SharedPrefs.readString(SharePrefsKey.user_token);
+        headers['token'] = token;
       }
+
       FormData formData = FormData.fromMap(req);
       var res = await dio
           .post(
         Const.api_host + endPoint,
-        data: formData,
+        data: hasForm ? formData : req,
         options: Options(
           headers: headers,
         ),
@@ -67,8 +74,51 @@ class Api{
       rethrow;
     }
   }
-}
+  static getAsync({required String endPoint, bool isToken = true, String? tokenStart}) async {
+    try {
+      Map<String, dynamic> headers = Map();
+      headers['Content-Type'] = "application/json";
 
+      if(isToken){
+        var token = await SharedPrefs.readString(SharePrefsKey.user_token);
+        headers['token'] = token;
+      }
+      if(tokenStart != null){
+        headers['token'] = tokenStart;
+      }
+      var res = await dio
+          .get(
+        Const.api_host + endPoint,
+        options: Options(
+          headers: headers,
+        ),
+      );
+      return res.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+  static deleteAsync({required String endPoint, String? token}) async {
+    try {
+      Map<String, dynamic> headers = Map();
+      headers['Content-Type'] = "application/json";
+
+      if(token != null){
+        headers['Authorization'] = "Bearer $token";
+      }
+      var res = await dio
+          .delete(
+        Const.api_host + endPoint,
+        options: Options(
+          headers: headers,
+        ),
+      );
+      return res.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+}
 
 class ModelApiError {
   String? error;

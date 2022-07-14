@@ -3,7 +3,7 @@ import 'package:app_q_n_a/models/model_local.dart';
 
 abstract class EventBloc {}
 
-class getData extends EventBloc {}
+class GetData extends EventBloc {}
 
 class getDataOrder extends EventBloc {
   String order_key;

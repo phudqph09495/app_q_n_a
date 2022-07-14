@@ -18,7 +18,7 @@ import '../styles/init_style.dart';
 import 'package:toast/toast.dart';
 import 'login.dart';
 
-import 'package:app_q_n_a/bloc/bloc_registrantion.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_registrantion.dart';
 
 enum EnumRegistrantion { username, phone }
 

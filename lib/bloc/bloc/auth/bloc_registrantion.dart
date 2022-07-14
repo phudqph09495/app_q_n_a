@@ -5,7 +5,7 @@ import 'package:app_q_n_a/config/api_path.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_q_n_a/config/api.dart';
-import 'event_bloc.dart';
+import '../../event_bloc.dart';
 
 
 class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
