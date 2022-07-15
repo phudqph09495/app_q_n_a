@@ -11,6 +11,7 @@ import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/config/next_page.dart';
+import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,10 @@ import 'package:share/share.dart';
 import '../account/profile.dart';
 import 'ThongKe/ThongKe.dart';
 
+import 'package:app_q_n_a/config/share_pref.dart';
+
+int id=0;
+String name='';
 class BodyProduct extends StatefulWidget {
   @override
   State<BodyProduct> createState() => _BodyProductState();
@@ -34,11 +39,16 @@ class _BodyProductState extends State<BodyProduct> {
   List<TitleAccount> titleAccount = [];
 
   List<TitleAccount> titleApp = [];
-
+getProfile() async
+{
+  id=await SharedPrefs.readString(SharePrefsKeys.user_id);
+  name=await SharedPrefs.readString(SharePrefsKeys.name);
+}
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+getProfile();
     titleAccount.addAll([
       TitleAccount(
           iconData: CupertinoIcons.person,
@@ -133,7 +143,7 @@ class _BodyProductState extends State<BodyProduct> {
       appBar: AppBar(
         backgroundColor: ColorApp.orangeF2,
         bottom: PreferredSize(
-          child: getAppBottomView(context),
+          child: getAppBottomView(context: context,id:(id!=0)?id.toString():'',name: name),
           preferredSize: const Size.fromHeight(45.0),
         ),
       ),

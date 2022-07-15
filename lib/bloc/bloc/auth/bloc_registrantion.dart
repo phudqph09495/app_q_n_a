@@ -28,7 +28,6 @@ class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
 
         var res =
         await Api.postAsync(endPoint: ApiPath.signin, req: req1);
-        print(res);
 
         if(res['code'] == 1){
           ModelUser model = ModelUser.fromJson(res['data']);

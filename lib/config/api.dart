@@ -56,7 +56,7 @@ class Api {
       Map<String, dynamic> headers = Map();
       headers['Content-Type'] = "application/json";
       if(isToken){
-        var token = await SharedPrefs.readString(SharePrefsKey.user_token);
+        var token = await SharedPrefs.readString(SharePrefsKeys.user_token);
         headers['token'] = token;
       }
 
@@ -80,7 +80,7 @@ class Api {
       headers['Content-Type'] = "application/json";
 
       if(isToken){
-        var token = await SharedPrefs.readString(SharePrefsKey.user_token);
+        var token = await SharedPrefs.readString(SharePrefsKeys.user_token);
         headers['token'] = token;
       }
       if(tokenStart != null){

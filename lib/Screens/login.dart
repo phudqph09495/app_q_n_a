@@ -8,7 +8,9 @@ import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
 import 'package:app_q_n_a/item/load_image.dart';
+import 'package:app_q_n_a/models/model_user.dart';
 import 'package:app_q_n_a/validator.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../bloc/check_log_state.dart';
@@ -18,6 +20,10 @@ import '../styles/init_style.dart';
 import 'package:toast/toast.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/config/share_pref.dart';
+
+import 'package:app_q_n_a/config/path/share_pref_key.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -60,12 +66,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 40,
                   ),
-                  // LoadImage(
-                  //   url: "https://hoidap247.com/static/img/logo_h247.png",
-                  //   height: 30,
-                  //   fit: BoxFit.fitHeight,
-                  //   alignment: Alignment.center,
-                  // ),
                   Image.asset(
                     'images/backg.png',
                     width: 230,
@@ -150,12 +150,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   BlocListener(
                     bloc: bloc,
                     listener: (_, StateBloc state) {
-                      if (state is LoadFail) print(state.error);
+                      ModelUser user = ModelUser();
+                      if (state is LoadSuccess) {
+                        user = state.data;
+
+                      }
                       CheckLogState.check(
                         context,
                         state: state,
                         msg: "Đăng nhập thành công",
-                        success: () {
+                        success: () async {
+                          SharePrefsKeys.seveUserKey(user);
+// String aaa= await SharedPrefs.readString(SharePrefsKeys.email);
+// int id=await SharedPrefs.readString(SharePrefsKeys.user_id);
+// print(id);
                           Navigator.push(
                               context,
                               MaterialPageRoute(

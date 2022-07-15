@@ -22,7 +22,7 @@ class Const {
   static const int debug = 1;
 
   static checkLogin({required Function nextPage}) async {
-    bool isLogin = await SharedPrefs.readBool(SharePrefsKey.login);
+    bool isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
     if(isLogin){
       nextPage();
     }else{

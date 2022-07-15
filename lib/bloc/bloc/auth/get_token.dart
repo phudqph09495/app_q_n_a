@@ -20,7 +20,7 @@ class GetToken extends Bloc<EventBloc, StateBloc> {
    if(event is GetData){
      yield Loading();
      try{
-       bool isLogin = await SharedPrefs.readBool(SharePrefsKey.login);
+       bool isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
        if(!isLogin){
          var rng = Random();
          var randText = rng.nextInt(1000000000);
@@ -28,7 +28,7 @@ class GetToken extends Bloc<EventBloc, StateBloc> {
          var res = await Api.getAsync(endPoint: ApiPath.startHome + randText.toString(),tokenStart: token.toString());
 
          if(res["code"] == 1){
-           SharedPrefs.saveString(SharePrefsKey.user_token, res['data']['token']);
+           SharedPrefs.saveString(SharePrefsKeys.user_token, res['data']['token']);
            yield LoadSuccess(
                data: res['data']['token']
            );
@@ -36,7 +36,7 @@ class GetToken extends Bloc<EventBloc, StateBloc> {
            yield LoadFail(error: res['message'] ?? "Tạo token không thành công.");
          }
        }else{
-         String? token = await SharedPrefs.readString(SharePrefsKey.user_token);
+         String? token = await SharedPrefs.readString(SharePrefsKeys.user_token);
          yield LoadSuccess(
              data: token
          );
