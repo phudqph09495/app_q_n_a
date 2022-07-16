@@ -10,9 +10,11 @@ import 'package:app_q_n_a/Screens/account/edit_account/edit_profile.dart';
 import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
+import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/item/button.dart';
+import 'package:app_q_n_a/main.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,7 @@ import 'package:app_q_n_a/config/share_pref.dart';
 
 int id=0;
 String name='';
+bool isLogin=false;
 class BodyProduct extends StatefulWidget {
   @override
   State<BodyProduct> createState() => _BodyProductState();
@@ -43,7 +46,10 @@ getProfile() async
 {
   id=await SharedPrefs.readString(SharePrefsKeys.user_id);
   name=await SharedPrefs.readString(SharePrefsKeys.name);
+  isLogin=await SharedPrefs.readBool(SharePrefsKeys.login);
+
 }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -215,9 +221,8 @@ getProfile();
             const SizedBox(
               height: 12,
             ),
-            Container(
+      isLogin? Container(
               decoration: BoxDecoration(
-                  // border: Border.all(color: ColorApp.black, width: 0.5),
                   border: Border.all(
                       color: ColorApp.main.withOpacity(0.2), width: 0.5),
                   borderRadius: BorderRadius.circular(5)),
@@ -244,25 +249,10 @@ getProfile();
                   ),
                 ),
               ),
-            ),
-            // const SizedBox(
-            //   height: 20,
-            // ),
-            // Button1(
-            //     colorButton: ColorApp.whiteF0,
-            //     textColor: ColorApp.black,
-            //     textButton: 'Đăng ký',
-            //     border: Border.all(color: ColorApp.black00),
-            //     radius: 10,
-            //     ontap: () {
-            //       Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //               builder: (context) => RegistrationScreen()));
-            //     }),
-            const SizedBox(
-              height: 12,
-            ),
+            )
+
+          :
+
             Button1(
                 border: Border.all(color: ColorApp.orangeF2, width: 0.5),
                 colorButton: ColorApp.orangeF2,

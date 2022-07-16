@@ -161,13 +161,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         msg: "Đăng nhập thành công",
                         success: () async {
                           SharePrefsKeys.seveUserKey(user);
-// String aaa= await SharedPrefs.readString(SharePrefsKeys.email);
-// int id=await SharedPrefs.readString(SharePrefsKeys.user_id);
-// print(id);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ScreenHome()));
+
                         },
                       );
                     },

@@ -8,6 +8,9 @@ class ApiPath{
   static const  resetPass = "/api/v2/auth/password/reset";
   static const  changePass = "/api/v2/auth/password/change";
 
+
+  /// question
+  static const addQuestion="/app/question/add-question";
   ///address
   static const getProvinces = "/api/v2/provinces";
   static const getDistricts = "/api/v2/districts-by-province/";

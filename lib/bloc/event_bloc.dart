@@ -69,6 +69,27 @@ class loginApp extends EventBloc {
   });
 }
 
+class addQuesForm extends EventBloc{
+  int user_id;
+  String question;
+  int cat_id;
+  DateTime deadline;
+  int money;
+  int class_id;
+List<dynamic>? image;
+  addQuesForm({
+    required this.user_id,
+    required this.cat_id,
+    required this.class_id,
+    required this.deadline,
+    required this.money,
+    required this.question,
+    this.image,
+
+});
+
+}
+
 class ChagePassApp extends EventBloc {
   String email_or_phone;
   String password;
