@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:app_q_n_a/Screens/login.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,12 +24,12 @@ class Const {
 
   static const int debug = 1;
 
-  static checkLogin({required Function nextPage}) async {
+  static checkLogin(BuildContext context,{required Function nextPage}) async {
     bool isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
     if(isLogin){
       nextPage();
     }else{
-      //Get.toNamed(RouterScreens.screenLogin);
+     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
     }
 
   }

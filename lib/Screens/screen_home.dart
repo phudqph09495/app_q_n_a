@@ -1,6 +1,7 @@
 import 'package:app_q_n_a/Screens/home.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_check_login.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _ScreenHomeState extends State<ScreenHome> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
+    context.read<BlocCheckLogin>().add(GetData());
     return Scaffold(
       body: BlocBuilder<BlocCheckLogin, StateBloc>(
         builder: (context, StateBloc state) {

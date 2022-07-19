@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_question.dart';
 import 'package:app_q_n_a/config/const.dart';
+import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
 import 'package:app_q_n_a/item/input/text_filed2.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
@@ -80,9 +82,10 @@ class _AddQuestionState extends State<AddQuestion> {
   final keyForm = GlobalKey<FormState>();
 
   AddQuesVoid() async {
-    if (keyForm.currentState!.validate()) {
+    if (keyForm.currentState!.validate())  {
+      var user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
       bloc.add(addQuesForm(
-          user_id: 1,
+          user_id: user_id,
           cat_id: 1,
           class_id: 1,
           deadline: DateTime.now(),
