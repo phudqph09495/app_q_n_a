@@ -1,4 +1,6 @@
-class ArgumentHome{
-  bool? checkLogin;
-  ArgumentHome({this.checkLogin,});
+ class ArgumentHome {
+  bool ? checkLogin;
+  ArgumentHome({
+    this.checkLogin,
+  });
 }

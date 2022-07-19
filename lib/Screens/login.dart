@@ -235,12 +235,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.arrow_back),
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
         ],
       )),
     );

@@ -18,8 +18,13 @@ import 'package:app_q_n_a/main.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:toast/toast.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
+import '../../bloc/bloc/routers/routers.dart';
+import '../../config/path/share_pref_key.dart';
+import '../../widget/items/dia_log_item.dart';
 import '../../widget/widget_info/widgetText.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
@@ -28,9 +33,10 @@ import 'ThongKe/ThongKe.dart';
 
 import 'package:app_q_n_a/config/share_pref.dart';
 
-int id=0;
-String name='';
-bool isLogin=false;
+int id = 0;
+String name = '';
+bool isLogin = false;
+
 class BodyProduct extends StatefulWidget {
   @override
   State<BodyProduct> createState() => _BodyProductState();
@@ -42,34 +48,44 @@ class _BodyProductState extends State<BodyProduct> {
   List<TitleAccount> titleAccount = [];
 
   List<TitleAccount> titleApp = [];
-getProfile() async
-{
-  id=await SharedPrefs.readString(SharePrefsKeys.user_id);
-  name=await SharedPrefs.readString(SharePrefsKeys.name);
-  isLogin=await SharedPrefs.readBool(SharePrefsKeys.login);
-
-}
+  getProfile() async {
+    id = await SharedPrefs.readString(SharePrefsKeys.user_id);
+    name = await SharedPrefs.readString(SharePrefsKeys.name);
+    isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-getProfile();
+    getProfile();
     titleAccount.addAll([
       TitleAccount(
           iconData: CupertinoIcons.person,
           title: "Trang cá nhân",
-          onTap: () {
-            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-                duration: 2, gravity: Toast.bottom);
+          onTap: () async {
+            // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+            //     duration: 2, gravity: Toast.bottom);
             PageNavigator.next(context: context, page: ProfileScreen());
+            // final checkLogin = await SharedPrefs.readBool(SharePrefsKey.login);
+            // print(checkLogin);
+            // if (checkLogin != null) {
+            //   Get.toNamed(RouterApp.loginScreen);
+            // } else {
+            //   DialogItem.showMsg(
+            //       title: "Đăng nhập",
+            //       msg: "Vui lòng đăng nhập để thực hiện hành động này",
+            //       login: true,
+            //       checkErr: false,
+            //       context: context);
+            // }
           }),
       TitleAccount(
           iconData: Icons.edit_outlined,
           title: "Chỉnh sửa cá nhân",
           onTap: () {
-            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-                duration: 2, gravity: Toast.bottom);
+            // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+            //     duration: 2, gravity: Toast.bottom);
             showModalBottomSheet(
                 context: context, builder: (context) => BottomSheetAccount());
           }),
@@ -77,8 +93,8 @@ getProfile();
         iconData: CupertinoIcons.bookmark_solid,
         title: "Câu hỏi đã lưu",
         onTap: () {
-          Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-              duration: 2, gravity: Toast.bottom);
+          // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+          //     duration: 2, gravity: Toast.bottom);
           PageNavigator.next(context: context, page: QuestionSavedSS());
         },
       ),
@@ -86,8 +102,8 @@ getProfile();
           iconData: Icons.wallet,
           title: "Ví điện tử",
           onTap: () {
-            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-                duration: 2, gravity: Toast.bottom);
+            // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+            //     duration: 2, gravity: Toast.bottom);
             showModalBottomSheet(
                 context: context, builder: (context) => ScreensPays());
           }),
@@ -95,8 +111,8 @@ getProfile();
         iconData: CupertinoIcons.chart_bar_alt_fill,
         title: "Thống kê",
         onTap: () {
-          Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-              duration: 2, gravity: Toast.bottom);
+          // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
+          //     duration: 2, gravity: Toast.bottom);
           PageNavigator.next(context: context, page: ThongKe());
         },
       ),
@@ -127,8 +143,6 @@ getProfile();
           iconData: CupertinoIcons.share,
           title: "Chia sẻ ứng dụng",
           onTap: () {
-            Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-                duration: 2, gravity: Toast.bottom);
             Share.share('Chia sẻ ứng dụng với bạn bè tại  https://hoidap.com/');
           }),
       TitleAccount(
@@ -149,7 +163,8 @@ getProfile();
       appBar: AppBar(
         backgroundColor: ColorApp.orangeF2,
         bottom: PreferredSize(
-          child: getAppBottomView(context: context,id:(id!=0)?id.toString():'',name: name),
+          child: getAppBottomView(
+              context: context, id: (id != 0) ? id.toString() : '', name: name),
           preferredSize: const Size.fromHeight(45.0),
         ),
       ),
@@ -221,50 +236,37 @@ getProfile();
             const SizedBox(
               height: 12,
             ),
-      isLogin? Container(
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: ColorApp.main.withOpacity(0.2), width: 0.5),
-                  borderRadius: BorderRadius.circular(5)),
-              child: ListTileTheme(
-                tileColor: Colors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                dense: true,
-                child: ExpansionTile(
-                  iconColor: ColorApp.orangeF01,
-                  collapsedIconColor: ColorApp.orangeF01,
-                  trailing: const SizedBox(),
-                  leading: const Padding(
-                    padding: EdgeInsets.only(left: 14),
-                    child: Icon(
-                      Icons.logout,
-                      color: ColorApp.black,
-                      size: 16,
-                    ),
-                  ),
-                  title: Text(
-                    'Đăng xuất',
-                    style: StyleApp.textStyle500(
-                        color: ColorApp.black, fontSize: 16),
-                  ),
-                ),
-              ),
-            )
-
-          :
-
-            Button1(
-                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                colorButton: ColorApp.orangeF2,
-                textColor: Colors.white,
-                textButton: 'Đăng nhập',
-                radius: 5,
-                fontSize: 18,
-                style: false,
-                ontap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
-                })
+            isLogin
+                ? Button1(
+                    border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                    colorButton: ColorApp.orangeF2,
+                    textColor: Colors.white,
+                    textButton: 'Đăng xuất',
+                    radius: 5,
+                    fontSize: 18,
+                    style: false,
+                    ontap: () {
+                      DialogItem.showMsg(
+                          context: context,
+                          title: "Đăng xuất",
+                          msg: "Bạn có muôn đăng xuất tài khoản này không?",
+                          logout: true,
+                          titleButton: "Đồng ý");
+                    })
+                : Button1(
+                    border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                    colorButton: ColorApp.orangeF2,
+                    textColor: Colors.white,
+                    textButton: 'Đăng nhập',
+                    radius: 5,
+                    fontSize: 18,
+                    style: false,
+                    ontap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    })
           ],
         ),
       ),

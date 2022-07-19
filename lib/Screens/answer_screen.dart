@@ -9,7 +9,7 @@ import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:toast/toast.dart';
-DateTime deadline = DateTime.parse("2022-07-08 22:00:00.0000");
+DateTime deadline = DateTime.parse("2022-07-18 22:00:00.0000");
 class AnswerScreen extends StatefulWidget {
 
   @override

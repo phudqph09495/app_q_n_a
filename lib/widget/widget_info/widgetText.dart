@@ -1,10 +1,10 @@
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
+import '../../config/const.dart';
 import 'widgetIcons.dart';
 
-Widget getAppBottomView({
-  required BuildContext context,
-  String? id, String? name}) {
+Widget getAppBottomView(
+    {required BuildContext context, String? id, String? name}) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
     child: Row(
@@ -19,6 +19,7 @@ Widget getAppBottomView({
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
+                  // Const.checkStringNull(name),
                   'Họ và tên: $name',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -26,6 +27,7 @@ Widget getAppBottomView({
                       color: ColorApp.black, fontSize: 16),
                 ),
                 Text(
+                  // Const.checkStringNull(id),
                   'Id thành viên: $id',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

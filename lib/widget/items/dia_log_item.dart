@@ -1,5 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../bloc/bloc/checkLogin.dart';
+import '../../bloc/bloc/routers/routers.dart';
+import '../../config/path/share_pref_key.dart';
 import '../../styles/init_style.dart';
 
 class DialogItem {
@@ -33,10 +37,11 @@ class DialogItem {
             onPressed: () async {
               if(logout){
                 Navigator.pop(context);
-
+                SharePrefsKey.removeAllKey();
+                Get.offAllNamed(RouterApp.screenHome, arguments: ArgumentHome());
               }else{
                 Navigator.pop(context);
-
+                Get.toNamed(RouterApp.bodyProduct);
               }
             },
             child: Text(
