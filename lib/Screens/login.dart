@@ -7,23 +7,17 @@ import 'package:app_q_n_a/bloc/bloc/auth/bloc_login.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
-import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_user.dart';
 import 'package:app_q_n_a/validator.dart';
-import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../bloc/bloc/auth/bloc_check_login.dart';
 import '../bloc/check_log_state.dart';
-import '../item/input_text.dart';
 import '../item/button.dart';
 import '../styles/init_style.dart';
 import 'package:toast/toast.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
-import 'package:app_q_n_a/config/share_pref.dart';
-
-import 'package:app_q_n_a/config/path/share_pref_key.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -160,7 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         state: state,
                         msg: "Đăng nhập thành công",
                         success: () async {
-                          SharePrefsKeys.seveUserKey(user);
+                          await SharePrefsKeys.seveUserKey(user);
+                          context.read<BlocCheckLogin>().add(GetData());
                           Navigator.push(
                               context,
                               MaterialPageRoute(

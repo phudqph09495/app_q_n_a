@@ -22,8 +22,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:toast/toast.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
-import '../../bloc/bloc/routers/routers.dart';
-import '../../config/path/share_pref_key.dart';
 import '../../widget/items/dia_log_item.dart';
 import '../../widget/widget_info/widgetText.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -251,7 +249,8 @@ class _BodyProductState extends State<BodyProduct> {
                           title: "Đăng xuất",
                           msg: "Bạn có muôn đăng xuất tài khoản này không?",
                           logout: true,
-                          titleButton: "Đồng ý");
+                          titleButton: "Đồng ý",
+                      );
                     })
                 : Button1(
                     border: Border.all(color: ColorApp.orangeF2, width: 0.5),

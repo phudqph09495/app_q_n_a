@@ -5,7 +5,8 @@ import 'package:app_q_n_a/config/path/api_path.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:dio/dio.dart';
-import '../../../config/path/share_pref_key.dart';
+
+import '../../../config/path/share_pref_path.dart';
 
 class BlocChangPass extends Bloc<EventBloc, StateBloc> {
   BlocChangPass() : super(StateBloc());
@@ -40,7 +41,7 @@ class BlocChangPass extends Bloc<EventBloc, StateBloc> {
         Map<String, dynamic> req = Map();
         req['new_password'] = event.password_new;
         req['old_password'] = event.password;
-        final token = await SharedPrefs.readString(SharePrefsKey.user_token);
+        final token = await SharedPrefs.readString(SharePrefsKeys.user_token);
         var res = await Api.postAsync(
             endPoint: ApiPath.changePassIsLogin, req: req, isToken: token);
         if (res['result']) {

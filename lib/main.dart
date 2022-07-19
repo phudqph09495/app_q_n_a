@@ -15,7 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'config/path/share_pref_key.dart';
+import 'bloc/bloc/auth/bloc_check_login.dart';
+import 'config/path/share_pref_path.dart';
 import 'config/share_pref.dart';
 import 'item/button/button2.dart';
 
@@ -23,9 +24,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefs.init();
 
-  final checkLogin = await SharedPrefs.readBool(SharePrefsKey.login);
+  final checkLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
   if (checkLogin != true) {
-    SharePrefsKey.removeAllKey();
+    SharePrefsKeys.removeAllKey();
   }
   runApp(MyApp(
     checkLogin: checkLogin,
@@ -40,15 +41,13 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => GetToken()..add(GetData())),
+        BlocProvider(create: (_) => BlocCheckLogin()..add(GetData())),
       ],
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ImageAppProvider()..setImage()),
         ],
         child: MaterialApp(
-          // useInheritedMediaQuery: true,
-          // locale: DevicePreview.locale(context),
-          // builder: DevicePreview.appBuilder,
           theme: ThemeData(
             unselectedWidgetColor: ColorApp.orangeF2,
           ),

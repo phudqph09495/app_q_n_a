@@ -21,13 +21,14 @@ class BlocLogin extends Bloc<EventBloc, StateBloc> {
         req1['LoginForm'] = req;
 
         var res = await Api.postAsync(endPoint: ApiPath.login, req: req1);
+
         if (res['code'] == 1) {
           ModelUser model = ModelUser.fromJson(res['data']);
           yield LoadSuccess(
             data: model,
           );
         } else {
-          yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
+          yield LoadFail(error: res['error'] ?? "Lỗi kết nối");
         }
       } on DioError catch (e) {
         yield LoadFail(error: e.error);

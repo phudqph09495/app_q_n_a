@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../config/path/share_pref_key.dart';
+import '../../config/path/share_pref_path.dart';
 import '../../config/share_pref.dart';
 
 class UserProvider with ChangeNotifier{
@@ -15,10 +15,10 @@ class UserProvider with ChangeNotifier{
   String? get getavatar => avatar;
 
   getDataProvider() async {
-    name = await SharedPrefs.readString(SharePrefsKey.name);
-    avatar = await SharedPrefs.readString(SharePrefsKey.avatar);
-    email = await SharedPrefs.readString(SharePrefsKey.email);
-    phone = await SharedPrefs.readString(SharePrefsKey.phone);
+    name = await SharedPrefs.readString(SharePrefsKeys.name);
+    avatar = await SharedPrefs.readString(SharePrefsKeys.avatar);
+    email = await SharedPrefs.readString(SharePrefsKeys.email);
+    phone = await SharedPrefs.readString(SharePrefsKeys.phone);
     notifyListeners();
   }
 }

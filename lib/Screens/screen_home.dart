@@ -1,6 +1,10 @@
 import 'package:app_q_n_a/Screens/home.dart';
+import 'package:app_q_n_a/Screens/login.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_check_login.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Screens_Notification/notification.dart';
 import '../styles/init_style.dart';
@@ -16,13 +20,18 @@ class _ScreenHomeState extends State<ScreenHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: index,
-        children: [
-          HomeScreen(),
-          Notificationbar(),
-          BodyProduct(),
-        ],
+      body: BlocBuilder<BlocCheckLogin, StateBloc>(
+        builder: (context, StateBloc state) {
+          final check = state is LoadSuccess ? state.data as bool : false;
+          return IndexedStack(
+            index: index,
+            children: [
+              HomeScreen(),
+              Notificationbar(),
+              check ? BodyProduct() : LoginScreen(),
+            ],
+          );
+        }
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (val) {
