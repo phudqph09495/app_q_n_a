@@ -25,11 +25,18 @@ class BlocQuestion extends Bloc<EventBloc,StateBloc>{
         req['class_id']=event.class_id;
         req['deadline']=event.deadline;
         req['money']=event.money;
-        req['image[]']=event.image;
-        Map<String, dynamic> req1 = Map();
-        req1['QuestionForm'] = req;
 
-        var res = await Api.postAsync(endPoint: ApiPath.addQuestion, req: req1);
+        List<MultipartFile> images = [];
+        if(event.images != null){
+          for(var item in event.images!){
+            MultipartFile image =  await MultipartFile.fromFile(item.path,
+                       filename: item.path.split('/').last);
+            images.add(image);
+          }
+          req['images'] = images;
+        }
+        print(req);
+        var res = await Api.postAsync(endPoint: ApiPath.addQuestion, req: req);
         if (res['code'] == 1) {
           // ModelUser model = ModelUser.fromJson(res['data']);
           yield LoadSuccess(

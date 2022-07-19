@@ -31,11 +31,10 @@ class Const {
 
   }
 
-  static formatTime(time, {String? format}) {
+  static formatTime(int time, {String? format}) {
     var check = isNumeric(time.toString());
     if (check) {
-      return DateFormat(format ?? 'dd-MM-yyyy', 'en_US')
-          .format(DateTime.fromMillisecondsSinceEpoch(int.parse(time.toString()) * 1000));
+      return DateFormat(format ?? 'dd/MM/yyyy', 'en_US').format(DateTime.fromMillisecondsSinceEpoch(time));
     }
     return '';
   }

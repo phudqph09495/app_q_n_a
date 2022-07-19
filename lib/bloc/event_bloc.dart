@@ -1,4 +1,5 @@
 import 'package:app_q_n_a/models/model_local.dart';
+import 'package:image_picker/image_picker.dart';
 
 abstract class EventBloc {}
 
@@ -76,7 +77,7 @@ class addQuesForm extends EventBloc{
   DateTime deadline;
   int money;
   int class_id;
-List<dynamic>? image;
+  List<XFile>? images;
   addQuesForm({
     required this.user_id,
     required this.cat_id,
@@ -84,7 +85,7 @@ List<dynamic>? image;
     required this.deadline,
     required this.money,
     required this.question,
-    this.image,
+    this.images,
 
 });
 
