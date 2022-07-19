@@ -147,7 +147,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ModelUser user = ModelUser();
                       if (state is LoadSuccess) {
                         user = state.data;
-
                       }
                       CheckLogState.check(
                         context,
@@ -160,7 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ScreenHome()));
-
                         },
                       );
                     },

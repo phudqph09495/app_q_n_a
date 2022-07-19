@@ -71,17 +71,17 @@ class loginApp extends EventBloc {
 }
 
 class addQuesForm extends EventBloc{
-  int user_id;
+ int user_id;
   String question;
-  int cat_id;
+  int? cat_id;
   DateTime deadline;
-  int money;
-  int class_id;
+  String money;
+  int? class_id;
   List<XFile>? images;
   addQuesForm({
     required this.user_id,
-    required this.cat_id,
-    required this.class_id,
+    this.cat_id,
+    this.class_id,
     required this.deadline,
     required this.money,
     required this.question,
