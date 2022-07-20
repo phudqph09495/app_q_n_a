@@ -86,7 +86,7 @@ class ViTien extends StatelessWidget {
                     ),
                     iconColor: ColorApp.orangeF2,
                     collapsedIconColor: Colors.black,
-                    children: List.generate(10, (index) => _buildItem()),
+                    children: List.generate(5, (index) => _buildItem()),
                   ),
                 ),
               ),

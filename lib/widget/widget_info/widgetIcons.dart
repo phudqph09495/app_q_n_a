@@ -12,15 +12,12 @@ import '../../Screens/account/item/bottom_sheet_avavtar.dart';
 Widget getProfileView(BuildContext context) {
   return InkWell(
     onTap: () {
-      Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-          duration: 2, gravity: Toast.bottom);
       Future.delayed(Duration(milliseconds: 4000), () {
         showModalBottomSheet(
             context: context, builder: (context) => BottomSheetAvatar());
       });
     },
     child: Consumer<ImageAppProvider>(builder: (context, model, child) {
-
       print(model.image);
       return Stack(
         children: [

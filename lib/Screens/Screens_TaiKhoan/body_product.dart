@@ -62,28 +62,14 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: CupertinoIcons.person,
           title: "Trang cá nhân",
           onTap: () async {
-            // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-            //     duration: 2, gravity: Toast.bottom);
-            PageNavigator.next(context: context, page: ProfileScreen());
-            // final checkLogin = await SharedPrefs.readBool(SharePrefsKey.login);
-            // print(checkLogin);
-            // if (checkLogin != null) {
-            //   Get.toNamed(RouterApp.loginScreen);
-            // } else {
-            //   DialogItem.showMsg(
-            //       title: "Đăng nhập",
-            //       msg: "Vui lòng đăng nhập để thực hiện hành động này",
-            //       login: true,
-            //       checkErr: false,
-            //       context: context);
-            // }
+            PageNavigator.next(
+                context: context,
+                page: ProfileScreen(context: context, name: name));
           }),
       TitleAccount(
           iconData: Icons.edit_outlined,
           title: "Chỉnh sửa cá nhân",
           onTap: () {
-            // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-            //     duration: 2, gravity: Toast.bottom);
             showModalBottomSheet(
                 context: context, builder: (context) => BottomSheetAccount());
           }),
@@ -91,8 +77,6 @@ class _BodyProductState extends State<BodyProduct> {
         iconData: CupertinoIcons.bookmark_solid,
         title: "Câu hỏi đã lưu",
         onTap: () {
-          // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-          //     duration: 2, gravity: Toast.bottom);
           PageNavigator.next(context: context, page: QuestionSavedSS());
         },
       ),
@@ -100,8 +84,6 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: Icons.wallet,
           title: "Ví điện tử",
           onTap: () {
-            // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-            //     duration: 2, gravity: Toast.bottom);
             showModalBottomSheet(
                 context: context, builder: (context) => ScreensPays());
           }),
@@ -109,8 +91,6 @@ class _BodyProductState extends State<BodyProduct> {
         iconData: CupertinoIcons.chart_bar_alt_fill,
         title: "Thống kê",
         onTap: () {
-          // Toast.show("Bạn phải đăng nhập mới sử dụng được chức năng này",
-          //     duration: 2, gravity: Toast.bottom);
           PageNavigator.next(context: context, page: ThongKe());
         },
       ),
@@ -245,11 +225,11 @@ class _BodyProductState extends State<BodyProduct> {
                     style: false,
                     ontap: () {
                       DialogItem.showMsg(
-                          context: context,
-                          title: "Đăng xuất",
-                          msg: "Bạn có muôn đăng xuất tài khoản này không?",
-                          logout: true,
-                          titleButton: "Đồng ý",
+                        context: context,
+                        title: "Đăng xuất",
+                        msg: "Bạn có muôn đăng xuất tài khoản này không?",
+                        logout: true,
+                        titleButton: "Đồng ý",
                       );
                     })
                 : Button1(

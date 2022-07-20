@@ -1,9 +1,13 @@
 import 'dart:io';
-
+import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/models/model_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../../../bloc/provider/user_provider.dart';
+import '../../../config/share_pref.dart';
 import '../../../item/drop_item.dart';
 import '../../../item/input/text_filed2.dart';
 import '../../../models/model_local.dart';
@@ -11,6 +15,11 @@ import '../../../styles/init_style.dart';
 
 class EditProfile extends StatelessWidget {
   TextEditingController birthday = TextEditingController();
+  Map req = new Map();
+  getDataReq(ModelUser user) {
+    req['sex'] = user.sex ?? "";
+    req['birthday'] = user.birthday ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {

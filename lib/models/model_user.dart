@@ -68,7 +68,7 @@ class ModelUser {
       this.passwordHash2, 
       this.userGtApp, 
       this.verifyEmail, 
-      this.cmt, 
+      this.cmt,
       this.tokenOtp, 
       this.tokenApp,});
 
