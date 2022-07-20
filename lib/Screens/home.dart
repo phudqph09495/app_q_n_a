@@ -1,9 +1,15 @@
 import 'package:app_q_n_a/Screens/answer_screen.dart';
 import 'package:app_q_n_a/Screens/filter.dart';
 import 'package:app_q_n_a/Screens/search_screen.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_getquestion.dart';
+import 'package:app_q_n_a/bloc/check_log_state.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
+import 'package:app_q_n_a/models/model_question.dart';
 
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../item/question_tile.dart';
 import 'add_question.dart';
@@ -14,6 +20,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  BlocGetQuestion blocGetQuestion = BlocGetQuestion();
+  List<ModelQuestion> listQues=[];
+  Future<void> onRefresh() async {
+    blocGetQuestion.add(GetData());
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    onRefresh();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: ColorApp.orangeF2,
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AddQuestion()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddQuestion()));
           },
           label: Text(
             'Đặt câu hỏi',
@@ -94,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(5),
               ),
               onPressed: () {
-
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SearchScreen()));
               },
@@ -108,38 +126,50 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+        body: RefreshIndicator(
+          onRefresh: onRefresh,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: BlocConsumer(
+                  bloc: blocGetQuestion,
+                  listener:(_,StateBloc state){
 
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric( horizontal: 10),
-                children: List.generate(
-                    10,
-                    (index) => QuestionTile(
-                        mon: 'Toán',
-                        deadline: 'Còn 3h',
-                        lop: 12,
-                        money: 50000,
-                        time: '1h',
-                        ontap: () {
-
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AnswerScreen()));
-                        },
-                        question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
-                        attach: true,
-                        attachCount: 1,
-                        first: true,
-                        avatar: '')),
+                   if(state is LoadSuccess){
+listQues.add(state.data);
+                   }
+                  } ,
+                  builder: (_, state) => ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    children: List.generate(
+                        10,
+                            (index) => QuestionTile(
+                            mon: 'Toán',
+                            deadline: 1660496400,
+                            lop: 12,
+                            money: 50000,
+                            createTime: 1658289888,
+                            ontap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AnswerScreen()));
+                            },
+                            question:
+                            'Đếm số đỉnh, số cạnh của khối bát diện đều.',
+                            attach: true,
+                            attachCount: 1,
+                            first: true,
+                            avatar: '')),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+

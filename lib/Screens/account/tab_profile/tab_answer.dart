@@ -14,14 +14,14 @@ class TabAnswer extends StatelessWidget {
         20,
         (index) => QuestionTile(
           mon: 'Toán',
-          deadline: 'Còn 3h',
+          deadline: 1660496400,
           lop: 12,
           money: 50,
           ontap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => AnswerScreen()));
           },
-          time: '1h trước',
+          createTime: 1658288536,
           question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
           attach: true,
           attachCount: 1,

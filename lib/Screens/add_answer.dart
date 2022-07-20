@@ -93,15 +93,6 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
               const SizedBox(
                 height: 10,
               ),
-              // InputText(
-              //   counter: true,
-              //
-              //
-              //   hint: 'Nhập câu trả lời của bạn',
-              //   controller: answer,
-              //   maxline: 6,
-              //   inputType: TextInputType.multiline,
-              // ),
               InputText2(
                 counter: true,
                 hint: 'Nhập câu trả lời của bạn',

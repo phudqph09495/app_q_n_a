@@ -194,7 +194,7 @@ class _AddQuestionState extends State<AddQuestion> {
       ),
       onConfirm: (date) {
         if (date.millisecondsSinceEpoch >
-            (DateTime.now().millisecondsSinceEpoch + (60000 * 30))) {
+            (DateTime.now().millisecondsSinceEpoch + (60000 * 10))) {
           dateTime = date;
 
           deadline.text = Const.formatTime(date.millisecondsSinceEpoch,
@@ -202,7 +202,7 @@ class _AddQuestionState extends State<AddQuestion> {
         } else {
           CustomToast.showToast(
               context: context,
-              msg: "Deadline phải lớn hơn thời gian tạo câu hỏi 30 phút");
+              msg: "Deadline phải lớn hơn thời gian tạo câu hỏi 10 phút");
         }
       },
       currentTime: dateTime,
@@ -253,7 +253,7 @@ class _AddQuestionState extends State<AddQuestion> {
         ),
       ),
       body: SingleChildScrollView(
-        reverse: true,
+        // reverse: true,
         child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Form(
@@ -280,10 +280,10 @@ class _AddQuestionState extends State<AddQuestion> {
                     ModelLocal(id: "7", name: "Địa lý"),
                     ModelLocal(id: "8", name: "Tiếng Anh"),
                     ModelLocal(id: "9", name: "Tin học"),
-                    ModelLocal(id: "10", name: "GDCD"),
-                    ModelLocal(id: "11", name: "Công nghệ"),
-                    ModelLocal(id: "12", name: "Âm nhạc"),
-                    ModelLocal(id: "13", name: "Mỹ Thuật"),
+                    ModelLocal(id: "10",name: "GDCD"),
+                    ModelLocal(id: "11",name: "Công nghệ"),
+                    ModelLocal(id: "12",name: "Âm nhạc"),
+                    ModelLocal(id: "13",name: "Mỹ Thuật"),
                   ],
                   hint: 'Chọn môn học',
                   onChanged: (val) {
@@ -383,40 +383,8 @@ class _AddQuestionState extends State<AddQuestion> {
                     return buildImage();
                   },
                 ),
-                // _imageFileList!.isNotEmpty
-                //     ? GridView.builder(
-                //         itemCount: _imageFileList!.length,
-                //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //             crossAxisCount: 3),
-                //         shrinkWrap: true,
-                //         itemBuilder: (BuildContext context, int index) {
-                //           return Image.file(
-                //             File(_imageFileList![index].path),
-                //           );
-                //         })
-                //     : SizedBox(),
-                // Row(
-                //   children: [
-                //     IconButton(
-                //         onPressed: () {
-                //           selectImageCamera();
-                //         },
-                //         icon: Icon(
-                //           Icons.camera_alt,
-                //           size: 30,
-                //         )),
-                //     IconButton(
-                //         onPressed: () {
-                //           selectImageGallery();
-                //         },
-                //         icon: Icon(
-                //           Icons.image,
-                //           size: 30,
-                //         )),
-                //   ],
-                // ),
                 SizedBox(
-                  height: 100,
+                  height: 70,
                 ),
               ],
             ),
