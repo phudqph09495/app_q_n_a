@@ -15,12 +15,11 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
     if (event is GetData) {
       List<ModelQuestion> ques = [];
-      Map<String, dynamic> req = Map();
-      req['user_id']=await SharedPrefs.readString(SharePrefsKeys.user_id);
+
       yield Loading();
       try {
         // var res = await Api.getAsync(endPoint: ApiPath.getQuestion);
-        var res=await Api.postAsync(endPoint: ApiPath.getQuestion, req: req);
+        var res=await Api.getAsync(endPoint: ApiPath.getQuestion);
         print(res);
         for (var item in res['data']) {
           ModelQuestion modelQuestion = ModelQuestion.fromJson(item);

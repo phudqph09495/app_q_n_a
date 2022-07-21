@@ -34,7 +34,7 @@ class _QuestionListState extends State<QuestionList> {
                                       null)
                                   ? int.parse(widget.listItem[index].deadline)*1000
                                   : 0,
-                              question: widget.listItem[index].question,
+                              question: widget.listItem[index].description,
                               username: widget.listItem[index].username,
                               createAt:
                                   int.parse(widget.listItem[index].createdAt),

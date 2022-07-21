@@ -37,12 +37,13 @@ class _AnswerScreenState extends State<AnswerScreen> {
   bool timing = true;
   late int kq;
 
-  CheckUserid() async {
+  getUserid() async {
     int userid = Body.id;
-    if ((userid == null) || (userid == 0)) {
+    print(userid);
+    if ( userid == 0) {
       kq = 0;
     }
-    if (userid != widget.uqid) {
+   else if (userid != widget.uqid) {
       kq = 1;
     } else {
       kq = 2;
@@ -53,8 +54,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    CheckUserid();
+    getUserid();
     showQuestion();
+    print(kq);
 
   }
 

@@ -11,7 +11,7 @@ class ApiPath{
 
   /// question
   static const addQuestion="/app/question/add-question";
-  static const getQuestion="/app/question/get-question";
+  static const getQuestion="/app/home/get-question";
   ///address
   static const getProvinces = "/api/v2/provinces";
   static const getDistricts = "/api/v2/districts-by-province/";
