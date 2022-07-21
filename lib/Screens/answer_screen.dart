@@ -12,16 +12,16 @@ import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
-
-
+import 'Screens_TaiKhoan/body_product.dart' as Body;
 
 class AnswerScreen extends StatefulWidget {
-int? deadline;
-String? question;
-String? username;
-int? createAt;
-int? uqid;
-AnswerScreen({this.deadline,this.question,this.username,this.createAt,this.uqid});
+  int? deadline;
+  String? question;
+  String? username;
+  int? createAt;
+  int? uqid;
+  AnswerScreen(
+      {this.deadline, this.question, this.username, this.createAt, this.uqid});
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
 }
@@ -33,26 +33,29 @@ class _AnswerScreenState extends State<AnswerScreen> {
   String mon = 'Toán';
   int value = -1;
   bool hasPaid = false;
-  List<int> i=[0,1,2,2,3,5];
+  List<int> i = [0, 1, 2, 2, 3, 5];
   bool timing = true;
   late int kq;
-getUserid() async{
-  int userid= await SharedPrefs.readString(SharePrefsKeys.user_id);
-  if((userid==null)||(userid==0)){
-    kq=0;
-  }
-  if(userid!=widget.uqid){
-    kq=1;
-  }else{kq=2;}
-}
 
+  getUserid() async {
+    int userid = Body.id;
+    if ((userid == null) || (userid == 0)) {
+      kq = 0;
+    }
+    if (userid != widget.uqid) {
+      kq = 1;
+    } else {
+      kq = 2;
+    }
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    showQuestion();
     getUserid();
+    showQuestion();
+
   }
 
   showQuestion() {
@@ -62,6 +65,7 @@ getUserid() async{
       timing = false;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
@@ -69,23 +73,25 @@ getUserid() async{
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Button1(
-            colorButton: timing?ColorApp.orangeF2:Colors.grey.withOpacity(0.5),
+            colorButton:
+                timing ? ColorApp.orangeF2 : Colors.grey.withOpacity(0.5),
             textColor: ColorApp.whiteF0,
             radius: 30,
             fontSize: 18,
             style: false,
             // border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-            textButton: timing?'Viết câu trả lời':'Đã hết thời gian trả lời',
+            textButton:
+                timing ? 'Viết câu trả lời' : 'Đã hết thời gian trả lời',
             ontap: () {
-              if ((timing == true)&&(hasPaid==false)) {
+              if ((timing == true) && (hasPaid == false)) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Add_Answer_Screen()));
-              } else if(timing==false) {
+              } else if (timing == false) {
                 Toast.show("Đã hết thời gian trả lời câu hỏi",
                     duration: 1, gravity: Toast.bottom);
-              }else if(hasPaid==true){
+              } else if (hasPaid == true) {
                 Toast.show("Câu hỏi đã được trả thưởng",
                     duration: 1, gravity: Toast.bottom);
               }
@@ -125,8 +131,9 @@ getUserid() async{
                 avatar: '',
                 ques: widget.question!,
                 user: widget.username!,
-                time: DateFormat('dd/MM/yyyy, HH:mm').format( DateTime.fromMillisecondsSinceEpoch(widget.createAt!*1000)),
-
+                time: DateFormat('dd/MM/yyyy, HH:mm').format(
+                    DateTime.fromMillisecondsSinceEpoch(
+                        widget.createAt! * 1000)),
               ),
               const SizedBox(
                 height: 10,
@@ -137,7 +144,7 @@ getUserid() async{
                 itemCount: 4,
                 itemBuilder: (context, index) {
                   return AnswerCard(
-                    status: timing ?kq : 3,
+                    status: timing ? kq : 3,
                     //trạng thái của câu trả lời
                     //0: chưa đăng nhập
                     //1: không phải chủ câu hỏi
@@ -150,45 +157,50 @@ getUserid() async{
                       style: StyleApp.textStyle500(fontSize: 14),
                     ),
                     onchanged: (val) {
-                      if (hasPaid == false) {
-                        showPlatformDialog(
-                          context: context,
-                          builder: (context) => BasicDialogAlert(
-                            title: Text("Thanh toán"),
-                            content:
-                                Text("Xác nhận thanh toán cho người trả lời"),
-                            actions: <Widget>[
-                              BasicDialogAction(
-                                title: Text("Từ chối"),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              BasicDialogAction(
-                                title: Text("Đồng ý"),
-                                onPressed: () {
-                                  setState(() {
-                                    Toast.show("Thanh toán thành công",
-                                        duration: 2, gravity: Toast.bottom);
-
+                      if (kq == 2) {
+                        if (hasPaid == false) {
+                          showPlatformDialog(
+                            context: context,
+                            builder: (context) => BasicDialogAlert(
+                              title: Text("Thanh toán"),
+                              content:
+                                  Text("Xác nhận thanh toán cho người trả lời"),
+                              actions: <Widget>[
+                                BasicDialogAction(
+                                  title: Text("Từ chối"),
+                                  onPressed: () {
                                     Navigator.pop(context);
-                                    value = val;
-                                    hasPaid = true;
+                                  },
+                                ),
+                                BasicDialogAction(
+                                  title: Text("Đồng ý"),
+                                  onPressed: () {
+                                    setState(() {
+                                      Toast.show("Thanh toán thành công",
+                                          duration: 2, gravity: Toast.bottom);
 
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        );
+                                      Navigator.pop(context);
+                                      value = val;
+                                      hasPaid = true;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          Toast.show(
+                              "Bạn chỉ có thể thanh toán cho 1 câu trả lời",
+                              duration: 1,
+                              gravity: Toast.bottom);
+                        }
                       } else {
                         Toast.show(
-                            "Bạn chỉ có thể thanh toán cho 1 câu trả lời",
+                            "Bạn không thể trả tiền cho câu hỏi của người khác",
                             duration: 1,
                             gravity: Toast.bottom);
                       }
                     },
-
 
                     time: '12:00 14/06/2022',
                     user: 'Nguyen van nam',
@@ -207,5 +219,3 @@ getUserid() async{
     );
   }
 }
-
-
