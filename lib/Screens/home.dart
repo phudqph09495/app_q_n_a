@@ -5,6 +5,7 @@ import 'package:app_q_n_a/bloc/bloc/auth/bloc_getquestion.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
+import 'package:app_q_n_a/item/question_list.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 
 import 'package:app_q_n_a/styles/init_style.dart';
@@ -21,7 +22,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   BlocGetQuestion blocGetQuestion = BlocGetQuestion();
-  List<ModelQuestion> listQues=[];
   Future<void> onRefresh() async {
     blocGetQuestion.add(GetData());
   }
@@ -132,36 +132,12 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: BlocConsumer(
+                child: BlocBuilder<BlocGetQuestion,StateBloc>(
                   bloc: blocGetQuestion,
-                  listener:(_,StateBloc state){
-
-                   if(state is LoadSuccess){
-listQues.add(state.data);
-                   }
-                  } ,
-                  builder: (_, state) => ListView(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    children: List.generate(
-                        10,
-                            (index) => QuestionTile(
-                            mon: 'Toán',
-                            deadline: 1660496400,
-                            lop: 12,
-                            money: 50000,
-                            createTime: 1658289888,
-                            ontap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AnswerScreen()));
-                            },
-                            question:
-                            'Đếm số đỉnh, số cạnh của khối bát diện đều.',
-                            attach: true,
-                            attachCount: 1,
-                            first: true,
-                            avatar: '')),
+                  builder: (_, state) => QuestionList(
+                    listItem: state is LoadSuccess
+                        ? state.data as List<ModelQuestion>
+                        : [],
                   ),
                 ),
               ),
@@ -172,4 +148,3 @@ listQues.add(state.data);
     );
   }
 }
-

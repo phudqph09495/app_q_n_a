@@ -14,7 +14,7 @@ Widget QuestionTile({
   required int money,
   required int createTime,
   required String question,
-  required String avatar,
+   String? avatar,
   Function()? ontap,
   bool first = false,
   bool attach = false,
