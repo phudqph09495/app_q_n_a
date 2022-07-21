@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/item/item_answer/item_answer1.dart';
 import 'package:app_q_n_a/item/item_answer/item_answer2.dart';
 import 'package:app_q_n_a/styles/colors.dart';
@@ -8,10 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
-DateTime deadline = DateTime.parse("2022-08-18 22:00:00.0000");
-class AnswerScreen extends StatefulWidget {
 
+
+
+class AnswerScreen extends StatefulWidget {
+int? deadline;
+String? question;
+String? username;
+int? createAt;
+int? uqid;
+AnswerScreen({this.deadline,this.question,this.username,this.createAt,this.uqid});
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
 }
@@ -25,6 +35,16 @@ class _AnswerScreenState extends State<AnswerScreen> {
   bool hasPaid = false;
   List<int> i=[0,1,2,2,3,5];
   bool timing = true;
+  late int kq;
+getUserid() async{
+  int userid= await SharedPrefs.readString(SharePrefsKeys.user_id);
+  if((userid==null)||(userid==0)){
+    kq=0;
+  }
+  if(userid!=widget.uqid){
+    kq=1;
+  }else{kq=2;}
+}
 
 
   @override
@@ -32,9 +52,11 @@ class _AnswerScreenState extends State<AnswerScreen> {
     // TODO: implement initState
     super.initState();
     showQuestion();
+    getUserid();
   }
+
   showQuestion() {
-    int end = deadline.millisecondsSinceEpoch;
+    int end = widget.deadline!;
     int now = DateTime.now().millisecondsSinceEpoch;
     if (now >= end) {
       timing = false;
@@ -99,12 +121,12 @@ class _AnswerScreenState extends State<AnswerScreen> {
                 height: 5,
               ),
               QuestionCard(
-                endTime: deadline.millisecondsSinceEpoch,
+                endTime: widget.deadline!,
                 avatar: '',
-                ques: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
-                user: 'tran thanh',
-                time: '11:07 7/6/2022',
-                imageques: 'https://img.loigiaihay.com/picture/2021/1116/1.png',
+                ques: widget.question!,
+                user: widget.username!,
+                time: DateFormat('dd/MM/yyyy, HH:mm').format( DateTime.fromMillisecondsSinceEpoch(widget.createAt!*1000)),
+
               ),
               const SizedBox(
                 height: 10,
@@ -114,14 +136,13 @@ class _AnswerScreenState extends State<AnswerScreen> {
                 shrinkWrap: true,
                 itemCount: 4,
                 itemBuilder: (context, index) {
-int value2=index;
                   return AnswerCard(
-                    status: timing ?i[value2] : 3,
+                    status: timing ?kq : 3,
                     //trạng thái của câu trả lời
                     //0: chưa đăng nhập
                     //1: không phải chủ câu hỏi
                     //2: là chủ câu hỏi
-                    //3: hiển thị
+                    //3: hiển thị khi hết deadline
                     value: index,
                     groupValue: value,
                     title: Text(
@@ -153,7 +174,7 @@ int value2=index;
                                     Navigator.pop(context);
                                     value = val;
                                     hasPaid = true;
-                                 i[value2]=3;
+
                                   });
                                 },
                               ),
@@ -186,3 +207,5 @@ int value2=index;
     );
   }
 }
+
+

@@ -69,7 +69,7 @@ class _QuestionCardState extends State<QuestionCard> {
                   ],
                 ),
                 SizedBox(
-                  width: 110,
+                  width: 90,
                 ),
                 Button1(
                   ontap: () {

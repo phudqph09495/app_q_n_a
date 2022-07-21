@@ -74,7 +74,7 @@ Widget QuestionTile({
                 ],
               ),
               CountdownTimer(
-                endTime: deadline * 1000,
+                endTime: deadline,
                 widgetBuilder: (_, CurrentRemainingTime? time) {
                   if (time == null) {
                     return Text(
