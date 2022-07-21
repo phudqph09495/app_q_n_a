@@ -11,7 +11,7 @@ Widget QuestionTile({
   required String mon,
   required int deadline,
   required int lop,
-  required int money,
+  required double money,
   required int createTime,
   required String question,
   String? avatar,

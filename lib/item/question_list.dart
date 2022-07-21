@@ -22,8 +22,8 @@ class _QuestionListState extends State<QuestionList> {
               deadline: (widget.listItem[index].deadline != null)
                   ? int.parse(widget.listItem[index].deadline)*1000
                   : 0,
-              lop: int.parse(widget.listItem[index].catId),
-              money: 50000,
+              lop: int.parse(widget.listItem[index].classId)-2,
+              money:double.parse(widget.listItem[index].priceGift) ,
               createTime: int.parse(widget.listItem[index].createdAt),
               ontap: () {
                 Navigator.push(

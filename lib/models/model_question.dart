@@ -11,7 +11,16 @@ class ModelQuestion {
       this.description, 
       this.deadline, 
       this.isImage, 
-      this.username,});
+      this.classId, 
+      this.subjectId, 
+      this.price, 
+      this.priceGift, 
+      this.username, 
+      this.avatarPath, 
+      this.avatarName, 
+      this.className, 
+      this.subjectName, 
+      this.countImages,});
 
   ModelQuestion.fromJson(dynamic json) {
     id = json['id'];
@@ -25,7 +34,16 @@ class ModelQuestion {
     description = json['description'];
     deadline = json['deadline'];
     isImage = json['is_image'];
+    classId = json['class_id'];
+    subjectId = json['subject_id'];
+    price = json['price'];
+    priceGift = json['price_gift'];
     username = json['username'];
+    avatarPath = json['avatar_path'];
+    avatarName = json['avatar_name'];
+    className = json['class_name'];
+    subjectName = json['subject_name'];
+    countImages = json['count_images'];
   }
   String? id;
   String? question;
@@ -35,10 +53,19 @@ class ModelQuestion {
   String? status;
   String? userId;
   String? isComplete;
-  String? description;
-  String? deadline;
+  dynamic description;
+  dynamic deadline;
   String? isImage;
+  String? classId;
+  String? subjectId;
+  String? price;
+  String? priceGift;
   String? username;
+  dynamic avatarPath;
+  dynamic avatarName;
+  String? className;
+  String? subjectName;
+  String? countImages;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -53,7 +80,16 @@ class ModelQuestion {
     map['description'] = description;
     map['deadline'] = deadline;
     map['is_image'] = isImage;
+    map['class_id'] = classId;
+    map['subject_id'] = subjectId;
+    map['price'] = price;
+    map['price_gift'] = priceGift;
     map['username'] = username;
+    map['avatar_path'] = avatarPath;
+    map['avatar_name'] = avatarName;
+    map['class_name'] = className;
+    map['subject_name'] = subjectName;
+    map['count_images'] = countImages;
     return map;
   }
 
