@@ -19,7 +19,7 @@ class _QuestionListState extends State<QuestionList> {
           widget.listItem.length,
               (index) => QuestionTile(
               mon: widget.listItem[index].catId,
-              deadline: int.parse(widget.listItem[index].deadline),
+              deadline:(widget.listItem[index].deadline!=null)? int.parse(widget.listItem[index].deadline):0,
               lop:int.parse(widget.listItem[index].catId),
               money: 50000,
               createTime: int.parse(widget.listItem[index].createdAt),
@@ -30,6 +30,7 @@ class _QuestionListState extends State<QuestionList> {
               attach: true,
               attachCount: 1,
               first: true,
+avatar: ''
               )),
     );
   }

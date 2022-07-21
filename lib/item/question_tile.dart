@@ -14,7 +14,7 @@ Widget QuestionTile({
   required int money,
   required int createTime,
   required String question,
-   String? avatar,
+  String? avatar,
   Function()? ontap,
   bool first = false,
   bool attach = false,
@@ -73,10 +73,6 @@ Widget QuestionTile({
                       : const SizedBox(),
                 ],
               ),
-              // Text(
-              //   deadline,
-              //   style:const TextStyle(color: ColorApp.grey82),
-              // ),
               CountdownTimer(
                 endTime: deadline * 1000,
                 widgetBuilder: (_, CurrentRemainingTime? time) {
@@ -127,18 +123,19 @@ Widget QuestionTile({
                 trimCollapsedText: 'Xem thêm',
                 trimExpandedText: 'Thu nhỏ',
               ),
+
               const SizedBox(
                 height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(),
-                  // ClipRRect(
-                  //   borderRadius: BorderRadius.circular(10.0),
-                  //   child:
-                  //   LoadImage(url:'$avatar',height: 40,width: 40,)
-                  // ),
+
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child:
+                    LoadImage(url:'$avatar',height: 40,width: 40,)
+                  ),
                   Button1(
                     height: 30,
                     colorButton: Colors.white,

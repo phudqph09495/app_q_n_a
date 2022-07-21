@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:app_q_n_a/bloc/bloc/auth/bloc_question.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_add_question.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/const.dart';
