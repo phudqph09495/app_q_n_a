@@ -129,10 +129,10 @@ class _AnswerScreenState extends State<AnswerScreen> {
                 height: 5,
               ),
               QuestionCard(
-                endTime: widget.deadline!,
+                endTime: widget.deadline??0,
                 avatar: '',
-                ques: widget.question!,
-                user: widget.username!,
+                ques: widget.question??'',
+                user: widget.username??'',
                 time: DateFormat('dd/MM/yyyy, HH:mm').format(
                     DateTime.fromMillisecondsSinceEpoch(
                         widget.createAt! * 1000)),

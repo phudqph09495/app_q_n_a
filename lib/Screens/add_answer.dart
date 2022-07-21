@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:app_q_n_a/item/gridView/grid_view_custom.dart';
 import 'package:app_q_n_a/item/input/text_filed2.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
 
@@ -17,27 +20,31 @@ class Add_Answer_Screen extends StatefulWidget {
 }
 
 class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
-  TextEditingController title = TextEditingController();
+
   TextEditingController answer = TextEditingController();
 
+  List<XFile> imageFiles = [];
+  StreamController imagesController = StreamController.broadcast();
   final ImagePicker _picker = ImagePicker();
-  List<XFile>? _imageFileList = [];
-  Future selectImageGallery() async {
-    final List<XFile>? selectedImage = await _picker.pickMultiImage();
-    if (selectedImage!.isNotEmpty) {
-      _imageFileList!.addAll(selectedImage);
-    }
-    setState(() {});
-    print(_imageFileList!.length.toString());
+  Stream get imageStream => imagesController.stream;
+
+  selectImageGallery() {
+    _picker.pickImage(source: ImageSource.gallery).then((value) {
+      if (value != null) {
+        imageFiles.add(value);
+        imagesController.sink.add(imageFiles);
+      }
+    });
   }
 
-  Future selectImageCamera() async {
-    final image = await _picker.pickImage(source: ImageSource.camera);
-    if (image == null) return;
-    _imageFileList?.add(image);
-    setState(() {});
+  selectImageCamera() {
+    _picker.pickImage(source: ImageSource.camera).then((value) {
+      if (value != null) {
+        imageFiles.add(value);
+        imagesController.sink.add(imageFiles);
+      }
+    });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +59,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
             border: Border.all(color: ColorApp.orangeF2, width: 0.5),
             textButton: 'Viết câu trả lời',
             ontap: () {
-              if ((answer.text == '') && (!_imageFileList!.isNotEmpty)) {
+              if ((answer.text == '') && (!imageFiles!.isNotEmpty)) {
                 Toast.show("Bạn chưa thêm câu trả lời",
                     duration: 1, gravity: Toast.bottom);
               } else {
@@ -103,40 +110,14 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                   return ValidatorApp.checkNull(text: val, isTextFiled: true);
                 },
               ),
-              Row(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        selectImageCamera();
-                      },
-                      icon: const Icon(
-                        Icons.camera_alt,
-                        color: ColorApp.black,
-                        size: 30,
-                      )),
-                  IconButton(
-                      onPressed: () {
-                        selectImageGallery();
-                      },
-                      icon: const Icon(
-                        Icons.image,
-                        color: ColorApp.black,
-                        size: 30,
-                      )),
-                ],
+              StreamBuilder(
+                stream: imageStream,
+                initialData: imageFiles,
+                builder: (context, snapshot) {
+                  return buildImage();
+                },
               ),
-              _imageFileList!.isNotEmpty
-                  ? GridView.builder(
-                      itemCount: _imageFileList!.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Image.file(
-                          File(_imageFileList![index].path),
-                        );
-                      })
-                  : SizedBox(),
+
 
               // Button1(
               //     ontap: () {},
@@ -150,5 +131,128 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         ),
       ),
     );
+  }
+
+  Widget buildImage() {
+    return GridViewCustom(
+        itemCount: imageFiles.length + 1,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        showFull: true,
+        maxWight: 100,
+        mainAxisExtent: 100,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        itemBuilder: (_, index) {
+          return index == 0
+              ? InkWell(
+            onTap: () {
+              showPlatformDialog(
+                  context: context,
+                  builder: (context) => BasicDialogAlert(
+                    title: Text("Thêm hình ảnh"),
+                    content: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          IconButton(
+                              onPressed: () {
+                                selectImageGallery();
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.image,
+                                size: 50,
+                              )),
+                          IconButton(
+                              onPressed: () {
+                                selectImageCamera();
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.camera_alt,
+                                size: 50,
+                              ))
+
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      BasicDialogAction(
+                        title: Text(
+                          "Trở lại",
+                          style: StyleApp.textStyle500(
+                              color: Colors.red),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ));
+            },
+            child: Container(
+              width: double.infinity,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: ColorApp.grey82,
+                  width: 1,
+                ),
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.add,
+                  size: 32,
+                  color: ColorApp.grey82,
+                ),
+              ),
+            ),
+          )
+              : SizedBox(
+            width: double.infinity,
+            height: 100,
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 100,
+                    child: Image.file(
+                      File(imageFiles[index - 1].path),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 100,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 3,
+                  right: 3,
+                  child: InkWell(
+                    onTap: () {
+                      imageFiles.removeAt(index - 1);
+                      imagesController.sink.add(imageFiles);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade400,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        size: 10,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

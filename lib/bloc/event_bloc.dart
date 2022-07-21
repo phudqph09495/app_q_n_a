@@ -110,3 +110,21 @@ class ChagePassIsLogin extends EventBloc {
     required this.password,
   });
 }
+
+class addAnsForm extends EventBloc{
+  int user_id;
+String question_id;
+String answer;
+  List<XFile>? images;
+  addAnsForm({
+    required this.user_id,
+required this.question_id,
+    required this.answer,
+    this.images,
+
+  });
+
+}
+
+
+
