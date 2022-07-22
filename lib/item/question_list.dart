@@ -31,6 +31,7 @@ class _QuestionListState extends State<QuestionList> {
                     MaterialPageRoute(
                         builder: (context) =>
                             AnswerScreen(
+                              qid:widget.listItem[index].id,
                           mon: widget.listItem[index].subjectName??'Lĩnh vực khác'.toString(),
                               lop: widget.listItem[index].className,
                               money:double.parse(widget.listItem[index].priceGift) ,
@@ -42,7 +43,8 @@ class _QuestionListState extends State<QuestionList> {
                               username: widget.listItem[index].username,
                               createAt:
                                   int.parse(widget.listItem[index].createdAt),
-                          uqid: int.parse(widget.listItem[index].userId),
+                          uqid: int.parse(widget.listItem[index].userId)
+                              ,
                             )
 
                     ));

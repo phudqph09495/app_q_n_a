@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 late String loi;
 
-class BlocQuestion extends Bloc<EventBloc, StateBloc> {
-  BlocQuestion() : super(StateBloc());
+class BlocAddAnswer extends Bloc<EventBloc, StateBloc> {
+  BlocAddAnswer() : super(StateBloc());
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
@@ -29,7 +29,7 @@ class BlocQuestion extends Bloc<EventBloc, StateBloc> {
           }
           req['images[]'] = images;
         }
-        var res = await Api.postAsync(endPoint: ApiPath.addQuestion, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.addAnswer, req: req);
         print(res);
 
         if (res['code'] == 1) {

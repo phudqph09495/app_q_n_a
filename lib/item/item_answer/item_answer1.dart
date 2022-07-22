@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/comment.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
@@ -23,13 +26,18 @@ class QuestionCard extends StatefulWidget {
   String ques;
   int endTime;
   String imageques;
+  Widget image;
+  List<dynamic>? imageFileList ;
   bool save=true;
   QuestionCard(
+
       {required this.avatar,
       required this.ques,
       required this.user,
       required this.time,
       this.imageques = '',
+        required this.image,
+        this.imageFileList,
       required this.endTime});
 
   @override
@@ -139,11 +147,9 @@ class _QuestionCardState extends State<QuestionCard> {
               trimExpandedText: 'Thu gọn',
               style: StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
             ),
-            (widget.imageques != '')
-                ? ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image(image: NetworkImage(widget.imageques)))
-                : Container(),
+            widget.imageFileList!.isNotEmpty
+                ?widget.image
+                : SizedBox(),
             const SizedBox(
               height: 10,
             ),
@@ -153,3 +159,14 @@ class _QuestionCardState extends State<QuestionCard> {
     );
   }
 }
+// GridView.builder(
+// itemCount: widget.imageFileList!.length,
+// gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+// crossAxisCount: 3),
+// shrinkWrap: true,
+// itemBuilder: (BuildContext context, int index) {
+// return LoadImage(url: "http://hoidap.nanoweb.vn/static${widget.imageFileList?[index]}");
+// // return Image.file(
+// //   File(widget.imageFileList![index].path),
+// // );
+// })

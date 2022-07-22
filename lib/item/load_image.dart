@@ -10,8 +10,9 @@ class LoadImage extends StatefulWidget {
   double height;
   BoxFit fit;
   Alignment alignment;
-
+bool ans;
   LoadImage({
+this.ans=true,
     required this.url,
     this.height = double.infinity,
     this.width = double.infinity,
@@ -53,7 +54,7 @@ class _LoadImageState extends State<LoadImage> {
         );
       },
       errorBuilder: (context, error, stackTrace) {
-        return Container(
+        return widget.ans? Container(
           width: widget.width,
           height: widget.height,
           color: Colors.white,
@@ -65,7 +66,7 @@ class _LoadImageState extends State<LoadImage> {
               fit: widget.fit,
             ),
           ),
-        );
+        ):SizedBox();
       },
     );
   }

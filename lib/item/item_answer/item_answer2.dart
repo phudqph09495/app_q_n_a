@@ -92,7 +92,7 @@ class _AnswerCardState extends State<AnswerCard> {
               context: context,
               builder: (context) => BasicDialogAlert(
                 title: Text("Lỗi"),
-                content: Text("Bạn không phải người hỏi câu hỏi này"),
+                content: Text("Bạn chưa thể xem câu trả lời này bây giờ"),
                 actions: <Widget>[
                   BasicDialogAction(
                     title: Text("Trở lại"),
