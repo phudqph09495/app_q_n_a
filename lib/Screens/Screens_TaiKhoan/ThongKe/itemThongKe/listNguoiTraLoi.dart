@@ -15,8 +15,8 @@ class NguoiTraLoiList extends StatelessWidget {
           title: '20.000đ',
           titleMoney: 'Nguyen Van Nam',
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => ViTien()));
+            // Navigator.push(
+            //     context, MaterialPageRoute(builder: (context) => ViTien()));
           },
           name: "Bạn",
           content: 'Câu trả lời của bạn rất chính xác!',

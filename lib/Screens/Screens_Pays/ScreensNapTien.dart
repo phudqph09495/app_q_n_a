@@ -5,6 +5,7 @@ import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../item/button.dart';
 
@@ -19,9 +20,14 @@ class _NapTienState extends State<NapTien> {
   TextEditingController Money = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   List<XFile>? _imageFileList = [];
-
-  Future selectImageCamera() async {
-    final image = await _picker.pickImage(source: ImageSource.camera);
+  // Future selectImageCamera() async {
+  //   final image = await _picker.pickImage(source: ImageSource.camera);
+  //   if (image == null) return;
+  //   _imageFileList?.add(image);
+  //   setState(() {});
+  // }
+  Future selectImageGallery() async {
+    final image = await _picker.pickImage(source: ImageSource.gallery);
     if (image == null) return;
     _imageFileList?.add(image);
     setState(() {});
@@ -192,10 +198,10 @@ class _NapTienState extends State<NapTien> {
         children: [
           IconButton(
             onPressed: () {
-              selectImageCamera();
+              selectImageGallery();
             },
             icon: const Icon(
-              Icons.camera_alt,
+              Icons.image,
               size: 30,
             ),
           ),

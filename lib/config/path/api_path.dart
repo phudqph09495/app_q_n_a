@@ -1,21 +1,23 @@
-class ApiPath{
+class ApiPath {
   ///auth
-  static const  startHome = "/app/home/start?string=";
-  static const  signin = "/app/home/signup";
-  static const  login = "/app/home/login";
-  static const  getUser = "/app/user/get-user";
-  static const  updateUser = "/api/v2/auth/user/update";
-  static const  resetPass = "/api/v2/auth/password/reset";
-  static const  changePass = "/api/v2/auth/password/change";
-  static const  changePassIsLogin = "/api/home/login";
+  static const startHome = "/app/home/start?string=";
+  static const signin = "/app/home/signup";
+  static const login = "/app/home/login";
+  static const getUser = "/app/user/get-user";
+  static const updateUser = "/api/v2/auth/user/update";
+  static const resetPass = "/api/v2/auth/password/reset";
+  static const changePassIsLogin = "/app/user/change-password";
 
   /// question
-  static const addQuestion="/app/question/add-question";
-  static const getQuestion="/app/home/get-question";
+  static const addQuestion = "/app/question/add-question";
+  static const getQuestion = "/app/home/get-question";
   static const getAnswer="/app/question/get-question-detail";
+  /// Wallet
+  static const getWallet="/app/wallet/wallet";
+  static const getWalletHistory="/app/wallet/my-history";
 
   ///answer
-  static const addAnswer="/app/question/add-answer";
+  static const addAnswer = "/app/question/add-answer";
 
   ///address
   static const getProvinces = "/api/v2/provinces";
@@ -46,14 +48,13 @@ class ApiPath{
   static const listCategory = "/app/home/get-productcat-showhome";
   static const charity = "/app/home/total-charity";
 
-
   /// product
- static const listProduct = "/app/product/get-products";
- static const wishProduct = "/app/user/wish-product";
- static const flashSale = "/blockcheck/getdata/get-data-home";
- static const productcat = "/app/home/get-productcat-showhome2product";
- static const detailProduct = "/app/product/data-page-detail-product";
+  static const listProduct = "/app/product/get-products";
+  static const wishProduct = "/app/user/wish-product";
+  static const flashSale = "/blockcheck/getdata/get-data-home";
+  static const productcat = "/app/home/get-productcat-showhome2product";
+  static const detailProduct = "/app/product/data-page-detail-product";
 
- /// notifi
- static const listNotifi = "/app/user/get-notifycations";
+  /// notifi
+  static const listNotifi = "/app/user/get-notifycations";
 }

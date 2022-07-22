@@ -1,14 +1,23 @@
 import 'dart:io';
-import 'package:app_q_n_a/Screens/home.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
+import 'package:app_q_n_a/models/model_wallet.dart';
 import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
-
-import '../../config/next_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/event_bloc.dart';
 import '../../item/button.dart';
 import '../../styles/colors.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
 
-class ViTien extends StatelessWidget {
+class ViTien extends StatefulWidget {
+  @override
+  State<ViTien> createState() => _ViTienState();
+}
+
+class _ViTienState extends State<ViTien> {
+  BlocGetWallet blocGetWallet = BlocGetWallet();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,16 +68,25 @@ class ViTien extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Button1(
-                    width: 190,
-                    height: 60,
-                    radius: 10,
-                    fontSize: 20,
-                    colorButton: ColorApp.orangeF2,
-                    textColor: Colors.white,
-                    textButton: '1.000.000đ',
-                    style: false,
-                  ),
+                  BlocBuilder<BlocGetWallet, StateBloc>(
+                      bloc: blocGetWallet,
+                      builder: (_, state) {
+                        if (state is LoadSuccess) {
+                          final user_id = state.data as ModelWallet;
+                          child:
+                          Button1(
+                            width: 190,
+                            height: 60,
+                            radius: 10,
+                            fontSize: 20,
+                            colorButton: ColorApp.orangeF2,
+                            textColor: Colors.white,
+                            textButton: user_id.wallet ?? 'Đ',
+                            style: false,
+                          );
+                        }
+                        return Container();
+                      }),
                 ],
               ),
             ),
@@ -96,14 +114,12 @@ class ViTien extends StatelessWidget {
       ),
     );
   }
-  _buildItem(){
+
+  _buildItem() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
-      decoration:const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Colors.grey, width: 0.5)
-        )
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      decoration: const BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey, width: 0.5))),
       child: Row(
         children: [
           Image.network(
@@ -114,48 +130,37 @@ class ViTien extends StatelessWidget {
           Expanded(
             child: Container(
               child: Padding(
-                padding:
-                const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'Chuyển tiền thành công',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
-                          fontWeight:
-                          FontWeight.bold),
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 7,
                     ),
                     const Text(
                       'Ngân hàng Techcombank',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14),
+                      style: TextStyle(color: Colors.black, fontSize: 14),
                     ),
                     const SizedBox(
                       height: 7,
                     ),
                     Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment
-                          .spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
                         Text(
                           '7h30p  28/06/2022',
-                          style: TextStyle(
-                              color:
-                              ColorApp.black),
+                          style: TextStyle(color: ColorApp.black),
                         ),
                         Text(
                           '1.500.000đ',
-                          style: TextStyle(
-                              color: ColorApp
-                                  .orangeF01),
+                          style: TextStyle(color: ColorApp.orangeF01),
                         ),
                       ],
                     )

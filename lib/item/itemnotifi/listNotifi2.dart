@@ -62,11 +62,11 @@ class ThongBao extends StatelessWidget {
               sub:
                   'Bạn đã nhận được 50.000 đ vào ví , sau khi trả lời đúng nhất trong câu hỏi : "Đếm số đỉnh,số cạnh của khối bát diện".....  ',
               onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                  MaterialPageRoute(
-                    builder: (_) => ViTien(),
-                  ),
-                );
+                // Navigator.of(context, rootNavigator: true).push(
+                //   MaterialPageRoute(
+                //     builder: (_) => ViTien(),
+                //   ),
+                // );
               },
               title: "Admin",
               time: "10 phút trước",

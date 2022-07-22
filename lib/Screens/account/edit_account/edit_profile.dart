@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_profile.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/models/model_user.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,7 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../bloc/bloc/auth/update_users.dart';
 import '../../../bloc/provider/user_provider.dart';
+import '../../../config/path/share_pref_path.dart';
+import '../../../config/path/share_pref_path.dart';
 import '../../../config/share_pref.dart';
 import '../../../item/drop_item.dart';
 import '../../../item/input/text_filed2.dart';
@@ -15,11 +20,16 @@ import '../../../styles/init_style.dart';
 
 class EditProfile extends StatelessWidget {
   TextEditingController birthday = TextEditingController();
+  String? sex;
   Map req = new Map();
   getDataReq(ModelUser user) {
     req['sex'] = user.sex ?? "";
     req['birthday'] = user.birthday ?? "";
+    req['address'] = user.address ?? "";
   }
+
+  BlocGetProfile blocGetProfile = BlocGetProfile()..add(GetData());
+  BlocUpdateUser blocUpdateUser = BlocUpdateUser();
 
   @override
   Widget build(BuildContext context) {
@@ -70,23 +80,23 @@ class EditProfile extends StatelessWidget {
               },
               listItem: [],
             ),
-            _buildTitleDrop(
-              title: "Lớp",
-              listItem: [
-                ModelLocal(id: "lop-1", name: "Lớp 1"),
-                ModelLocal(id: "lop-2", name: "Lớp 2"),
-                ModelLocal(id: "lop-3", name: "Lớp 3"),
-                ModelLocal(id: "lop-4", name: "Lớp 4"),
-                ModelLocal(id: "lop-5", name: "Lớp 5"),
-                ModelLocal(id: "lop-6", name: "Lớp 6"),
-                ModelLocal(id: "lop-7", name: "Lớp 7"),
-                ModelLocal(id: "lop-8", name: "Lớp 8"),
-                ModelLocal(id: "lop-9", name: "Lớp 9"),
-                ModelLocal(id: "lop-10", name: "Lớp 10"),
-                ModelLocal(id: "lop-11", name: "Lớp 11"),
-                ModelLocal(id: "lop-12", name: "Lớp 12"),
-              ],
-            ),
+            // _buildTitleDrop(
+            //   title: "Lớp",
+            //   listItem: [
+            //     ModelLocal(id: "lop-1", name: "Lớp 1"),
+            //     ModelLocal(id: "lop-2", name: "Lớp 2"),
+            //     ModelLocal(id: "lop-3", name: "Lớp 3"),
+            //     ModelLocal(id: "lop-4", name: "Lớp 4"),
+            //     ModelLocal(id: "lop-5", name: "Lớp 5"),
+            //     ModelLocal(id: "lop-6", name: "Lớp 6"),
+            //     ModelLocal(id: "lop-7", name: "Lớp 7"),
+            //     ModelLocal(id: "lop-8", name: "Lớp 8"),
+            //     ModelLocal(id: "lop-9", name: "Lớp 9"),
+            //     ModelLocal(id: "lop-10", name: "Lớp 10"),
+            //     ModelLocal(id: "lop-11", name: "Lớp 11"),
+            //     ModelLocal(id: "lop-12", name: "Lớp 12"),
+            //   ],
+            // ),
             Text(
               "Thông tin khác",
               style: StyleApp.textStyle700(color: Colors.black),

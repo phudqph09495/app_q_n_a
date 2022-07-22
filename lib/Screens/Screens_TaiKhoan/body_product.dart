@@ -121,7 +121,7 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: CupertinoIcons.share,
           title: "Chia sẻ ứng dụng",
           onTap: () {
-            Share.share('Chia sẻ ứng dụng với bạn bè tại  https://hoidap.com/');
+            Share.share('Chia sẻ ứng dụng  tại  https://hoidapHTHT.com/');
           }),
       TitleAccount(
         iconData: CupertinoIcons.chat_bubble,

@@ -92,9 +92,7 @@ Widget ProfileScreen({required BuildContext context, String? name}) {
           ),
           _buidRow(title: "Giới thiệu:", content: "Nam"),
           _buidRow(title: "Ngày sinh:", content: "01/01/2004"),
-          _buidRow(title: "Lớp:", content: "12"),
           _buidRow(title: "Tỉnh thành:", content: "Hà Nội"),
-          // _buidRow(title: "Thành viên từ:", content: "10/06/2022"),
           Padding(
             padding: EdgeInsets.all(17),
             child: Column(

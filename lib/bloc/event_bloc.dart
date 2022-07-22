@@ -31,15 +31,13 @@ class getBanner extends EventBloc {
 }
 
 class UpdateProfile extends EventBloc {
-  String name;
-  String email;
-  String gender;
+  String address;
+  String sex;
   String? birthday;
 
   UpdateProfile({
-    required this.name,
-    required this.email,
-    required this.gender,
+    required this.address,
+    required this.sex,
     this.birthday,
   });
 }
@@ -70,8 +68,8 @@ class loginApp extends EventBloc {
   });
 }
 
-class addQuesForm extends EventBloc{
- int user_id;
+class addQuesForm extends EventBloc {
+  int user_id;
   String question;
   int? cat_id;
   DateTime deadline;
@@ -86,9 +84,7 @@ class addQuesForm extends EventBloc{
     required this.money,
     required this.question,
     this.images,
-
-});
-
+  });
 }
 
 class ChagePassApp extends EventBloc {
@@ -102,39 +98,67 @@ class ChagePassApp extends EventBloc {
 }
 
 class ChagePassIsLogin extends EventBloc {
+  int user_id;
   String password;
-  String password_new;
+  String passwordre;
 
   ChagePassIsLogin({
-    required this.password_new,
+    required this.user_id,
+    required this.passwordre,
     required this.password,
   });
 }
 
-class addAnsForm extends EventBloc{
+class addAnsForm extends EventBloc {
   int user_id;
-int question_id;
-String answer;
+  int question_id;
+  String answer;
   List<XFile>? images;
   addAnsForm({
     required this.user_id,
-required this.question_id,
+    required this.question_id,
     required this.answer,
     this.images,
-
   });
-
 }
 
-
-class getAns extends EventBloc{
+class getAns extends EventBloc {
   int user_id;
   int question_id;
   getAns({
     required this.user_id,
     required this.question_id,
-});
+  });
 }
 
+class getHistory extends EventBloc {
+  int user_id;
+  String limit;
+  String page;
+  String is_week;
+  String is_day;
+  String is_month;
+  String is_last_month;
+  String start_time;
+  String end_time;
 
+  getHistory(
+      {required this.user_id,
+      required this.limit,
+      required this.page,
+      required this.is_week,
+      required this.is_day,
+      required this.is_month,
+      required this.is_last_month,
+      required this.start_time,
+      required this.end_time});
+}
 
+class getViTien extends EventBloc {
+  int user_id;
+  int cat_id;
+  getViTien({
+    required this.user_id,
+    required this.cat_id,
+  });
+}
