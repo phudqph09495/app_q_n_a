@@ -20,17 +20,18 @@ class AnswerScreen extends StatefulWidget {
   String? username;
   int? createAt;
   int? uqid;
+  String? mon;
+  String? lop;
+  double? money;
   AnswerScreen(
-      {this.deadline, this.question, this.username, this.createAt, this.uqid});
+      {this.deadline, this.question, this.username, this.createAt, this.uqid,this.money,this.lop,this.mon});
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
 }
 
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
-  int money = 50000;
-  int lop = 12;
-  String mon = 'Toán';
+
   int value = -1;
   bool hasPaid = false;
   List<int> i = [0, 1, 2, 2, 3, 5];
@@ -104,7 +105,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
         title: Text(
-          'Môn $mon- Lớp $lop- $money đ',
+          '${widget.mon} - ${widget.lop} - ${widget.money} đ',
           style: StyleApp.textStyle700(
             fontSize: 18,
           ),

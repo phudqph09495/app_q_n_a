@@ -18,18 +18,22 @@ class _QuestionListState extends State<QuestionList> {
       children: List.generate(
           widget.listItem.length,
           (index) => QuestionTile(
-              mon: widget.listItem[index].catId,
+              mon: widget.listItem[index].subjectName??'Lĩnh vực khác'.toString(),
               deadline: (widget.listItem[index].deadline != null)
                   ? int.parse(widget.listItem[index].deadline)*1000
                   : 0,
-              lop: int.parse(widget.listItem[index].classId)-2,
+              lop: widget.listItem[index].className,
               money:double.parse(widget.listItem[index].priceGift) ,
               createTime: int.parse(widget.listItem[index].createdAt),
               ontap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AnswerScreen(
+                        builder: (context) =>
+                            AnswerScreen(
+                          mon: widget.listItem[index].subjectName??'Lĩnh vực khác'.toString(),
+                              lop: widget.listItem[index].className,
+                              money:double.parse(widget.listItem[index].priceGift) ,
                               deadline: (widget.listItem[index].deadline !=
                                       null)
                                   ? int.parse(widget.listItem[index].deadline)*1000
@@ -39,11 +43,13 @@ class _QuestionListState extends State<QuestionList> {
                               createAt:
                                   int.parse(widget.listItem[index].createdAt),
                           uqid: int.parse(widget.listItem[index].userId),
-                            )));
+                            )
+
+                    ));
               },
               question: widget.listItem[index].question,
-              attach: true,
-              attachCount: 1,
+
+              attachCount:widget.listItem[index].countImages ,
               first: true,
               avatar: '')),
     );

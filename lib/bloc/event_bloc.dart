@@ -113,7 +113,7 @@ class ChagePassIsLogin extends EventBloc {
 
 class addAnsForm extends EventBloc{
   int user_id;
-String question_id;
+int question_id;
 String answer;
   List<XFile>? images;
   addAnsForm({
@@ -124,6 +124,16 @@ required this.question_id,
 
   });
 
+}
+
+
+class getAns extends EventBloc{
+  int user_id;
+  int question_id;
+  getAns({
+    required this.user_id,
+    required this.question_id,
+});
 }
 
 

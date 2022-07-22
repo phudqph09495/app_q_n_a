@@ -18,7 +18,6 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
 
       yield Loading();
       try {
-        // var res = await Api.getAsync(endPoint: ApiPath.getQuestion);
         var res=await Api.getAsync(endPoint: ApiPath.getQuestion);
         print(res);
         for (var item in res['data']) {

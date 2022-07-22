@@ -10,7 +10,7 @@ import 'package:readmore/readmore.dart';
 Widget QuestionTile({
   required String mon,
   required int deadline,
-  required int lop,
+  required String lop,
   required double money,
   required int createTime,
   required String question,
@@ -18,7 +18,7 @@ Widget QuestionTile({
   Function()? ontap,
   bool first = false,
   bool attach = false,
-  int? attachCount,
+  String? attachCount,
 }) {
   return InkWell(
     onTap: ontap,
@@ -40,14 +40,14 @@ Widget QuestionTile({
                 children: [
                   Expanded(
                     child: Text(
-                      '$mon - Lớp $lop - $moneyđ - ${formatHHMMSS((DateTime.now().millisecondsSinceEpoch / 1000).round() - createTime)}',
+                      '$mon - $lop - $moneyđ - ${formatHHMMSS((DateTime.now().millisecondsSinceEpoch / 1000).round() - createTime)}',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: StyleApp.textStyle700(
                           fontSize: 16, color: ColorApp.black),
                     ),
                   ),
-                  attach
+                  (attachCount!='0')
                       ? Row(
                           children: [
                             const Icon(Icons.attach_file_rounded),

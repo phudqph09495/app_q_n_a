@@ -15,7 +15,7 @@ class TabAnswer extends StatelessWidget {
         (index) => QuestionTile(
           mon: 'Toán',
           deadline: 1660496400,
-          lop: 12,
+          lop: '12',
           money: 50,
           ontap: () {
             Navigator.push(context,
@@ -24,7 +24,7 @@ class TabAnswer extends StatelessWidget {
           createTime: 1658288536,
           question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
           attach: true,
-          attachCount: 1,
+          attachCount: '0',
           first: true,
           avatar: "images/default.png",
         ),
