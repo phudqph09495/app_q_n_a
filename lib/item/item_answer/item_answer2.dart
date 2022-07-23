@@ -16,17 +16,7 @@ import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 
-List<String> report = [
-  'Spam',
-  'Trả lời sai',
-  'Quấy rồi',
-  'Bắt nạt',
-  'Xúc phạm',
-  'Lạc đề',
-  'Sai chính tả',
-  'Không phù hợp',
-  'Thiếu sáng tạo',
-];
+
 
 class AnswerCard extends StatefulWidget {
   String avatar;
@@ -36,10 +26,12 @@ class AnswerCard extends StatefulWidget {
   String imageAns;
   int status;
   var value;
+
   var groupValue;
   ValueChanged? onchanged;
   Widget? title;
-
+  Widget IconReport;
+Function()? report;
   AnswerCard(
       {required this.time,
       required this.user,
@@ -50,7 +42,9 @@ class AnswerCard extends StatefulWidget {
       this.value,
       this.groupValue,
       this.onchanged,
-      this.title});
+        required this.IconReport,
+
+      this.title,this.report});
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
@@ -60,69 +54,71 @@ class _AnswerCardState extends State<AnswerCard> {
   @override
   Widget build(BuildContext context) {
     if ((widget.status == 0) || (widget.status == 1) || (widget.status == 2)) {
-      return InkWell(
-        onTap: () {
-          if (widget.status == 0) {
-            showPlatformDialog(
-              context: context,
-              builder: (context) => BasicDialogAlert(
-                title: Text("Lỗi"),
-                content: Text("Bạn phải đăng nhập để xem"),
-                actions: <Widget>[
-                  BasicDialogAction(
-                    title: Text("Trở lại"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  BasicDialogAction(
-                    title: Text("Đăng nhập"),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
-                    },
-                  ),
-                ],
-              ),
-            );
-          } else if (widget.status == 1) {
-            showPlatformDialog(
-              context: context,
-              builder: (context) => BasicDialogAlert(
-                title: Text("Lỗi"),
-                content: Text("Bạn chưa thể xem câu trả lời này bây giờ"),
-                actions: <Widget>[
-                  BasicDialogAction(
-                    title: Text("Trở lại"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            );
-          } else if (widget.status == 2) {
-
-            setState(() {
-              widget.status = 3;
-            });
-          }
-        },
-        child: Card(
-          color: ColorApp.whiteF7,
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Center(
-              child: Text(
-                '..... đã trả lời câu hỏi của bạn',
-                style: StyleApp.textStyle400(color: ColorApp.blue6D),
-              ),
-            ),
-          ),
-        ),
-      );
+      return SizedBox();
+      //   InkWell(
+      //   onTap: () {
+      //     if (widget.status == 0) {
+      //       showPlatformDialog(
+      //         context: context,
+      //         builder: (context) => BasicDialogAlert(
+      //           title: Text("Lỗi"),
+      //           content: Text("Bạn phải đăng nhập để xem"),
+      //           actions: <Widget>[
+      //             BasicDialogAction(
+      //               title: Text("Trở lại"),
+      //               onPressed: () {
+      //                 Navigator.pop(context);
+      //               },
+      //             ),
+      //             BasicDialogAction(
+      //               title: Text("Đăng nhập"),
+      //               onPressed: () {
+      //                 Navigator.push(
+      //                     context,
+      //                     MaterialPageRoute(
+      //                         builder: (context) => LoginScreen()));
+      //               },
+      //             ),
+      //           ],
+      //         ),
+      //       );
+      //     } else if (widget.status == 1) {
+      //       showPlatformDialog(
+      //         context: context,
+      //         builder: (context) => BasicDialogAlert(
+      //           title: Text("Lỗi"),
+      //           content: Text("Bạn chưa thể xem câu trả lời này bây giờ"),
+      //           actions: <Widget>[
+      //             BasicDialogAction(
+      //               title: Text("Trở lại"),
+      //               onPressed: () {
+      //                 Navigator.pop(context);
+      //               },
+      //             ),
+      //           ],
+      //         ),
+      //       );
+      //     } else if (widget.status == 2) {
+      //
+      //       setState(() {
+      //         widget.status = 3;
+      //       });
+      //     }
+      //   },
+      //   child:
+      //   Card(
+      //     color: ColorApp.whiteF7,
+      //     child: Padding(
+      //       padding: EdgeInsets.all(8),
+      //       child: Center(
+      //         child: Text(
+      //           '..... đã trả lời câu hỏi',
+      //           style: StyleApp.textStyle400(color: ColorApp.blue6D),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // );
     } else {
       return Card(
         color: ColorApp.whiteF7,
@@ -194,56 +190,7 @@ class _AnswerCardState extends State<AnswerCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        showPlatformDialog(
-                          context: context,
-                          builder: (context) => BasicDialogAlert(
-                            title: Text("Báo cáo câu trả lời"),
-                            content: Container(
-                              height: 250,
-                              width: 200,
-                              child: SingleChildScrollView(
-                                child: FilterList(
-                                  color: Colors.white,
-                                  title: '',
-                                  column: 1,
-                                  list: report,
-                                  space: 5.5,
-                                ),
-                              ),
-                            ),
-                            actions: <Widget>[
-                              BasicDialogAction(
-                                title: Text(
-                                  "Report",
-                                  style:
-                                      StyleApp.textStyle500(color: Colors.red),
-                                ),
-                                onPressed: () {
-                                  Toast.show("Ý kiến của bạn đã được ghi nhận",
-                                      duration: 3, gravity: Toast.bottom);
-
-                                  Future.delayed(Duration(milliseconds: 2000),
-                                      () {
-                                    Navigator.pop(context);
-                                  });
-                                },
-                              ),
-                              BasicDialogAction(
-                                title: Text(
-                                  "Trở lại",
-                                  style: StyleApp.textStyle400(),
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      icon: Image.asset('images/report.png')),
+                  widget.IconReport,
                   Container(
                     width: 140,
                     child: RadioListTile<int>(

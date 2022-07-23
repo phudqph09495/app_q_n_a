@@ -131,6 +131,13 @@ class getAns extends EventBloc {
   });
 }
 
+class reportANS extends EventBloc {
+  int user_id;
+  int id;
+  String content;
+  reportANS({required this.user_id, required this.id, required this.content});
+}
+
 class getHistory extends EventBloc {
   int user_id;
   String limit;

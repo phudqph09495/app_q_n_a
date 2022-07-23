@@ -2,11 +2,13 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_report.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
+import 'package:app_q_n_a/item/grid_view.dart'as Grid;
 import 'package:app_q_n_a/item/item_answer/item_answer1.dart';
 import 'package:app_q_n_a/item/item_answer/item_answer2.dart';
 import 'package:app_q_n_a/item/load_image.dart';
@@ -21,7 +23,20 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
 import 'Screens_TaiKhoan/body_product.dart' as Body;
+late int ansid;
+late String ansCon;
 
+List<String> reportList = [
+  'Spam',
+  'Trả lời sai',
+  'Quấy rối',
+  'Bắt nạt',
+  'Xúc phạm',
+  'Lạc đề',
+  'Sai chính tả',
+  'Không phù hợp',
+  'Thiếu sáng tạo',
+];
 class AnswerScreen extends StatefulWidget {
   int? deadline;
   String? question;
@@ -48,30 +63,35 @@ class AnswerScreen extends StatefulWidget {
 
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
-
+int? valueReport;
   int value = -1;
   bool hasPaid = false;
   List<int> i = [0, 1, 2, 2, 3, 5];
   bool timing = true;
-  late int kq;
+  late int userStatus;
 
   getUserid() async {
     int userid = Body.id;
     // print(userid);
     if (userid == 0) {
-      kq = 0;
+      userStatus = 0;
     } else if (userid != widget.uqid) {
-      kq = 1;
+      userStatus = 1;
     } else {
-      kq = 2;
+      userStatus = 2;
     }
   }
 
   BlocGetAnswer bloc = BlocGetAnswer();
+  BlocReport blocReport=BlocReport();
 
   getANS() async {
     bloc.add(
         getAns(user_id: Body.id, question_id: int.parse(widget.qid ?? '0')));
+  }
+
+  report()async{
+blocReport.add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
   }
 
   @override
@@ -157,6 +177,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                       height: 5,
                     ),
                     QuestionCard(
+                      countAns: list.countAnswer,
                       imageFileList: list.images,
                       image: GridView.builder(
                           itemCount: list.images?.length,
@@ -188,20 +209,22 @@ class _AnswerScreenState extends State<AnswerScreen> {
                       itemCount: int.parse(list.countAnswer ?? '0'),
                       itemBuilder: (context, index) {
                         return AnswerCard(
-                          status: timing ? kq : 3,
+                          status: timing ? userStatus : 3,
                           //trạng thái của câu trả lời
                           //0: chưa đăng nhập
                           //1: không phải chủ câu hỏi
                           //2: là chủ câu hỏi
                           //3: hiển thị khi hết deadline
+
                           value: index,
                           groupValue: value,
+
                           title: Text(
                             'Trả tiền',
                             style: StyleApp.textStyle500(fontSize: 14),
                           ),
                           onchanged: (val) {
-                            if (kq == 2) {
+                            if (userStatus == 2) {
                               if (hasPaid == false) {
                                 showPlatformDialog(
                                   context: context,
@@ -256,6 +279,61 @@ class _AnswerScreenState extends State<AnswerScreen> {
                           user: list.answer?[index].username ?? '',
                           avatar: '',
                           answer: list.answer?[index].answer ?? '',
+
+
+                          IconReport: IconButton(
+                              onPressed: () {
+                                showPlatformDialog(
+                                  context: context,
+                                  builder: (context) => BasicDialogAlert(
+                                    title: Text("Báo cáo câu trả lời"),
+                                    content: Container(
+                                      height: 250,
+                                      width: 200,
+                                      child: SingleChildScrollView(
+                                        child: Grid.FilterList(
+                                          value: valueReport,
+                                          color: Colors.white,
+                                          title: '',
+                                          column: 1,
+                                          list:reportList ,
+                                          space: 5.5,
+                                        ),
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      BasicDialogAction(
+                                        title: Text(
+                                          "Report",
+                                          style:
+                                          StyleApp.textStyle500(color: Colors.red),
+                                        ),
+                                        onPressed: () {
+                                         ansid=int.parse(list.answer?[index].id??'0');
+                                         report();
+                                          Toast.show("Ý kiến của bạn đã được ghi nhận",
+                                              duration: 3, gravity: Toast.bottom);
+
+                                          Future.delayed(Duration(milliseconds: 2000),
+                                                  () {
+                                                Navigator.pop(context);
+                                              });
+                                        },
+                                      ),
+                                      BasicDialogAction(
+                                        title: Text(
+                                          "Trở lại",
+                                          style: StyleApp.textStyle400(),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              icon: Image.asset('images/report.png')),
                         );
                       },
                     ),

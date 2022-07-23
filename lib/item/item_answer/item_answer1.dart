@@ -27,6 +27,7 @@ class QuestionCard extends StatefulWidget {
   int endTime;
   String imageques;
   Widget image;
+  String? countAns;
   List<dynamic>? imageFileList ;
   bool save=true;
   QuestionCard(
@@ -38,6 +39,7 @@ class QuestionCard extends StatefulWidget {
       this.imageques = '',
         required this.image,
         this.imageFileList,
+        this.countAns,
       required this.endTime});
 
   @override
@@ -152,6 +154,11 @@ class _QuestionCardState extends State<QuestionCard> {
                 : SizedBox(),
             const SizedBox(
               height: 10,
+            ),
+            Container(width: double.infinity,
+              child: Text(
+                'Có ${widget.countAns} câu trả lời',style:
+              StyleApp.textStyle500(color: ColorApp.blue6D),textAlign:TextAlign.end,),
             ),
           ],
         ),
