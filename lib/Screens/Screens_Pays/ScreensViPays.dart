@@ -6,6 +6,8 @@ import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/event_bloc.dart';
+import '../../config/path/share_pref_path.dart';
+import '../../config/share_pref.dart';
 import '../../item/button.dart';
 import '../../styles/colors.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
@@ -18,6 +20,16 @@ class ViTien extends StatefulWidget {
 class _ViTienState extends State<ViTien> {
   BlocGetWallet blocGetWallet = BlocGetWallet();
 
+  getVi()async{
+    int id = await SharedPrefs.readString(SharePrefsKeys.user_id);
+    blocGetWallet.add(getViTien(user_id: id, cat_id: 1));
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getVi();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,13 +80,12 @@ class _ViTienState extends State<ViTien> {
                   const SizedBox(
                     height: 20,
                   ),
-                  BlocBuilder<BlocGetWallet, StateBloc>(
+                  BlocBuilder(
                       bloc: blocGetWallet,
                       builder: (_, state) {
                         if (state is LoadSuccess) {
                           final user_id = state.data as ModelWallet;
-                          child:
-                          Button1(
+                        return  Button1(
                             width: 190,
                             height: 60,
                             radius: 10,
