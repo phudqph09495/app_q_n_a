@@ -140,23 +140,23 @@ class reportANS extends EventBloc {
 
 class getHistory extends EventBloc {
   int user_id;
-  String limit;
-  String page;
-  String is_week;
-  String is_day;
-  String is_month;
-  String is_last_month;
-  String start_time;
-  String end_time;
+  int limit;
+  int page;
+  int is_week;
+  int is_day;
+  int is_month;
+  int is_last_month;
+  DateTime start_time;
+  DateTime end_time;
 
   getHistory(
       {required this.user_id,
-      required this.limit,
-      required this.page,
-      required this.is_week,
-      required this.is_day,
-      required this.is_month,
-      required this.is_last_month,
+       required this.limit,
+       required this.page,
+       required this.is_week,
+       required this.is_day,
+       required this.is_month,
+       required this.is_last_month,
       required this.start_time,
       required this.end_time});
 }

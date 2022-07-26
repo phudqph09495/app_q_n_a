@@ -1,6 +1,7 @@
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/api.dart';
+import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/config/path/api_path.dart';
 import 'package:app_q_n_a/models/model_wallet.dart';
 import 'package:dio/dio.dart';
@@ -18,11 +19,10 @@ class BlocGetWallet extends Bloc<EventBloc, StateBloc> {
         req['user_id'] = event.user_id;
         req['cat_id'] = event.cat_id;
         var res=await Api.postAsync(endPoint: ApiPath.getWallet, req: req);
-
+        print(res);
         if (res['code'] == 1) {
-          ModelWallet modelWallet=ModelWallet.fromJson(res['data']);
           yield LoadSuccess(
-              data: modelWallet
+              data:Const.convertNumber( res['data']['wallet']).round(),
           );
         }
       } on DioError catch (e) {

@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_waller_history.dart';
 import 'package:app_q_n_a/models/model_wallet.dart';
 import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import '../../bloc/event_bloc.dart';
 import '../../config/path/share_pref_path.dart';
 import '../../config/share_pref.dart';
@@ -19,17 +21,28 @@ class ViTien extends StatefulWidget {
 
 class _ViTienState extends State<ViTien> {
   BlocGetWallet blocGetWallet = BlocGetWallet();
+  BlocWalletHistory blocWalletHistory = BlocWalletHistory();
+  DateTime start_time = DateTime.now();
+  DateTime end_time = DateTime.now();
 
-  getVi()async{
+  getVi() async {
     int id = await SharedPrefs.readString(SharePrefsKeys.user_id);
     blocGetWallet.add(getViTien(user_id: id, cat_id: 1));
   }
+
+  BlocWalletHistory blochistory = BlocWalletHistory();
+  Future<void> History() async {
+    blocWalletHistory.add(GetData());
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getVi();
+    History();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,20 +96,18 @@ class _ViTienState extends State<ViTien> {
                   BlocBuilder(
                       bloc: blocGetWallet,
                       builder: (_, state) {
-                        if (state is LoadSuccess) {
-                          final user_id = state.data as ModelWallet;
-                        return  Button1(
-                            width: 190,
-                            height: 60,
-                            radius: 10,
-                            fontSize: 20,
-                            colorButton: ColorApp.orangeF2,
-                            textColor: Colors.white,
-                            textButton: user_id.wallet ?? 'Đ',
-                            style: false,
-                          );
-                        }
-                        return Container();
+                        final coin =
+                            state is LoadSuccess ? state.data as int : 0;
+                        return Button1(
+                          width: 190,
+                          height: 60,
+                          radius: 10,
+                          fontSize: 20,
+                          colorButton: ColorApp.orangeF2,
+                          textColor: Colors.white,
+                          textButton: '$coin Đ',
+                          style: false,
+                        );
                       }),
                 ],
               ),
@@ -131,57 +142,61 @@ class _ViTienState extends State<ViTien> {
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: const BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey, width: 0.5))),
-      child: Row(
-        children: [
-          Image.network(
-            'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
-            width: 70,
-            height: 70,
-          ),
-          Expanded(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Chuyển tiền thành công',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    const Text(
-                      'Ngân hàng Techcombank',
-                      style: TextStyle(color: Colors.black, fontSize: 14),
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          '7h30p  28/06/2022',
-                          style: TextStyle(color: ColorApp.black),
-                        ),
-                        Text(
-                          '1.500.000đ',
-                          style: TextStyle(color: ColorApp.orangeF01),
-                        ),
-                      ],
-                    )
-                  ],
+      child: BlocBuilder(
+          bloc: blocGetWallet,
+          builder: (_, state) {
+            final history = state is LoadSuccess ? state.data as int : 0;
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.network(
+                  'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
+                  width: 70,
+                  height: 70,
                 ),
-              ),
-            ),
-          ),
-        ],
-      ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Chuyển tiền thành công',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        const Text(
+                          'Ngân hàng Techcombank',
+                          style: TextStyle(color: Colors.black, fontSize: 14),
+                        ),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '',
+                              style: TextStyle(color: ColorApp.black),
+                            ),
+                            Text(
+                              '',
+                              style: TextStyle(color: ColorApp.orangeF01),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
     );
   }
 }

@@ -6,9 +6,10 @@ import 'package:app_q_n_a/bloc/bloc/auth/bloc_report.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
+import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
-import 'package:app_q_n_a/item/grid_view.dart'as Grid;
+import 'package:app_q_n_a/item/grid_view.dart' as Grid;
 import 'package:app_q_n_a/item/item_answer/item_answer1.dart';
 import 'package:app_q_n_a/item/item_answer/item_answer2.dart';
 import 'package:app_q_n_a/item/load_image.dart';
@@ -23,6 +24,7 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
 import 'Screens_TaiKhoan/body_product.dart' as Body;
+
 late int ansid;
 late String ansCon;
 
@@ -37,6 +39,7 @@ List<String> reportList = [
   'Không phù hợp',
   'Thiếu sáng tạo',
 ];
+
 class AnswerScreen extends StatefulWidget {
   int? deadline;
   String? question;
@@ -47,6 +50,7 @@ class AnswerScreen extends StatefulWidget {
   String? lop;
   double? money;
   String? qid;
+
   AnswerScreen(
       {this.deadline,
       this.question,
@@ -57,13 +61,14 @@ class AnswerScreen extends StatefulWidget {
       this.lop,
       this.mon,
       this.qid});
+
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
 }
 
 class _AnswerScreenState extends State<AnswerScreen> {
   var groupValue = 0;
-int? valueReport;
+  int? valueReport;
   int value = -1;
   bool hasPaid = false;
   List<int> i = [0, 1, 2, 2, 3, 5];
@@ -83,15 +88,16 @@ int? valueReport;
   }
 
   BlocGetAnswer bloc = BlocGetAnswer();
-  BlocReport blocReport=BlocReport();
+  BlocReport blocReport = BlocReport();
 
   getANS() async {
     bloc.add(
         getAns(user_id: Body.id, question_id: int.parse(widget.qid ?? '0')));
   }
 
-  report()async{
-blocReport.add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
+  report() async {
+    blocReport
+        .add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
   }
 
   @override
@@ -137,7 +143,10 @@ blocReport.add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Add_Answer_Screen(user_id: Body.id,question_id:int.parse(widget.qid??'0') ,)));
+                              builder: (context) => Add_Answer_Screen(
+                                    user_id: Body.id,
+                                    question_id: int.parse(widget.qid ?? '0'),
+                                  )));
                     } else if (timing == false) {
                       Toast.show("Đã hết thời gian trả lời câu hỏi",
                           duration: 1, gravity: Toast.bottom);
@@ -183,12 +192,11 @@ blocReport.add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
                           itemCount: list.images?.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 2,
-                                  crossAxisCount: 3),
+                                  childAspectRatio: 2, crossAxisCount: 3),
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return LoadImage(
-                              ans: false,
+                                ans: false,
                                 url:
                                     "http://hoidap.nanoweb.vn/static${list.images?[index].path}${list.images?[index].name}");
                           }),
@@ -270,16 +278,14 @@ blocReport.add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
                             }
                           },
 
-                          time: DateFormat('dd/MM/yyyy, HH:mm').format(
-                                  DateTime.fromMillisecondsSinceEpoch(int.parse(
-                                          list.answer?[index].createdAt ??
-                                              '0')! *
-                                      1000)) ??
-                              '',
+                          time: Const.formatTime(
+                            Const.convertNumber(list.answer![index].createdAt)
+                                .round(),
+                            format: "dd/MM/yyyy HH:ss"
+                          ),
                           user: list.answer?[index].username ?? '',
                           avatar: '',
                           answer: list.answer?[index].answer ?? '',
-
 
                           IconReport: IconButton(
                               onPressed: () {
@@ -296,7 +302,7 @@ blocReport.add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
                                           color: Colors.white,
                                           title: '',
                                           column: 1,
-                                          list:reportList ,
+                                          list: reportList,
                                           space: 5.5,
                                         ),
                                       ),
@@ -305,19 +311,22 @@ blocReport.add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
                                       BasicDialogAction(
                                         title: Text(
                                           "Report",
-                                          style:
-                                          StyleApp.textStyle500(color: Colors.red),
+                                          style: StyleApp.textStyle500(
+                                              color: Colors.red),
                                         ),
                                         onPressed: () {
-                                         ansid=int.parse(list.answer?[index].id??'0');
-                                         report();
-                                          Toast.show("Ý kiến của bạn đã được ghi nhận",
-                                              duration: 3, gravity: Toast.bottom);
+                                          ansid = int.parse(
+                                              list.answer?[index].id ?? '0');
+                                          report();
+                                          Toast.show(
+                                              "Ý kiến của bạn đã được ghi nhận",
+                                              duration: 3,
+                                              gravity: Toast.bottom);
 
-                                          Future.delayed(Duration(milliseconds: 2000),
-                                                  () {
-                                                Navigator.pop(context);
-                                              });
+                                          Future.delayed(
+                                              Duration(milliseconds: 2000), () {
+                                            Navigator.pop(context);
+                                          });
                                         },
                                       ),
                                       BasicDialogAction(

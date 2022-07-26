@@ -162,7 +162,7 @@ class Const {
     return text;
   }
 
-  static convertNumber(dynamic data) {
+  static double convertNumber(dynamic data) {
     var res = isNumeric(data.toString());
     if (res) {
       return double.parse(data.toString());
