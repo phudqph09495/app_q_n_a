@@ -79,6 +79,7 @@ class _AddQuestionState extends State<AddQuestion> {
 
   TextEditingController ques = TextEditingController();
   TextEditingController deadline = TextEditingController();
+  TextEditingController description=TextEditingController();
   DateTime dateTime = DateTime.now();
 
   final keyForm = GlobalKey<FormState>();
@@ -86,7 +87,7 @@ class _AddQuestionState extends State<AddQuestion> {
   Map req = new Map();
   String? lop;
   String? mon;
-
+String? cat;
   AddQuesVoid() async {
 
     if (keyForm.currentState!.validate()) {
@@ -94,12 +95,14 @@ class _AddQuestionState extends State<AddQuestion> {
 
       bloc.add(addQuesForm(
           user_id: user_id ?? -1,
-          cat_id: int.parse(req['mon']),
+          subject_id: int.parse(req['mon']),
           class_id: int.parse(req['lop']),
           deadline: dateTime,
           money: money.text,
+          description: description.text,
           question: ques.text,
-          images: imageFiles));
+          images: imageFiles,
+          cat_id: int.parse(req['cat'])));
     }
   }
 
@@ -220,7 +223,10 @@ class _AddQuestionState extends State<AddQuestion> {
           listener: (_, StateBloc state) {
             CheckLogState.check(context,
                 state: state, msg: "Thêm câu hỏi thành công", success: () {
-              Navigator.pop(context);
+             money.clear();
+             ques.clear();
+             deadline.clear();
+             description.clear();
             });
           },
           child: Button1(
@@ -266,24 +272,43 @@ class _AddQuestionState extends State<AddQuestion> {
                   height: 5,
                 ),
                 Text(
+                  'Loại câu hỏi',
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
+                DropDown2(
+                  listItem: [
+                    ModelLocal(id: "7", name: "Ngẫu hứng"),
+                    ModelLocal(id: "8", name: "Chiến lược"),
+
+                  ],
+                  hint: 'Chọn thể loại',
+                  onChanged: (val) {
+                    req['cat'] = val.id;
+                  },
+                  value: cat,
+                  validator: (val) {
+                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                  },
+                ),
+                Text(
                   'Môn học',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 DropDown2(
                   listItem: [
-                    ModelLocal(id: "1", name: "Toán học"),
-                    ModelLocal(id: "2", name: "Vật lý"),
-                    ModelLocal(id: "3", name: "Hoá học"),
-                    ModelLocal(id: "4", name: "Văn học"),
-                    ModelLocal(id: "5", name: "Sinh học"),
-                    ModelLocal(id: "6", name: "Lịch sử"),
-                    ModelLocal(id: "7", name: "Địa lý"),
-                    ModelLocal(id: "8", name: "Tiếng Anh"),
-                    ModelLocal(id: "9", name: "Tin học"),
-                    ModelLocal(id: "10",name: "GDCD"),
-                    ModelLocal(id: "11",name: "Công nghệ"),
-                    ModelLocal(id: "12",name: "Âm nhạc"),
-                    ModelLocal(id: "13",name: "Mỹ Thuật"),
+                    ModelLocal(id: "16", name: "Toán học"),
+                    ModelLocal(id: "19", name: "Vật lý"),
+                    ModelLocal(id: "20", name: "Hoá học"),
+                    ModelLocal(id: "17", name: "Văn học"),
+                    ModelLocal(id: "21", name: "Sinh học"),
+                    ModelLocal(id: "15", name: "Lịch sử"),
+                    ModelLocal(id: "22", name: "Địa lý"),
+                    ModelLocal(id: "18", name: "Tiếng Anh"),
+                    ModelLocal(id: "23", name: "Tin học"),
+                    ModelLocal(id: "24",name: "GDCD"),
+                    ModelLocal(id: "25",name: "Công nghệ"),
+                    ModelLocal(id: "26",name: "Âm nhạc"),
+                    ModelLocal(id: "27",name: "Mỹ thuật"),
                   ],
                   hint: 'Chọn môn học',
                   onChanged: (val) {
@@ -316,7 +341,7 @@ class _AddQuestionState extends State<AddQuestion> {
                     ModelLocal(id: "13", name: "Lớp 11"),
                     ModelLocal(id: "14", name: "Lớp 12"),
                   ],
-                  hint: 'Chọn môn học',
+                  hint: 'Chọn lớp học',
                   onChanged: (val) {
                     req['lop'] = val.id;
                   },
@@ -362,7 +387,21 @@ class _AddQuestionState extends State<AddQuestion> {
                   height: 5,
                 ),
                 Text(
-                  'Câu hỏi',
+                  'Tiêu đề câu hỏi',
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
+                InputText2(
+                  hint: 'Tiêu đề câu hỏi',
+                  controller: ques,
+                  validator: (val) {
+                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Nội dung câu hỏi',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 InputText2(
@@ -370,7 +409,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   hint: 'Nhập câu hỏi của bạn',
                   keyboardType: TextInputType.multiline,
                   maxline: 6,
-                  controller: ques,
+                  controller: description,
                   validator: (val) {
                     return ValidatorApp.checkNull(text: val, isTextFiled: true);
                   },

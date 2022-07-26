@@ -77,9 +77,12 @@ print(widget.question_id);
           bloc: bloc,
           listener: (_, StateBloc state) {
             CheckLogState.check(context,
-                state: state, msg: "Thêm câu trả lời thành công", success: () {
+                state: state, msg: "Thêm câu trả lời thành công",isShowMsg: true,
+              success: (){
               Navigator.pop(context);
-            });
+
+             }
+           );
           },
           child: Button1(
               colorButton: ColorApp.orangeF2,

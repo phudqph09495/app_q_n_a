@@ -18,11 +18,13 @@ class BlocQuestion extends Bloc<EventBloc, StateBloc> {
       try {
         Map<String, dynamic> req = Map();
         req['user_id'] = event.user_id;
-        req['cat_id'] = event.cat_id;
+        req['subject_id'] = event.subject_id;
         req['class_id'] = event.class_id;
         req['deadline'] = event.deadline;
-        req['money'] = event.money;
+        req['price_gift'] = event.money;
         req['question']=event.question;
+        req['description']=event.description;
+        req['cat_id']=event.cat_id;
         List<MultipartFile> images = [];
         if (event.images != null) {
           for (var item in event.images!) {

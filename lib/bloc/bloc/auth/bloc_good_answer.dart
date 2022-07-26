@@ -4,34 +4,41 @@ import 'package:app_q_n_a/config/api.dart';
 import 'package:app_q_n_a/config/path/api_path.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
+import 'package:app_q_n_a/models/model_answer.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 
-class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
-  BlocGetQuestion() : super(StateBloc());
+class BlocGoodAnswer extends Bloc<EventBloc, StateBloc> {
+  BlocGoodAnswer() : super(StateBloc());
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
-    if (event is GetData) {
-      List<ModelQuestion> ques = [];
-      Map<String, dynamic> req = Map();
-      req['class_id']=event.class_id;
-      req['subject_id']=event.subject_id;
+    if (event is goodAns) {
       yield Loading();
       try {
-        var res=await Api.postAsync(endPoint: ApiPath.getQuestion,req: req);
-        print(res);
-        for (var item in res['data']) {
-          ModelQuestion modelQuestion = ModelQuestion.fromJson(item);
-          ques.add(modelQuestion);
-          yield LoadSuccess(data: ques);
+        Map<String, dynamic> req = Map();
+        req['user_id'] = event.user_id;
+        req['id'] = event.answer_id;
+        var res=await Api.postAsync(endPoint: ApiPath.goodAnswer, req: req);
+
+print(res);
+        if (res['code'] == 1) {
+
+          yield LoadSuccess(
+
+          );
+        }
+        else {
+          yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }
       } on DioError catch (e) {
-        yield LoadFail(error: e.error ?? "Lỗi kết nối");
+        yield LoadFail(error: e.error );
       } catch (e) {
         yield LoadFail(error: e.toString());
       }
     }
   }
 }
+
+

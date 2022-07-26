@@ -3,7 +3,14 @@ import 'package:image_picker/image_picker.dart';
 
 abstract class EventBloc {}
 
-class GetData extends EventBloc {}
+class GetData extends EventBloc {
+  String? class_id;
+  String? subject_id;
+  GetData({
+    this.class_id,
+    this.subject_id
+});
+}
 
 class getDataOrder extends EventBloc {
   String order_key;
@@ -71,14 +78,18 @@ class loginApp extends EventBloc {
 class addQuesForm extends EventBloc {
   int user_id;
   String question;
-  int? cat_id;
+  int? subject_id;
   DateTime deadline;
   String money;
   int? class_id;
+  int cat_id;
+  String description;
   List<XFile>? images;
   addQuesForm({
+    required this.cat_id,
+    required this.description,
     required this.user_id,
-    this.cat_id,
+    this.subject_id,
     this.class_id,
     required this.deadline,
     required this.money,
@@ -129,6 +140,15 @@ class getAns extends EventBloc {
     required this.user_id,
     required this.question_id,
   });
+}
+
+class goodAns extends EventBloc{
+  int user_id;
+  int answer_id;
+  goodAns({
+    required this.user_id,
+    required this.answer_id,
+});
 }
 
 class reportANS extends EventBloc {

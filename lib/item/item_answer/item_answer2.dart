@@ -23,7 +23,8 @@ class AnswerCard extends StatefulWidget {
   String user;
   String time;
   String answer;
-  String imageAns;
+  List<dynamic>? imageFileList ;
+  Widget imageAns;
   int status;
   var value;
 
@@ -37,13 +38,13 @@ Function()? report;
       required this.user,
       required this.avatar,
       required this.answer,
-      this.imageAns = '',
+        required this.imageAns ,
       this.status = 0,
       this.value,
       this.groupValue,
       this.onchanged,
         required this.IconReport,
-
+this.imageFileList,
       this.title,this.report});
 
   @override
@@ -54,71 +55,71 @@ class _AnswerCardState extends State<AnswerCard> {
   @override
   Widget build(BuildContext context) {
     if ((widget.status == 0) || (widget.status == 1) || (widget.status == 2)) {
-      return SizedBox();
-      //   InkWell(
-      //   onTap: () {
-      //     if (widget.status == 0) {
-      //       showPlatformDialog(
-      //         context: context,
-      //         builder: (context) => BasicDialogAlert(
-      //           title: Text("Lỗi"),
-      //           content: Text("Bạn phải đăng nhập để xem"),
-      //           actions: <Widget>[
-      //             BasicDialogAction(
-      //               title: Text("Trở lại"),
-      //               onPressed: () {
-      //                 Navigator.pop(context);
-      //               },
-      //             ),
-      //             BasicDialogAction(
-      //               title: Text("Đăng nhập"),
-      //               onPressed: () {
-      //                 Navigator.push(
-      //                     context,
-      //                     MaterialPageRoute(
-      //                         builder: (context) => LoginScreen()));
-      //               },
-      //             ),
-      //           ],
-      //         ),
-      //       );
-      //     } else if (widget.status == 1) {
-      //       showPlatformDialog(
-      //         context: context,
-      //         builder: (context) => BasicDialogAlert(
-      //           title: Text("Lỗi"),
-      //           content: Text("Bạn chưa thể xem câu trả lời này bây giờ"),
-      //           actions: <Widget>[
-      //             BasicDialogAction(
-      //               title: Text("Trở lại"),
-      //               onPressed: () {
-      //                 Navigator.pop(context);
-      //               },
-      //             ),
-      //           ],
-      //         ),
-      //       );
-      //     } else if (widget.status == 2) {
-      //
-      //       setState(() {
-      //         widget.status = 3;
-      //       });
-      //     }
-      //   },
-      //   child:
-      //   Card(
-      //     color: ColorApp.whiteF7,
-      //     child: Padding(
-      //       padding: EdgeInsets.all(8),
-      //       child: Center(
-      //         child: Text(
-      //           '..... đã trả lời câu hỏi',
-      //           style: StyleApp.textStyle400(color: ColorApp.blue6D),
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // );
+      return
+        InkWell(
+        onTap: () {
+          if (widget.status == 0) {
+            showPlatformDialog(
+              context: context,
+              builder: (context) => BasicDialogAlert(
+                title: Text("Lỗi"),
+                content: Text("Bạn phải đăng nhập để xem"),
+                actions: <Widget>[
+                  BasicDialogAction(
+                    title: Text("Trở lại"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  BasicDialogAction(
+                    title: Text("Đăng nhập"),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    },
+                  ),
+                ],
+              ),
+            );
+          } else if (widget.status == 1) {
+            showPlatformDialog(
+              context: context,
+              builder: (context) => BasicDialogAlert(
+                title: Text("Lỗi"),
+                content: Text("Bạn chưa thể xem câu trả lời này bây giờ"),
+                actions: <Widget>[
+                  BasicDialogAction(
+                    title: Text("Trở lại"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            );
+          } else if (widget.status == 2) {
+
+            setState(() {
+              widget.status = 3;
+            });
+          }
+        },
+        child:
+        Card(
+          color: ColorApp.whiteF7,
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Center(
+              child: Text(
+                '..... đã trả lời câu hỏi',
+                style: StyleApp.textStyle400(color: ColorApp.blue6D),
+              ),
+            ),
+          ),
+        ),
+      );
     } else {
       return Card(
         color: ColorApp.whiteF7,
@@ -156,22 +157,7 @@ class _AnswerCardState extends State<AnswerCard> {
                   ),
                 ],
               ),
-              RatingBar.builder(
-                initialRating: 3,
-                minRating: 1,
-                itemSize: 20,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemCount: 5,
-                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                itemBuilder: (context, _) => const Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                ),
-                onRatingUpdate: (rating) {
-                  print(rating);
-                },
-              ),
+     SizedBox(height: 10,),
               ReadMoreText(
                 widget.answer,
                 trimLines: 2,
@@ -182,11 +168,9 @@ class _AnswerCardState extends State<AnswerCard> {
                 style:
                     StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
               ),
-              (widget.imageAns != '')
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image(image: NetworkImage(widget.imageAns)))
-                  : Container(),
+              ( widget.imageFileList!.isNotEmpty)
+                  ? widget.imageAns:SizedBox(),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
