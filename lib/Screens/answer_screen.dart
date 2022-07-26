@@ -250,7 +250,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             hasPaid=true;
                           }
                           return AnswerCard(
-                            imageFileList: [],
+
+                            imageFileList:list.answer?[index].images??[] ,
                             // list.answer?[index].images ,
 
                             status: 3,
@@ -260,19 +261,21 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             //2: là chủ câu hỏi
                             //3: hiển thị khi hết deadline
 
-                            imageAns: Container()
-                            // GridView.builder(
-                            //     itemCount: list.answer?[index].images?.length,
-                            //     gridDelegate:
-                            //         SliverGridDelegateWithFixedCrossAxisCount(
-                            //             childAspectRatio: 2, crossAxisCount: 3),
-                            //     shrinkWrap: true,
-                            //     itemBuilder: (BuildContext context, int index) {
-                            //       return LoadImage(
-                            //           ans: false,
-                            //           url:
-                            //               "http://hoidap.nanoweb.vn/static${list.answer?[index].images?[index].path}${list.answer?[index].images?[index].name}");
-                            //     })
+                            imageAns:
+
+                            GridView.builder(
+                                itemCount: list.answer?[index].images?.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        childAspectRatio: 2, crossAxisCount: 3),
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, int index2) {
+                                  return LoadImage(
+                                      ans: true,
+                                      url: (list.answer?[index].id==list.answer?[index].images?[index2].answerId)?
+                                      "http://hoidap.nanoweb.vn/static${list.answer?[index].images?[index2].path}${list.answer?[index].images?[index2].name}":""
+                                  );
+                                })
                             ,
                             value: index,
                             groupValue: (list.answer?[index].status == '2')

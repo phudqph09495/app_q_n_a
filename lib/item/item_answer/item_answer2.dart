@@ -23,7 +23,7 @@ class AnswerCard extends StatefulWidget {
   String user;
   String time;
   String answer;
-  List<dynamic>? imageFileList ;
+  List<dynamic> imageFileList ;
   Widget imageAns;
   int status;
   var value;
@@ -44,7 +44,7 @@ Function()? report;
       this.groupValue,
       this.onchanged,
         required this.IconReport,
-this.imageFileList,
+required this.imageFileList,
       this.title,this.report});
 
   @override
@@ -168,7 +168,7 @@ class _AnswerCardState extends State<AnswerCard> {
                 style:
                     StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
               ),
-              ( widget.imageFileList!.isNotEmpty)
+              ( widget.imageFileList.isNotEmpty)
                   ? widget.imageAns:SizedBox(),
 
               Row(
