@@ -40,7 +40,6 @@ class _ViTienState extends State<ViTien> {
     // TODO: implement initState
     super.initState();
     getVi();
-
   }
 
   @override
@@ -145,7 +144,7 @@ class _ViTienState extends State<ViTien> {
       child: BlocBuilder(
           bloc: blocGetWallet,
           builder: (_, state) {
-            final history = state is LoadSuccess ? state.data as int : 0;
+            final history = state is LoadSuccess;
             return Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -172,7 +171,7 @@ class _ViTienState extends State<ViTien> {
                         ),
                         const Text(
                           'Ngân hàng Techcombank',
-                          style: TextStyle(color: Colors.black, fontSize: 14),
+                          style: TextStyle(color: Colors.black, fontSize: 13),
                         ),
                         const SizedBox(
                           height: 7,
@@ -185,7 +184,7 @@ class _ViTienState extends State<ViTien> {
                               style: TextStyle(color: ColorApp.black),
                             ),
                             Text(
-                              '',
+                              '1500000 Đ',
                               style: TextStyle(color: ColorApp.orangeF01),
                             ),
                           ],
