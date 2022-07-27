@@ -16,6 +16,9 @@ import '../item/question_tile.dart';
 import 'add_question.dart';
 
 class HomeScreen extends StatefulWidget {
+  int? class_id;
+  int? subject_id;
+  HomeScreen({this.subject_id,this.class_id});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -23,7 +26,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   BlocGetQuestion blocGetQuestion = BlocGetQuestion();
   Future<void> onRefresh() async {
-    blocGetQuestion.add(GetData());
+    blocGetQuestion.add(GetData(class_id:widget.class_id,subject_id: widget.subject_id ));
   }
 
   @override

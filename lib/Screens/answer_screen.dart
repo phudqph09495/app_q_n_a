@@ -272,8 +272,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                 itemBuilder: (BuildContext context, int index2) {
                                   return LoadImage(
                                       ans: true,
-                                      url: (list.answer?[index].id==list.answer?[index].images?[index2].answerId)?
-                                      "http://hoidap.nanoweb.vn/static${list.answer?[index].images?[index2].path}${list.answer?[index].images?[index2].name}":""
+                                      url:
+                                      "http://hoidap.nanoweb.vn/static${list.answer?[index].images?[index2].path}${list.answer?[index].images?[index2].name}"
                                   );
                                 })
                             ,

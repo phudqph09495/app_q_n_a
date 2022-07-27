@@ -11,11 +11,21 @@ class BlocWalletHistory extends Bloc<EventBloc, StateBloc> {
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
-    if (event is GetData) {
+    if (event is getHistory) {
       List<Datas> ques = [];
       yield Loading();
       try {
-        var res = await Api.getAsync(endPoint: ApiPath.getWalletHistory);
+        Map<String, dynamic> req = Map();
+        req['user_id']=event.user_id;
+        req['limit']=event.limit;
+        req['page']=event.page;
+        req['is_week']=event.is_week;
+        req['is_day']=event.is_day;
+        req['is_month']=event.is_month;
+        req['is_last_month']=event.is_last_month;
+        req['start_time']=event.start_time;
+        req['end_time']=event.end_time;
+        var res = await Api.postAsync(endPoint: ApiPath.getWalletHistory, req: req);
         print(res);
         if (res['code'] == 1) {
           Datas datas = Datas.fromJson(res['data']);

@@ -28,19 +28,19 @@ class _ViTienState extends State<ViTien> {
   getVi() async {
     int id = await SharedPrefs.readString(SharePrefsKeys.user_id);
     blocGetWallet.add(getViTien(user_id: id, cat_id: 1));
+    blocWalletHistory.add(getHistory(user_id: id, limit: 5, page: 1, is_week: 1, is_day: 1, is_month: 1, is_last_month: 1, start_time: start_time, end_time: end_time));
+
   }
 
   BlocWalletHistory blochistory = BlocWalletHistory();
-  Future<void> History() async {
-    blocWalletHistory.add(GetData());
-  }
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getVi();
-    History();
+
   }
 
   @override

@@ -4,8 +4,8 @@ import 'package:image_picker/image_picker.dart';
 abstract class EventBloc {}
 
 class GetData extends EventBloc {
-  String? class_id;
-  String? subject_id;
+  int? class_id;
+  int? subject_id;
   GetData({
     this.class_id,
     this.subject_id
