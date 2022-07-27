@@ -1,10 +1,20 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/Screens/home.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_getquestion.dart';
+import 'package:app_q_n_a/bloc/check_log_state.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/item/gridView/grid_view_2.dart';
+import 'package:app_q_n_a/models/model_local.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/item/grid_view.dart';
 import 'package:app_q_n_a/item/button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/state_bloc.dart';
 
 class Filter extends StatefulWidget {
   @override
@@ -12,57 +22,89 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
-  List<String> status = ['Tất cả', 'Đã trả lời', 'Chưa trả lời', 'Lần đầu hỏi'];
-  List<String> lop = [
-    'Tất cả',
-    'Lớp 1',
-    'Lớp 2',
-    'Lớp 3',
-    'Lớp 4',
-    'Lớp 5',
-    'Lớp 6',
-    'Lớp 7',
-    'Lớp 8',
-    'Lớp 9',
-    'Lớp 10',
-    'Lớp 11',
-    'Lớp 12'
-  ];
-  List<String> monList = [
-    'Toán học',
-    'Vật lý',
-    'Hoá học',
-    'Ngữ Văn',
-    'Sinh học',
-    'Sử học',
-    'Địa lý',
-    'Tiếng Anh',
-    'Tin học',
-    'GDCD',
-    'Công nghệ',
-    'Âm nhạc',
-    'Mỹ thuật'
-  ];
+  BlocGetQuestion blocGetQuestion = BlocGetQuestion();
 
+  loc() async {
+    blocGetQuestion.add(GetData(
+        cat_id: int.parse(req['theloai']),
+        class_id: int.parse(req['lophoc']),
+        subject_id: int.parse(req['monhoc'])));
+  }
+
+  Map req = new Map();
+  String? theloai;
+  String? lophoc;
+  String? monhoc;
+  int lopval = -1;
+  int monval = -1;
+  int catval = -1;
+  List cat = [
+    ModelLocal(id: "7", name: "Ngẫu hứng"),
+    ModelLocal(id: "8", name: "Chiến lược"),
+  ];
+  List listmon = [
+    ModelLocal(id: "16", name: "Toán học"),
+    ModelLocal(id: "19", name: "Vật lý"),
+    ModelLocal(id: "20", name: "Hoá học"),
+    ModelLocal(id: "17", name: "Văn học"),
+    ModelLocal(id: "21", name: "Sinh học"),
+    ModelLocal(id: "15", name: "Lịch sử"),
+    ModelLocal(id: "22", name: "Địa lý"),
+    ModelLocal(id: "18", name: "Tiếng Anh"),
+    ModelLocal(id: "23", name: "Tin học"),
+    ModelLocal(id: "24", name: "GDCD"),
+    ModelLocal(id: "25", name: "Công nghệ"),
+    ModelLocal(id: "26", name: "Âm nhạc"),
+    ModelLocal(id: "27", name: "Mỹ thuật"),
+  ];
+  List listlop = [
+    ModelLocal(id: "3", name: "Lớp 1"),
+    ModelLocal(id: "4", name: "Lớp 2"),
+    ModelLocal(id: "5", name: "Lớp 3"),
+    ModelLocal(id: "6", name: "Lớp 4"),
+    ModelLocal(id: "7", name: "Lớp 5"),
+    ModelLocal(id: "8", name: "Lớp 6"),
+    ModelLocal(id: "9", name: "Lớp 7"),
+    ModelLocal(id: "10", name: "Lớp 8"),
+    ModelLocal(id: "11", name: "Lớp 9"),
+    ModelLocal(id: "12", name: "Lớp 10"),
+    ModelLocal(id: "13", name: "Lớp 11"),
+    ModelLocal(id: "14", name: "Lớp 12"),
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomSheet:  Padding(
+        bottomSheet: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Button1(
-            style: false,
-            fontSize: 18,
-            radius: 30,
-              ontap: () {},
-              colorButton: ColorApp.orangeF2,
-              textColor: Colors.white,
-              border: Border.all(color: ColorApp.orangeF2,width: 0.5),
-              textButton: 'Tìm kiếm'),
+          child: BlocListener(
+            bloc: blocGetQuestion,
+            listener: (_, StateBloc state) {
+              CheckLogState.check(context, state: state, success: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomeScreen(
+                              subject_id: int.parse(req['monhoc']),
+                              class_id: int.parse(req['lophoc']),
+                          cat_id:int.parse(req['theloai']) ,
+                            )));
+              });
+            },
+            child: Button1(
+                style: false,
+                fontSize: 18,
+                radius: 30,
+                ontap: () {},
+                colorButton: ColorApp.orangeF2,
+                textColor: Colors.white,
+                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                textButton: 'Tìm kiếm'),
+          ),
         ),
         backgroundColor: ColorApp.whiteF0,
         appBar: AppBar(
-centerTitle: true,
+          centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -74,8 +116,9 @@ centerTitle: true,
           ),
           title: Text(
             'Lọc câu hỏi',
-            style:
-                StyleApp.textStyle700(fontSize: 18, ),
+            style: StyleApp.textStyle700(
+              fontSize: 18,
+            ),
           ),
           backgroundColor: ColorApp.whiteF0,
         ),
@@ -83,24 +126,55 @@ centerTitle: true,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-          children: [
-            FilterList(
-                column: 1, list: status, title: '  Trạng thái câu hỏi',space: 10,),
-SizedBox(height: 8,),
-            FilterList(
-              title: '  Lớp',
-              column: 3,
-              list: lop,
-            ),
-            SizedBox(height: 8,),
-            FilterList(
-              title: '  Môn học',
-              column: 3,
-              list: monList,
-            ),
-            SizedBox(height: 8,),
-
-          ],
+              children: [
+                FilterList2(
+                  value: catval,
+                  column: 1,
+                  list: cat,
+                  title: '  Trạng thái câu hỏi',
+                  space: 10,
+                  onChanged: (val) {
+                    setState(() {
+                      catval = val;
+                      req['theloai'] = cat[catval].id;
+                      ;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                FilterList2(
+                  value: lopval,
+                  title: '  Lớp',
+                  column: 3,
+                  list: listlop,
+                  onChanged: (val) {
+                    setState(() {
+                      lopval = val;
+                      req['lophoc'] = listlop[lopval].id;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                FilterList2(
+                  value: monval,
+                  title: '  Môn học',
+                  column: 3,
+                  list: listmon,
+                  onChanged: (val) {
+                    setState(() {
+                      monval = val;
+                      req['monhoc'] = listmon[monval].id;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+              ],
             ),
           ),
         ),

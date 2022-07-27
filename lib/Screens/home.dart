@@ -17,8 +17,9 @@ import 'add_question.dart';
 
 class HomeScreen extends StatefulWidget {
   int? class_id;
+  int? cat_id;
   int? subject_id;
-  HomeScreen({this.subject_id,this.class_id});
+  HomeScreen({this.subject_id,this.class_id,this.cat_id});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
