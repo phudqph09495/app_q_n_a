@@ -5,7 +5,22 @@ import 'package:flutter/material.dart';
 import '../../config/next_page.dart';
 import '../../styles/colors.dart';
 import '../../styles/styles.dart';
-class ScreensPays extends StatelessWidget {
+
+class ScreensPays extends StatefulWidget {
+  int? user_id;
+  int? limit;
+  int? page;
+  int? is_week;
+  int? is_day;
+  int? is_month;
+  int? is_last_month;
+  DateTime? start_time;
+  DateTime? end_time;
+  @override
+  State<ScreensPays> createState() => _ScreensPaysState();
+}
+
+class _ScreensPaysState extends State<ScreensPays> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
