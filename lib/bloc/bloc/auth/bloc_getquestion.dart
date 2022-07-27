@@ -14,18 +14,34 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
     if (event is GetData) {
+
       List<ModelQuestion> ques = [];
-      Map<String, dynamic> req = Map();
-      req['class_id']=event.class_id;
-      req['subject_id']=event.subject_id;
+     
       yield Loading();
       try {
-        var res=await Api.postAsync(endPoint: ApiPath.getQuestion,req: req);
+        Map<String, dynamic> req = Map();
+        req['class_id'] = event.class_id;
+        req['subject_id'] = event.subject_id;
+        print(req);
+        var res = await Api.postAsync(endPoint: ApiPath.getQuestion, req: req);
         print(res);
-        for (var item in res['data']) {
-          ModelQuestion modelQuestion = ModelQuestion.fromJson(item);
-          ques.add(modelQuestion);
-          yield LoadSuccess(data: ques);
+        if (res["code"] == 1) {
+          for (var item in res['data']) {
+            ModelQuestion modelQuestion = ModelQuestion.fromJson(item);
+            ques.add(modelQuestion);
+          }
+          yield LoadSuccess(
+            data: ques,
+            keySearch: event.keySearch,
+          );
+        }else if (res["code"] == 114) {
+          yield LoadSuccess(
+            data: ques,
+            keySearch: event.keySearch,
+          );
+        }
+        else {
+          yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }
       } on DioError catch (e) {
         yield LoadFail(error: e.error ?? "Lỗi kết nối");

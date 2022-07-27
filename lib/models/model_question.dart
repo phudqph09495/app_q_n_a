@@ -54,7 +54,7 @@ class ModelQuestion {
   String? userId;
   String? isComplete;
   dynamic description;
-  dynamic deadline;
+  String? deadline;
   String? isImage;
   String? classId;
   String? subjectId;

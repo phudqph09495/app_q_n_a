@@ -7,10 +7,12 @@ class GetData extends EventBloc {
   int? cat_id;
   int? class_id;
   int? subject_id;
+  String? keySearch;
   GetData({
     this.cat_id,
     this.class_id,
-    this.subject_id
+    this.subject_id,
+    this.keySearch,
 });
 }
 
@@ -81,7 +83,7 @@ class addQuesForm extends EventBloc {
   int user_id;
   String question;
   int? subject_id;
-  DateTime deadline;
+  String deadline;
   String money;
   int? class_id;
   int cat_id;

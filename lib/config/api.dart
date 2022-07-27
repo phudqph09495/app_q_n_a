@@ -59,7 +59,10 @@ class Api {
         var token = await SharedPrefs.readString(SharePrefsKeys.user_token);
         headers['token'] = token;
       }
-
+      var user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
+      if (user_id != null) {
+        req['user_id'] = user_id;
+      }
       FormData formData = FormData.fromMap(req);
       var res = await dio
           .post(

@@ -1,9 +1,7 @@
-import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
+
 import 'package:app_q_n_a/item/itemnotifi/itemNotifi2.dart';
 import 'package:flutter/material.dart';
 
-import '../../../item/question_tile.dart';
-import '../../Screens/answer_screen.dart';
 import '../../Screens/comment.dart';
 
 class ThongBao extends StatelessWidget {
@@ -20,11 +18,11 @@ class ThongBao extends StatelessWidget {
               sub:
                   'Đã trả lời câu hỏi : " Đếm số đỉnh,số cạnh của khối bát diện"...... Mà bạn đang theo dõi ',
               onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                  MaterialPageRoute(
-                    builder: (_) => AnswerScreen(),
-                  ),
-                );
+                // Navigator.of(context, rootNavigator: true).push(
+                //   MaterialPageRoute(
+                //     builder: (_) => AnswerScreen(),
+                //   ),
+                // );
               },
               title: "Tran thanh",
               time: "3 phút trước",
@@ -34,11 +32,11 @@ class ThongBao extends StatelessWidget {
               sub:
                   'Đã vote 5 sao cho câu trả lời của bạn , trong bài :"Đếm số đỉnh,số cạnh của khối bát diện"',
               onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                  MaterialPageRoute(
-                    builder: (_) => AnswerScreen(),
-                  ),
-                );
+                // Navigator.of(context, rootNavigator: true).push(
+                //   MaterialPageRoute(
+                //     builder: (_) => AnswerScreen(),
+                //   ),
+                // );
               },
               title: "Nguyen van nam",
               time: "4 phút trước",
@@ -76,11 +74,11 @@ class ThongBao extends StatelessWidget {
               sub:
                   'Câu trả lời của bạn cho câu hỏi: "Đếm số đỉnh,số cạnh của khối bát diện"... đã bị xóa vì lý do sao chép từ nguồn khác trên mạng.  ',
               onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                  MaterialPageRoute(
-                    builder: (_) => AnswerScreen(),
-                  ),
-                );
+                // Navigator.of(context, rootNavigator: true).push(
+                //   MaterialPageRoute(
+                //     builder: (_) => AnswerScreen(),
+                //   ),
+                // );
               },
               title: "Admin",
               time: "15 phút trước",

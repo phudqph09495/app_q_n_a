@@ -8,6 +8,7 @@ import 'package:app_q_n_a/bloc/bloc/auth/bloc_report.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
+import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/item/grid_view.dart' as Grid;
@@ -15,6 +16,7 @@ import 'package:app_q_n_a/item/item_answer/item_answer1.dart';
 import 'package:app_q_n_a/item/item_answer/item_answer2.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_answer.dart';
+import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
@@ -42,25 +44,8 @@ List<String> reportList = [
 ];
 
 class AnswerScreen extends StatefulWidget {
-  int? deadline;
-  String? question;
-  String? username;
-  int? createAt;
-  int? uqid;
-  String? mon;
-  String? lop;
-  double? money;
-  String? qid;
-  AnswerScreen(
-      {this.deadline,
-      this.question,
-      this.username,
-      this.createAt,
-      this.uqid,
-      this.money,
-      this.lop,
-      this.mon,
-      this.qid});
+  ModelQuestion modelQuestion;
+  AnswerScreen({required this.modelQuestion});
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
 }
@@ -73,17 +58,6 @@ class _AnswerScreenState extends State<AnswerScreen> {
   List<int> i = [0, 1, 2, 2, 3, 5];
   bool timing = true;
   late int userStatus;
-  //
-  // getUserid() async {
-  //   int userid = Body.id;
-  //   if (userid == 0) {
-  //     userStatus = 0;
-  //   } else if (userid != widget.uqid) {
-  //     userStatus = 1;
-  //   } else {
-  //     userStatus = 2;
-  //   }
-  // }
 
 
   BlocGetAnswer bloc = BlocGetAnswer();
@@ -111,16 +85,16 @@ class _AnswerScreenState extends State<AnswerScreen> {
 
     if (userid == 0) {
       userStatus = 0;
-    } else if (userid != widget.uqid) {
+    } else if (userid != Const.convertNumber(widget.modelQuestion.userId).round()) {
       userStatus = 1;
     } else {
       userStatus = 2;
     }
 
     bloc.add(
-        getAns(user_id: Body.id, question_id: int.parse(widget.qid ?? '0')));
+        getAns(user_id: Body.id, question_id: int.parse(widget.modelQuestion.id ?? '0')));
 
-      int end = widget.deadline!;
+      int end = Const.convertNumber(widget.modelQuestion.deadline).round() * 1000;
       int now = DateTime.now().millisecondsSinceEpoch;
       if (now >= end) {
         timing = false;
@@ -173,7 +147,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             MaterialPageRoute(
                                 builder: (context) => Add_Answer_Screen(
                                       user_id: Body.id,
-                                      question_id: int.parse(widget.qid ?? '0'),
+                                      question_id: int.parse(widget.modelQuestion.id ?? '0'),
                                     )));
                       } else if (timing == false) {
                         Toast.show("Đã hết thời gian trả lời câu hỏi",
@@ -189,7 +163,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                 centerTitle: true,
                 backgroundColor: ColorApp.whiteF0,
                 title: Text(
-                  '${widget.mon} - ${widget.lop} - ${widget.money} đ',
+                  '${widget.modelQuestion.subjectName ?? 'Lĩnh vực khác'} - ${widget.modelQuestion.className} - ${Const.convertNumber(widget.modelQuestion.priceGift)} đ',
                   style: StyleApp.textStyle700(
                     fontSize: 18,
                   ),
@@ -228,13 +202,11 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                   url:
                                       "http://hoidap.nanoweb.vn/static${list.images?[index].path}${list.images?[index].name}");
                             }),
-                        endTime: widget.deadline ?? 0,
+                        endTime:  Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,
                         avatar: '',
                         ques: list.question?.description ?? '',
-                        user: widget.username ?? '',
-                        time: DateFormat('dd/MM/yyyy, HH:mm').format(
-                            DateTime.fromMillisecondsSinceEpoch(
-                                widget.createAt! * 1000)),
+                        user: widget.modelQuestion.username ?? '',
+                        time: Const.formatTime( Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,format: "dd/MM/yyyy HH:mm"),
                       ),
                       const SizedBox(
                         height: 10,
@@ -338,12 +310,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                               }
                             },
 
-                            time: DateFormat('dd/MM/yyyy, HH:mm').format(
-                                    DateTime.fromMillisecondsSinceEpoch(int.parse(
-                                            list.answer?[index].createdAt ??
-                                                '0')! *
-                                        1000)) ??
-                                '',
+                            time: Const.formatTime(int.parse(list.answer?[index].createdAt ?? "0"),format: "dd/MM/yyyy HH:mm"),
                             user: list.answer?[index].username ?? '',
                             avatar: '',
                             answer: list.answer?[index].answer ?? '',

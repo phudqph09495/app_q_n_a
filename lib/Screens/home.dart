@@ -25,9 +25,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  BlocGetQuestion blocGetQuestion = BlocGetQuestion();
+
   Future<void> onRefresh() async {
-    blocGetQuestion.add(GetData(class_id:widget.class_id,subject_id: widget.subject_id ));
+    context.read<BlocGetQuestion>().add(GetData(class_id:widget.class_id,subject_id: widget.subject_id ));
   }
 
   @override
@@ -63,11 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: ColorApp.whiteF0,
           elevation: 0,
           flexibleSpace: Padding(
-            padding: EdgeInsets.only(left: 13),
+            padding: const EdgeInsets.only(left: 13),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 Image.asset(
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fit: BoxFit.fitHeight,
                   alignment: Alignment.centerLeft,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -132,20 +132,28 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: onRefresh,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: BlocBuilder<BlocGetQuestion,StateBloc>(
-                  bloc: blocGetQuestion,
-                  builder: (_, state) => QuestionList(
-                    listItem: state is LoadSuccess
-                        ? state.data as List<ModelQuestion>
-                        : [],
+          child:  BlocBuilder<BlocGetQuestion,StateBloc>(
+            builder: (_, state){
+             final keySearch =  state is LoadSuccess
+                  ? state.keySearch
+                  : null;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  keySearch != null ? Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text("Lọc câu hỏi: $keySearch", style: StyleApp.textStyle700(fontSize: 16,color: Colors.green),),
+                  ) : const SizedBox(),
+                  Expanded(
+                    child: QuestionList(
+                      listItem: state is LoadSuccess
+                          ? state.data as List<ModelQuestion>
+                          : [],
+                    ),
                   ),
-                ),
-              ),
-            ],
+                ],
+              );
+            },
           ),
         ),
       ),

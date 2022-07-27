@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:time_elapsed/time_elapsed.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'path/share_pref_path.dart';
@@ -162,7 +163,7 @@ class Const {
     return text;
   }
 
-  static double convertNumber(dynamic data) {
+  static  double convertNumber(dynamic data) {
     var res = isNumeric(data.toString());
     if (res) {
       return double.parse(data.toString());
@@ -187,26 +188,64 @@ class Const {
   }
 
   static bool isNumeric(String result) {
-    if (result == null) {
+    if(result.toString() == "null"){
       return false;
     }
-    return double.tryParse(result) != null;
+    try{
+      double.parse(result.toString());
+      return true;
+    }catch (e){
+      return false;
+    }
   }
 
-  static checkTime(int timestamp, {bool checkNew = true}) {
-    // DateTime _timeDate = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-    // String timestr = "";
-    // final customDate = CustomTimeElapsed(
-    //   minutes: 'phút trước',
-    //   hours: 'giờ trước',
-    //   days: 'ngày trước',
-    //   now: 'vừa xong',
-    //   seconds: 'giây trước',
-    //   weeks: 'tuần trước',
-    // );
-    // timestr =
-    //     TimeElapsed.fromDateTime(_timeDate).toCustomTimeElapsed(customDate);
-    // return timestr;
+  static checkTime(int timestamp) {
+
+    if(timestamp == 0){
+      return "";
+    }
+    DateTime _timeDate = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+
+    String timestr = "";
+    final customDate = CustomTimeElapsed(
+      minutes: 'phút trước',
+      hours: 'giờ trước',
+      days: 'ngày trước',
+      now: 'vừa xong',
+      seconds: 'giây trước',
+      weeks: 'tuần trước',
+    );
+    //.toCustomTimeElapsed(customDate)
+
+    timestr = TimeElapsed.fromDateTime(_timeDate);
+    if(timestr == "Now") {
+      return "vừa xong";
+    }
+    String key = timestr.substring(timestr.length - 1, timestr.length);
+    String text = timestr.substring(0, timestr.length - 1);
+
+
+
+    switch (key) {
+      case "s":
+        return "$text giây trước";
+      case "m":
+        return "$text phút trước";
+      case "h":
+        return "$text giờ trước";
+      case "d":
+        return "$text ngày trước";
+      case "w":
+        if(int.parse(text) >= 52){
+          return "${(int.parse(text) / 52).round()} năm trước";
+        }
+        if(int.parse(text) >= 4){
+          return "${(int.parse(text) / 4).round()} tháng trước";
+        }
+        return "$text tuần trước";
+      default:
+        return "vừa xong";
+    }
   }
 
   static callLaunch(url) async {

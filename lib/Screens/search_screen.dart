@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/answer_screen.dart';
 import 'package:app_q_n_a/item/input_text.dart';
+import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController search = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +72,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AnswerScreen()));
+                                builder: (context) => AnswerScreen(
+                                      modelQuestion: ModelQuestion(),
+                                    )));
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

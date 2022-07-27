@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app_q_n_a/Screens/home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_getquestion.dart';
+import 'package:app_q_n_a/bloc/bloc/question/get_class_bloc.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/item/gridView/grid_view_2.dart';
@@ -13,6 +14,7 @@ import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/item/grid_view.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../bloc/state_bloc.dart';
 
@@ -22,22 +24,16 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
-  BlocGetQuestion blocGetQuestion = BlocGetQuestion();
+  BlocGetClass blocGetClass = BlocGetClass()..add(GetData());
 
-  loc() async {
-    blocGetQuestion.add(GetData(
-        cat_id: int.parse(req['theloai']),
-        class_id: int.parse(req['lophoc']),
-        subject_id: int.parse(req['monhoc'])));
-  }
 
   Map req = new Map();
   String? theloai;
   String? lophoc;
   String? monhoc;
-  int lopval = -1;
-  int monval = -1;
-  int catval = -1;
+  int? lopval;
+  int? monval;
+  int? catval;
   List cat = [
     ModelLocal(id: "7", name: "Ngẫu hứng"),
     ModelLocal(id: "8", name: "Chiến lược"),
@@ -71,36 +67,52 @@ class _FilterState extends State<Filter> {
     ModelLocal(id: "13", name: "Lớp 11"),
     ModelLocal(id: "14", name: "Lớp 12"),
   ];
+  GetData getQuestionHome = GetData();
+
+  getKeySearch(){
+    String key = "";
+    if(theloai != null){
+      key = key + "$theloai ";
+    }
+    if(lophoc != null){
+      key = key + "$lophoc ";
+    }
+    if(monhoc != null){
+      key = key + "$monhoc ";
+    }
+
+    if(key != ""){
+      return key;
+    }
+    return null;
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         bottomSheet: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: BlocListener(
-            bloc: blocGetQuestion,
-            listener: (_, StateBloc state) {
-              CheckLogState.check(context, state: state, success: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomeScreen(
-                              subject_id: int.parse(req['monhoc']),
-                              class_id: int.parse(req['lophoc']),
-                          cat_id:int.parse(req['theloai']) ,
-                            )));
-              });
-            },
-            child: Button1(
-                style: false,
-                fontSize: 18,
-                radius: 30,
-                ontap: () {},
-                colorButton: ColorApp.orangeF2,
-                textColor: Colors.white,
-                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                textButton: 'Tìm kiếm'),
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+          child: Button1(
+              style: false,
+              fontSize: 18,
+              radius: 30,
+              ontap: () {
+                if(lopval != null){
+                  getQuestionHome.class_id = lopval;
+                }
+                if(monval != null){
+                  getQuestionHome.subject_id = monval;
+                }
+                if(catval != null){
+                  getQuestionHome.cat_id =  catval;
+                }
+                context.read<BlocGetQuestion>().add(getQuestionHome);
+                Navigator.pop(context);
+              },
+              colorButton: ColorApp.orangeF2,
+              textColor: Colors.white,
+              border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+              textButton: 'Tìm kiếm'),
         ),
         backgroundColor: ColorApp.whiteF0,
         appBar: AppBar(
@@ -123,59 +135,65 @@ class _FilterState extends State<Filter> {
           backgroundColor: ColorApp.whiteF0,
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                FilterList2(
-                  value: catval,
-                  column: 1,
-                  list: cat,
-                  title: '  Trạng thái câu hỏi',
-                  space: 10,
-                  onChanged: (val) {
-                    setState(() {
-                      catval = val;
-                      req['theloai'] = cat[catval].id;
-                      ;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                FilterList2(
-                  value: lopval,
-                  title: '  Lớp',
-                  column: 3,
-                  list: listlop,
-                  onChanged: (val) {
-                    setState(() {
-                      lopval = val;
-                      req['lophoc'] = listlop[lopval].id;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                FilterList2(
-                  value: monval,
-                  title: '  Môn học',
-                  column: 3,
-                  list: listmon,
-                  onChanged: (val) {
-                    setState(() {
-                      monval = val;
-                      req['monhoc'] = listmon[monval].id;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-              ],
-            ),
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              FilterList2(
+                value: catval,
+                column: 1,
+                list: cat,
+                title: '  Trạng thái câu hỏi',
+                space: 10,
+                onChanged: (val) {
+                  setState(() {
+                    catval = val;
+                  });
+                  getQuestionHome.keySearch = getKeySearch();
+                },
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              BlocBuilder(
+                 bloc: blocGetClass,
+                 builder: (context, state) {
+                   final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
+                   return FilterList2(
+                     value: lopval,
+                     title: '  Lớp',
+                     column: 3,
+                     list: list,
+                     onChanged: (val) {
+                       lopval = val;
+                       for(ModelLocal element in list){
+                         if(element.id.toString() == val.toString()){
+                           lophoc = element.name;
+                         }
+                       }
+                       getQuestionHome.keySearch = getKeySearch();
+                     },
+                   );
+                 },
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              FilterList2(
+                value: monval,
+                title: '  Môn học',
+                column: 3,
+                list: listmon,
+                onChanged: (val) {
+                  setState(() {
+                    monval = val;
+                  });
+                  getQuestionHome.keySearch = getKeySearch();
+                },
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+            ],
           ),
         ),
       ),

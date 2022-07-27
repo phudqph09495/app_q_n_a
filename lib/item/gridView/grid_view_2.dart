@@ -11,11 +11,11 @@ class FilterList2 extends StatefulWidget {
   double? space;
   double? height;
   int? value;
-  ValueChanged? onChanged;
+  ValueChanged onChanged;
   String? lop;
   String? mon;
   FilterList2({
-    this.onChanged,
+    required this.onChanged,
     this.height,
     this.color = ColorApp.whiteF7,
     required this.title,
@@ -66,9 +66,13 @@ class _FilterList2State extends State<FilterList2> {
               itemBuilder: (BuildContext context, int index) {
                 return RadioTile(
                   title: widget.list[index].name.toString(),
-                  index: index,
+                  index: int.parse(widget.list[index].id),
                   groupValue: widget.value,
-                  onChange: widget.onChanged??(val){},
+                  onChange: (val){
+                    widget.value = val;
+                    setState((){});
+                    return widget.onChanged(val);
+                  },
                 );
               },
               itemCount: widget.list.length,

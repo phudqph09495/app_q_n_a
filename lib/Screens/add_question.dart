@@ -89,7 +89,14 @@ class _AddQuestionState extends State<AddQuestion> {
   String? mon;
 String? cat;
   AddQuesVoid() async {
-
+    // bloc.add(addQuesForm(
+    //     user_id: 7442,
+    //     cat_id: 2,
+    //     class_id: 2,
+    //     deadline: "15-08-2022",
+    //     money: "4566",
+    //     question: "3453543504120",
+    //     images: imageFiles),);
     if (keyForm.currentState!.validate()) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
 
@@ -97,7 +104,7 @@ String? cat;
           user_id: user_id ?? -1,
           subject_id: int.parse(req['mon']),
           class_id: int.parse(req['lop']),
-          deadline: dateTime,
+          deadline: Const.formatTimeString(dateTime.toString(),format: "dd-MM-yyy"),
           money: money.text,
           description: description.text,
           question: ques.text,

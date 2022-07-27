@@ -12,8 +12,6 @@ import '../../../bloc/state_bloc.dart';
 import '../../../models/model_question.dart';
 import '../../../styles/colors.dart';
 import '../../../styles/styles.dart';
-import '../../account/tab_profile/tab_answer.dart';
-import '../../account/tab_profile/tab_question.dart';
 import 'itemThongKe/listNguoiHoi.dart';
 
 class ThongKe extends StatefulWidget {

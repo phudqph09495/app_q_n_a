@@ -12,7 +12,8 @@ class ApiPath {
   static const addQuestion = "/app/question/add-question";
   static const getQuestion = "/app/home/get-question";
   static const getAnswer="/app/question/get-question-detail";
-  static const goodAnswer="app/question/good-answer";
+  static const goodAnswer="/app/question/good-answer";
+  static const getClass="/app/home/get-class";
   /// Wallet
   static const getWallet="/app/wallet/wallet";
   static const getWalletHistory="/app/wallet/my-history";
