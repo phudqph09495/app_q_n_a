@@ -83,7 +83,7 @@ class addQuesForm extends EventBloc {
   int user_id;
   String question;
   int? subject_id;
-  String deadline;
+  DateTime deadline;
   String money;
   int? class_id;
   int cat_id;

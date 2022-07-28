@@ -104,7 +104,7 @@ String? cat;
           user_id: user_id ?? -1,
           subject_id: int.parse(req['mon']),
           class_id: int.parse(req['lop']),
-          deadline: Const.formatTimeString(dateTime.toString(),format: "dd-MM-yyy"),
+          deadline: dateTime,
           money: money.text,
           description: description.text,
           question: ques.text,
@@ -230,10 +230,7 @@ String? cat;
           listener: (_, StateBloc state) {
             CheckLogState.check(context,
                 state: state, msg: "Thêm câu hỏi thành công", success: () {
-             money.clear();
-             ques.clear();
-             deadline.clear();
-             description.clear();
+            Navigator.pop(context);
             });
           },
           child: Button1(

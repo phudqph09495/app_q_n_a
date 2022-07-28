@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> onRefresh() async {
     context.read<BlocGetQuestion>().add(GetData(class_id:widget.class_id,subject_id: widget.subject_id ));
   }
-
   @override
   void initState() {
     // TODO: implement initState

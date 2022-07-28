@@ -206,7 +206,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         avatar: '',
                         ques: list.question?.description ?? '',
                         user: widget.modelQuestion.username ?? '',
-                        time: Const.formatTime( Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,format: "dd/MM/yyyy HH:mm"),
+                        time: Const.formatTime( Const.convertNumber(widget.modelQuestion.createdAt).round() * 1000,format: "dd/MM/yyyy HH:mm"),
                       ),
                       const SizedBox(
                         height: 10,
@@ -226,7 +226,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             imageFileList:list.answer?[index].images??[] ,
                             // list.answer?[index].images ,
 
-                            status: 3,
+                            status: timing?userStatus:3,
                             //trạng thái của câu trả lời
                             //0: chưa đăng nhập
                             //1: không phải chủ câu hỏi

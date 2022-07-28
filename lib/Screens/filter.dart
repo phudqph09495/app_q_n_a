@@ -86,13 +86,15 @@ class _FilterState extends State<Filter> {
     }
     return null;
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         bottomSheet: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-          child: Button1(
+          child:
+          Button1(
               style: false,
               fontSize: 18,
               radius: 30,
@@ -107,6 +109,7 @@ class _FilterState extends State<Filter> {
                   getQuestionHome.cat_id =  catval;
                 }
                 context.read<BlocGetQuestion>().add(getQuestionHome);
+
                 Navigator.pop(context);
               },
               colorButton: ColorApp.orangeF2,
