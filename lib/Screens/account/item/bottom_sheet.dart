@@ -17,16 +17,16 @@ class BottomSheetAccount extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ListTile(
-            title: Text(
-              "Thay ảnh đại diện",
-              style: StyleApp.textStyle500(color: ColorApp.black),
-            ),
-            onTap: (){
-              Navigator.pop(context);
-              showModalBottomSheet(context: context, builder: (context)=>BottomSheetAvatar());
-            },
-          ),
+          // ListTile(
+          //   title: Text(
+          //     "Thay ảnh đại diện",
+          //     style: StyleApp.textStyle500(color: ColorApp.black),
+          //   ),
+          //   onTap: (){
+          //     Navigator.pop(context);
+          //     showModalBottomSheet(context: context, builder: (context)=>BottomSheetAvatar());
+          //   },
+          // ),
           ListTile(
             onTap: (){
               Navigator.pop(context);

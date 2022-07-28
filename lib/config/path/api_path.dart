@@ -4,7 +4,7 @@ class ApiPath {
   static const signin = "/app/home/signup";
   static const login = "/app/home/login";
   static const getUser = "/app/user/get-user";
-  static const updateUser = "/api/v2/auth/user/update";
+  static const updateUser = "app/user/update-user";
   static const resetPass = "/api/v2/auth/password/reset";
   static const changePassIsLogin = "/app/user/change-password";
 
@@ -17,6 +17,8 @@ class ApiPath {
   /// Wallet
   static const getWallet="/app/wallet/wallet";
   static const getWalletHistory="/app/wallet/my-history";
+  static const getNganHang="/app/user/create-bank";
+  static const getPhieuTien="/app/wallet/withdraw";
 
   ///answer
   static const addAnswer = "/app/question/add-answer";

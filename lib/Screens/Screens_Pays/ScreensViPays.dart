@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_waller_history.dart';
+import 'package:app_q_n_a/config/const.dart';
+import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_wallet.dart';
 import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
@@ -20,27 +22,34 @@ class ViTien extends StatefulWidget {
 }
 
 class _ViTienState extends State<ViTien> {
-  BlocGetWallet blocGetWallet = BlocGetWallet();
-  BlocWalletHistory blocWalletHistory = BlocWalletHistory();
-  DateTime start_time = DateTime.now();
-  DateTime end_time = DateTime.now();
-
-  getVi() async {
-    int id = await SharedPrefs.readString(SharePrefsKeys.user_id);
-    blocGetWallet.add(getViTien(user_id: id, cat_id: 1));
-    blocWalletHistory.add(getHistory(user_id: id, limit: 5, page: 1, is_week: 1, is_day: 1, is_month: 1, is_last_month: 1, start_time: start_time, end_time: end_time));
-
-  }
+  BlocGetWallet blocGetWallet = BlocGetWallet()..add(getViTien(user_id: 1, cat_id: 1));
+  BlocWalletHistory blocWalletHistory = BlocWalletHistory()..add(getHistory());
+  // DateTime start_time = DateTime.now();
+  // DateTime end_time = DateTime.now();
+  //
+  // getVi() async {
+  //   int id = await SharedPrefs.readString(SharePrefsKeys.user_id);
+  //   blocGetWallet.add(getViTien(user_id: id, cat_id: 1));
+  //   blocWalletHistory.add(getHistory(
+  //       user_id: id,
+  //       limit: 5,
+  //       page: 1,
+  //       is_week: 1,
+  //       is_day: 1,
+  //       is_month: 1,
+  //       is_last_month: 1,
+  //       start_time: start_time,
+  //       end_time: end_time));
+  // }
 
   BlocWalletHistory blochistory = BlocWalletHistory();
 
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getVi();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getVi();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -111,25 +120,8 @@ class _ViTienState extends State<ViTien> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(15),
-              child: Card(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ExpansionTile(
-                    title: const Text(
-                      'Lịch sử giao dịch',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    iconColor: ColorApp.orangeF2,
-                    collapsedIconColor: Colors.black,
-                    children: List.generate(5, (index) => _buildItem()),
-                  ),
-                ),
-              ),
-            ),
+            _buildItem(),
+            
           ],
         ),
       ),
@@ -142,59 +134,84 @@ class _ViTienState extends State<ViTien> {
       decoration: const BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey, width: 0.5))),
       child: BlocBuilder(
-          bloc: blocGetWallet,
+          bloc: blocWalletHistory,
           builder: (_, state) {
-            final history = state is LoadSuccess;
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.network(
-                  'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
-                  width: 70,
-                  height: 70,
+          if (state is LoadSuccess) {
+            print(state.data);
+            final history = state.data as ModelHistory;
+            return Card(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Chuyển tiền thành công',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        const Text(
-                          'Ngân hàng Techcombank',
-                          style: TextStyle(color: Colors.black, fontSize: 13),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '',
-                              style: TextStyle(color: ColorApp.black),
-                            ),
-                            Text(
-                              '1500000 Đ',
-                              style: TextStyle(color: ColorApp.orangeF01),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                child: ExpansionTile(
+                  title: const Text(
+                    'Lịch sử giao dịch',
+                    style: TextStyle(color: Colors.black),
                   ),
+                  iconColor: ColorApp.orangeF2,
+                  collapsedIconColor: Colors.black,
+                  children: List.generate(history.data!.length, (index) {
+                    DataHistory model = history.data![index];
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                             color: Colors.grey,
+                            width: 0.5
+                          )
+                        )
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.network(
+                            'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
+                            width: 70,
+                            height: 70,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                   Text(
+                                    model.typeText ?? "Đang cập nhật",
+                                    style: StyleApp.textStyle700(),
+                                  ),
+
+                                  const SizedBox(
+                                    height: 7,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        Const.formatTime(Const.convertNumber(model.createdAt).round() * 1000,format: "HH:mm dd/MM/yyyy"),
+                                        style: StyleApp.textStyle400(),
+                                      ),
+                                      Text(
+                                        '${Const.convertPrice(model.price)} Đ',
+                                        style: StyleApp.textStyle400(color: ColorApp.orangeF01),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                 ),
-              ],
+              ),
             );
+           
+          }
+          return Container();
           }),
     );
   }

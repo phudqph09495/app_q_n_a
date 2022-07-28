@@ -33,6 +33,9 @@ import 'package:app_q_n_a/config/share_pref.dart';
 
 int id = 0;
 String name = '';
+String email = '';
+String phone = '';
+String sex = '';
 bool isLogin = false;
 
 class BodyProduct extends StatefulWidget {
@@ -49,7 +52,10 @@ class _BodyProductState extends State<BodyProduct> {
   getProfile() async {
     id = await SharedPrefs.readString(SharePrefsKeys.user_id);
     name = await SharedPrefs.readString(SharePrefsKeys.name);
+    email = await SharedPrefs.readString(SharePrefsKeys.email);
+    phone = await SharedPrefs.readString(SharePrefsKeys.phone);
     isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
+    sex = await SharedPrefs.readString(SharePrefsKeys.sex);
   }
 
   @override
@@ -64,7 +70,12 @@ class _BodyProductState extends State<BodyProduct> {
           onTap: () async {
             PageNavigator.next(
                 context: context,
-                page: ProfileScreen(context: context, name: name));
+                page: ProfileScreen(
+                    context: context,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    sex: sex));
           }),
       TitleAccount(
           iconData: Icons.edit_outlined,
@@ -224,7 +235,7 @@ class _BodyProductState extends State<BodyProduct> {
                     fontSize: 18,
                     style: false,
                     ontap: () {
-                      id=0;
+                      id = 0;
                       DialogItem.showMsg(
                         context: context,
                         title: "Đăng xuất",

@@ -5,17 +5,14 @@ import 'package:app_q_n_a/path/image_path.dart';
 import 'package:app_q_n_a/provider/image_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
-import '../../Screens/account/item/bottom_sheet_avavtar.dart';
+import '../../Screens/account/item/bottom_sheet.dart';
 
 Widget getProfileView(BuildContext context) {
   return InkWell(
     onTap: () {
-      Future.delayed(Duration(milliseconds: 4000), () {
-        showModalBottomSheet(
-            context: context, builder: (context) => BottomSheetAvatar());
-      });
+      showModalBottomSheet(
+          context: context, builder: (context) => BottomSheetAccount());
     },
     child: Consumer<ImageAppProvider>(builder: (context, model, child) {
       print(model.image);

@@ -16,12 +16,18 @@ class BlocUpdateUser extends Bloc<EventBloc, StateBloc> {
       try {
         final token = await SharedPrefs.readString(SharePrefsKeys.user_token);
         Map<String, dynamic> req = Map();
-        req['address'] = event.address;
-        req['sex'] = event.sex;
+        req['user_id'] = event.user_id;
         req['birthday'] = event.birthday;
+        req['phone'] = event.phone;
+        req['sex'] = event.sex;
+        req['avatar'] = event.avatar;
+        req['cmt'] = event.cmt;
+        req['province_id'] = event.province_id;
+        req['district_id'] = event.district_id;
 
         var res = await Api.postAsync(
-            endPoint: ApiPath.login, req: req, isToken: token);
+            endPoint: ApiPath.updateUser, req: req);
+        print(res);
         yield LoadSuccess(
           data: res,
         );

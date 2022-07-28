@@ -2,9 +2,11 @@ import 'dart:io';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_profile.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -16,20 +18,29 @@ import '../../../config/share_pref.dart';
 import '../../../item/drop_item.dart';
 import '../../../item/input/text_filed2.dart';
 import '../../../models/model_local.dart';
+import '../../../path/image_path.dart';
 import '../../../styles/init_style.dart';
 
 class EditProfile extends StatelessWidget {
   TextEditingController birthday = TextEditingController();
   String? sex;
+  String? address;
   Map req = new Map();
+  BlocUpdateUser blocUpdateUser = BlocUpdateUser()..add(UpdateProfile());
+  bool update = false;
+  @override
   getDataReq(ModelUser user) {
     req['sex'] = user.sex ?? "";
-    req['birthday'] = user.birthday ?? "";
     req['address'] = user.address ?? "";
-  }
+    req['birthday'] = user.birthday ?? "";
 
-  BlocGetProfile blocGetProfile = BlocGetProfile()..add(GetData());
-  BlocUpdateUser blocUpdateUser = BlocUpdateUser();
+    SharedPrefs.saveString(SharePrefsKeys.email, user.email);
+    SharedPrefs.saveString(SharePrefsKeys.phone, user.phone);
+
+    // final userProvider =
+    // Provider.of<UserProvider>(context, listen: false);
+    // userProvider.getDataProvider();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,89 +66,110 @@ class EditProfile extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              "Thông tin chung của tài khoản",
-              style: StyleApp.textStyle700(color: Colors.black),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(
+                    color: ColorApp.orangeF0.withOpacity(0.5), width: 2),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: LoadImage(
+                    url: ImagesPath.defultAvatar.toString(),
+                    width: 100,
+                    height: 100),
+              ),
             ),
-            const SizedBox(height: 10),
-            _buildTitleDrop(
-              title: "Giới thiệu",
-              listItem: [
-                ModelLocal(id: "Nam", name: "Nam"),
-                ModelLocal(id: "Nữ", name: "Nữ"),
-              ],
-            ),
-            _buildTitleDrop(
-              title: "Ngày sinh",
-              isTextFiled: true,
-              textEditingController: birthday,
-              onTap: () {
-                choieDate(context);
-              },
-              listItem: [],
-            ),
-            // _buildTitleDrop(
-            //   title: "Lớp",
-            //   listItem: [
-            //     ModelLocal(id: "lop-1", name: "Lớp 1"),
-            //     ModelLocal(id: "lop-2", name: "Lớp 2"),
-            //     ModelLocal(id: "lop-3", name: "Lớp 3"),
-            //     ModelLocal(id: "lop-4", name: "Lớp 4"),
-            //     ModelLocal(id: "lop-5", name: "Lớp 5"),
-            //     ModelLocal(id: "lop-6", name: "Lớp 6"),
-            //     ModelLocal(id: "lop-7", name: "Lớp 7"),
-            //     ModelLocal(id: "lop-8", name: "Lớp 8"),
-            //     ModelLocal(id: "lop-9", name: "Lớp 9"),
-            //     ModelLocal(id: "lop-10", name: "Lớp 10"),
-            //     ModelLocal(id: "lop-11", name: "Lớp 11"),
-            //     ModelLocal(id: "lop-12", name: "Lớp 12"),
-            //   ],
-            // ),
-            Text(
-              "Thông tin khác",
-              style: StyleApp.textStyle700(color: Colors.black),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 10),
-            _buildTitleDrop(
-              title: "Tỉnh thành",
-              listItem: [
-                ModelLocal(id: "ha-noi", name: "Hà Nội"),
-                ModelLocal(id: "tp-ho-chi-minh", name: "TP. Hồ Chí Minh"),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    primary: ColorApp.orangeF2,
-                  ),
-                  child: Text(
-                    "Đồng ý",
-                    style: StyleApp.textStyle700(
-                      color: Colors.white,
-                    ),
-                  ),
+                const SizedBox(
+                  height: 20,
                 ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    primary: ColorApp.orangeF01,
-                  ),
-                  child: Text(
-                    "Hủy",
-                    style: StyleApp.textStyle700(
-                      color: Colors.white,
+                Text(
+                  "Thông tin chung của tài khoản",
+                  style: StyleApp.textStyle700(color: Colors.black),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 10),
+                _buildTitleDrop(
+                  title: "Giới thiệu",
+                  listItem: [
+                    ModelLocal(id: "Nam", name: "Nam"),
+                    ModelLocal(id: "Nữ", name: "Nữ"),
+                  ],
+                ),
+                _buildTitleDrop(
+                  title: "Ngày sinh",
+                  isTextFiled: true,
+                  textEditingController: birthday,
+                  onTap: () {
+                    choieDate(context);
+                  },
+                  listItem: [],
+                ),
+                // _buildTitleDrop(
+                //   title: "Lớp",
+                //   listItem: [
+                //     ModelLocal(id: "lop-1", name: "Lớp 1"),
+                //     ModelLocal(id: "lop-2", name: "Lớp 2"),
+                //     ModelLocal(id: "lop-3", name: "Lớp 3"),
+                //     ModelLocal(id: "lop-4", name: "Lớp 4"),
+                //     ModelLocal(id: "lop-5", name: "Lớp 5"),
+                //     ModelLocal(id: "lop-6", name: "Lớp 6"),
+                //     ModelLocal(id: "lop-7", name: "Lớp 7"),
+                //     ModelLocal(id: "lop-8", name: "Lớp 8"),
+                //     ModelLocal(id: "lop-9", name: "Lớp 9"),
+                //     ModelLocal(id: "lop-10", name: "Lớp 10"),
+                //     ModelLocal(id: "lop-11", name: "Lớp 11"),
+                //     ModelLocal(id: "lop-12", name: "Lớp 12"),
+                //   ],
+                // ),
+                Text(
+                  "Thông tin khác",
+                  style: StyleApp.textStyle700(color: Colors.black),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 10),
+                _buildTitleDrop(
+                  title: "Tỉnh thành",
+                  listItem: [
+                    ModelLocal(id: "ha-noi", name: "Hà Nội"),
+                    ModelLocal(id: "tp-ho-chi-minh", name: "TP. Hồ Chí Minh"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: ColorApp.orangeF2,
+                      ),
+                      child: Text(
+                        "Đồng ý",
+                        style: StyleApp.textStyle700(
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: ColorApp.orangeF01,
+                      ),
+                      child: Text(
+                        "Hủy",
+                        style: StyleApp.textStyle700(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
