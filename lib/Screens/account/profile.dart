@@ -6,7 +6,13 @@ import '../../path/image_path.dart';
 
 // class ProfileScreen extends StatelessWidget {
 //   @override
-Widget ProfileScreen({required BuildContext context, String? name}) {
+Widget ProfileScreen({
+  required BuildContext context,
+  String? name,
+  String? email,
+  String? phone,
+  String? sex
+}) {
   return DefaultTabController(
     length: 3,
     child: Scaffold(
@@ -90,41 +96,44 @@ Widget ProfileScreen({required BuildContext context, String? name}) {
           const SizedBox(
             height: 10,
           ),
+          _buidRow(title: "Email:", content: '$email'),
+          _buidRow(title: "Số điện thoại:", content: '$phone'),
+          _buidRow(title: "Sex:", content: '$sex'),
           _buidRow(title: "Giới thiệu:", content: "Nam"),
           _buidRow(title: "Ngày sinh:", content: "01/01/2004"),
           _buidRow(title: "Tỉnh thành:", content: "Hà Nội"),
-          Padding(
-            padding: EdgeInsets.all(17),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  "Danh hiệu của bạn".toUpperCase(),
-                  style: StyleApp.textStyle700(
-                      fontSize: 16, color: ColorApp.black),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 10),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      ImagesPath.imageRank1,
-                      width: 40,
-                      height: 40,
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      "Lính mới",
-                      style: StyleApp.textStyle400(color: ColorApp.black),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.all(17),
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.stretch,
+          //     children: [
+          //       Text(
+          //         "Danh hiệu của bạn".toUpperCase(),
+          //         style: StyleApp.textStyle700(
+          //             fontSize: 16, color: ColorApp.black),
+          //         maxLines: 1,
+          //         overflow: TextOverflow.ellipsis,
+          //       ),
+          //       const SizedBox(height: 10),
+          //       Column(
+          //         mainAxisSize: MainAxisSize.min,
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Image.asset(
+          //             ImagesPath.imageRank1,
+          //             width: 40,
+          //             height: 40,
+          //           ),
+          //           const SizedBox(height: 5),
+          //           Text(
+          //             "Lính mới",
+          //             style: StyleApp.textStyle400(color: ColorApp.black),
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     ),

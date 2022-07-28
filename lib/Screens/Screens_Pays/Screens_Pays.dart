@@ -1,4 +1,5 @@
-import 'package:app_q_n_a/Screens/Screens_Pays/ScreensNapTien.dart';
+import 'package:app_q_n_a/Screens/Screens_Pays/ScreensRutTien.dart';
+import 'package:app_q_n_a/Screens/Screens_Pays/ScreensTkNhang.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/qrPays.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +30,24 @@ class _ScreensPaysState extends State<ScreensPays> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // ListTile(
+          //   title: Text(
+          //     "Liên kết ngân hàng",
+          //     style: StyleApp.textStyle500(color: ColorApp.black),
+          //   ),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //     PageNavigator.next(context: context, page: ScreensNganHang());
+          //   },
+          // ),
           ListTile(
             title: Text(
-              "Nạp Tiền",
+              "Rút Tiền",
               style: StyleApp.textStyle500(color: ColorApp.black),
             ),
             onTap: () {
               Navigator.pop(context);
-              PageNavigator.next(context: context, page: NapTien());
+              PageNavigator.next(context: context, page: RutTien());
             },
           ),
           ListTile(

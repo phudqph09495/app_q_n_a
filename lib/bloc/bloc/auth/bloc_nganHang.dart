@@ -1,27 +1,30 @@
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
-import 'package:app_q_n_a/config/api.dart';
 import 'package:app_q_n_a/config/path/api_path.dart';
-import 'package:app_q_n_a/models/model_wallet.dart';
-import 'package:dio/dio.dart';
+import 'package:app_q_n_a/models/model_taonganhang.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
+import '../../../config/api.dart';
 
-class BlocWalletHistory extends Bloc<EventBloc, StateBloc> {
-  BlocWalletHistory() : super(StateBloc());
-
+class BlocNganHang extends Bloc<EventBloc, StateBloc> {
+  BlocNganHang() : super(StateBloc());
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
-    if (event is getHistory) {
+    if (event is getTaoNganHang) {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
+        req['user_id'] = event.user_id;
+        req['name'] = event.name;
+        req['bank_name'] = event.bank_name;
+        req['number'] = event.number;
         var res =
-            await Api.postAsync(endPoint: ApiPath.getWalletHistory, req: req);
+            await Api.postAsync(endPoint: ApiPath.getNganHang, req: req);
         print(res);
         if (res['code'] == 1) {
-          ModelHistory datas = ModelHistory.fromJson(res['data']);
+          ModelNganHang modelNganHang = ModelNganHang.fromJson(res['data']);
           yield LoadSuccess(
-            data: datas,
+            data: modelNganHang,
           );
         }
       } on DioError catch (e) {

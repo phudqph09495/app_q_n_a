@@ -13,7 +13,7 @@ class GetData extends EventBloc {
     this.class_id,
     this.subject_id,
     this.keySearch,
-});
+  });
 }
 
 class getDataOrder extends EventBloc {
@@ -42,15 +42,18 @@ class getBanner extends EventBloc {
 }
 
 class UpdateProfile extends EventBloc {
-  String address;
-  String sex;
+  String? user_id;
   String? birthday;
+  String? phone;
+  String? email;
+  String? sex;
+  String? avatar;
+  String? cmt;
+  String? province_id;
+  String? district_id;
 
-  UpdateProfile({
-    required this.address,
-    required this.sex,
-    this.birthday,
-  });
+  UpdateProfile({this.user_id, this.birthday, this.phone, this.email, this.sex,
+      this.avatar, this.cmt, this.province_id, this.district_id});
 }
 
 class AddDataRegistrantion extends EventBloc {
@@ -146,13 +149,13 @@ class getAns extends EventBloc {
   });
 }
 
-class goodAns extends EventBloc{
+class goodAns extends EventBloc {
   int user_id;
   int answer_id;
   goodAns({
     required this.user_id,
     required this.answer_id,
-});
+  });
 }
 
 class reportANS extends EventBloc {
@@ -163,26 +166,26 @@ class reportANS extends EventBloc {
 }
 
 class getHistory extends EventBloc {
-  int user_id;
-  int limit;
-  int page;
-  int is_week;
-  int is_day;
-  int is_month;
-  int is_last_month;
-  DateTime start_time;
-  DateTime end_time;
+  int? user_id;
+  int? limit;
+  int? page;
+  int? is_week;
+  int? is_day;
+  int? is_month;
+  int? is_last_month;
+  DateTime? start_time;
+  DateTime? end_time;
 
   getHistory(
-      {required this.user_id,
-       required this.limit,
-       required this.page,
-       required this.is_week,
-       required this.is_day,
-       required this.is_month,
-       required this.is_last_month,
-      required this.start_time,
-      required this.end_time});
+      {this.user_id,
+      this.limit,
+      this.page,
+      this.is_week,
+      this.is_day,
+      this.is_month,
+      this.is_last_month,
+      this.start_time,
+      this.end_time});
 }
 
 class getViTien extends EventBloc {
@@ -192,4 +195,21 @@ class getViTien extends EventBloc {
     required this.user_id,
     required this.cat_id,
   });
+}
+
+class getTaoNganHang extends EventBloc {
+  int? user_id;
+  String? name;
+  String? bank_name;
+  int? created_at;
+  int? updated_at;
+  int? number;
+
+  getTaoNganHang(
+      {this.user_id,
+      this.number,
+      this.name,
+      this.bank_name,
+      this.created_at,
+      this.updated_at});
 }
