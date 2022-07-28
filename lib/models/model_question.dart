@@ -20,7 +20,9 @@ class ModelQuestion {
       this.avatarName, 
       this.className, 
       this.subjectName, 
-      this.countImages,});
+      this.countImages, 
+      this.countAnswer, 
+      this.userCountQuestion,});
 
   ModelQuestion.fromJson(dynamic json) {
     id = json['id'];
@@ -44,6 +46,8 @@ class ModelQuestion {
     className = json['class_name'];
     subjectName = json['subject_name'];
     countImages = json['count_images'];
+    countAnswer = json['count_answer'];
+    userCountQuestion = json['user_count_question'];
   }
   String? id;
   String? question;
@@ -54,7 +58,7 @@ class ModelQuestion {
   String? userId;
   String? isComplete;
   dynamic description;
-  String? deadline;
+  dynamic deadline;
   String? isImage;
   String? classId;
   String? subjectId;
@@ -66,6 +70,8 @@ class ModelQuestion {
   String? className;
   String? subjectName;
   String? countImages;
+  String? countAnswer;
+  String? userCountQuestion;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -90,6 +96,8 @@ class ModelQuestion {
     map['class_name'] = className;
     map['subject_name'] = subjectName;
     map['count_images'] = countImages;
+    map['count_answer'] = countAnswer;
+    map['user_count_question'] = userCountQuestion;
     return map;
   }
 
