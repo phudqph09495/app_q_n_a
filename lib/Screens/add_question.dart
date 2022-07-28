@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:app_q_n_a/Screens/home.dart';
+import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_add_question.dart';
+import 'package:app_q_n_a/bloc/bloc/question/get_class_bloc.dart';
+import 'package:app_q_n_a/bloc/bloc/question/get_sub_bloc.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/const.dart';
@@ -15,6 +19,7 @@ import 'package:app_q_n_a/models/model_local.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/validator.dart';
 import 'package:app_q_n_a/widget/items/custom_toast.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,88 +88,38 @@ class _AddQuestionState extends State<AddQuestion> {
   DateTime dateTime = DateTime.now();
 
   final keyForm = GlobalKey<FormState>();
+  BlocGetClass blocGetClass = BlocGetClass()..add(GetData());
+  BlocGetSub blocGetSub=BlocGetSub()..add(GetData());
 
-  Map req = new Map();
+  int? lopval;
+  int? monval;
   String? lop;
   String? mon;
-String? cat;
+
   AddQuesVoid() async {
-    // bloc.add(addQuesForm(
-    //     user_id: 7442,
-    //     cat_id: 2,
-    //     class_id: 2,
-    //     deadline: "15-08-2022",
-    //     money: "4566",
-    //     question: "3453543504120",
-    //     images: imageFiles),);
-    if (keyForm.currentState!.validate()) {
+    if (keyForm.currentState!.validate()&&((description.text!='')||imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
 
       bloc.add(addQuesForm(
           user_id: user_id ?? -1,
-          subject_id: int.parse(req['mon']),
-          class_id: int.parse(req['lop']),
+          subject_id: monval,
+          class_id: lopval,
           deadline: dateTime,
           money: money.text,
           description: description.text,
           question: ques.text,
           images: imageFiles,
-          cat_id: int.parse(req['cat'])));
+          
+      ));
     }
+    else{
+      DialogItem.showMsg(
+          context: context,
+          title: "Lỗi",
+          msg: "Bạn chưa nhập đủ thông tin");
+    }
+
   }
-
-  // String mon = 'Toán học';
-  // List<String> monList = [
-  //   'Toán học',
-  //   'Vật lý',
-  //   'Hoá học',
-  //   'Ngữ Văn',
-  //   'Sinh học',
-  //   'Sử học',
-  //   'Địa lý',
-  //   'Tiếng Anh',
-  //   'Tin học',
-  //   'GDCD',
-  //   'Công nghệ',
-  //   'Âm nhạc',
-  //   'Mỹ thuật'
-  // ];
-  // String lop = 'Lớp 1';
-  // List<String> lopList = [
-  //   'Lớp 1',
-  //   'Lớp 2',
-  //   'Lớp 3',
-  //   'Lớp 4',
-  //   'Lớp 5',
-  //   'Lớp 6',
-  //   'Lớp 7',
-  //   'Lớp 8',
-  //   'Lớp 9',
-  //   'Lớp 10',
-  //   'Lớp 11',
-  //   'Lớp 12',
-  // ];
-
-  // final ImagePicker _picker = ImagePicker();
-  // List<XFile>? _imageFileList = [];
-  //
-  //
-  //
-  // Future selectImageGallery() async {
-  //   final List<XFile>? selectedImage = await _picker.pickMultiImage();
-  //   if (selectedImage!.isNotEmpty) {
-  //     _imageFileList!.addAll(selectedImage);
-  //   }
-  //   setState(() {});
-  //   print(_imageFileList!.length.toString());
-  // }
-  //
-  // Future selectImageCamera() async {
-  //   final image = await _picker.pickImage(source: ImageSource.camera);
-  //   if (image == null) return;
-  //   _imageFileList?.add(image);
-  //
-  // }
 
   List<XFile> imageFiles = [];
   StreamController imagesController = StreamController.broadcast();
@@ -229,9 +184,14 @@ String? cat;
           bloc: bloc,
           listener: (_, StateBloc state) {
             CheckLogState.check(context,
-                state: state, msg: "Thêm câu hỏi thành công", success: () {
-            Navigator.pop(context);
-            });
+                state: state, msg: "Thêm câu hỏi thành công", isShowDlg: true,ontap: (){
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ScreenHome()));
+                });
           },
           child: Button1(
               colorButton: ColorApp.orangeF2,
@@ -275,53 +235,30 @@ String? cat;
                 SizedBox(
                   height: 5,
                 ),
-                Text(
-                  'Loại câu hỏi',
-                  style: StyleApp.textStyle700(fontSize: 16),
-                ),
-                DropDown2(
-                  listItem: [
-                    ModelLocal(id: "7", name: "Ngẫu hứng"),
-                    ModelLocal(id: "8", name: "Chiến lược"),
 
-                  ],
-                  hint: 'Chọn thể loại',
-                  onChanged: (val) {
-                    req['cat'] = val.id;
-                  },
-                  value: cat,
-                  validator: (val) {
-                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
-                  },
-                ),
                 Text(
                   'Môn học',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
-                DropDown2(
-                  listItem: [
-                    ModelLocal(id: "16", name: "Toán học"),
-                    ModelLocal(id: "19", name: "Vật lý"),
-                    ModelLocal(id: "20", name: "Hoá học"),
-                    ModelLocal(id: "17", name: "Văn học"),
-                    ModelLocal(id: "21", name: "Sinh học"),
-                    ModelLocal(id: "15", name: "Lịch sử"),
-                    ModelLocal(id: "22", name: "Địa lý"),
-                    ModelLocal(id: "18", name: "Tiếng Anh"),
-                    ModelLocal(id: "23", name: "Tin học"),
-                    ModelLocal(id: "24",name: "GDCD"),
-                    ModelLocal(id: "25",name: "Công nghệ"),
-                    ModelLocal(id: "26",name: "Âm nhạc"),
-                    ModelLocal(id: "27",name: "Mỹ thuật"),
-                  ],
-                  hint: 'Chọn môn học',
-                  onChanged: (val) {
-                    req['mon'] = val.id;
+                BlocBuilder(
+                  bloc: blocGetSub,
+                  builder: (context,state){
+
+                    final list=state is LoadSuccess? state.data as List<ModelLocal>:<ModelLocal>[];
+                    return DropDown2(
+                      listItem: list,
+                      hint: 'Chọn môn học',
+                      onChanged: (val) {
+                        monval=int.parse(val.id);
+
+                      },
+                      value: mon,
+                      validator: (val) {
+                        return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                      },
+                    );
                   },
-                  value: mon,
-                  validator: (val) {
-                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
-                  },
+
                 ),
                 SizedBox(
                   height: 10,
@@ -330,29 +267,26 @@ String? cat;
                   'Lớp',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
-                DropDown2(
-                  listItem: [
-                    ModelLocal(id: "3", name: "Lớp 1"),
-                    ModelLocal(id: "4", name: "Lớp 2"),
-                    ModelLocal(id: "5", name: "Lớp 3"),
-                    ModelLocal(id: "6", name: "Lớp 4"),
-                    ModelLocal(id: "7", name: "Lớp 5"),
-                    ModelLocal(id: "8", name: "Lớp 6"),
-                    ModelLocal(id: "9", name: "Lớp 7"),
-                    ModelLocal(id: "10", name: "Lớp 8"),
-                    ModelLocal(id: "11", name: "Lớp 9"),
-                    ModelLocal(id: "12", name: "Lớp 10"),
-                    ModelLocal(id: "13", name: "Lớp 11"),
-                    ModelLocal(id: "14", name: "Lớp 12"),
-                  ],
-                  hint: 'Chọn lớp học',
-                  onChanged: (val) {
-                    req['lop'] = val.id;
-                  },
-                  value: lop,
-                  validator: (val) {
-                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
-                  },
+                BlocBuilder(
+                  bloc: blocGetClass,
+                 builder: (context,state){
+
+                    final list=state is LoadSuccess? state.data as List<ModelLocal>:<ModelLocal>[];
+                    return DropDown2(
+                      listItem: list,
+                      hint: 'Chọn lớp học',
+                      onChanged: (val) {
+
+                      lopval=int.parse(val.id);
+
+                      },
+                      value: lop,
+                      validator: (val) {
+                        return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                      },
+                    );
+                 },
+
                 ),
                 SizedBox(
                   height: 10,
@@ -414,9 +348,7 @@ String? cat;
                   keyboardType: TextInputType.multiline,
                   maxline: 6,
                   controller: description,
-                  validator: (val) {
-                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
-                  },
+
                 ),
 
                 StreamBuilder(

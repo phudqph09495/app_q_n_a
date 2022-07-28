@@ -38,9 +38,8 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   BlocAddAnswer bloc = BlocAddAnswer();
 
   AddAnswerVoid() async {
-print(widget.user_id);
-print(widget.question_id);
-    if (keyForm.currentState!.validate()) {
+
+    if ((answer.text!='')||imageFiles.isNotEmpty) {
       bloc.add(addAnsForm(
           user_id: widget.user_id ?? 0,
           question_id: widget.question_id ?? 0,

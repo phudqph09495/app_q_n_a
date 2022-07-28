@@ -24,7 +24,6 @@ class BlocQuestion extends Bloc<EventBloc, StateBloc> {
         req['price_gift'] = event.money;
         req['question']=event.question;
         req['description']=event.description;
-        req['cat_id']=event.cat_id;
         List<MultipartFile> images = [];
         if (event.images != null) {
           for (var item in event.images!) {
@@ -38,7 +37,9 @@ class BlocQuestion extends Bloc<EventBloc, StateBloc> {
 print(res);
 
         if (res['code'] == 1) {
-          yield LoadSuccess();
+          yield LoadSuccess(
+            mess: res['message']
+          );
         } else {
           if (res['message'] != '') {
             loi = res['message'];

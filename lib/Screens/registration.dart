@@ -100,11 +100,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           SizedBox(
                             height: 15,
                           ),
-                          Dropdown1(
-                            pad: 32,
-                            val: type,
-                            monList: typeList,
-                          ),
+
                           SizedBox(
                             height: 15,
                           ),

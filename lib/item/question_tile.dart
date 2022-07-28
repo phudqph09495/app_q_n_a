@@ -62,7 +62,7 @@ Widget QuestionTile(
                       ],
                     )
                     : const SizedBox(),
-                Container(
+           (modelQuestion.userCountQuestion=='1' )   ? Container(
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(5),
@@ -74,7 +74,7 @@ Widget QuestionTile(
                     'Lần đầu hỏi',
                     style: TextStyle(color: ColorApp.whiteF0),
                   ),
-                )
+                ):SizedBox()
               ],
             ),
             CountdownTimer(

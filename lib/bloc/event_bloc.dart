@@ -86,11 +86,11 @@ class addQuesForm extends EventBloc {
   DateTime deadline;
   String money;
   int? class_id;
-  int cat_id;
+
   String description;
   List<XFile>? images;
   addQuesForm({
-    required this.cat_id,
+
     required this.description,
     required this.user_id,
     this.subject_id,

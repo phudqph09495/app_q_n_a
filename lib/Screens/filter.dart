@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:app_q_n_a/Screens/home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_getquestion.dart';
+import 'package:app_q_n_a/bloc/bloc/question/get_cat_bloc.dart';
 import 'package:app_q_n_a/bloc/bloc/question/get_class_bloc.dart';
+import 'package:app_q_n_a/bloc/bloc/question/get_sub_bloc.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/item/gridView/grid_view_2.dart';
@@ -25,7 +27,8 @@ class Filter extends StatefulWidget {
 
 class _FilterState extends State<Filter> {
   BlocGetClass blocGetClass = BlocGetClass()..add(GetData());
-
+BlocGetSub blocGetSub=BlocGetSub()..add(GetData());
+BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
 
   Map req = new Map();
   String? theloai;
@@ -141,17 +144,25 @@ class _FilterState extends State<Filter> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              FilterList2(
-                value: catval,
-                column: 1,
-                list: cat,
-                title: '  Trạng thái câu hỏi',
-                space: 10,
-                onChanged: (val) {
-                  setState(() {
-                    catval = val;
-                  });
-                  getQuestionHome.keySearch = getKeySearch();
+              BlocBuilder(
+                bloc: blocGetCat,
+                builder: (context, state) {
+                  final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
+                  return FilterList2(
+                    value: catval,
+                    title: '  Lớp',
+                    column: 3,
+                    list: list,
+                    onChanged: (val) {
+                      catval = val;
+                      for(ModelLocal element in list){
+                        if(element.id.toString() == val.toString()){
+                          lophoc = element.name;
+                        }
+                      }
+                      getQuestionHome.keySearch = getKeySearch();
+                    },
+                  );
                 },
               ),
               const SizedBox(
@@ -170,7 +181,7 @@ class _FilterState extends State<Filter> {
                        lopval = val;
                        for(ModelLocal element in list){
                          if(element.id.toString() == val.toString()){
-                           lophoc = element.name;
+                           theloai = element.name;
                          }
                        }
                        getQuestionHome.keySearch = getKeySearch();
@@ -181,16 +192,25 @@ class _FilterState extends State<Filter> {
               const SizedBox(
                 height: 8,
               ),
-              FilterList2(
-                value: monval,
-                title: '  Môn học',
-                column: 3,
-                list: listmon,
-                onChanged: (val) {
-                  setState(() {
-                    monval = val;
-                  });
-                  getQuestionHome.keySearch = getKeySearch();
+              BlocBuilder(
+                bloc: blocGetSub,
+                builder: (context, state) {
+                  final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
+                  return FilterList2(
+                    value: lopval,
+                    title: '  Lớp',
+                    column: 3,
+                    list: list,
+                    onChanged: (val) {
+                      monval = val;
+                      for(ModelLocal element in list){
+                        if(element.id.toString() == val.toString()){
+                          monhoc = element.name;
+                        }
+                      }
+                      getQuestionHome.keySearch = getKeySearch();
+                    },
+                  );
                 },
               ),
               const SizedBox(

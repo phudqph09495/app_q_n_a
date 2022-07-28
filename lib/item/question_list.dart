@@ -16,7 +16,7 @@ class QuestionList extends StatefulWidget {
 class _QuestionListState extends State<QuestionList> {
   @override
   Widget build(BuildContext context) {
-    return  widget.listItem.isEmpty ? Center(child: Text("Không có câu hỏi nào", style: StyleApp.textStyle400(),),) :ListView(
+    return  widget.listItem.isEmpty ? Center(child: Text("", style: StyleApp.textStyle400(),),) :ListView(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       children: List.generate(
           widget.listItem.length,

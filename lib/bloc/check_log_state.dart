@@ -7,6 +7,8 @@ import '../widget/items/dia_log_item.dart';
 class CheckLogState {
    static check(BuildContext context,{required StateBloc state,String msg = "",
      bool isShowMsg = true,
+     bool isShowDlg=false,
+         Function()? ontap,
      Function()? success}){
      if(state is Loading){
        DialogItem.showLoading(context: context);
@@ -15,6 +17,11 @@ class CheckLogState {
      if(state is LoadSuccess){
        DialogItem.hideLoading(context: context);
        isShowMsg ? CustomToast.showToast(context: context, msg: msg) : null;
+       isShowDlg? DialogItem.showMsg(
+         onTap: ontap,
+           context: context,
+           title: "Thành công",
+           msg: state.mess??''):null;
        if(success != null){
          success();
        }
