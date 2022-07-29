@@ -7,7 +7,9 @@ class ApiPath {
   static const updateUser = "app/user/update-user";
   static const resetPass = "/api/v2/auth/password/reset";
   static const changePassIsLogin = "/app/user/change-password";
-
+  /// vi tri
+   static const province ="/app/home/get-option-provinces";
+   static const district ="/app/home/get-option-districts";
   /// question
   static const addQuestion = "/app/question/add-question";
   static const getQuestion = "/app/home/get-question";

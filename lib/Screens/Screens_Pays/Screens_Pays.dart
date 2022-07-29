@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_Pays/ScreensNapTien.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensRutTien.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensTkNhang.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
@@ -8,15 +9,6 @@ import '../../styles/colors.dart';
 import '../../styles/styles.dart';
 
 class ScreensPays extends StatefulWidget {
-  int? user_id;
-  int? limit;
-  int? page;
-  int? is_week;
-  int? is_day;
-  int? is_month;
-  int? is_last_month;
-  DateTime? start_time;
-  DateTime? end_time;
   @override
   State<ScreensPays> createState() => _ScreensPaysState();
 }
@@ -30,16 +22,16 @@ class _ScreensPaysState extends State<ScreensPays> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // ListTile(
-          //   title: Text(
-          //     "Liên kết ngân hàng",
-          //     style: StyleApp.textStyle500(color: ColorApp.black),
-          //   ),
-          //   onTap: () {
-          //     Navigator.pop(context);
-          //     PageNavigator.next(context: context, page: ScreensNganHang());
-          //   },
-          // ),
+          ListTile(
+            title: Text(
+              "Nạp tiền",
+              style: StyleApp.textStyle500(color: ColorApp.black),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              PageNavigator.next(context: context, page: NapTien());
+            },
+          ),
           ListTile(
             title: Text(
               "Rút Tiền",

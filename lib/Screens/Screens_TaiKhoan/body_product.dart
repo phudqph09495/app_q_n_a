@@ -55,7 +55,6 @@ class _BodyProductState extends State<BodyProduct> {
     email = await SharedPrefs.readString(SharePrefsKeys.email);
     phone = await SharedPrefs.readString(SharePrefsKeys.phone);
     isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
-    sex = await SharedPrefs.readString(SharePrefsKeys.sex);
   }
 
   @override
@@ -71,11 +70,11 @@ class _BodyProductState extends State<BodyProduct> {
             PageNavigator.next(
                 context: context,
                 page: ProfileScreen(
-                    context: context,
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    sex: sex));
+                  context: context,
+                  name: name,
+                  email: email,
+                  phone: phone,
+                ));
           }),
       TitleAccount(
           iconData: Icons.edit_outlined,

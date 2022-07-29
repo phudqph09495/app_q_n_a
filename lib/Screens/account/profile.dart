@@ -11,7 +11,6 @@ Widget ProfileScreen({
   String? name,
   String? email,
   String? phone,
-  String? sex
 }) {
   return DefaultTabController(
     length: 3,
@@ -98,8 +97,7 @@ Widget ProfileScreen({
           ),
           _buidRow(title: "Email:", content: '$email'),
           _buidRow(title: "Số điện thoại:", content: '$phone'),
-          _buidRow(title: "Sex:", content: '$sex'),
-          _buidRow(title: "Giới thiệu:", content: "Nam"),
+          _buidRow(title: "Giới tính:", content: "Nam"),
           _buidRow(title: "Ngày sinh:", content: "01/01/2004"),
           _buidRow(title: "Tỉnh thành:", content: "Hà Nội"),
           // Padding(

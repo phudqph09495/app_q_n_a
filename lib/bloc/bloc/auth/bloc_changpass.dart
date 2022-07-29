@@ -20,8 +20,8 @@ class BlocChangPass extends Bloc<EventBloc, StateBloc> {
       try {
         Map<String, dynamic> req = Map();
         req['user_id'] = event.user_id;
-        req['password'] = event.passwordre;
-        req['passwordre'] = event.password;
+        req['password'] = event.password;
+        req['passwordre'] = event.passwordre;
 
         var res =
             await Api.postAsync(endPoint: ApiPath.changePassIsLogin, req: req);

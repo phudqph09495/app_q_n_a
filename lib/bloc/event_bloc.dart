@@ -52,8 +52,16 @@ class UpdateProfile extends EventBloc {
   String? province_id;
   String? district_id;
 
-  UpdateProfile({this.user_id, this.birthday, this.phone, this.email, this.sex,
-      this.avatar, this.cmt, this.province_id, this.district_id});
+  UpdateProfile(
+      {this.user_id,
+      this.birthday,
+      this.phone,
+      this.email,
+      this.sex,
+      this.avatar,
+      this.cmt,
+      this.province_id,
+      this.district_id});
 }
 
 class AddDataRegistrantion extends EventBloc {

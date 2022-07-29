@@ -1,4 +1,5 @@
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/models/model_user.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../config/path/api_path.dart';
@@ -14,7 +15,6 @@ class BlocUpdateUser extends Bloc<EventBloc, StateBloc> {
     if (event is UpdateProfile) {
       yield Loading();
       try {
-        final token = await SharedPrefs.readString(SharePrefsKeys.user_token);
         Map<String, dynamic> req = Map();
         req['user_id'] = event.user_id;
         req['birthday'] = event.birthday;
@@ -24,13 +24,14 @@ class BlocUpdateUser extends Bloc<EventBloc, StateBloc> {
         req['cmt'] = event.cmt;
         req['province_id'] = event.province_id;
         req['district_id'] = event.district_id;
-
-        var res = await Api.postAsync(
-            endPoint: ApiPath.updateUser, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.updateUser, req: req);
         print(res);
-        yield LoadSuccess(
-          data: res,
-        );
+        if (res['code'] == 1) {
+          ModelUser datas = ModelUser.fromJson(res['data']);
+          yield LoadSuccess(
+            data: datas,
+          );
+        }
       } on DioError catch (e) {
         yield LoadFail(
             error: e.error.error ??

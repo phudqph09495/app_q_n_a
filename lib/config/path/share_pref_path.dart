@@ -13,9 +13,7 @@ class SharePrefsKeys{
   static String phone = "phone";
   static String email = "email";
   static String location = "location";
-  static String sex = "sex";
-  static String address = "address";
-  static String birthday = "birthday";
+
 
 
   static seveUserKey(ModelUser model) async {
@@ -23,9 +21,6 @@ class SharePrefsKeys{
     SharedPrefs.saveString(SharePrefsKeys.user_id, model.id);
     SharedPrefs.saveString(SharePrefsKeys.user_token, model.tokenApp);
     SharedPrefs.saveString(SharePrefsKeys.name, model.username);
-    SharedPrefs.saveString(SharePrefsKeys.address, model.address);
-    SharedPrefs.saveString(SharePrefsKeys.sex, model.sex);
-    SharedPrefs.saveString(SharePrefsKeys.birthday, model.birthday);
     SharedPrefs.saveString(SharePrefsKeys.phone, model.phone);
     SharedPrefs.saveString(SharePrefsKeys.email, model.email);
     SharedPrefs.saveString(SharePrefsKeys.avatar, model.avatarPath.toString() + model.avatarName.toString());
@@ -38,8 +33,5 @@ class SharePrefsKeys{
     SharedPrefs.remove(SharePrefsKeys.phone);
     SharedPrefs.remove(SharePrefsKeys.email);
     SharedPrefs.remove(SharePrefsKeys.avatar);
-    SharedPrefs.remove(SharePrefsKeys.sex);
-    SharedPrefs.remove(SharePrefsKeys.birthday);
-    SharedPrefs.remove(SharePrefsKeys.address);
   }
 }

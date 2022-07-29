@@ -6,7 +6,7 @@ class DropItem extends StatefulWidget {
   String hint;
   dynamic value;
   bool filled;
-  ValueChanged onChanged;
+  ValueChanged valueChanged;
   double radius;
   Color? colorBorder;
 
@@ -14,7 +14,7 @@ class DropItem extends StatefulWidget {
     required this.listItem,
     required this.hint,
     this.value,
-    required this.onChanged,
+    required this.valueChanged,
     this.filled = true,
     this.radius = 5,
     this.colorBorder,
@@ -30,7 +30,7 @@ class _DropItemState extends State<DropItem> {
     return DropdownButtonFormField(
       value: widget.value,
       onChanged: (val) {
-        return widget.onChanged(val);
+        return widget.valueChanged(val);
       },
       isExpanded: true,
       style: StyleApp.textStyle400(),

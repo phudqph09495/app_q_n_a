@@ -32,8 +32,8 @@ class _ChangePassState extends State<ChangePass> {
       bloc.add(
         ChagePassIsLogin(
           user_id: user_id,
-          passwordre: password.text,
-          password: password1.text,
+          passwordre: password1.text,
+          password: password.text,
         ),
       );
     }
