@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_good_answer.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_report.dart';
@@ -141,7 +142,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     textButton:
                         timing ? 'Viết câu trả lời' : 'Đã hết thời gian trả lời',
                     ontap: () {
-                      if ((timing == true) && (hasPaid == false)) {
+                      if ((timing == true) && (hasPaid == false)&&(userStatus==1)) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -156,6 +157,37 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         Toast.show("Câu hỏi đã được trả thưởng",
                             duration: 1, gravity: Toast.bottom);
                       }
+                      else if(userStatus==0){
+                        showPlatformDialog(
+                          context: context,
+                          builder: (context) => BasicDialogAlert(
+                            title: Text("Lỗi"),
+                            content: Text("Bạn phải đăng nhập để xem"),
+                            actions: <Widget>[
+                              BasicDialogAction(
+                                title: Text("Trở lại"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              BasicDialogAction(
+                                title: Text("Đăng nhập"),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginScreen()));
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      else if(userStatus==2){
+                        Toast.show("Bạn không thể trả lời câu hỏi của mình",
+                            duration: 1, gravity: Toast.bottom);
+                      }
+
                     }),
               ),
               backgroundColor: ColorApp.whiteF0,
