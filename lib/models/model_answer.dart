@@ -181,8 +181,10 @@ class Answer {
   String? userId;
   String? isImages;
   String? countReport;
+  Null? parentId;
   String? username;
   List<Images2>? images;
+  List<Items>? items;
 
   Answer(
       {this.id,
@@ -194,8 +196,10 @@ class Answer {
         this.userId,
         this.isImages,
         this.countReport,
+        this.parentId,
         this.username,
-        this.images});
+        this.images,
+        this.items});
 
   Answer.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -207,11 +211,18 @@ class Answer {
     userId = json['user_id'];
     isImages = json['is_images'];
     countReport = json['count_report'];
+    parentId = json['parent_id'];
     username = json['username'];
     if (json['images'] != null) {
       images = <Images2>[];
       json['images'].forEach((v) {
         images!.add(new Images2.fromJson(v));
+      });
+    }
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(new Items.fromJson(v));
       });
     }
   }
@@ -227,9 +238,13 @@ class Answer {
     data['user_id'] = this.userId;
     data['is_images'] = this.isImages;
     data['count_report'] = this.countReport;
+    data['parent_id'] = this.parentId;
     data['username'] = this.username;
     if (this.images != null) {
       data['images'] = this.images!.map((v) => v.toJson()).toList();
+    }
+    if (this.items != null) {
+      data['items'] = this.items!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -288,6 +303,63 @@ class Images2 {
     data['created_at'] = this.createdAt;
     data['is_avatar'] = this.isAvatar;
     data['answer_id'] = this.answerId;
+    return data;
+  }
+}
+
+class Items {
+  String? id;
+  String? answer;
+  String? createdAt;
+  String? updatedAt;
+  String? questionId;
+  String? status;
+  String? userId;
+  String? isImages;
+  Null? countReport;
+  String? parentId;
+  String? username;
+
+  Items(
+      {this.id,
+        this.answer,
+        this.createdAt,
+        this.updatedAt,
+        this.questionId,
+        this.status,
+        this.userId,
+        this.isImages,
+        this.countReport,
+        this.parentId,
+        this.username});
+
+  Items.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    answer = json['answer'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    questionId = json['question_id'];
+    status = json['status'];
+    userId = json['user_id'];
+    isImages = json['is_images'];
+    countReport = json['count_report'];
+    parentId = json['parent_id'];
+    username = json['username'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['answer'] = this.answer;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['question_id'] = this.questionId;
+    data['status'] = this.status;
+    data['user_id'] = this.userId;
+    data['is_images'] = this.isImages;
+    data['count_report'] = this.countReport;
+    data['parent_id'] = this.parentId;
+    data['username'] = this.username;
     return data;
   }
 }

@@ -161,8 +161,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                             Border.all(color: ColorApp.orangeF2, width: 0.5),
                         textButton: 'Bình luận',
                         ontap: () {
-                          PageNavigator.next(
-                              context: context, page: CommentScreen());
+
                         },
                       )
                     ],

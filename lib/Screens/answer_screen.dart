@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:app_q_n_a/Screens/comment.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_good_answer.dart';
@@ -10,6 +11,7 @@ import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/const.dart';
+import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/item/grid_view.dart' as Grid;
@@ -62,7 +64,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   bool timing = true;
   late int userStatus;
 
-  ModelAnswer list=ModelAnswer();
+
 
   BlocGetAnswer bloc = BlocGetAnswer();
   BlocReport blocReport = BlocReport();
@@ -73,7 +75,6 @@ class _AnswerScreenState extends State<AnswerScreen> {
   //   bloc.add(
   //       getAns(user_id: Body.id, question_id: int.parse(widget.qid ?? '0')));
   // }
-
 
   report() async {
     blocReport
@@ -89,27 +90,27 @@ class _AnswerScreenState extends State<AnswerScreen> {
 
     if (userid == 0) {
       userStatus = 0;
-    } else if (userid != Const.convertNumber(widget.modelQuestion.userId).round()) {
+    } else if (userid !=
+        Const.convertNumber(widget.modelQuestion.userId).round()) {
       userStatus = 1;
     } else {
       userStatus = 2;
     }
 
-    bloc.add(
-        getAns(user_id: Body.id, question_id: int.parse(widget.modelQuestion.id ?? '0')));
+    bloc.add(getAns(question_id: int.parse(widget.modelQuestion.id ?? '0')));
 
-      int end = Const.convertNumber(widget.modelQuestion.deadline).round() * 1000;
-      int now = DateTime.now().millisecondsSinceEpoch;
-      if (now >= end) {
-        timing = false;
-      }
-
+    int end = Const.convertNumber(widget.modelQuestion.deadline).round() * 1000;
+    int now = DateTime.now().millisecondsSinceEpoch;
+    if (now >= end) {
+      timing = false;
+    }
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
- onRefresh();
+    onRefresh();
   }
 
   // showQuestion() {
@@ -126,10 +127,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
     return BlocBuilder(
       bloc: bloc,
       builder: (_, state) {
-
-        if (state is LoadSuccess)
-        {
-          list = state.data ;
+        if (state is LoadSuccess) {
+       final list = state.data as ModelAnswer;
 
           return RefreshIndicator(
             onRefresh: onRefresh,
@@ -137,32 +136,30 @@ class _AnswerScreenState extends State<AnswerScreen> {
               bottomSheet: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Button1(
-                    colorButton:
-                        timing ? ColorApp.orangeF2 : Colors.grey.withOpacity(0.5),
+                    colorButton: timing
+                        ? ColorApp.orangeF2
+                        : Colors.grey.withOpacity(0.5),
                     textColor: ColorApp.whiteF0,
                     radius: 30,
                     fontSize: 18,
                     style: false,
                     // border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                    textButton:
-                        timing ? 'Viết câu trả lời' : 'Đã hết thời gian trả lời',
+                    textButton: timing
+                        ? 'Viết câu trả lời'
+                        : 'Đã hết thời gian trả lời',
                     ontap: () {
-                      if ((timing == true) && (hasPaid == false)&&(userStatus==1)) {
+                      if ((timing == true) &&
+                          (hasPaid == false) &&
+                          (userStatus == 1)) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Add_Answer_Screen(
                                       user_id: Body.id,
-                                      question_id: int.parse(widget.modelQuestion.id ?? '0'),
-                                    )));
-                      } else if (timing == false) {
-                        Toast.show("Đã hết thời gian trả lời câu hỏi",
-                            duration: 1, gravity: Toast.bottom);
-                      } else if (hasPaid == true) {
-                        Toast.show("Câu hỏi đã được trả thưởng",
-                            duration: 1, gravity: Toast.bottom);
-                      }
-                      else if(userStatus==0){
+                                      question_id: int.parse(
+                                          widget.modelQuestion.id ?? '0'),
+                                    ))).then((value) => onRefresh());
+                      } else if (userStatus == 0) {
                         showPlatformDialog(
                           context: context,
                           builder: (context) => BasicDialogAlert(
@@ -187,12 +184,16 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             ],
                           ),
                         );
-                      }
-                      else if(userStatus==2){
+                      } else if (userStatus == 2) {
                         Toast.show("Bạn không thể trả lời câu hỏi của mình",
                             duration: 1, gravity: Toast.bottom);
+                      } else if (timing == false) {
+                        Toast.show("Đã hết thời gian trả lời câu hỏi",
+                            duration: 1, gravity: Toast.bottom);
+                      } else if (hasPaid == true) {
+                        Toast.show("Câu hỏi đã được trả thưởng",
+                            duration: 1, gravity: Toast.bottom);
                       }
-
                     }),
               ),
               backgroundColor: ColorApp.whiteF0,
@@ -210,7 +211,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     Navigator.pop(context);
                   },
                   icon: Icon(
-                    Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+                    Platform.isAndroid
+                        ? Icons.arrow_back
+                        : Icons.arrow_back_ios,
                     color: ColorApp.black,
                   ),
                 ),
@@ -239,11 +242,18 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                   url:
                                       "http://hoidap.nanoweb.vn/static${list.images?[index].path}${list.images?[index].name}");
                             }),
-                        endTime:  Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,
+                        endTime:
+                            Const.convertNumber(widget.modelQuestion.deadline)
+                                    .round() *
+                                1000,
                         avatar: '',
                         ques: list.question?.description ?? '',
                         user: widget.modelQuestion.username ?? '',
-                        time: Const.formatTime( Const.convertNumber(widget.modelQuestion.createdAt).round() * 1000,format: "dd/MM/yyyy HH:mm"),
+                        time: Const.formatTime(
+                            Const.convertNumber(widget.modelQuestion.createdAt)
+                                    .round() *
+                                1000,
+                            format: "dd/MM/yyyy HH:mm"),
                       ),
                       const SizedBox(
                         height: 10,
@@ -253,40 +263,34 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         shrinkWrap: true,
                         itemCount: int.parse(list.countAnswer ?? '0'),
                         itemBuilder: (context, index) {
-                          if(
-                          list.answer?[index].status=='2'
-                          ){
-                            hasPaid=true;
+                          if (list.answer?[index].status == '2') {
+                            hasPaid = true;
                           }
-                        print(list.answer?[index].createdAt);
+
                           return AnswerCard(
+                            imageFileList: list.answer?[index].images ?? [],
 
-                            imageFileList:list.answer?[index].images??[] ,
-                            // list.answer?[index].images ,
 
-                            status: timing?userStatus:3,
+                            status: timing ? userStatus : 3,
                             //trạng thái của câu trả lời
                             //0: chưa đăng nhập
                             //1: không phải chủ câu hỏi
                             //2: là chủ câu hỏi
                             //3: hiển thị khi hết deadline
 
-                            imageAns:
-
-                            GridView.builder(
+                            imageAns: GridView.builder(
                                 itemCount: list.answer?[index].images?.length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         childAspectRatio: 2, crossAxisCount: 3),
                                 shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index2) {
+                                itemBuilder:
+                                    (BuildContext context, int index2) {
                                   return LoadImage(
                                       ans: true,
                                       url:
-                                      "http://hoidap.nanoweb.vn/static${list.answer?[index].images?[index2].path}${list.answer?[index].images?[index2].name}"
-                                  );
-                                })
-                            ,
+                                          "http://hoidap.nanoweb.vn/static${list.answer?[index].images?[index2].path}${list.answer?[index].images?[index2].name}");
+                                }),
                             value: index,
                             groupValue: (list.answer?[index].status == '2')
                                 ? index
@@ -298,54 +302,56 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             ),
                             onchanged: (val) {
                               if (userStatus == 2) {
-if(hasPaid==false) {
-  showPlatformDialog(
-                                context: context,
-                                builder: (context) => BlocConsumer(
-                                  bloc: blocGoodAnswer,
-                                  listener: (_,StateBloc state){
-                                    CheckLogState.check(context, state: state,msg: "Trả tiền thành công"
-                                        ,success: (){
-                                          setState((){
-                                            value=val;
+                                if (hasPaid == false) {
+                                  showPlatformDialog(
+                                    context: context,
+                                    builder: (context) => BlocConsumer(
+                                      bloc: blocGoodAnswer,
+                                      listener: (_, StateBloc state) {
+                                        CheckLogState.check(context,
+                                            state: state,
+                                            msg: "Trả tiền thành công",
+                                            success: () {
+                                          setState(() {
+                                            value = val;
                                           });
                                           Navigator.pop(context);
                                         });
-                                  },
-                                  builder: (_,state){
-                                    return BasicDialogAlert(
-                                      title: Text("Thanh toán"),
-                                      content: Text(
-                                          "Xác nhận thanh toán cho người trả lời"),
-                                      actions: <Widget>[
-                                        BasicDialogAction(
-                                          title: Text("Trở lại"),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                        BasicDialogAction(
-                                          title: Text("Đồng ý"),
-                                          onPressed: () {
-                                            goodid = int.parse(
-                                                list.answer?[index].id ?? '0');
-                                            payANS();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                  ,
-                                ),
-                              );}
-else{
-  DialogItem.showMsg(
-    context: context,
-    title: "Lỗi",
-    msg: "Câu hỏi \"${list.question?.question}\" đã có câu trả lời đúng nhất");
-}
-                              }
-                              else {
+                                      },
+                                      builder: (_, state) {
+                                        return BasicDialogAlert(
+                                          title: Text("Thanh toán"),
+                                          content: Text(
+                                              "Xác nhận thanh toán cho người trả lời"),
+                                          actions: <Widget>[
+                                            BasicDialogAction(
+                                              title: Text("Trở lại"),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                            BasicDialogAction(
+                                              title: Text("Đồng ý"),
+                                              onPressed: () {
+                                                goodid = int.parse(
+                                                    list.answer?[index].id ??
+                                                        '0');
+                                                payANS();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  DialogItem.showMsg(
+                                      context: context,
+                                      title: "Lỗi",
+                                      msg:
+                                          "Câu hỏi \"${list.question?.question}\" đã có câu trả lời đúng nhất");
+                                }
+                              } else {
                                 Toast.show(
                                     "Bạn không thể trả tiền cho câu hỏi của người khác",
                                     duration: 1,
@@ -353,7 +359,11 @@ else{
                               }
                             },
 
-                            time: Const.formatTime(int.parse(list.answer?[index].createdAt ?? "0")*1000,format: "dd/MM/yyyy HH:mm"),
+                            time: Const.formatTime(
+                                int.parse(
+                                        list.answer?[index].createdAt ?? "0") *
+                                    1000,
+                                format: "dd/MM/yyyy HH:mm"),
                             user: list.answer?[index].username ?? '',
                             avatar: '',
                             answer: list.answer?[index].answer ?? '',
@@ -410,6 +420,18 @@ else{
                                   );
                                 },
                                 icon: Image.asset('images/report.png')),
+                            comment: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CommentScreen(
+                                        user_id: Body.id,
+                                          quesID: list.question?.id ?? 0,
+                                          parent_id: int.parse(
+                                              (list.answer?[index].id) ?? ''),
+                                          item: list.answer?[index].items??[]
+                                      )));
+                            },
                           );
                         },
                       ),

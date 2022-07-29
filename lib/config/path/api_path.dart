@@ -11,7 +11,7 @@ class ApiPath {
   /// question
   static const addQuestion = "/app/question/add-question";
   static const getQuestion = "/app/home/get-question";
-  static const getAnswer="/app/question/get-question-detail";
+  static const getAnswer="/app/home/get-question-detail";
   static const goodAnswer="/app/question/good-answer";
   static const getClass="/app/home/get-class";
   static const getSub="/app/home/get-subjects";

@@ -20,6 +20,7 @@ class BlocAddAnswer extends Bloc<EventBloc, StateBloc> {
         req['user_id'] = event.user_id;
         req['question_id'] = event.question_id;
         req['answer']=event.answer;
+        req['parent_id']=event.parent_id;
         List<MultipartFile> images = [];
         if (event.images != null) {
           for (var item in event.images!) {

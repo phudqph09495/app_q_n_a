@@ -132,19 +132,21 @@ class addAnsForm extends EventBloc {
   int question_id;
   String answer;
   List<XFile>? images;
+  int? parent_id;
   addAnsForm({
     required this.user_id,
     required this.question_id,
     required this.answer,
     this.images,
+    this.parent_id
   });
 }
 
 class getAns extends EventBloc {
-  int user_id;
+
   int question_id;
   getAns({
-    required this.user_id,
+
     required this.question_id,
   });
 }

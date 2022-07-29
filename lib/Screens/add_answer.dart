@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_add_answer.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
@@ -78,7 +79,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
             CheckLogState.check(context,
                 state: state, msg: "Thêm câu trả lời thành công",isShowMsg: true,
               success: (){
-              Navigator.pop(context);
+               Navigator.pop(context);
 
              }
            );

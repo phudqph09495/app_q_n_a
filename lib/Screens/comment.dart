@@ -1,38 +1,49 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
+import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/item/load_image.dart';
+import 'package:app_q_n_a/models/model_answer.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 
 class CommentScreen extends StatefulWidget {
+  int quesID;
+  int parent_id;
+  int user_id;
+  List<Items> item;
+  CommentScreen(
+      {required this.quesID, required this.parent_id, required this.item,required this.user_id});
   @override
   State<CommentScreen> createState() => _CommentScreenState();
 }
 
 class _CommentScreenState extends State<CommentScreen> {
-  String avatar = '';
-  List<String> commentList = [];
+
 
   TextEditingController reply = TextEditingController();
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
+      child:  Scaffold(
         bottomSheet: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: InputText(
             iconPress: () {
-              setState(() {
-                (reply.text != '')
-                    ? commentList.add(reply.text)
-                    : Toast.show("Bạn chưa thêm bình luận",
-                        duration: 1, gravity: Toast.bottom);
-                ;
-              });
               reply.clear();
             },
             width: double.infinity,
@@ -74,20 +85,13 @@ class _CommentScreenState extends State<CommentScreen> {
             child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: commentList.length,
-                itemBuilder: (context, int index) {
+                itemCount: widget.item.length,
+                itemBuilder: (context,  index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: LoadImage(
-                            url: avatar,
-                            height: 40,
-                            width: 40,
-                          ),
-                        ),
+                        Text(widget.item[index].username??'hello',style:StyleApp.textStyle600(fontSize: 14) ,),
                         const SizedBox(
                           width: 15,
                         ),
@@ -96,12 +100,10 @@ class _CommentScreenState extends State<CommentScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+
+                              Text(Const.checkTime(Const.convertNumber(widget.item[index].createdAt??00).round())??'hi'),
                               Text(
-                                '3 phút trước',
-                                style: StyleApp.textStyle400(fontSize: 12),
-                              ),
-                              Text(
-                                commentList[index],
+                                widget.item[index].answer??'hi',
                                 style: StyleApp.textStyle600(),
                               ),
                             ],

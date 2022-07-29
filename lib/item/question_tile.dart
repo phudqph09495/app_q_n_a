@@ -25,13 +25,6 @@ Widget QuestionTile(
 
   return InkWell(
     onTap: (){
-      if(Body.id==0){
-        DialogItem.showMsg(
-            context: context,
-            title: "Lỗi",
-            msg: "Bạn phải đăng nhập để thực hiện hành động này");
-      }
-      else
       Navigator.push(
         context,
         MaterialPageRoute(

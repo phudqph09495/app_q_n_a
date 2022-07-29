@@ -27,7 +27,7 @@ class AnswerCard extends StatefulWidget {
   Widget imageAns;
   int status;
   var value;
-
+Function()? comment;
   var groupValue;
   ValueChanged? onchanged;
   Widget? title;
@@ -43,6 +43,7 @@ Function()? report;
       this.value,
       this.groupValue,
       this.onchanged,
+        this.comment,
         required this.IconReport,
 required this.imageFileList,
       this.title,this.report});
@@ -204,10 +205,7 @@ class _AnswerCardState extends State<AnswerCard> {
                     textColor: ColorApp.black,
                     border: Border.all(color: ColorApp.orangeF2, width: 0.5),
                     textButton: 'Bình luận',
-                    ontap: () {
-                      PageNavigator.next(
-                          context: context, page: CommentScreen());
-                    },
+                    ontap: widget.comment,
                   )
                 ],
               ),

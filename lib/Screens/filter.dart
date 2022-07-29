@@ -144,20 +144,22 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              SizedBox(height: 10,),
               BlocBuilder(
                 bloc: blocGetCat,
                 builder: (context, state) {
                   final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
                   return FilterList2(
                     value: catval,
-                    title: '  Lớp',
-                    column: 3,
+                    title: '  Trạng thái câu hỏi',
+                    column: 1,
+                    space: 10,
                     list: list,
                     onChanged: (val) {
                       catval = val;
                       for(ModelLocal element in list){
                         if(element.id.toString() == val.toString()){
-                          lophoc = element.name;
+                          theloai = element.name;
                         }
                       }
                       getQuestionHome.keySearch = getKeySearch();
@@ -166,7 +168,7 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
                 },
               ),
               const SizedBox(
-                height: 8,
+                height: 15,
               ),
               BlocBuilder(
                  bloc: blocGetClass,
@@ -174,7 +176,7 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
                    final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
                    return FilterList2(
                      value: lopval,
-                     title: '  Lớp',
+                     title: '  Môn học',
                      column: 3,
                      list: list,
                      onChanged: (val) {
@@ -190,7 +192,7 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
                  },
               ),
               const SizedBox(
-                height: 8,
+                height: 15,
               ),
               BlocBuilder(
                 bloc: blocGetSub,

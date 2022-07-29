@@ -46,11 +46,11 @@ class ThongBao extends StatelessWidget {
               sub:
                   'Đã nhắc đến bạn trong bình luận của câu hỏi :Đếm số đỉnh,số cạnh của khối bát diện"...... ',
               onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                  MaterialPageRoute(
-                    builder: (_) => CommentScreen(),
-                  ),
-                );
+                // Navigator.of(context, rootNavigator: true).push(
+                //   MaterialPageRoute(
+                //     builder: (_) => CommentScreen(),
+                //   ),
+                // );
               },
               title: "Tran thanh",
               time: "5 phút trước",
