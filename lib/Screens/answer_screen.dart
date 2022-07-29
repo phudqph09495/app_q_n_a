@@ -113,13 +113,6 @@ class _AnswerScreenState extends State<AnswerScreen> {
     onRefresh();
   }
 
-  // showQuestion() {
-  //   int end = widget.deadline!;
-  //   int now = DateTime.now().millisecondsSinceEpoch;
-  //   if (now >= end) {
-  //     timing = false;
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +264,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             imageFileList: list.answer?[index].images ?? [],
 
 
-                            status: timing ? userStatus : 3,
+                            status: timing ? userStatus :((userStatus==0)?0:3),
                             //trạng thái của câu trả lời
                             //0: chưa đăng nhập
                             //1: không phải chủ câu hỏi
