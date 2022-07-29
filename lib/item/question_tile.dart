@@ -2,12 +2,13 @@ import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
-
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/body_product.dart' as Body;
 import '../Screens/answer_screen.dart';
 import '../models/model_question.dart';
 
@@ -24,7 +25,13 @@ Widget QuestionTile(
 
   return InkWell(
     onTap: (){
-
+      if(Body.id==0){
+        DialogItem.showMsg(
+            context: context,
+            title: "Lỗi",
+            msg: "Bạn phải đăng nhập để thực hiện hành động này");
+      }
+      else
       Navigator.push(
         context,
         MaterialPageRoute(

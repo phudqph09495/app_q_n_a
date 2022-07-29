@@ -20,6 +20,7 @@ import 'package:app_q_n_a/models/model_answer.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
@@ -46,6 +47,7 @@ List<String> reportList = [
 
 class AnswerScreen extends StatefulWidget {
   ModelQuestion modelQuestion;
+
   AnswerScreen({required this.modelQuestion});
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
@@ -60,6 +62,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   bool timing = true;
   late int userStatus;
 
+  ModelAnswer list=ModelAnswer();
 
   BlocGetAnswer bloc = BlocGetAnswer();
   BlocReport blocReport = BlocReport();
@@ -120,15 +123,17 @@ class _AnswerScreenState extends State<AnswerScreen> {
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
-    return RefreshIndicator(
-      onRefresh: onRefresh,
-      child: BlocBuilder(
-        bloc: bloc,
-        builder: (_, state) {
-          if (state is LoadSuccess) {
-            final list = state.data as ModelAnswer;
+    return BlocBuilder(
+      bloc: bloc,
+      builder: (_, state) {
 
-            return Scaffold(
+        if (state is LoadSuccess)
+        {
+          list = state.data ;
+
+          return RefreshIndicator(
+            onRefresh: onRefresh,
+            child: Scaffold(
               bottomSheet: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Button1(
@@ -253,6 +258,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                           ){
                             hasPaid=true;
                           }
+                        print(list.answer?[index].createdAt);
                           return AnswerCard(
 
                             imageFileList:list.answer?[index].images??[] ,
@@ -292,18 +298,18 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             ),
                             onchanged: (val) {
                               if (userStatus == 2) {
-
-                              showPlatformDialog(
+if(hasPaid==false) {
+  showPlatformDialog(
                                 context: context,
                                 builder: (context) => BlocConsumer(
                                   bloc: blocGoodAnswer,
                                   listener: (_,StateBloc state){
                                     CheckLogState.check(context, state: state,msg: "Trả tiền thành công"
-                                    ,success: (){
-                                      setState((){
-                                        value=val;
-                                      });
-                                      Navigator.pop(context);
+                                        ,success: (){
+                                          setState((){
+                                            value=val;
+                                          });
+                                          Navigator.pop(context);
                                         });
                                   },
                                   builder: (_,state){
@@ -331,8 +337,13 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                   }
                                   ,
                                 ),
-                              );
-
+                              );}
+else{
+  DialogItem.showMsg(
+    context: context,
+    title: "Lỗi",
+    msg: "Câu hỏi \"${list.question?.question}\" đã có câu trả lời đúng nhất");
+}
                               }
                               else {
                                 Toast.show(
@@ -342,7 +353,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                               }
                             },
 
-                            time: Const.formatTime(int.parse(list.answer?[index].createdAt ?? "0"),format: "dd/MM/yyyy HH:mm"),
+                            time: Const.formatTime(int.parse(list.answer?[index].createdAt ?? "0")*1000,format: "dd/MM/yyyy HH:mm"),
                             user: list.answer?[index].username ?? '',
                             avatar: '',
                             answer: list.answer?[index].answer ?? '',
@@ -409,11 +420,11 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   ),
                 ),
               ),
-            );
-          }
-          return Container();
-        },
-      ),
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
 }
