@@ -445,7 +445,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
             ),
           );
         }
-        return Container();
+        return Scaffold();
       },
     );
   }
