@@ -122,97 +122,100 @@ class _AnswerCardState extends State<AnswerCard> {
         ),
       );
     } else {
-      return Card(
-        color: ColorApp.whiteF7,
-        child: Padding(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Trả lời',
-                style:
-                    StyleApp.textStyle700(fontSize: 20, color: ColorApp.black),
-              ),
-              Row(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: LoadImage(
-                        url: widget.avatar,
-                        height: 40,
-                        width: 40,
-                      )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${widget.user}',
-                        style: StyleApp.textStyle500(),
-                      ),
-                      Text('${widget.time}', style: StyleApp.textStyle500())
-                    ],
-                  ),
-                ],
-              ),
-     SizedBox(height: 10,),
-              ReadMoreText(
-                widget.answer,
-                trimLines: 2,
-                colorClickableText: ColorApp.orangeF01,
-                trimMode: TrimMode.Line,
-                trimCollapsedText: 'Hiện thêm',
-                trimExpandedText: 'Thu gọn',
-                style:
-                    StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
-              ),
-              ( widget.imageFileList.isNotEmpty)
-                  ? widget.imageAns:SizedBox(),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  widget.IconReport,
-                  Container(
-                    width: 140,
-                    child: RadioListTile<int>(
-                        visualDensity: const VisualDensity(
-                          horizontal: VisualDensity.minimumDensity,
-                          vertical: VisualDensity.minimumDensity,
+      return InkWell(
+        onTap:widget.comment,
+        child: Card(
+          color: ColorApp.whiteF7,
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Trả lời',
+                  style:
+                      StyleApp.textStyle700(fontSize: 20, color: ColorApp.black),
+                ),
+                Row(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: LoadImage(
+                          url: widget.avatar,
+                          height: 40,
+                          width: 40,
+                        )),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${widget.user}',
+                          style: StyleApp.textStyle500(),
                         ),
-                        selectedTileColor: Colors.green,
-                        activeColor: Colors.green,
-                        contentPadding: EdgeInsets.zero,
-                        dense: true,
-                        toggleable: true,
-                        title: (widget.value == widget.groupValue)
-                            ? Text(
-                                'Đã trả tiền',
-                                style:
-                                    StyleApp.textStyle500(color: Colors.green),
-                              )
-                            : widget.title,
-                        value: widget.value,
-                        groupValue: widget.groupValue,
-                        onChanged: widget.onchanged),
-                  ),
-                  Button1(
-                    height: 35,
-                    colorButton: ColorApp.whiteF7,
-                    textColor: ColorApp.black,
-                    border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                    textButton: 'Bình luận',
-                    ontap: widget.comment,
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-            ],
+                        Text('${widget.time}', style: StyleApp.textStyle500())
+                      ],
+                    ),
+                  ],
+                ),
+     SizedBox(height: 10,),
+                ReadMoreText(
+                  widget.answer,
+                  trimLines: 2,
+                  colorClickableText: ColorApp.orangeF01,
+                  trimMode: TrimMode.Line,
+                  trimCollapsedText: 'Hiện thêm',
+                  trimExpandedText: 'Thu gọn',
+                  style:
+                      StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
+                ),
+                ( widget.imageFileList.isNotEmpty)
+                    ? widget.imageAns:SizedBox(),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    widget.IconReport,
+                    Container(
+                      width: 140,
+                      child: RadioListTile<int>(
+                          visualDensity: const VisualDensity(
+                            horizontal: VisualDensity.minimumDensity,
+                            vertical: VisualDensity.minimumDensity,
+                          ),
+                          selectedTileColor: Colors.green,
+                          activeColor: Colors.green,
+                          contentPadding: EdgeInsets.zero,
+                          dense: true,
+                          toggleable: true,
+                          title: (widget.value == widget.groupValue)
+                              ? Text(
+                                  'Đã trả tiền',
+                                  style:
+                                      StyleApp.textStyle500(color: Colors.green),
+                                )
+                              : widget.title,
+                          value: widget.value,
+                          groupValue: widget.groupValue,
+                          onChanged: widget.onchanged),
+                    ),
+                    Button1(
+                      height: 35,
+                      colorButton: ColorApp.whiteF7,
+                      textColor: ColorApp.black,
+                      border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                      textButton: 'Bình luận',
+                      ontap: widget.comment,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+              ],
+            ),
           ),
         ),
       );
