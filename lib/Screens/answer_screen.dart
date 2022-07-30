@@ -65,12 +65,12 @@ class _AnswerScreenState extends State<AnswerScreen> {
   late int userStatus;
 
 
-
+  int userid = Body.id;
   BlocGetAnswer bloc = BlocGetAnswer();
   BlocReport blocReport = BlocReport();
 
   BlocGoodAnswer blocGoodAnswer = BlocGoodAnswer();
-
+  late int answerStatus;
   // getANS() async {
   //   bloc.add(
   //       getAns(user_id: Body.id, question_id: int.parse(widget.qid ?? '0')));
@@ -85,8 +85,21 @@ class _AnswerScreenState extends State<AnswerScreen> {
     blocGoodAnswer.add(goodAns(user_id: Body.id, answer_id: goodid));
   }
 
+  getAnswerStatus(){
+    if(timing==true){
+      answerStatus=userStatus;
+    }
+
+    if((timing==false)&&(userStatus==0)){
+      answerStatus=userStatus;
+    }
+    if((timing==false)&&(userStatus!=0)){
+      answerStatus=3;
+    }
+  }
+
   Future<void> onRefresh() async {
-    int userid = Body.id;
+
 
     if (userid == 0) {
       userStatus = 0;
@@ -104,6 +117,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
     if (now >= end) {
       timing = false;
     }
+    getAnswerStatus();
   }
 
   @override
@@ -264,7 +278,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             imageFileList: list.answer?[index].images ?? [],
 
 
-                            status: timing ? userStatus :((userStatus==0)?0:3),
+                            status:answerStatus,
                             //trạng thái của câu trả lời
                             //0: chưa đăng nhập
                             //1: không phải chủ câu hỏi
@@ -418,6 +432,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => CommentScreen(
+                                        answerind: index,
                                         user_id: Body.id,
                                           quesID: list.question?.id ?? 0,
                                           parent_id: int.parse(
