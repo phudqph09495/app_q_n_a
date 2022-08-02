@@ -8,7 +8,9 @@ class GetData extends EventBloc {
   int? class_id;
   int? subject_id;
   String? keySearch;
+  String? keyword;
   GetData({
+    this.keyword,
     this.cat_id,
     this.class_id,
     this.subject_id,

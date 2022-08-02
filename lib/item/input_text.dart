@@ -20,7 +20,7 @@ class InputText extends StatefulWidget {
   Function()? deadline;
   bool counter;
   TextInputAction action;
-
+  Function(String)? onSubmit;
   TextEditingController controller;
   InputText(
       {this.colorhint = Colors.black45,
@@ -40,7 +40,8 @@ class InputText extends StatefulWidget {
       this.width,
       this.iconPress,
       this.counter = false,
-      this.validator});
+      this.validator,
+      this.onSubmit});
   @override
   State<InputText> createState() => _InputTextState();
 }
@@ -52,6 +53,7 @@ class _InputTextState extends State<InputText> {
       height: widget.height,
       width: widget.width,
       child: TextFormField(
+onFieldSubmitted: widget.onSubmit,
         textInputAction: widget.action,
         style: StyleApp.textStyle500(color: widget.textColor),
         onTap: widget.deadline,

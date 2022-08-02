@@ -1,13 +1,20 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/answer_screen.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_getquestion.dart';
+import 'package:app_q_n_a/bloc/check_log_state.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/item/input_text.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../styles/colors.dart';
+import '../widget/items/dia_log_item.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -16,7 +23,10 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController search = TextEditingController();
-
+BlocGetQuestion blocGetQuestion=BlocGetQuestion();
+  StreamController listController = StreamController.broadcast();
+  Stream get imageStream => listController.stream;
+  List<ModelQuestion> list=[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,64 +48,120 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body:SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 6,
-              ),
-              InputText(
-                  textColor: Colors.black,
-                  maxline: null,
-                  action: TextInputAction.search,
-                  suffixIcon: Icon(
-                    Icons.close,
-                    color: ColorApp.black,
-                  ),
-                  hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
-                  controller: search,
-                  iconPress: () {
-                    search.clear();
-                  },
-                  colorBorder: Colors.black,
-                  colorhint: ColorApp.black.withOpacity(0.3),
-                  iconS: true),
-              ListView.builder(
-                  itemCount: 50,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AnswerScreen(
-                                      modelQuestion: ModelQuestion(),
+          child: BlocConsumer(
+         builder: (_,state){
+           if(state is LoadSuccess){
+             return Column(
+               children: [
+                 SizedBox(
+                   height: 6,
+                 ),
+                 InputText(
+                     onSubmit: (val){
+                       blocGetQuestion.add(GetData(keyword: val));
+                     }
+                     ,
+                     textColor: Colors.black,
+                     maxline: null,
+                     action: TextInputAction.search,
+                     suffixIcon: Icon(
+                       Icons.close,
+                       color: ColorApp.black,
+                     ),
+                     hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
+                     controller: search,
+                     iconPress: () {
+                       search.clear();
+                     list.clear();
+                     listController.sink.add(list);
+                     },
+                     colorBorder: Colors.black,
+                     colorhint: ColorApp.black.withOpacity(0.3),
+                     iconS: true),
+                StreamBuilder(
+                  stream: imageStream,
+                    initialData: list,
+                    builder: (context,snapshot){
+                  return  ListView.builder(
+                      itemCount: list.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AnswerScreen(
+                                      modelQuestion: list[index],
                                     )));
-                      },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Divider(
-                            color: Colors.black,
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Divider(
+                                color: Colors.black,
+                              ),
+                              Text(
+                                list[index].question??'',
+                                style: StyleApp.textStyle500(color: ColorApp.black),
+                              ),
+                              Text('Số câu trả lời: ${list[index].countAnswer.toString()}',
+                                  style: StyleApp.textStyle500(color: Colors.red)),
+                            ],
                           ),
-                          Text(
-                            'Đếm số đỉnh, số cạnh của khối bát diện đều.',
-                            style: StyleApp.textStyle500(color: ColorApp.black),
-                          ),
-                          Text('số câu trả lời: 2',
-                              style: StyleApp.textStyle500(color: Colors.red)),
-                        ],
-                      ),
-                    );
-                  })
-            ],
+                        );
+                      });
+                })
+               ],
+             );
+           }
+
+           return  InputText(
+               onSubmit: (val){
+                 blocGetQuestion.add(GetData(keyword: val));
+               }
+               ,
+               textColor: Colors.black,
+               maxline: null,
+               action: TextInputAction.search,
+               suffixIcon: Icon(
+                 Icons.close,
+                 color: ColorApp.black,
+               ),
+               hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
+               controller: search,
+               iconPress: () {
+                 search.clear();
+               },
+               colorBorder: Colors.black,
+               colorhint: ColorApp.black.withOpacity(0.3),
+               iconS: true);
+         },
+            listener: (_,StateBloc state){
+           if(state is Loading){
+             DialogItem.showLoading(context: context);
+           }
+           if(state is LoadSuccess){
+             DialogItem.hideLoading(context: context);
+             list=state.data;
+             if(list.isEmpty){
+               DialogItem.showMsg(
+                   context: context,
+                   title: "Lỗi",
+                   msg: "Không tìm thấy câu hỏi phù hợp");
+             }
+           }
+            },
+            bloc: blocGetQuestion,
+
           ),
         ),
-      ),
+      )
+      ,
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: ColorApp.orangeF2,
         onPressed: () {
@@ -114,3 +180,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 }
+
+
+
+

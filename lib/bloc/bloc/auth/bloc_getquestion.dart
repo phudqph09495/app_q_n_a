@@ -22,6 +22,7 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
         Map<String, dynamic> req = Map();
         req['class_id'] = event.class_id;
         req['subject_id'] = event.subject_id;
+        req['keywords']=event.keyword;
         print(req);
         var res = await Api.postAsync(endPoint: ApiPath.getQuestion, req: req);
         print(res);
