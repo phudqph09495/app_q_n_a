@@ -30,6 +30,8 @@ class _FilterState extends State<Filter> {
 BlocGetSub blocGetSub=BlocGetSub()..add(GetData());
 BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
 
+
+BlocGetQuestion blocGetQuestion=BlocGetQuestion();
   Map req = new Map();
   String? theloai;
   String? lophoc;
@@ -72,23 +74,6 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
   ];
   GetData getQuestionHome = GetData();
 
-  getKeySearch(){
-    String key = "";
-    if(theloai != null){
-      key = key + "$theloai ";
-    }
-    if(lophoc != null){
-      key = key + "$lophoc ";
-    }
-    if(monhoc != null){
-      key = key + "$monhoc ";
-    }
-
-    if(key != ""){
-      return key;
-    }
-    return null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,28 +82,53 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
         bottomSheet: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
           child:
-          Button1(
-              style: false,
-              fontSize: 18,
-              radius: 30,
-              ontap: () {
-                if(lopval != null){
-                  getQuestionHome.class_id = lopval;
-                }
-                if(monval != null){
-                  getQuestionHome.subject_id = monval;
-                }
-                if(catval != null){
-                  getQuestionHome.cat_id =  catval;
-                }
+          BlocListener(
+            bloc: blocGetQuestion,
+            listener: (_,StateBloc state){
+              CheckLogState.check(context, state: state,isShowMsg: false,success: (){
                 context.read<BlocGetQuestion>().add(getQuestionHome);
-
                 Navigator.pop(context);
-              },
-              colorButton: ColorApp.orangeF2,
-              textColor: Colors.white,
-              border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-              textButton: 'Tìm kiếm'),
+              });
+            },
+            child: Button1(
+                style: false,
+                fontSize: 18,
+                radius: 30,
+                ontap: () {
+                  if(lopval != null){
+                    getQuestionHome.class_id = lopval;
+                  }
+                  if(monval != null){
+                    getQuestionHome.subject_id = monval;
+                  }
+                  if(catval != null){
+                    getQuestionHome.cat_id =  catval;
+                  }
+
+                  if(theloai!=''){
+                    getQuestionHome.keySearch=theloai;
+                  }
+                  if(monhoc!=''){
+                    getQuestionHome.keySearch1=monhoc;
+                  }
+                  if(lophoc!=''){
+                    getQuestionHome.keySearch2=lophoc;
+                  }
+
+blocGetQuestion.add(getQuestionHome);
+
+
+
+
+
+
+                  // Navigator.pop(context);
+                },
+                colorButton: ColorApp.orangeF2,
+                textColor: Colors.white,
+                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                textButton: 'Tìm kiếm'),
+          ),
         ),
         backgroundColor: ColorApp.whiteF0,
         appBar: AppBar(
@@ -162,7 +172,7 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
                           theloai = element.name;
                         }
                       }
-                      getQuestionHome.keySearch = getKeySearch();
+
                     },
                   );
                 },
@@ -176,17 +186,17 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
                    final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
                    return FilterList2(
                      value: lopval,
-                     title: '  Môn học',
+                     title: '  Lớp học',
                      column: 3,
                      list: list,
                      onChanged: (val) {
                        lopval = val;
                        for(ModelLocal element in list){
                          if(element.id.toString() == val.toString()){
-                           theloai = element.name;
+                           monhoc = element.name;
                          }
                        }
-                       getQuestionHome.keySearch = getKeySearch();
+
                      },
                    );
                  },
@@ -200,17 +210,17 @@ BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
                   final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
                   return FilterList2(
                     value: lopval,
-                    title: '  Lớp',
+                    title: '  Môn học',
                     column: 3,
                     list: list,
                     onChanged: (val) {
                       monval = val;
                       for(ModelLocal element in list){
                         if(element.id.toString() == val.toString()){
-                          monhoc = element.name;
+                          lophoc = element.name;
                         }
                       }
-                      getQuestionHome.keySearch = getKeySearch();
+
                     },
                   );
                 },

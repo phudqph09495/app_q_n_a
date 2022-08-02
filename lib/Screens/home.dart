@@ -16,19 +16,22 @@ import '../item/question_tile.dart';
 import 'add_question.dart';
 
 class HomeScreen extends StatefulWidget {
-  int? class_id;
-  int? cat_id;
-  int? subject_id;
-  HomeScreen({this.subject_id,this.class_id,this.cat_id});
+
+  HomeScreen();
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   Future<void> onRefresh() async {
-    context.read<BlocGetQuestion>().add(GetData(class_id:widget.class_id,subject_id: widget.subject_id ));
+    context
+        .read<BlocGetQuestion>()
+        .add(GetData());
   }
+  String? keySearch;
+  String? keySearch1;
+  String? keySearch2;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -131,18 +134,96 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: onRefresh,
-          child:  BlocBuilder<BlocGetQuestion,StateBloc>(
-            builder: (_, state){
-             final keySearch =  state is LoadSuccess
-                  ? state.keySearch
-                  : null;
+          child: BlocBuilder<BlocGetQuestion, StateBloc>(
+            builder: (_, state) {
+
+              // final keySearch =  state is LoadSuccess
+              //      ? state.keySearch
+              //      : null;
+              if (state is LoadSuccess) {
+                keySearch = state.keySearch;
+                keySearch1 = state.keySearch1;
+                keySearch2 = state.keySearch2;
+
+              }
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  keySearch != null ? Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text("Lọc câu hỏi: $keySearch", style: StyleApp.textStyle700(fontSize: 16,color: Colors.green),),
-                  ) : const SizedBox(),
+                  Row(
+
+                    children: [
+                      keySearch != null
+                          ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: InkWell(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Filter()));
+                        },
+                              child: Container(
+                                  height: 15,
+                                  child: Center(
+                                    child: Text('${keySearch}'),
+                                  ),
+                                  width: 75,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(1),
+                                      color: ColorApp.whiteF7,
+                                      border: Border.all(
+                                          color: Colors.black, width: 0.5))),
+                            ),
+                          )
+                          : Container(),
+                      keySearch1 != null
+                          ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: InkWell(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Filter()));
+                        },
+                              child: Container(
+                                  height: 15,
+                                  child: Center(
+                                    child: Text('${keySearch1}'),
+                                  ),
+                                  width: 75,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(1),
+                                      color: ColorApp.whiteF7,
+                                      border: Border.all(
+                                          color: Colors.black, width: 0.5))),
+                            ),
+                          )
+                          : Container(),
+                      keySearch2 != null
+                          ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: InkWell(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Filter()));
+                        },
+                              child: Container(
+                                  height: 15,
+                                  child: Center(
+                                    child: Text('${keySearch2}'),
+                                  ),
+                                  width: 75,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(1),
+                                      color: ColorApp.whiteF7,
+                                      border: Border.all(
+                                          color: Colors.black, width: 0.5))),
+                            ),
+                          )
+                          : Container(),
+                    ],
+                  )
+                  // keySearch != null ? Padding(
+                  //   padding: const EdgeInsets.all(10),
+                  //   child: Text("Lọc câu hỏi: $keySearch", style: StyleApp.textStyle700(fontSize: 16,color: Colors.green),),
+                  // ) : const SizedBox(),
+                  ,
                   Expanded(
                     child: QuestionList(
                       listItem: state is LoadSuccess

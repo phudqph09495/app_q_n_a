@@ -20,6 +20,7 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
+        req['cat_id']=event.cat_id;
         req['class_id'] = event.class_id;
         req['subject_id'] = event.subject_id;
         req['keywords']=event.keyword;
@@ -34,13 +35,22 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
           yield LoadSuccess(
             data: ques,
             keySearch: event.keySearch,
-          );
-        }else if (res["code"] == 114) {
-          yield LoadSuccess(
-            data: ques,
-            keySearch: event.keySearch,
+            keySearch1: event.keySearch1,
+            keySearch2: event.keySearch2,
+
+
           );
         }
+        // else if (res["code"] == 114) {
+        //   yield LoadSuccess(
+        //     data: ques,
+        //     keySearch: event.keySearch,
+        //       keySearch1: event.keySearch1,
+        //       keySearch2: event.keySearch2,
+        //
+        //
+        //   );
+        // }
         else {
           yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }

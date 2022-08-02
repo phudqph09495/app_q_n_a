@@ -8,6 +8,7 @@ import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/item/input_text.dart';
+import 'package:app_q_n_a/item/question_tile.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,8 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
                   stream: imageStream,
                     initialData: list,
                     builder: (context,snapshot){
-                  return  ListView.builder(
+                  return
+                    ListView.builder(
                       itemCount: list.length,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -105,12 +107,7 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
                               Divider(
                                 color: Colors.black,
                               ),
-                              Text(
-                                list[index].question??'',
-                                style: StyleApp.textStyle500(color: ColorApp.black),
-                              ),
-                              Text('Số câu trả lời: ${list[index].countAnswer.toString()}',
-                                  style: StyleApp.textStyle500(color: Colors.red)),
+                              QuestionTile(context, modelQuestion: list[index]),
                             ],
                           ),
                         );
