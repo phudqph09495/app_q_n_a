@@ -19,9 +19,7 @@ class BlocLogin extends Bloc<EventBloc, StateBloc> {
         req['password'] = event.password;
         Map<String, dynamic> req1 = Map();
         req1['LoginForm'] = req;
-
         var res = await Api.postAsync(endPoint: ApiPath.login, req: req1);
-
         if (res['code'] == 1) {
           ModelUser model = ModelUser.fromJson(res['data']);
           yield LoadSuccess(

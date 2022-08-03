@@ -134,6 +134,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
     return BlocBuilder(
       bloc: bloc,
       builder: (_, state) {
+
         if (state is LoadSuccess) {
        final list = state.data as ModelAnswer;
 
@@ -268,6 +269,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                       ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
+
                         itemCount: int.parse(list.countAnswer ?? '0'),
                         itemBuilder: (context, index) {
                           if (list.answer?[index].status == '2') {
@@ -453,7 +455,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
             ),
           );
         }
-        return Scaffold();
+        return Scaffold(
+
+        );
       },
     );
   }

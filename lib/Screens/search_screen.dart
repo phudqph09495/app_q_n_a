@@ -55,6 +55,7 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
           child: BlocConsumer(
          builder: (_,state){
            if(state is LoadSuccess){
+             list=state.data;
              return Column(
                children: [
                  SizedBox(
@@ -139,19 +140,9 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
                iconS: true);
          },
             listener: (_,StateBloc state){
-           if(state is Loading){
-             DialogItem.showLoading(context: context);
-           }
-           if(state is LoadSuccess){
-             DialogItem.hideLoading(context: context);
-             list=state.data;
-             if(list.isEmpty){
-               DialogItem.showMsg(
-                   context: context,
-                   title: "Lỗi",
-                   msg: "Không tìm thấy câu hỏi phù hợp");
-             }
-           }
+CheckLogState.check(context, state: state,isShowMsg: false,
+
+);
             },
             bloc: blocGetQuestion,
 

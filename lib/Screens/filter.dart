@@ -39,39 +39,7 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
   int? lopval;
   int? monval;
   int? catval;
-  List cat = [
-    ModelLocal(id: "7", name: "Ngẫu hứng"),
-    ModelLocal(id: "8", name: "Chiến lược"),
-  ];
-  List listmon = [
-    ModelLocal(id: "16", name: "Toán học"),
-    ModelLocal(id: "19", name: "Vật lý"),
-    ModelLocal(id: "20", name: "Hoá học"),
-    ModelLocal(id: "17", name: "Văn học"),
-    ModelLocal(id: "21", name: "Sinh học"),
-    ModelLocal(id: "15", name: "Lịch sử"),
-    ModelLocal(id: "22", name: "Địa lý"),
-    ModelLocal(id: "18", name: "Tiếng Anh"),
-    ModelLocal(id: "23", name: "Tin học"),
-    ModelLocal(id: "24", name: "GDCD"),
-    ModelLocal(id: "25", name: "Công nghệ"),
-    ModelLocal(id: "26", name: "Âm nhạc"),
-    ModelLocal(id: "27", name: "Mỹ thuật"),
-  ];
-  List listlop = [
-    ModelLocal(id: "3", name: "Lớp 1"),
-    ModelLocal(id: "4", name: "Lớp 2"),
-    ModelLocal(id: "5", name: "Lớp 3"),
-    ModelLocal(id: "6", name: "Lớp 4"),
-    ModelLocal(id: "7", name: "Lớp 5"),
-    ModelLocal(id: "8", name: "Lớp 6"),
-    ModelLocal(id: "9", name: "Lớp 7"),
-    ModelLocal(id: "10", name: "Lớp 8"),
-    ModelLocal(id: "11", name: "Lớp 9"),
-    ModelLocal(id: "12", name: "Lớp 10"),
-    ModelLocal(id: "13", name: "Lớp 11"),
-    ModelLocal(id: "14", name: "Lớp 12"),
-  ];
+
   GetData getQuestionHome = GetData();
 
 
