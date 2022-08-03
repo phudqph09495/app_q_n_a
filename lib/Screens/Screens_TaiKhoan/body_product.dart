@@ -6,6 +6,7 @@ import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/rules.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
+import 'package:app_q_n_a/Screens/account/bank/screen_create_bank.dart';
 import 'package:app_q_n_a/Screens/account/edit_account/edit_profile.dart';
 import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/login.dart';
@@ -26,7 +27,7 @@ import '../../widget/items/dia_log_item.dart';
 import '../../widget/widget_info/widgetText.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
-import '../account/profile.dart';
+import '../account/screen_profile.dart';
 import 'ThongKe/ThongKe.dart';
 
 import 'package:app_q_n_a/config/share_pref.dart';
@@ -67,14 +68,7 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: CupertinoIcons.person,
           title: "Trang cá nhân",
           onTap: () async {
-            PageNavigator.next(
-                context: context,
-                page: ProfileScreen(
-                  context: context,
-                  name: name,
-                  email: email,
-                  phone: phone,
-                ));
+            PageNavigator.next(context: context, page: ScreenProfile());
           }),
       TitleAccount(
           iconData: Icons.edit_outlined,
@@ -82,6 +76,12 @@ class _BodyProductState extends State<BodyProduct> {
           onTap: () {
             showModalBottomSheet(
                 context: context, builder: (context) => BottomSheetAccount());
+          }),
+      TitleAccount(
+          iconData: Icons.account_balance,
+          title: "Ngân hàng",
+          onTap: () {
+            PageNavigator.next(context: context, page: ScreenCreateBank());
           }),
       TitleAccount(
         iconData: CupertinoIcons.bookmark_solid,
@@ -151,8 +151,7 @@ class _BodyProductState extends State<BodyProduct> {
       appBar: AppBar(
         backgroundColor: ColorApp.orangeF2,
         bottom: PreferredSize(
-          child: getAppBottomView(
-              context: context, id: (id != 0) ? id.toString() : '', name: name),
+          child: ItemAccount(),
           preferredSize: const Size.fromHeight(45.0),
         ),
       ),

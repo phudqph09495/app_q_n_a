@@ -132,8 +132,7 @@ class ExampleDetailsScreen extends StatelessWidget {
                   deadline: 'Còn 3h',
                   question: 'Đếm số đỉnh, số cạnh của khối bát diện đều.',
                   hasImage: true,
-                  image:
-                      'https://img.loigiaihay.com/picture/2021/1116/1.png'),
+                  image: 'https://img.loigiaihay.com/picture/2021/1116/1.png'),
             ],
           ),
         ),

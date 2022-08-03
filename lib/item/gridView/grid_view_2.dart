@@ -23,7 +23,6 @@ class FilterList2 extends StatefulWidget {
     required this.list,
     this.space = 3,
     this.value,
-
   });
 
   @override
@@ -31,7 +30,6 @@ class FilterList2 extends StatefulWidget {
 }
 
 class _FilterList2State extends State<FilterList2> {
-
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -47,15 +45,15 @@ class _FilterList2State extends State<FilterList2> {
           children: [
             (widget.title != '')
                 ? SizedBox(
-              height: 15,
-            )
+                    height: 15,
+                  )
                 : SizedBox(),
             (widget.title != '')
                 ? Text(
-              widget.title,
-              style: StyleApp.textStyle700(
-                  fontSize: 18, color: ColorApp.black),
-            )
+                    widget.title,
+                    style: StyleApp.textStyle700(
+                        fontSize: 18, color: ColorApp.black),
+                  )
                 : SizedBox(),
             GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -68,9 +66,9 @@ class _FilterList2State extends State<FilterList2> {
                   title: widget.list[index].name.toString(),
                   index: int.parse(widget.list[index].id),
                   groupValue: widget.value,
-                  onChange: (val){
+                  onChange: (val) {
                     widget.value = val;
-                    setState((){});
+                    setState(() {});
                     return widget.onChanged(val);
                   },
                 );

@@ -15,22 +15,22 @@ class BlocUpdateUser extends Bloc<EventBloc, StateBloc> {
     if (event is UpdateProfile) {
       yield Loading();
       try {
-        Map<String, dynamic> req = Map();
-        req['user_id'] = event.user_id;
-        req['birthday'] = event.birthday;
-        req['phone'] = event.phone;
-        req['sex'] = event.sex;
-        req['avatar'] = event.avatar;
-        req['cmt'] = event.cmt;
-        req['province_id'] = event.province_id;
-        req['district_id'] = event.district_id;
-        var res = await Api.postAsync(endPoint: ApiPath.updateUser, req: req);
+        if (event.req!['avatar'] != null) {
+          event.req!['avatar'] = await MultipartFile.fromFile(
+              event.req!['avatar'].path,
+              filename: event.req!['avatar'].path.split('/').last);
+        }
+
+        var res =
+            await Api.postAsync(endPoint: ApiPath.updateUser, req: event.req!);
         print(res);
         if (res['code'] == 1) {
           ModelUser datas = ModelUser.fromJson(res['data']);
           yield LoadSuccess(
             data: datas,
           );
+        } else {
+          yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }
       } on DioError catch (e) {
         yield LoadFail(

@@ -84,12 +84,12 @@ class _AddQuestionState extends State<AddQuestion> {
 
   TextEditingController ques = TextEditingController();
   TextEditingController deadline = TextEditingController();
-  TextEditingController description=TextEditingController();
+  TextEditingController description = TextEditingController();
   DateTime dateTime = DateTime.now();
 
   final keyForm = GlobalKey<FormState>();
   BlocGetClass blocGetClass = BlocGetClass()..add(GetData());
-  BlocGetSub blocGetSub=BlocGetSub()..add(GetData());
+  BlocGetSub blocGetSub = BlocGetSub()..add(GetData());
 
   int? lopval;
   int? monval;
@@ -97,28 +97,24 @@ class _AddQuestionState extends State<AddQuestion> {
   String? mon;
 
   AddQuesVoid() async {
-    if (keyForm.currentState!.validate()&&((description.text!='')||imageFiles.isNotEmpty)) {
+    if (keyForm.currentState!.validate() &&
+        ((description.text != '') || imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
 
       bloc.add(addQuesForm(
-          user_id: user_id ?? -1,
-          subject_id: monval,
-          class_id: lopval,
-          deadline: dateTime,
-          money: money.text,
-          description: description.text,
-          question: ques.text,
-          images: imageFiles,
-          
+        user_id: user_id ?? -1,
+        subject_id: monval,
+        class_id: lopval,
+        deadline: dateTime,
+        money: money.text,
+        description: description.text,
+        question: ques.text,
+        images: imageFiles,
       ));
-    }
-    else{
+    } else {
       DialogItem.showMsg(
-          context: context,
-          title: "Lỗi",
-          msg: "Bạn chưa nhập đủ thông tin");
+          context: context, title: "Lỗi", msg: "Bạn chưa nhập đủ thông tin");
     }
-
   }
 
   List<XFile> imageFiles = [];
@@ -184,14 +180,12 @@ class _AddQuestionState extends State<AddQuestion> {
           bloc: bloc,
           listener: (_, StateBloc state) {
             CheckLogState.check(context,
-                state: state, msg: "Thêm câu hỏi thành công", isShowDlg: true,ontap: (){
-
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ScreenHome()));
-                });
+                state: state,
+                msg: "Thêm câu hỏi thành công",
+                isShowDlg: true, ontap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ScreenHome()));
+            });
           },
           child: Button1(
               colorButton: ColorApp.orangeF2,
@@ -235,30 +229,29 @@ class _AddQuestionState extends State<AddQuestion> {
                 SizedBox(
                   height: 5,
                 ),
-
                 Text(
                   'Môn học',
                   style: StyleApp.textStyle700(fontSize: 16),
                 ),
                 BlocBuilder(
                   bloc: blocGetSub,
-                  builder: (context,state){
-
-                    final list=state is LoadSuccess? state.data as List<ModelLocal>:<ModelLocal>[];
+                  builder: (context, state) {
+                    final list = state is LoadSuccess
+                        ? state.data as List<ModelLocal>
+                        : <ModelLocal>[];
                     return DropDown2(
                       listItem: list,
                       hint: 'Chọn môn học',
                       onChanged: (val) {
-                        monval=int.parse(val.id);
-
+                        monval = int.parse(val.id);
                       },
                       value: mon,
                       validator: (val) {
-                        return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                        return ValidatorApp.checkNull(
+                            text: val, isTextFiled: true);
                       },
                     );
                   },
-
                 ),
                 SizedBox(
                   height: 10,
@@ -269,24 +262,23 @@ class _AddQuestionState extends State<AddQuestion> {
                 ),
                 BlocBuilder(
                   bloc: blocGetClass,
-                 builder: (context,state){
-
-                    final list=state is LoadSuccess? state.data as List<ModelLocal>:<ModelLocal>[];
+                  builder: (context, state) {
+                    final list = state is LoadSuccess
+                        ? state.data as List<ModelLocal>
+                        : <ModelLocal>[];
                     return DropDown2(
                       listItem: list,
                       hint: 'Chọn lớp học',
                       onChanged: (val) {
-
-                      lopval=int.parse(val.id);
-
+                        lopval = int.parse(val.id);
                       },
                       value: lop,
                       validator: (val) {
-                        return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                        return ValidatorApp.checkNull(
+                            text: val, isTextFiled: true);
                       },
                     );
-                 },
-
+                  },
                 ),
                 SizedBox(
                   height: 10,
@@ -348,9 +340,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   keyboardType: TextInputType.multiline,
                   maxline: 6,
                   controller: description,
-
                 ),
-
                 StreamBuilder(
                   stream: imageStream,
                   initialData: imageFiles,
@@ -389,9 +379,9 @@ class _AddQuestionState extends State<AddQuestion> {
                               title: Text("Thêm hình ảnh"),
                               content: Container(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-
                                     IconButton(
                                         onPressed: () {
                                           selectImageGallery();
@@ -410,7 +400,6 @@ class _AddQuestionState extends State<AddQuestion> {
                                           Icons.camera_alt,
                                           size: 50,
                                         ))
-
                                   ],
                                 ),
                               ),

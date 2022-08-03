@@ -8,6 +8,7 @@ Widget itemDrop({
   required String hint,
   dynamic value,
   required Function(dynamic) onChanged,
+  Function(dynamic)? validator,
   required List items,
 }) {
   return Padding(
@@ -26,6 +27,7 @@ Widget itemDrop({
           value: value,
           filled: false,
           colorBorder: ColorApp.grey90,
+          validator: (val) => validator!(val),
         ),
       ],
     ),

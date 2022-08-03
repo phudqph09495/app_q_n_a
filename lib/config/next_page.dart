@@ -11,7 +11,7 @@ class PageNavigator {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => page),
-          (Route<dynamic> route) => false,
+      (Route<dynamic> route) => false,
     );
   }
 }

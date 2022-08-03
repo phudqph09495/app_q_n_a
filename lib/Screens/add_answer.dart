@@ -39,15 +39,13 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   BlocAddAnswer bloc = BlocAddAnswer();
 
   AddAnswerVoid() async {
-
-    if ((answer.text!='')||imageFiles.isNotEmpty) {
+    if ((answer.text != '') || imageFiles.isNotEmpty) {
       bloc.add(addAnsForm(
           user_id: widget.user_id ?? 0,
           question_id: widget.question_id ?? 0,
           answer: answer.text,
           images: imageFiles));
     }
-
   }
 
   selectImageGallery() {
@@ -77,12 +75,11 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
           bloc: bloc,
           listener: (_, StateBloc state) {
             CheckLogState.check(context,
-                state: state, msg: "Thêm câu trả lời thành công",isShowMsg: true,
-              success: (){
-               Navigator.pop(context);
-
-             }
-           );
+                state: state,
+                msg: "Thêm câu trả lời thành công",
+                isShowMsg: true, success: () {
+              Navigator.pop(context);
+            });
           },
           child: Button1(
               colorButton: ColorApp.orangeF2,
@@ -92,7 +89,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
               style: false,
               border: Border.all(color: ColorApp.orangeF2, width: 0.5),
               textButton: 'Viết câu trả lời',
-              ontap:AddAnswerVoid),
+              ontap: AddAnswerVoid),
         ),
       ),
       backgroundColor: ColorApp.whiteF7,
@@ -120,7 +117,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Form(
-            key:keyForm,
+            key: keyForm,
             child: Column(
               children: [
                 const SizedBox(
@@ -143,7 +140,6 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
                     return buildImage();
                   },
                 ),
-
               ],
             ),
           ),

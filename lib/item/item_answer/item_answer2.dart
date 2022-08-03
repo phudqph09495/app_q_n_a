@@ -16,37 +16,36 @@ import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 
-
-
 class AnswerCard extends StatefulWidget {
   String avatar;
   String user;
   String time;
   String answer;
-  List<dynamic> imageFileList ;
+  List<dynamic> imageFileList;
   Widget imageAns;
   int status;
   var value;
-Function()? comment;
+  Function()? comment;
   var groupValue;
   ValueChanged? onchanged;
   Widget? title;
   Widget IconReport;
-Function()? report;
+  Function()? report;
   AnswerCard(
       {required this.time,
       required this.user,
       required this.avatar,
       required this.answer,
-        required this.imageAns ,
+      required this.imageAns,
       this.status = 0,
       this.value,
       this.groupValue,
       this.onchanged,
-        this.comment,
-        required this.IconReport,
-required this.imageFileList,
-      this.title,this.report});
+      this.comment,
+      required this.IconReport,
+      required this.imageFileList,
+      this.title,
+      this.report});
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
@@ -56,8 +55,7 @@ class _AnswerCardState extends State<AnswerCard> {
   @override
   Widget build(BuildContext context) {
     if ((widget.status == 0) || (widget.status == 1) || (widget.status == 2)) {
-      return
-        InkWell(
+      return InkWell(
         onTap: () {
           if (widget.status == 0) {
             showPlatformDialog(
@@ -101,14 +99,12 @@ class _AnswerCardState extends State<AnswerCard> {
               ),
             );
           } else if (widget.status == 2) {
-
             setState(() {
               widget.status = 3;
             });
           }
         },
-        child:
-        Card(
+        child: Card(
           color: ColorApp.whiteF7,
           child: Padding(
             padding: EdgeInsets.all(8),
@@ -123,7 +119,7 @@ class _AnswerCardState extends State<AnswerCard> {
       );
     } else {
       return InkWell(
-        onTap:widget.comment,
+        onTap: widget.comment,
         child: Card(
           color: ColorApp.whiteF7,
           child: Padding(
@@ -133,8 +129,8 @@ class _AnswerCardState extends State<AnswerCard> {
               children: [
                 Text(
                   'Trả lời',
-                  style:
-                      StyleApp.textStyle700(fontSize: 20, color: ColorApp.black),
+                  style: StyleApp.textStyle700(
+                      fontSize: 20, color: ColorApp.black),
                 ),
                 Row(
                   children: [
@@ -160,7 +156,9 @@ class _AnswerCardState extends State<AnswerCard> {
                     ),
                   ],
                 ),
-     SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 ReadMoreText(
                   widget.answer,
                   trimLines: 2,
@@ -168,12 +166,12 @@ class _AnswerCardState extends State<AnswerCard> {
                   trimMode: TrimMode.Line,
                   trimCollapsedText: 'Hiện thêm',
                   trimExpandedText: 'Thu gọn',
-                  style:
-                      StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
+                  style: StyleApp.textStyle500(
+                      fontSize: 16, color: ColorApp.black),
                 ),
-                ( widget.imageFileList.isNotEmpty)
-                    ? widget.imageAns:SizedBox(),
-
+                (widget.imageFileList.isNotEmpty)
+                    ? widget.imageAns
+                    : SizedBox(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -193,8 +191,8 @@ class _AnswerCardState extends State<AnswerCard> {
                           title: (widget.value == widget.groupValue)
                               ? Text(
                                   'Đã trả tiền',
-                                  style:
-                                      StyleApp.textStyle500(color: Colors.green),
+                                  style: StyleApp.textStyle500(
+                                      color: Colors.green),
                                 )
                               : widget.title,
                           value: widget.value,

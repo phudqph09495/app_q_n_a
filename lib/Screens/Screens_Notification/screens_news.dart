@@ -44,7 +44,8 @@ class ScreensNew extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Image.network('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/770RueHue.jpg/340px-770RueHue.jpg'),
+                Image.network(
+                    'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/770RueHue.jpg/340px-770RueHue.jpg'),
                 const SizedBox(
                   height: 15,
                 ),
@@ -97,7 +98,7 @@ class ScreensNew extends StatelessWidget {
                           child: Text(
                             'A. Lần thứ ba, năm 1960',
                             style: TextStyle(
-                                color:  ColorApp.black00, fontSize: 14),
+                                color: ColorApp.black00, fontSize: 14),
                           ),
                         ),
                       ],
@@ -112,8 +113,7 @@ class ScreensNew extends StatelessWidget {
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
                             'B. Lần thứ hai, năm 1957',
-                            style: TextStyle(
-                                color: Colors.black, fontSize: 14),
+                            style: TextStyle(color: Colors.black, fontSize: 14),
                           ),
                         ),
                       ],
@@ -188,7 +188,7 @@ class ScreensNew extends StatelessWidget {
                           child: Text(
                             'A. Triệu Quốc Đạt, Bà Triệu',
                             style: TextStyle(
-                                color:  ColorApp.black00, fontSize: 14),
+                                color: ColorApp.black00, fontSize: 14),
                           ),
                         ),
                       ],
@@ -203,8 +203,7 @@ class ScreensNew extends StatelessWidget {
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
                             'B. Lê Đại Hành, Lê Lợi',
-                            style: TextStyle(
-                                color: Colors.black, fontSize: 14),
+                            style: TextStyle(color: Colors.black, fontSize: 14),
                           ),
                         ),
                       ],
@@ -279,7 +278,7 @@ class ScreensNew extends StatelessWidget {
                           child: Text(
                             'A. Ngày 09/5/2019 ( Mùng 05 tháng 4 Âm lịch )',
                             style: TextStyle(
-                                color:  ColorApp.black00, fontSize: 14),
+                                color: ColorApp.black00, fontSize: 14),
                           ),
                         ),
                       ],
@@ -294,8 +293,7 @@ class ScreensNew extends StatelessWidget {
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
                             'B. Ngày 08/5/2019 ( Mùng 04 tháng 4 Âm lịch )',
-                            style: TextStyle(
-                                color: Colors.black, fontSize: 14),
+                            style: TextStyle(color: Colors.black, fontSize: 14),
                           ),
                         ),
                       ],
@@ -367,7 +365,7 @@ class ScreensNew extends StatelessWidget {
                           child: Text(
                             'A. Lê Chủ',
                             style: TextStyle(
-                                color:  ColorApp.black00, fontSize: 14),
+                                color: ColorApp.black00, fontSize: 14),
                           ),
                         ),
                       ],
@@ -382,8 +380,7 @@ class ScreensNew extends StatelessWidget {
                           padding: EdgeInsets.only(left: 5),
                           child: Text(
                             'B. Đặng Thai Mai',
-                            style: TextStyle(
-                                color: Colors.black, fontSize: 14),
+                            style: TextStyle(color: Colors.black, fontSize: 14),
                           ),
                         ),
                       ],

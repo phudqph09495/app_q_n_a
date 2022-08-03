@@ -6,7 +6,11 @@ class RadioTile extends StatefulWidget {
   var groupValue;
   String title;
   ValueChanged onChange;
-  RadioTile({this.index, this.groupValue, required this.title, required this.onChange});
+  RadioTile(
+      {this.index,
+      this.groupValue,
+      required this.title,
+      required this.onChange});
   @override
   State<RadioTile> createState() => _RadioTileState();
 }
@@ -20,9 +24,12 @@ class _RadioTileState extends State<RadioTile> {
       dense: true,
       toggleable: true,
       value: widget.index,
-      title: Text(widget.title,style: StyleApp.textStyle500(fontSize: 13.5),),
+      title: Text(
+        widget.title,
+        style: StyleApp.textStyle500(fontSize: 13.5),
+      ),
       groupValue: widget.groupValue,
-      onChanged: widget.onChange
-      ,);
+      onChanged: widget.onChange,
+    );
   }
 }

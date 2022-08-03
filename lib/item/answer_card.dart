@@ -12,8 +12,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 
-
-
 class AnswerWidget extends StatefulWidget {
   String avatar;
   String user;
@@ -89,7 +87,6 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                 ),
                 widget.type
                     ? Button1(
-
                         ontap: () {
                           Toast.show("Lưu thành công", gravity: Toast.bottom);
                           Navigator.push(
@@ -160,9 +157,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                         border:
                             Border.all(color: ColorApp.orangeF2, width: 0.5),
                         textButton: 'Bình luận',
-                        ontap: () {
-
-                        },
+                        ontap: () {},
                       )
                     ],
                   ),

@@ -12,7 +12,6 @@ import 'path/share_pref_path.dart';
 import 'share_pref.dart';
 
 class Const {
-
   static final ConvertPrice = NumberFormat("#,##0.##", "vi");
 
   static const image_host = 'http://hoidap.nanoweb.vn/static';
@@ -25,20 +24,27 @@ class Const {
 
   static const int debug = 1;
 
-  static checkLogin(BuildContext context,{required Function nextPage}) async {
+  static checkLogin(BuildContext context, {required Function nextPage}) async {
     bool isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
-    if(isLogin){
+    if (isLogin) {
       nextPage();
-    }else{
-     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ));
     }
-
   }
 
   static formatTime(int time, {String? format}) {
+    if (time == 0) {
+      return "Chưa cập nhật";
+    }
     var check = isNumeric(time.toString());
     if (check) {
-      return DateFormat(format ?? 'dd/MM/yyyy', 'en_US').format(DateTime.fromMillisecondsSinceEpoch(time));
+      return DateFormat(format ?? 'dd/MM/yyyy', 'en_US')
+          .format(DateTime.fromMillisecondsSinceEpoch(time));
     }
     return '';
   }
@@ -58,7 +64,6 @@ class Const {
   }
 
   static checkStatusOrder(int index) {
-
     List status = [
       "Tạo mới",
       "Hủy",
@@ -75,8 +80,8 @@ class Const {
   }
 
   static convertPrice(
-      dynamic price,
-      ) {
+    dynamic price,
+  ) {
     var res = isNumeric(price.toString());
     if (res) {
       return ConvertPrice.format(double.parse(price.toString())).toString();
@@ -84,7 +89,9 @@ class Const {
     return "0";
   }
 
-  static String formatPrice(dynamic price, ) {
+  static String formatPrice(
+    dynamic price,
+  ) {
     double key = 0;
     var check = isNumeric(price.toString());
     if (check) {
@@ -110,7 +117,8 @@ class Const {
     return formatCurrency2;
   }
 
-  static convertPhone(String? phone, {bool check = false, bool isHint = false}) {
+  static convertPhone(String? phone,
+      {bool check = false, bool isHint = false}) {
     if (phone == "null" || phone == "" || phone == null) {
       if (check) {
         return "";
@@ -118,7 +126,7 @@ class Const {
       return "Chưa cập nhật";
     }
 
-    if(isHint){
+    if (isHint) {
       return "${phone.substring(0, 4)}***${phone.substring(7, 10)}";
     }
 
@@ -126,14 +134,14 @@ class Const {
   }
 
   static convertContact(
-      String? value,
-      ) {
+    String? value,
+  ) {
     if (value != null) {
       String data = value.replaceAll(" ", '');
       String data1 = data.replaceAll("-", '');
       String data2 = data1.replaceAll("+", '');
-      if(data2.startsWith("84")){
-        return "0${data2.substring(2,data2.length)}";
+      if (data2.startsWith("84")) {
+        return "0${data2.substring(2, data2.length)}";
       }
       return data2;
     }
@@ -142,11 +150,11 @@ class Const {
 
   static checkStringNull(String? text,
       {bool checkReturn = false,
-        bool checkAddress = false,
-        bool checkPrice = false}) {
+      bool checkAddress = false,
+      bool checkPrice = false}) {
     if (text == "null" || text == null || text == "") {
       if (!checkReturn) {
-        if (checkAddress ) {
+        if (checkAddress) {
           return "";
         }
         if (checkPrice) {
@@ -163,7 +171,7 @@ class Const {
     return text;
   }
 
-  static  double convertNumber(dynamic data) {
+  static double convertNumber(dynamic data) {
     var res = isNumeric(data.toString());
     if (res) {
       return double.parse(data.toString());
@@ -188,20 +196,19 @@ class Const {
   }
 
   static bool isNumeric(String result) {
-    if(result.toString() == "null"){
+    if (result.toString() == "null") {
       return false;
     }
-    try{
+    try {
       double.parse(result.toString());
       return true;
-    }catch (e){
+    } catch (e) {
       return false;
     }
   }
 
   static checkTime(int timestamp) {
-
-    if(timestamp == 0){
+    if (timestamp == 0) {
       return "";
     }
     DateTime _timeDate = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
@@ -218,13 +225,11 @@ class Const {
     //.toCustomTimeElapsed(customDate)
 
     timestr = TimeElapsed.fromDateTime(_timeDate);
-    if(timestr == "Now") {
+    if (timestr == "Now") {
       return "vừa xong";
     }
     String key = timestr.substring(timestr.length - 1, timestr.length);
     String text = timestr.substring(0, timestr.length - 1);
-
-
 
     switch (key) {
       case "s":
@@ -236,10 +241,10 @@ class Const {
       case "d":
         return "$text ngày trước";
       case "w":
-        if(int.parse(text) >= 52){
+        if (int.parse(text) >= 52) {
           return "${(int.parse(text) / 52).round()} năm trước";
         }
-        if(int.parse(text) >= 4){
+        if (int.parse(text) >= 4) {
           return "${(int.parse(text) / 4).round()} tháng trước";
         }
         return "$text tuần trước";
@@ -273,6 +278,3 @@ extension HexColor on Color {
       '${green.toRadixString(16).padLeft(2, '0')}'
       '${blue.toRadixString(16).padLeft(2, '0')}';
 }
-
-
-

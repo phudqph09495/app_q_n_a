@@ -27,11 +27,10 @@ class Filter extends StatefulWidget {
 
 class _FilterState extends State<Filter> {
   BlocGetClass blocGetClass = BlocGetClass()..add(GetData());
-BlocGetSub blocGetSub=BlocGetSub()..add(GetData());
-BlocGetCat blocGetCat=BlocGetCat()..add(GetData());
+  BlocGetSub blocGetSub = BlocGetSub()..add(GetData());
+  BlocGetCat blocGetCat = BlocGetCat()..add(GetData());
 
-
-BlocGetQuestion blocGetQuestion=BlocGetQuestion();
+  BlocGetQuestion blocGetQuestion = BlocGetQuestion();
   Map req = new Map();
   String? theloai;
   String? lophoc;
@@ -42,18 +41,17 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
 
   GetData getQuestionHome = GetData();
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         bottomSheet: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-          child:
-          BlocListener(
+          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+          child: BlocListener(
             bloc: blocGetQuestion,
-            listener: (_,StateBloc state){
-              CheckLogState.check(context, state: state,isShowMsg: false,success: (){
+            listener: (_, StateBloc state) {
+              CheckLogState.check(context, state: state, isShowMsg: false,
+                  success: () {
                 context.read<BlocGetQuestion>().add(getQuestionHome);
                 Navigator.pop(context);
               });
@@ -63,33 +61,27 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
                 fontSize: 18,
                 radius: 30,
                 ontap: () {
-                  if(lopval != null){
+                  if (lopval != null) {
                     getQuestionHome.class_id = lopval;
                   }
-                  if(monval != null){
+                  if (monval != null) {
                     getQuestionHome.subject_id = monval;
                   }
-                  if(catval != null){
-                    getQuestionHome.cat_id =  catval;
+                  if (catval != null) {
+                    getQuestionHome.cat_id = catval;
                   }
 
-                  if(theloai!=''){
-                    getQuestionHome.keySearch=theloai;
+                  if (theloai != '') {
+                    getQuestionHome.keySearch = theloai;
                   }
-                  if(monhoc!=''){
-                    getQuestionHome.keySearch1=monhoc;
+                  if (monhoc != '') {
+                    getQuestionHome.keySearch1 = monhoc;
                   }
-                  if(lophoc!=''){
-                    getQuestionHome.keySearch2=lophoc;
+                  if (lophoc != '') {
+                    getQuestionHome.keySearch2 = lophoc;
                   }
 
-blocGetQuestion.add(getQuestionHome);
-
-
-
-
-
-
+                  blocGetQuestion.add(getQuestionHome);
                   // Navigator.pop(context);
                 },
                 colorButton: ColorApp.orangeF2,
@@ -122,11 +114,15 @@ blocGetQuestion.add(getQuestionHome);
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               BlocBuilder(
                 bloc: blocGetCat,
                 builder: (context, state) {
-                  final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
+                  final list = state is LoadSuccess
+                      ? state.data as List<ModelLocal>
+                      : <ModelLocal>[];
                   return FilterList2(
                     value: catval,
                     title: '  Trạng thái câu hỏi',
@@ -135,12 +131,11 @@ blocGetQuestion.add(getQuestionHome);
                     list: list,
                     onChanged: (val) {
                       catval = val;
-                      for(ModelLocal element in list){
-                        if(element.id.toString() == val.toString()){
+                      for (ModelLocal element in list) {
+                        if (element.id.toString() == val.toString()) {
                           theloai = element.name;
                         }
                       }
-
                     },
                   );
                 },
@@ -149,25 +144,26 @@ blocGetQuestion.add(getQuestionHome);
                 height: 15,
               ),
               BlocBuilder(
-                 bloc: blocGetClass,
-                 builder: (context, state) {
-                   final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
-                   return FilterList2(
-                     value: lopval,
-                     title: '  Lớp học',
-                     column: 3,
-                     list: list,
-                     onChanged: (val) {
-                       lopval = val;
-                       for(ModelLocal element in list){
-                         if(element.id.toString() == val.toString()){
-                           monhoc = element.name;
-                         }
-                       }
-
-                     },
-                   );
-                 },
+                bloc: blocGetClass,
+                builder: (context, state) {
+                  final list = state is LoadSuccess
+                      ? state.data as List<ModelLocal>
+                      : <ModelLocal>[];
+                  return FilterList2(
+                    value: lopval,
+                    title: '  Lớp học',
+                    column: 3,
+                    list: list,
+                    onChanged: (val) {
+                      lopval = val;
+                      for (ModelLocal element in list) {
+                        if (element.id.toString() == val.toString()) {
+                          monhoc = element.name;
+                        }
+                      }
+                    },
+                  );
+                },
               ),
               const SizedBox(
                 height: 15,
@@ -175,7 +171,9 @@ blocGetQuestion.add(getQuestionHome);
               BlocBuilder(
                 bloc: blocGetSub,
                 builder: (context, state) {
-                  final list  = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
+                  final list = state is LoadSuccess
+                      ? state.data as List<ModelLocal>
+                      : <ModelLocal>[];
                   return FilterList2(
                     value: lopval,
                     title: '  Môn học',
@@ -183,12 +181,11 @@ blocGetQuestion.add(getQuestionHome);
                     list: list,
                     onChanged: (val) {
                       monval = val;
-                      for(ModelLocal element in list){
-                        if(element.id.toString() == val.toString()){
+                      for (ModelLocal element in list) {
+                        if (element.id.toString() == val.toString()) {
                           lophoc = element.name;
                         }
                       }
-
                     },
                   );
                 },

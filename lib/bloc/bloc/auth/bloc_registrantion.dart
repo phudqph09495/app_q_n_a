@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_q_n_a/config/api.dart';
 import '../../event_bloc.dart';
 
-
 class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
   BlocRegistrantion() : super(StateBloc());
 
@@ -18,30 +17,27 @@ class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
-        req['email']=event.email;
-        req['username']=event.username;
+        req['email'] = event.email;
+        req['username'] = event.username;
         req['phone'] = event.phone;
         req['register_by'] = event.register_by;
         req['password'] = event.password;
         Map<String, dynamic> req1 = Map();
         req1['SignupForm'] = req;
 
-        var res =
-        await Api.postAsync(endPoint: ApiPath.signin, req: req1);
+        var res = await Api.postAsync(endPoint: ApiPath.signin, req: req1);
 
-        if(res['code'] == 1){
+        if (res['code'] == 1) {
           ModelUser model = ModelUser.fromJson(res['data']);
           yield LoadSuccess(
             data: model,
           );
-        }else{
+        } else {
           yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }
-      }
-      on DioError catch (e) {
+      } on DioError catch (e) {
         yield LoadFail(error: e.error);
-      }
-      catch (e) {
+      } catch (e) {
         yield LoadFail(error: e.toString());
       }
     }

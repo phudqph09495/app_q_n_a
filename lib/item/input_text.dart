@@ -53,7 +53,7 @@ class _InputTextState extends State<InputText> {
       height: widget.height,
       width: widget.width,
       child: TextFormField(
-onFieldSubmitted: widget.onSubmit,
+        onFieldSubmitted: widget.onSubmit,
         textInputAction: widget.action,
         style: StyleApp.textStyle500(color: widget.textColor),
         onTap: widget.deadline,
@@ -77,9 +77,7 @@ onFieldSubmitted: widget.onSubmit,
         },
         decoration: InputDecoration(
             suffixIcon: widget.iconS
-                ? InkWell(
-                    onTap: widget.iconPress,
-                    child: widget.suffixIcon!)
+                ? InkWell(onTap: widget.iconPress, child: widget.suffixIcon!)
                 : null,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -106,7 +104,7 @@ onFieldSubmitted: widget.onSubmit,
               // borderSide:
               // const BorderSide(color: ColorApp.black, width: 2),
             ),
-            contentPadding: EdgeInsets.only(left: 33,top: 15,right: 20),
+            contentPadding: EdgeInsets.only(left: 33, top: 15, right: 20),
             hintText: widget.hint,
             hintStyle: StyleApp.textStyle400(color: widget.colorhint)),
         onChanged: (val) {

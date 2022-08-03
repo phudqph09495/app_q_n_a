@@ -103,7 +103,6 @@ class NguoiHoi extends StatelessWidget {
                                 style: StyleApp.textStyle400(
                                     fontSize: 12, color: ColorApp.grey82),
                               ),
-
                               Text(
                                 time,
                                 overflow: TextOverflow.ellipsis,

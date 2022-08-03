@@ -62,14 +62,16 @@ class UserManual extends StatelessWidget {
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children:  [
+                    children: [
                       Padding(
                         padding:
                             EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                         child: TextButton(
-                          onPressed: (){
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => UserTitle()));
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => UserTitle()));
                           },
                           child: Text(
                             'HƯỚNG DẪN TĂNG ĐIỂM',

@@ -12,18 +12,16 @@ class LoadSuccess extends StateBloc {
   bool hasMore;
   bool checkLength;
 
-
-  LoadSuccess(
-      {this.data,
-      this.hasMore = false,
-      this.checkLength = false,
-      this.code,
-      this.keySearch,
-      this.mess,
-      this.keySearch1,
-      this.keySearch2,
-
-     });
+  LoadSuccess({
+    this.data,
+    this.hasMore = false,
+    this.checkLength = false,
+    this.code,
+    this.keySearch,
+    this.mess,
+    this.keySearch1,
+    this.keySearch2,
+  });
 }
 
 class LoadFail extends StateBloc {

@@ -64,7 +64,6 @@ class _AnswerScreenState extends State<AnswerScreen> {
   bool timing = true;
   late int userStatus;
 
-
   int userid = Body.id;
   BlocGetAnswer bloc = BlocGetAnswer();
   BlocReport blocReport = BlocReport();
@@ -85,22 +84,20 @@ class _AnswerScreenState extends State<AnswerScreen> {
     blocGoodAnswer.add(goodAns(user_id: Body.id, answer_id: goodid));
   }
 
-  getAnswerStatus(){
-    if(timing==true){
-      answerStatus=userStatus;
+  getAnswerStatus() {
+    if (timing == true) {
+      answerStatus = userStatus;
     }
 
-    if((timing==false)&&(userStatus==0)){
-      answerStatus=userStatus;
+    if ((timing == false) && (userStatus == 0)) {
+      answerStatus = userStatus;
     }
-    if((timing==false)&&(userStatus!=0)){
-      answerStatus=3;
+    if ((timing == false) && (userStatus != 0)) {
+      answerStatus = 3;
     }
   }
 
   Future<void> onRefresh() async {
-
-
     if (userid == 0) {
       userStatus = 0;
     } else if (userid !=
@@ -127,7 +124,6 @@ class _AnswerScreenState extends State<AnswerScreen> {
     onRefresh();
   }
 
-
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
@@ -136,7 +132,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
       builder: (_, state) {
 
         if (state is LoadSuccess) {
-       final list = state.data as ModelAnswer;
+          final list = state.data as ModelAnswer;
 
           return RefreshIndicator(
             onRefresh: onRefresh,
@@ -279,8 +275,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                           return AnswerCard(
                             imageFileList: list.answer?[index].images ?? [],
 
-
-                            status:answerStatus,
+                            status: answerStatus,
                             //trạng thái của câu trả lời
                             //0: chưa đăng nhập
                             //1: không phải chủ câu hỏi
@@ -434,13 +429,13 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => CommentScreen(
-                                        answerind: index,
-                                        user_id: Body.id,
+                                          answerind: index,
+                                          user_id: Body.id,
                                           quesID: list.question?.id ?? 0,
                                           parent_id: int.parse(
                                               (list.answer?[index].id) ?? ''),
-                                          item: list.answer?[index].items??[]
-                                      )));
+                                          item: list.answer?[index].items ??
+                                              [])));
                             },
                           );
                         },

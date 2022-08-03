@@ -17,7 +17,8 @@ class NguoiHoiList extends StatelessWidget {
             //     MaterialPageRoute(builder: (context) => ViTien()));
           },
           name: "Trần thanh",
-          titleMoney: 'Bạn là người trả lời chính xác nhất', time: ' 7h30p  28/06/2022',
+          titleMoney: 'Bạn là người trả lời chính xác nhất',
+          time: ' 7h30p  28/06/2022',
         ),
       ),
     );

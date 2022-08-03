@@ -23,18 +23,17 @@ class _ScreenHomeState extends State<ScreenHome> {
     context.read<BlocCheckLogin>().add(GetData());
     return Scaffold(
       body: BlocBuilder<BlocCheckLogin, StateBloc>(
-        builder: (context, StateBloc state) {
-          final check = state is LoadSuccess ? state.data as bool : false;
-          return IndexedStack(
-            index: index,
-            children: [
-              HomeScreen(),
-              Notificationbar(),
-              check ? BodyProduct() : LoginScreen(),
-            ],
-          );
-        }
-      ),
+          builder: (context, StateBloc state) {
+        final check = state is LoadSuccess ? state.data as bool : false;
+        return IndexedStack(
+          index: index,
+          children: [
+            HomeScreen(),
+            Notificationbar(),
+            check ? BodyProduct() : LoginScreen(),
+          ],
+        );
+      }),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (val) {
           index = val;

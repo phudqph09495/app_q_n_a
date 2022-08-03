@@ -1,4 +1,4 @@
-class ImagePath{
+class ImagePath {
   static const bgAppBar = "assets/images/image_bg.png";
   static const logo = "images/home.png";
   static const logo_lending = "assets/images/Group 8207.png";
@@ -12,5 +12,4 @@ class ImagePath{
   static const scanqrv = "assets/images/qr-code.png";
   static const sendV = "assets/images/Group 596.png";
   static const scanQR = "assets/images/Group.png";
-
 }

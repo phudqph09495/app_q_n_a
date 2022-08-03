@@ -1,16 +1,22 @@
 import 'dart:io';
 import 'package:app_q_n_a/Screens/login.dart';
+import 'package:app_q_n_a/bloc/bloc/wallet/bloc_add_money.dart';
+import 'package:app_q_n_a/bloc/bloc/wallet/bloc_site_info.dart';
+import 'package:app_q_n_a/bloc/bloc/wallet/price_by_coin.dart';
+import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/item/input/text_filed3.dart';
+import 'package:app_q_n_a/models/model_site_info.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../bloc/bloc/auth/bloc_nganHang.dart';
 import '../../bloc/event_bloc.dart';
 import '../../bloc/state_bloc.dart';
+import '../../config/const.dart';
 import '../../item/button.dart';
 import '../../models/model_taonganhang.dart';
 
@@ -23,22 +29,11 @@ class NapTien extends StatefulWidget {
 
 class _NapTienState extends State<NapTien> {
   TextEditingController Money = TextEditingController();
-  BlocNganHang blocNganHang = BlocNganHang()..add(getTaoNganHang());
   final ImagePicker _picker = ImagePicker();
-  List<XFile>? _imageFileList = [];
-  Future selectImageCamera() async {
-    final image = await _picker.pickImage(source: ImageSource.camera);
-    if (image == null) return;
-    _imageFileList?.add(image);
-    setState(() {});
-  }
-  Future selectImageGallery() async {
-    final image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image == null) return;
-    _imageFileList?.add(image);
-    setState(() {});
-  }
-
+  XFile? image;
+  PriceByCoin priceByCoin = PriceByCoin();
+  BlocSiteInfo blocSiteInfo = BlocSiteInfo()..add(GetData());
+  BlocAddMoney blocAddMoney = BlocAddMoney();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,216 +55,162 @@ class _NapTienState extends State<NapTien> {
           ),
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: BlocListener(
+          bloc: blocAddMoney,
+          listener: (_, StateBloc state) {
+            CheckLogState.check(context, state: state, success: () {
+              image = null;
+              Money.clear();
+              setState(() {});
+            });
+          },
+          child: Button1(
+            border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+            colorButton: ColorApp.orangeF2,
+            textColor: Colors.white,
+            textButton: 'Xác nhận',
+            radius: 5,
+            fontSize: 18,
+            style: false,
+            ontap: () {
+              if (Money.text.isNotEmpty && image != null) {
+                blocAddMoney.add(GetData());
+              } else {
+                DialogItem.showMsg(
+                    context: context,
+                    title: "Lỗi",
+                    msg:
+                        "Vui lòng nhập số tiền nạp và ảnh xác thực giao dịch thành công từ ngân hàng");
+              }
+            },
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Tỷ lệ chuyển đổi',
-                    style: TextStyle(color: Colors.black, fontSize: 16),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  InputText3(
-                    keyboardType: TextInputType.number,
-                    controller: Money,
-                    hint: 'Nhập số tiền cần nạp',
-                    radius: 5,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: const [
+            const Text(
+              'Số tiền nạp',
+              style: TextStyle(color: Colors.black, fontSize: 16),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            InputText3(
+              keyboardType: TextInputType.number,
+              controller: Money,
+              hint: 'Nhập số tiền cần nạp',
+              radius: 5,
+              onChanged: (val) {
+                priceByCoin.getPrice(val.isEmpty ? 0 : int.parse(val));
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            BlocBuilder(
+                bloc: priceByCoin,
+                builder: (context, snapshot) {
+                  return Row(
+                    children: [
                       Text(
                         'Số tiền cần thanh toán:  ',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        style: StyleApp.textStyle400(fontSize: 16),
                       ),
-                      Text(
-                        '10.000đ',
-                        style:
-                        TextStyle(color: ColorApp.orangeF01, fontSize: 16),
+                      Expanded(
+                        child: Text(
+                          '${Const.convertPrice(snapshot)} đ',
+                          style: StyleApp.textStyle700(
+                              fontSize: 16, color: Colors.red),
+                        ),
                       ),
                     ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Card(
+                  );
+                }),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Thông tin thanh toán',
+              style: StyleApp.textStyle400(fontSize: 16),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            BlocBuilder(
+              bloc: blocSiteInfo,
+              builder: (_, StateBloc state) {
+                if (state is LoadSuccess) {
+                  final model = state.data as ModelSiteInfo;
+                  return Card(
                     child: Padding(
-                      padding: EdgeInsets.all(12),
-                      child: BlocBuilder(
-                          bloc: blocNganHang,
-                          builder: (_, state) {
-                            if (state is LoadSuccess) {
-                              final bankk = state.data as ModelNganHang;
-                              return Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        'Ngân hàng: ',
-                                        style: TextStyle(
-                                            color: ColorApp.black,
-                                            fontSize: 14),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(left: 25),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                '${bankk.bankName}',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Divider(
-                                    color: ColorApp.grey82,
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        'Số tài khoản: ',
-                                        style: TextStyle(
-                                            color: ColorApp.black,
-                                            fontSize: 14),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(left: 20),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                '${bankk.number}',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Divider(
-                                    color: ColorApp.grey82,
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        'Chủ tài khoản: ',
-                                        style: TextStyle(
-                                            color: ColorApp.black,
-                                            fontSize: 14),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(left: 25),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                '${bankk.name}',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  // const Divider(
-                                  //   color: ColorApp.grey82,
-                                  // ),
-                                  // Row(
-                                  //   children: [
-                                  //     const Text(
-                                  //       'Chi nhánh: ',
-                                  //       style: TextStyle(
-                                  //           color: ColorApp.black,
-                                  //           fontSize: 14),
-                                  //     ),
-                                  //     Expanded(
-                                  //       child: Padding(
-                                  //         padding: EdgeInsets.only(left: 25),
-                                  //         child: Column(
-                                  //           crossAxisAlignment:
-                                  //           CrossAxisAlignment.end,
-                                  //           children: const [
-                                  //             Text(
-                                  //               '',
-                                  //               style: TextStyle(
-                                  //                   color: Colors.black,
-                                  //                   fontSize: 14),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //   ],
-                                  // ),
-                                ],
-                              );
-                            }
-                            return SizedBox();
-                          }),
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        model.bankAdmin ?? "",
+                        style: StyleApp.textStyle400(fontSize: 16),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  _imageFileList!.isNotEmpty
-                      ? GridView.builder(
-                      itemCount: _imageFileList!.length,
-                      gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Image.file(
-                          File(_imageFileList![index].path),
-                        );
-                      })
-                      : SizedBox(),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Card(
-                    child: _Cammera(),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Button1(
-                    border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                    colorButton: ColorApp.orangeF2,
-                    textColor: Colors.white,
-                    textButton: 'Xác nhận',
-                    radius: 5,
-                    fontSize: 18,
-                    style: false,
-                    ontap: () {
-                    },
+                  );
+                }
+                return const SizedBox();
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            image != null
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.file(
+                      File(image!.path),
+                    ),
+                  )
+                : const SizedBox(),
+            const SizedBox(
+              height: 10,
+            ),
+            Card(
+              margin: EdgeInsets.zero,
+              child: _Cammera(),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _Cammera() {
+    return InkWell(
+      onTap: () async {
+        await _picker
+            .pickImage(source: ImageSource.gallery)
+            .then((value) => image = value);
+        setState(() {});
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.image,
+              size: 30,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Column(
+                children: const [
+                  Text(
+                    'Ảnh giao dịch thàng công trên mobile , hoặc nạp tiền từ ngân hàng',
+                    style: TextStyle(color: ColorApp.black, fontSize: 14),
                   ),
                 ],
               ),
@@ -279,36 +220,4 @@ class _NapTienState extends State<NapTien> {
       ),
     );
   }
-
-Padding _Cammera() {
-  return Padding(
-    padding: EdgeInsets.all(10),
-    child: Row(
-      children: [
-        IconButton(
-          onPressed: () {
-            selectImageGallery();
-          },
-          icon: const Icon(
-            Icons.image,
-            size: 30,
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Expanded(
-          child: Column(
-            children: const [
-              Text(
-                'Ảnh giao dịch thàng công trên mobile , hoặc nạp tiền từ ngân hàng',
-                style: TextStyle(color: ColorApp.black, fontSize: 14),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-}
 }

@@ -12,21 +12,16 @@ class BlocGetSub extends Bloc<EventBloc, StateBloc> {
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
     if (event is GetData) {
-      List<ModelLocal> list  = [];
+      List<ModelLocal> list = [];
       yield Loading();
       try {
         var res = await Api.postAsync(endPoint: ApiPath.getSub, req: {});
         if (res['code'] == 1) {
-          for(var item in res['data']){
-            ModelLocal model = ModelLocal(
-                id: item["id"],
-                name: item['name']
-            );
+          for (var item in res['data']) {
+            ModelLocal model = ModelLocal(id: item["id"], name: item['name']);
             list.add(model);
           }
-          yield LoadSuccess(
-              data: list
-          );
+          yield LoadSuccess(data: list);
         }
       } on DioError catch (e) {
         yield LoadFail(error: e.error ?? "Lỗi kết nối");

@@ -28,18 +28,17 @@ class QuestionCard extends StatefulWidget {
   String imageques;
   Widget image;
   String? countAns;
-  List<dynamic>? imageFileList ;
-  bool save=true;
+  List<dynamic>? imageFileList;
+  bool save = true;
   QuestionCard(
-
       {required this.avatar,
       required this.ques,
       required this.user,
       required this.time,
       this.imageques = '',
-        required this.image,
-        this.imageFileList,
-        this.countAns,
+      required this.image,
+      this.imageFileList,
+      this.countAns,
       required this.endTime});
 
   @override
@@ -83,19 +82,21 @@ class _QuestionCardState extends State<QuestionCard> {
                 ),
                 Button1(
                   ontap: () {
-
-                    setState((){
-                      widget.save=!widget.save;
+                    setState(() {
+                      widget.save = !widget.save;
                     });
-                    Toast.show(widget.save?"Bỏ lưu thành công":"Lưu thành công", gravity: Toast.bottom);
+                    Toast.show(
+                        widget.save ? "Bỏ lưu thành công" : "Lưu thành công",
+                        gravity: Toast.bottom);
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(
                     //         builder: (context) => QuestionSavedSS()));
                   },
-                  colorButton: widget.save?ColorApp.blue6D:ColorApp.orangeF01,
-                  textColor: widget.save?ColorApp.whiteF0:Colors.black,
-                  textButton:widget.save? 'Lưu':'Bỏ lưu',
+                  colorButton:
+                      widget.save ? ColorApp.blue6D : ColorApp.orangeF01,
+                  textColor: widget.save ? ColorApp.whiteF0 : Colors.black,
+                  textButton: widget.save ? 'Lưu' : 'Bỏ lưu',
                   height: 35,
                 )
               ],
@@ -149,16 +150,17 @@ class _QuestionCardState extends State<QuestionCard> {
               trimExpandedText: 'Thu gọn',
               style: StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
             ),
-            widget.imageFileList!.isNotEmpty
-                ?widget.image
-                : SizedBox(),
+            widget.imageFileList!.isNotEmpty ? widget.image : SizedBox(),
             const SizedBox(
               height: 10,
             ),
-            Container(width: double.infinity,
+            Container(
+              width: double.infinity,
               child: Text(
-                'Có ${widget.countAns} câu trả lời',style:
-              StyleApp.textStyle500(color: ColorApp.blue6D),textAlign:TextAlign.end,),
+                'Có ${widget.countAns} câu trả lời',
+                style: StyleApp.textStyle500(color: ColorApp.blue6D),
+                textAlign: TextAlign.end,
+              ),
             ),
           ],
         ),

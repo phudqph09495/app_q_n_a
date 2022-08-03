@@ -1,76 +1,41 @@
-/// id : 7442
-/// username : "qq"
-/// auth_key : "mpUwUP-0ANb7RgpzKBxXPAbZjpd_Krq_"
-/// password_hash : "$2y$13$lhahFiSMkUnInU93xDTNaucv.lvw4QKX.d.EDSgsSQy70gbPoLkca"
-/// password_reset_token : null
-/// phone : "0123456789"
-/// email : "asfa2@gmail.com"
-/// status : 1
-/// created_at : 1657774845
-/// updated_at : 1657774845
-/// address : null
-/// province_id : null
-/// district_id : null
-/// facebook : null
-/// link_facebook : null
-/// type_social : null
-/// id_social : null
-/// is_notification : null
-/// sex : null
-/// birthday : null
-/// image_path : null
-/// image_name : null
-/// avatar_path : null
-/// avatar_name : null
-/// member_privatekey : ""
-/// member_username : ""
-/// last_request_time : null
-/// user_before : null
-/// getfly_id : 0
-/// password_hash2 : null
-/// user_gt_app : 1
-/// verify_email : null
-/// cmt : null
-/// token_otp : null
-/// token_app : "aa1ca14f05538db52fd3e51210f286b636e28e5c"
-
 class ModelUser {
   ModelUser({
-      this.id, 
-      this.username, 
-      this.authKey, 
-      this.passwordHash, 
-      this.passwordResetToken, 
-      this.phone, 
-      this.email, 
-      this.status, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.address, 
-      this.provinceId, 
-      this.districtId, 
-      this.facebook, 
-      this.linkFacebook, 
-      this.typeSocial, 
-      this.idSocial, 
-      this.isNotification, 
-      this.sex, 
-      this.birthday, 
-      this.imagePath, 
-      this.imageName, 
-      this.avatarPath, 
-      this.avatarName, 
-      this.memberPrivatekey, 
-      this.memberUsername, 
-      this.lastRequestTime, 
-      this.userBefore, 
-      this.getflyId, 
-      this.passwordHash2, 
-      this.userGtApp, 
-      this.verifyEmail, 
-      this.cmt,
-      this.tokenOtp, 
-      this.tokenApp,});
+    this.id,
+    this.username,
+    this.authKey,
+    this.passwordHash,
+    this.passwordResetToken,
+    this.phone,
+    this.email,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.address,
+    this.provinceId,
+    this.districtId,
+    this.facebook,
+    this.linkFacebook,
+    this.typeSocial,
+    this.idSocial,
+    this.isNotification,
+    this.sex,
+    this.birthday,
+    this.imagePath,
+    this.imageName,
+    this.avatarPath,
+    this.avatarName,
+    this.memberPrivatekey,
+    this.memberUsername,
+    this.lastRequestTime,
+    this.userBefore,
+    this.getflyId,
+    this.passwordHash2,
+    this.userGtApp,
+    this.verifyEmail,
+    this.cmt,
+    this.tokenOtp,
+    this.tokenApp,
+  });
 
   ModelUser.fromJson(dynamic json) {
     id = json['id'];
@@ -184,5 +149,4 @@ class ModelUser {
     map['token_app'] = tokenApp;
     return map;
   }
-
 }

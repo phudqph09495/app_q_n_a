@@ -43,7 +43,6 @@ class _CommentScreenState extends State<CommentScreen> {
   BlocAddAnswer blocAddAnswer = BlocAddAnswer();
   Future<void> onRefresh() async {
     blocGetAnswer.add(getAns(question_id: widget.quesID));
-
   }
 
   ModelAnswer list = ModelAnswer();
@@ -72,8 +71,9 @@ class _CommentScreenState extends State<CommentScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: BlocListener(
               bloc: blocAddAnswer,
-              listener: (_,StateBloc state){
-                CheckLogState.check(context, state: state,isShowMsg: false,success: (){
+              listener: (_, StateBloc state) {
+                CheckLogState.check(context, state: state, isShowMsg: false,
+                    success: () {
                   onRefresh();
                   reply.clear();
                 });
@@ -118,22 +118,22 @@ class _CommentScreenState extends State<CommentScreen> {
               if (state is LoadSuccess) {
                 list = state.data as ModelAnswer;
                 print(list.answer?[widget.answerind].items?.length);
-                return
-                  SingleChildScrollView(
+                return SingleChildScrollView(
                   reverse: true,
                   child: Padding(
                     padding: EdgeInsets.all(8),
                     child: ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: list.answer?[widget.answerind].items?.length??0,
+                        itemCount:
+                            list.answer?[widget.answerind].items?.length ?? 0,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 15),
                             child: Row(
                               children: [
                                 InkWell(
-                                  onTap: (){
+                                  onTap: () {
                                     //Mở trang cá nhân
                                   },
                                   child: Text(
