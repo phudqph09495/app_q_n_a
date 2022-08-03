@@ -9,8 +9,10 @@ import 'path/share_pref_path.dart';
 final dio = Dio()
   ..interceptors.add(
     InterceptorsWrapper(
-      onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
-        print("#################################### Url: ${options.baseUrl}${options.path}");
+      onRequest:
+          (RequestOptions options, RequestInterceptorHandler handler) async {
+        print(
+            "#################################### Url: ${options.baseUrl}${options.path}");
         // print("#################################### headers: ${options.headers}");
         // print("#################################### request: ${options.data}");
         return handler.next(options);
@@ -25,18 +27,19 @@ final dio = Dio()
             "#################################### error: [${e.response?.statusCode}] >> ${e.response?.data}");
         ModelApiError err = ModelApiError();
         if (e.response == null) {
-          err =  ModelApiError(code: null, error: "Lỗi kết nối");
+          err = ModelApiError(code: null, error: "Lỗi kết nối");
         } else if (e.response?.statusCode == 400) {
-          err = ModelApiError(code: e.response?.statusCode, error: "Lỗi cú pháp");
+          err =
+              ModelApiError(code: e.response?.statusCode, error: "Lỗi cú pháp");
         } else if (e.response?.statusCode == 404) {
           err = ModelApiError(
               code: e.response?.statusCode, error: "Không tìm thấy tài nguyên");
         } else if (e.response?.statusCode == 500) {
-          err =  ModelApiError(
+          err = ModelApiError(
               code: e.response?.statusCode,
               error: "Có lỗi hệ thống, bạn quay lại sau");
-        }else{
-          err =  ModelApiError(
+        } else {
+          err = ModelApiError(
               code: e.response?.statusCode,
               error: e.response?.data['message'] ?? e.message);
         }
@@ -51,11 +54,15 @@ final dio = Dio()
   );
 
 class Api {
-  static postAsync({required String endPoint, required Map<String, dynamic> req, bool isToken = true, bool hasForm = true}) async {
+  static postAsync(
+      {required String endPoint,
+      required Map<String, dynamic> req,
+      bool isToken = true,
+      bool hasForm = true}) async {
     try {
       Map<String, dynamic> headers = Map();
       headers['Content-Type'] = "application/json";
-      if(isToken){
+      if (isToken) {
         var token = await SharedPrefs.readString(SharePrefsKeys.user_token);
         headers['token'] = token;
       }
@@ -64,8 +71,7 @@ class Api {
         req['user_id'] = user_id;
       }
       FormData formData = FormData.fromMap(req);
-      var res = await dio
-          .post(
+      var res = await dio.post(
         Const.api_host + endPoint,
         data: hasForm ? formData : req,
         options: Options(
@@ -73,24 +79,27 @@ class Api {
         ),
       );
       return res.data;
-    }  catch (e) {
+    } catch (e) {
       rethrow;
     }
   }
-  static getAsync({required String endPoint, bool isToken = true, String? tokenStart}) async {
+
+  static getAsync(
+      {required String endPoint,
+      bool isToken = true,
+      String? tokenStart}) async {
     try {
       Map<String, dynamic> headers = Map();
       headers['Content-Type'] = "application/json";
 
-      if(isToken){
+      if (isToken) {
         var token = await SharedPrefs.readString(SharePrefsKeys.user_token);
         headers['token'] = token;
       }
-      if(tokenStart != null){
+      if (tokenStart != null) {
         headers['token'] = tokenStart;
       }
-      var res = await dio
-          .get(
+      var res = await dio.get(
         Const.api_host + endPoint,
         options: Options(
           headers: headers,
@@ -101,16 +110,16 @@ class Api {
       rethrow;
     }
   }
+
   static deleteAsync({required String endPoint, String? token}) async {
     try {
       Map<String, dynamic> headers = Map();
       headers['Content-Type'] = "application/json";
 
-      if(token != null){
+      if (token != null) {
         headers['Authorization'] = "Bearer $token";
       }
-      var res = await dio
-          .delete(
+      var res = await dio.delete(
         Const.api_host + endPoint,
         options: Options(
           headers: headers,

@@ -12,18 +12,17 @@ class BlocGetWallet extends Bloc<EventBloc, StateBloc> {
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
-    if (event is getViTien) {
+    if (event is GetData) {
       yield Loading();
       try {
-        Map<String, dynamic> req = Map();
-        req['user_id'] = event.user_id;
-        req['cat_id'] = event.cat_id;
-        var res=await Api.postAsync(endPoint: ApiPath.getWallet, req: req);
-        print(res);
+        var res = await Api.postAsync(endPoint: ApiPath.getWallet, req: {});
+
         if (res['code'] == 1) {
           yield LoadSuccess(
-              data:Const.convertNumber( res['data']['wallet']).round(),
+            data: Const.convertNumber(res['data']['wallet']).round(),
           );
+        } else {
+          yield LoadFail(error: res['error'] ?? "Lỗi kết nối");
         }
       } on DioError catch (e) {
         yield LoadFail(error: e.error ?? "Lỗi kết nối");

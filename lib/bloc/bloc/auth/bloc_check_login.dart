@@ -5,8 +5,8 @@ import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BlocCheckLogin extends Bloc<EventBloc, StateBloc>{
-  BlocCheckLogin(): super(StateBloc());
+class BlocCheckLogin extends Bloc<EventBloc, StateBloc> {
+  BlocCheckLogin() : super(StateBloc());
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
@@ -25,5 +25,4 @@ class BlocCheckLogin extends Bloc<EventBloc, StateBloc>{
       }
     }
   }
-
 }

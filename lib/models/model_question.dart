@@ -1,28 +1,29 @@
 class ModelQuestion {
   ModelQuestion({
-      this.id, 
-      this.question, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.catId, 
-      this.status, 
-      this.userId, 
-      this.isComplete, 
-      this.description, 
-      this.deadline, 
-      this.isImage, 
-      this.classId, 
-      this.subjectId, 
-      this.price, 
-      this.priceGift, 
-      this.username, 
-      this.avatarPath, 
-      this.avatarName, 
-      this.className, 
-      this.subjectName, 
-      this.countImages, 
-      this.countAnswer, 
-      this.userCountQuestion,});
+    this.id,
+    this.question,
+    this.createdAt,
+    this.updatedAt,
+    this.catId,
+    this.status,
+    this.userId,
+    this.isComplete,
+    this.description,
+    this.deadline,
+    this.isImage,
+    this.classId,
+    this.subjectId,
+    this.price,
+    this.priceGift,
+    this.username,
+    this.avatarPath,
+    this.avatarName,
+    this.className,
+    this.subjectName,
+    this.countImages,
+    this.countAnswer,
+    this.userCountQuestion,
+  });
 
   ModelQuestion.fromJson(dynamic json) {
     id = json['id'];
@@ -100,5 +101,4 @@ class ModelQuestion {
     map['user_count_question'] = userCountQuestion;
     return map;
   }
-
 }

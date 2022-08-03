@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/config/path/image_path.dart';
+import 'package:app_q_n_a/path/image_path.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +12,9 @@ class LoadImage extends StatefulWidget {
   double height;
   BoxFit fit;
   Alignment alignment;
-bool ans;
+  bool ans;
   LoadImage({
-this.ans=true,
+    this.ans = true,
     required this.url,
     this.height = double.infinity,
     this.width = double.infinity,
@@ -25,7 +27,6 @@ this.ans=true,
 }
 
 class _LoadImageState extends State<LoadImage> {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -54,19 +55,21 @@ class _LoadImageState extends State<LoadImage> {
         );
       },
       errorBuilder: (context, error, stackTrace) {
-        return widget.ans? Container(
-          width: widget.width,
-          height: widget.height,
-          color: Colors.white,
-          child: Center(
-            child: Image.asset(
-              "images/default.png",
-              width: widget.width,
-              height: widget.height,
-              fit: widget.fit,
-            ),
-          ),
-        ):SizedBox();
+        return widget.ans
+            ? Container(
+                width: widget.width,
+                height: widget.height,
+                color: Colors.white,
+                child: Center(
+                  child: Image.asset(
+                    ImagesPath.imageDefult,
+                    width: widget.width,
+                    height: widget.height,
+                    fit: widget.fit,
+                  ),
+                ),
+              )
+            : SizedBox();
       },
     );
   }

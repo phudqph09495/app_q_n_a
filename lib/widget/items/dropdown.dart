@@ -8,6 +8,7 @@ class DropDown1 extends StatefulWidget {
   dynamic value;
   bool filled;
   ValueChanged onChanged;
+  Function(dynamic)? validator;
   double radius;
   Color? colorBorder;
 
@@ -19,6 +20,7 @@ class DropDown1 extends StatefulWidget {
     this.filled = true,
     this.radius = 5,
     this.colorBorder,
+    this.validator,
   });
 
   @override
@@ -26,7 +28,6 @@ class DropDown1 extends StatefulWidget {
 }
 
 class _DropDown1State extends State<DropDown1> {
-
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -38,23 +39,50 @@ class _DropDown1State extends State<DropDown1> {
       style: StyleApp.textStyle400(),
       hint: Align(
         alignment: Alignment.centerLeft,
-        child: Text(widget.hint, style: StyleApp.textStyle400(color: ColorApp.blue3D),),
+        child: Text(
+          widget.hint,
+          style: StyleApp.textStyle400(color: ColorApp.blue3D),
+        ),
       ),
+      validator: (val) {
+        if (widget.validator != null) {
+          return widget.validator!(val);
+        }
+      },
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:  BorderSide(color: widget.colorBorder ?? ColorApp.orangeF01.withOpacity(0.5), width: 1),
+            borderSide: BorderSide(
+                color:
+                    widget.colorBorder ?? ColorApp.orangeF01.withOpacity(0.5),
+                width: 1),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius:  BorderRadius.circular(widget.radius),
-            borderSide: BorderSide(color: widget.colorBorder ?? ColorApp.orangeF01.withOpacity(0.5), width: 1),
+            borderRadius: BorderRadius.circular(widget.radius),
+            borderSide: BorderSide(
+                color:
+                    widget.colorBorder ?? ColorApp.orangeF01.withOpacity(0.5),
+                width: 1),
           ),
-          fillColor: widget.filled ? ColorApp.orangeF01.withOpacity(0.1) : Colors.white,
+          fillColor: widget.filled
+              ? ColorApp.orangeF01.withOpacity(0.1)
+              : Colors.white,
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(widget.radius),
+            borderSide: BorderSide(
+                color:
+                    widget.colorBorder ?? ColorApp.orangeF01.withOpacity(0.5),
+                width: 1),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(widget.radius),
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+          ),
           filled: widget.filled,
           contentPadding: const EdgeInsets.symmetric(horizontal: 15)),
       items: List.generate(
         widget.listItem.length,
-            (index) => DropdownMenuItem(
+        (index) => DropdownMenuItem(
           child: Text(
             widget.listItem[index].name.toString(),
             style: StyleApp.textStyle400(),

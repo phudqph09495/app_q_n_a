@@ -57,29 +57,30 @@ class _QRViewExampleState extends State<QRViewExample> {
                       Container(
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: ColorApp.orangeF2, // background
-                              onPrimary: Colors.white,
-                              minimumSize:const Size(60, 50),// foreground
-                            ),
-                            onPressed: () async {
-                              await controller?.toggleFlash();
-                              setState(() {});
+                          style: ElevatedButton.styleFrom(
+                            primary: ColorApp.orangeF2, // background
+                            onPrimary: Colors.white,
+                            minimumSize: const Size(60, 50), // foreground
+                          ),
+                          onPressed: () async {
+                            await controller?.toggleFlash();
+                            setState(() {});
+                          },
+                          child: FutureBuilder(
+                            future: controller?.getFlashStatus(),
+                            builder: (context, snapshot) {
+                              return Text('Flash: ${snapshot.data}');
                             },
-                            child: FutureBuilder(
-                              future: controller?.getFlashStatus(),
-                              builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
-                              },
-                            ),),
+                          ),
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: ColorApp.orangeF2,// background
+                            primary: ColorApp.orangeF2, // background
                             onPrimary: Colors.white,
-                            minimumSize:const Size(60, 50),// foreground
+                            minimumSize: const Size(60, 50), // foreground
                           ),
                           onPressed: () async {
                             await controller?.flipCamera();
@@ -108,7 +109,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            minimumSize:const Size(60, 50),
+                            minimumSize: const Size(60, 50),
                             primary: ColorApp.orangeF2, // background
                             onPrimary: Colors.white, // foreground
                           ),
@@ -125,7 +126,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                           style: ElevatedButton.styleFrom(
                             primary: ColorApp.orangeF2, // background
                             onPrimary: Colors.white,
-                            minimumSize:const Size(60, 50),// foreground
+                            minimumSize: const Size(60, 50), // foreground
                           ),
                           onPressed: () async {
                             await controller?.resumeCamera();

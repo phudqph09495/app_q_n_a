@@ -14,8 +14,7 @@ class GridViewCustom extends StatelessWidget {
   double mainAxisSpacing;
   EdgeInsetsGeometry? padding;
   ScrollController? controller;
-  Axis scrollDirection ;
-
+  Axis scrollDirection;
 
   GridViewCustom({
     this.physics,
@@ -33,18 +32,17 @@ class GridViewCustom extends StatelessWidget {
     this.showFull = false,
   });
 
-  checkSize(Size size){
-    double a = size.width/maxWight;
+  checkSize(Size size) {
+    double a = size.width / maxWight;
     double b = a - a.floor();
     int count = 2;
-    if(b > 0.75){
+    if (b > 0.75) {
       count = a.round();
-    }else{
+    } else {
       count = a.floor();
     }
     return count;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +52,15 @@ class GridViewCustom extends StatelessWidget {
       controller: controller,
       shrinkWrap: shrinkWrap,
       physics: physics,
-      itemCount: itemCount > (checkSize(size) * 2) && !showFull ? (checkSize(size) * 2) : itemCount,
+      itemCount: itemCount > (checkSize(size) * 2) && !showFull
+          ? (checkSize(size) * 2)
+          : itemCount,
       padding: padding,
       scrollDirection: scrollDirection,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: scrollDirection == Axis.horizontal ? crossAxisCount : checkSize(size),
+        crossAxisCount: scrollDirection == Axis.horizontal
+            ? crossAxisCount
+            : checkSize(size),
         crossAxisSpacing: crossAxisSpacing,
         mainAxisSpacing: mainAxisSpacing,
         mainAxisExtent: mainAxisExtent,

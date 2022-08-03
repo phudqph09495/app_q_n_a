@@ -20,7 +20,8 @@ class ModelWallet {
   ModelWallet({this.data, this.code, this.message});
 
   ModelWallet.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new ModelHistory.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? new ModelHistory.fromJson(json['data']) : null;
     code = json['code'];
     message = json['message'];
   }

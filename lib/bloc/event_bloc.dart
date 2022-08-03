@@ -11,6 +11,11 @@ class GetData extends EventBloc {
   String? keySearch1;
   String? keySearch2;
   String? keyword;
+  String? name;
+  String? number;
+  String? bankName;
+  String? money;
+  XFile? image;
   GetData({
     this.keyword,
     this.cat_id,
@@ -19,7 +24,11 @@ class GetData extends EventBloc {
     this.keySearch,
     this.keySearch1,
     this.keySearch2,
-
+    this.bankName,
+    this.name,
+    this.number,
+    this.image,
+    this.money,
   });
 }
 
@@ -58,9 +67,11 @@ class UpdateProfile extends EventBloc {
   String? cmt;
   String? province_id;
   String? district_id;
+  Map<String, dynamic>? req;
 
   UpdateProfile(
-      {this.user_id,
+      {this.req,
+      this.user_id,
       this.birthday,
       this.phone,
       this.email,
@@ -108,7 +119,6 @@ class addQuesForm extends EventBloc {
   String description;
   List<XFile>? images;
   addQuesForm({
-
     required this.description,
     required this.user_id,
     this.subject_id,
@@ -148,20 +158,17 @@ class addAnsForm extends EventBloc {
   String answer;
   List<XFile>? images;
   int? parent_id;
-  addAnsForm({
-    required this.user_id,
-    required this.question_id,
-    required this.answer,
-    this.images,
-    this.parent_id
-  });
+  addAnsForm(
+      {required this.user_id,
+      required this.question_id,
+      required this.answer,
+      this.images,
+      this.parent_id});
 }
 
 class getAns extends EventBloc {
-
   int question_id;
   getAns({
-
     required this.question_id,
   });
 }

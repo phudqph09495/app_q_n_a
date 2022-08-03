@@ -36,7 +36,10 @@ class _DropItemState extends State<DropItem> {
       style: StyleApp.textStyle400(),
       hint: Align(
         alignment: Alignment.centerLeft,
-        child: Text(widget.hint, style: StyleApp.textStyle400(color: ColorApp.grey82),),
+        child: Text(
+          widget.hint,
+          style: StyleApp.textStyle400(color: ColorApp.grey82),
+        ),
       ),
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
@@ -50,23 +53,24 @@ class _DropItemState extends State<DropItem> {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide:
-            BorderSide(color: Colors.black.withOpacity(0.2), width: 0.5),
+                BorderSide(color: Colors.black.withOpacity(0.2), width: 0.5),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.red, width: 0.5),
           ),
-          fillColor: widget.filled ? ColorApp.blue1F.withOpacity(0.1) : Colors.white,
+          fillColor:
+              widget.filled ? ColorApp.blue1F.withOpacity(0.1) : Colors.white,
           filled: widget.filled,
           contentPadding: const EdgeInsets.symmetric(horizontal: 15)),
       items: List.generate(
         widget.listItem.length,
-            (index) => DropdownMenuItem(
+        (index) => DropdownMenuItem(
           child: Text(
             widget.listItem[index].name.toString(),
             style: StyleApp.textStyle400(),
           ),
-          value:widget.listItem[index],
+          value: widget.listItem[index],
         ),
       ),
     );

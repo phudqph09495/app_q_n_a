@@ -16,7 +16,6 @@ import '../item/question_tile.dart';
 import 'add_question.dart';
 
 class HomeScreen extends StatefulWidget {
-
   HomeScreen();
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,10 +23,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Future<void> onRefresh() async {
-    context
-        .read<BlocGetQuestion>()
-        .add(GetData());
+    context.read<BlocGetQuestion>().add(GetData());
   }
+
   String? keySearch;
   String? keySearch1;
   String? keySearch2;
@@ -136,7 +134,6 @@ class _HomeScreenState extends State<HomeScreen> {
           onRefresh: onRefresh,
           child: BlocBuilder<BlocGetQuestion, StateBloc>(
             builder: (_, state) {
-
               // final keySearch =  state is LoadSuccess
               //      ? state.keySearch
               //      : null;
@@ -144,78 +141,85 @@ class _HomeScreenState extends State<HomeScreen> {
                 keySearch = state.keySearch;
                 keySearch1 = state.keySearch1;
                 keySearch2 = state.keySearch2;
-
               }
               return Column(
                 children: [
                   Row(
-
                     children: [
                       keySearch != null
                           ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: InkWell(
-                        onTap: (){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Filter()));
-                        },
-                              child: Container(
-                                  height: 15,
-                                  child: Center(
-                                    child: Text('${keySearch}'),
-                                  ),
-                                  width: 75,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(1),
-                                      color: ColorApp.whiteF7,
-                                      border: Border.all(
-                                          color: Colors.black, width: 0.5))),
-                            ),
-                          )
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Filter()));
+                                },
+                                child: Container(
+                                    height: 15,
+                                    child: Center(
+                                      child: Text('${keySearch}'),
+                                    ),
+                                    width: 75,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(1),
+                                        color: ColorApp.whiteF7,
+                                        border: Border.all(
+                                            color: Colors.black, width: 0.5))),
+                              ),
+                            )
                           : Container(),
                       keySearch1 != null
                           ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: InkWell(
-                        onTap: (){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Filter()));
-                        },
-                              child: Container(
-                                  height: 15,
-                                  child: Center(
-                                    child: Text('${keySearch1}'),
-                                  ),
-                                  width: 75,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(1),
-                                      color: ColorApp.whiteF7,
-                                      border: Border.all(
-                                          color: Colors.black, width: 0.5))),
-                            ),
-                          )
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Filter()));
+                                },
+                                child: Container(
+                                    height: 15,
+                                    child: Center(
+                                      child: Text('${keySearch1}'),
+                                    ),
+                                    width: 75,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(1),
+                                        color: ColorApp.whiteF7,
+                                        border: Border.all(
+                                            color: Colors.black, width: 0.5))),
+                              ),
+                            )
                           : Container(),
                       keySearch2 != null
                           ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: InkWell(
-                        onTap: (){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Filter()));
-                        },
-                              child: Container(
-                                  height: 15,
-                                  child: Center(
-                                    child: Text('${keySearch2}'),
-                                  ),
-                                  width: 75,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(1),
-                                      color: ColorApp.whiteF7,
-                                      border: Border.all(
-                                          color: Colors.black, width: 0.5))),
-                            ),
-                          )
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Filter()));
+                                },
+                                child: Container(
+                                    height: 15,
+                                    child: Center(
+                                      child: Text('${keySearch2}'),
+                                    ),
+                                    width: 75,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(1),
+                                        color: ColorApp.whiteF7,
+                                        border: Border.all(
+                                            color: Colors.black, width: 0.5))),
+                              ),
+                            )
                           : Container(),
                     ],
                   )

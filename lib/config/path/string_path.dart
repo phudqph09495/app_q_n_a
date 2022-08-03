@@ -1,4 +1,4 @@
-class StringPath{
+class StringPath {
   static const appName = "Ocop";
   static const appFullName = "OcopMart";
   static const appCompany = "OcopMart Company";

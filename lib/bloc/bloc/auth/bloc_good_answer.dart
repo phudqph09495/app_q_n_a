@@ -20,25 +20,19 @@ class BlocGoodAnswer extends Bloc<EventBloc, StateBloc> {
         Map<String, dynamic> req = Map();
         req['user_id'] = event.user_id;
         req['id'] = event.answer_id;
-        var res=await Api.postAsync(endPoint: ApiPath.goodAnswer, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.goodAnswer, req: req);
 
-print(res);
+        print(res);
         if (res['code'] == 1) {
-
-          yield LoadSuccess(
-
-          );
-        }
-        else {
+          yield LoadSuccess();
+        } else {
           yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }
       } on DioError catch (e) {
-        yield LoadFail(error: e.error );
+        yield LoadFail(error: e.error);
       } catch (e) {
         yield LoadFail(error: e.toString());
       }
     }
   }
 }
-
-

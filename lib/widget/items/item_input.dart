@@ -11,6 +11,8 @@ Widget itemInput({
   GestureTapCallback? onTap,
   String? errorText,
   Function(String)? onChanged,
+  Function(String)? validator,
+  TextInputType? keyboardType,
 }) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -21,31 +23,34 @@ Widget itemInput({
         const SizedBox(
           height: 5,
         ),
-        TextField(
+        TextFormField(
           onTap: onTap,
           readOnly: readOnly,
           controller: controller,
           obscureText: obscureText,
           onChanged: onChanged,
+          keyboardType: keyboardType,
           style: StyleApp.textStyle400(),
+          validator: (val) {
+            if (validator != null) {
+              return validator(val as String);
+            }
+          },
           decoration: InputDecoration(
-            enabledBorder:  OutlineInputBorder(
+            enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide:
-              const BorderSide(color: ColorApp.grey90, width: 1),
+              borderSide: const BorderSide(color: ColorApp.grey90, width: 1),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide:
-              const BorderSide(color: ColorApp.grey90, width: 1),
+              borderSide: const BorderSide(color: ColorApp.grey90, width: 1),
             ),
             errorBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.red, width: 1),
               borderRadius: BorderRadius.circular(5),
             ),
-            focusedErrorBorder:  OutlineInputBorder(
-              borderSide:
-              const BorderSide(color: ColorApp.grey90, width: 1),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: ColorApp.grey90, width: 1),
               borderRadius: BorderRadius.circular(5),
             ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 15),

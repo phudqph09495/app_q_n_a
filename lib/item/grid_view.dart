@@ -2,7 +2,9 @@ import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
-String content='';
+
+String content = '';
+
 class FilterList extends StatefulWidget {
   String title;
   Color? color;
@@ -20,7 +22,6 @@ class FilterList extends StatefulWidget {
     required this.list,
     this.space = 3,
     this.value,
-
   });
 
   @override
@@ -28,7 +29,6 @@ class FilterList extends StatefulWidget {
 }
 
 class _FilterListState extends State<FilterList> {
-
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -68,8 +68,8 @@ class _FilterListState extends State<FilterList> {
                   onChange: (val) {
                     setState(() {
                       widget.value = val;
-content=widget.list[widget.value!];
-print(content);
+                      content = widget.list[widget.value!];
+                      print(content);
                     });
                   },
                 );

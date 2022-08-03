@@ -18,10 +18,9 @@ class BottomSheetAccount extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ListTile(
-            onTap: (){
+            onTap: () {
               Navigator.pop(context);
               PageNavigator.next(context: context, page: EditProfile());
-
             },
             title: Text(
               "Thông tin chung",
@@ -33,10 +32,9 @@ class BottomSheetAccount extends StatelessWidget {
               "Thay đổi mật khẩu",
               style: StyleApp.textStyle500(color: ColorApp.black),
             ),
-            onTap: (){
+            onTap: () {
               Navigator.pop(context);
               PageNavigator.next(context: context, page: ChangePass());
-
             },
           ),
         ],

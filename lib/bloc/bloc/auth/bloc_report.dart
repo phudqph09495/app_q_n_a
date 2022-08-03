@@ -18,8 +18,8 @@ class BlocReport extends Bloc<EventBloc, StateBloc> {
       try {
         Map<String, dynamic> req = Map();
         req['user_id'] = event.user_id;
-      req['id']=event.id;
-      req['content']=event.content;
+        req['id'] = event.id;
+        req['content'] = event.content;
 
         var res = await Api.postAsync(endPoint: ApiPath.reportAnswer, req: req);
         print(res);

@@ -10,14 +10,13 @@ Widget GetNotification(BuildContext context) {
       backgroundColor: ColorApp.whiteF0,
       title: TabBar(
         labelColor: ColorApp.black,
-        unselectedLabelStyle:
-        StyleApp.textStyle500(color: ColorApp.grey82),
+        unselectedLabelStyle: StyleApp.textStyle500(color: ColorApp.grey82),
         labelStyle: StyleApp.textStyle500(),
         indicatorColor: ColorApp.orangeF01,
         unselectedLabelColor: ColorApp.grey82,
-        tabs:   [
-          Row (children: [Icon(null), SizedBox(width:5), Text("Sự kiện nóng")]),
-          Row (children: [Icon(null), SizedBox(width:5), Text("Thông báo")]),
+        tabs: [
+          Row(children: [Icon(null), SizedBox(width: 5), Text("Sự kiện nóng")]),
+          Row(children: [Icon(null), SizedBox(width: 5), Text("Thông báo")]),
           // Tab(
           //   child: Text(
           //     "Sự kiện nóng",

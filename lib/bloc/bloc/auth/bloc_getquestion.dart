@@ -14,16 +14,15 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
     if (event is GetData) {
-
       List<ModelQuestion> ques = [];
-     
+
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
-        req['cat_id']=event.cat_id;
+        req['cat_id'] = event.cat_id;
         req['class_id'] = event.class_id;
         req['subject_id'] = event.subject_id;
-        req['keywords']=event.keyword;
+        req['keywords'] = event.keyword;
         print(req);
         var res = await Api.postAsync(endPoint: ApiPath.getQuestion, req: req);
         print(res);
@@ -37,8 +36,6 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
             keySearch: event.keySearch,
             keySearch1: event.keySearch1,
             keySearch2: event.keySearch2,
-
-
           );
         }
         // else if (res["code"] == 114) {

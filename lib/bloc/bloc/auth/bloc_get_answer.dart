@@ -15,21 +15,17 @@ class BlocGetAnswer extends Bloc<EventBloc, StateBloc> {
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
     if (event is getAns) {
-
-
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
 
         req['question_id'] = event.question_id;
-        var res=await Api.postAsync(endPoint: ApiPath.getAnswer, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.getAnswer, req: req);
 
-print(res);
+        print(res);
         if (res['code'] == 1) {
-        ModelAnswer modelAnswer=ModelAnswer.fromJson(res['data']);
-          yield LoadSuccess(
-            data: modelAnswer
-          );
+          ModelAnswer modelAnswer = ModelAnswer.fromJson(res['data']);
+          yield LoadSuccess(data: modelAnswer);
         }
       } on DioError catch (e) {
         yield LoadFail(error: e.error ?? "Lỗi kết nối");

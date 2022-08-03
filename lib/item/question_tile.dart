@@ -16,7 +16,8 @@ Widget QuestionTile(
   BuildContext context, {
   required ModelQuestion modelQuestion,
 }) {
-  String createdAt = Const.checkTime(Const.convertNumber(modelQuestion.createdAt).round());
+  String createdAt =
+      Const.checkTime(Const.convertNumber(modelQuestion.createdAt).round());
 
   String title = '${modelQuestion.subjectName ?? 'Lĩnh vực khác'}'
       ' - ${modelQuestion.className}'
@@ -24,13 +25,14 @@ Widget QuestionTile(
       '${createdAt == "" ? "" : " - $createdAt"}';
 
   return InkWell(
-    onTap: (){
+    onTap: () {
       Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => AnswerScreen(
-              modelQuestion: modelQuestion,
-            )));},
+          context,
+          MaterialPageRoute(
+              builder: (context) => AnswerScreen(
+                    modelQuestion: modelQuestion,
+                  )));
+    },
     child: Card(
       color: ColorApp.whiteF7,
       child: Container(
@@ -56,29 +58,33 @@ Widget QuestionTile(
                 ),
                 modelQuestion.countImages != '0'
                     ? Row(
-                      children: [
-                        const Icon(Icons.attach_file_rounded),
-                        Text(modelQuestion.countImages ?? "0")
-                      ],
-                    )
+                        children: [
+                          const Icon(Icons.attach_file_rounded),
+                          Text(modelQuestion.countImages ?? "0")
+                        ],
+                      )
                     : const SizedBox(),
-           (modelQuestion.userCountQuestion=='1' )   ? Container(
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: ColorApp.black, width: 0.5),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                  margin: const EdgeInsets.only(left: 5),
-                  child: const Text(
-                    'Lần đầu hỏi',
-                    style: TextStyle(color: ColorApp.whiteF0),
-                  ),
-                ):SizedBox()
+                (modelQuestion.userCountQuestion == '1')
+                    ? Container(
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: ColorApp.black, width: 0.5),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 2),
+                        margin: const EdgeInsets.only(left: 5),
+                        child: const Text(
+                          'Lần đầu hỏi',
+                          style: TextStyle(color: ColorApp.whiteF0),
+                        ),
+                      )
+                    : SizedBox()
               ],
             ),
             CountdownTimer(
-              endTime: Const.convertNumber(modelQuestion.deadline).round() * 1000,
+              endTime:
+                  Const.convertNumber(modelQuestion.deadline).round() * 1000,
               widgetBuilder: (_, CurrentRemainingTime? time) {
                 if (time == null) {
                   return Text(

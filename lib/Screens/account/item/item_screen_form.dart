@@ -12,40 +12,39 @@ class ItemScreenForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (context, contains){
-          return KeyboardDismisser(
-            child: Scaffold(
-              body: Container(
-                height: Get.height,
-                width: Get.width,
-                alignment: Alignment.center,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      child: Image.asset(
-                        ImagePath.logo,
-                        width: Get.width,
-                        height: 92,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Positioned(
-                        right: 0,
-                        bottom: 0,
-                        child: Image.asset(ImagePath.logo_lending)),
-                    Container(
-                      height: Get.height,
-                      width: Get.width,
-                      alignment: Alignment.center,
-                      child: child,
-                    ),
-                  ],
+    return LayoutBuilder(builder: (context, contains) {
+      return KeyboardDismisser(
+        child: Scaffold(
+          body: Container(
+            height: Get.height,
+            width: Get.width,
+            alignment: Alignment.center,
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                  child: Image.asset(
+                    ImagePath.logo,
+                    width: Get.width,
+                    height: 92,
+                    fit: BoxFit.fill,
+                  ),
                 ),
-              ),
+                Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Image.asset(ImagePath.logo_lending)),
+                Container(
+                  height: Get.height,
+                  width: Get.width,
+                  alignment: Alignment.center,
+                  child: child,
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        ),
+      );
+    });
   }
 }

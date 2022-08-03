@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../../config/path/share_pref_path.dart';
 import '../../config/share_pref.dart';
 
-class UserProvider with ChangeNotifier{
+class UserProvider with ChangeNotifier {
   String? name;
   String? email;
   String? phone;

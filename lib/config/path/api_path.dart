@@ -4,29 +4,35 @@ class ApiPath {
   static const signin = "/app/home/signup";
   static const login = "/app/home/login";
   static const getUser = "/app/user/get-user";
-  static const updateUser = "app/user/update-user";
+  static const updateUser = "/app/user/update-user";
   static const resetPass = "/api/v2/auth/password/reset";
   static const changePassIsLogin = "/app/user/change-password";
+
   /// vi tri
-   static const province ="/app/home/get-option-provinces";
-   static const district ="/app/home/get-option-districts";
+  static const province = "/app/home/get-option-provinces";
+  static const district = "/app/home/get-option-districts";
+
   /// question
   static const addQuestion = "/app/question/add-question";
   static const getQuestion = "/app/home/get-question";
-  static const getAnswer="/app/home/get-question-detail";
-  static const goodAnswer="/app/question/good-answer";
-  static const getClass="/app/home/get-class";
-  static const getSub="/app/home/get-subjects";
-  static const getCat="/app/home/get-category";
+  static const getAnswer = "/app/home/get-question-detail";
+  static const goodAnswer = "/app/question/good-answer";
+  static const getClass = "/app/home/get-class";
+  static const getSub = "/app/home/get-subjects";
+  static const getCat = "/app/home/get-category";
+
   /// Wallet
-  static const getWallet="/app/wallet/wallet";
-  static const getWalletHistory="/app/wallet/my-history";
-  static const getNganHang="/app/user/create-bank";
-  static const getPhieuTien="/app/wallet/withdraw";
+  static const getWallet = "/app/wallet/wallet";
+  static const getWalletHistory = "/app/wallet/my-history";
+  static const createNganHang = "/app/user/create-bank";
+  static const getPhieuTien = "/app/wallet/withdraw";
+  static const getBank = "/app/user/bank";
+  static const getBankAdmin = "/app/home/get-siteinfo";
+  static const addMoney = "/app/user/add-money";
 
   ///answer
   static const addAnswer = "/app/question/add-answer";
-  static const reportAnswer="/app/question/report-answer";
+  static const reportAnswer = "/app/question/report-answer";
 
   ///address
   static const getProvinces = "/api/v2/provinces";

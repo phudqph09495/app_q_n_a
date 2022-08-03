@@ -1,9 +1,7 @@
-
 import '../../models/model_user.dart';
 import '../share_pref.dart';
 
-
-class SharePrefsKeys{
+class SharePrefsKeys {
   static String login = "login";
   static String user = "user";
   static String user_id = "id";
@@ -14,8 +12,6 @@ class SharePrefsKeys{
   static String email = "email";
   static String location = "location";
 
-
-
   static seveUserKey(ModelUser model) async {
     SharedPrefs.saveBool(SharePrefsKeys.login, true);
     SharedPrefs.saveString(SharePrefsKeys.user_id, model.id);
@@ -23,9 +19,11 @@ class SharePrefsKeys{
     SharedPrefs.saveString(SharePrefsKeys.name, model.username);
     SharedPrefs.saveString(SharePrefsKeys.phone, model.phone);
     SharedPrefs.saveString(SharePrefsKeys.email, model.email);
-    SharedPrefs.saveString(SharePrefsKeys.avatar, model.avatarPath.toString() + model.avatarName.toString());
+    SharedPrefs.saveString(SharePrefsKeys.avatar,
+        model.avatarPath.toString() + model.avatarName.toString());
     SharedPrefs.saveString(SharePrefsKeys.user, model.toJson());
   }
+
   static removeAllKey() async {
     SharedPrefs.remove(SharePrefsKeys.login);
     SharedPrefs.remove(SharePrefsKeys.user_id);

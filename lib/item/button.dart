@@ -13,7 +13,7 @@ class Button1 extends StatefulWidget {
   double radius;
   Border? border;
   Color textColor;
-bool style;
+  bool style;
   String textButton;
   Button1(
       {this.height = 50,
@@ -27,8 +27,7 @@ bool style;
       this.imagePath,
       this.radius = 5,
       this.fontSize = 14,
-   this.style=true
-      });
+      this.style = true});
 
   @override
   State<Button1> createState() => _Button1State();
@@ -80,9 +79,11 @@ class _Button1State extends State<Button1> {
           children: [
             widget.icon ? Image.asset(widget.imagePath!) : SizedBox(),
             Text(widget.textButton,
-                style: widget.style?StyleApp.textStyle600(
-                    fontSize: widget.fontSize, color: widget.textColor):StyleApp.textStyle900(
-                    fontSize: widget.fontSize, color: widget.textColor)),
+                style: widget.style
+                    ? StyleApp.textStyle600(
+                        fontSize: widget.fontSize, color: widget.textColor)
+                    : StyleApp.textStyle900(
+                        fontSize: widget.fontSize, color: widget.textColor)),
           ],
         ),
       ),

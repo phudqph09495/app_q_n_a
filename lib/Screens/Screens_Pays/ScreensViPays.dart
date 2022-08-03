@@ -22,8 +22,7 @@ class ViTien extends StatefulWidget {
 }
 
 class _ViTienState extends State<ViTien> {
-  BlocGetWallet blocGetWallet = BlocGetWallet()
-    ..add(getViTien(user_id: 1, cat_id: 1));
+  BlocGetWallet blocGetWallet = BlocGetWallet()..add(GetData());
   BlocWalletHistory blocWalletHistory = BlocWalletHistory()..add(getHistory());
   // BlocWalletHistory blochistory = BlocWalletHistory();
 

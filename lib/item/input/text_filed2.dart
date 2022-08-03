@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../styles/init_style.dart';
@@ -60,28 +59,24 @@ class _InputText2State extends State<InputText2> {
         readOnly: widget.readOnly,
         onChanged: widget.onChanged,
         controller: widget.controller,
-
         maxLength: 5000,
         buildCounter: (context,
             {required currentLength, required isFocused, maxLength}) {
           return widget.counter
               ? Container(
-            transform:
-            Matrix4.translationValues(0, -kToolbarHeight + 25, 0),
-            child: Text(
-              "$currentLength/$maxLength kí tự",
-              style: StyleApp.textStyle400(color: Colors.black45),
-            ),
-          )
+                  transform:
+                      Matrix4.translationValues(0, -kToolbarHeight + 25, 0),
+                  child: Text(
+                    "$currentLength/$maxLength kí tự",
+                    style: StyleApp.textStyle400(color: Colors.black45),
+                  ),
+                )
               : SizedBox();
         },
-
-
         keyboardType: widget.keyboardType,
         style: StyleApp.textStyle400(),
         decoration: InputDecoration(
           hintText: widget.hint,
-
           hintStyle: StyleApp.textStyle400(color: ColorApp.grey82),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -93,15 +88,14 @@ class _InputText2State extends State<InputText2> {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color: ColorApp.black.withOpacity(0.2), width: 0.5),
+            borderSide:
+                BorderSide(color: ColorApp.black.withOpacity(0.2), width: 0.5),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.red, width: 0.5),
-
           ),
-          contentPadding: EdgeInsets.only(left: 33,top: 15,right: 20),
+          contentPadding: EdgeInsets.only(left: 33, top: 15, right: 20),
           errorText: null,
         ),
         validator: (val) {

@@ -16,12 +16,19 @@ class QuestionList extends StatefulWidget {
 class _QuestionListState extends State<QuestionList> {
   @override
   Widget build(BuildContext context) {
-    return  widget.listItem.isEmpty ? Center(child: Text("", style: StyleApp.textStyle400(),),) :ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      children: List.generate(
-
-          widget.listItem.length,
-          (index) => QuestionTile(context,modelQuestion: widget.listItem[index])),
-    );
+    return widget.listItem.isEmpty
+        ? Center(
+            child: Text(
+              "Danh sách trống",
+              style: StyleApp.textStyle400(),
+            ),
+          )
+        : ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            children: List.generate(
+                widget.listItem.length,
+                (index) => QuestionTile(context,
+                    modelQuestion: widget.listItem[index])),
+          );
   }
 }

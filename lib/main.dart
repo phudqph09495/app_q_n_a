@@ -1,5 +1,6 @@
 import 'package:app_q_n_a/Screens/comment.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/get_token.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => GetToken()..add(GetData())),
         BlocProvider(create: (_) => BlocCheckLogin()..add(GetData())),
         BlocProvider(create: (_) => BlocGetQuestion()),
+        BlocProvider(create: (_) => BLocLocalUser()..getUser()),
       ],
       child: MultiProvider(
         providers: [

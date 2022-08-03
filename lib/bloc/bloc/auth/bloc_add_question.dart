@@ -22,8 +22,8 @@ class BlocQuestion extends Bloc<EventBloc, StateBloc> {
         req['class_id'] = event.class_id;
         req['deadline'] = event.deadline;
         req['price_gift'] = event.money;
-        req['question']=event.question;
-        req['description']=event.description;
+        req['question'] = event.question;
+        req['description'] = event.description;
         List<MultipartFile> images = [];
         if (event.images != null) {
           for (var item in event.images!) {
@@ -34,12 +34,10 @@ class BlocQuestion extends Bloc<EventBloc, StateBloc> {
           req['images[]'] = images;
         }
         var res = await Api.postAsync(endPoint: ApiPath.addQuestion, req: req);
-print(res);
+        print(res);
 
         if (res['code'] == 1) {
-          yield LoadSuccess(
-            mess: res['message']
-          );
+          yield LoadSuccess(mess: res['message']);
         } else {
           if (res['message'] != '') {
             loi = res['message'];

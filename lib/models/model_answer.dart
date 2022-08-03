@@ -60,20 +60,20 @@ class Question {
 
   Question(
       {this.id,
-        this.question,
-        this.createdAt,
-        this.updatedAt,
-        this.catId,
-        this.status,
-        this.userId,
-        this.isComplete,
-        this.description,
-        this.deadline,
-        this.isImage,
-        this.classId,
-        this.subjectId,
-        this.price,
-        this.priceGift});
+      this.question,
+      this.createdAt,
+      this.updatedAt,
+      this.catId,
+      this.status,
+      this.userId,
+      this.isComplete,
+      this.description,
+      this.deadline,
+      this.isImage,
+      this.classId,
+      this.subjectId,
+      this.price,
+      this.priceGift});
 
   Question.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -129,16 +129,16 @@ class Images {
 
   Images(
       {this.id,
-        this.questionId,
-        this.path,
-        this.name,
-        this.displayName,
-        this.height,
-        this.width,
-        this.order,
-        this.createdAt,
-        this.isAvatar,
-        this.answerId});
+      this.questionId,
+      this.path,
+      this.name,
+      this.displayName,
+      this.height,
+      this.width,
+      this.order,
+      this.createdAt,
+      this.isAvatar,
+      this.answerId});
 
   Images.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -188,18 +188,18 @@ class Answer {
 
   Answer(
       {this.id,
-        this.answer,
-        this.createdAt,
-        this.updatedAt,
-        this.questionId,
-        this.status,
-        this.userId,
-        this.isImages,
-        this.countReport,
-        this.parentId,
-        this.username,
-        this.images,
-        this.items});
+      this.answer,
+      this.createdAt,
+      this.updatedAt,
+      this.questionId,
+      this.status,
+      this.userId,
+      this.isImages,
+      this.countReport,
+      this.parentId,
+      this.username,
+      this.images,
+      this.items});
 
   Answer.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -265,16 +265,16 @@ class Images2 {
 
   Images2(
       {this.id,
-        this.questionId,
-        this.path,
-        this.name,
-        this.displayName,
-        this.height,
-        this.width,
-        this.order,
-        this.createdAt,
-        this.isAvatar,
-        this.answerId});
+      this.questionId,
+      this.path,
+      this.name,
+      this.displayName,
+      this.height,
+      this.width,
+      this.order,
+      this.createdAt,
+      this.isAvatar,
+      this.answerId});
 
   Images2.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -322,16 +322,16 @@ class Items {
 
   Items(
       {this.id,
-        this.answer,
-        this.createdAt,
-        this.updatedAt,
-        this.questionId,
-        this.status,
-        this.userId,
-        this.isImages,
-        this.countReport,
-        this.parentId,
-        this.username});
+      this.answer,
+      this.createdAt,
+      this.updatedAt,
+      this.questionId,
+      this.status,
+      this.userId,
+      this.isImages,
+      this.countReport,
+      this.parentId,
+      this.username});
 
   Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];

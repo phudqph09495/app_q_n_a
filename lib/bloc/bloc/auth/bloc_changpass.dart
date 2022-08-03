@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:app_q_n_a/bloc/event_bloc.dart';
@@ -31,17 +30,14 @@ class BlocChangPass extends Bloc<EventBloc, StateBloc> {
           yield LoadSuccess(
             data: model,
           );
-        }else{
+        } else {
           yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }
-      }
-      on DioError catch (e) {
+      } on DioError catch (e) {
         yield LoadFail(error: e.error);
-      }
-      catch (e) {
+      } catch (e) {
         yield LoadFail(error: e.toString());
       }
     }
-
   }
 }

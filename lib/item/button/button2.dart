@@ -12,7 +12,7 @@ Widget Button2({
   Border? border,
   Color textColor = ColorApp.main,
   Function()? onTap,
-}){
+}) {
   return InkWell(
     onTap: onTap,
     child: Container(
@@ -24,7 +24,9 @@ Widget Button2({
         color: bgColor,
         border: border,
       ),
-      child: Text(title, style: StyleApp.textStyle700(color: textColor, fontSize: fontSize),overflow: TextOverflow.ellipsis),
+      child: Text(title,
+          style: StyleApp.textStyle700(color: textColor, fontSize: fontSize),
+          overflow: TextOverflow.ellipsis),
     ),
   );
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../styles/init_style.dart';
@@ -69,15 +68,15 @@ class _InputText3State extends State<InputText3> {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide(
-                color: ColorApp.black.withOpacity(0.2), width: 0.5),
+            borderSide:
+                BorderSide(color: ColorApp.black.withOpacity(0.2), width: 0.5),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: const BorderSide(color: Colors.red, width: 0.5),
-
           ),
-          contentPadding: const  EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           errorText: null,
         ),
         validator: (val) {

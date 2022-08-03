@@ -29,14 +29,14 @@ class Data {
 
   Data(
       {this.id,
-        this.userId,
-        this.money,
-        this.adminId,
-        this.status,
-        this.imagePath,
-        this.createdAt,
-        this.updatedAt,
-        this.type});
+      this.userId,
+      this.money,
+      this.adminId,
+      this.status,
+      this.imagePath,
+      this.createdAt,
+      this.updatedAt,
+      this.type});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
