@@ -88,31 +88,29 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
                     initialData: list,
                     builder: (context,snapshot){
                   return
-                    ListView.builder(
-                      itemCount: list.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AnswerScreen(
-                                      modelQuestion: list[index],
-                                    )));
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Divider(
-                                color: Colors.black,
-                              ),
-                              QuestionTile(context, modelQuestion: list[index]),
-                            ],
-                          ),
-                        );
-                      });
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        (list.length!=0)?Text('Có ${list.length} câu hỏi',style: StyleApp.textStyle500(color: Colors.green),):Container(),
+                        ListView.builder(
+                          itemCount: list.length,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AnswerScreen(
+                                          modelQuestion: list[index],
+                                        )));
+                              },
+                              child: QuestionTile(context, modelQuestion: list[index]),
+                            );
+                          }),
+                      ],
+                    );
                 })
                ],
              );
