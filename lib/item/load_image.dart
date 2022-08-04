@@ -5,7 +5,7 @@ import 'package:app_q_n_a/path/image_path.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:insta_image_viewer/insta_image_viewer.dart';
 class LoadImage extends StatefulWidget {
   String url;
   double width;
@@ -30,47 +30,49 @@ class _LoadImageState extends State<LoadImage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Image.network(
-      widget.url,
-      fit: widget.fit,
-      width: widget.width,
-      height: widget.height,
-      alignment: widget.alignment,
-      loadingBuilder: (BuildContext context, Widget child,
-          ImageChunkEvent? loadingProgress) {
-        if (loadingProgress == null) {
-          return child;
-        }
-        return Container(
-          width: widget.width,
-          height: widget.height,
-          child: Center(
-            child: Platform.isAndroid
-                ? const CircularProgressIndicator(
-                    color: ColorApp.main,
-                    strokeWidth: 2,
-                  )
-                : CupertinoActivityIndicator(),
-          ),
-        );
-      },
-      errorBuilder: (context, error, stackTrace) {
-        return widget.ans
-            ? Container(
-                width: widget.width,
-                height: widget.height,
-                color: Colors.white,
-                child: Center(
-                  child: Image.asset(
-                    ImagesPath.imageDefult,
-                    width: widget.width,
-                    height: widget.height,
-                    fit: widget.fit,
+    return InstaImageViewer(
+      child: Image.network(
+        widget.url,
+        fit: widget.fit,
+        width: widget.width,
+        height: widget.height,
+        alignment: widget.alignment,
+        loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return Container(
+            width: widget.width,
+            height: widget.height,
+            child: Center(
+              child: Platform.isAndroid
+                  ? const CircularProgressIndicator(
+                      color: ColorApp.main,
+                      strokeWidth: 2,
+                    )
+                  : CupertinoActivityIndicator(),
+            ),
+          );
+        },
+        errorBuilder: (context, error, stackTrace) {
+          return widget.ans
+              ? Container(
+                  width: widget.width,
+                  height: widget.height,
+                  color: Colors.white,
+                  child: Center(
+                    child: Image.asset(
+                      ImagesPath.imageDefult,
+                      width: widget.width,
+                      height: widget.height,
+                      fit: widget.fit,
+                    ),
                   ),
-                ),
-              )
-            : SizedBox();
-      },
+                )
+              : SizedBox();
+        },
+      ),
     );
   }
 }
