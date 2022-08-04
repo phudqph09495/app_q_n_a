@@ -232,7 +232,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         height: 5,
                       ),
                       QuestionCard(
-                        countAns: list.countAnswer,
+                        countAns: list.answer?.length.toString(),
                         imageFileList: list.images,
                         image: GridView.builder(
                             itemCount: list.images?.length,
@@ -266,7 +266,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
 
-                        itemCount: int.parse(list.countAnswer ?? '0'),
+                        itemCount: list.answer?.length ,
                         itemBuilder: (context, index) {
                           if (list.answer?[index].status == '2') {
                             hasPaid = true;

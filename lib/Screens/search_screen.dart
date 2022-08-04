@@ -55,7 +55,7 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
           child: BlocConsumer(
          builder: (_,state){
            if(state is LoadSuccess){
-             list=state.data;
+
              return Column(
                children: [
                  SizedBox(
@@ -140,9 +140,14 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
                iconS: true);
          },
             listener: (_,StateBloc state){
-CheckLogState.check(context, state: state,isShowMsg: false,
 
-);
+              if (state is LoadSuccess) {
+                list=state.data;
+                if(list.length==0){
+                  DialogItem.showMsg(context: context, title: "Lỗi", msg: "Không có dữ liệu phù hợp");
+                }
+              }
+
             },
             bloc: blocGetQuestion,
 

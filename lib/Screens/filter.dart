@@ -10,7 +10,9 @@ import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/item/gridView/grid_view_2.dart';
 import 'package:app_q_n_a/models/model_local.dart';
+import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/item/grid_view.dart';
@@ -32,12 +34,12 @@ class _FilterState extends State<Filter> {
 
   BlocGetQuestion blocGetQuestion = BlocGetQuestion();
   Map req = new Map();
-  String? theloai;
+  String theloai='Tất cả';
   String? lophoc;
   String? monhoc;
   int? lopval;
   int? monval;
-  int? catval;
+  int catval=7;
 
   GetData getQuestionHome = GetData();
 
@@ -50,11 +52,22 @@ class _FilterState extends State<Filter> {
           child: BlocListener(
             bloc: blocGetQuestion,
             listener: (_, StateBloc state) {
-              CheckLogState.check(context, state: state, isShowMsg: false,
-                  success: () {
-                context.read<BlocGetQuestion>().add(getQuestionHome);
-                Navigator.pop(context);
-              });
+              // CheckLogState.check(context, state: state, isShowMsg: false,
+              //     success: () {
+              //   context.read<BlocGetQuestion>().add(getQuestionHome);
+              //   Navigator.pop(context);
+              // });
+              if(state is LoadSuccess){
+                final list=state.data as List<ModelQuestion>;
+                if(list.length==0){
+                  DialogItem.showMsg(context: context, title: "Lỗi", msg: "Không có dữ liệu phù hợp");
+                }
+                else{
+                  getQuestionHome.countFilter=list.length;
+                    context.read<BlocGetQuestion>().add(getQuestionHome);
+                    Navigator.pop(context);
+                }
+              }
             },
             child: Button1(
                 style: false,
@@ -80,6 +93,7 @@ class _FilterState extends State<Filter> {
                   if (lophoc != '') {
                     getQuestionHome.keySearch2 = lophoc;
                   }
+
 
                   blocGetQuestion.add(getQuestionHome);
                   // Navigator.pop(context);
@@ -133,9 +147,10 @@ class _FilterState extends State<Filter> {
                       catval = val;
                       for (ModelLocal element in list) {
                         if (element.id.toString() == val.toString()) {
-                          theloai = element.name;
+                          theloai = element.name!;
                         }
                       }
+print(theloai);
                     },
                   );
                 },
@@ -157,9 +172,11 @@ class _FilterState extends State<Filter> {
                     onChanged: (val) {
                       lopval = val;
                       for (ModelLocal element in list) {
-                        if (element.id.toString() == val.toString()) {
-                          monhoc = element.name;
-                        }
+                        if (val!=null) {
+                          if (element.id.toString() == val.toString()) {
+                            lophoc = element.name;
+                          }
+                        }else{lophoc=null;}
                       }
                     },
                   );
@@ -175,17 +192,23 @@ class _FilterState extends State<Filter> {
                       ? state.data as List<ModelLocal>
                       : <ModelLocal>[];
                   return FilterList2(
-                    value: lopval,
+                    value: monval,
                     title: '  Môn học',
                     column: 3,
                     list: list,
                     onChanged: (val) {
-                      monval = val;
-                      for (ModelLocal element in list) {
-                        if (element.id.toString() == val.toString()) {
-                          lophoc = element.name;
+                      monval=val;
+
+                        for (ModelLocal element in list) {
+                          if (val!=null) {
+                            if (element.id.toString() == val.toString()) {
+                              monhoc = element.name;
+                            }
+                          }
+                          else{monhoc=null;}
                         }
-                      }
+
+
                     },
                   );
                 },

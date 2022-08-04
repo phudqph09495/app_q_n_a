@@ -11,6 +11,7 @@ class LoadSuccess extends StateBloc {
   String? code;
   bool hasMore;
   bool checkLength;
+  int? countFilter;
 
   LoadSuccess({
     this.data,
@@ -21,6 +22,7 @@ class LoadSuccess extends StateBloc {
     this.mess,
     this.keySearch1,
     this.keySearch2,
+     this.countFilter,
   });
 }
 

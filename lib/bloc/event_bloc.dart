@@ -16,6 +16,7 @@ class GetData extends EventBloc {
   String? bankName;
   String? money;
   XFile? image;
+  int? countFilter;
   GetData({
     this.keyword,
     this.cat_id,
@@ -29,6 +30,7 @@ class GetData extends EventBloc {
     this.number,
     this.image,
     this.money,
+    this.countFilter
   });
 }
 

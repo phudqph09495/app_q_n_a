@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? keySearch;
   String? keySearch1;
   String? keySearch2;
+  int? countFilter;
 
   @override
   void initState() {
@@ -141,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 keySearch = state.keySearch;
                 keySearch1 = state.keySearch1;
                 keySearch2 = state.keySearch2;
+                countFilter=state.countFilter;
               }
               return Column(
                 children: [
@@ -221,6 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             )
                           : Container(),
+                countFilter!=null ?     Text('Có $countFilter câu hỏi',style: StyleApp.textStyle500(color: Colors.green),):Container(),
                     ],
                   )
                   // keySearch != null ? Padding(
