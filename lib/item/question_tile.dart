@@ -1,4 +1,5 @@
 import 'package:app_q_n_a/config/const.dart';
+import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
@@ -26,12 +27,12 @@ Widget QuestionTile(
 
   return InkWell(
     onTap: () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => AnswerScreen(
-                    modelQuestion: modelQuestion,
-                  )));
+      PageNavigator.next(
+        context: context,
+        page: AnswerScreen(
+          modelQuestion: modelQuestion,
+        ),
+      );
     },
     child: Card(
       color: ColorApp.whiteF7,

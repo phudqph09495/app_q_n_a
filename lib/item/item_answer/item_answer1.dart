@@ -77,7 +77,7 @@ class _QuestionCardState extends State<QuestionCard> {
                     Text('${widget.time}', style: StyleApp.textStyle500())
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 90,
                 ),
                 Button1(
@@ -88,10 +88,7 @@ class _QuestionCardState extends State<QuestionCard> {
                     Toast.show(
                         widget.save ? "Bỏ lưu thành công" : "Lưu thành công",
                         gravity: Toast.bottom);
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => QuestionSavedSS()));
+
                   },
                   colorButton:
                       widget.save ? ColorApp.blue6D : ColorApp.orangeF01,

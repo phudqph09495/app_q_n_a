@@ -26,12 +26,10 @@ class _ChangePassState extends State<ChangePass> {
   TextEditingController password2 = TextEditingController();
   final keyForm = GlobalKey<FormState>();
   BlocChangPass bloc = BlocChangPass();
-  ChangePassword() async {
+  ChangePassword() {
     if (keyForm.currentState!.validate()) {
-      var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
       bloc.add(
         ChagePassIsLogin(
-          user_id: user_id,
           passwordre: password1.text,
           password: password.text,
         ),
@@ -55,7 +53,6 @@ class _ChangePassState extends State<ChangePass> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            setState(() {});
           },
           icon: Icon(
             Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,

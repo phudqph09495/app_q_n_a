@@ -76,13 +76,17 @@ class _NapTienState extends State<NapTien> {
             style: false,
             ontap: () {
               if (Money.text.isNotEmpty && image != null) {
-                blocAddMoney.add(GetData());
+                blocAddMoney.add(GetData(
+                  image: image,
+                  money: Money.text,
+                ));
               } else {
                 DialogItem.showMsg(
-                    context: context,
-                    title: "Lỗi",
-                    msg:
-                        "Vui lòng nhập số tiền nạp và ảnh xác thực giao dịch thành công từ ngân hàng");
+                  context: context,
+                  title: "Lỗi",
+                  msg:
+                      "Vui lòng nhập số tiền nạp và ảnh xác thực giao dịch thành công từ ngân hàng",
+                );
               }
             },
           ),

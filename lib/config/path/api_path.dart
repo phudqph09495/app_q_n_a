@@ -72,4 +72,5 @@ class ApiPath {
 
   /// notifi
   static const listNotifi = "/app/user/get-notifycations";
+  static const getNews = "/app/home/get-news";
 }

@@ -16,7 +16,6 @@ import '../item/question_tile.dart';
 import 'add_question.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen();
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -147,87 +146,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     children: [
                       keySearch != null
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Filter()));
-                                },
-                                child: Container(
-                                    height: 15,
-                                    child: Center(
-                                      child: Text('${keySearch}'),
-                                    ),
-                                    width: 75,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: ColorApp.whiteF7,
-                                        border: Border.all(
-                                            color: Colors.black, width: 0.5))),
-                              ),
-                            )
+                          ? _itemSearch(keySearch)
                           : Container(),
                       keySearch1 != null
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Filter()));
-                                },
-                                child: Container(
-                                    height: 15,
-                                    child: Center(
-                                      child: Text('${keySearch1}'),
-                                    ),
-                                    width: 75,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: ColorApp.whiteF7,
-                                        border: Border.all(
-                                            color: Colors.black, width: 0.5))),
-                              ),
-                            )
+                          ? _itemSearch(keySearch1)
                           : Container(),
                       keySearch2 != null
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Filter()));
-                                },
-                                child: Container(
-                                    height: 15,
-                                    child: Center(
-                                      child: Text('${keySearch2}'),
-                                    ),
-                                    width: 75,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: ColorApp.whiteF7,
-                                        border: Border.all(
-                                            color: Colors.black, width: 0.5))),
-                              ),
-                            )
+                          ? _itemSearch(keySearch2)
                           : Container(),
                     ],
-                  )
-                  // keySearch != null ? Padding(
-                  //   padding: const EdgeInsets.all(10),
-                  //   child: Text("Lọc câu hỏi: $keySearch", style: StyleApp.textStyle700(fontSize: 16,color: Colors.green),),
-                  // ) : const SizedBox(),
-                  ,
+                  ),
+                  const SizedBox(height: 10),
                   Expanded(
                     child: QuestionList(
                       listItem: state is LoadSuccess
@@ -240,6 +169,22 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
+      ),
+    );
+  }
+
+  _itemSearch(key) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7,vertical: 2),
+      margin: const EdgeInsets.only(left: 15),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.green.shade100,
+        border: Border.all(color: Colors.black, width: 0.5),
+      ),
+      child: Text(
+        key,
+        style: StyleApp.textStyle400(),
       ),
     );
   }

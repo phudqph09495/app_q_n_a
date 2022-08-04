@@ -43,7 +43,7 @@ class AnswerWidget extends StatefulWidget {
 
 class _AnswerWidgetState extends State<AnswerWidget> {
   TextEditingController reply = TextEditingController();
-  @override
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -54,7 +54,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             widget.type
-                ? SizedBox()
+                ? const SizedBox()
                 : Text(
                     'Trả lời',
                     style: StyleApp.textStyle700(
@@ -76,10 +76,10 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${widget.user}',
+                      widget.user,
                       style: StyleApp.textStyle500(),
                     ),
-                    Text('${widget.time}', style: StyleApp.textStyle500())
+                    Text(widget.time, style: StyleApp.textStyle500())
                   ],
                 ),
                 const SizedBox(
@@ -103,7 +103,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
               ],
             ),
             widget.type
-                ? SizedBox(
+                ? const SizedBox(
                     height: 20,
                   )
                 : RatingBar.builder(
@@ -147,7 +147,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                       IconButton(
                           onPressed: widget.report,
                           icon: Image.asset('images/report.png')),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Button1(
@@ -161,7 +161,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                       )
                     ],
                   ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
           ],

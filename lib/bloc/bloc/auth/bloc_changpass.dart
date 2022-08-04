@@ -18,7 +18,6 @@ class BlocChangPass extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
-        req['user_id'] = event.user_id;
         req['password'] = event.password;
         req['passwordre'] = event.passwordre;
 

@@ -23,6 +23,7 @@ import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/widget/items/dia_log_item.dart';
+import 'package:app_q_n_a/widget/items/item_load_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
@@ -51,6 +52,7 @@ class AnswerScreen extends StatefulWidget {
   ModelQuestion modelQuestion;
 
   AnswerScreen({required this.modelQuestion});
+
   @override
   State<AnswerScreen> createState() => _AnswerScreenState();
 }
@@ -70,6 +72,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
 
   BlocGoodAnswer blocGoodAnswer = BlocGoodAnswer();
   late int answerStatus;
+
   // getANS() async {
   //   bloc.add(
   //       getAns(user_id: Body.id, question_id: int.parse(widget.qid ?? '0')));
@@ -127,329 +130,314 @@ class _AnswerScreenState extends State<AnswerScreen> {
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
-    return BlocBuilder(
-      bloc: bloc,
-      builder: (_, state) {
-        if (state is LoadSuccess) {
-          final list = state.data as ModelAnswer;
+    return Scaffold(
+      backgroundColor: ColorApp.whiteF0,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 10,left: 10,right: 10,top: 5),
+        child: Button1(
+            colorButton:
+                timing ? ColorApp.orangeF2 : Colors.grey.withOpacity(0.5),
+            textColor: ColorApp.whiteF0,
+            radius: 30,
+            fontSize: 18,
+            style: false,
+            textButton:
+                timing ? 'Viết câu trả lời' : 'Đã hết thời gian trả lời',
+            ontap: _send,
+        ),
+      ),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: ColorApp.whiteF0,
+        iconTheme: const IconThemeData(
+          color: Colors.black
+        ),
+        title: Text(
+          '${widget.modelQuestion.subjectName ?? 'Lĩnh vực khác'} - ${widget.modelQuestion.className} - ${Const.convertNumber(widget.modelQuestion.priceGift)} đ',
+          style: StyleApp.textStyle700(fontSize: 18,),
+        ),
+      ),
+      body: BlocBuilder(
+        bloc: bloc,
+        builder: (_, StateBloc state) {
+          final list =
+              state is LoadSuccess ? state.data as ModelAnswer : ModelAnswer();
+          return ItemLoadPage(
+              state: state,
+              onTapErr: () {
+                onRefresh();
+              },
+              success: RefreshIndicator(
+                onRefresh: onRefresh,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        QuestionCard(
+                          countAns: list.countAnswer,
+                          imageFileList: list.images,
+                          image: GridView.builder(
+                              itemCount: list.images?.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      childAspectRatio: 2, crossAxisCount: 3),
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index) {
+                                return LoadImage(
+                                    ans: false,
+                                    url:
+                                        "${Const.image_host}${list.images?[index].path}${list.images?[index].name}");
+                              }),
+                          endTime:
+                              Const.convertNumber(widget.modelQuestion.deadline)
+                                      .round() *
+                                  1000,
+                          avatar: '',
+                          ques: list.question?.description ?? '',
+                          user: widget.modelQuestion.username ?? '',
+                          time: Const.formatTime(
+                              Const.convertNumber(
+                                          widget.modelQuestion.createdAt)
+                                      .round() *
+                                  1000,
+                              format: "dd/MM/yyyy HH:mm"),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ListView.builder(
+                          physics:const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: int.parse(list.countAnswer ?? '0'),
+                          itemBuilder: (context, index) {
+                            if (list.answer?[index].status == '2') {
+                              hasPaid = true;
+                            }
+                            return AnswerCard(
+                              imageFileList: list.answer?[index].images ?? [],
 
-          return RefreshIndicator(
-            onRefresh: onRefresh,
-            child: Scaffold(
-              bottomSheet: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Button1(
-                    colorButton: timing
-                        ? ColorApp.orangeF2
-                        : Colors.grey.withOpacity(0.5),
-                    textColor: ColorApp.whiteF0,
-                    radius: 30,
-                    fontSize: 18,
-                    style: false,
-                    // border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                    textButton: timing
-                        ? 'Viết câu trả lời'
-                        : 'Đã hết thời gian trả lời',
-                    ontap: () {
-                      if ((timing == true) &&
-                          (hasPaid == false) &&
-                          (userStatus == 1)) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Add_Answer_Screen(
-                                      user_id: Body.id,
-                                      question_id: int.parse(
-                                          widget.modelQuestion.id ?? '0'),
-                                    ))).then((value) => onRefresh());
-                      } else if (userStatus == 0) {
-                        showPlatformDialog(
-                          context: context,
-                          builder: (context) => BasicDialogAlert(
-                            title: Text("Lỗi"),
-                            content: Text("Bạn phải đăng nhập để xem"),
-                            actions: <Widget>[
-                              BasicDialogAction(
-                                title: Text("Trở lại"),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
+                              status: answerStatus,
+                              //trạng thái của câu trả lời
+                              //0: chưa đăng nhập
+                              //1: không phải chủ câu hỏi
+                              //2: là chủ câu hỏi
+                              //3: hiển thị khi hết deadline
+
+                              imageAns: GridView.builder(
+                                  itemCount: list.answer?[index].images?.length,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          childAspectRatio: 2,
+                                          crossAxisCount: 3),
+                                  shrinkWrap: true,
+                                  itemBuilder:
+                                      (BuildContext context, int index2) {
+                                    return LoadImage(
+                                        ans: true,
+                                        url:
+                                            "${Const.image_host}${list.answer?[index].images?[index2].path}${list.answer?[index].images?[index2].name}");
+                                  }),
+                              value: index,
+                              groupValue: (list.answer?[index].status == '2')
+                                  ? index
+                                  : value,
+
+                              title: Text(
+                                'Trả tiền',
+                                style: StyleApp.textStyle500(fontSize: 14),
                               ),
-                              BasicDialogAction(
-                                title: Text("Đăng nhập"),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginScreen()));
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      } else if (userStatus == 2) {
-                        Toast.show("Bạn không thể trả lời câu hỏi của mình",
-                            duration: 1, gravity: Toast.bottom);
-                      } else if (timing == false) {
-                        Toast.show("Đã hết thời gian trả lời câu hỏi",
-                            duration: 1, gravity: Toast.bottom);
-                      } else if (hasPaid == true) {
-                        Toast.show("Câu hỏi đã được trả thưởng",
-                            duration: 1, gravity: Toast.bottom);
-                      }
-                    }),
-              ),
-              backgroundColor: ColorApp.whiteF0,
-              appBar: AppBar(
-                centerTitle: true,
-                backgroundColor: ColorApp.whiteF0,
-                title: Text(
-                  '${widget.modelQuestion.subjectName ?? 'Lĩnh vực khác'} - ${widget.modelQuestion.className} - ${Const.convertNumber(widget.modelQuestion.priceGift)} đ',
-                  style: StyleApp.textStyle700(
-                    fontSize: 18,
-                  ),
-                ),
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Platform.isAndroid
-                        ? Icons.arrow_back
-                        : Icons.arrow_back_ios,
-                    color: ColorApp.black,
-                  ),
-                ),
-              ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 5,
-                      ),
-                      QuestionCard(
-                        countAns: list.countAnswer,
-                        imageFileList: list.images,
-                        image: GridView.builder(
-                            itemCount: list.images?.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    childAspectRatio: 2, crossAxisCount: 3),
-                            shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index) {
-                              return LoadImage(
-                                  ans: false,
-                                  url:
-                                      "http://hoidap.nanoweb.vn/static${list.images?[index].path}${list.images?[index].name}");
-                            }),
-                        endTime:
-                            Const.convertNumber(widget.modelQuestion.deadline)
-                                    .round() *
-                                1000,
-                        avatar: '',
-                        ques: list.question?.description ?? '',
-                        user: widget.modelQuestion.username ?? '',
-                        time: Const.formatTime(
-                            Const.convertNumber(widget.modelQuestion.createdAt)
-                                    .round() *
-                                1000,
-                            format: "dd/MM/yyyy HH:mm"),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: int.parse(list.countAnswer ?? '0'),
-                        itemBuilder: (context, index) {
-                          if (list.answer?[index].status == '2') {
-                            hasPaid = true;
-                          }
-
-                          return AnswerCard(
-                            imageFileList: list.answer?[index].images ?? [],
-
-                            status: answerStatus,
-                            //trạng thái của câu trả lời
-                            //0: chưa đăng nhập
-                            //1: không phải chủ câu hỏi
-                            //2: là chủ câu hỏi
-                            //3: hiển thị khi hết deadline
-
-                            imageAns: GridView.builder(
-                                itemCount: list.answer?[index].images?.length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        childAspectRatio: 2, crossAxisCount: 3),
-                                shrinkWrap: true,
-                                itemBuilder:
-                                    (BuildContext context, int index2) {
-                                  return LoadImage(
-                                      ans: true,
-                                      url:
-                                          "http://hoidap.nanoweb.vn/static${list.answer?[index].images?[index2].path}${list.answer?[index].images?[index2].name}");
-                                }),
-                            value: index,
-                            groupValue: (list.answer?[index].status == '2')
-                                ? index
-                                : value,
-
-                            title: Text(
-                              'Trả tiền',
-                              style: StyleApp.textStyle500(fontSize: 14),
-                            ),
-                            onchanged: (val) {
-                              if (userStatus == 2) {
-                                if (hasPaid == false) {
-                                  showPlatformDialog(
-                                    context: context,
-                                    builder: (context) => BlocConsumer(
-                                      bloc: blocGoodAnswer,
-                                      listener: (_, StateBloc state) {
-                                        CheckLogState.check(context,
-                                            state: state,
-                                            msg: "Trả tiền thành công",
-                                            success: () {
-                                          setState(() {
-                                            value = val;
-                                          });
-                                          Navigator.pop(context);
-                                        });
-                                      },
-                                      builder: (_, state) {
-                                        return BasicDialogAlert(
-                                          title: Text("Thanh toán"),
-                                          content: Text(
-                                              "Xác nhận thanh toán cho người trả lời"),
-                                          actions: <Widget>[
-                                            BasicDialogAction(
-                                              title: Text("Trở lại"),
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                            BasicDialogAction(
-                                              title: Text("Đồng ý"),
-                                              onPressed: () {
-                                                goodid = int.parse(
-                                                    list.answer?[index].id ??
-                                                        '0');
-                                                payANS();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  );
-                                } else {
-                                  DialogItem.showMsg(
+                              onchanged: (val) {
+                                if (userStatus == 2) {
+                                  if (hasPaid == false) {
+                                    showPlatformDialog(
                                       context: context,
-                                      title: "Lỗi",
-                                      msg:
-                                          "Câu hỏi \"${list.question?.question}\" đã có câu trả lời đúng nhất");
-                                }
-                              } else {
-                                Toast.show(
-                                    "Bạn không thể trả tiền cho câu hỏi của người khác",
-                                    duration: 1,
-                                    gravity: Toast.bottom);
-                              }
-                            },
-
-                            time: Const.formatTime(
-                                int.parse(
-                                        list.answer?[index].createdAt ?? "0") *
-                                    1000,
-                                format: "dd/MM/yyyy HH:mm"),
-                            user: list.answer?[index].username ?? '',
-                            avatar: '',
-                            answer: list.answer?[index].answer ?? '',
-
-                            IconReport: IconButton(
-                                onPressed: () {
-                                  showPlatformDialog(
-                                    context: context,
-                                    builder: (context) => BasicDialogAlert(
-                                      title: Text("Báo cáo câu trả lời"),
-                                      content: Container(
-                                        height: 250,
-                                        width: 200,
-                                        child: SingleChildScrollView(
-                                          child: Grid.FilterList(
-                                            value: valueReport,
-                                            color: Colors.white,
-                                            title: '',
-                                            column: 1,
-                                            list: reportList,
-                                            space: 5.5,
-                                          ),
-                                        ),
-                                      ),
-                                      actions: <Widget>[
-                                        BasicDialogAction(
-                                          title: Text(
-                                            "Report",
-                                            style: StyleApp.textStyle500(
-                                                color: Colors.red),
-                                          ),
-                                          onPressed: () {
-                                            ansid = int.parse(
-                                                list.answer?[index].id ?? '0');
-                                            report();
-                                            CheckLogState.check(context,
-                                                state: state,
-                                                msg:
-                                                    "Ý kiến của bạn đã được ghi nhận",
-                                                success: () {});
-                                          },
-                                        ),
-                                        BasicDialogAction(
-                                          title: Text(
-                                            "Trở lại",
-                                            style: StyleApp.textStyle400(),
-                                          ),
-                                          onPressed: () {
+                                      builder: (context) => BlocConsumer(
+                                        bloc: blocGoodAnswer,
+                                        listener: (_, StateBloc state) {
+                                          CheckLogState.check(context,
+                                              state: state,
+                                              msg: "Trả tiền thành công",
+                                              success: () {
+                                            setState(() {
+                                              value = val;
+                                            });
                                             Navigator.pop(context);
-                                          },
+                                          });
+                                        },
+                                        builder: (_, state) {
+                                          return BasicDialogAlert(
+                                            title: Text("Thanh toán"),
+                                            content: Text(
+                                                "Xác nhận thanh toán cho người trả lời"),
+                                            actions: <Widget>[
+                                              BasicDialogAction(
+                                                title: Text("Trở lại"),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                              BasicDialogAction(
+                                                title: Text("Đồng ý"),
+                                                onPressed: () {
+                                                  goodid = int.parse(
+                                                      list.answer?[index].id ??
+                                                          '0');
+                                                  payANS();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  } else {
+                                    DialogItem.showMsg(
+                                        context: context,
+                                        title: "Lỗi",
+                                        msg:
+                                            "Câu hỏi \"${list.question?.question}\" đã có câu trả lời đúng nhất");
+                                  }
+                                } else {
+                                  Toast.show(
+                                      "Bạn không thể trả tiền cho câu hỏi của người khác",
+                                      duration: 1,
+                                      gravity: Toast.bottom);
+                                }
+                              },
+
+                              time: Const.formatTime(
+                                  int.parse(list.answer?[index].createdAt ??
+                                          "0") *
+                                      1000,
+                                  format: "dd/MM/yyyy HH:mm"),
+                              user: list.answer?[index].username ?? '',
+                              avatar: '',
+                              answer: list.answer?[index].answer ?? '',
+
+                              IconReport: IconButton(
+                                  onPressed: () {
+                                    showPlatformDialog(
+                                      context: context,
+                                      builder: (context) => BasicDialogAlert(
+                                        title: Text("Báo cáo câu trả lời"),
+                                        content: Container(
+                                          height: 250,
+                                          width: 200,
+                                          child: SingleChildScrollView(
+                                            child: Grid.FilterList(
+                                              value: valueReport,
+                                              color: Colors.white,
+                                              title: '',
+                                              column: 1,
+                                              list: reportList,
+                                              space: 5.5,
+                                            ),
+                                          ),
                                         ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                icon: Image.asset('images/report.png')),
-                            comment: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CommentScreen(
-                                          answerind: index,
-                                          user_id: Body.id,
-                                          quesID: list.question?.id ?? 0,
-                                          parent_id: int.parse(
-                                              (list.answer?[index].id) ?? ''),
-                                          item: list.answer?[index].items ??
-                                              [])));
-                            },
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: 100,
-                      )
-                    ],
+                                        actions: <Widget>[
+                                          BasicDialogAction(
+                                            title: Text(
+                                              "Report",
+                                              style: StyleApp.textStyle500(
+                                                  color: Colors.red),
+                                            ),
+                                            onPressed: () {
+                                              ansid = int.parse(
+                                                  list.answer?[index].id ??
+                                                      '0');
+                                              report();
+                                              CheckLogState.check(context,
+                                                  state: state,
+                                                  msg:
+                                                      "Ý kiến của bạn đã được ghi nhận",
+                                                  success: () {});
+                                            },
+                                          ),
+                                          BasicDialogAction(
+                                            title: Text(
+                                              "Trở lại",
+                                              style: StyleApp.textStyle400(),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  icon: Image.asset('images/report.png')),
+                              comment: () {
+                                PageNavigator.next(
+                                  context: context,
+                                  page: CommentScreen(
+                                    answerind: index,
+                                    user_id: Body.id,
+                                    quesID: list.question?.id ?? 0,
+                                    parent_id: int.parse(
+                                        (list.answer?[index].id) ?? ''),
+                                    item: list.answer?[index].items ?? [],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        const SizedBox(
+                          height: 100,
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-          );
-        }
-        return Scaffold();
-      },
+              ));
+        },
+      ),
     );
+  }
+  _send(){
+    if ((timing == true) && (hasPaid == false) && (userStatus == 1)) {
+      PageNavigator.next(context: context, page: Add_Answer_Screen(
+        user_id: Body.id,
+        question_id:
+        int.parse(widget.modelQuestion.id ?? '0'),
+      )).then((value) => onRefresh());
+    } else if (userStatus == 0) {
+      showPlatformDialog(
+        context: context,
+        builder: (context) => BasicDialogAlert(
+          title: Text("Lỗi",style: StyleApp.textStyle500(),),
+          content: Text("Bạn phải đăng nhập để xem",style: StyleApp.textStyle400(),),
+          actions: <Widget>[
+            BasicDialogAction(
+              title: Text("Trở lại",style: StyleApp.textStyle500(),),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            BasicDialogAction(
+              title: Text("Đăng nhập", style: StyleApp.textStyle500(),),
+              onPressed: () {
+                PageNavigator.next(context: context, page: LoginScreen());
+              },
+            ),
+          ],
+        ),
+      );
+    } else if (userStatus == 2) {
+      Toast.show("Bạn không thể trả lời câu hỏi của mình",
+          duration: 1, gravity: Toast.bottom);
+    } else if (timing == false) {
+      Toast.show("Đã hết thời gian trả lời câu hỏi",
+          duration: 1, gravity: Toast.bottom);
+    } else if (hasPaid == true) {
+      Toast.show("Câu hỏi đã được trả thưởng",
+          duration: 1, gravity: Toast.bottom);
+    }
   }
 }

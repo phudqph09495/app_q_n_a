@@ -78,7 +78,16 @@ class Api {
           headers: headers,
         ),
       );
-      return res.data;
+
+      if(res.data['code'] == 1){
+        return res.data;
+      }
+      if(res.data['code'] == 0){
+        throw "Code: ${res.data['code']} => ${res.data['error']}";
+      }
+      if(res.data['code'] != 0 || res.data['code'] != 1){
+        throw "Code: ${res.data['code']} => ${res.data['message']}";
+      }
     } catch (e) {
       rethrow;
     }

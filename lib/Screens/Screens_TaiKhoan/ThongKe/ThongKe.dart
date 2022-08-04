@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/ThongKe/itemThongKe/listNguoiTraLoi.dart';
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/ThongKe/tab/tab_question.dart';
 import 'package:app_q_n_a/Screens/answer_screen.dart';
 import 'package:app_q_n_a/item/question_list.dart';
 import 'package:flutter/material.dart';
@@ -36,132 +37,61 @@ class _ThongKeState extends State<ThongKe> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        backgroundColor: ColorApp.whiteF0,
+        appBar: AppBar(
+          centerTitle: true,
           backgroundColor: ColorApp.whiteF0,
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: ColorApp.whiteF0,
-            title: Text(
-              'Thống kê',
-              style: StyleApp.textStyle700(fontSize: 18),
-            ),
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-                color: ColorApp.black,
-              ),
-            ),
-            bottom: PreferredSize(
-              child: TabBar(
-                labelColor: ColorApp.black,
-                unselectedLabelStyle:
-                    StyleApp.textStyle500(color: ColorApp.grey82, fontSize: 16),
-                labelStyle: StyleApp.textStyle700(fontSize: 16),
-                indicatorColor: ColorApp.orangeF01,
-                unselectedLabelColor: ColorApp.grey82,
-                isScrollable: true,
-                tabs: [
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Câu hỏi',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                        Text(
-                          '(5)',
-                          style: TextStyle(
-                              fontSize: 15, color: ColorApp.orangeF01),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Câu trả lời',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                        Text(
-                          '(5)',
-                          style: TextStyle(
-                              fontSize: 15, color: ColorApp.orangeF01),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Nhận thưởng',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                        Text(
-                          '(10)',
-                          style: TextStyle(
-                              fontSize: 15, color: ColorApp.orangeF01),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Trả thưởng',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                        Text(
-                          '(5)',
-                          style: TextStyle(
-                              fontSize: 15, color: ColorApp.orangeF01),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              preferredSize: Size.fromHeight(50),
+          title: Text(
+            'Thống kê',
+            style: StyleApp.textStyle700(fontSize: 18),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+              color: ColorApp.black,
             ),
           ),
-          body: TabBarView(
-            children: [
-              Expanded(
-                child: BlocBuilder<BlocGetQuestion, StateBloc>(
-                  bloc: blocGetQuestion,
-                  builder: (_, state) => QuestionList(
-                    listItem: state is LoadSuccess
-                        ? state.data as List<ModelQuestion>
-                        : [],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: BlocBuilder<BlocGetQuestion, StateBloc>(
-                  bloc: blocGetQuestion,
-                  builder: (_, state) => QuestionList(
-                    listItem: state is LoadSuccess
-                        ? state.data as List<ModelQuestion>
-                        : [],
-                  ),
-                ),
-              ),
-              NguoiHoiList(),
-              NguoiTraLoiList(),
-            ],
+          bottom: PreferredSize(
+            child: TabBar(
+              unselectedLabelStyle:
+              StyleApp.textStyle500(color: ColorApp.grey82, fontSize: 16),
+              labelStyle: StyleApp.textStyle700(fontSize: 16),
+              unselectedLabelColor: ColorApp.grey82,
+              labelColor: Colors.black,
+              indicatorColor: ColorApp.orangeF01,
+              isScrollable: true,
+              tabs: const [
+                Tab(text: "Câu hỏi"),
+                Tab(text: "Câu trả lời"),
+                Tab(text: "Nhận thưởng"),
+                Tab(text: "Trả thưởng"),
+              ],
+            ),
+            preferredSize: Size.fromHeight(50),
           ),
+        ),
+        body: TabBarView(
+          children: [
+            TabQuestion(),
+            Expanded(
+              child: BlocBuilder<BlocGetQuestion, StateBloc>(
+                bloc: blocGetQuestion,
+                builder: (_, state) => QuestionList(
+                  listItem: state is LoadSuccess
+                      ? state.data as List<ModelQuestion>
+                      : [],
+                ),
+              ),
+            ),
+            NguoiHoiList(),
+            NguoiTraLoiList(),
+          ],
         ),
       ),
     );

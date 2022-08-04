@@ -15,35 +15,33 @@ class Notificationbar extends StatefulWidget {
 class _NotificationbarState extends State<Notificationbar> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
+    return  DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            bottom: PreferredSize(
-              child: TabBar(
-                labelColor: ColorApp.black,
-                unselectedLabelStyle:
-                    StyleApp.textStyle500(color: ColorApp.grey82, fontSize: 16),
-                labelStyle: StyleApp.textStyle700(fontSize: 16),
-                indicatorColor: ColorApp.orangeF01,
-                unselectedLabelColor: ColorApp.grey82,
-                tabs: const [
-                  Tab(text: "Sự kiện nóng"),
-                  Tab(text: "Thông báo"),
-                ],
-              ),
-              preferredSize: Size.zero,
+          bottom: PreferredSize(
+            child: TabBar(
+              labelColor: ColorApp.black,
+              unselectedLabelStyle:
+              StyleApp.textStyle500(color: ColorApp.grey82, fontSize: 16),
+              labelStyle: StyleApp.textStyle700(fontSize: 16),
+              indicatorColor: ColorApp.orangeF01,
+              unselectedLabelColor: ColorApp.grey82,
+              tabs: const [
+                Tab(text: "Sự kiện nóng"),
+                Tab(text: "Thông báo"),
+              ],
             ),
+            preferredSize: Size.zero,
           ),
-          body: TabBarView(
-            children: [
-              SuKienNong(),
-              ThongBao(),
-            ],
-          ),
+        ),
+        body: TabBarView(
+          children: [
+            SuKienNong(),
+            ThongBao(),
+          ],
         ),
       ),
     );

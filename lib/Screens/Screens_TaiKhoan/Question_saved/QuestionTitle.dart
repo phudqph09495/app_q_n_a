@@ -113,7 +113,7 @@ Widget QuestionTitleSaved(
                 ClipRRect(
                     borderRadius: BorderRadius.circular(50.0),
                     child: LoadImage(
-                      url: '$avatar',
+                      url: avatar,
                       height: 40,
                       width: 40,
                     )),

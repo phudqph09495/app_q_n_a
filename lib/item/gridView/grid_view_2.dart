@@ -44,17 +44,17 @@ class _FilterList2State extends State<FilterList2> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             (widget.title != '')
-                ? SizedBox(
+                ? const SizedBox(
                     height: 15,
                   )
-                : SizedBox(),
+                : const SizedBox(),
             (widget.title != '')
                 ? Text(
                     widget.title,
                     style: StyleApp.textStyle700(
                         fontSize: 18, color: ColorApp.black),
                   )
-                : SizedBox(),
+                :const  SizedBox(),
             GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

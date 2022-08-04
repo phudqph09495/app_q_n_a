@@ -13,9 +13,9 @@ class ModelSiteInfo {
   String? metaDescription;
   int? createdAt;
   int? updatedAt;
-  Null? goldPrice;
+  dynamic goldPrice;
   String? iframe;
-  Null? liveChat;
+  dynamic liveChat;
   String? company;
   String? numberAuth;
   String? emailRif;

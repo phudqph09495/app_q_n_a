@@ -22,6 +22,7 @@ class BlocAddMoney extends Bloc<EventBloc, StateBloc> {
         req['image'] = await MultipartFile.fromFile(event.image!.path,
             filename: event.image!.path.split('/').last);
         var res = await Api.postAsync(endPoint: ApiPath.addMoney, req: req);
+        print(res);
 
         if (res['code'] == 1) {
           yield LoadSuccess(
