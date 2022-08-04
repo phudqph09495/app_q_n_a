@@ -223,6 +223,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                 ),
               ),
               body: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Column(

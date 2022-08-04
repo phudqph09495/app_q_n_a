@@ -13,6 +13,12 @@ class LoadSuccess extends StateBloc {
   bool checkLength;
   int? countFilter;
 
+
+  int? keySearchid;
+  int? keySearchid1;
+  int? keySearchid2;
+
+
   LoadSuccess({
     this.data,
     this.hasMore = false,
@@ -23,6 +29,11 @@ class LoadSuccess extends StateBloc {
     this.keySearch1,
     this.keySearch2,
      this.countFilter,
+    this.keySearchid,
+    this.keySearchid1,
+
+    this.keySearchid2,
+
   });
 }
 

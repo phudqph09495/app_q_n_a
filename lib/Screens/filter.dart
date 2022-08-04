@@ -52,11 +52,6 @@ class _FilterState extends State<Filter> {
           child: BlocListener(
             bloc: blocGetQuestion,
             listener: (_, StateBloc state) {
-              // CheckLogState.check(context, state: state, isShowMsg: false,
-              //     success: () {
-              //   context.read<BlocGetQuestion>().add(getQuestionHome);
-              //   Navigator.pop(context);
-              // });
               if(state is LoadSuccess){
                 final list=state.data as List<ModelQuestion>;
                 if(list.length==0){

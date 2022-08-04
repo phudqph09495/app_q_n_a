@@ -23,13 +23,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Future<void> onRefresh() async {
-    context.read<BlocGetQuestion>().add(GetData());
+    context.read<BlocGetQuestion>().add(GetData(cat_id: keySearchid,subject_id: keySearchid1,class_id: keySearchid2
+    ));
+
   }
 
   String? keySearch;
   String? keySearch1;
   String? keySearch2;
   int? countFilter;
+
+  int? keySearchid;
+  int? keySearchid1;
+  int? keySearchid2;
+
+
+
 
   @override
   void initState() {
@@ -135,23 +144,28 @@ class _HomeScreenState extends State<HomeScreen> {
           onRefresh: onRefresh,
           child: BlocBuilder<BlocGetQuestion, StateBloc>(
             builder: (_, state) {
-              // final keySearch =  state is LoadSuccess
-              //      ? state.keySearch
-              //      : null;
               if (state is LoadSuccess) {
                 keySearch = state.keySearch;
                 keySearch1 = state.keySearch1;
                 keySearch2 = state.keySearch2;
+
                 countFilter=state.countFilter;
+
+                keySearchid=state.keySearchid;
+                keySearchid1=state.keySearchid1;
+                keySearchid2=state.keySearchid2;
+
+
               }
               return Column(
                 children: [
                   Row(
+
                     children: [
                       keySearch != null
                           ? Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: InkWell(
                                 onTap: () {
                                   Navigator.push(
@@ -176,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       keySearch1 != null
                           ? Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: InkWell(
                                 onTap: () {
                                   Navigator.push(
@@ -201,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       keySearch2 != null
                           ? Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: InkWell(
                                 onTap: () {
                                   Navigator.push(
