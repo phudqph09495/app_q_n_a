@@ -125,7 +125,7 @@ class Images {
   String? order;
   String? createdAt;
   String? isAvatar;
-  Null? answerId;
+  String? answerId;
 
   Images(
       {this.id,
@@ -181,7 +181,7 @@ class Answer {
   String? userId;
   String? isImages;
   String? countReport;
-  Null? parentId;
+  String? parentId;
   String? username;
   List<Images2>? images;
   List<Items>? items;
@@ -316,7 +316,7 @@ class Items {
   String? status;
   String? userId;
   String? isImages;
-  Null? countReport;
+  String? countReport;
   String? parentId;
   String? username;
 

@@ -21,15 +21,19 @@ class BlocGetAnswer extends Bloc<EventBloc, StateBloc> {
 
         req['question_id'] = event.question_id;
         var res = await Api.postAsync(endPoint: ApiPath.getAnswer, req: req);
-
-        print(res);
+print(res);
         if (res['code'] == 1) {
           ModelAnswer modelAnswer = ModelAnswer.fromJson(res['data']);
           yield LoadSuccess(data: modelAnswer);
         }
+        else {
+          yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
+        }
       } on DioError catch (e) {
         yield LoadFail(error: e.error ?? "Lỗi kết nối");
-      } catch (e) {
+
+      }
+      catch (e) {
         yield LoadFail(error: e.toString());
       }
     }
