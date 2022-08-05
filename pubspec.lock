@@ -448,6 +448,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0"
+  insta_image_viewer:
+    dependency: "direct main"
+    description:
+      name: insta_image_viewer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+3"
   intl:
     dependency: "direct main"
     description:

@@ -38,14 +38,15 @@ class _FilterState extends State<Filter> {
   int? lopval;
   int? monval;
   int? catval;
+
   GetData getQuestionHome = GetData();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+        bottomSheet: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
           child: BlocListener(
             bloc: blocGetQuestion,
             listener: (_, StateBloc state) {
@@ -113,7 +114,7 @@ class _FilterState extends State<Filter> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const SizedBox(
+              SizedBox(
                 height: 10,
               ),
               BlocBuilder(

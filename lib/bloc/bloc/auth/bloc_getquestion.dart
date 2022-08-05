@@ -23,7 +23,7 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
         req['class_id'] = event.class_id;
         req['subject_id'] = event.subject_id;
         req['keywords'] = event.keyword;
-        print(req);
+
         var res = await Api.postAsync(endPoint: ApiPath.getQuestion, req: req);
         print(res);
         if (res["code"] == 1) {
@@ -36,18 +36,13 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
             keySearch: event.keySearch,
             keySearch1: event.keySearch1,
             keySearch2: event.keySearch2,
+            countFilter: event.countFilter,
+
+              keySearchid: event.cat_id,
+            keySearchid1: event.subject_id,
+            keySearchid2: event.class_id
           );
         }
-        // else if (res["code"] == 114) {
-        //   yield LoadSuccess(
-        //     data: ques,
-        //     keySearch: event.keySearch,
-        //       keySearch1: event.keySearch1,
-        //       keySearch2: event.keySearch2,
-        //
-        //
-        //   );
-        // }
         else {
           yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }

@@ -3,24 +3,10 @@ import 'package:image_picker/image_picker.dart';
 
 abstract class EventBloc {}
 
-class LoadMoreEvent extends EventBloc {
-  String? id;
-  int limit, page;
-  bool cleanList, loadMore;
-  LoadMoreEvent({
-    this.id,
-    this.cleanList = false,
-    this.limit = 12,
-    this.page = 1,
-    this.loadMore = false,
-  });
-}
-
 class GetData extends EventBloc {
   int? cat_id;
   int? class_id;
   int? subject_id;
-  String? id;
   String? keySearch;
   String? keySearch1;
   String? keySearch2;
@@ -43,7 +29,6 @@ class GetData extends EventBloc {
     this.number,
     this.image,
     this.money,
-    this.id,
   });
 }
 
@@ -156,10 +141,12 @@ class ChagePassApp extends EventBloc {
 }
 
 class ChagePassIsLogin extends EventBloc {
+  int user_id;
   String password;
   String passwordre;
 
   ChagePassIsLogin({
+    required this.user_id,
     required this.passwordre,
     required this.password,
   });

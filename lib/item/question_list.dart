@@ -19,7 +19,7 @@ class _QuestionListState extends State<QuestionList> {
     return widget.listItem.isEmpty
         ? Center(
             child: Text(
-              "Danh sách trống",
+              "Loading...",
               style: StyleApp.textStyle400(),
             ),
           )
