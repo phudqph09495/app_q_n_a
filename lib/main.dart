@@ -54,6 +54,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           theme: ThemeData(
             unselectedWidgetColor: ColorApp.orangeF2,
+            iconTheme:const  IconThemeData(
+              color: Colors.black
+            )
           ),
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [

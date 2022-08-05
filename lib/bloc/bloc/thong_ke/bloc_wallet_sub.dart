@@ -2,6 +2,7 @@ import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/path/api_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
+import 'package:app_q_n_a/models/model_wallet_sub.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,9 +10,9 @@ import '../../../config/api.dart';
 import '../../../config/path/share_pref_path.dart';
 import '../../../models/model_question.dart';
 
-class BlocUserQuestion extends Bloc<EventBloc, StateBloc> {
-  BlocUserQuestion() : super(StateBloc());
-  List<ModelQuestion> list = [];
+class BlocWalletSub extends Bloc<EventBloc, StateBloc> {
+  BlocWalletSub() : super(StateBloc());
+  List<ModelWalletSub> list = [];
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
@@ -34,23 +35,23 @@ class BlocUserQuestion extends Bloc<EventBloc, StateBloc> {
         req['limit'] = event.limit;
         req['page'] = event.page;
 
-        var res = await Api.postAsync(endPoint: ApiPath.getQuestionByUser, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.getWalletSub, req: req);
 
         if (res['code'] == 1) {
           for (var item in res['data']) {
-            ModelQuestion model = ModelQuestion.fromJson(item);
+            ModelWalletSub model = ModelWalletSub.fromJson(item);
             list.add(model);
           }
           yield LoadSuccess(
             data: list,
             hasMore: false,
             checkLength:
-                res['data'].length == 0 && event.loadMore ? true : false,
+            res['data'].length == 0 && event.loadMore ? true : false,
           );
         }
-       else  if (res['code'] == 0) {
+        else  if (res['code'] == 0) {
           yield LoadFail(
-              error:  "Code: ${res['code']} => ${res['error']}",
+            error:  "Code: ${res['code']} => ${res['error']}",
           );
         }
         else {

@@ -97,7 +97,7 @@ Widget QuestionTitleSaved(
             ),
             ReadMoreText(
               question,
-              trimLines: 2,
+              trimLines: 3,
               colorClickableText: ColorApp.orangeF0,
               trimMode: TrimMode.Line,
               style: StyleApp.textStyle500(color: ColorApp.black),

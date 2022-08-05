@@ -174,8 +174,8 @@ class _AddQuestionState extends State<AddQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(10),
         child: BlocListener(
           bloc: bloc,
           listener: (_, StateBloc state) {
@@ -193,6 +193,7 @@ class _AddQuestionState extends State<AddQuestion> {
               radius: 30,
               style: false,
               fontSize: 18,
+              height: 40,
               border: Border.all(color: ColorApp.orangeF2, width: 0.5),
               textButton: 'Đăng câu hỏi',
               ontap: AddQuesVoid),
@@ -202,18 +203,12 @@ class _AddQuestionState extends State<AddQuestion> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
+        iconTheme:const  IconThemeData(
+          color: Colors.black
+        ),
         title: Text(
           'Đăng câu hỏi',
           style: StyleApp.textStyle700(fontSize: 18),
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-            color: ColorApp.black,
-          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -226,7 +221,7 @@ class _AddQuestionState extends State<AddQuestion> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
@@ -372,51 +367,7 @@ class _AddQuestionState extends State<AddQuestion> {
         itemBuilder: (_, index) {
           return index == 0
               ? InkWell(
-                  onTap: () {
-                    showPlatformDialog(
-                        context: context,
-                        builder: (context) => BasicDialogAlert(
-                              title: Text("Thêm hình ảnh"),
-                              content: Container(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    IconButton(
-                                        onPressed: () {
-                                          selectImageGallery();
-                                          Navigator.pop(context);
-                                        },
-                                        icon: Icon(
-                                          Icons.image,
-                                          size: 50,
-                                        )),
-                                    IconButton(
-                                        onPressed: () {
-                                          selectImageCamera();
-                                          Navigator.pop(context);
-                                        },
-                                        icon: Icon(
-                                          Icons.camera_alt,
-                                          size: 50,
-                                        ))
-                                  ],
-                                ),
-                              ),
-                              actions: <Widget>[
-                                BasicDialogAction(
-                                  title: Text(
-                                    "Trở lại",
-                                    style: StyleApp.textStyle500(
-                                        color: Colors.red),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            ));
-                  },
+                  onTap: _show,
                   child: Container(
                     width: double.infinity,
                     height: 100,
@@ -479,5 +430,29 @@ class _AddQuestionState extends State<AddQuestion> {
                   ),
                 );
         });
+  }
+  _show(){
+    showModalBottomSheet(
+        context: context, builder: (context) => Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ListTile(
+          onTap: (){
+            selectImageGallery();
+            Navigator.pop(context);
+          },
+          leading: const Icon(Icons.image_outlined,),
+          title: Text("Thư viện", style: StyleApp.textStyle400(),),
+        ),
+        ListTile(
+          onTap: (){
+            selectImageCamera();
+            Navigator.pop(context);
+          },
+          leading: const Icon(Icons.camera_alt_outlined,),
+          title: Text("Máy ảnh", style: StyleApp.textStyle400(),),
+        ),
+      ],
+    ));
   }
 }

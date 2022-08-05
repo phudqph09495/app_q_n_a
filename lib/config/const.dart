@@ -32,14 +32,14 @@ class Const {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginScreen(),
+            builder: (context) => const LoginScreen(),
           ));
     }
   }
 
   static formatTime(int time, {String? format}) {
     if (time == 0) {
-      return "Chưa cập nhật";
+      return "";
     }
     var check = isNumeric(time.toString());
     if (check) {

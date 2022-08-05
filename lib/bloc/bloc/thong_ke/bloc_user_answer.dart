@@ -1,17 +1,15 @@
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/path/api_path.dart';
-import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/api.dart';
-import '../../../config/path/share_pref_path.dart';
-import '../../../models/model_question.dart';
+import '../../../models/model_answer.dart';
 
-class BlocUserQuestion extends Bloc<EventBloc, StateBloc> {
-  BlocUserQuestion() : super(StateBloc());
-  List<ModelQuestion> list = [];
+class BlocUserAnswer extends Bloc<EventBloc, StateBloc> {
+  BlocUserAnswer() : super(StateBloc());
+  List<Answer> list = [];
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
@@ -34,23 +32,23 @@ class BlocUserQuestion extends Bloc<EventBloc, StateBloc> {
         req['limit'] = event.limit;
         req['page'] = event.page;
 
-        var res = await Api.postAsync(endPoint: ApiPath.getQuestionByUser, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.getAnswerByUser, req: req);
 
         if (res['code'] == 1) {
           for (var item in res['data']) {
-            ModelQuestion model = ModelQuestion.fromJson(item);
+            Answer model = Answer.fromJson(item);
             list.add(model);
           }
           yield LoadSuccess(
             data: list,
             hasMore: false,
             checkLength:
-                res['data'].length == 0 && event.loadMore ? true : false,
+            res['data'].length == 0 && event.loadMore ? true : false,
           );
         }
-       else  if (res['code'] == 0) {
+        else  if (res['code'] == 0) {
           yield LoadFail(
-              error:  "Code: ${res['code']} => ${res['error']}",
+            error:  "Code: ${res['code']} => ${res['error']}",
           );
         }
         else {

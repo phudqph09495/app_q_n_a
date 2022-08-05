@@ -5,6 +5,7 @@ import 'package:app_q_n_a/bloc/bloc/auth/bloc_waller_history.dart';
 import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_wallet.dart';
+import 'package:app_q_n_a/path/image_path.dart';
 import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -137,8 +138,8 @@ class _ViTienState extends State<ViTien> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.network(
-                              'https://i.pinimg.com/564x/eb/ff/a9/ebffa9af01173721c66e8090c35bb4cf.jpg',
+                            Image.asset(
+                              ImagesPath.withdraw,
                               width: 70,
                               height: 70,
                             ),
@@ -168,10 +169,15 @@ class _ViTienState extends State<ViTien> {
                                               format: "HH:mm dd/MM/yyyy"),
                                           style: StyleApp.textStyle400(),
                                         ),
-                                        Text(
-                                          '${Const.convertPrice(model.price)} Đ',
-                                          style: StyleApp.textStyle400(
-                                              color: ColorApp.orangeF01),
+                                        const SizedBox(width: 10,),
+                                        Expanded(
+                                          child: Text(
+                                            '${Const.convertPrice(model.price)} Đ',
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.right,
+                                            style: StyleApp.textStyle400(
+                                                color: ColorApp.orangeF01),
+                                          ),
                                         ),
                                       ],
                                     )

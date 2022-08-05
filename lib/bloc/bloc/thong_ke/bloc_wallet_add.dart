@@ -8,10 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../config/api.dart';
 import '../../../config/path/share_pref_path.dart';
 import '../../../models/model_question.dart';
+import '../../../models/model_wallet_add.dart';
 
-class BlocUserQuestion extends Bloc<EventBloc, StateBloc> {
-  BlocUserQuestion() : super(StateBloc());
-  List<ModelQuestion> list = [];
+class BlocWalletAdd extends Bloc<EventBloc, StateBloc> {
+  BlocWalletAdd() : super(StateBloc());
+  List<ModelWalletAdd> list = [];
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
@@ -34,23 +35,23 @@ class BlocUserQuestion extends Bloc<EventBloc, StateBloc> {
         req['limit'] = event.limit;
         req['page'] = event.page;
 
-        var res = await Api.postAsync(endPoint: ApiPath.getQuestionByUser, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.getWalletAdd, req: req);
 
         if (res['code'] == 1) {
           for (var item in res['data']) {
-            ModelQuestion model = ModelQuestion.fromJson(item);
+            ModelWalletAdd model = ModelWalletAdd.fromJson(item);
             list.add(model);
           }
           yield LoadSuccess(
             data: list,
             hasMore: false,
             checkLength:
-                res['data'].length == 0 && event.loadMore ? true : false,
+            res['data'].length == 0 && event.loadMore ? true : false,
           );
         }
-       else  if (res['code'] == 0) {
+        else  if (res['code'] == 0) {
           yield LoadFail(
-              error:  "Code: ${res['code']} => ${res['error']}",
+            error:  "Code: ${res['code']} => ${res['error']}",
           );
         }
         else {

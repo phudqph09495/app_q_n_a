@@ -5,10 +5,16 @@ import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/comment.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
+import 'package:app_q_n_a/item/gridView/grid_view_custom.dart';
 import 'package:app_q_n_a/item/input_text.dart';
+import 'package:app_q_n_a/item/item_answer/build_image_ans.dart';
+import 'package:app_q_n_a/item/item_user.dart';
 import 'package:app_q_n_a/item/load_image.dart';
+import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/styles.dart';
+import 'package:app_q_n_a/widget/items/item_count_down.dart';
+import 'package:app_q_n_a/widget/items/show_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 
@@ -19,160 +25,105 @@ import 'package:toast/toast.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:app_q_n_a/Screens/answer_screen.dart' as AnswerScreen;
 
+import '../../config/const.dart';
+import '../../models/model_answer.dart';
+
 class QuestionCard extends StatefulWidget {
-  String avatar;
-  String user;
-  String time;
-  String ques;
-  int endTime;
-  String imageques;
-  Widget image;
-  String? countAns;
-  List<dynamic>? imageFileList;
-  bool save = true;
-  QuestionCard(
-      {required this.avatar,
-      required this.ques,
-      required this.user,
-      required this.time,
-      this.imageques = '',
-      required this.image,
-      this.imageFileList,
-      this.countAns,
-      required this.endTime});
+  ModelAnswer modelAnswer;
+  ModelQuestion modelQuestion;
+  bool isSave;
+
+  QuestionCard({
+    this.isSave = false,
+    required this.modelAnswer,
+    required this.modelQuestion,
+  });
 
   @override
   State<QuestionCard> createState() => _QuestionCardState();
 }
 
 class _QuestionCardState extends State<QuestionCard> {
+  List<String> listImages = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.modelAnswer.images!.isNotEmpty) {
+      for (var image in widget.modelAnswer.images!) {
+        listImages.add("${Const.image_host}${image.path}${image.name}");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: ColorApp.whiteF7,
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: LoadImage(
-                      url: widget.avatar,
-                      height: 40,
-                      width: 40,
-                    )),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${widget.user}',
-                      style: StyleApp.textStyle500(),
-                    ),
-                    Text('${widget.time}', style: StyleApp.textStyle500())
-                  ],
-                ),
-                const SizedBox(
-                  width: 90,
-                ),
-                Button1(
-                  ontap: () {
-                    setState(() {
-                      widget.save = !widget.save;
-                    });
-                    Toast.show(
-                        widget.save ? "Bỏ lưu thành công" : "Lưu thành công",
-                        gravity: Toast.bottom);
-
-                  },
-                  colorButton:
-                      widget.save ? ColorApp.blue6D : ColorApp.orangeF01,
-                  textColor: widget.save ? ColorApp.whiteF0 : Colors.black,
-                  textButton: widget.save ? 'Lưu' : 'Bỏ lưu',
-                  height: 35,
+    return Container(
+      padding: const EdgeInsets.all(10),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ItemUser(username: widget.modelQuestion.username ?? "",
+          image: widget.modelQuestion.avatarPath +
+              widget.modelQuestion.avatarName,
+            time: widget.modelQuestion.createdAt ?? "",
+            onTap: (){
+              widget.isSave = !widget.isSave;
+              Toast.show(
+                  widget.isSave ? "Bỏ lưu thành công" : "Lưu thành công",
+                  gravity: Toast.bottom);
+            },
+            isSave: widget.isSave,
+            isSHowSave: true,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ItemCountDown(
+              time: Const.convertNumber(widget.modelQuestion.deadline).round() *
+                  1000),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(widget.modelQuestion.question ?? "", style: StyleApp.textStyle500(),),
+          const SizedBox(
+            height: 10,
+          ),
+          (Const.convertNumber(widget.modelQuestion.deadline).round() * 1000) >
+                  DateTime.now().millisecondsSinceEpoch
+              ? Container(
+                  decoration: BoxDecoration(
+                      color: ColorApp.whiteF0,
+                      borderRadius: BorderRadius.circular(5)),
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ReadMoreText(
+                        widget.modelQuestion.description ?? "",
+                        trimLines: 3,
+                        colorClickableText: ColorApp.orangeF01,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: 'Xem thêm',
+                        trimExpandedText: 'Ẩn bớt',
+                        style: StyleApp.textStyle500(fontSize: 16),
+                      ),
+                      listImages.isNotEmpty
+                          ? BuildImageAns(listImages: listImages)
+                          : const SizedBox(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
                 )
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CountdownTimer(
-              endTime: widget.endTime,
-              widgetBuilder: (_, CurrentRemainingTime? time) {
-                if (time == null) {
-                  return Text(
-                    'Đã hết giờ',
-                    style: StyleApp.textStyle500(color: ColorApp.red),
-                  );
-                }
-                return Row(
-                  children: [
-                    Text('Còn ',
-                        style: StyleApp.textStyle500(color: ColorApp.blue6D)),
-                    (time.days != null)
-                        ? Text('${time.days} ngày ',
-                            style:
-                                StyleApp.textStyle500(color: ColorApp.blue6D))
-                        : Text(''),
-                    (time.hours != null)
-                        ? Text('${time.hours} giờ ',
-                            style:
-                                StyleApp.textStyle500(color: ColorApp.blue6D))
-                        : Text(''),
-                    (time.min != null)
-                        ? Text('${time.min} phút ',
-                            style:
-                                StyleApp.textStyle500(color: ColorApp.blue6D))
-                        : Text(''),
-                    (time.sec != null)
-                        ? Text('${time.sec} giây',
-                            style:
-                                StyleApp.textStyle500(color: ColorApp.blue6D))
-                        : Text(''),
-                  ],
-                );
-              },
-            ),
-            ReadMoreText(
-              widget.ques,
-              trimLines: 2,
-              colorClickableText: ColorApp.orangeF01,
-              trimMode: TrimMode.Line,
-              trimCollapsedText: 'Hiện thêm',
-              trimExpandedText: 'Thu gọn',
-              style: StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
-            ),
-            widget.imageFileList!.isNotEmpty ? widget.image : SizedBox(),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              width: double.infinity,
-              child: Text(
-                'Có ${widget.countAns} câu trả lời',
-                style: StyleApp.textStyle500(color: ColorApp.blue6D),
-                textAlign: TextAlign.end,
-              ),
-            ),
-          ],
-        ),
+              : const SizedBox(),
+        ],
       ),
     );
   }
+
 }
-// GridView.builder(
-// itemCount: widget.imageFileList!.length,
-// gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-// crossAxisCount: 3),
-// shrinkWrap: true,
-// itemBuilder: (BuildContext context, int index) {
-// return LoadImage(url: "http://hoidap.nanoweb.vn/static${widget.imageFileList?[index]}");
-// // return Image.file(
-// //   File(widget.imageFileList![index].path),
-// // );
-// })

@@ -20,6 +20,7 @@ class GetData extends EventBloc {
   int? cat_id;
   int? class_id;
   int? subject_id;
+  String? id;
   String? keySearch;
   String? keySearch1;
   String? keySearch2;
@@ -42,6 +43,7 @@ class GetData extends EventBloc {
     this.number,
     this.image,
     this.money,
+    this.id,
   });
 }
 

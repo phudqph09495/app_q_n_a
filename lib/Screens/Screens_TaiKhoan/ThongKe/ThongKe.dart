@@ -14,6 +14,9 @@ import '../../../models/model_question.dart';
 import '../../../styles/colors.dart';
 import '../../../styles/styles.dart';
 import 'itemThongKe/listNguoiHoi.dart';
+import 'tab/tab_3.dart';
+import 'tab/tab_4.dart';
+import 'tab/tab_answer.dart';
 
 class ThongKe extends StatefulWidget {
   const ThongKe({Key? key}) : super(key: key);
@@ -79,18 +82,9 @@ class _ThongKeState extends State<ThongKe> {
         body: TabBarView(
           children: [
             TabQuestion(),
-            Expanded(
-              child: BlocBuilder<BlocGetQuestion, StateBloc>(
-                bloc: blocGetQuestion,
-                builder: (_, state) => QuestionList(
-                  listItem: state is LoadSuccess
-                      ? state.data as List<ModelQuestion>
-                      : [],
-                ),
-              ),
-            ),
-            NguoiHoiList(),
-            NguoiTraLoiList(),
+            TabAnswer(),
+            Tab3(),
+            Tab4(),
           ],
         ),
       ),

@@ -28,61 +28,55 @@ class DropDown2 extends StatefulWidget {
 class _DropDown2State extends State<DropDown2> {
   @override
   Widget build(BuildContext context) {
-    return ButtonTheme(
-      alignedDropdown: true,
-      child: DropdownButtonFormField(
-        validator: (val) {
-          if (widget.validator != null) {
-            return widget.validator!(val.toString());
-          }
-          return null;
-        },
-        menuMaxHeight: 300,
-        value: widget.value,
-        onChanged: (val) {
-          return widget.onChanged(val);
-        },
-        isExpanded: true,
-        style: StyleApp.textStyle400(),
-        hint: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            widget.hint,
-            style: StyleApp.textStyle400(color: ColorApp.blue3D),
-          ),
+    return DropdownButtonFormField(
+      validator: (val) {
+        if (widget.validator != null) {
+          return widget.validator!(val.toString());
+        }
+        return null;
+      },
+      menuMaxHeight: 300,
+      value: widget.value,
+      onChanged: (val) {
+        return widget.onChanged(val);
+      },
+      isExpanded: true,
+      style: StyleApp.textStyle400(),
+      hint: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          widget.hint,
+          style: StyleApp.textStyle400(color: ColorApp.blue3D),
         ),
-        decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.radius),
-              borderSide:
-                  BorderSide(color: Colors.black.withOpacity(0.2), width: 0.5),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.radius),
-              borderSide: BorderSide(color: ColorApp.orangeF2, width: 0.5),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.radius),
-              borderSide: const BorderSide(color: Colors.red, width: 0.5),
-              // borderSide:
-              // const BorderSide(color: ColorApp.black, width: 1),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.radius),
-              borderSide: BorderSide(color: Colors.red, width: 0.5),
-              // borderSide:
-              // const BorderSide(color: ColorApp.black, width: 1),
-            ),
-            contentPadding: EdgeInsets.only(left: 15, right: 10)),
-        items: List.generate(
-          widget.listItem.length,
-          (index) => DropdownMenuItem(
-            child: Text(
-              widget.listItem[index].name.toString(),
-              style: StyleApp.textStyle400(),
-            ),
-            value: widget.listItem[index],
+      ),
+      decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(widget.radius),
+            borderSide:
+                BorderSide(color: Colors.black.withOpacity(0.2), width: 0.5),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(widget.radius),
+            borderSide: const BorderSide(color: ColorApp.orangeF2, width: 0.5),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(widget.radius),
+            borderSide: const BorderSide(color: Colors.red, width: 0.5),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(widget.radius),
+            borderSide: const BorderSide(color: Colors.red, width: 0.5),
+
+          ),
+          contentPadding:const EdgeInsets.symmetric(horizontal: 10,)),
+      items: List.generate(
+        widget.listItem.length,
+        (index) => DropdownMenuItem(
+          child: Text(
+            widget.listItem[index].name.toString(),
+            style: StyleApp.textStyle400(),
+          ),
+          value: widget.listItem[index],
         ),
       ),
     );

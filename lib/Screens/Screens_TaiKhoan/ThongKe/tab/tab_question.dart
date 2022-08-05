@@ -1,20 +1,13 @@
 import 'package:app_q_n_a/bloc/bloc/thong_ke/bloc_user_qusetion.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
-import 'package:app_q_n_a/config/path/share_pref_path.dart';
-import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/widget/items/item_load_page.dart';
 import 'package:app_q_n_a/widget/items/item_loadmore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/state_bloc.dart';
-import '../../../../config/path/string_path.dart';
 import '../../../../item/question_tile.dart';
-import '../../../../styles/init_style.dart';
 
 class TabQuestion extends StatefulWidget {
   @override

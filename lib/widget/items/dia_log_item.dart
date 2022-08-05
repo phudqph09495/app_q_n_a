@@ -16,7 +16,7 @@ class DialogItem {
     bool login = false,
     bool logout = false,
     required String msg,
-    Function? onTap,
+    Function()? onTap,
   }) {
     showDialog(
       context: context,
@@ -33,6 +33,14 @@ class DialogItem {
           textAlign: TextAlign.left,
         ),
         actions: [
+          onTap != null ?  FlatButton(
+            onPressed: onTap,
+            child: Text(
+              "Xác nhận",
+              style: StyleApp.textStyle400(
+                  color: ColorApp.blue6D),
+            ),
+          ) : const SizedBox(),
           login || logout
               ? FlatButton(
                   onPressed: () async {
@@ -50,14 +58,10 @@ class DialogItem {
                         color: checkErr ? Colors.red : ColorApp.main),
                   ),
                 )
-              : Container(),
+              : const SizedBox(),
           FlatButton(
             onPressed: () {
-              if (onTap != null) {
-                onTap();
-              } else {
-                Navigator.pop(context);
-              }
+              Navigator.pop(context);
             },
             child: Text(
               "Đóng",

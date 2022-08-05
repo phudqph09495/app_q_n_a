@@ -71,7 +71,7 @@ class _InputText2State extends State<InputText2> {
                     style: StyleApp.textStyle400(color: Colors.black45),
                   ),
                 )
-              : SizedBox();
+              : const SizedBox();
         },
         keyboardType: widget.keyboardType,
         style: StyleApp.textStyle400(),
@@ -95,7 +95,7 @@ class _InputText2State extends State<InputText2> {
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.red, width: 0.5),
           ),
-          contentPadding: EdgeInsets.only(left: 33, top: 15, right: 20),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
           errorText: null,
         ),
         validator: (val) {

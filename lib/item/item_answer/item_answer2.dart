@@ -2,220 +2,204 @@ import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/comment.dart';
 import 'package:app_q_n_a/Screens/login.dart';
+import 'package:app_q_n_a/bloc/check_log_state.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/next_page.dart';
+import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/grid_view.dart';
 import 'package:app_q_n_a/item/input_text.dart';
+import 'package:app_q_n_a/item/item_answer/build_image_ans.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/styles.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 
+import '../../bloc/bloc/auth/bloc_good_answer.dart';
+import '../../bloc/event_bloc.dart';
+import '../../config/const.dart';
+import '../../models/model_answer.dart';
+import '../gridView/grid_view_custom.dart';
+import '../item_user.dart';
+
 class AnswerCard extends StatefulWidget {
-  String avatar;
-  String user;
-  String time;
-  String answer;
-  List<dynamic> imageFileList;
-  Widget imageAns;
-  int status;
-  var value;
+  int? user_id;
   Function()? comment;
-  var groupValue;
-  ValueChanged? onchanged;
-  Widget? title;
-  Widget IconReport;
-  Function()? report;
-  AnswerCard(
-      {required this.time,
-      required this.user,
-      required this.avatar,
-      required this.answer,
-      required this.imageAns,
-      this.status = 0,
-      this.value,
-      this.groupValue,
-      this.onchanged,
-      this.comment,
-      required this.IconReport,
-      required this.imageFileList,
-      this.title,
-      this.report});
+  bool showAnswer;
+  Answer model;
+  bool isUser;
+
+  AnswerCard({
+    required this.model,
+    this.comment,
+    this.user_id,
+    this.showAnswer = false,
+    this.isUser = true,
+  });
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
 }
 
 class _AnswerCardState extends State<AnswerCard> {
+  List<String> listImages = [];
+  int groupValue = 0;
+  BlocGoodAnswer blocGoodAnswer = BlocGoodAnswer();
+  var user_id;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    groupValue = Const.convertNumber(widget.model.status).round() == 2
+        ? 2
+        : Const.convertNumber(widget.model.status).round();
+    if (widget.model.images!.isNotEmpty) {
+      for (var element in widget.model.images!) {
+        listImages.add("${Const.image_host}${element.path}${element.name}");
+      }
+    }
+  }
+
+  getUserId() async {
+     user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
+     setState((){});
+  }
+  //trạng thái của câu trả lời
+  //0: chưa đăng nhập
+  //1: không phải chủ câu hỏi
+  //2: là chủ câu hỏi
+  //3: hiển thị khi hết deadline
+
   @override
   Widget build(BuildContext context) {
-    if ((widget.status == 0) || (widget.status == 1) || (widget.status == 2)) {
-      return InkWell(
-        onTap: () {
-          if (widget.status == 0) {
-            showPlatformDialog(
-              context: context,
-              builder: (context) => BasicDialogAlert(
-                title: Text("Lỗi"),
-                content: Text("Bạn phải đăng nhập để xem"),
-                actions: <Widget>[
-                  BasicDialogAction(
-                    title: Text("Trở lại"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          !widget.isUser ? const SizedBox() : Text(
+            'Trả lời',
+            style: StyleApp.textStyle700(fontSize: 20, color: ColorApp.black),
+          ) ,
+          ItemUser(
+            username: widget.model.username ?? "",
+            time: widget.model.createdAt ?? "",
+          ),
+          widget.user_id == user_id || widget.model.status == "3" ? Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              ReadMoreText(
+                widget.model.answer ?? "",
+                trimLines: 3,
+                colorClickableText: ColorApp.orangeF01,
+                trimMode: TrimMode.Line,
+                trimCollapsedText: 'Xem thêm',
+                trimExpandedText: 'Ẩn bớt',
+                style: StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
+              ),
+              listImages.isNotEmpty
+                  ? BuildImageAns(
+                listImages: listImages,
+                maxWight: 100,
+                mainAxisExtent: 100,
+              )
+                  : const SizedBox(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  !widget.isUser ? const SizedBox() : IconButton(
+                      onPressed: () {
+                        // báo cáo spam
+                      },
+                      icon: const Icon(Icons.report_gmailerrorred,
+                          color: Colors.red)),
+                  Expanded(
+                    child: BlocListener(
+                      bloc: blocGoodAnswer,
+                      listener: (_, StateBloc state) {
+                        CheckLogState.check(context,
+                            state: state,
+                            msg: "Trả tiền thành công", success: () {
+                              groupValue = 2;
+                              setState(() {});
+                            });
+                      },
+                      child: RadioListTile(
+                        visualDensity: const VisualDensity(
+                          horizontal: VisualDensity.minimumDensity,
+                          vertical: VisualDensity.minimumDensity,
+                        ),
+                        selectedTileColor: Colors.green,
+                        activeColor: Colors.green,
+                        contentPadding: EdgeInsets.zero,
+                        dense: true,
+                        toggleable: true,
+                        title: Text(
+                          groupValue == 2 ? 'Đã trả tiền' : "Trả tiền",
+                          style: StyleApp.textStyle500(color: groupValue == 2 ? Colors.green : Colors.orange),
+                        ),
+                        value: 2,
+                        groupValue: groupValue,
+                        onChanged: (val) async {
+                          _payment();
+                        },
+                      ),
+                    ),
                   ),
-                  BasicDialogAction(
-                    title: Text("Đăng nhập"),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
-                    },
-                  ),
+                  !widget.isUser ? const SizedBox() :const SizedBox(width: 10),
+                  !widget.isUser ? const SizedBox() :Button1(
+                    height: 35,
+                    colorButton: ColorApp.whiteF7,
+                    textColor: ColorApp.black,
+                    border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                    textButton: 'Bình luận',
+                    ontap: widget.comment,
+                  )
                 ],
               ),
-            );
-          } else if (widget.status == 1) {
-            showPlatformDialog(
-              context: context,
-              builder: (context) => BasicDialogAlert(
-                title: Text("Lỗi"),
-                content: Text("Bạn chưa thể xem câu trả lời này bây giờ"),
-                actions: <Widget>[
-                  BasicDialogAction(
-                    title: Text("Trở lại"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            );
-          } else if (widget.status == 2) {
-            setState(() {
-              widget.status = 3;
-            });
+            ],
+          ) : const SizedBox(),
+        ],
+      ),
+    );
+  }
+
+  _payment() async {
+
+    if(widget.model.userId == user_id){
+      Const.checkLogin(
+        context,
+        nextPage: () {
+          if (groupValue != 2 && user_id == widget.user_id) {
+            DialogItem.showMsg(
+                context: context,
+                title: "Thanh toán",
+                msg: "Xác nhận thanh toán cho người trả lời",
+                checkErr: true,
+                onTap: () {
+                  Navigator.pop(context);
+                  blocGoodAnswer.add(GetData(id: widget.model.userId));
+                });
+          }else{
+            if(widget.model.userId == widget.user_id.toString()){
+              DialogItem.showMsg(context: context, title: "Lỗi", msg: "Bạn không thể tự trả tiền cho chính mình");
+            }
           }
         },
-        child: Card(
-          color: ColorApp.whiteF7,
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Center(
-              child: Text(
-                '..... đã trả lời câu hỏi',
-                style: StyleApp.textStyle400(color: ColorApp.blue6D),
-              ),
-            ),
-          ),
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap: widget.comment,
-        child: Card(
-          color: ColorApp.whiteF7,
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Trả lời',
-                  style: StyleApp.textStyle700(
-                      fontSize: 20, color: ColorApp.black),
-                ),
-                Row(
-                  children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: LoadImage(
-                          url: widget.avatar,
-                          height: 40,
-                          width: 40,
-                        )),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${widget.user}',
-                          style: StyleApp.textStyle500(),
-                        ),
-                        Text('${widget.time}', style: StyleApp.textStyle500())
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ReadMoreText(
-                  widget.answer,
-                  trimLines: 2,
-                  colorClickableText: ColorApp.orangeF01,
-                  trimMode: TrimMode.Line,
-                  trimCollapsedText: 'Hiện thêm',
-                  trimExpandedText: 'Thu gọn',
-                  style: StyleApp.textStyle500(
-                      fontSize: 16, color: ColorApp.black),
-                ),
-                (widget.imageFileList.isNotEmpty)
-                    ? widget.imageAns
-                    : SizedBox(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    widget.IconReport,
-                    Container(
-                      width: 140,
-                      child: RadioListTile<int>(
-                          visualDensity: const VisualDensity(
-                            horizontal: VisualDensity.minimumDensity,
-                            vertical: VisualDensity.minimumDensity,
-                          ),
-                          selectedTileColor: Colors.green,
-                          activeColor: Colors.green,
-                          contentPadding: EdgeInsets.zero,
-                          dense: true,
-                          toggleable: true,
-                          title: (widget.value == widget.groupValue)
-                              ? Text(
-                                  'Đã trả tiền',
-                                  style: StyleApp.textStyle500(
-                                      color: Colors.green),
-                                )
-                              : widget.title,
-                          value: widget.value,
-                          groupValue: widget.groupValue,
-                          onChanged: widget.onchanged),
-                    ),
-                    Button1(
-                      height: 35,
-                      colorButton: ColorApp.whiteF7,
-                      textColor: ColorApp.black,
-                      border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                      textButton: 'Bình luận',
-                      ontap: widget.comment,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-          ),
-        ),
       );
     }
   }

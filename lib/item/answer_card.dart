@@ -124,11 +124,11 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                   ),
             ReadMoreText(
               widget.question,
-              trimLines: 2,
+              trimLines: 3,
               colorClickableText: ColorApp.orangeF01,
               trimMode: TrimMode.Line,
-              trimCollapsedText: 'Hiện thêm',
-              trimExpandedText: 'Thu gọn',
+              trimCollapsedText: 'Xem thêm',
+              trimExpandedText: 'Ẩn bớt',
               style: StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
             ),
             widget.hasImage

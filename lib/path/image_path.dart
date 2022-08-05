@@ -9,4 +9,7 @@ class ImagesPath {
   static const imageStar = "images/icon_star.png";
   static const imageRank1 = "images/logo-rank1.png";
   static const imageDefult = "images/default.jpg";
+  static const withdraw = "images/cash-withdrawal.png";
+  static const walletTransfer = "images/money-transfer.png";
+  static const reward = "images/reward.png";
 }

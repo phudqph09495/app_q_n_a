@@ -127,7 +127,7 @@ Widget QuestionTile(
             ),
             ReadMoreText(
               modelQuestion.question ?? "Đang cập nhật",
-              trimLines: 2,
+              trimLines: 3,
               colorClickableText: ColorApp.orangeF0,
               trimMode: TrimMode.Line,
               style: StyleApp.textStyle500(color: ColorApp.black),

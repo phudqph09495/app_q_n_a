@@ -7,19 +7,19 @@ class ModelAnswer {
   ModelAnswer({this.question, this.images, this.answer, this.countAnswer});
 
   ModelAnswer.fromJson(Map<String, dynamic> json) {
+    images = <Images>[];
+    answer = <Answer>[];
     question = json['question'] != null
-        ? new Question.fromJson(json['question'])
+        ? Question.fromJson(json['question'])
         : null;
     if (json['images'] != null) {
-      images = <Images>[];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(Images.fromJson(v));
       });
     }
     if (json['answer'] != null) {
-      answer = <Answer>[];
       json['answer'].forEach((v) {
-        answer!.add(new Answer.fromJson(v));
+        answer!.add(Answer.fromJson(v));
       });
     }
     countAnswer = json['count_answer'];
@@ -202,6 +202,8 @@ class Answer {
       this.items});
 
   Answer.fromJson(Map<String, dynamic> json) {
+    images = <Images2>[];
+    items = <Items>[];
     id = json['id'];
     answer = json['answer'];
     createdAt = json['created_at'];
@@ -214,13 +216,13 @@ class Answer {
     parentId = json['parent_id'];
     username = json['username'];
     if (json['images'] != null) {
-      images = <Images2>[];
+
       json['images'].forEach((v) {
         images!.add(new Images2.fromJson(v));
       });
     }
     if (json['items'] != null) {
-      items = <Items>[];
+
       json['items'].forEach((v) {
         items!.add(new Items.fromJson(v));
       });

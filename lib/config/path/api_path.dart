@@ -20,6 +20,10 @@ class ApiPath {
   static const getClass = "/app/home/get-class";
   static const getSub = "/app/home/get-subjects";
   static const getCat = "/app/home/get-category";
+  static const getQuestionByUser = "/app/question/get-question-user";
+  static const getAnswerByUser = "/app/question/get-answer-user";
+  static const getWalletSub = "/app/user/get-wallet-sub";
+  static const getWalletAdd = "/app/user/get-wallet-add";
 
   /// Wallet
   static const getWallet = "/app/wallet/wallet";
