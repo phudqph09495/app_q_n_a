@@ -22,13 +22,11 @@ class CommentScreen extends StatefulWidget {
   int answerind;
   int quesID;
   int parent_id;
-  int user_id;
   List<Items> item;
   CommentScreen(
       {required this.quesID,
       required this.parent_id,
       required this.item,
-      required this.user_id,
       required this.answerind});
   @override
   State<CommentScreen> createState() => _CommentScreenState();

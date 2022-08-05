@@ -14,6 +14,7 @@ import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../config/next_page.dart';
 import '../styles/colors.dart';
 import '../widget/items/dia_log_item.dart';
 
@@ -153,19 +154,28 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
         ),
       )
       ,
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: ColorApp.orangeF2,
+      floatingActionButton: ElevatedButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddQuestion()));
+          PageNavigator.next(context: context, page: AddQuestion());
         },
-        label: Text(
-          'Đặt câu hỏi',
-          style: StyleApp.textStyle900(fontSize: 16, color: Colors.white),
+        style: ElevatedButton.styleFrom(
+          primary: ColorApp.orangeF0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30)
+          ),
         ),
-        icon: const Icon(
-          Icons.add,
-          color: Colors.white,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Đặt câu hỏi', style: StyleApp.textStyle700(color: Colors.white),), // <-- Text
+            const SizedBox(
+              width: 5,
+            ),
+            const Icon( // <-- Icon
+              Icons.add,
+              size: 24.0,
+            ),
+          ],
         ),
       ),
     );

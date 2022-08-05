@@ -2,11 +2,23 @@ import 'package:app_q_n_a/models/model_local.dart';
 import 'package:image_picker/image_picker.dart';
 
 abstract class EventBloc {}
-
+class LoadMoreEvent extends EventBloc {
+  String? id;
+  int limit, page;
+  bool cleanList, loadMore;
+  LoadMoreEvent({
+    this.id,
+    this.cleanList = false,
+    this.limit = 12,
+    this.page = 1,
+    this.loadMore = false,
+  });
+}
 class GetData extends EventBloc {
   int? cat_id;
   int? class_id;
   int? subject_id;
+  String? id;
   String? keySearch;
   String? keySearch1;
   String? keySearch2;
@@ -16,10 +28,12 @@ class GetData extends EventBloc {
   String? bankName;
   String? money;
   XFile? image;
+  int? countFilter;
   GetData({
     this.keyword,
     this.cat_id,
     this.class_id,
+    this.id,
     this.subject_id,
     this.keySearch,
     this.keySearch1,
@@ -141,12 +155,10 @@ class ChagePassApp extends EventBloc {
 }
 
 class ChagePassIsLogin extends EventBloc {
-  int user_id;
-  String password;
+ String password;
   String passwordre;
 
   ChagePassIsLogin({
-    required this.user_id,
     required this.passwordre,
     required this.password,
   });
@@ -183,10 +195,9 @@ class goodAns extends EventBloc {
 }
 
 class reportANS extends EventBloc {
-  int user_id;
   int id;
   String content;
-  reportANS({required this.user_id, required this.id, required this.content});
+  reportANS({required this.id, required this.content});
 }
 
 class getHistory extends EventBloc {

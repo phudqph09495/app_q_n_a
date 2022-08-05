@@ -25,45 +25,53 @@ class BuildImageAns extends StatelessWidget {
       crossAxisSpacing: 10,
       mainAxisExtent: mainAxisExtent,
       itemBuilder: (_, index) {
-        return InkWell(
-          onTap: () {
-            PageNavigator.next(
-                context: context,
-                page: ShowImage(
-                  listImage: listImages,
-                ));
-          },
+        return  ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: LoadImage(
-                  ans: false,
-                  url: listImages[index],
-                  fit: BoxFit.cover,
-                ),
-              ),
-              (listImages.length - 4) > 0 && index == 3
-                  ? Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  "+ ${listImages.length - 4}",
-                  style: StyleApp.textStyle500(
-                      fontSize: 16, color: Colors.black),
-                ),
-              )
-                  : const SizedBox(),
-            ],
+          child: LoadImage(
+            ans: false,
+            url: listImages[index],
+            fit: BoxFit.contain,
           ),
         );
       },
     );
   }
 }
+//InkWell(
+//           onTap: () {
+//             PageNavigator.next(
+//                 context: context,
+//                 page: ShowImage(
+//                   listImage: listImages,
+//                 ));
+//           },
+//           borderRadius: BorderRadius.circular(10),
+//           child: Stack(
+//             children: [
+//               ClipRRect(
+//                 borderRadius: BorderRadius.circular(10),
+//                 child: LoadImage(
+//                   ans: false,
+//                   url: listImages[index],
+//                   fit: BoxFit.contain,
+//                 ),
+//               ),
+//               (listImages.length - 4) > 0 && index == 3
+//                   ? Container(
+//                 width: double.infinity,
+//                 height: double.infinity,
+//                 decoration: BoxDecoration(
+//                   color: Colors.white.withOpacity(0.3),
+//                   borderRadius: BorderRadius.circular(10),
+//                 ),
+//                 alignment: Alignment.center,
+//                 child: Text(
+//                   "+ ${listImages.length - 4}",
+//                   style: StyleApp.textStyle500(
+//                       fontSize: 16, color: Colors.black),
+//                 ),
+//               )
+//                   : const SizedBox(),
+//             ],
+//           ),
+//         )

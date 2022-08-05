@@ -1,16 +1,21 @@
+import 'package:app_q_n_a/bloc/bloc/notification/bloc_read_notifi.dart';
 import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../Screens/Screens_Notification/screens_news.dart';
+import '../../bloc/event_bloc.dart';
+import '../../bloc/state_bloc.dart';
 import '../../models/model_news.dart';
 
 class ItemNotifi1 extends StatelessWidget {
   ModelNews modelNews;
 
   ItemNotifi1({required this.modelNews});
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,11 @@ class ItemNotifi1 extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         onTap: () {
-          PageNavigator.next(context: context, page: ScreensNew(modelNews: modelNews,));
+
+          PageNavigator.next(context: context, page: ScreensNew(
+            title: modelNews.title ?? "Thông báo",
+            des: modelNews.description ?? "Đang cập nhật",
+          ));
         },
         child: Padding(
           padding: const EdgeInsets.all(10.0),

@@ -9,7 +9,6 @@ class ItemUser extends StatefulWidget {
   String image ;
   String username;
   String time;
-  bool isSave;
   bool isSHowSave;
   Function()? onTap;
 
@@ -17,7 +16,6 @@ class ItemUser extends StatefulWidget {
     required this.username,
     this.image = "",
     this.time = '',
-    this.isSave = false,
     this.isSHowSave = false,
     this.onTap
 });
@@ -65,14 +63,10 @@ class _ItemUserState extends State<ItemUser> {
         ),
         SizedBox(width: widget.isSHowSave ? 10 : 0),
         widget.isSHowSave ? ElevatedButton(
-          onPressed: (){
-            widget.isSave = !widget.isSave;
-            setState((){});
-            widget.onTap!();
-          },
+          onPressed: widget.onTap,
           style: ElevatedButton.styleFrom(primary: ColorApp.blue6D),
           child: Text(
-            widget.isSave ? "Hủy" : "Lưu",
+             "Lưu",
             style: StyleApp.textStyle700(color: Colors.white),
           ),
         ) : const SizedBox(),

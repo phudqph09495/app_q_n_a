@@ -24,25 +24,29 @@ import 'package:toast/toast.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 
 import '../../bloc/bloc/auth/bloc_good_answer.dart';
+import '../../bloc/bloc/auth/bloc_report.dart';
 import '../../bloc/event_bloc.dart';
 import '../../config/const.dart';
 import '../../models/model_answer.dart';
 import '../gridView/grid_view_custom.dart';
+import '../input/text_filed2.dart';
 import '../item_user.dart';
 
 class AnswerCard extends StatefulWidget {
   int? user_id;
-  Function()? comment;
   bool showAnswer;
   Answer model;
   bool isUser;
+  int deadLine;
+  int index;
 
   AnswerCard({
     required this.model,
-    this.comment,
     this.user_id,
     this.showAnswer = false,
     this.isUser = true,
+    this.deadLine = 0,
+    this.index = 0,
   });
 
   @override
@@ -52,7 +56,9 @@ class AnswerCard extends StatefulWidget {
 class _AnswerCardState extends State<AnswerCard> {
   List<String> listImages = [];
   int groupValue = 0;
+  BlocReport blocReport = BlocReport();
   BlocGoodAnswer blocGoodAnswer = BlocGoodAnswer();
+  TextEditingController textReport = TextEditingController();
   var user_id;
 
   @override
@@ -70,9 +76,10 @@ class _AnswerCardState extends State<AnswerCard> {
   }
 
   getUserId() async {
-     user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
-     setState((){});
+    user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
+    setState(() {});
   }
+
   //trạng thái của câu trả lời
   //0: chưa đăng nhập
   //1: không phải chủ câu hỏi
@@ -88,99 +95,134 @@ class _AnswerCardState extends State<AnswerCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          !widget.isUser ? const SizedBox() : Text(
-            'Trả lời',
-            style: StyleApp.textStyle700(fontSize: 20, color: ColorApp.black),
-          ) ,
+          !widget.isUser
+              ? const SizedBox()
+              : Text(
+                  'Trả lời',
+                  style: StyleApp.textStyle700(
+                      fontSize: 20, color: ColorApp.black),
+                ),
           ItemUser(
             username: widget.model.username ?? "",
             time: widget.model.createdAt ?? "",
           ),
-          widget.user_id == user_id || widget.model.status == "3" ? Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              ReadMoreText(
-                widget.model.answer ?? "",
-                trimLines: 3,
-                colorClickableText: ColorApp.orangeF01,
-                trimMode: TrimMode.Line,
-                trimCollapsedText: 'Xem thêm',
-                trimExpandedText: 'Ẩn bớt',
-                style: StyleApp.textStyle500(fontSize: 16, color: ColorApp.black),
-              ),
-              listImages.isNotEmpty
-                  ? BuildImageAns(
-                listImages: listImages,
-                maxWight: 100,
-                mainAxisExtent: 100,
-              )
-                  : const SizedBox(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  !widget.isUser ? const SizedBox() : IconButton(
-                      onPressed: () {
-                        // báo cáo spam
-                      },
-                      icon: const Icon(Icons.report_gmailerrorred,
-                          color: Colors.red)),
-                  Expanded(
-                    child: BlocListener(
-                      bloc: blocGoodAnswer,
-                      listener: (_, StateBloc state) {
-                        CheckLogState.check(context,
-                            state: state,
-                            msg: "Trả tiền thành công", success: () {
-                              groupValue = 2;
-                              setState(() {});
-                            });
-                      },
-                      child: RadioListTile(
-                        visualDensity: const VisualDensity(
-                          horizontal: VisualDensity.minimumDensity,
-                          vertical: VisualDensity.minimumDensity,
-                        ),
-                        selectedTileColor: Colors.green,
-                        activeColor: Colors.green,
-                        contentPadding: EdgeInsets.zero,
-                        dense: true,
-                        toggleable: true,
-                        title: Text(
-                          groupValue == 2 ? 'Đã trả tiền' : "Trả tiền",
-                          style: StyleApp.textStyle500(color: groupValue == 2 ? Colors.green : Colors.orange),
-                        ),
-                        value: 2,
-                        groupValue: groupValue,
-                        onChanged: (val) async {
-                          _payment();
-                        },
-                      ),
+          widget.user_id == user_id ||
+                  widget.model.status == "3" ||
+                   DateTime.now().millisecondsSinceEpoch >= widget.deadLine
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  !widget.isUser ? const SizedBox() :const SizedBox(width: 10),
-                  !widget.isUser ? const SizedBox() :Button1(
-                    height: 35,
-                    colorButton: ColorApp.whiteF7,
-                    textColor: ColorApp.black,
-                    border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                    textButton: 'Bình luận',
-                    ontap: widget.comment,
-                  )
-                ],
-              ),
-            ],
-          ) : const SizedBox(),
+                    ReadMoreText(
+                      widget.model.answer ?? "",
+                      trimLines: 3,
+                      colorClickableText: ColorApp.orangeF01,
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: 'Xem thêm',
+                      trimExpandedText: 'Ẩn bớt',
+                      style: StyleApp.textStyle500(
+                          fontSize: 16, color: ColorApp.black),
+                    ),
+                    listImages.isNotEmpty
+                        ? BuildImageAns(
+                            listImages: listImages,
+                            maxWight: 100,
+                            mainAxisExtent: 100,
+                          )
+                        : const SizedBox(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        !widget.isUser
+                            ? const SizedBox()
+                            : BlocListener(
+                                bloc: blocReport,
+                                listener: (_, StateBloc state) {
+                                  CheckLogState.check(context,
+                                      state: state,
+                                      msg: "Báo cáo vi phạm thành công");
+                                },
+                                child: IconButton(
+                                    onPressed: () {
+                                      _showDataReport();
+                                    },
+                                    icon: const Icon(Icons.report_gmailerrorred,
+                                        color: Colors.red)),
+                              ),
+                        Expanded(
+                          child: BlocListener(
+                            bloc: blocGoodAnswer,
+                            listener: (_, StateBloc state) {
+                              CheckLogState.check(context,
+                                  state: state,
+                                  msg: "Trả tiền thành công", success: () {
+                                groupValue = 2;
+                                setState(() {});
+                              });
+                            },
+                            child: RadioListTile(
+                              visualDensity: const VisualDensity(
+                                horizontal: VisualDensity.minimumDensity,
+                                vertical: VisualDensity.minimumDensity,
+                              ),
+                              selectedTileColor: Colors.green,
+                              activeColor: Colors.green,
+                              contentPadding: EdgeInsets.zero,
+                              dense: true,
+                              toggleable: true,
+                              title: Text(
+                                groupValue == 2 ? 'Đã trả tiền' : "Trả tiền",
+                                style: StyleApp.textStyle500(
+                                    color: groupValue == 2
+                                        ? Colors.green
+                                        : Colors.orange),
+                              ),
+                              value: 2,
+                              groupValue: groupValue,
+                              onChanged: (val) async {
+                                _payment();
+                              },
+                            ),
+                          ),
+                        ),
+                        !widget.isUser
+                            ? const SizedBox()
+                            : const SizedBox(width: 10),
+                        !widget.isUser
+                            ? const SizedBox()
+                            : Button1(
+                                height: 35,
+                                colorButton: ColorApp.whiteF7,
+                                textColor: ColorApp.black,
+                                border: Border.all(
+                                    color: ColorApp.orangeF2, width: 0.5),
+                                textButton: 'Bình luận',
+                                ontap: (){
+                                  PageNavigator.next(
+                                    context: context,
+                                    page: CommentScreen(
+                                      answerind: widget.index,
+                                      quesID: Const.convertNumber(widget.model.questionId).round(),
+                                      parent_id: Const.convertNumber(widget.model.id).round(),
+                                      item: widget.model.items ?? [],
+                                    ),
+                                  );
+                                },
+                              )
+                      ],
+                    ),
+                  ],
+                )
+              : const SizedBox(),
         ],
       ),
     );
   }
 
   _payment() async {
-
-    if(widget.model.userId == user_id){
+    if (widget.model.userId == user_id) {
       Const.checkLogin(
         context,
         nextPage: () {
@@ -194,13 +236,73 @@ class _AnswerCardState extends State<AnswerCard> {
                   Navigator.pop(context);
                   blocGoodAnswer.add(GetData(id: widget.model.userId));
                 });
-          }else{
-            if(widget.model.userId == widget.user_id.toString()){
-              DialogItem.showMsg(context: context, title: "Lỗi", msg: "Bạn không thể tự trả tiền cho chính mình");
+          } else {
+            if (widget.model.userId == widget.user_id.toString()) {
+              DialogItem.showMsg(
+                  context: context,
+                  title: "Lỗi",
+                  msg: "Bạn không thể tự trả tiền cho chính mình");
             }
           }
         },
       );
     }
+  }
+
+  _showDataReport() {
+    textReport.clear();
+    showBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10)
+      ),
+      builder: (_) => Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InputText2(
+                counter: true,
+                hint: 'Nhập thông tin vi phạm',
+                keyboardType: TextInputType.multiline,
+                maxline: 6,
+                controller: textReport,
+              ),
+              const SizedBox(height: 10),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.spaceAround,
+               children: [
+                 ElevatedButton(
+                   onPressed: () {
+                     Navigator.pop(context);
+                     if(textReport.text.isNotEmpty){
+                       blocReport.add(reportANS(id: Const.convertNumber(widget.model.id).round(), content: textReport.text));
+                     }else{
+                       DialogItem.showMsg(context: context, title: "Lỗi", msg: "Vui lòng nhập thông tin vi phạm");
+                     }
+
+                   },
+                   child: Text(
+                     "Gửi báo cáo",
+                     style: StyleApp.textStyle500(color: Colors.white),
+                   ),
+                 ),
+                 ElevatedButton(
+                   onPressed: () {
+                    Navigator.pop(context);
+                   },
+                   child: Text(
+                     "Hủy",
+                     style: StyleApp.textStyle500(color: Colors.white),
+                   ),
+                 ),
+               ],
+             ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

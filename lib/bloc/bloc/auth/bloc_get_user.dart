@@ -33,9 +33,9 @@ class BlocGetUser extends Bloc<EventBloc, StateBloc> {
         yield LoadFail(
             error: e.error.error ??
                 "Lỗi. Vui lòng liên hệ với Admin để được hỗ trợ.");
-      } on Exception catch (_) {
+      } catch (e) {
         yield LoadFail(
-            error: "Lỗi. Vui lòng liên hệ với Admin để được hỗ trợ.");
+            error: e.toString());
       }
     }
   }

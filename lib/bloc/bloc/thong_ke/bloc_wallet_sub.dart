@@ -61,8 +61,8 @@ class BlocWalletSub extends Bloc<EventBloc, StateBloc> {
         }
       } on DioError catch (e) {
         yield LoadFail(error: e.error.error ?? "Không sác định");
-      } on Exception catch (e) {
-        yield LoadFail(error: "Không sác định");
+      }  catch (e) {
+        yield LoadFail(error: e.toString());
       }
     }
   }

@@ -1,81 +1,69 @@
+import 'package:app_q_n_a/Screens/Screens_Notification/screens_news.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
+import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/load_image.dart';
+import 'package:app_q_n_a/models/model_notifi.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Notification2 extends StatelessWidget {
-  Function()? onTap;
-  String avatar;
-  String title;
-  String time;
-  String sub;
+import '../../bloc/bloc/notification/bloc_read_notifi.dart';
+import '../../bloc/event_bloc.dart';
+import '../../config/const.dart';
 
-  Notification2(
-      {required this.avatar,
-      required this.sub,
-      this.onTap,
-      required this.time,
-      required this.title});
+class Notification2 extends StatefulWidget {
+  ModelNotifi modelNotifi ;
+
+  Notification2({required this.modelNotifi});
 
   @override
+  State<Notification2> createState() => _Notification2State();
+}
+
+class _Notification2State extends State<Notification2> {
+  BlocReadNotifi bloc = BlocReadNotifi();
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: InkWell(
-        onTap: onTap,
-        child: Column(
-          children: [
-            const SizedBox(height: 5),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 4),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: LoadImage(
-                          url: avatar,
-                          height: 25,
-                          width: 25,
-                          fit: BoxFit.cover)),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          title,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: StyleApp.textStyle700(
-                              fontSize: 16, color: ColorApp.black),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          sub,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          style: StyleApp.textStyle400(
-                              fontSize: 12, color: ColorApp.black),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          time,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: StyleApp.textStyle400(
-                              fontSize: 12, color: ColorApp.grey82),
-                        ),
-                        const SizedBox(height: 5),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+    return InkWell(
+      onTap: (){
+        bloc.add(GetData(id: widget.modelNotifi.id));
+        widget.modelNotifi.unread = "0";
+        PageNavigator.next(context: context, page: ScreensNew(
+          title: widget.modelNotifi.title ?? "Thông báo",
+          des: widget.modelNotifi.description ?? "Đang cập nhật",
+        ));
+        setState((){});
+      },
+      child:  BlocListener(
+        bloc: bloc,
+        listener: (_,StateBloc state){},
+        child: Container(
+          padding: const EdgeInsets.all(10.0),
+          decoration:  BoxDecoration(
+            border: const Border(
+              bottom: BorderSide(color: Colors.grey),
             ),
-            const Divider(color: ColorApp.greyBD),
-          ],
+            color: widget.modelNotifi.unread == "1" ?  ColorApp.orangeF0.withOpacity(0.2) : Colors.white
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                widget.modelNotifi.title ?? "",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: StyleApp.textStyle500(),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                Const.checkTime(Const.convertNumber(widget.modelNotifi.createdAt).round()),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: StyleApp.textStyle400(
+                    fontSize: 12, color: ColorApp.grey82),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/comment.dart';
+import 'package:app_q_n_a/bloc/bloc/question/bloc_save_question.dart';
+import 'package:app_q_n_a/bloc/check_log_state.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/gridView/grid_view_custom.dart';
@@ -16,9 +20,11 @@ import 'package:app_q_n_a/styles/styles.dart';
 import 'package:app_q_n_a/widget/items/item_count_down.dart';
 import 'package:app_q_n_a/widget/items/show_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
@@ -45,6 +51,7 @@ class QuestionCard extends StatefulWidget {
 
 class _QuestionCardState extends State<QuestionCard> {
   List<String> listImages = [];
+  BlocSaveQuestion blocSaveQuestion = BlocSaveQuestion();
 
   @override
   void initState() {
@@ -65,18 +72,24 @@ class _QuestionCardState extends State<QuestionCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ItemUser(username: widget.modelQuestion.username ?? "",
-          image: widget.modelQuestion.avatarPath +
-              widget.modelQuestion.avatarName,
-            time: widget.modelQuestion.createdAt ?? "",
-            onTap: (){
-              widget.isSave = !widget.isSave;
-              Toast.show(
-                  widget.isSave ? "Bỏ lưu thành công" : "Lưu thành công",
-                  gravity: Toast.bottom);
+          BlocListener(
+            bloc: blocSaveQuestion,
+            listener: (_,StateBloc state){
+              CheckLogState.check(context, state: state,
+              msg: "Lưu câu hỏi thành công"
+              );
             },
-            isSave: widget.isSave,
-            isSHowSave: true,
+            child: ItemUser(username: widget.modelQuestion.username ?? "",
+            image: widget.modelQuestion.avatarPath +
+                widget.modelQuestion.avatarName,
+              time: widget.modelQuestion.createdAt ?? "",
+              onTap: (){
+                blocSaveQuestion.add(GetData(
+                  id: widget.modelQuestion.id
+                ));
+              },
+              isSHowSave: true,
+            ),
           ),
           const SizedBox(
             height: 10,

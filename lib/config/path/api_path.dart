@@ -20,10 +20,7 @@ class ApiPath {
   static const getClass = "/app/home/get-class";
   static const getSub = "/app/home/get-subjects";
   static const getCat = "/app/home/get-category";
-  static const getQuestionByUser = "/app/question/get-question-user";
-  static const getAnswerByUser = "/app/question/get-answer-user";
-  static const getWalletSub = "/app/user/get-wallet-sub";
-  static const getWalletAdd = "/app/user/get-wallet-add";
+  static const getsave = "/app/user/save-question";
 
   /// Wallet
   static const getWallet = "/app/wallet/wallet";
@@ -33,6 +30,10 @@ class ApiPath {
   static const getBank = "/app/user/bank";
   static const getBankAdmin = "/app/home/get-siteinfo";
   static const addMoney = "/app/user/add-money";
+  static const getQuestionByUser = "/app/question/get-question-user";
+  static const getAnswerByUser = "/app/question/get-answer-user";
+  static const getWalletSub = "/app/user/get-wallet-sub";
+  static const getWalletAdd = "/app/user/get-wallet-add";
 
   ///answer
   static const addAnswer = "/app/question/add-answer";
@@ -76,5 +77,6 @@ class ApiPath {
 
   /// notifi
   static const listNotifi = "/app/user/get-notifycations";
+  static const readNotifi = "/app/user/read-notifycation";
   static const getNews = "/app/home/get-news";
 }

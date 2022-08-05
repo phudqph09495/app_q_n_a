@@ -7,7 +7,6 @@ import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/path/image_path.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/provider/image_provider.dart';
-import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';

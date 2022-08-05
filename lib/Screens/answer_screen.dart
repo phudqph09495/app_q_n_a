@@ -3,19 +3,13 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/Screens/comment.dart';
-import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
-import 'package:app_q_n_a/bloc/bloc/auth/bloc_good_answer.dart';
-import 'package:app_q_n_a/bloc/bloc/auth/bloc_report.dart';
-import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/config/next_page.dart';
-import 'package:app_q_n_a/item/grid_view.dart' as Grid;
 import 'package:app_q_n_a/item/item_answer/item_answer1.dart';
 import 'package:app_q_n_a/item/item_answer/item_answer2.dart';
-import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_answer.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
@@ -25,12 +19,10 @@ import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/Screens/add_answer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dialogs/flutter_dialogs.dart';
-import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
 import '../config/path/share_pref_path.dart';
 import '../config/share_pref.dart';
-import 'Screens_TaiKhoan/body_product.dart' as Body;
+//import 'Screens_TaiKhoan/body_product.dart' as Body;
 
 late int ansid;
 late String ansCon;
@@ -58,17 +50,10 @@ class AnswerScreen extends StatefulWidget {
 
 class _AnswerScreenState extends State<AnswerScreen> {
   BlocGetAnswer bloc = BlocGetAnswer();
-  BlocReport blocReport = BlocReport();
+
   int end = 0;
   int now = 0;
   bool isPass = false;
-
-
-  report() async {
-    blocReport
-        .add(reportANS(user_id: Body.id, id: ansid, content: Grid.content));
-  }
-
 
   Future<void> onRefresh() async {
     bloc.add(getAns(question_id: int.parse(widget.modelQuestion.id ?? '0')));
@@ -161,19 +146,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
                           return AnswerCard(
                             model: model.answer![index],
                             user_id: model.question!.userId,
-                            comment: () {
-                              PageNavigator.next(
-                                context: context,
-                                page: CommentScreen(
-                                  answerind: index,
-                                  user_id: Body.id,
-                                  quesID: model.question?.id ?? 0,
-                                  parent_id: int.parse(
-                                      (model.answer?[index].id) ?? ''),
-                                  item: model.answer?[index].items ?? [],
-                                ),
-                              );
-                            },
+                            deadLine: Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,
+                            index: index,
                           );
                         },
                       ),
@@ -195,9 +169,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
       if(user_id != widget.modelQuestion.userId && end > now && !isPass){
         PageNavigator.next(context: context, page: Add_Answer_Screen(
-          user_id: Body.id,
-          question_id:
-          int.parse(widget.modelQuestion.id ?? '0'),
+          user_id: user_id,
+          question_id: int.parse(widget.modelQuestion.id ?? '0'),
         )).then((value) => onRefresh());
       }else{
         String err = "Lỗi kết nối";

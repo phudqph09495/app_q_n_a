@@ -17,7 +17,6 @@ class BlocReport extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
-        req['user_id'] = event.user_id;
         req['id'] = event.id;
         req['content'] = event.content;
 
