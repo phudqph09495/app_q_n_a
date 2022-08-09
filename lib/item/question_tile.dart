@@ -1,9 +1,11 @@
 import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
+import 'package:app_q_n_a/item/item_user.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/widget/items/dia_log_item.dart';
+import 'package:app_q_n_a/widget/items/item_count_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
@@ -21,8 +23,7 @@ Widget QuestionTile(
       Const.checkTime(Const.convertNumber(modelQuestion.createdAt).round());
 
   String title = '${modelQuestion.subjectName ?? 'Lĩnh vực khác'}'
-      ' - ${modelQuestion.className}'
-      ' - ${Const.convertPrice(modelQuestion.priceGift)} đ'
+      '${modelQuestion.className == null ? "" : " - ${modelQuestion.className}"}'
       '${createdAt == "" ? "" : " - $createdAt"}';
 
   return InkWell(
@@ -46,25 +47,18 @@ Widget QuestionTile(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: StyleApp.textStyle700(
-                        fontSize: 16, color: ColorApp.black),
+                  child: ItemUser(
+                    username: modelQuestion.username ?? "",
+                    time: modelQuestion.createdAt ?? "0",
+                    image:
+                        "${modelQuestion.avatarPath}${modelQuestion.avatarName}",
                   ),
                 ),
-                modelQuestion.countImages != '0'
-                    ? Row(
-                        children: [
-                          const Icon(Icons.attach_file_rounded),
-                          Text(modelQuestion.countImages ?? "0")
-                        ],
-                      )
-                    : const SizedBox(),
+                const SizedBox(
+                  width: 10,
+                ),
                 (modelQuestion.userCountQuestion == '1')
                     ? Container(
                         decoration: BoxDecoration(
@@ -83,45 +77,62 @@ Widget QuestionTile(
                     : SizedBox()
               ],
             ),
-            CountdownTimer(
-              endTime:
-                  Const.convertNumber(modelQuestion.deadline).round() * 1000,
-              widgetBuilder: (_, CurrentRemainingTime? time) {
-                if (time == null) {
-                  return Text(
-                    'Đã hết giờ',
-                    style: StyleApp.textStyle500(color: ColorApp.red),
-                  );
-                }
-                return Row(
-                  children: [
-                    Text('Còn ',
-                        style: StyleApp.textStyle500(
-                            color: ColorApp.blue6D.withOpacity(0.5))),
-                    (time.days != null)
-                        ? Text('${time.days} ngày ',
-                            style: StyleApp.textStyle500(
-                                color: ColorApp.blue6D.withOpacity(0.5)))
-                        : Text(''),
-                    (time.hours != null)
-                        ? Text('${time.hours} giờ ',
-                            style: StyleApp.textStyle500(
-                                color: ColorApp.blue6D.withOpacity(0.5)))
-                        : Text(''),
-                    (time.min != null)
-                        ? Text('${time.min} phút ',
-                            style: StyleApp.textStyle500(
-                                color: ColorApp.blue6D.withOpacity(0.5)))
-                        : Text(''),
-                    (time.sec != null)
-                        ? Text('${time.sec} giây',
-                            style: StyleApp.textStyle500(
-                                color: ColorApp.blue6D.withOpacity(0.5)))
-                        : Text(''),
-                  ],
-                );
-              },
+            const SizedBox(height: 10),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: RichText(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: title,
+                          style: StyleApp.textStyle700(
+                              fontSize: 16, color: ColorApp.black),
+                        ),
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.attach_file_rounded,
+                                size: 17,
+                              ),
+                              Text(
+                                modelQuestion.countImages ?? "0",
+                                style: StyleApp.textStyle700(
+                                    fontSize: 16, color: ColorApp.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Const.convertNumber(modelQuestion.priceGift) <= 0
+                    ? const SizedBox()
+                    : Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border:
+                                Border.all(color: Colors.green, width: 0.5)),
+                        child: Text(
+                          Const.convertPrice(modelQuestion.priceGift),
+                          style: StyleApp.textStyle500(color: Colors.green),
+                        ),
+                      ),
+              ],
             ),
+            ItemCountDown(
+                time:
+                    Const.convertNumber(modelQuestion.deadline).round() * 1000),
             const SizedBox(
               height: 5,
             ),
@@ -138,15 +149,15 @@ Widget QuestionTile(
               height: 10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: LoadImage(
-                      url: '',
-                      height: 40,
-                      width: 40,
-                    )),
+                // ClipRRect(
+                //     borderRadius: BorderRadius.circular(10.0),
+                //     child: LoadImage(
+                //       url: '',
+                //       height: 40,
+                //       width: 40,
+                //     )),
                 Button1(
                   height: 30,
                   colorButton: Colors.white,
@@ -155,11 +166,13 @@ Widget QuestionTile(
                   textButton: 'Trả lời',
                   ontap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AnswerScreen(
-                                  modelQuestion: modelQuestion,
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AnswerScreen(
+                          modelQuestion: modelQuestion,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],

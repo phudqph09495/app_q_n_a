@@ -41,7 +41,7 @@ class _Notification2State extends State<Notification2> {
           padding: const EdgeInsets.all(10.0),
           decoration:  BoxDecoration(
             border: const Border(
-              bottom: BorderSide(color: Colors.grey),
+              bottom: BorderSide(color: Colors.grey, width:0.5),
             ),
             color: widget.modelNotifi.unread == "1" ?  ColorApp.orangeF0.withOpacity(0.2) : Colors.white
           ),

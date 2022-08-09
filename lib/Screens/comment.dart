@@ -63,121 +63,119 @@ class _CommentScreenState extends State<CommentScreen> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: onRefresh,
-      child: SafeArea(
-        child: Scaffold(
-          bottomSheet: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: BlocListener(
-              bloc: blocAddAnswer,
-              listener: (_, StateBloc state) {
-                CheckLogState.check(context, state: state, isShowMsg: false,
-                    success: () {
-                  onRefresh();
-                  reply.clear();
-                });
-              },
-              child: InputText(
-                iconPress: AddComment,
-                width: double.infinity,
-                inputType: TextInputType.multiline,
-                maxline: null,
-                controller: reply,
-                hint: 'Nhập bình luận....',
-                iconS: true,
-                suffixIcon: Icon(
-                  Icons.send,
-                ),
-              ),
-            ),
-          ),
-          backgroundColor: ColorApp.whiteF7,
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: ColorApp.whiteF0,
-            title: Text(
-              'Bình luận',
-              style: StyleApp.textStyle700(
-                fontSize: 18,
-              ),
-            ),
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
-                color: ColorApp.black,
-              ),
-            ),
-          ),
-          body: BlocBuilder(
-            bloc: blocGetAnswer,
-            builder: (_, state) {
-              if (state is LoadSuccess) {
-                list = state.data as ModelAnswer;
-                print(list.answer?[widget.answerind].items?.length);
-                return SingleChildScrollView(
-                  reverse: true,
-                  child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount:
-                            list.answer?[widget.answerind].items?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    //Mở trang cá nhân
-                                  },
-                                  child: Text(
-                                    list.answer?[widget.answerind].items?[index]
-                                            .username ??
-                                        'hello',
-                                    style: StyleApp.textStyle600(fontSize: 14),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(Const.checkTime(Const.convertNumber(
-                                                  list
-                                                          .answer?[
-                                                              widget.answerind]
-                                                          .items?[index]
-                                                          .createdAt ??
-                                                      00)
-                                              .round()) ??
-                                          'hi'),
-                                      Text(
-                                        list.answer?[widget.answerind]
-                                                .items?[index].answer ??
-                                            'hi',
-                                        style: StyleApp.textStyle600(),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
-                );
-              }
-              return Container();
+      child: Scaffold(
+        bottomSheet: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: BlocListener(
+            bloc: blocAddAnswer,
+            listener: (_, StateBloc state) {
+              CheckLogState.check(context, state: state, isShowMsg: false,
+                  success: () {
+                onRefresh();
+                reply.clear();
+              });
             },
+            child: InputText(
+              iconPress: AddComment,
+              width: double.infinity,
+              inputType: TextInputType.multiline,
+              maxline: null,
+              controller: reply,
+              hint: 'Nhập bình luận....',
+              iconS: true,
+              suffixIcon: Icon(
+                Icons.send,
+              ),
+            ),
           ),
+        ),
+        backgroundColor: ColorApp.whiteF7,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: ColorApp.whiteF0,
+          title: Text(
+            'Bình luận',
+            style: StyleApp.textStyle700(
+              fontSize: 18,
+            ),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+              color: ColorApp.black,
+            ),
+          ),
+        ),
+        body: BlocBuilder(
+          bloc: blocGetAnswer,
+          builder: (_, state) {
+            if (state is LoadSuccess) {
+              list = state.data as ModelAnswer;
+              print(list.answer?[widget.answerind].items?.length);
+              return SingleChildScrollView(
+                reverse: true,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount:
+                          list.answer?[widget.answerind].items?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  //Mở trang cá nhân
+                                },
+                                child: Text(
+                                  list.answer?[widget.answerind].items?[index]
+                                          .username ??
+                                      'hello',
+                                  style: StyleApp.textStyle600(fontSize: 14),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(Const.checkTime(Const.convertNumber(
+                                                list
+                                                        .answer?[
+                                                            widget.answerind]
+                                                        .items?[index]
+                                                        .createdAt ??
+                                                    00)
+                                            .round()) ??
+                                        'hi'),
+                                    Text(
+                                      list.answer?[widget.answerind]
+                                              .items?[index].answer ??
+                                          'hi',
+                                      style: StyleApp.textStyle600(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                ),
+              );
+            }
+            return Container();
+          },
         ),
       ),
     );

@@ -20,10 +20,10 @@ class ScreenProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorApp.whiteF0,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: ColorApp.whiteF0,
         centerTitle: true,
+        backgroundColor: Colors.white,
         title: Text(
           "Trang Cá Nhân",
           style: StyleApp.textStyle700(fontSize: 18, color: ColorApp.black),

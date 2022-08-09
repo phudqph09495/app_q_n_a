@@ -120,6 +120,7 @@ class _AddQuestionState extends State<AddQuestion> {
   List<XFile> imageFiles = [];
   StreamController imagesController = StreamController.broadcast();
   final ImagePicker _picker = ImagePicker();
+
   Stream get imageStream => imagesController.stream;
 
   selectImageGallery() {
@@ -203,16 +204,14 @@ class _AddQuestionState extends State<AddQuestion> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ColorApp.whiteF0,
-        iconTheme:const  IconThemeData(
-          color: Colors.black
-        ),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           'Đăng câu hỏi',
           style: StyleApp.textStyle700(fontSize: 18),
         ),
       ),
       body: SingleChildScrollView(
-        padding:const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Form(
           key: keyForm,
           child: Column(
@@ -298,6 +297,30 @@ class _AddQuestionState extends State<AddQuestion> {
                 'Phần thưởng',
                 style: StyleApp.textStyle700(fontSize: 16),
               ),
+              GridViewCustom(
+                itemCount: 5,
+                showFull: true,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                mainAxisExtent: 45,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                maxWight: 120,
+                itemBuilder: (_, index) => OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    primary: Colors.green.shade200,
+                    side: BorderSide(
+                      color: Colors.green.shade200,
+                    )
+                  ),
+                  child: Text(
+                    Const.convertPrice(10000 * (index + 1)),
+                    style: StyleApp.textStyle500(color: Colors.green),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
               InputText2(
                 keyboardType: TextInputType.number,
                 hint: 'Phần thưởng cho người trả lời',
@@ -428,28 +451,40 @@ class _AddQuestionState extends State<AddQuestion> {
                 );
         });
   }
-  _show(){
+
+  _show() {
     showModalBottomSheet(
-        context: context, builder: (context) => Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ListTile(
-          onTap: (){
-            selectImageGallery();
-            Navigator.pop(context);
-          },
-          leading: const Icon(Icons.image_outlined,),
-          title: Text("Thư viện", style: StyleApp.textStyle400(),),
-        ),
-        ListTile(
-          onTap: (){
-            selectImageCamera();
-            Navigator.pop(context);
-          },
-          leading: const Icon(Icons.camera_alt_outlined,),
-          title: Text("Máy ảnh", style: StyleApp.textStyle400(),),
-        ),
-      ],
-    ));
+        context: context,
+        builder: (context) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  onTap: () {
+                    selectImageGallery();
+                    Navigator.pop(context);
+                  },
+                  leading: const Icon(
+                    Icons.image_outlined,
+                  ),
+                  title: Text(
+                    "Thư viện",
+                    style: StyleApp.textStyle400(),
+                  ),
+                ),
+                ListTile(
+                  onTap: () {
+                    selectImageCamera();
+                    Navigator.pop(context);
+                  },
+                  leading: const Icon(
+                    Icons.camera_alt_outlined,
+                  ),
+                  title: Text(
+                    "Máy ảnh",
+                    style: StyleApp.textStyle400(),
+                  ),
+                ),
+              ],
+            ));
   }
 }

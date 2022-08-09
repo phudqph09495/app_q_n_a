@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/Question_saved/List_save.dart';
+import 'package:app_q_n_a/bloc/bloc/question/bloc_list_question-save.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,10 @@ import '../../bloc/bloc/auth/bloc_getquestion.dart';
 import '../../bloc/event_bloc.dart';
 import '../../bloc/state_bloc.dart';
 import '../../item/question_list.dart';
+import '../../item/question_tile.dart';
 import '../../models/model_question.dart';
+import '../../widget/items/item_load_page.dart';
+import '../../widget/items/item_loadmore.dart';
 import '../answer_screen.dart';
 
 class QuestionSavedSS extends StatefulWidget {
@@ -19,16 +23,38 @@ class QuestionSavedSS extends StatefulWidget {
 }
 
 class _QuestionSavedSSState extends State<QuestionSavedSS> {
-  BlocGetQuestion blocGetQuestion = BlocGetQuestion();
-  Future<void> onRefresh() async {
-    blocGetQuestion.add(GetData());
-  }
+  BlocListQuestionSave bloc = BlocListQuestionSave();
+  ScrollController _controller = ScrollController();
+  int page = 1;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     onRefresh();
+    loadmore();
+  }
+
+  Future<void> onRefresh() async {
+    page = 1;
+    bloc.add(LoadMoreEvent(
+      page: page,
+      limit: 20,
+      cleanList: true,
+    ));
+  }
+
+  loadmore() async {
+    _controller.addListener(() {
+      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+        page++;
+        bloc.add(LoadMoreEvent(
+          page: page,
+          loadMore: true,
+          limit: 20,
+        ));
+      }
+    });
   }
 
   @override
@@ -52,46 +78,44 @@ class _QuestionSavedSSState extends State<QuestionSavedSS> {
           ),
         ),
       ),
-      // body: SingleChildScrollView(
-      //   child: Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         const SizedBox(
-      //           height: 8,
-      //         ),
-      //         Expanded(
-      //           child: BlocBuilder<BlocGetQuestion, StateBloc>(
-      //             bloc: blocGetQuestion,
-      //             builder: (_, state) => QuestionList(
-      //               listItem: state is LoadSuccess
-      //                   ? state.data as List<ModelQuestion>
-      //                   : [],
-      //             ),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
       body: RefreshIndicator(
         onRefresh: onRefresh,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: BlocBuilder<BlocGetQuestion, StateBloc>(
-                bloc: blocGetQuestion,
-                builder: (_, state) => QuestionList(
-                  listItem: state is LoadSuccess
-                      ? state.data as List<ModelQuestion>
-                      : [],
-                ),
-              ),
-            ),
-          ],
-        ),
+        child: BlocBuilder(
+            bloc: bloc,
+            builder: (_, StateBloc state) {
+              final list = state is LoadSuccess
+                  ? state.data as List<ModelQuestion>
+                  : <ModelQuestion>[];
+              final length = state is LoadSuccess ? state.checkLength : false;
+              final hasMore = state is LoadSuccess ? state.hasMore : false;
+              return ItemLoadPage(
+                  state: state,
+                  onTapErr: () {
+                    onRefresh();
+                  },
+                  success: list.isEmpty
+                      ? ItemListEmpty()
+                      : SingleChildScrollView(
+                    controller: _controller,
+                    padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: List.generate(
+                              list.length,
+                                  (index) => QuestionTile(context,
+                                  modelQuestion: list[index])),
+                        ),
+                        ItemLoadMore(
+                          hasMore: hasMore,
+                          length: length,
+                        ),
+                      ],
+                    ),
+                  ));
+            }),
       ),
     );
   }

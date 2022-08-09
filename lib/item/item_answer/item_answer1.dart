@@ -80,8 +80,8 @@ class _QuestionCardState extends State<QuestionCard> {
               );
             },
             child: ItemUser(username: widget.modelQuestion.username ?? "",
-            image: widget.modelQuestion.avatarPath +
-                widget.modelQuestion.avatarName,
+            image: widget.modelQuestion.avatarPath.toString() +
+                widget.modelQuestion.avatarName.toString(),
               time: widget.modelQuestion.createdAt ?? "",
               onTap: (){
                 blocSaveQuestion.add(GetData(
