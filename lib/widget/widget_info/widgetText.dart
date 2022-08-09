@@ -13,7 +13,9 @@ class ItemAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
+      context.read<BLocLocalUser>().getUser();
       ModelUser user = snapshot ?? ModelUser();
+
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(

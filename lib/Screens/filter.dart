@@ -10,7 +10,9 @@ import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/item/gridView/grid_view_2.dart';
 import 'package:app_q_n_a/models/model_local.dart';
+import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
 import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/item/grid_view.dart';
@@ -50,11 +52,33 @@ class _FilterState extends State<Filter> {
           child: BlocListener(
             bloc: blocGetQuestion,
             listener: (_, StateBloc state) {
-              CheckLogState.check(context, state: state, isShowMsg: false,
-                  success: () {
-                context.read<BlocGetQuestion>().add(getQuestionHome);
-                Navigator.pop(context);
-              });
+              // CheckLogState.check(context, state: state, isShowMsg: false,
+              //     success: () {
+              //   context.read<BlocGetQuestion>().add(getQuestionHome);
+              // });
+              // List<ModelQuestion> list =
+              //     state is LoadSuccess ? state.data as List<ModelQuestion> : [];
+              // if (list.isNotEmpty) {
+              //   Navigator.pop(context);
+              // } else {
+              //   DialogItem.showMsg(
+              //       context: context,
+              //       title: "Lỗi",
+              //       msg: "Không tìm thấy nội dung phù hợp",
+              //   onTap: (){
+              //         Navigator.pop(context);
+              //   });
+              // }
+              if(state is LoadSuccess){
+                List<ModelQuestion> list=state.data;
+                if(list.length==0){
+                  DialogItem.showMsg(context: context, title: "Lỗi", msg: "Không tìm thấy nội dung");
+                }
+                else{
+                  context.read<BlocGetQuestion>().add(getQuestionHome);
+                  Navigator.pop(context);
+                }
+              }
             },
             child: Button1(
                 style: false,
