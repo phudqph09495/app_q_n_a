@@ -29,6 +29,7 @@ class GetData extends EventBloc {
   String? money;
   XFile? image;
   int? countFilter;
+int? delete;
   GetData({
     this.keyword,
     this.cat_id,
@@ -43,6 +44,7 @@ class GetData extends EventBloc {
     this.number,
     this.image,
     this.money,
+this.delete
   });
 }
 
@@ -248,3 +250,5 @@ class getTaoNganHang extends EventBloc {
       this.created_at,
       this.updated_at});
 }
+
+

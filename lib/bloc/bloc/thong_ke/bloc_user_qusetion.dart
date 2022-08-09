@@ -33,9 +33,7 @@ class BlocUserQuestion extends Bloc<EventBloc, StateBloc> {
         Map<String, dynamic> req = {};
         req['limit'] = event.limit;
         req['page'] = event.page;
-
         var res = await Api.postAsync(endPoint: ApiPath.getQuestionByUser, req: req);
-
         if (res['code'] == 1) {
           for (var item in res['data']) {
             ModelQuestion model = ModelQuestion.fromJson(item);

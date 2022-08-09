@@ -45,9 +45,9 @@ class DialogItem {
               ? FlatButton(
                   onPressed: () async {
                     if (logout) {
-                      Navigator.pop(context);
                       await SharePrefsKeys.removeAllKey();
                       context.read<BlocCheckLogin>().add(GetData());
+                      Navigator.pop(context);
                     } else {
                       Navigator.pop(context);
                     }

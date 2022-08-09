@@ -12,6 +12,7 @@ import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/item/button.dart';
@@ -57,6 +58,7 @@ class _BodyProductState extends State<BodyProduct> {
     phone = await SharedPrefs.readString(SharePrefsKeys.phone);
     isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
   }
+
 
   @override
   void initState() {
@@ -233,7 +235,7 @@ class _BodyProductState extends State<BodyProduct> {
                     fontSize: 18,
                     style: false,
                     ontap: () {
-                      id = 0;
+
                       DialogItem.showMsg(
                         context: context,
                         title: "Đăng xuất",
@@ -241,6 +243,7 @@ class _BodyProductState extends State<BodyProduct> {
                         logout: true,
                         titleButton: "Đồng ý",
                       );
+
                     })
                 : Button1(
                     border: Border.all(color: ColorApp.orangeF2, width: 0.5),

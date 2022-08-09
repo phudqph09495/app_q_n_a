@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/Question_saved/List_save.dart';
+import 'package:app_q_n_a/bloc/bloc/question/bloc_list_save.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/styles.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import '../../bloc/state_bloc.dart';
 import '../../item/question_list.dart';
 import '../../models/model_question.dart';
 import '../answer_screen.dart';
+import '../../../../item/question_tile.dart';
 
 class QuestionSavedSS extends StatefulWidget {
   @override
@@ -19,9 +21,10 @@ class QuestionSavedSS extends StatefulWidget {
 }
 
 class _QuestionSavedSSState extends State<QuestionSavedSS> {
-  BlocGetQuestion blocGetQuestion = BlocGetQuestion();
+  BlocListSave blocListSave = BlocListSave();
+
   Future<void> onRefresh() async {
-    blocGetQuestion.add(GetData());
+    blocListSave.add(GetData());
   }
 
   @override
@@ -81,14 +84,22 @@ class _QuestionSavedSSState extends State<QuestionSavedSS> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: BlocBuilder<BlocGetQuestion, StateBloc>(
-                bloc: blocGetQuestion,
-                builder: (_, state) => QuestionList(
-                  listItem: state is LoadSuccess
-                      ? state.data as List<ModelQuestion>
-                      : [],
-                ),
-              ),
+              child: BlocBuilder<BlocListSave, StateBloc>(
+                  bloc: blocListSave,
+                  builder: (_, state) {
+                    if (state is LoadSuccess) {
+                      List<ModelQuestion> list = state.data;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: List.generate(
+                            list.length,
+                            (index) => QuestionTile(context,
+                                modelQuestion: list[index],
+                            )),
+                      );
+                    }
+                    return Container();
+                  }),
             ),
           ],
         ),

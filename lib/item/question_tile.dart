@@ -21,7 +21,7 @@ Widget QuestionTile(
       Const.checkTime(Const.convertNumber(modelQuestion.createdAt).round());
 
   String title = '${modelQuestion.subjectName ?? 'Lĩnh vực khác'}'
-      ' - ${modelQuestion.className}'
+      ' - ${(modelQuestion.className)??'Lớp ${(int.parse(modelQuestion.classId??'0')-2)}'}'
       ' - ${Const.convertPrice(modelQuestion.priceGift)} đ'
       '${createdAt == "" ? "" : " - $createdAt"}';
 
