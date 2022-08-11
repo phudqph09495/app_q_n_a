@@ -67,11 +67,11 @@ class _Button1State extends State<Button1> {
       alignment: Alignment.center,
       child: FlatButton(
         onPressed: widget.ontap,
-        onLongPress: () {
-          setState(() {
-            _incrementColorIndex();
-          });
-        },
+        // onLongPress: () {
+        //   setState(() {
+        //     _incrementColorIndex();
+        //   });
+        // },
         height: widget.height,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

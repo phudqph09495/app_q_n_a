@@ -50,24 +50,24 @@ class ItemAccount extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      height: 20,
-                      width: 20,
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Colors.lightGreen,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                      ),
-                    ))
+                // Positioned(
+                //     bottom: 0,
+                //     right: 0,
+                //     child: Container(
+                //       height: 20,
+                //       width: 20,
+                //       child: const Icon(
+                //         Icons.edit,
+                //         color: Colors.white,
+                //         size: 15,
+                //       ),
+                //       decoration: const BoxDecoration(
+                //         color: Colors.lightGreen,
+                //         borderRadius: BorderRadius.all(
+                //           Radius.circular(20),
+                //         ),
+                //       ),
+                //     ))
               ],
             ),
             const SizedBox(
@@ -88,6 +88,14 @@ class ItemAccount extends StatelessWidget {
                   Text(
                     // Const.checkStringNull(id),
                     'Id thành viên: ${user.id ?? ""}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: StyleApp.textStyle700(
+                        color: ColorApp.black, fontSize: 16),
+                  ),
+                  Text(
+                    // Const.checkStringNull(id),
+                    'Điểm: ${user.id ?? ""}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: StyleApp.textStyle700(

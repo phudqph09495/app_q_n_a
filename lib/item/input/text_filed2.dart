@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:flutter/services.dart';
 import '../../styles/init_style.dart';
 
 class InputText2 extends StatefulWidget {
@@ -18,7 +19,7 @@ class InputText2 extends StatefulWidget {
   Color borderColor;
   String hint;
   Function()? onTap;
-
+  List<TextInputFormatter>? textInputFormatter;
   int? maxline;
   bool counter;
 
@@ -40,6 +41,7 @@ class InputText2 extends StatefulWidget {
     this.borderColor = ColorApp.main,
     this.colorBg = Colors.white,
     this.hint = "",
+    this.textInputFormatter
   });
 
   @override
@@ -53,6 +55,7 @@ class _InputText2State extends State<InputText2> {
     return Container(
       width: widget.width,
       child: TextFormField(
+        inputFormatters: widget.textInputFormatter,
         maxLines: widget.maxline,
         obscureText: widget.obscureText,
         onTap: widget.onTap,

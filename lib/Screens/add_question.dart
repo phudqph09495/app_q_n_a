@@ -20,6 +20,7 @@ import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/validator.dart';
 import 'package:app_q_n_a/widget/items/custom_toast.dart';
 import 'package:app_q_n_a/widget/items/dia_log_item.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -307,7 +308,9 @@ class _AddQuestionState extends State<AddQuestion> {
                 mainAxisSpacing: 5,
                 maxWight: 120,
                 itemBuilder: (_, index) => OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    money.text=Const.convertPrice(10000 * (index + 1));
+                  },
                   style: OutlinedButton.styleFrom(
                     primary: Colors.green.shade200,
                     side: BorderSide(
@@ -322,6 +325,13 @@ class _AddQuestionState extends State<AddQuestion> {
               ),
               const SizedBox(height: 10),
               InputText2(
+                textInputFormatter: [
+                  CurrencyTextInputFormatter(
+                    // locale: 'ko',
+                    decimalDigits: 0,
+                    symbol: '',
+                  ),
+                ],
                 keyboardType: TextInputType.number,
                 hint: 'Phần thưởng cho người trả lời',
                 controller: money,
