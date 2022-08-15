@@ -10,6 +10,7 @@ import 'package:app_q_n_a/item/question_list.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/widget/items/item_load_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -149,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: RefreshIndicator(
           onRefresh: onRefresh,
           child: BlocBuilder<BlocGetQuestion, StateBloc>(
-            builder: (_, state) {
+            builder: (_,StateBloc state) {
               // final keySearch =  state is LoadSuccess
               //      ? state.keySearch
               //      : null;
@@ -158,30 +159,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 keySearch1 = state.keySearch1;
                 keySearch2 = state.keySearch2;
               }
-              return Column(
-                children: [
-                  Row(
-                    children: [
-                      keySearch != null
-                          ? _itemSearch(keySearch)
-                          : Container(),
-                      keySearch1 != null
-                          ? _itemSearch(keySearch1)
-                          : Container(),
-                      keySearch2 != null
-                          ? _itemSearch(keySearch2)
-                          : Container(),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: QuestionList(
-                      listItem: state is LoadSuccess
-                          ? state.data as List<ModelQuestion>
-                          : [],
-                    ),
-                  ),
-                ],
+              return ItemLoadPage(state: state,
+               success: Column(
+                 children: [
+                   Row(
+                     children: [
+                       keySearch != null
+                           ? _itemSearch(keySearch)
+                           : Container(),
+                       keySearch1 != null
+                           ? _itemSearch(keySearch1)
+                           : Container(),
+                       keySearch2 != null
+                           ? _itemSearch(keySearch2)
+                           : Container(),
+                     ],
+                   ),
+                   const SizedBox(height: 10),
+                   Expanded(
+                     child: QuestionList(
+                       listItem: state is LoadSuccess
+                           ? state.data as List<ModelQuestion>
+                           : [],
+                     ),
+                   ),
+                 ],
+               ),
+                onTapErr: onRefresh,
               );
             },
           ),

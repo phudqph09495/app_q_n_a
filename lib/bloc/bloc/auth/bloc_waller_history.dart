@@ -25,7 +25,7 @@ class BlocWalletHistory extends Bloc<EventBloc, StateBloc> {
           );
         }
       } on DioError catch (e) {
-        yield LoadFail(error: e.error ?? "Lỗi kết nối");
+        yield LoadFail(error: e.error.error ?? "Lỗi kết nối");
       } catch (e) {
         yield LoadFail(error: e.toString());
       }

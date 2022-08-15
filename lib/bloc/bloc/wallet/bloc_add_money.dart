@@ -33,7 +33,7 @@ class BlocAddMoney extends Bloc<EventBloc, StateBloc> {
               error: res['error'] ?? "Tạo phiếu nạp tiền không thành công");
         }
       } on DioError catch (e) {
-        yield LoadFail(error: e.error ?? "Lỗi kết nối");
+        yield LoadFail(error: e.error.error ?? "Lỗi kết nối");
       } catch (e) {
         yield LoadFail(error: e.toString());
       }

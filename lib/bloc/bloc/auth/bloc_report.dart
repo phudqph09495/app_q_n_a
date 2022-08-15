@@ -35,7 +35,7 @@ class BlocReport extends Bloc<EventBloc, StateBloc> {
           yield LoadFail(error: loi);
         }
       } on DioError catch (e) {
-        yield LoadFail(error: e.error);
+        yield LoadFail(error: e.error.error);
       } catch (e) {
         yield LoadFail(error: e.toString());
       }
