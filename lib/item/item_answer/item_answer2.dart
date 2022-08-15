@@ -46,15 +46,14 @@ class AnswerCard extends StatefulWidget {
   int index;
   Function()? refresh;
 
-  AnswerCard({
-    required this.model,
-    this.user_id,
-    this.showAnswer = false,
-    this.isUser = true,
-    this.deadLine = 0,
-    this.index = 0,
-    this.refresh
-  });
+  AnswerCard(
+      {required this.model,
+      this.user_id,
+      this.showAnswer = false,
+      this.isUser = true,
+      this.deadLine = 0,
+      this.index = 0,
+      this.refresh});
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
@@ -123,9 +122,11 @@ class _AnswerCardState extends State<AnswerCard> {
                     BlocListener(
                       bloc: blocRatingAnswer,
                       listener: (_, StateBloc state1) {
-                        CheckLogState.check(context,msg: "Đánh giá thành công",
-                            state: state1,success: widget.refresh);
-                        if(state1 is LoadFail){
+                        CheckLogState.check(context,
+                            msg: "Đánh giá thành công",
+                            state: state1,
+                            success: widget.refresh);
+                        if (state1 is LoadFail) {
                           widget.refresh;
                         }
                       },
@@ -379,8 +380,10 @@ class _AnswerCardState extends State<AnswerCard> {
                 maxWight: 120,
                 itemBuilder: (_, index) => OutlinedButton(
                   onPressed: () {
-                    textTip.text = Const.convertPrice(10000 * (index));
-                    money=10000 * (index);
+                    textTip.text = (index != 0)
+                        ? Const.convertPrice(10000 * (index))
+                        : 'Miễn phí';
+                    money = 10000 * (index);
                   },
                   style: OutlinedButton.styleFrom(
                       primary: Colors.green.shade200,
@@ -388,7 +391,9 @@ class _AnswerCardState extends State<AnswerCard> {
                         color: Colors.green.shade200,
                       )),
                   child: Text(
-                    Const.convertPrice(10000 * (index)),
+                    (index != 0)
+                        ? Const.convertPrice(10000 * (index))
+                        : 'Miễn ph',
                     style: StyleApp.textStyle500(color: Colors.green),
                   ),
                 ),
@@ -413,29 +418,32 @@ class _AnswerCardState extends State<AnswerCard> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-money=double.parse(textTip.text).round();
+                      money = double.parse(textTip.text).round();
+                      if (widget.user_id == user_id) {
                         blocRatingAnswer.add(Rating(
                             id: int.parse(widget.model.id ?? '0'),
                             ratings: rate,
-                            price_tip: money??0));
-
+                            price_tip: money ?? 0));
+                      } else {
+                        CustomToast.showToast(
+                            context: context,
+                            msg: "Đây không phải câu hỏi của bạn");
+                      }
                     },
                     child: Text(
-                      "Gửi đánh giá",
+                      "Gửi tiền thưởng",
                       style: StyleApp.textStyle500(color: Colors.white),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
-
-
-
                       Navigator.pop(context);
-                      blocRatingAnswer.add(Rating(
+                      if (widget.user_id == user_id) {
+                        blocRatingAnswer.add(Rating(
                           id: int.parse(widget.model.id ?? '0'),
                           ratings: rate,
-                          ));
-
+                        ));
+                      }
                     },
                     child: Text(
                       "Hủy",
