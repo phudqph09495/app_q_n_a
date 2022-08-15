@@ -17,6 +17,7 @@ import 'package:app_q_n_a/item/radio_list_tile.dart';
 import 'package:app_q_n_a/styles/colors.dart';
 import 'package:app_q_n_a/styles/styles.dart';
 import 'package:app_q_n_a/widget/items/dia_log_item.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -29,6 +30,7 @@ import '../../bloc/bloc/auth/bloc_report.dart';
 import '../../bloc/event_bloc.dart';
 import '../../config/const.dart';
 import '../../models/model_answer.dart';
+import '../../widget/items/custom_toast.dart';
 import '../gridView/grid_view_custom.dart';
 import '../input/text_filed2.dart';
 import '../item_user.dart';
@@ -42,6 +44,7 @@ class AnswerCard extends StatefulWidget {
   bool isUser;
   int deadLine;
   int index;
+  Function()? refresh;
 
   AnswerCard({
     required this.model,
@@ -50,6 +53,7 @@ class AnswerCard extends StatefulWidget {
     this.isUser = true,
     this.deadLine = 0,
     this.index = 0,
+    this.refresh
   });
 
   @override
@@ -63,8 +67,9 @@ class _AnswerCardState extends State<AnswerCard> {
   BlocGoodAnswer blocGoodAnswer = BlocGoodAnswer();
   BlocRatingAnswer blocRatingAnswer = BlocRatingAnswer();
   TextEditingController textReport = TextEditingController();
+  TextEditingController textTip = TextEditingController();
   int user_id = iduser.userID;
-
+  double? rate;
   @override
   void initState() {
     // TODO: implement initState
@@ -86,11 +91,8 @@ class _AnswerCardState extends State<AnswerCard> {
   //
   // }
 
-
-
   @override
   Widget build(BuildContext context) {
-
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.all(10),
@@ -121,12 +123,15 @@ class _AnswerCardState extends State<AnswerCard> {
                     BlocListener(
                       bloc: blocRatingAnswer,
                       listener: (_, StateBloc state1) {
-
-                        CheckLogState.check(context, state: state1);
+                        CheckLogState.check(context,msg: "Đánh giá thành công",
+                            state: state1,success: widget.refresh);
+                        if(state1 is LoadFail){
+                          widget.refresh;
+                        }
                       },
                       child: RatingBar.builder(
-                        initialRating: Const.convertNumber(widget.model.ratings)
-                            ,
+                        initialRating:
+                            Const.convertNumber(widget.model.ratings),
                         minRating: 0,
                         direction: Axis.horizontal,
                         allowHalfRating: true,
@@ -138,9 +143,8 @@ class _AnswerCardState extends State<AnswerCard> {
                           color: Colors.amber,
                         ),
                         onRatingUpdate: (rating) {
-                          blocRatingAnswer.add(Rating(
-                              id: int.parse(widget.model.id ?? '0'),
-                              ratings: rating));
+                          rate = rating;
+                          _showDataTip();
                         },
                       ),
                     ),
@@ -333,6 +337,105 @@ class _AnswerCardState extends State<AnswerCard> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Hủy",
+                      style: StyleApp.textStyle500(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _showDataTip() {
+    int money;
+    textTip.clear();
+    showBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      builder: (_) => Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Phần thưởng thêm cho câu trả lời',
+                style: StyleApp.textStyle700(fontSize: 16),
+              ),
+              GridViewCustom(
+                itemCount: 6,
+                showFull: true,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                mainAxisExtent: 45,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                maxWight: 120,
+                itemBuilder: (_, index) => OutlinedButton(
+                  onPressed: () {
+                    textTip.text = Const.convertPrice(10000 * (index));
+                    money=10000 * (index);
+                  },
+                  style: OutlinedButton.styleFrom(
+                      primary: Colors.green.shade200,
+                      side: BorderSide(
+                        color: Colors.green.shade200,
+                      )),
+                  child: Text(
+                    Const.convertPrice(10000 * (index)),
+                    style: StyleApp.textStyle500(color: Colors.green),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              InputText2(
+                textInputFormatter: [
+                  CurrencyTextInputFormatter(
+                    // locale: 'ko',
+                    decimalDigits: 0,
+                    symbol: '',
+                  ),
+                ],
+                keyboardType: TextInputType.number,
+                hint: 'Phần thưởng thêm cho người trả lời',
+                controller: textTip,
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+money=double.parse(textTip.text).round();
+                        blocRatingAnswer.add(Rating(
+                            id: int.parse(widget.model.id ?? '0'),
+                            ratings: rate,
+                            price_tip: money??0));
+
+                    },
+                    child: Text(
+                      "Gửi đánh giá",
+                      style: StyleApp.textStyle500(color: Colors.white),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+
+
+
+                      Navigator.pop(context);
+                      blocRatingAnswer.add(Rating(
+                          id: int.parse(widget.model.id ?? '0'),
+                          ratings: rate,
+                          ));
+
                     },
                     child: Text(
                       "Hủy",

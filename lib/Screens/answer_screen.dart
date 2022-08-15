@@ -122,6 +122,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
               success: RefreshIndicator(
                 onRefresh: onRefresh,
                 child: model.question == null ? const SizedBox() : SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -143,6 +144,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         itemCount: model.answer!.length,
                         itemBuilder: (context, index) {
                           return AnswerCard(
+                            refresh: onRefresh,
                             model: model.answer![index],
                             user_id: model.question!.userId,
                             deadLine: Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,
