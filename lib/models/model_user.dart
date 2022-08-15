@@ -1,41 +1,45 @@
 class ModelUser {
   ModelUser({
-    this.id,
-    this.username,
-    this.authKey,
-    this.passwordHash,
-    this.passwordResetToken,
-    this.phone,
-    this.email,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
-    this.address,
-    this.provinceId,
-    this.districtId,
-    this.facebook,
-    this.linkFacebook,
-    this.typeSocial,
-    this.idSocial,
-    this.isNotification,
-    this.sex,
-    this.birthday,
-    this.imagePath,
-    this.imageName,
-    this.avatarPath,
-    this.avatarName,
-    this.memberPrivatekey,
-    this.memberUsername,
-    this.lastRequestTime,
-    this.userBefore,
-    this.getflyId,
-    this.passwordHash2,
-    this.userGtApp,
-    this.verifyEmail,
-    this.cmt,
-    this.tokenOtp,
-    this.tokenApp,
-  });
+      this.id, 
+      this.username, 
+      this.authKey, 
+      this.passwordHash, 
+      this.passwordResetToken, 
+      this.phone, 
+      this.email, 
+      this.status, 
+      this.createdAt, 
+      this.updatedAt, 
+      this.address, 
+      this.provinceId, 
+      this.districtId, 
+      this.facebook, 
+      this.linkFacebook, 
+      this.typeSocial, 
+      this.idSocial, 
+      this.isNotification, 
+      this.sex, 
+      this.imagePath, 
+      this.imageName, 
+      this.avatarPath, 
+      this.avatarName, 
+      this.memberPrivatekey, 
+      this.memberUsername, 
+      this.lastRequestTime, 
+      this.userBefore, 
+      this.getflyId, 
+      this.passwordHash2, 
+      this.userGtApp, 
+      this.verifyEmail, 
+      this.cmt, 
+      this.tokenOtp, 
+      this.tokenApp, 
+      this.countQuestion, 
+      this.birthday, 
+      this.countReport, 
+
+      this.isKyc, 
+      this.wallet,});
 
   ModelUser.fromJson(dynamic json) {
     id = json['id'];
@@ -57,7 +61,6 @@ class ModelUser {
     idSocial = json['id_social'];
     isNotification = json['is_notification'];
     sex = json['sex'];
-    birthday = json['birthday'];
     imagePath = json['image_path'];
     imageName = json['image_name'];
     avatarPath = json['avatar_path'];
@@ -73,6 +76,12 @@ class ModelUser {
     cmt = json['cmt'];
     tokenOtp = json['token_otp'];
     tokenApp = json['token_app'];
+    countQuestion = json['count_question'];
+    birthday = json['birthday'];
+    countReport = json['count_report'];
+
+    isKyc = json['is_kyc'];
+    wallet = json['wallet'];
   }
   int? id;
   String? username;
@@ -84,20 +93,19 @@ class ModelUser {
   int? status;
   int? createdAt;
   int? updatedAt;
-  dynamic address;
+  String? address;
   dynamic provinceId;
   dynamic districtId;
-  dynamic facebook;
-  dynamic linkFacebook;
+  String? facebook;
+  String? linkFacebook;
   dynamic typeSocial;
   dynamic idSocial;
   dynamic isNotification;
   dynamic sex;
-  dynamic birthday;
   dynamic imagePath;
   dynamic imageName;
-  dynamic avatarPath;
-  dynamic avatarName;
+  String? avatarPath;
+  String? avatarName;
   String? memberPrivatekey;
   String? memberUsername;
   dynamic lastRequestTime;
@@ -109,6 +117,12 @@ class ModelUser {
   dynamic cmt;
   dynamic tokenOtp;
   String? tokenApp;
+  int? countQuestion;
+  dynamic birthday;
+  int? countReport;
+
+  bool? isKyc;
+  int? wallet;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -131,7 +145,6 @@ class ModelUser {
     map['id_social'] = idSocial;
     map['is_notification'] = isNotification;
     map['sex'] = sex;
-    map['birthday'] = birthday;
     map['image_path'] = imagePath;
     map['image_name'] = imageName;
     map['avatar_path'] = avatarPath;
@@ -147,6 +160,13 @@ class ModelUser {
     map['cmt'] = cmt;
     map['token_otp'] = tokenOtp;
     map['token_app'] = tokenApp;
+    map['count_question'] = countQuestion;
+    map['birthday'] = birthday;
+    map['count_report'] = countReport;
+
+    map['is_kyc'] = isKyc;
+    map['wallet'] = wallet;
     return map;
   }
+
 }
