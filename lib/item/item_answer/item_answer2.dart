@@ -31,6 +31,7 @@ import '../../models/model_answer.dart';
 import '../gridView/grid_view_custom.dart';
 import '../input/text_filed2.dart';
 import '../item_user.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AnswerCard extends StatefulWidget {
   int? user_id;
@@ -104,10 +105,29 @@ class _AnswerCardState extends State<AnswerCard> {
           ),
           widget.user_id == user_id ||
                   widget.model.status == "3" ||
-                   DateTime.now().millisecondsSinceEpoch >= widget.deadLine
+                  DateTime.now().millisecondsSinceEpoch >= widget.deadLine
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    RatingBar.builder(
+                      initialRating: widget.model.ratings ?? 0,
+                      minRating: 0,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: 20,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+
+                      },
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -195,13 +215,17 @@ class _AnswerCardState extends State<AnswerCard> {
                                 border: Border.all(
                                     color: ColorApp.orangeF2, width: 0.5),
                                 textButton: 'Bình luận',
-                                ontap: (){
+                                ontap: () {
                                   PageNavigator.next(
                                     context: context,
                                     page: CommentScreen(
                                       answerind: widget.index,
-                                      quesID: Const.convertNumber(widget.model.questionId).round(),
-                                      parent_id: Const.convertNumber(widget.model.id).round(),
+                                      quesID: Const.convertNumber(
+                                              widget.model.questionId)
+                                          .round(),
+                                      parent_id:
+                                          Const.convertNumber(widget.model.id)
+                                              .round(),
                                       item: widget.model.items ?? [],
                                     ),
                                   );
@@ -249,9 +273,7 @@ class _AnswerCardState extends State<AnswerCard> {
     textReport.clear();
     showBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       builder: (_) => Padding(
         padding: const EdgeInsets.all(10.0),
         child: SingleChildScrollView(
@@ -266,35 +288,39 @@ class _AnswerCardState extends State<AnswerCard> {
                 controller: textReport,
               ),
               const SizedBox(height: 10),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.spaceAround,
-               children: [
-                 ElevatedButton(
-                   onPressed: () {
-                     Navigator.pop(context);
-                     if(textReport.text.isNotEmpty){
-                       blocReport.add(reportANS(id: Const.convertNumber(widget.model.id).round(), content: textReport.text));
-                     }else{
-                       DialogItem.showMsg(context: context, title: "Lỗi", msg: "Vui lòng nhập thông tin vi phạm");
-                     }
-
-                   },
-                   child: Text(
-                     "Gửi báo cáo",
-                     style: StyleApp.textStyle500(color: Colors.white),
-                   ),
-                 ),
-                 ElevatedButton(
-                   onPressed: () {
-                    Navigator.pop(context);
-                   },
-                   child: Text(
-                     "Hủy",
-                     style: StyleApp.textStyle500(color: Colors.white),
-                   ),
-                 ),
-               ],
-             ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      if (textReport.text.isNotEmpty) {
+                        blocReport.add(reportANS(
+                            id: Const.convertNumber(widget.model.id).round(),
+                            content: textReport.text));
+                      } else {
+                        DialogItem.showMsg(
+                            context: context,
+                            title: "Lỗi",
+                            msg: "Vui lòng nhập thông tin vi phạm");
+                      }
+                    },
+                    child: Text(
+                      "Gửi báo cáo",
+                      style: StyleApp.textStyle500(color: Colors.white),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Hủy",
+                      style: StyleApp.textStyle500(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
