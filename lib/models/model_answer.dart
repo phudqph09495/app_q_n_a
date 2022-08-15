@@ -183,8 +183,10 @@ class Answer {
   String? countReport;
   String? parentId;
   String? username;
+  double? ratings;
   List<Images2>? images;
   List<Items>? items;
+
 
   Answer(
       {this.id,
@@ -198,6 +200,7 @@ class Answer {
       this.countReport,
       this.parentId,
       this.username,
+        this.ratings,
       this.images,
       this.items});
 
@@ -212,6 +215,7 @@ class Answer {
     status = json['status'];
     userId = json['user_id'];
     isImages = json['is_images'];
+    ratings=json['ratings'];
     countReport = json['count_report'];
     parentId = json['parent_id'];
     username = json['username'];
@@ -238,6 +242,7 @@ class Answer {
     data['question_id'] = this.questionId;
     data['status'] = this.status;
     data['user_id'] = this.userId;
+    data['ratings']=this.ratings;
     data['is_images'] = this.isImages;
     data['count_report'] = this.countReport;
     data['parent_id'] = this.parentId;

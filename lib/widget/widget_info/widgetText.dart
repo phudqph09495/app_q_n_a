@@ -116,7 +116,6 @@ class _ItemAccountState extends State<ItemAccount> {
                   BlocBuilder(bloc: getUser,builder: (_,StateBloc state){
                     if(state is LoadSuccess){
                       final user1= state.data as ModelUser;
-                      print(user1.wallet);
                       return
                         Text(
                           'Điểm: ${user1.wallet} ',
