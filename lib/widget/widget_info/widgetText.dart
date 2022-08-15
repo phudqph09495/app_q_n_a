@@ -18,14 +18,7 @@ class ItemAccount extends StatefulWidget {
 }
 
 class _ItemAccountState extends State<ItemAccount> {
-  BlocGetUser getUser = BlocGetUser();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getUser.add(GetData());
 
-  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
@@ -108,21 +101,13 @@ class _ItemAccountState extends State<ItemAccount> {
                     style: StyleApp.textStyle700(
                         color: ColorApp.black, fontSize: 16),
                   ),
-                  BlocBuilder(bloc: getUser,builder: (_,StateBloc state){
-                    if(state is LoadSuccess){
-                      final user1= state.data as ModelUser;
-                      return
-                        Text(
-                          'Điểm: ${user1.wallet} ',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: StyleApp.textStyle700(
-                              color: ColorApp.black, fontSize: 16),
-                        );
-                    }
-                  return Container();
-                  })
-
+                  Text(
+                    'Điểm: ${Const.convertPrice(user.wallet)} ',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: StyleApp.textStyle700(
+                        color: ColorApp.red, fontSize: 16),
+                  ),
                 ],
               ),
             ),
