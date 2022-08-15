@@ -393,7 +393,7 @@ class _AnswerCardState extends State<AnswerCard> {
                   child: Text(
                     (index != 0)
                         ? Const.convertPrice(10000 * (index))
-                        : 'Miễn ph',
+                        : 'Miễn phí',
                     style: StyleApp.textStyle500(color: Colors.green),
                   ),
                 ),
