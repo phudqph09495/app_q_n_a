@@ -418,7 +418,7 @@ class _AnswerCardState extends State<AnswerCard> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      money = double.parse(textTip.text).round();
+                      money = double.parse(textTip.text).round()*1000;
                       if (widget.user_id == user_id) {
                         blocRatingAnswer.add(Rating(
                             id: int.parse(widget.model.id ?? '0'),

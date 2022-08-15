@@ -107,7 +107,7 @@ class _AddQuestionState extends State<AddQuestion> {
         subject_id: monval,
         class_id: lopval,
         deadline: dateTime,
-        money:(double.parse(money.text).round()).toString(),
+        money:(double.parse(money.text).round()*1000).toString(),
         description: description.text,
         question: ques.text,
         images: imageFiles,
