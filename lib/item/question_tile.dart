@@ -22,7 +22,8 @@ Widget QuestionTile(
   String createdAt =
       Const.checkTime(Const.convertNumber(modelQuestion.createdAt).round());
 
-  String title = '#${modelQuestion.id}. ${modelQuestion.subjectName ?? 'Lĩnh vực khác'}'
+  String title =
+      '#${modelQuestion.id}. ${modelQuestion.subjectName ?? 'Lĩnh vực khác'}'
       '${modelQuestion.className == null ? "" : " - ${modelQuestion.className}"}'
       '${createdAt == "" ? "" : " - $createdAt"}';
 
@@ -117,7 +118,7 @@ Widget QuestionTile(
                 Const.convertNumber(modelQuestion.priceGift) <= 0
                     ? const SizedBox()
                     : Container(
-                  margin: const EdgeInsets.only(left: 10),
+                        margin: const EdgeInsets.only(left: 10),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 2),
                         decoration: BoxDecoration(
@@ -145,6 +146,13 @@ Widget QuestionTile(
               style: StyleApp.textStyle500(color: ColorApp.black),
               trimCollapsedText: 'Xem thêm',
               trimExpandedText: 'Thu nhỏ',
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              '${modelQuestion.username}: ${modelQuestion.userCountQuestion ?? '0'} câu hỏi',
+              style: StyleApp.textStyle500(color: ColorApp.black),
             ),
             const SizedBox(
               height: 10,
