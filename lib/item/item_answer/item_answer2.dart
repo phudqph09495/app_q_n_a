@@ -2,6 +2,7 @@ import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
 import 'package:app_q_n_a/Screens/comment.dart';
 import 'package:app_q_n_a/Screens/login.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_rating_answer.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/next_page.dart';
@@ -32,6 +33,7 @@ import '../gridView/grid_view_custom.dart';
 import '../input/text_filed2.dart';
 import '../item_user.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:app_q_n_a/widget/widget_info/widgetText.dart' as iduser;
 
 class AnswerCard extends StatefulWidget {
   int? user_id;
@@ -59,14 +61,15 @@ class _AnswerCardState extends State<AnswerCard> {
   int groupValue = 0;
   BlocReport blocReport = BlocReport();
   BlocGoodAnswer blocGoodAnswer = BlocGoodAnswer();
+  BlocRatingAnswer blocRatingAnswer = BlocRatingAnswer();
   TextEditingController textReport = TextEditingController();
-  var user_id;
+  int user_id = iduser.userID;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    // getUserId();
     groupValue = Const.convertNumber(widget.model.status).round() == 2
         ? 2
         : Const.convertNumber(widget.model.status).round();
@@ -75,16 +78,19 @@ class _AnswerCardState extends State<AnswerCard> {
         listImages.add("${Const.image_host}${element.path}${element.name}");
       }
     }
+    print(user_id);
   }
 
-  getUserId() async {
-    user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
-    setState(() {});
-  }
+  // getUserId() async {
+  //   user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
+  //
+  // }
+
 
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.all(10),
@@ -112,21 +118,31 @@ class _AnswerCardState extends State<AnswerCard> {
                     const SizedBox(
                       height: 10,
                     ),
-                    RatingBar.builder(
-                      initialRating: widget.model.ratings ?? 0,
-                      minRating: 0,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemSize: 20,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating) {
+                    BlocListener(
+                      bloc: blocRatingAnswer,
+                      listener: (_, StateBloc state1) {
 
+                        CheckLogState.check(context, state: state1);
                       },
+                      child: RatingBar.builder(
+                        initialRating: Const.convertNumber(widget.model.ratings)
+                            ,
+                        minRating: 0,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemSize: 20,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          blocRatingAnswer.add(Rating(
+                              id: int.parse(widget.model.id ?? '0'),
+                              ratings: rating));
+                        },
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -178,29 +194,33 @@ class _AnswerCardState extends State<AnswerCard> {
                                 setState(() {});
                               });
                             },
-                            child: groupValue == 2 ||  widget.user_id == user_id  ? RadioListTile(
-                              visualDensity: const VisualDensity(
-                                horizontal: VisualDensity.minimumDensity,
-                                vertical: VisualDensity.minimumDensity,
-                              ),
-                              selectedTileColor: Colors.green,
-                              activeColor: Colors.green,
-                              contentPadding: EdgeInsets.zero,
-                              dense: true,
-                              toggleable: true,
-                              title: Text(
-                                groupValue == 2 ? 'Đã trả tiền' : "Trả tiền",
-                                style: StyleApp.textStyle500(
-                                    color: groupValue == 2
-                                        ? Colors.green
-                                        : Colors.orange),
-                              ),
-                              value: 2,
-                              groupValue: groupValue,
-                              onChanged: (val) async {
-                                _payment();
-                              },
-                            ) : const SizedBox(),
+                            child: groupValue == 2 || widget.user_id == user_id
+                                ? RadioListTile(
+                                    visualDensity: const VisualDensity(
+                                      horizontal: VisualDensity.minimumDensity,
+                                      vertical: VisualDensity.minimumDensity,
+                                    ),
+                                    selectedTileColor: Colors.green,
+                                    activeColor: Colors.green,
+                                    contentPadding: EdgeInsets.zero,
+                                    dense: true,
+                                    toggleable: true,
+                                    title: Text(
+                                      groupValue == 2
+                                          ? 'Đã trả tiền'
+                                          : "Trả tiền",
+                                      style: StyleApp.textStyle500(
+                                          color: groupValue == 2
+                                              ? Colors.green
+                                              : Colors.orange),
+                                    ),
+                                    value: 2,
+                                    groupValue: groupValue,
+                                    onChanged: (val) async {
+                                      _payment();
+                                    },
+                                  )
+                                : const SizedBox(),
                           ),
                         ),
                         !widget.isUser
@@ -254,7 +274,7 @@ class _AnswerCardState extends State<AnswerCard> {
                 checkErr: true,
                 onTap: () {
                   Navigator.pop(context);
-                  blocGoodAnswer.add(GetData(id: widget.model.userId));
+                  blocGoodAnswer.add(GetData(id: widget.model.id));
                 });
           } else {
             if (widget.model.userId == widget.user_id.toString()) {

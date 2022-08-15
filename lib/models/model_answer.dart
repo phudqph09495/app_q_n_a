@@ -183,7 +183,7 @@ class Answer {
   String? countReport;
   String? parentId;
   String? username;
-  double? ratings;
+  String? ratings;
   List<Images2>? images;
   List<Items>? items;
 
