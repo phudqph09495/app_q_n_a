@@ -65,6 +65,7 @@ class _AnswerCardState extends State<AnswerCard> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     groupValue = Const.convertNumber(widget.model.status).round() == 2
         ? 2
         : Const.convertNumber(widget.model.status).round();
@@ -162,7 +163,7 @@ class _AnswerCardState extends State<AnswerCard> {
                                 setState(() {});
                               });
                             },
-                            child: RadioListTile(
+                            child: groupValue == 2 ||  widget.user_id == user_id  ? RadioListTile(
                               visualDensity: const VisualDensity(
                                 horizontal: VisualDensity.minimumDensity,
                                 vertical: VisualDensity.minimumDensity,
@@ -184,7 +185,7 @@ class _AnswerCardState extends State<AnswerCard> {
                               onChanged: (val) async {
                                 _payment();
                               },
-                            ),
+                            ) : const SizedBox(),
                           ),
                         ),
                         !widget.isUser

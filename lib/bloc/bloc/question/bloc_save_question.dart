@@ -15,13 +15,13 @@ class BlocSaveQuestion extends Bloc<EventBloc, StateBloc> {
       try {
         Map<String, dynamic> req = {};
         req['question_id'] = event.id;
-        req['delete']=event.delete;
+        req['delete'] = event.delete;
         var res = await Api.postAsync(endPoint: ApiPath.getsave, req: req);
         if (res['code'] == 1) {
           yield LoadSuccess();
         }
       } on DioError catch (e) {
-        yield LoadFail(error: e.error ?? "Lỗi kết nối");
+        yield LoadFail(error: e.error.error ?? "Lỗi kết nối");
       } catch (e) {
         yield LoadFail(error: e.toString());
       }

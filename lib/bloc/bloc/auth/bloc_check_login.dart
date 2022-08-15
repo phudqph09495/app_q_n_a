@@ -19,7 +19,7 @@ class BlocCheckLogin extends Bloc<EventBloc, StateBloc> {
           data: check,
         );
       } on DioError catch (e) {
-        yield LoadFail(error: e.error);
+        yield LoadFail(error: e.error.error);
       } catch (e) {
         yield LoadFail(error: e.toString());
       }

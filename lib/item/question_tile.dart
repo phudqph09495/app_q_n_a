@@ -22,7 +22,7 @@ Widget QuestionTile(
   String createdAt =
       Const.checkTime(Const.convertNumber(modelQuestion.createdAt).round());
 
-  String title = '${modelQuestion.subjectName ?? 'Lĩnh vực khác'}'
+  String title = '#${modelQuestion.id}. ${modelQuestion.subjectName ?? 'Lĩnh vực khác'}'
       '${modelQuestion.className == null ? "" : " - ${modelQuestion.className}"}'
       '${createdAt == "" ? "" : " - $createdAt"}';
 
@@ -74,12 +74,12 @@ Widget QuestionTile(
                           style: TextStyle(color: ColorApp.whiteF0),
                         ),
                       )
-                    : SizedBox()
+                    : const SizedBox()
               ],
             ),
             const SizedBox(height: 10),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: RichText(
@@ -117,6 +117,7 @@ Widget QuestionTile(
                 Const.convertNumber(modelQuestion.priceGift) <= 0
                     ? const SizedBox()
                     : Container(
+                  margin: const EdgeInsets.only(left: 10),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 2),
                         decoration: BoxDecoration(

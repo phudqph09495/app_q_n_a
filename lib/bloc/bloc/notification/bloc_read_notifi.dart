@@ -22,7 +22,7 @@ class BlocReadNotifi extends Bloc<EventBloc, StateBloc> {
           yield LoadFail(error: res['error']);
         }
       } on DioError catch (e) {
-        yield LoadFail(error: e.error ?? "Lỗi kết nối");
+        yield LoadFail(error: e.error.error ?? "Lỗi kết nối");
       } catch (e) {
         yield LoadFail(error: e.toString());
       }

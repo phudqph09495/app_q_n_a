@@ -33,7 +33,7 @@ class BlocChangPass extends Bloc<EventBloc, StateBloc> {
           yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }
       } on DioError catch (e) {
-        yield LoadFail(error: e.error);
+        yield LoadFail(error: e.error.error);
       } catch (e) {
         yield LoadFail(error: e.toString());
       }
