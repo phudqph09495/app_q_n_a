@@ -58,6 +58,7 @@ class Api {
       {required String endPoint,
       required Map<String, dynamic> req,
       bool isToken = true,
+        bool user=true,
       bool hasForm = true}) async {
     try {
       Map<String, dynamic> headers = Map();
@@ -67,8 +68,8 @@ class Api {
         headers['token'] = token;
       }
       var user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
-      if (user_id != null) {
-        req['user_id'] = user_id;
+      if ((user_id != null)&&(user)) {
+         req['user_id'] = user_id;
       }
       FormData formData = FormData.fromMap(req);
       var res = await dio.post(

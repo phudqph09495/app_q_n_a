@@ -23,8 +23,8 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
         req['class_id'] = event.class_id;
         req['subject_id'] = event.subject_id;
         req['keywords'] = event.keyword;
-
-        var res = await Api.postAsync(endPoint: ApiPath.getQuestion, req: req);
+bool? user=event.user;
+        var res = await Api.postAsync(endPoint: ApiPath.getQuestion, req: req,user: user??true);
         print(res);
         if (res["code"] == 1) {
           for (var item in res['data']) {

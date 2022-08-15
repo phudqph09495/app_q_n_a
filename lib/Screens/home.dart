@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Future<void> onRefresh() async {
-    context.read<BlocGetQuestion>().add(GetData(cat_id: keySearchid,subject_id: keySearchid1,class_id: keySearchid2
+    context.read<BlocGetQuestion>().add(GetData(cat_id: keySearchid,subject_id: keySearchid1,class_id: keySearchid2,user: false
     ),);
   }
 

@@ -22,7 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toast/toast.dart';
 import '../config/path/share_pref_path.dart';
 import '../config/share_pref.dart';
-//import 'Screens_TaiKhoan/body_product.dart' as Body;
+import 'package:app_q_n_a/widget/widget_info/widgetText.dart' as user;
 
 late int ansid;
 late String ansCon;
@@ -168,7 +168,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
     Const.checkLogin(context, nextPage: () async {
       now = DateTime.now().millisecondsSinceEpoch;
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
-      if(user_id != widget.modelQuestion.userId && end > now && !isPass){
+      if(user_id != widget.modelQuestion.userId && end > now && !isPass &&user.iskyc){
         PageNavigator.next(context: context, page: Add_Answer_Screen(
           user_id: user_id,
           question_id: int.parse(widget.modelQuestion.id ?? '0'),
@@ -184,6 +184,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
         }
         if(isPass){
           err = "Câu hỏi đã được trả thưởng";
+        }
+        if(user.iskyc==false){
+          err="Thông tin của bạn chưa xác thực nên không thể thực hiện thao tác này ";
         }
         DialogItem.showMsg(context: context, title: "Lỗi", msg: err);
       }

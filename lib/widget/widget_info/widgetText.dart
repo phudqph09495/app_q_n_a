@@ -7,26 +7,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
 import '../../config/const.dart';
+import '../../config/path/image_path.dart';
 import '../../item/load_image.dart';
 import '../../path/image_path.dart';
 import 'widgetIcons.dart';
 import '../../../bloc/state_bloc.dart';
 
-int userID=0;
+int userID = 0;
+bool iskyc=false;
 class ItemAccount extends StatefulWidget {
-
   @override
   State<ItemAccount> createState() => _ItemAccountState();
 }
 
 class _ItemAccountState extends State<ItemAccount> {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
       context.read<BLocLocalUser>().getUser();
       ModelUser user = snapshot ?? ModelUser();
-      userID=user.id??0;
+      userID = user.id ?? 0;
+      iskyc=user.isKyc??false;
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(
@@ -98,7 +99,7 @@ class _ItemAccountState extends State<ItemAccount> {
                   ),
                   Text(
                     // Const.checkStringNull(id),
-                    'Id thành viên: ${userID?? ""}',
+                    'Id thành viên: ${userID ?? ""}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: StyleApp.textStyle700(
@@ -114,6 +115,18 @@ class _ItemAccountState extends State<ItemAccount> {
                 ],
               ),
             ),
+            (user.isKyc ?? false)
+                ? Row(
+                  children: [
+                    Image.asset(
+                        ImagePath.kyc,
+                        height: 40,
+                        width: 40,
+                      ),
+                    Text('Đã KYC')
+                  ],
+                )
+                : Container()
           ],
         ),
       );

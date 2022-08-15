@@ -31,6 +31,7 @@ class GetData extends EventBloc {
   int? countFilter;
 int? delete;
 
+bool? user=true;
   GetData({
     this.keyword,
     this.cat_id,
@@ -46,6 +47,7 @@ int? delete;
     this.image,
     this.money,
 this.delete,
+    this.user
 
   });
 }

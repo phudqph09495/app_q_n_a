@@ -25,7 +25,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:toast/toast.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
 import '../../widget/items/dia_log_item.dart';
-import '../../widget/widget_info/widgetText.dart';
+import '../../widget/widget_info/widgetText.dart' as user;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import '../account/screen_profile.dart';
@@ -58,7 +58,6 @@ class _BodyProductState extends State<BodyProduct> {
     phone = await SharedPrefs.readString(SharePrefsKeys.phone);
     isLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
   }
-
 
   @override
   void initState() {
@@ -153,7 +152,7 @@ class _BodyProductState extends State<BodyProduct> {
       appBar: AppBar(
         backgroundColor: ColorApp.orangeF2,
         bottom: PreferredSize(
-          child: ItemAccount(),
+          child: user.ItemAccount(),
           preferredSize: const Size.fromHeight(45.0),
         ),
       ),
@@ -235,7 +234,8 @@ class _BodyProductState extends State<BodyProduct> {
                     fontSize: 18,
                     style: false,
                     ontap: () {
-
+                      user.userID = 0;
+                      user.iskyc=false;
                       DialogItem.showMsg(
                         context: context,
                         title: "Đăng xuất",
@@ -243,7 +243,6 @@ class _BodyProductState extends State<BodyProduct> {
                         logout: true,
                         titleButton: "Đồng ý",
                       );
-
                     })
                 : Button1(
                     border: Border.all(color: ColorApp.orangeF2, width: 0.5),

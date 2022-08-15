@@ -12,4 +12,6 @@ class ImagePath {
   static const scanqrv = "assets/images/qr-code.png";
   static const sendV = "assets/images/Group 596.png";
   static const scanQR = "assets/images/Group.png";
+
+  static const kyc="images/kyc.png";
 }
