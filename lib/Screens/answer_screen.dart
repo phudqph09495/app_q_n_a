@@ -113,8 +113,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
           }
         },
         builder: (_, StateBloc state) {
-          final model =
-              state is LoadSuccess ? state.data as ModelAnswer : ModelAnswer.fromJson({});
+          final model = state is LoadSuccess ? state.data as ModelAnswer : ModelAnswer();
           return ItemLoadPage(
               state: state,
               onTapErr: () {
@@ -122,7 +121,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
               },
               success: RefreshIndicator(
                 onRefresh: onRefresh,
-                child: SingleChildScrollView(
+                child: model.question == null ? const SizedBox() : SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -141,7 +140,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                           : ListView.builder(
                         physics:const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: int.parse(model.countAnswer ?? '0'),
+                        itemCount: model.answer!.length,
                         itemBuilder: (context, index) {
                           return AnswerCard(
                             model: model.answer![index],

@@ -30,12 +30,7 @@ class _ItemAccountState extends State<ItemAccount> {
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
       context.read<BLocLocalUser>().getUser();
-
-
       ModelUser user = snapshot ?? ModelUser();
-
-
-
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(
@@ -116,7 +111,6 @@ class _ItemAccountState extends State<ItemAccount> {
                   BlocBuilder(bloc: getUser,builder: (_,StateBloc state){
                     if(state is LoadSuccess){
                       final user1= state.data as ModelUser;
-                      print(user1.wallet);
                       return
                         Text(
                           'Điểm: ${user1.wallet} ',

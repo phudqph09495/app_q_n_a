@@ -81,11 +81,6 @@ class _AnswerCardState extends State<AnswerCard> {
     setState(() {});
   }
 
-  //trạng thái của câu trả lời
-  //0: chưa đăng nhập
-  //1: không phải chủ câu hỏi
-  //2: là chủ câu hỏi
-  //3: hiển thị khi hết deadline
 
   @override
   Widget build(BuildContext context) {
