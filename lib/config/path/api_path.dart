@@ -83,4 +83,5 @@ class ApiPath {
   static const listNotifi = "/app/user/get-notifycations";
   static const readNotifi = "/app/user/read-notifycation";
   static const getNews = "/app/home/get-news";
+  static const regisNotify="/app/user/register-notify";
 }

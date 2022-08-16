@@ -262,4 +262,8 @@ class Rating extends EventBloc{
   Rating({this.id,this.ratings,this.price_tip});
 }
 
+class RegisNotify extends EventBloc{
+  int? subject_id;
+  RegisNotify({ this.subject_id});
+}
 
