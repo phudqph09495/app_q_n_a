@@ -358,7 +358,10 @@ class _AnswerCardState extends State<AnswerCard> {
   }
 
   _showDataTip() {
-    int money=0;
+    String free='';
+    int money = 0;
+    late num monSend;
+    String moneyStr = '0';
     textTip.clear();
     showBottomSheet(
       context: context,
@@ -391,7 +394,8 @@ class _AnswerCardState extends State<AnswerCard> {
                       itemBuilder: (_, index) => OutlinedButton(
                         onPressed: () {
                           textTip.text = list[index].name.toString();
-                          money=list[index].id??0;
+                          money = list[index].id ?? 0;
+                          index==0?free=list[0].name.toString():'';
                         },
                         style: OutlinedButton.styleFrom(
                             primary: Colors.green.shade200,
@@ -432,15 +436,23 @@ class _AnswerCardState extends State<AnswerCard> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      String moneyStr=((money!=0)||(textTip.text!='0đ'))?textTip.text.substring(0,textTip.text.indexOf('đ')):'0.0';
+                      if (money != 0) {
+                        moneyStr = textTip.text
+                            .substring(0, textTip.text.indexOf('đ'));
+                        monSend = NumberFormat().parse(moneyStr) * 1000;
+                      } else if ((money == 0) && (textTip.text != '0đ')&&(textTip.text!=free)) {
+                        moneyStr = textTip.text
+                            .substring(0, textTip.text.indexOf('đ'));
+                        monSend = NumberFormat().parse(moneyStr);
+                      } else if (textTip.text == '0đ' && money == 0) {
+                        monSend = 0;
+                      }
 
                       if (widget.user_id == user_id) {
                         blocRatingAnswer.add(Rating(
                             id: int.parse(widget.model.id ?? '0'),
                             ratings: rate,
-                            price_tip:
-                            money==0?NumberFormat().parse(moneyStr):NumberFormat().parse(moneyStr)*1000
-                        ));
+                            price_tip: monSend));
                       } else {
                         CustomToast.showToast(
                             context: context,

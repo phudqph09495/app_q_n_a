@@ -99,13 +99,23 @@ BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
   String? lop;
   String? mon;
 
-
+String free='';
   int moneyId=0;
   AddQuesVoid() async {
     if (keyForm.currentState!.validate() &&
         ((description.text != '') || imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
-String moneyStr=((moneyId!=0)||(money.text!='0đ'))?money.text.substring(0,money.text.indexOf('đ')):'0.0';
+String moneyStr='0';
+late num monSend;
+if (moneyId!=0) {
+  moneyStr = money.text.substring(0,money.text.indexOf('đ'));
+  monSend=NumberFormat().parse(moneyStr)*1000;
+} else if((moneyId==0)&&(money.text!='0đ')&&(money.text!=free)) {
+  moneyStr = money.text.substring(0,money.text.indexOf('đ'));
+  monSend=NumberFormat().parse(moneyStr);
+}else if(money.text=='0đ'||moneyId==0){
+  monSend=0;
+}
 
 print(moneyStr);
 
@@ -114,7 +124,7 @@ print(moneyStr);
         subject_id: monval,
         class_id: lopval,
         deadline: dateTime,
-        money: moneyId==0?NumberFormat().parse(moneyStr):NumberFormat().parse(moneyStr)*1000,
+        money:monSend,
         description: description.text,
         question: ques.text,
         images: imageFiles,
@@ -325,7 +335,7 @@ print(moneyStr);
                     money.text=list[index].name.toString();
                     moneyId=list[index].id??0;
 
-
+index==0?free=list[0].name.toString():'';
                     },
                     style: OutlinedButton.styleFrom(
                         primary: Colors.green.shade200,
