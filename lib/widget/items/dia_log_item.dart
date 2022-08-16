@@ -4,6 +4,7 @@ import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import '../../bloc/bloc/auth/bloc_get_user_local.dart';
 import '../../config/routers/routers.dart';
 import '../../styles/init_style.dart';
 import '../../widget/widget_info/widgetText.dart' as user;
@@ -51,6 +52,7 @@ class DialogItem {
                       user.userID = 0;
                       user.iskyc=false;
                       context.read<BlocCheckLogin>().add(GetData());
+                      context.read<BLocLocalUser>().getUser();
                       Navigator.pop(context);
                     } else {
                       Navigator.pop(context);

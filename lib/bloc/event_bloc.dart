@@ -2,10 +2,12 @@ import 'package:app_q_n_a/models/model_local.dart';
 import 'package:image_picker/image_picker.dart';
 
 abstract class EventBloc {}
+
 class LoadMoreEvent extends EventBloc {
   String? id;
   int limit, page;
   bool cleanList, loadMore;
+
   LoadMoreEvent({
     this.id,
     this.cleanList = false,
@@ -14,6 +16,7 @@ class LoadMoreEvent extends EventBloc {
     this.loadMore = false,
   });
 }
+
 class GetData extends EventBloc {
   int? cat_id;
   int? class_id;
@@ -29,27 +32,31 @@ class GetData extends EventBloc {
   String? money;
   XFile? image;
   int? countFilter;
-int? delete;
+  int? delete;
+  bool? isUser = true;
+  int limit, page;
+  bool cleanList, loadMore;
 
-bool? user=true;
-  GetData({
-    this.keyword,
-    this.cat_id,
-    this.class_id,
-    this.id,
-    this.subject_id,
-    this.keySearch,
-    this.keySearch1,
-    this.keySearch2,
-    this.bankName,
-    this.name,
-    this.number,
-    this.image,
-    this.money,
-this.delete,
-    this.user
-
-  });
+  GetData(
+      {this.keyword,
+      this.cat_id,
+      this.class_id,
+      this.id,
+      this.subject_id,
+      this.keySearch,
+      this.keySearch1,
+      this.keySearch2,
+      this.bankName,
+      this.name,
+      this.number,
+      this.image,
+      this.money,
+      this.delete,
+      this.cleanList = false,
+      this.limit = 20,
+      this.page = 1,
+      this.loadMore = false,
+      this.isUser});
 }
 
 class getDataOrder extends EventBloc {
@@ -138,6 +145,7 @@ class addQuesForm extends EventBloc {
 
   String description;
   List<XFile>? images;
+
   addQuesForm({
     required this.description,
     required this.user_id,
@@ -161,7 +169,7 @@ class ChagePassApp extends EventBloc {
 }
 
 class ChagePassIsLogin extends EventBloc {
- String password;
+  String password;
   String passwordre;
 
   ChagePassIsLogin({
@@ -176,6 +184,7 @@ class addAnsForm extends EventBloc {
   String answer;
   List<XFile>? images;
   int? parent_id;
+
   addAnsForm(
       {required this.user_id,
       required this.question_id,
@@ -186,6 +195,7 @@ class addAnsForm extends EventBloc {
 
 class getAns extends EventBloc {
   int question_id;
+
   getAns({
     required this.question_id,
   });
@@ -194,6 +204,7 @@ class getAns extends EventBloc {
 class goodAns extends EventBloc {
   int user_id;
   int answer_id;
+
   goodAns({
     required this.user_id,
     required this.answer_id,
@@ -203,6 +214,7 @@ class goodAns extends EventBloc {
 class reportANS extends EventBloc {
   int id;
   String content;
+
   reportANS({required this.id, required this.content});
 }
 
@@ -232,6 +244,7 @@ class getHistory extends EventBloc {
 class getViTien extends EventBloc {
   int user_id;
   int cat_id;
+
   getViTien({
     required this.user_id,
     required this.cat_id,
@@ -255,15 +268,16 @@ class getTaoNganHang extends EventBloc {
       this.updated_at});
 }
 
-class Rating extends EventBloc{
+class Rating extends EventBloc {
   int? id;
   double? ratings;
   int? price_tip;
-  Rating({this.id,this.ratings,this.price_tip});
+
+  Rating({this.id, this.ratings, this.price_tip});
 }
 
-class RegisNotify extends EventBloc{
+class RegisNotify extends EventBloc {
   int? subject_id;
-  RegisNotify({ this.subject_id});
-}
 
+  RegisNotify({this.subject_id});
+}

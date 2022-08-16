@@ -14,7 +14,8 @@ import 'widgetIcons.dart';
 import '../../../bloc/state_bloc.dart';
 
 int userID = 0;
-bool iskyc=false;
+bool iskyc = false;
+
 class ItemAccount extends StatefulWidget {
   @override
   State<ItemAccount> createState() => _ItemAccountState();
@@ -24,10 +25,9 @@ class _ItemAccountState extends State<ItemAccount> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
-      context.read<BLocLocalUser>().getUser();
       ModelUser user = snapshot ?? ModelUser();
       userID = user.id ?? 0;
-      iskyc=user.isKyc??false;
+      iskyc = user.isKyc ?? false;
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(
@@ -117,22 +117,30 @@ class _ItemAccountState extends State<ItemAccount> {
             ),
             (user.isKyc ?? false)
                 ? Row(
-                  children: [
-                    Image.asset(
+                    children: [
+                      Image.asset(
                         ImagePath.kyc,
                         height: 40,
                         width: 40,
                       ),
-                    Text('Đã KYC')
-                  ],
-                )
+                      Text(
+                        'Đã KYC',
+                        style: StyleApp.textStyle400(),
+                      )
+                    ],
+                  )
                 : Row(
-                  children: [
-                    Icon(Icons.report_gmailerrorred,
-                    color: Colors.red),
-                    Text('Chưa KYC')
-                  ],
-                )
+                    children: [
+                      const Icon(
+                        Icons.report_gmailerrorred,
+                        color: Colors.red,
+                      ),
+                      Text(
+                        'Chưa KYC',
+                        style: StyleApp.textStyle400(),
+                      )
+                    ],
+                  )
           ],
         ),
       );

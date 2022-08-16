@@ -15,18 +15,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../item/question_tile.dart';
+import '../widget/items/item_loadmore.dart';
 import 'add_question.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen();
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int page = 1;
+  ScrollController controller = ScrollController();
   Future<void> onRefresh() async {
-    context.read<BlocGetQuestion>().add(GetData(cat_id: keySearchid,subject_id: keySearchid1,class_id: keySearchid2,user: false
-    ),);
+    page = 1;
+    context.read<BlocGetQuestion>().add(
+          GetData(
+              cat_id: keySearchid,
+              subject_id: keySearchid1,
+              class_id: keySearchid2,
+              isUser: false,
+            cleanList: true,
+            page: page,
+          ),
+        );
   }
 
   String? keySearch;
@@ -43,6 +56,21 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     onRefresh();
+    controller.addListener(() {
+      if(controller.position.pixels == controller.position.maxScrollExtent){
+        page++;
+        context.read<BlocGetQuestion>().add(
+          GetData(
+            cat_id: keySearchid,
+            subject_id: keySearchid1,
+            class_id: keySearchid2,
+            isUser: false,
+            loadMore: true,
+            page: page,
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -55,18 +83,21 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           style: ElevatedButton.styleFrom(
             primary: ColorApp.orangeF0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)
-            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Đặt câu hỏi', style: StyleApp.textStyle700(color: Colors.white),), // <-- Text
+              Text(
+                'Đặt câu hỏi',
+                style: StyleApp.textStyle700(color: Colors.white),
+              ), // <-- Text
               const SizedBox(
                 width: 5,
               ),
-              const Icon( // <-- Icon
+              const Icon(
+                // <-- Icon
                 Icons.add,
                 size: 24.0,
               ),
@@ -150,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: RefreshIndicator(
           onRefresh: onRefresh,
           child: BlocBuilder<BlocGetQuestion, StateBloc>(
-            builder: (_,StateBloc state) {
+            builder: (_, StateBloc state) {
               // final keySearch =  state is LoadSuccess
               //      ? state.keySearch
               //      : null;
@@ -159,32 +190,54 @@ class _HomeScreenState extends State<HomeScreen> {
                 keySearch1 = state.keySearch1;
                 keySearch2 = state.keySearch2;
               }
-              return ItemLoadPage(state: state,
-               success: Column(
-                 children: [
-                   Row(
-                     children: [
-                       keySearch != null
-                           ? _itemSearch(keySearch)
-                           : Container(),
-                       keySearch1 != null
-                           ? _itemSearch(keySearch1)
-                           : Container(),
-                       keySearch2 != null
-                           ? _itemSearch(keySearch2)
-                           : Container(),
-                     ],
-                   ),
-                   const SizedBox(height: 10),
-                   Expanded(
-                     child: QuestionList(
-                       listItem: state is LoadSuccess
-                           ? state.data as List<ModelQuestion>
-                           : [],
-                     ),
-                   ),
-                 ],
-               ),
+              final list = state is LoadSuccess ? state.data as List<ModelQuestion> : <ModelQuestion>[];
+              final length = state is LoadSuccess ? state.checkLength : false;
+              final hasMore = state is LoadSuccess ? state.hasMore : false;
+              return ItemLoadPage(
+                state: state,
+                success: Column(
+                  children: [
+                    Row(
+                      children: [
+                        keySearch != null
+                            ? _itemSearch(keySearch)
+                            : Container(),
+                        keySearch1 != null
+                            ? _itemSearch(keySearch1)
+                            : Container(),
+                        keySearch2 != null
+                            ? _itemSearch(keySearch2)
+                            : Container(),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Expanded(
+                      child:list.isEmpty
+                          ? ItemListEmpty()
+                          :  SingleChildScrollView(
+                        controller: controller,
+                        padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: List.generate(
+                                  list.length,
+                                      (index) => QuestionTile(context,
+                                      modelQuestion: list[index])),
+                            ),
+                            ItemLoadMore(
+                              hasMore: hasMore,
+                              length: length,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ),
+                  ],
+                ),
                 onTapErr: onRefresh,
               );
             },
@@ -193,9 +246,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   _itemSearch(key) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7,vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       margin: const EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),

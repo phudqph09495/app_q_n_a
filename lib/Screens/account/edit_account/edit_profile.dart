@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:app_q_n_a/bloc/bloc/address/bloc_districts.dart';
+import 'package:app_q_n_a/bloc/bloc/address/bloc_provices.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/choose_image_bloc.dart';
@@ -41,12 +43,17 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController cmt = TextEditingController();
   TextEditingController phone = TextEditingController();
   String? sex;
+  ModelLocal? province;
+  ModelLocal? district;
   String? address;
   Map<String, dynamic> req = new Map();
   BlocUpdateUser blocUpdateUser = BlocUpdateUser();
   BlocGetUser getUser = BlocGetUser()..add(GetData());
   ChooseImageBloc chooseImageBloc = ChooseImageBloc();
   final keyForm = GlobalKey<FormState>();
+
+  BlocProvinces blocProvinces = BlocProvinces()..add(GetData());
+  BlocDistricts blocDistricts = BlocDistricts();
 
   @override
   Widget build(BuildContext context) {
@@ -67,21 +74,18 @@ class _EditProfileState extends State<EditProfile> {
           }
           if (state is LoadSuccess) {
             DialogItem.hideLoading(context: context);
-            await SharePrefsKeys.seveUserKey(state.data as ModelUser);
-            context.read<BLocLocalUser>().getUser();
+            getUser.add(GetData());
             CustomToast.showToast(
                 context: context, msg: "Cập nhật thông tin thành công");
           }
         },
         child: Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
           child: ElevatedButton(
             onPressed: () {
-              print(req);
               blocUpdateUser.add(UpdateProfile(req: req));
             },
             style: ElevatedButton.styleFrom(
-              minimumSize: Size(10, 50),
               primary: ColorApp.orangeF2,
             ),
             child: Text(
@@ -111,11 +115,25 @@ class _EditProfileState extends State<EditProfile> {
           ),
         ),
       ),
-      body: BlocBuilder(
+      body: BlocConsumer(
           bloc: getUser,
+          listener: (_, StateBloc state) async {
+            if(state is LoadSuccess){
+              await SharePrefsKeys.seveUserKey(state.data as ModelUser);
+              context.read<BLocLocalUser>().getUser();
+            }
+          },
           builder: (_, StateBloc state) {
             final user =
                 state is LoadSuccess ? state.data as ModelUser : ModelUser();
+            // province = ModelLocal(
+            //   id: user.provinceId.toString(),
+            //   name: user.provinceName
+            // );
+            // district = ModelLocal(
+            //     id: user.districtId.toString(),
+            //     name: user.districtName
+            // );
             return ItemLoadPage(
               state: state,
               onTapErr: () {
@@ -129,27 +147,28 @@ class _EditProfileState extends State<EditProfile> {
                     BlocBuilder(
                         bloc: chooseImageBloc,
                         builder: (context, XFile? snapshot) {
-                          return Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(
-                                      color: ColorApp.orangeF0.withOpacity(0.5),
-                                      width: 2),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    ImagePicker _picker = ImagePicker();
-                                    _picker
-                                        .pickImage(source: ImageSource.gallery)
-                                        .then((value) {
-                                      if (value != null) {
-                                        req["avatar"] = value;
-                                      }
-                                      chooseImageBloc.getImage(image: value);
-                                    });
-                                  },
+                          return InkWell(
+                            borderRadius: BorderRadius.circular(100),
+                            onTap: (){
+                              ImagePicker _picker = ImagePicker();
+                              _picker
+                                  .pickImage(source: ImageSource.gallery)
+                                  .then((value) {
+                                if (value != null) {
+                                  req["avatar"] = value;
+                                }
+                                chooseImageBloc.getImage(image: value);
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    border: Border.all(
+                                        color: ColorApp.orangeF0.withOpacity(0.5),
+                                        width: 2),
+                                  ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(100),
                                     child: snapshot != null
@@ -169,24 +188,24 @@ class _EditProfileState extends State<EditProfile> {
                                           ),
                                   ),
                                 ),
-                              ),
-                              // ignore: prefer_const_constructors
-                              Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: ColorApp.orangeF0),
-                                          shape: BoxShape.circle),
-                                      child: const Icon(
-                                        Icons.edit,
-                                        size: 18,
-                                      ))),
-                            ],
+                                // ignore: prefer_const_constructors
+                                Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                                color: ColorApp.orangeF0),
+                                            shape: BoxShape.circle),
+                                        child: const Icon(
+                                          Icons.edit,
+                                          size: 18,
+                                        ))),
+                              ],
+                            ),
                           );
                         }),
                     Column(
@@ -231,6 +250,7 @@ class _EditProfileState extends State<EditProfile> {
                           ],
                           onChanged: (val) {
                             req['sex'] = val.id;
+                            sex = val.name;
                           },
                           value: sex,
                         ),
@@ -252,9 +272,8 @@ class _EditProfileState extends State<EditProfile> {
                               ).then((value) {
                                 if (value != null) {
                                   birthday.text = Const.formatTime(
-                                      value.millisecondsSinceEpoch,
-                                      format: "dd-MM-yyyy");
-                                  req['birthday'] = birthday.text;
+                                      value.millisecondsSinceEpoch,);
+                                  req['birthday'] = (value.millisecondsSinceEpoch/1000).round();
                                 }
                               });
                             }),
@@ -265,6 +284,44 @@ class _EditProfileState extends State<EditProfile> {
                           keyboardType: TextInputType.number,
                           onChanged: (val) {
                             req['cmt'] = val;
+                          },
+                        ),
+                        BlocBuilder(
+                           bloc: blocProvinces,
+                           builder: (context, state) {
+                             final list = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
+                             return itemDrop(
+                               title: "Tỉnh thành phố",
+                               hint: Const.checkStringNull(user.provinceName),
+                               items: list,
+                               onChanged: (val) {
+                                 req['province_id'] = val.id;
+                                 province = val;
+                                 district = null;
+                                 blocDistricts.add(GetData(
+                                   id: val.id,
+                                 ));
+                                 setState((){});
+                               },
+                               value: province,
+                             );
+                           },
+                        ),
+                        BlocBuilder(
+                          bloc: blocDistricts,
+                          builder: (context, state) {
+                            final list = state is LoadSuccess ? state.data as List<ModelLocal> : <ModelLocal>[];
+                            return itemDrop(
+                              title: "Quận huyện",
+                              hint: Const.checkStringNull(user.districtName),
+                              items: list,
+                              onChanged: (val) {
+                                req['district_id'] = val.id;
+                                district = val;
+                                setState((){});
+                              },
+                              value: district,
+                            );
                           },
                         ),
                       ],

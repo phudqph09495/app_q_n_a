@@ -1,45 +1,47 @@
 class ModelUser {
   ModelUser({
-      this.id, 
-      this.username, 
-      this.authKey, 
-      this.passwordHash, 
-      this.passwordResetToken, 
-      this.phone, 
-      this.email, 
-      this.status, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.address, 
-      this.provinceId, 
-      this.districtId, 
-      this.facebook, 
-      this.linkFacebook, 
-      this.typeSocial, 
-      this.idSocial, 
-      this.isNotification, 
-      this.sex, 
-      this.imagePath, 
-      this.imageName, 
-      this.avatarPath, 
-      this.avatarName, 
-      this.memberPrivatekey, 
-      this.memberUsername, 
-      this.lastRequestTime, 
-      this.userBefore, 
-      this.getflyId, 
-      this.passwordHash2, 
-      this.userGtApp, 
-      this.verifyEmail, 
-      this.cmt, 
-      this.tokenOtp, 
-      this.tokenApp, 
-      this.countQuestion, 
-      this.birthday, 
-      this.countReport, 
-
-      this.isKyc, 
-      this.wallet,});
+    this.id,
+    this.username,
+    this.authKey,
+    this.passwordHash,
+    this.passwordResetToken,
+    this.phone,
+    this.email,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.address,
+    this.provinceId,
+    this.districtId,
+    this.facebook,
+    this.linkFacebook,
+    this.typeSocial,
+    this.idSocial,
+    this.isNotification,
+    this.sex,
+    this.imagePath,
+    this.imageName,
+    this.avatarPath,
+    this.avatarName,
+    this.memberPrivatekey,
+    this.memberUsername,
+    this.lastRequestTime,
+    this.userBefore,
+    this.getflyId,
+    this.passwordHash2,
+    this.userGtApp,
+    this.verifyEmail,
+    this.cmt,
+    this.tokenOtp,
+    this.tokenApp,
+    this.countQuestion,
+    this.birthday,
+    this.countReport,
+    this.provinceName,
+    this.districtName,
+    this.isKyc,
+    this.wallet,
+  });
 
   ModelUser.fromJson(dynamic json) {
     id = json['id'];
@@ -79,10 +81,13 @@ class ModelUser {
     countQuestion = json['count_question'];
     birthday = json['birthday'];
     countReport = json['count_report'];
+    provinceName = json['province_name'];
+    districtName = json['district_name'];
 
     isKyc = json['is_kyc'];
     wallet = json['wallet'];
   }
+
   int? id;
   String? username;
   String? authKey;
@@ -90,6 +95,8 @@ class ModelUser {
   dynamic passwordResetToken;
   String? phone;
   String? email;
+  String? provinceName;
+  String? districtName;
   int? status;
   int? createdAt;
   int? updatedAt;
@@ -163,10 +170,10 @@ class ModelUser {
     map['count_question'] = countQuestion;
     map['birthday'] = birthday;
     map['count_report'] = countReport;
-
+    map['province_name'] = provinceName;
+    map['district_name'] = districtName;
     map['is_kyc'] = isKyc;
     map['wallet'] = wallet;
     return map;
   }
-
 }

@@ -41,7 +41,10 @@ class _FilterState extends State<Filter> {
   int? monval;
   int? catval;
 
-  GetData getQuestionHome = GetData();
+  GetData getQuestionHome = GetData(
+    cleanList: true,
+    page: 1,
+  );
 
   @override
   Widget build(BuildContext context) {
