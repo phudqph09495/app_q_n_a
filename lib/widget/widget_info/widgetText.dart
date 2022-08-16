@@ -99,7 +99,7 @@ class _ItemAccountState extends State<ItemAccount> {
                   ),
                   Text(
                     // Const.checkStringNull(id),
-                    'Id thành viên: ${userID ?? ""}',
+                    'Id thành viên: $userID',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: StyleApp.textStyle700(

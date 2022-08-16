@@ -11,18 +11,10 @@ class BlocCheckLogin extends Bloc<EventBloc, StateBloc> {
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
     if (event is GetData) {
-      yield Loading();
-      try {
-        bool check = await SharedPrefs.readBool(SharePrefsKeys.login) ?? false;
-
-        yield LoadSuccess(
-          data: check,
-        );
-      } on DioError catch (e) {
-        yield LoadFail(error: e.error.error);
-      } catch (e) {
-        yield LoadFail(error: e.toString());
-      }
+      bool check = await SharedPrefs.readBool(SharePrefsKeys.login) ?? false;
+      yield LoadSuccess(
+        data: check,
+      );
     }
   }
 }
