@@ -27,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import '../bloc/event_bloc.dart';
 import '../item/dropdown_button.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,17 +99,22 @@ BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
   String? lop;
   String? mon;
 
+
+  int moneyId=0;
   AddQuesVoid() async {
     if (keyForm.currentState!.validate() &&
         ((description.text != '') || imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
+String moneyStr=((moneyId!=0)||(money.text!='0đ'))?money.text.substring(0,money.text.indexOf('đ')):'0.0';
+
+print(moneyStr);
 
       bloc.add(addQuesForm(
         user_id: user_id ?? -1,
         subject_id: monval,
         class_id: lopval,
         deadline: dateTime,
-        money:(double.parse(money.text).round()*1000).toString(),
+        money: moneyId==0?NumberFormat().parse(moneyStr):NumberFormat().parse(moneyStr)*1000,
         description: description.text,
         question: ques.text,
         images: imageFiles,
@@ -185,10 +191,12 @@ BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
             CheckLogState.check(context,
                 state: state,
                 msg: "Thêm câu hỏi thành công",
-                isShowDlg: true, ontap: () {
+                isShowDlg: true,
+                ontap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ScreenHome()));
-            });
+            }
+            );
           },
           child: Button1(
               colorButton: ColorApp.orangeF2,
@@ -300,7 +308,7 @@ BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
                 style: StyleApp.textStyle700(fontSize: 16),
               ),
               BlocBuilder(bloc: blocGetPrice,builder: (context,state){
-                print(state);
+
                 final list=state is LoadSuccess? state.data as List<ModelLocal2>:<ModelLocal2>[];
                 return GridViewCustom(
                   itemCount: list.length,
@@ -314,7 +322,9 @@ BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
                   itemBuilder: (_, index) => OutlinedButton(
                     onPressed: () {
                       // money.text=Const.convertPrice(10000 * (index + 1));
-                      money.text=list[index].name.toString();
+                    money.text=list[index].name.toString();
+                    moneyId=list[index].id??0;
+
 
                     },
                     style: OutlinedButton.styleFrom(
@@ -332,6 +342,13 @@ BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
               }),
               const SizedBox(height: 10),
               InputText2(
+                onChanged: (value) {
+                  value.endsWith('đ')
+                      ? money.text = value
+                      : money.text = value + 'đ';
+                  money.selection = TextSelection.fromPosition(
+                      TextPosition(offset: money.text.length - 1));
+                },
                 textInputFormatter: [
                   CurrencyTextInputFormatter(
                     // locale: 'ko',
