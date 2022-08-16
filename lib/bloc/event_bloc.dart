@@ -140,7 +140,7 @@ class addQuesForm extends EventBloc {
   String question;
   int? subject_id;
   DateTime deadline;
-  String money;
+  num money;
   int? class_id;
 
   String description;
@@ -271,7 +271,7 @@ class getTaoNganHang extends EventBloc {
 class Rating extends EventBloc {
   int? id;
   double? ratings;
-  int? price_tip;
+  num? price_tip;
 
   Rating({this.id, this.ratings, this.price_tip});
 }
