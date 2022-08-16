@@ -126,7 +126,13 @@ class _ItemAccountState extends State<ItemAccount> {
                     Text('Đã KYC')
                   ],
                 )
-                : Container()
+                : Row(
+                  children: [
+                    Icon(Icons.report_gmailerrorred,
+                    color: Colors.red),
+                    Text('Chưa KYC')
+                  ],
+                )
           ],
         ),
       );

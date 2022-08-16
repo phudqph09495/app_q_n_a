@@ -18,12 +18,11 @@ class BlocRegisNotify extends Bloc<EventBloc, StateBloc> {
       try {
         Map<String, dynamic> req = Map();
 
-req['subject_id']=event.subject_id;
+        req['subject_id'] = event.subject_id;
         var res = await Api.postAsync(endPoint: ApiPath.regisNotify, req: req);
 
         if (res['code'] == 1) {
-          yield LoadSuccess(
-          );
+          yield LoadSuccess(data: res['message']);
         } else {
           yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }

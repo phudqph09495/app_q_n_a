@@ -110,9 +110,7 @@ class _NotificationbarState extends State<Notificationbar> {
                     print(state);
                     CheckLogState.check(context,
                         state: state,
-                        msg: "Đăng ký nhận thông báo thành công", success: () {
-
-                    });
+                       );
                   },
                   child: BasicDialogAction(
                     title: Text(
