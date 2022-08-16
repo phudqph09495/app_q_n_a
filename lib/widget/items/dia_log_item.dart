@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import '../../config/routers/routers.dart';
 import '../../styles/init_style.dart';
+import '../../widget/widget_info/widgetText.dart' as user;
 
 class DialogItem {
   static showMsg({
@@ -45,7 +46,10 @@ class DialogItem {
               ? FlatButton(
                   onPressed: () async {
                     if (logout) {
+
                       await SharePrefsKeys.removeAllKey();
+                      user.userID = 0;
+                      user.iskyc=false;
                       context.read<BlocCheckLogin>().add(GetData());
                       Navigator.pop(context);
                     } else {

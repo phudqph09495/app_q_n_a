@@ -5,6 +5,7 @@ import 'package:app_q_n_a/Screens/home.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_add_question.dart';
 import 'package:app_q_n_a/bloc/bloc/question/get_class_bloc.dart';
+import 'package:app_q_n_a/bloc/bloc/question/get_price_bloc.dart';
 import 'package:app_q_n_a/bloc/bloc/question/get_sub_bloc.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
@@ -91,7 +92,7 @@ class _AddQuestionState extends State<AddQuestion> {
   final keyForm = GlobalKey<FormState>();
   BlocGetClass blocGetClass = BlocGetClass()..add(GetData());
   BlocGetSub blocGetSub = BlocGetSub()..add(GetData());
-
+BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
   int? lopval;
   int? monval;
   String? lop;
@@ -298,31 +299,37 @@ class _AddQuestionState extends State<AddQuestion> {
                 'Phần thưởng',
                 style: StyleApp.textStyle700(fontSize: 16),
               ),
-              GridViewCustom(
-                itemCount: 5,
-                showFull: true,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisExtent: 45,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-                maxWight: 120,
-                itemBuilder: (_, index) => OutlinedButton(
-                  onPressed: () {
-                    money.text=Const.convertPrice(10000 * (index + 1));
-                  },
-                  style: OutlinedButton.styleFrom(
-                    primary: Colors.green.shade200,
-                    side: BorderSide(
-                      color: Colors.green.shade200,
-                    )
+              BlocBuilder(bloc: blocGetPrice,builder: (context,state){
+                print(state);
+                final list=state is LoadSuccess? state.data as List<ModelLocal2>:<ModelLocal2>[];
+                return GridViewCustom(
+                  itemCount: list.length,
+                  showFull: true,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  mainAxisExtent: 45,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  maxWight: 120,
+                  itemBuilder: (_, index) => OutlinedButton(
+                    onPressed: () {
+                      // money.text=Const.convertPrice(10000 * (index + 1));
+                      money.text=list[index].name.toString();
+
+                    },
+                    style: OutlinedButton.styleFrom(
+                        primary: Colors.green.shade200,
+                        side: BorderSide(
+                          color: Colors.green.shade200,
+                        )
+                    ),
+                    child: Text(
+                        list[index].name.toString(),
+                      style: StyleApp.textStyle500(color: Colors.green),
+                    ),
                   ),
-                  child: Text(
-                    Const.convertPrice(10000 * (index + 1)),
-                    style: StyleApp.textStyle500(color: Colors.green),
-                  ),
-                ),
-              ),
+                );
+              }),
               const SizedBox(height: 10),
               InputText2(
                 textInputFormatter: [

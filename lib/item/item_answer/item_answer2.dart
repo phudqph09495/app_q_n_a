@@ -27,9 +27,11 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 
 import '../../bloc/bloc/auth/bloc_good_answer.dart';
 import '../../bloc/bloc/auth/bloc_report.dart';
+import '../../bloc/bloc/question/get_price_bloc.dart';
 import '../../bloc/event_bloc.dart';
 import '../../config/const.dart';
 import '../../models/model_answer.dart';
+import '../../models/model_local.dart';
 import '../../widget/items/custom_toast.dart';
 import '../gridView/grid_view_custom.dart';
 import '../input/text_filed2.dart';
@@ -67,6 +69,7 @@ class _AnswerCardState extends State<AnswerCard> {
   BlocRatingAnswer blocRatingAnswer = BlocRatingAnswer();
   TextEditingController textReport = TextEditingController();
   TextEditingController textTip = TextEditingController();
+  BlocGetPrice blocGetPrice = BlocGetPrice()..add(GetData());
   int user_id = iduser.userID;
   double? rate;
   @override
@@ -369,37 +372,46 @@ class _AnswerCardState extends State<AnswerCard> {
                 'Phần thưởng thêm cho câu trả lời',
                 style: StyleApp.textStyle700(fontSize: 16),
               ),
-              GridViewCustom(
-                itemCount: 6,
-                showFull: true,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisExtent: 45,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-                maxWight: 120,
-                itemBuilder: (_, index) => OutlinedButton(
-                  onPressed: () {
-                    textTip.text = (index != 0)
-                        ? Const.convertPrice(10000 * (index))
-                        : 'Miễn phí';
-                    money = 10000 * (index);
-                  },
-                  style: OutlinedButton.styleFrom(
-                      primary: Colors.green.shade200,
-                      side: BorderSide(
-                        color: Colors.green.shade200,
-                      )),
-                  child: Text(
-                    (index != 0)
-                        ? Const.convertPrice(10000 * (index))
-                        : 'Miễn phí',
-                    style: StyleApp.textStyle500(color: Colors.green),
-                  ),
-                ),
-              ),
+              BlocBuilder(
+                  bloc: blocGetPrice,
+                  builder: (context, state) {
+                    final list = state is LoadSuccess
+                        ? state.data as List<ModelLocal2>
+                        : <ModelLocal2>[];
+                    return GridViewCustom(
+                      itemCount: list.length,
+                      showFull: true,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      mainAxisExtent: 45,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      maxWight: 120,
+                      itemBuilder: (_, index) => OutlinedButton(
+                        onPressed: () {
+                          textTip.text = list[index].name.toString();
+                        },
+                        style: OutlinedButton.styleFrom(
+                            primary: Colors.green.shade200,
+                            side: BorderSide(
+                              color: Colors.green.shade200,
+                            )),
+                        child: Text(
+                          list[index].name.toString(),
+                          style: StyleApp.textStyle500(color: Colors.green),
+                        ),
+                      ),
+                    );
+                  }),
               const SizedBox(height: 10),
               InputText2(
+                onChanged: (value) {
+                  value.endsWith('đ')
+                      ? textTip.text = value
+                      : textTip.text = value + 'đ';
+                  textTip.selection = TextSelection.fromPosition(
+                      TextPosition(offset: textTip.text.length - 1));
+                },
                 textInputFormatter: [
                   CurrencyTextInputFormatter(
                     // locale: 'ko',
@@ -418,7 +430,7 @@ class _AnswerCardState extends State<AnswerCard> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      money = double.parse(textTip.text).round()*1000;
+                      money = double.parse(textTip.text).round() * 1000;
                       if (widget.user_id == user_id) {
                         blocRatingAnswer.add(Rating(
                             id: int.parse(widget.model.id ?? '0'),
@@ -437,13 +449,8 @@ class _AnswerCardState extends State<AnswerCard> {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      widget.refresh;
                       Navigator.pop(context);
-                      if (widget.user_id == user_id) {
-                        blocRatingAnswer.add(Rating(
-                          id: int.parse(widget.model.id ?? '0'),
-                          ratings: rate,
-                        ));
-                      }
                     },
                     child: Text(
                       "Hủy",

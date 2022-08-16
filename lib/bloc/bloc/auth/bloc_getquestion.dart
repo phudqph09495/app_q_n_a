@@ -19,7 +19,7 @@ class BlocGetQuestion extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
-        req['cat_id'] = event.cat_id;
+        req['status'] = event.cat_id;
         req['class_id'] = event.class_id;
         req['subject_id'] = event.subject_id;
         req['keywords'] = event.keyword;

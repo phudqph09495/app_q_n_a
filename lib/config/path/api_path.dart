@@ -19,8 +19,9 @@ class ApiPath {
   static const goodAnswer = "/app/question/good-answer";
   static const getClass = "/app/home/get-class";
   static const getSub = "/app/home/get-subjects";
-  static const getCat = "/app/home/get-category";
+  static const getCat = "/app/home/status-question";
   static const getsave = "/app/user/save-question";
+  static const getPrice="/app/question/get-price-tip";
   static const getQuestionByUser = "/app/question/get-question-user";
   static const getAnswerByUser = "/app/question/get-answer-user";
   static const getListQuestionSave = "/app/user/list-save-question";

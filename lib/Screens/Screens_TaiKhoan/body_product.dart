@@ -234,8 +234,6 @@ class _BodyProductState extends State<BodyProduct> {
                     fontSize: 18,
                     style: false,
                     ontap: () {
-                      user.userID = 0;
-                      user.iskyc=false;
                       DialogItem.showMsg(
                         context: context,
                         title: "Đăng xuất",

@@ -6,8 +6,8 @@ import 'package:app_q_n_a/models/model_local.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BlocGetCat extends Bloc<EventBloc, StateBloc> {
-  BlocGetCat() : super(StateBloc());
+class BlocGetPrice extends Bloc<EventBloc, StateBloc> {
+  BlocGetPrice() : super(StateBloc());
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
@@ -15,11 +15,11 @@ class BlocGetCat extends Bloc<EventBloc, StateBloc> {
       List<ModelLocal2> list = [];
       yield Loading();
       try {
-        var res = await Api.postAsync(endPoint: ApiPath.getCat, req: {});
-        print(res);
+        var res = await Api.postAsync(endPoint: ApiPath.getPrice, req: {});
+print(res);
         if (res['code'] == 1) {
           for (var item in res['data']) {
-            ModelLocal2 model = ModelLocal2(id: item["id"], name: item['name']);
+            ModelLocal2 model = ModelLocal2(id: item["id"], name: item["name"]);
             list.add(model);
           }
           yield LoadSuccess(data: list);
@@ -28,6 +28,7 @@ class BlocGetCat extends Bloc<EventBloc, StateBloc> {
 
         yield LoadFail(error: e.error.error ?? "Lỗi kết nối");
       } catch (e) {
+        print(e);
         yield LoadFail(error: e.toString());
       }
     }

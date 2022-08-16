@@ -64,7 +64,7 @@ class _FilterList2State extends State<FilterList2> {
               itemBuilder: (BuildContext context, int index) {
                 return RadioTile(
                   title: widget.list[index].name.toString(),
-                  index: int.parse(widget.list[index].id),
+                  index: int.parse(widget.list[index].id.toString()),
                   groupValue: widget.value,
                   onChange: (val) {
                     widget.value = val;

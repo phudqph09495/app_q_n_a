@@ -144,9 +144,10 @@ class _FilterState extends State<Filter> {
               BlocBuilder(
                 bloc: blocGetCat,
                 builder: (context, state) {
+                  print(state);
                   final list = state is LoadSuccess
-                      ? state.data as List<ModelLocal>
-                      : <ModelLocal>[];
+                      ? state.data as List<ModelLocal2>
+                      : <ModelLocal2>[];
                   return FilterList2(
                     value: catval,
                     title: '  Trạng thái câu hỏi',
@@ -155,7 +156,7 @@ class _FilterState extends State<Filter> {
                     list: list,
                     onChanged: (val) {
                       catval = val;
-                      for (ModelLocal element in list) {
+                      for (ModelLocal2 element in list) {
                         if (element.id.toString() == val.toString()) {
                           theloai = element.name;
                         }
