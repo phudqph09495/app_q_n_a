@@ -139,17 +139,7 @@ class _EditProfileState extends State<EditProfile> {
                                       width: 2),
                                 ),
                                 child: InkWell(
-                                  onTap: () {
-                                    ImagePicker _picker = ImagePicker();
-                                    _picker
-                                        .pickImage(source: ImageSource.gallery)
-                                        .then((value) {
-                                      if (value != null) {
-                                        req["avatar"] = value;
-                                      }
-                                      chooseImageBloc.getImage(image: value);
-                                    });
-                                  },
+
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(100),
                                     child: snapshot != null
@@ -182,9 +172,23 @@ class _EditProfileState extends State<EditProfile> {
                                           border: Border.all(
                                               color: ColorApp.orangeF0),
                                           shape: BoxShape.circle),
-                                      child: const Icon(
-                                        Icons.edit,
-                                        size: 18,
+                                      child:  InkWell(
+                                        onTap: () {
+
+                                          ImagePicker _picker = ImagePicker();
+                                          _picker
+                                              .pickImage(source: ImageSource.gallery)
+                                              .then((value) {
+                                            if (value != null) {
+                                              req["avatar"] = value;
+                                            }
+                                            chooseImageBloc.getImage(image: value);
+                                          });
+                                        },
+                                        child: Icon(
+                                          Icons.edit,
+                                          size: 18,
+                                        ),
                                       ))),
                             ],
                           );

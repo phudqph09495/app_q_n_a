@@ -93,38 +93,40 @@ class _AddQuestionState extends State<AddQuestion> {
   final keyForm = GlobalKey<FormState>();
   BlocGetClass blocGetClass = BlocGetClass()..add(GetData());
   BlocGetSub blocGetSub = BlocGetSub()..add(GetData());
-BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
+  BlocGetPrice blocGetPrice = BlocGetPrice()..add(GetData());
   int? lopval;
   int? monval;
   String? lop;
   String? mon;
 
-String free='';
-  int moneyId=0;
+  String free = '';
+  int moneyId = 0;
   AddQuesVoid() async {
     if (keyForm.currentState!.validate() &&
         ((description.text != '') || imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
-String moneyStr='0';
-late num monSend;
-if (moneyId!=0) {
-  moneyStr = money.text.substring(0,money.text.indexOf('đ'));
-  monSend=NumberFormat().parse(moneyStr)*1000;
-} else if((moneyId==0)&&(money.text!='0đ')&&(money.text!=free)) {
-  moneyStr = money.text.substring(0,money.text.indexOf('đ'));
-  monSend=NumberFormat().parse(moneyStr);
-}else if(money.text=='0đ'||moneyId==0){
-  monSend=0;
-}
+      String moneyStr = '0';
+      late num monSend;
+      if (moneyId != 0) {
+        moneyStr = money.text.substring(0, money.text.indexOf('đ'));
+        monSend = NumberFormat().parse(moneyStr) * 1000;
+      } else if ((moneyId == 0) &&
+          (money.text != '0đ') &&
+          (money.text != free)) {
+        moneyStr = money.text.substring(0, money.text.indexOf('đ'));
+        monSend = NumberFormat().parse(moneyStr);
+      } else if (money.text == '0đ' || moneyId == 0) {
+        monSend = 0;
+      }
 
-print(moneyStr);
+      print(moneyStr);
 
       bloc.add(addQuesForm(
         user_id: user_id ?? -1,
         subject_id: monval,
         class_id: lopval,
         deadline: dateTime,
-        money:monSend,
+        money: monSend,
         description: description.text,
         question: ques.text,
         images: imageFiles,
@@ -201,12 +203,10 @@ print(moneyStr);
             CheckLogState.check(context,
                 state: state,
                 msg: "Thêm câu hỏi thành công",
-                isShowDlg: true,
-                ontap: () {
+                isShowDlg: true, ontap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ScreenHome()));
-            }
-            );
+            });
           },
           child: Button1(
               colorButton: ColorApp.orangeF2,
@@ -317,39 +317,41 @@ print(moneyStr);
                 'Phần thưởng',
                 style: StyleApp.textStyle700(fontSize: 16),
               ),
-              BlocBuilder(bloc: blocGetPrice,builder: (context,state){
+              BlocBuilder(
+                  bloc: blocGetPrice,
+                  builder: (context, state) {
+                    final list = state is LoadSuccess
+                        ? state.data as List<ModelLocal2>
+                        : <ModelLocal2>[];
+                    return GridViewCustom(
+                      itemCount: list.length,
+                      showFull: true,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      mainAxisExtent: 45,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      maxWight: 120,
+                      itemBuilder: (_, index) => OutlinedButton(
+                        onPressed: () {
+                          // money.text=Const.convertPrice(10000 * (index + 1));
+                          money.text = list[index].name.toString();
+                          moneyId = list[index].id ?? 0;
 
-                final list=state is LoadSuccess? state.data as List<ModelLocal2>:<ModelLocal2>[];
-                return GridViewCustom(
-                  itemCount: list.length,
-                  showFull: true,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  mainAxisExtent: 45,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  maxWight: 120,
-                  itemBuilder: (_, index) => OutlinedButton(
-                    onPressed: () {
-                      // money.text=Const.convertPrice(10000 * (index + 1));
-                    money.text=list[index].name.toString();
-                    moneyId=list[index].id??0;
-
-index==0?free=list[0].name.toString():'';
-                    },
-                    style: OutlinedButton.styleFrom(
-                        primary: Colors.green.shade200,
-                        side: BorderSide(
-                          color: Colors.green.shade200,
-                        )
-                    ),
-                    child: Text(
-                        list[index].name.toString(),
-                      style: StyleApp.textStyle500(color: Colors.green),
-                    ),
-                  ),
-                );
-              }),
+                          index == 0 ? free = list[0].name.toString() : '';
+                        },
+                        style: OutlinedButton.styleFrom(
+                            primary: Colors.green.shade200,
+                            side: BorderSide(
+                              color: Colors.green.shade200,
+                            )),
+                        child: Text(
+                          list[index].name.toString(),
+                          style: StyleApp.textStyle500(color: Colors.green),
+                        ),
+                      ),
+                    );
+                  }),
               const SizedBox(height: 10),
               InputText2(
                 onChanged: (value) {
