@@ -27,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import '../bloc/event_bloc.dart';
 import '../item/dropdown_button.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,17 +99,34 @@ class _AddQuestionState extends State<AddQuestion> {
   String? lop;
   String? mon;
 
+  String free = '';
+  int moneyId = 0;
   AddQuesVoid() async {
     if (keyForm.currentState!.validate() &&
         ((description.text != '') || imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
+      String moneyStr = '0';
+      late num monSend;
+      if (moneyId != 0) {
+        moneyStr = money.text.substring(0, money.text.indexOf('đ'));
+        monSend = NumberFormat().parse(moneyStr) * 1000;
+      } else if ((moneyId == 0) &&
+          (money.text != '0đ') &&
+          (money.text != free)) {
+        moneyStr = money.text.substring(0, money.text.indexOf('đ'));
+        monSend = NumberFormat().parse(moneyStr);
+      } else if (money.text == '0đ' || moneyId == 0) {
+        monSend = 0;
+      }
+
+      print(moneyStr);
 
       bloc.add(addQuesForm(
         user_id: user_id ?? -1,
         subject_id: monval,
         class_id: lopval,
         deadline: dateTime,
-        money: (double.parse(money.text).round() * 1000).toString(),
+        money: monSend,
         description: description.text,
         question: ques.text,
         images: imageFiles,
@@ -301,11 +319,11 @@ class _AddQuestionState extends State<AddQuestion> {
               ),
               BlocBuilder(
                   bloc: blocGetPrice,
-                  builder: (context, StateBloc state) {
+                  builder: (context, state) {
                     final list = state is LoadSuccess
                         ? state.data as List<ModelLocal2>
                         : <ModelLocal2>[];
-                    return list.isEmpty ? const SizedBox() : GridViewCustom(
+                    return GridViewCustom(
                       itemCount: list.length,
                       showFull: true,
                       shrinkWrap: true,
@@ -316,7 +334,11 @@ class _AddQuestionState extends State<AddQuestion> {
                       maxWight: 120,
                       itemBuilder: (_, index) => OutlinedButton(
                         onPressed: () {
-                          money.text = (list[index].id ?? 0).toString();
+                          // money.text=Const.convertPrice(10000 * (index + 1));
+                          money.text = list[index].name.toString();
+                          moneyId = list[index].id ?? 0;
+
+                          index == 0 ? free = list[0].name.toString() : '';
                         },
                         style: OutlinedButton.styleFrom(
                             primary: Colors.green.shade200,
@@ -332,6 +354,13 @@ class _AddQuestionState extends State<AddQuestion> {
                   }),
               const SizedBox(height: 10),
               InputText2(
+                onChanged: (value) {
+                  value.endsWith('đ')
+                      ? money.text = value
+                      : money.text = value + 'đ';
+                  money.selection = TextSelection.fromPosition(
+                      TextPosition(offset: money.text.length - 1));
+                },
                 textInputFormatter: [
                   CurrencyTextInputFormatter(
                     // locale: 'ko',

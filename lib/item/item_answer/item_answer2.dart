@@ -21,6 +21,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 import 'package:readmore/readmore.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
@@ -357,7 +358,10 @@ class _AnswerCardState extends State<AnswerCard> {
   }
 
   _showDataTip() {
-    int money;
+    String free='';
+    int money = 0;
+    late num monSend;
+    String moneyStr = '0';
     textTip.clear();
     showBottomSheet(
       context: context,
@@ -390,6 +394,8 @@ class _AnswerCardState extends State<AnswerCard> {
                       itemBuilder: (_, index) => OutlinedButton(
                         onPressed: () {
                           textTip.text = list[index].name.toString();
+                          money = list[index].id ?? 0;
+                          index==0?free=list[0].name.toString():'';
                         },
                         style: OutlinedButton.styleFrom(
                             primary: Colors.green.shade200,
@@ -430,12 +436,23 @@ class _AnswerCardState extends State<AnswerCard> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      money = double.parse(textTip.text).round() * 1000;
+                      if (money != 0) {
+                        moneyStr = textTip.text
+                            .substring(0, textTip.text.indexOf('đ'));
+                        monSend = NumberFormat().parse(moneyStr) * 1000;
+                      } else if ((money == 0) && (textTip.text != '0đ')&&(textTip.text!=free)) {
+                        moneyStr = textTip.text
+                            .substring(0, textTip.text.indexOf('đ'));
+                        monSend = NumberFormat().parse(moneyStr);
+                      } else if (textTip.text == '0đ' && money == 0) {
+                        monSend = 0;
+                      }
+
                       if (widget.user_id == user_id) {
                         blocRatingAnswer.add(Rating(
                             id: int.parse(widget.model.id ?? '0'),
                             ratings: rate,
-                            price_tip: money));
+                            price_tip: monSend));
                       } else {
                         CustomToast.showToast(
                             context: context,
@@ -443,7 +460,7 @@ class _AnswerCardState extends State<AnswerCard> {
                       }
                     },
                     child: Text(
-                      "Gửi tiền thưởng",
+                      "Đánh giá",
                       style: StyleApp.textStyle500(color: Colors.white),
                     ),
                   ),
