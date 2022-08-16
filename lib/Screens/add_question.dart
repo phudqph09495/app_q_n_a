@@ -92,7 +92,7 @@ class _AddQuestionState extends State<AddQuestion> {
   final keyForm = GlobalKey<FormState>();
   BlocGetClass blocGetClass = BlocGetClass()..add(GetData());
   BlocGetSub blocGetSub = BlocGetSub()..add(GetData());
-BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
+  BlocGetPrice blocGetPrice = BlocGetPrice()..add(GetData());
   int? lopval;
   int? monval;
   String? lop;
@@ -108,7 +108,7 @@ BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
         subject_id: monval,
         class_id: lopval,
         deadline: dateTime,
-        money:(double.parse(money.text).round()*1000).toString(),
+        money: (double.parse(money.text).round() * 1000).toString(),
         description: description.text,
         question: ques.text,
         images: imageFiles,
@@ -299,37 +299,37 @@ BlocGetPrice blocGetPrice=BlocGetPrice()..add(GetData());
                 'Phần thưởng',
                 style: StyleApp.textStyle700(fontSize: 16),
               ),
-              BlocBuilder(bloc: blocGetPrice,builder: (context,state){
-                print(state);
-                final list=state is LoadSuccess? state.data as List<ModelLocal2>:<ModelLocal2>[];
-                return GridViewCustom(
-                  itemCount: list.length,
-                  showFull: true,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  mainAxisExtent: 45,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  maxWight: 120,
-                  itemBuilder: (_, index) => OutlinedButton(
-                    onPressed: () {
-                      // money.text=Const.convertPrice(10000 * (index + 1));
-                      money.text=list[index].name.toString();
-
-                    },
-                    style: OutlinedButton.styleFrom(
-                        primary: Colors.green.shade200,
-                        side: BorderSide(
-                          color: Colors.green.shade200,
-                        )
-                    ),
-                    child: Text(
-                        list[index].name.toString(),
-                      style: StyleApp.textStyle500(color: Colors.green),
-                    ),
-                  ),
-                );
-              }),
+              BlocBuilder(
+                  bloc: blocGetPrice,
+                  builder: (context, StateBloc state) {
+                    final list = state is LoadSuccess
+                        ? state.data as List<ModelLocal2>
+                        : <ModelLocal2>[];
+                    return list.isEmpty ? const SizedBox() : GridViewCustom(
+                      itemCount: list.length,
+                      showFull: true,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      mainAxisExtent: 45,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      maxWight: 120,
+                      itemBuilder: (_, index) => OutlinedButton(
+                        onPressed: () {
+                          money.text = (list[index].id ?? 0).toString();
+                        },
+                        style: OutlinedButton.styleFrom(
+                            primary: Colors.green.shade200,
+                            side: BorderSide(
+                              color: Colors.green.shade200,
+                            )),
+                        child: Text(
+                          list[index].name.toString(),
+                          style: StyleApp.textStyle500(color: Colors.green),
+                        ),
+                      ),
+                    );
+                  }),
               const SizedBox(height: 10),
               InputText2(
                 textInputFormatter: [

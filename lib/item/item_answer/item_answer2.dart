@@ -435,7 +435,7 @@ class _AnswerCardState extends State<AnswerCard> {
                         blocRatingAnswer.add(Rating(
                             id: int.parse(widget.model.id ?? '0'),
                             ratings: rate,
-                            price_tip: money ?? 0));
+                            price_tip: money));
                       } else {
                         CustomToast.showToast(
                             context: context,
