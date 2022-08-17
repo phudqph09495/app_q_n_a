@@ -104,7 +104,7 @@ Widget QuestionTile(
                                 size: 17,
                               ),
                               Text(
-                                modelQuestion.countImages ?? "0",
+                                (modelQuestion.countImages ?? 0).toString(),
                                 style: StyleApp.textStyle700(
                                     fontSize: 16, color: ColorApp.black),
                               ),

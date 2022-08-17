@@ -19,10 +19,9 @@ class BlocBankUser extends Bloc<EventBloc, StateBloc> {
       try {
         Map<String, dynamic> req = {};
         var res = await Api.postAsync(endPoint: ApiPath.getBank, req: req);
-
         print(res);
         if (res['code'] == 1) {
-          ModelBank model = ModelBank.fromJson(res['data']);
+          ModelBank model =res['data'] != null ? ModelBank.fromJson(res['data']) : ModelBank();
           yield LoadSuccess(
             data: model,
           );

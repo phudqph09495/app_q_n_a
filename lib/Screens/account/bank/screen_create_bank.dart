@@ -50,8 +50,7 @@ class ScreenCreateBank extends StatelessWidget {
           bloc: blocBank,
           listener: (_, StateBloc state) {
             if (state is LoadSuccess) {
-              final bank =
-                  state is LoadSuccess ? state.data as ModelBank : ModelBank();
+              final bank = state.data as ModelBank ;
               userName.text = bank.name ?? "";
               bankName.text = bank.bankName ?? "";
               bankNumber.text = bank.number ?? "";
