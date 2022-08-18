@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../config/next_page.dart';
 import '../styles/colors.dart';
 import '../widget/items/dia_log_item.dart';
+import '../widget/items/item_load_page.dart';
 import '../widget/items/item_loadmore.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -34,6 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
     blocGetQuestion.add(
       GetData(
         cleanList: true,
+        isUser: false,
         page: page,
         keyword: search.text
       ),
@@ -43,13 +45,15 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    onRefresh();
     controller.addListener(() {
       if(controller.position.pixels == controller.position.maxScrollExtent){
         page++;
         blocGetQuestion.add(
           GetData(
             loadMore: true,
-            page: page,
+              isUser: false,
+              page: page,
               keyword: search.text
           ),
         );
@@ -97,6 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 controller: search,
                 iconPress: () {
                   search.clear();
+                  onRefresh();
                 },
                 colorBorder: Colors.black,
                 colorhint: ColorApp.black.withOpacity(0.3),
@@ -106,31 +111,35 @@ class _SearchScreenState extends State<SearchScreen> {
           Expanded(
             child: BlocBuilder(
               bloc: blocGetQuestion,
-              builder: (_, state) {
+              builder: (_,StateBloc state) {
                 final list  = state is LoadSuccess ? state.data as List<ModelQuestion> : <ModelQuestion>[];
                 final length = state is LoadSuccess ? state.checkLength : false;
                 final hasMore = state is LoadSuccess ? state.hasMore : false;
-                return list.isEmpty
-                    ? ItemListEmpty()
-                    :  SingleChildScrollView(
-                  controller: controller,
-                  padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: List.generate(
-                            list.length,
-                                (index) => QuestionTile(context,
-                                modelQuestion: list[index])),
-                      ),
-                      ItemLoadMore(
-                        hasMore: hasMore,
-                        length: length,
-                      ),
-                    ],
+                return ItemLoadPage(
+                  state: state,
+                  success: list.isEmpty
+                      ? ItemListEmpty()
+                      :  SingleChildScrollView(
+                    controller: controller,
+                    padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: List.generate(
+                              list.length,
+                                  (index) => QuestionTile(context,
+                                  modelQuestion: list[index])),
+                        ),
+                        ItemLoadMore(
+                          hasMore: hasMore,
+                          length: length,
+                        ),
+                      ],
+                    ),
                   ),
+                  onTapErr: onRefresh
                 );
               },
 

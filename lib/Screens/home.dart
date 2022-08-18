@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? ItemListEmpty()
                           :  SingleChildScrollView(
                         controller: controller,
-                        padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                        padding:const EdgeInsets.symmetric(horizontal: 10,),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
