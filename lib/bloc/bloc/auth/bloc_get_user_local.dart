@@ -4,6 +4,9 @@ import 'package:app_q_n_a/models/model_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../config/api.dart';
+import '../../../config/path/api_path.dart';
+
 class BLocLocalUser extends Cubit<ModelUser?> {
   BLocLocalUser() : super(null);
 

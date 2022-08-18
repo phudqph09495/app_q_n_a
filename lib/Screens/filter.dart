@@ -21,7 +21,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../bloc/state_bloc.dart';
-
+bool isUser = false;
 class Filter extends StatefulWidget {
   @override
   State<Filter> createState() => _FilterState();
@@ -44,37 +44,21 @@ class _FilterState extends State<Filter> {
   GetData getQuestionHome = GetData(
     cleanList: true,
     page: 1,
+    isUser: isUser,
   );
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomSheet: Padding(
+        bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
           child: BlocListener(
             bloc: blocGetQuestion,
             listener: (_, StateBloc state) {
-              // CheckLogState.check(context, state: state, isShowMsg: false,
-              //     success: () {
-              //   context.read<BlocGetQuestion>().add(getQuestionHome);
-              // });
-              // List<ModelQuestion> list =
-              //     state is LoadSuccess ? state.data as List<ModelQuestion> : [];
-              // if (list.isNotEmpty) {
-              //   Navigator.pop(context);
-              // } else {
-              //   DialogItem.showMsg(
-              //       context: context,
-              //       title: "Lỗi",
-              //       msg: "Không tìm thấy nội dung phù hợp",
-              //   onTap: (){
-              //         Navigator.pop(context);
-              //   });
-              // }
               if(state is LoadSuccess){
                 List<ModelQuestion> list=state.data;
-                if(list.length==0){
+                if(list.isEmpty){
                   DialogItem.showMsg(context: context, title: "Lỗi", msg: "Không tìm thấy nội dung");
                 }
                 else{
@@ -107,10 +91,10 @@ class _FilterState extends State<Filter> {
                   if (lophoc != '') {
                     getQuestionHome.keySearch2 = lophoc;
                   }
-
                   blocGetQuestion.add(getQuestionHome);
                   // Navigator.pop(context);
                 },
+                height: 40,
                 colorButton: ColorApp.orangeF2,
                 textColor: Colors.white,
                 border: Border.all(color: ColorApp.orangeF2, width: 0.5),
@@ -141,13 +125,12 @@ class _FilterState extends State<Filter> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               BlocBuilder(
                 bloc: blocGetCat,
                 builder: (context, state) {
-                  print(state);
                   final list = state is LoadSuccess
                       ? state.data as List<ModelLocal2>
                       : <ModelLocal2>[];
@@ -159,9 +142,13 @@ class _FilterState extends State<Filter> {
                     list: list,
                     onChanged: (val) {
                       catval = val;
+                      isUser = false;
                       for (ModelLocal2 element in list) {
                         if (element.id.toString() == val.toString()) {
                           theloai = element.name;
+                        }
+                        if(element.name.toString().toUpperCase().contains("suppoter".toUpperCase()) && element.id.toString() == val.toString()){
+                          isUser = true;
                         }
                       }
                     },

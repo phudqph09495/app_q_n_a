@@ -34,7 +34,6 @@ class BlocRatingAnswer extends Bloc<EventBloc, StateBloc> {
         yield LoadFail(error: e.error.error);
       } catch (e) {
         yield LoadFail(error: e.toString());
-        print(e);
       }
     }
 

@@ -36,7 +36,7 @@ class BlocNotifi extends Bloc<EventBloc, StateBloc> {
         req['limit'] = event.limit;
         req['page'] = event.page;
         var res = await Api.postAsync(endPoint: ApiPath.listNotifi, req: req);
-        print(res);
+
         if (res['code'] == 1) {
           for (var item in res['data']) {
             ModelNotifi model = ModelNotifi.fromJson(item);

@@ -114,7 +114,6 @@ class _CommentScreenState extends State<CommentScreen> {
           builder: (_, state) {
             if (state is LoadSuccess) {
               list = state.data as ModelAnswer;
-              print(list.answer?[widget.answerind].items?.length);
               return SingleChildScrollView(
                 reverse: true,
                 child: Padding(

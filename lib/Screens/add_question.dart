@@ -28,14 +28,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import '../bloc/bloc/auth/bloc_get_user_local.dart';
+import '../bloc/bloc/auth/bloc_get_wallet.dart';
+import '../bloc/bloc/auth/bloc_getquestion.dart';
 import '../bloc/event_bloc.dart';
-import '../item/dropdown_button.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../item/input_text.dart';
 import '../item/button.dart';
-import 'package:toast/toast.dart';
-import 'package:flutter_dialogs/flutter_dialogs.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 DateTime? _chosenDateTime;
 
@@ -52,37 +50,6 @@ class AddQuestion extends StatefulWidget {
 }
 
 class _AddQuestionState extends State<AddQuestion> {
-  void _showDatePicker(ctx) {
-    showCupertinoModalPopup(
-        context: ctx,
-        builder: (_) => Container(
-              height: 500,
-              color: const Color.fromARGB(255, 255, 255, 255),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 400,
-                    child: CupertinoDatePicker(
-                        minuteInterval: 1,
-                        minimumDate: DateTime.now(),
-                        use24hFormat: true,
-                        initialDateTime: DateTime.now(),
-                        onDateTimeChanged: (val) {
-                          _chosenDateTime = val;
-                        }),
-                  ),
-                  CupertinoButton(
-                      child: Text('OK'),
-                      onPressed: () {
-                        deadline.text =
-                            '${_getNumberAddZero(_chosenDateTime!.hour)}:${_getNumberAddZero(_chosenDateTime!.minute)}\'  ${_getNumberAddZero(_chosenDateTime!.day)}/${_getNumberAddZero(_chosenDateTime!.month)}/${_chosenDateTime?.year}';
-                        Navigator.of(ctx).pop();
-                      })
-                ],
-              ),
-            ));
-  }
-
   TextEditingController money = TextEditingController();
 
   TextEditingController ques = TextEditingController();
@@ -101,39 +68,24 @@ class _AddQuestionState extends State<AddQuestion> {
 
   String free = '';
   int moneyId = 0;
+
   AddQuesVoid() async {
-    if (keyForm.currentState!.validate() &&
-        ((description.text != '') || imageFiles.isNotEmpty)) {
+    if (keyForm.currentState!.validate()) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
-      String moneyStr = '0';
-      late num monSend;
-      if (moneyId != 0) {
-        moneyStr = money.text.substring(0, money.text.indexOf('đ'));
-        monSend = NumberFormat().parse(moneyStr) * 1000;
-      } else if ((moneyId == 0) &&
-          (money.text != '0đ') &&
-          (money.text != free)) {
-        moneyStr = money.text.substring(0, money.text.indexOf('đ'));
-        monSend = NumberFormat().parse(moneyStr);
-      } else if (money.text == '0đ' || moneyId == 0) {
-        monSend = 0;
-      }
-
-      print(moneyStr);
-
+      String priceText = money.text
+          .replaceAll(".", "")
+          .substring(0, money.text.replaceAll(".", "").length - 2);
+      int price = Const.convertNumber(priceText).round();
       bloc.add(addQuesForm(
         user_id: user_id ?? -1,
         subject_id: monval,
         class_id: lopval,
         deadline: dateTime,
-        money: monSend,
+        money: price,
         description: description.text,
         question: ques.text,
         images: imageFiles,
       ));
-    } else {
-      DialogItem.showMsg(
-          context: context, title: "Lỗi", msg: "Bạn chưa nhập đủ thông tin");
     }
   }
 
@@ -194,226 +146,224 @@ class _AddQuestionState extends State<AddQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(10),
-        child: BlocListener(
-          bloc: bloc,
-          listener: (_, StateBloc state) {
-            CheckLogState.check(context,
-                state: state,
-                msg: "Thêm câu hỏi thành công",
-                isShowDlg: true, ontap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ScreenHome()));
-            });
-          },
-          child: Button1(
-              colorButton: ColorApp.orangeF2,
-              textColor: ColorApp.whiteF0,
-              radius: 30,
-              style: false,
-              fontSize: 18,
-              height: 40,
-              border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-              textButton: 'Đăng câu hỏi',
-              ontap: AddQuesVoid),
+    return KeyboardDismisser(
+      child: Scaffold(
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(10),
+          child: BlocListener(
+            bloc: bloc,
+            listener: (_, StateBloc state) {
+              CheckLogState.check(context,
+                  state: state,
+                  msg: "Thêm câu hỏi thành công",
+                  isShowMsg: false,
+                  isShowDlg: true, ontap: () {
+                context.read<BlocGetWallet>().add(GetData());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ScreenHome(),
+                  ),
+                );
+              });
+            },
+            child: Button1(
+                colorButton: ColorApp.orangeF2,
+                textColor: ColorApp.whiteF0,
+                radius: 30,
+                style: false,
+                fontSize: 18,
+                height: 40,
+                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                textButton: 'Đăng câu hỏi',
+                ontap: AddQuesVoid),
+          ),
         ),
-      ),
-      backgroundColor: ColorApp.whiteF7,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: ColorApp.whiteF0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        title: Text(
-          'Đăng câu hỏi',
-          style: StyleApp.textStyle700(fontSize: 18),
+        backgroundColor: ColorApp.whiteF7,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: ColorApp.whiteF0,
+          iconTheme: const IconThemeData(color: Colors.black),
+          title: Text(
+            'Đăng câu hỏi',
+            style: StyleApp.textStyle700(fontSize: 18),
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
-        child: Form(
-          key: keyForm,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                'Môn học',
-                style: StyleApp.textStyle700(fontSize: 16),
-              ),
-              BlocBuilder(
-                bloc: blocGetSub,
-                builder: (context, state) {
-                  final list = state is LoadSuccess
-                      ? state.data as List<ModelLocal>
-                      : <ModelLocal>[];
-                  return DropDown2(
-                    listItem: list,
-                    hint: 'Chọn môn học',
-                    onChanged: (val) {
-                      monval = int.parse(val.id);
-                    },
-                    value: mon,
-                    validator: (val) {
-                      return ValidatorApp.checkNull(
-                          text: val, isTextFiled: true);
-                    },
-                  );
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Lớp',
-                style: StyleApp.textStyle700(fontSize: 16),
-              ),
-              BlocBuilder(
-                bloc: blocGetClass,
-                builder: (context, state) {
-                  final list = state is LoadSuccess
-                      ? state.data as List<ModelLocal>
-                      : <ModelLocal>[];
-                  return DropDown2(
-                    listItem: list,
-                    hint: 'Chọn lớp học',
-                    onChanged: (val) {
-                      lopval = int.parse(val.id);
-                    },
-                    value: lop,
-                    validator: (val) {
-                      return ValidatorApp.checkNull(
-                          text: val, isTextFiled: true);
-                    },
-                  );
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Deadline',
-                style: StyleApp.textStyle700(fontSize: 16),
-              ),
-              InputText2(
-                onTap: () {
-                  showDatetime();
-                },
-                readOnly: true,
-                hint: 'Ngày kết thúc câu hỏi',
-                controller: deadline,
-                validator: (val) {
-                  return ValidatorApp.checkNull(text: val, isTextFiled: true);
-                },
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                'Phần thưởng',
-                style: StyleApp.textStyle700(fontSize: 16),
-              ),
-              BlocBuilder(
-                  bloc: blocGetPrice,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(10),
+          child: Form(
+            key: keyForm,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Môn học',
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
+                BlocBuilder(
+                  bloc: blocGetSub,
                   builder: (context, state) {
                     final list = state is LoadSuccess
-                        ? state.data as List<ModelLocal2>
-                        : <ModelLocal2>[];
-                    return GridViewCustom(
-                      itemCount: list.length,
-                      showFull: true,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      mainAxisExtent: 45,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      maxWight: 120,
-                      itemBuilder: (_, index) => OutlinedButton(
-                        onPressed: () {
-                          // money.text=Const.convertPrice(10000 * (index + 1));
-                          money.text = list[index].name.toString();
-                          moneyId = list[index].id ?? 0;
-
-                          index == 0 ? free = list[0].name.toString() : '';
-                        },
-                        style: OutlinedButton.styleFrom(
-                            primary: Colors.green.shade200,
-                            side: BorderSide(
-                              color: Colors.green.shade200,
-                            )),
-                        child: Text(
-                          list[index].name.toString(),
-                          style: StyleApp.textStyle500(color: Colors.green),
-                        ),
-                      ),
+                        ? state.data as List<ModelLocal>
+                        : <ModelLocal>[];
+                    return DropDown2(
+                      listItem: list,
+                      hint: 'Chọn môn học',
+                      onChanged: (val) {
+                        monval = int.parse(val.id);
+                      },
+                      value: mon,
+                      validator: (val) {
+                        return ValidatorApp.checkNull(
+                            text: val, isTextFiled: true);
+                      },
                     );
-                  }),
-              const SizedBox(height: 10),
-              InputText2(
-                onChanged: (value) {
-                  value.endsWith('đ')
-                      ? money.text = value
-                      : money.text = value + 'đ';
-                  money.selection = TextSelection.fromPosition(
-                      TextPosition(offset: money.text.length - 1));
-                },
-                textInputFormatter: [
-                  CurrencyTextInputFormatter(
-                    // locale: 'ko',
-                    decimalDigits: 0,
-                    symbol: '',
-                  ),
-                ],
-                keyboardType: TextInputType.number,
-                hint: 'Phần thưởng cho người trả lời',
-                controller: money,
-                validator: (val) {
-                  return ValidatorApp.checkNull(text: val, isTextFiled: true);
-                },
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                'Tiêu đề câu hỏi',
-                style: StyleApp.textStyle700(fontSize: 16),
-              ),
-              InputText2(
-                hint: 'Tiêu đề câu hỏi',
-                controller: ques,
-                validator: (val) {
-                  return ValidatorApp.checkNull(text: val, isTextFiled: true);
-                },
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                'Nội dung câu hỏi',
-                style: StyleApp.textStyle700(fontSize: 16),
-              ),
-              InputText2(
-                counter: true,
-                hint: 'Nhập câu hỏi của bạn',
-                keyboardType: TextInputType.multiline,
-                maxline: 6,
-                controller: description,
-              ),
-              StreamBuilder(
-                stream: imageStream,
-                initialData: imageFiles,
-                builder: (context, snapshot) {
-                  return buildImage();
-                },
-              ),
-              SizedBox(
-                height: 70,
-              ),
-            ],
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Lớp',
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
+                BlocBuilder(
+                  bloc: blocGetClass,
+                  builder: (context, state) {
+                    final list = state is LoadSuccess
+                        ? state.data as List<ModelLocal>
+                        : <ModelLocal>[];
+                    return DropDown2(
+                      listItem: list,
+                      hint: 'Chọn lớp học',
+                      onChanged: (val) {
+                        lopval = int.parse(val.id);
+                      },
+                      value: lop,
+                      validator: (val) {
+                        return ValidatorApp.checkNull(
+                            text: val, isTextFiled: true);
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Deadline',
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
+                InputText2(
+                  onTap: () {
+                    showDatetime();
+                  },
+                  readOnly: true,
+                  hint: 'Ngày kết thúc câu hỏi',
+                  controller: deadline,
+                  validator: (val) {
+                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Phần thưởng',
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
+                BlocBuilder(
+                    bloc: blocGetPrice,
+                    builder: (context, state) {
+                      final list = state is LoadSuccess
+                          ? state.data as List<ModelLocal2>
+                          : <ModelLocal2>[];
+                      return GridViewCustom(
+                        itemCount: list.length,
+                        showFull: true,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisExtent: 45,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                        maxWight: 120,
+                        itemBuilder: (_, index) => OutlinedButton(
+                          onPressed: () {
+                            money.text =
+                                Const.convertPrice(list[index].id) + " đ";
+                          },
+                          style: OutlinedButton.styleFrom(
+                              primary: Colors.green.shade200,
+                              side: BorderSide(
+                                color: Colors.green.shade200,
+                              )),
+                          child: Text(
+                            list[index].name.toString(),
+                            style: StyleApp.textStyle500(color: Colors.green),
+                          ),
+                        ),
+                      );
+                    }),
+                const SizedBox(height: 10),
+                InputText2(
+                  textInputFormatter: [
+                    CurrencyTextInputFormatter(
+                      locale: 'vi',
+                      decimalDigits: 0,
+                      symbol: 'đ',
+                    ),
+                  ],
+                  keyboardType: TextInputType.number,
+                  hint: 'Phần thưởng cho người trả lời',
+                  controller: money,
+                  validator: (val) {
+                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Tiêu đề câu hỏi',
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
+                InputText2(
+                  hint: 'Tiêu đề câu hỏi',
+                  controller: ques,
+                  validator: (val) {
+                    return ValidatorApp.checkNull(text: val, isTextFiled: true);
+                  },
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Nội dung câu hỏi',
+                  style: StyleApp.textStyle700(fontSize: 16),
+                ),
+                InputText2(
+                  counter: true,
+                  hint: 'Nhập câu hỏi của bạn',
+                  keyboardType: TextInputType.multiline,
+                  maxline: 6,
+                  controller: description,
+                ),
+                StreamBuilder(
+                  stream: imageStream,
+                  initialData: imageFiles,
+                  builder: (context, snapshot) {
+                    return buildImage();
+                  },
+                ),
+                SizedBox(
+                  height: 70,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -23,7 +23,7 @@ class BlocUpdateUser extends Bloc<EventBloc, StateBloc> {
 
         var res =
             await Api.postAsync(endPoint: ApiPath.updateUser, req: event.req!);
-        print(res);
+
         if (res['code'] == 1) {
           ModelUser datas = ModelUser.fromJson(res['data']);
           yield LoadSuccess(

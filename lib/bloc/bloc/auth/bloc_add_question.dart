@@ -33,9 +33,9 @@ class BlocQuestion extends Bloc<EventBloc, StateBloc> {
           }
           req['images[]'] = images;
         }
+        print(req);
         var res = await Api.postAsync(endPoint: ApiPath.addQuestion, req: req);
         print(res);
-
         if (res['code'] == 1) {
           yield LoadSuccess(mess: res['message']);
         } else {

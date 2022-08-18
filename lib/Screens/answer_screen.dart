@@ -114,6 +114,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
         },
         builder: (_, StateBloc state) {
           final model = state is LoadSuccess ? state.data as ModelAnswer : ModelAnswer();
+
           return ItemLoadPage(
               state: state,
               onTapErr: () {
@@ -145,6 +146,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                         itemBuilder: (context, index) {
                           return AnswerCard(
                             refresh: onRefresh,
+                            listUserIdAnswer: model.listUseridAnswer ?? [],
                             model: model.answer![index],
                             user_id: model.question!.userId,
                             deadLine: Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,

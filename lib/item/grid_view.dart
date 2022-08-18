@@ -69,7 +69,7 @@ class _FilterListState extends State<FilterList> {
                     setState(() {
                       widget.value = val;
                       content = widget.list[widget.value!];
-                      print(content);
+
                     });
                   },
                 );

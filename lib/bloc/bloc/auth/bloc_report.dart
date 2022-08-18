@@ -21,7 +21,7 @@ class BlocReport extends Bloc<EventBloc, StateBloc> {
         req['content'] = event.content;
 
         var res = await Api.postAsync(endPoint: ApiPath.reportAnswer, req: req);
-        print(res);
+
 
         if (res['code'] == 1) {
           yield LoadSuccess();

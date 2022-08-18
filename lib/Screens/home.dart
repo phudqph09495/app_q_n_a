@@ -30,14 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
   ScrollController controller = ScrollController();
   Future<void> onRefresh() async {
     page = 1;
+    isUser = false;
     context.read<BlocGetQuestion>().add(
           GetData(
               cat_id: keySearchid,
               subject_id: keySearchid1,
               class_id: keySearchid2,
-              isUser: false,
-            cleanList: true,
-            page: page,
+              isUser: isUser,
+              cleanList: true,
+              page: page,
           ),
         );
   }
@@ -59,12 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
     controller.addListener(() {
       if(controller.position.pixels == controller.position.maxScrollExtent){
         page++;
+        print(isUser);
         context.read<BlocGetQuestion>().add(
           GetData(
             cat_id: keySearchid,
             subject_id: keySearchid1,
             class_id: keySearchid2,
-            isUser: false,
+            isUser: isUser,
             loadMore: true,
             page: page,
           ),
@@ -182,9 +184,6 @@ class _HomeScreenState extends State<HomeScreen> {
           onRefresh: onRefresh,
           child: BlocBuilder<BlocGetQuestion, StateBloc>(
             builder: (_, StateBloc state) {
-              // final keySearch =  state is LoadSuccess
-              //      ? state.keySearch
-              //      : null;
               if (state is LoadSuccess) {
                 keySearch = state.keySearch;
                 keySearch1 = state.keySearch1;

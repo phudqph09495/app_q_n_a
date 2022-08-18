@@ -23,9 +23,14 @@ class ViTien extends StatefulWidget {
 }
 
 class _ViTienState extends State<ViTien> {
-  BlocGetWallet blocGetWallet = BlocGetWallet()..add(GetData());
   BlocWalletHistory blocWalletHistory = BlocWalletHistory()..add(getHistory());
-  // BlocWalletHistory blochistory = BlocWalletHistory();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<BlocGetWallet>().add(GetData());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,22 +82,19 @@ class _ViTienState extends State<ViTien> {
                   const SizedBox(
                     height: 20,
                   ),
-                  BlocBuilder(
-                      bloc: blocGetWallet,
-                      builder: (_, state) {
-                        final coin =
-                            state is LoadSuccess ? state.data as int : 0;
-                        return Button1(
-                          width: 190,
-                          height: 60,
-                          radius: 10,
-                          fontSize: 20,
-                          colorButton: ColorApp.orangeF2,
-                          textColor: Colors.white,
-                          textButton: '${Const.convertPrice(coin)} Đ',
-                          style: false,
-                        );
-                      }),
+                  BlocBuilder<BlocGetWallet, StateBloc>(builder: (_, state) {
+                    final coin = state is LoadSuccess ? state.data as int : 0;
+                    return Button1(
+                      width: 190,
+                      height: 60,
+                      radius: 10,
+                      fontSize: 20,
+                      colorButton: ColorApp.orangeF2,
+                      textColor: Colors.white,
+                      textButton: '${Const.convertPrice(coin)} Đ',
+                      style: false,
+                    );
+                  }),
                 ],
               ),
             ),
@@ -112,7 +114,6 @@ class _ViTienState extends State<ViTien> {
           bloc: blocWalletHistory,
           builder: (_, state) {
             if (state is LoadSuccess) {
-              print(state.data);
               final history = state.data as ModelHistory;
               return Card(
                 child: Container(
@@ -158,21 +159,23 @@ class _ViTienState extends State<ViTien> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           Const.formatTime(
                                               Const.convertNumber(
-                                                          model.createdAt)
-                                                      .round() *
+                                                  model.createdAt)
+                                                  .round() *
                                                   1000,
                                               format: "HH:mm dd/MM/yyyy"),
                                           style: StyleApp.textStyle400(),
                                         ),
-                                        const SizedBox(width: 10,),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
                                         Expanded(
                                           child: Text(
-                                            '${Const.convertPrice(model.price)} Đ',
+                                            '${model.moneyText} đ',
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.right,
                                             style: StyleApp.textStyle400(
@@ -180,7 +183,18 @@ class _ViTienState extends State<ViTien> {
                                           ),
                                         ),
                                       ],
-                                    )
+                                    ),
+                                    const SizedBox(
+                                      height: 7,
+                                    ),
+                                    Text(
+                                      "Số dư trước: ${Const.convertPrice(model.userBuyMoneyBefore)}",
+                                      style: StyleApp.textStyle400(),
+                                    ),
+                                    Text(
+                                      "Số sau trước: ${Const.convertPrice(model.userBuyMoneyAfter)}",
+                                      style: StyleApp.textStyle400(),
+                                    ),
                                   ],
                                 ),
                               ),

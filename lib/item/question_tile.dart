@@ -162,23 +162,44 @@ Widget QuestionTile(
             const SizedBox(
               height: 10,
             ),
-            Text(
-              '${modelQuestion.username}: ${modelQuestion.userCountQuestion ?? '0'} câu hỏi',
-              style: StyleApp.textStyle500(color: ColorApp.black),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                // ClipRRect(
-                //     borderRadius: BorderRadius.circular(10.0),
-                //     child: LoadImage(
-                //       url: '',
-                //       height: 40,
-                //       width: 40,
-                //     )),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          '${modelQuestion.username}',
+                          style: StyleApp.textStyle700(color: ColorApp.black),
+                        ),
+                        Expanded(
+                          child: Text(
+                            ': đã hỏi ${Const.convertNumber(modelQuestion.userCountQuestion).round()}',
+                            style: StyleApp.textStyle500(color: ColorApp.black),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '${modelQuestion.username}',
+                          style: StyleApp.textStyle700(color: ColorApp.black),
+                        ),
+                        Expanded(
+                          child: Text(
+                            ': đã trả lời ${Const.convertNumber(modelQuestion.countAnswer).round()}',
+                            style: StyleApp.textStyle500(color: ColorApp.black),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
+                const SizedBox(width: 10),
                 Button1(
                   height: 30,
                   colorButton: Colors.white,

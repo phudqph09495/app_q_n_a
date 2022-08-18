@@ -107,7 +107,6 @@ class _NotificationbarState extends State<Notificationbar> {
                 BlocListener(
                   bloc: blocRegisNotify,
                   listener: (_, StateBloc state) {
-                    print(state);
                     CheckLogState.check(context,
                         state: state,
                        );
@@ -118,7 +117,6 @@ class _NotificationbarState extends State<Notificationbar> {
                       style: StyleApp.textStyle500(color: Colors.blue),
                     ),
                     onPressed: () {
-                      print(monval);
                       if ((monval != null) && (user.iskyc)) {
                         blocRegisNotify.add(RegisNotify(subject_id: monval));
                       } else if (user.iskyc == false) {

@@ -119,7 +119,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                       color: Colors.yellow,
                     ),
                     onRatingUpdate: (rating) {
-                      print(rating);
+
                     },
                   ),
             ReadMoreText(

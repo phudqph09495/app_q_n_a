@@ -17,7 +17,6 @@ class BlocWalletHistory extends Bloc<EventBloc, StateBloc> {
         Map<String, dynamic> req = Map();
         var res =
             await Api.postAsync(endPoint: ApiPath.getWalletHistory, req: req);
-        print(res);
         if (res['code'] == 1) {
           ModelHistory datas = ModelHistory.fromJson(res['data']);
           yield LoadSuccess(

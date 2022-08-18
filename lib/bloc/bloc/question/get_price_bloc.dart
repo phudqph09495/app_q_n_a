@@ -27,7 +27,7 @@ class BlocGetPrice extends Bloc<EventBloc, StateBloc> {
 
         yield LoadFail(error: e.error.error ?? "Lỗi kết nối");
       } catch (e) {
-        print(e);
+
         yield LoadFail(error: e.toString());
       }
     }

@@ -6,6 +6,8 @@ import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
+import '../../bloc/bloc/auth/bloc_get_wallet.dart';
+import '../../bloc/bloc/auth/bloc_waller_history.dart';
 import '../../config/const.dart';
 import '../../config/path/image_path.dart';
 import '../../item/load_image.dart';
@@ -105,17 +107,23 @@ class _ItemAccountState extends State<ItemAccount> {
                     style: StyleApp.textStyle700(
                         color: ColorApp.black, fontSize: 16),
                   ),
-                  Text(
-                    'Điểm: ${Const.convertPrice(user.wallet)} ',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: StyleApp.textStyle700(
-                        color: ColorApp.red, fontSize: 16),
+                  BlocBuilder<BlocGetWallet, StateBloc>(
+                      builder: (_, state) {
+                        final coin =
+                        state is LoadSuccess ? state.data as int : 0;
+                      return Text(
+                        'VNĐ: ${Const.convertPrice(coin)} ',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: StyleApp.textStyle700(
+                            color: ColorApp.red, fontSize: 16),
+                      );
+                    }
                   ),
                 ],
               ),
             ),
-            (user.isKyc ?? false)
+            iskyc
                 ? Row(
                     children: [
                       Image.asset(

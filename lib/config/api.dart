@@ -84,10 +84,12 @@ class Api {
         return res.data;
       }
       if(res.data['code'] == 0){
-        throw "Code: ${res.data['code']} => ${res.data['error']}";
+       // throw "Code: ${res.data['code']} => ${res.data['error']}";
+        throw res.data['error'];
       }
       if(res.data['code'] != 0 || res.data['code'] != 1){
-        throw "Code: ${res.data['code']} => ${res.data['message']}";
+        throw res.data['message'];
+        //throw "Code: ${res.data['code']} => ${res.data['message']}";
       }
     } catch (e) {
       rethrow;

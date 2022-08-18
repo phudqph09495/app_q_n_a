@@ -198,7 +198,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           BlocListener(
                             bloc: bloc,
                             listener: (_, StateBloc state) {
-                              if (state is LoadFail) print(state.error);
                               CheckLogState.check(
                                 context,
                                 state: state,

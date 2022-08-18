@@ -256,6 +256,7 @@ class _BodyProductState extends State<BodyProduct> {
                       radius: 5,
                       fontSize: 18,
                       style: false,
+                      height: 40,
                       ontap: () {
                         DialogItem.showMsg(
                             context: context,
@@ -276,6 +277,7 @@ class _BodyProductState extends State<BodyProduct> {
                         textButton: 'Đăng xuất',
                         radius: 5,
                         fontSize: 18,
+                    height: 40,
                         style: false,
                         ontap: () {
                           DialogItem.showMsg(

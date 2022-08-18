@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../config/next_page.dart';
 import '../styles/colors.dart';
 import '../widget/items/dia_log_item.dart';
+import '../widget/items/item_loadmore.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -25,10 +26,36 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController search = TextEditingController();
-BlocGetQuestion blocGetQuestion=BlocGetQuestion();
-  StreamController listController = StreamController.broadcast();
-  Stream get imageStream => listController.stream;
-  List<ModelQuestion> list=[];
+  BlocGetQuestion blocGetQuestion = BlocGetQuestion();
+  ScrollController controller = ScrollController();
+  int page = 1;
+  Future<void> onRefresh() async {
+    page = 1;
+    blocGetQuestion.add(
+      GetData(
+        cleanList: true,
+        page: page,
+        keyword: search.text
+      ),
+    );
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.addListener(() {
+      if(controller.position.pixels == controller.position.maxScrollExtent){
+        page++;
+        blocGetQuestion.add(
+          GetData(
+            loadMore: true,
+            page: page,
+              keyword: search.text
+          ),
+        );
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,128 +77,88 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
           ),
         ),
       ),
-      body:SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: BlocConsumer(
-         builder: (_,state){
-           if(state is LoadSuccess){
-
-             return Column(
-               children: [
-                 SizedBox(
-                   height: 6,
-                 ),
-                 InputText(
-                     onSubmit: (val){
-                       blocGetQuestion.add(GetData(keyword: val));
-                     }
-                     ,
-                     textColor: Colors.black,
-                     maxline: null,
-                     action: TextInputAction.search,
-                     suffixIcon: Icon(
-                       Icons.close,
-                       color: ColorApp.black,
-                     ),
-                     hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
-                     controller: search,
-                     iconPress: () {
-                       search.clear();
-                     list.clear();
-                     listController.sink.add(list);
-                     },
-                     colorBorder: Colors.black,
-                     colorhint: ColorApp.black.withOpacity(0.3),
-                     iconS: true),
-                StreamBuilder(
-                  stream: imageStream,
-                    initialData: list,
-                    builder: (context,snapshot){
-                  return
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        (list.length!=0)?Text('Có ${list.length} câu hỏi',style: StyleApp.textStyle500(color: Colors.green),):Container(),
-                        ListView.builder(
-                          itemCount: list.length,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AnswerScreen(
-                                          modelQuestion: list[index],
-                                        )));
-                              },
-                              child: QuestionTile(context, modelQuestion: list[index]),
-                            );
-                          }),
-                      ],
-                    );
-                })
-               ],
-             );
-           }
-
-           return  InputText(
-               onSubmit: (val){
-                 blocGetQuestion.add(GetData(keyword: val));
-               }
-               ,
-               textColor: Colors.black,
-               maxline: null,
-               action: TextInputAction.search,
-               suffixIcon: Icon(
-                 Icons.close,
-                 color: ColorApp.black,
-               ),
-               hint: 'Tìm nội dung, ID câu hỏi bạn quan tâm',
-               controller: search,
-               iconPress: () {
-                 search.clear();
-               },
-               colorBorder: Colors.black,
-               colorhint: ColorApp.black.withOpacity(0.3),
-               iconS: true);
-         },
-            listener: (_,StateBloc state){
-
-              if (state is LoadSuccess) {
-                list=state.data;
-                if(list.length==0){
-                  DialogItem.showMsg(context: context, title: "Lỗi", msg: "Không có dữ liệu phù hợp");
-                }
-              }
-
-            },
-            bloc: blocGetQuestion,
-
+      body: Column(
+        children: [
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: InputText(
+                onSubmit: (val) {
+                  onRefresh();
+                },
+                textColor: Colors.black,
+                maxline: 1,
+                action: TextInputAction.search,
+                suffixIcon: const Icon(
+                  Icons.close,
+                  color: ColorApp.black,
+                ),
+                hint: 'Tìm nội dung câu hỏi bạn quan tâm',
+                controller: search,
+                iconPress: () {
+                  search.clear();
+                },
+                colorBorder: Colors.black,
+                colorhint: ColorApp.black.withOpacity(0.3),
+                iconS: true,
+            ),
           ),
-        ),
-      )
-      ,
+          Expanded(
+            child: BlocBuilder(
+              bloc: blocGetQuestion,
+              builder: (_, state) {
+                final list  = state is LoadSuccess ? state.data as List<ModelQuestion> : <ModelQuestion>[];
+                final length = state is LoadSuccess ? state.checkLength : false;
+                final hasMore = state is LoadSuccess ? state.hasMore : false;
+                return list.isEmpty
+                    ? ItemListEmpty()
+                    :  SingleChildScrollView(
+                  controller: controller,
+                  padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: List.generate(
+                            list.length,
+                                (index) => QuestionTile(context,
+                                modelQuestion: list[index])),
+                      ),
+                      ItemLoadMore(
+                        hasMore: hasMore,
+                        length: length,
+                      ),
+                    ],
+                  ),
+                );
+              },
+
+            ),
+          ),
+        ],
+      ),
       floatingActionButton: ElevatedButton(
         onPressed: () {
           PageNavigator.next(context: context, page: AddQuestion());
         },
         style: ElevatedButton.styleFrom(
           primary: ColorApp.orangeF0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Đặt câu hỏi', style: StyleApp.textStyle700(color: Colors.white),), // <-- Text
+            Text(
+              'Đặt câu hỏi',
+              style: StyleApp.textStyle700(color: Colors.white),
+            ), // <-- Text
             const SizedBox(
               width: 5,
             ),
-            const Icon( // <-- Icon
+            const Icon(
+              // <-- Icon
               Icons.add,
               size: 24.0,
             ),
@@ -181,7 +168,3 @@ BlocGetQuestion blocGetQuestion=BlocGetQuestion();
     );
   }
 }
-
-
-
-

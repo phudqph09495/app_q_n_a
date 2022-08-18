@@ -84,7 +84,7 @@ class ModelUser {
     provinceName = json['province_name'];
     districtName = json['district_name'];
 
-    isKyc = json['is_kyc'];
+    isKyc = json['is_kyc'] ?? false;
     wallet = json['wallet'];
   }
 

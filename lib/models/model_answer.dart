@@ -3,12 +3,14 @@ class ModelAnswer {
   List<Images>? images;
   List<Answer>? answer;
   String? countAnswer;
+  List<String>? listUseridAnswer;
 
-  ModelAnswer({this.question, this.images, this.answer, this.countAnswer});
+  ModelAnswer({this.question, this.images, this.answer, this.countAnswer, this.listUseridAnswer});
 
   ModelAnswer.fromJson(Map<String, dynamic> json) {
     images = <Images>[];
     answer = <Answer>[];
+    listUseridAnswer = <String>[];
     question = json['question'] != null
         ? Question.fromJson(json['question'])
         : null;
@@ -20,6 +22,7 @@ class ModelAnswer {
     if (json['answer'] != null) {
       json['answer'].forEach((v) {
         answer!.add(Answer.fromJson(v));
+        listUseridAnswer!.add(v["user_id"]);
       });
     }
     countAnswer = json['count_answer'];
@@ -37,6 +40,7 @@ class ModelAnswer {
       data['answer'] = this.answer!.map((v) => v.toJson()).toList();
     }
     data['count_answer'] = this.countAnswer;
+    data['list_user_id_answer'] = this.listUseridAnswer;
     return data;
   }
 }

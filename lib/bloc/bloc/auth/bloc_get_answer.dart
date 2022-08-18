@@ -21,8 +21,9 @@ class BlocGetAnswer extends Bloc<EventBloc, StateBloc> {
 
         req['question_id'] = event.question_id;
 
-        var res = await Api.postAsync(endPoint: ApiPath.getAnswer, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.getAnswer, req: req,user: false);
         print(res);
+
         if (res['code'] == 1) {
           ModelAnswer modelAnswer = ModelAnswer.fromJson(res['data']);
           yield LoadSuccess(data: modelAnswer);

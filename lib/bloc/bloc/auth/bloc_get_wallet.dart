@@ -16,7 +16,7 @@ class BlocGetWallet extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         var res = await Api.postAsync(endPoint: ApiPath.getWallet, req: {});
-
+        print(res);
         if (res['code'] == 1) {
           yield LoadSuccess(
             data: Const.convertNumber(res['data']['wallet']).round(),

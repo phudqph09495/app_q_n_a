@@ -1,12 +1,9 @@
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/api.dart';
-import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/config/path/api_path.dart';
 import 'package:app_q_n_a/models/model_bank.dart';
-import 'package:app_q_n_a/models/model_wallet.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BlocBankUser extends Bloc<EventBloc, StateBloc> {
@@ -19,7 +16,7 @@ class BlocBankUser extends Bloc<EventBloc, StateBloc> {
       try {
         Map<String, dynamic> req = {};
         var res = await Api.postAsync(endPoint: ApiPath.getBank, req: req);
-        print(res);
+
         if (res['code'] == 1) {
           ModelBank model =res['data'] != null ? ModelBank.fromJson(res['data']) : ModelBank();
           yield LoadSuccess(

@@ -48,15 +48,18 @@ class AnswerCard extends StatefulWidget {
   int deadLine;
   int index;
   Function()? refresh;
+  List<String> listUserIdAnswer;
 
-  AnswerCard(
-      {required this.model,
-      this.user_id,
-      this.showAnswer = false,
-      this.isUser = true,
-      this.deadLine = 0,
-      this.index = 0,
-      this.refresh});
+  AnswerCard({
+    required this.model,
+    this.user_id,
+    this.showAnswer = false,
+    this.isUser = true,
+    this.deadLine = 0,
+    this.index = 0,
+    this.refresh,
+    required this.listUserIdAnswer,
+  });
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
@@ -73,6 +76,7 @@ class _AnswerCardState extends State<AnswerCard> {
   BlocGetPrice blocGetPrice = BlocGetPrice()..add(GetData());
   int user_id = iduser.userID;
   double? rate;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -86,7 +90,6 @@ class _AnswerCardState extends State<AnswerCard> {
         listImages.add("${Const.image_host}${element.path}${element.name}");
       }
     }
-    print(user_id);
   }
 
   // getUserId() async {
@@ -114,160 +117,168 @@ class _AnswerCardState extends State<AnswerCard> {
             username: widget.model.username ?? "",
             time: widget.model.createdAt ?? "",
           ),
-          widget.user_id == user_id ||
-                  widget.model.status == "3" ||
-                  DateTime.now().millisecondsSinceEpoch >= widget.deadLine
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    BlocListener(
-                      bloc: blocRatingAnswer,
-                      listener: (_, StateBloc state1) {
-                        CheckLogState.check(context,
-                            msg: "Đánh giá thành công",
-                            state: state1,
-                            success: widget.refresh);
-                        if (state1 is LoadFail) {
-                          widget.refresh;
-                        }
-                      },
-                      child: RatingBar.builder(
-                        initialRating:
-                            Const.convertNumber(widget.model.ratings),
-                        minRating: 0,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemSize: 20,
-                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) {
-                          rate = rating;
-                          _showDataTip();
-                        },
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ReadMoreText(
-                      widget.model.answer ?? "",
-                      trimLines: 3,
-                      colorClickableText: ColorApp.orangeF01,
-                      trimMode: TrimMode.Line,
-                      trimCollapsedText: 'Xem thêm',
-                      trimExpandedText: 'Ẩn bớt',
-                      style: StyleApp.textStyle500(
-                          fontSize: 16, color: ColorApp.black),
-                    ),
-                    listImages.isNotEmpty
-                        ? BuildImageAns(
-                            listImages: listImages,
-                            maxWight: 100,
-                            mainAxisExtent: 100,
-                          )
-                        : const SizedBox(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        !widget.isUser
-                            ? const SizedBox()
-                            : BlocListener(
-                                bloc: blocReport,
-                                listener: (_, StateBloc state) {
-                                  CheckLogState.check(context,
-                                      state: state,
-                                      msg: "Báo cáo vi phạm thành công");
-                                },
-                                child: IconButton(
-                                    onPressed: () {
-                                      _showDataReport();
-                                    },
-                                    icon: const Icon(Icons.report_gmailerrorred,
-                                        color: Colors.red)),
-                              ),
-                        Expanded(
-                          child: BlocListener(
-                            bloc: blocGoodAnswer,
-                            listener: (_, StateBloc state) {
-                              CheckLogState.check(context,
-                                  state: state,
-                                  msg: "Trả tiền thành công", success: () {
-                                groupValue = 2;
-                                setState(() {});
-                              });
-                            },
-                            child: groupValue == 2 || widget.user_id == user_id
-                                ? RadioListTile(
-                                    visualDensity: const VisualDensity(
-                                      horizontal: VisualDensity.minimumDensity,
-                                      vertical: VisualDensity.minimumDensity,
-                                    ),
-                                    selectedTileColor: Colors.green,
-                                    activeColor: Colors.green,
-                                    contentPadding: EdgeInsets.zero,
-                                    dense: true,
-                                    toggleable: true,
-                                    title: Text(
-                                      groupValue == 2
-                                          ? 'Đã trả tiền'
-                                          : "Trả tiền",
-                                      style: StyleApp.textStyle500(
-                                          color: groupValue == 2
-                                              ? Colors.green
-                                              : Colors.orange),
-                                    ),
-                                    value: 2,
-                                    groupValue: groupValue,
-                                    onChanged: (val) async {
-                                      _payment();
-                                    },
-                                  )
-                                : const SizedBox(),
-                          ),
-                        ),
-                        !widget.isUser
-                            ? const SizedBox()
-                            : const SizedBox(width: 10),
-                        !widget.isUser
-                            ? const SizedBox()
-                            : Button1(
-                                height: 35,
-                                colorButton: ColorApp.whiteF7,
-                                textColor: ColorApp.black,
-                                border: Border.all(
-                                    color: ColorApp.orangeF2, width: 0.5),
-                                textButton: 'Bình luận',
-                                ontap: () {
-                                  PageNavigator.next(
-                                    context: context,
-                                    page: CommentScreen(
-                                      answerind: widget.index,
-                                      quesID: Const.convertNumber(
-                                              widget.model.questionId)
-                                          .round(),
-                                      parent_id:
-                                          Const.convertNumber(widget.model.id)
-                                              .round(),
-                                      item: widget.model.items ?? [],
-                                    ),
-                                  );
-                                },
-                              )
-                      ],
-                    ),
-                  ],
-                )
-              : const SizedBox(),
+          _buildAnswer(),
         ],
       ),
     );
+  }
+  _buildAnswer(){
+    if(widget.user_id == user_id || widget.listUserIdAnswer.contains(user_id.toString())){
+      if(widget.model.status == "3" || DateTime.now().millisecondsSinceEpoch >= widget.deadLine || widget.model.userId == user_id.toString()){
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            BlocListener(
+              bloc: blocRatingAnswer,
+              listener: (_, StateBloc state1) {
+                CheckLogState.check(context,
+                    msg: "Đánh giá thành công",
+                    state: state1,
+                    success: widget.refresh);
+                if (state1 is LoadFail) {
+                  widget.refresh;
+                }
+              },
+              child: RatingBar.builder(
+                initialRating:
+                Const.convertNumber(widget.model.ratings),
+                minRating: 0,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemSize: 20,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {
+                  rate = rating;
+                  _showDataTip();
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ReadMoreText(
+              widget.model.answer ?? "",
+              trimLines: 3,
+              colorClickableText: ColorApp.orangeF01,
+              trimMode: TrimMode.Line,
+              trimCollapsedText: 'Xem thêm',
+              trimExpandedText: 'Ẩn bớt',
+              style: StyleApp.textStyle500(
+                  fontSize: 16, color: ColorApp.black),
+            ),
+            listImages.isNotEmpty
+                ? BuildImageAns(
+              listImages: listImages,
+              maxWight: 100,
+              mainAxisExtent: 100,
+            )
+                : const SizedBox(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                !widget.isUser
+                    ? const SizedBox()
+                    : BlocListener(
+                  bloc: blocReport,
+                  listener: (_, StateBloc state) {
+                    CheckLogState.check(context,
+                        state: state,
+                        msg: "Báo cáo vi phạm thành công");
+                  },
+                  child: IconButton(
+                      onPressed: () {
+                        _showDataReport();
+                      },
+                      icon: const Icon(
+                          Icons.report_gmailerrorred,
+                          color: Colors.red)),
+                ),
+                Expanded(
+                  child: BlocListener(
+                    bloc: blocGoodAnswer,
+                    listener: (_, StateBloc state) {
+                      CheckLogState.check(context,
+                          state: state,
+                          msg: "Trả tiền thành công", success: () {
+                            groupValue = 2;
+                            setState(() {});
+                          });
+                    },
+                    child:
+                    groupValue == 2 || widget.user_id == user_id
+                        ? RadioListTile(
+                      visualDensity: const VisualDensity(
+                        horizontal:
+                        VisualDensity.minimumDensity,
+                        vertical:
+                        VisualDensity.minimumDensity,
+                      ),
+                      selectedTileColor: Colors.green,
+                      activeColor: Colors.green,
+                      contentPadding: EdgeInsets.zero,
+                      dense: true,
+                      toggleable: true,
+                      title: Text(
+                        groupValue == 2
+                            ? 'Đã trả tiền'
+                            : "Trả tiền",
+                        style: StyleApp.textStyle500(
+                            color: groupValue == 2
+                                ? Colors.green
+                                : Colors.orange),
+                      ),
+                      value: 2,
+                      groupValue: groupValue,
+                      onChanged: (val) async {
+                        _payment();
+                      },
+                    )
+                        : const SizedBox(),
+                  ),
+                ),
+                !widget.isUser
+                    ? const SizedBox()
+                    : const SizedBox(width: 10),
+                !widget.isUser
+                    ? const SizedBox()
+                    : Button1(
+                  height: 35,
+                  colorButton: ColorApp.whiteF7,
+                  textColor: ColorApp.black,
+                  border: Border.all(
+                      color: ColorApp.orangeF2, width: 0.5),
+                  textButton: 'Bình luận',
+                  ontap: () {
+                    PageNavigator.next(
+                      context: context,
+                      page: CommentScreen(
+                        answerind: widget.index,
+                        quesID: Const.convertNumber(
+                            widget.model.questionId)
+                            .round(),
+                        parent_id: Const.convertNumber(
+                            widget.model.id)
+                            .round(),
+                        item: widget.model.items ?? [],
+                      ),
+                    );
+                  },
+                )
+              ],
+            ),
+          ],
+        );
+      }
+    }
+    return const SizedBox();
   }
 
   _payment() async {
@@ -358,7 +369,7 @@ class _AnswerCardState extends State<AnswerCard> {
   }
 
   _showDataTip() {
-    String free='';
+    String free = '';
     int money = 0;
     late num monSend;
     String moneyStr = '0';
@@ -395,7 +406,7 @@ class _AnswerCardState extends State<AnswerCard> {
                         onPressed: () {
                           textTip.text = list[index].name.toString();
                           money = list[index].id ?? 0;
-                          index==0?free=list[0].name.toString():'';
+                          index == 0 ? free = list[0].name.toString() : '';
                         },
                         style: OutlinedButton.styleFrom(
                             primary: Colors.green.shade200,
@@ -440,7 +451,9 @@ class _AnswerCardState extends State<AnswerCard> {
                         moneyStr = textTip.text
                             .substring(0, textTip.text.indexOf('đ'));
                         monSend = NumberFormat().parse(moneyStr) * 1000;
-                      } else if ((money == 0) && (textTip.text != '0đ')&&(textTip.text!=free)) {
+                      } else if ((money == 0) &&
+                          (textTip.text != '0đ') &&
+                          (textTip.text != free)) {
                         moneyStr = textTip.text
                             .substring(0, textTip.text.indexOf('đ'));
                         monSend = NumberFormat().parse(moneyStr);

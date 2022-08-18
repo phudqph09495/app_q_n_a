@@ -16,7 +16,7 @@ class BlocGetCat extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         var res = await Api.postAsync(endPoint: ApiPath.getCat, req: {});
-        print(res);
+
         if (res['code'] == 1) {
           for (var item in res['data']) {
             ModelLocal2 model = ModelLocal2(id: item["id"], name: item['name']);

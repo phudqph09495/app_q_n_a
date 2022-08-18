@@ -23,7 +23,7 @@ class BlocChangPass extends Bloc<EventBloc, StateBloc> {
 
         var res =
             await Api.postAsync(endPoint: ApiPath.changePassIsLogin, req: req);
-        print(req);
+
         if (res['code'] == 1) {
           ModelUser model = ModelUser.fromJson(res['data']);
           yield LoadSuccess(

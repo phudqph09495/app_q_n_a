@@ -18,7 +18,7 @@ class BlocWithDraw extends Bloc<EventBloc, StateBloc> {
         Map<String, dynamic> req = {};
         req["money"] = event.keyword;
         var res = await Api.postAsync(endPoint: ApiPath.getPhieuTien, req: req);
-        print(res);
+
         if (res['code'] == 1) {
           yield LoadSuccess(
             data: "Tạo phiếu rút tiền thành công",
