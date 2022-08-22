@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ScrollController controller = ScrollController();
   Future<void> onRefresh() async {
     page = 1;
-    isUser = false;
+    isUser = true;
     context.read<BlocGetQuestion>().add(
           GetData(
               cat_id: keySearchid,
