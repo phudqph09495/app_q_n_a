@@ -21,7 +21,6 @@ Widget QuestionTile(
 }) {
   String createdAt =
       Const.checkTime(Const.convertNumber(modelQuestion.createdAt).round());
-
   String title =
       '#${modelQuestion.id}. ${modelQuestion.subjectName ?? 'Lĩnh vực khác'}'
       '${modelQuestion.className == null ? "" : " - ${modelQuestion.className}"}'
@@ -170,29 +169,21 @@ Widget QuestionTile(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${modelQuestion.username}',
+                          '${modelQuestion.username}: ',
                           style: StyleApp.textStyle700(color: ColorApp.black),
                         ),
                         Expanded(
-                          child: Text(
-                            ': đã hỏi ${Const.convertNumber(modelQuestion.userCountQuestion).round()}',
-                            style: StyleApp.textStyle500(color: ColorApp.black),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '${modelQuestion.username}',
-                          style: StyleApp.textStyle700(color: ColorApp.black),
-                        ),
-                        Expanded(
-                          child: Text(
-                            ': đã trả lời ${Const.convertNumber(modelQuestion.countAnswer).round()}',
-                            style: StyleApp.textStyle500(color: ColorApp.black),
+                          child: Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            spacing: 5,
+                            children: [
+                              Text("${Const.convertNumber(modelQuestion.userCountQuestion).round()} (câu hỏi)."),
+                              Text("${Const.convertNumber(modelQuestion.count_gift_to_user).round()} (trả thưởng)."),
+                              Text("${Const.convertNumber(modelQuestion.countAnswer).round()} (trả lời)."),
+                            ],
                           ),
                         ),
                       ],

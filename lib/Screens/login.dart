@@ -4,6 +4,7 @@ import 'package:app_q_n_a/Screens/forgot_password.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_login.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
@@ -122,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     'Ghi nhớ mật khẩu',
                     style: StyleApp.textStyle700(),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 60,
                   ),
                   FlatButton(
@@ -152,6 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     success: () async {
                       await SharePrefsKeys.seveUserKey(user);
                       context.read<BLocLocalUser>().getUser();
+                      context.read<BlocGetWallet>().add(GetData());
                       context.read<BlocCheckLogin>().add(GetData());
                       Navigator.push(
                           context,

@@ -23,7 +23,9 @@ import 'package:toast/toast.dart';
 class Add_Answer_Screen extends StatefulWidget {
   int? user_id;
   int? question_id;
+
   Add_Answer_Screen({this.question_id, this.user_id});
+
   @override
   State<Add_Answer_Screen> createState() => _Add_Answer_ScreenState();
 }
@@ -34,6 +36,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   List<XFile> imageFiles = [];
   StreamController imagesController = StreamController.broadcast();
   final ImagePicker _picker = ImagePicker();
+
   Stream get imageStream => imagesController.stream;
   final keyForm = GlobalKey<FormState>();
   BlocAddAnswer bloc = BlocAddAnswer();
@@ -70,7 +73,7 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
         child: BlocListener(
           bloc: bloc,
           listener: (_, StateBloc state) {
@@ -82,14 +85,16 @@ class _Add_Answer_ScreenState extends State<Add_Answer_Screen> {
             });
           },
           child: Button1(
-              colorButton: ColorApp.orangeF2,
-              textColor: ColorApp.whiteF0,
-              radius: 30,
-              fontSize: 18,
-              style: false,
-              border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-              textButton: 'Viết câu trả lời',
-              ontap: AddAnswerVoid),
+            colorButton: ColorApp.orangeF2,
+            textColor: ColorApp.whiteF0,
+            radius: 30,
+            height: 40,
+            fontSize: 18,
+            style: false,
+            border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+            textButton: 'Viết câu trả lời',
+            ontap: AddAnswerVoid,
+          ),
         ),
       ),
       backgroundColor: ColorApp.whiteF7,

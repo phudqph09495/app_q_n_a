@@ -1,6 +1,7 @@
 import 'package:app_q_n_a/Screens/home.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_check_login.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,9 +19,17 @@ class ScreenHome extends StatefulWidget {
 
 class _ScreenHomeState extends State<ScreenHome> {
   int index = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<BlocCheckLogin>().add(GetData());
+    context.read<BlocGetWallet>().add(GetData());
+  }
+
   @override
   Widget build(BuildContext context) {
-    context.read<BlocCheckLogin>().add(GetData());
     return Scaffold(
       body: BlocBuilder<BlocCheckLogin, StateBloc>(
           builder: (context, StateBloc state) {
@@ -39,8 +48,8 @@ class _ScreenHomeState extends State<ScreenHome> {
           index = val;
           setState(() {});
         },
-        elevation: 4,
-        backgroundColor: ColorApp.whiteF0,
+        elevation: 5,
+        backgroundColor: Colors.white,
         currentIndex: index,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: ColorApp.orangeF01,

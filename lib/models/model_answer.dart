@@ -188,6 +188,8 @@ class Answer {
   String? parentId;
   String? username;
   String? ratings;
+  String? avatar_path;
+  String? avatar_name;
   List<Images2>? images;
   List<Items>? items;
 
@@ -206,6 +208,7 @@ class Answer {
       this.username,
         this.ratings,
       this.images,
+        this.avatar_name,this.avatar_path,
       this.items});
 
   Answer.fromJson(Map<String, dynamic> json) {
@@ -223,6 +226,8 @@ class Answer {
     countReport = json['count_report'];
     parentId = json['parent_id'];
     username = json['username'];
+    avatar_name = json['avatar_name'];
+    avatar_path = json['avatar_path'];
     if (json['images'] != null) {
 
       json['images'].forEach((v) {
@@ -251,6 +256,8 @@ class Answer {
     data['count_report'] = this.countReport;
     data['parent_id'] = this.parentId;
     data['username'] = this.username;
+    data['avatar_name'] = this.avatar_name;
+    data['avatar_path'] = this.avatar_path;
     if (this.images != null) {
       data['images'] = this.images!.map((v) => v.toJson()).toList();
     }
@@ -276,16 +283,16 @@ class Images2 {
 
   Images2(
       {this.id,
-      this.questionId,
-      this.path,
-      this.name,
-      this.displayName,
-      this.height,
-      this.width,
-      this.order,
-      this.createdAt,
-      this.isAvatar,
-      this.answerId});
+        this.questionId,
+        this.path,
+        this.name,
+        this.displayName,
+        this.height,
+        this.width,
+        this.order,
+        this.createdAt,
+        this.isAvatar,
+        this.answerId});
 
   Images2.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -317,6 +324,7 @@ class Images2 {
     return data;
   }
 }
+
 
 class Items {
   String? id;

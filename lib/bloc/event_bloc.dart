@@ -17,6 +17,18 @@ class LoadMoreEvent extends EventBloc {
   });
 }
 
+class GoodAnswer extends EventBloc {
+  String id;
+  double ratings;
+  int price_tip;
+
+  GoodAnswer({
+    required this.id,
+    this.ratings = 0,
+    this.price_tip = 0,
+  });
+}
+
 class GetData extends EventBloc {
   int? cat_id;
   int? class_id;

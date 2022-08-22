@@ -1,19 +1,12 @@
 import 'dart:io';
 
-import 'package:app_q_n_a/Screens/Screens_TaiKhoan/ThongKe/itemThongKe/listNguoiTraLoi.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/ThongKe/tab/tab_question.dart';
-import 'package:app_q_n_a/Screens/answer_screen.dart';
-import 'package:app_q_n_a/item/question_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/bloc/auth/bloc_getquestion.dart';
 import '../../../bloc/event_bloc.dart';
-import '../../../bloc/state_bloc.dart';
-import '../../../models/model_question.dart';
 import '../../../styles/colors.dart';
 import '../../../styles/styles.dart';
-import 'itemThongKe/listNguoiHoi.dart';
 import 'tab/tab_3.dart';
 import 'tab/tab_4.dart';
 import 'tab/tab_answer.dart';

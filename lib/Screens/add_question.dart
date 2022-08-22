@@ -157,15 +157,18 @@ class _AddQuestionState extends State<AddQuestion> {
                   state: state,
                   msg: "Thêm câu hỏi thành công",
                   isShowMsg: false,
-                  isShowDlg: true, ontap: () {
-                context.read<BlocGetWallet>().add(GetData());
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ScreenHome(),
-                  ),
-                );
-              });
+                  success: () {
+                    context.read<BlocGetWallet>().add(GetData());
+                  },
+                  isShowDlg: true,
+                  ontap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ScreenHome(),
+                      ),
+                    );
+                  });
             },
             child: Button1(
                 colorButton: ColorApp.orangeF2,

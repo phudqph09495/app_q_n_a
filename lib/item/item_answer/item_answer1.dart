@@ -104,36 +104,34 @@ class _QuestionCardState extends State<QuestionCard> {
           const SizedBox(
             height: 10,
           ),
-          (Const.convertNumber(widget.modelQuestion.deadline).round() * 1000) >
-                  DateTime.now().millisecondsSinceEpoch
-              ? Container(
-                  decoration: BoxDecoration(
-                      color: ColorApp.whiteF0,
-                      borderRadius: BorderRadius.circular(5)),
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ReadMoreText(
-                        widget.modelQuestion.description ?? "",
-                        trimLines: 3,
-                        colorClickableText: ColorApp.orangeF01,
-                        trimMode: TrimMode.Line,
-                        trimCollapsedText: 'Xem thêm',
-                        trimExpandedText: 'Ẩn bớt',
-                        style: StyleApp.textStyle500(fontSize: 16),
-                      ),
-                      listImages.isNotEmpty
-                          ? BuildImageAns(listImages: listImages)
-                          : const SizedBox(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
-                )
-              : const SizedBox(),
+          Container(
+            decoration: BoxDecoration(
+                color: ColorApp.whiteF0,
+                borderRadius: BorderRadius.circular(5)),
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ReadMoreText(
+                  widget.modelQuestion.description ?? "",
+                  trimLines: 3,
+                  colorClickableText: ColorApp.orangeF01,
+                  trimMode: TrimMode.Line,
+                  trimCollapsedText: 'Xem thêm',
+                  trimExpandedText: 'Ẩn bớt',
+                  style: StyleApp.textStyle500(fontSize: 16),
+                ),
+                listImages.isNotEmpty
+                    ? BuildImageAns(listImages: listImages)
+                    : const SizedBox(),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          )
+
         ],
       ),
     );

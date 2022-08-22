@@ -21,6 +21,7 @@ class InputText2 extends StatefulWidget {
   Function()? onTap;
   List<TextInputFormatter>? textInputFormatter;
   int? maxline;
+  int maxLength;
   bool counter;
 
   InputText2({
@@ -41,6 +42,7 @@ class InputText2 extends StatefulWidget {
     this.borderColor = ColorApp.main,
     this.colorBg = Colors.white,
     this.hint = "",
+    this.maxLength = 5000,
     this.textInputFormatter
   });
 
@@ -62,7 +64,7 @@ class _InputText2State extends State<InputText2> {
         readOnly: widget.readOnly,
         onChanged: widget.onChanged,
         controller: widget.controller,
-        maxLength: 5000,
+        maxLength: widget.maxLength,
         buildCounter: (context,
             {required currentLength, required isFocused, maxLength}) {
           return widget.counter

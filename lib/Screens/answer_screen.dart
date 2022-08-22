@@ -63,6 +63,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     onRefresh();
      end = Const.convertNumber(widget.modelQuestion.deadline).round() * 1000;
 
@@ -73,7 +74,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
     ToastContext().init(context);
     now = DateTime.now().millisecondsSinceEpoch;
     return Scaffold(backgroundColor: ColorApp.whiteF0,
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: Container(
+        color: Colors.white,
         padding: const EdgeInsets.all(10),
         child: Button1(
             colorButton:
@@ -123,7 +125,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
               success: RefreshIndicator(
                 onRefresh: onRefresh,
                 child: model.question == null ? const SizedBox() : SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

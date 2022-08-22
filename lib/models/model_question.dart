@@ -23,6 +23,7 @@ class ModelQuestion {
     this.countImages,
     this.countAnswer,
     this.userCountQuestion,
+    this.count_gift_to_user,
   });
 
   ModelQuestion.fromJson(dynamic json) {
@@ -49,7 +50,9 @@ class ModelQuestion {
     countImages = json['count_images'];
     countAnswer = json['count_answer'];
     userCountQuestion = json['user_count_question'];
+    count_gift_to_user = json['count_gift_to_user'];
   }
+
   String? id;
   String? question;
   String? createdAt;
@@ -73,6 +76,7 @@ class ModelQuestion {
   String? countImages;
   String? countAnswer;
   String? userCountQuestion;
+  String? count_gift_to_user;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -99,6 +103,7 @@ class ModelQuestion {
     map['count_images'] = countImages;
     map['count_answer'] = countAnswer;
     map['user_count_question'] = userCountQuestion;
+    map['count_gift_to_user'] = count_gift_to_user;
     return map;
   }
 }

@@ -34,7 +34,6 @@ class _ItemAccountState extends State<ItemAccount> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
-      context.read<BlocGetWallet>().add(GetData());
       ModelUser user = snapshot ?? ModelUser();
       userID = user.id ?? 0;
       iskyc = user.isKyc ?? false;

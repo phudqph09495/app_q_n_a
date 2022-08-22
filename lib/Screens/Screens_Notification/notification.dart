@@ -44,31 +44,18 @@ class _NotificationbarState extends State<Notificationbar> {
               labelStyle: StyleApp.textStyle700(fontSize: 16),
               indicatorColor: ColorApp.orangeF01,
               unselectedLabelColor: ColorApp.grey82,
-              tabs: [
+              tabs: const [
                 Tab(text: "Sự kiện nóng"),
-                Tab(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("Thông báo"),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            regisNotify();
-                          },
-                          icon: Icon(Icons.more_vert))
-                    ],
-                  ),
-                ),
+                Tab(text: "Thông báo"),
               ],
             ),
             preferredSize: Size.zero,
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: regisNotify,
+          backgroundColor: ColorApp.orangeF2,
+          child: const Icon(Icons.add, color: Colors.white,),
         ),
         body: TabBarView(
           children: [
@@ -86,7 +73,7 @@ class _NotificationbarState extends State<Notificationbar> {
     showPlatformDialog(
         context: context,
         builder: (context) => BasicDialogAlert(
-              title: Text("Nhận thông báo"),
+              title: const Text("Nhận thông báo"),
               content: BlocBuilder(
                 bloc: blocGetSub,
                 builder: (context, state) {
@@ -107,9 +94,9 @@ class _NotificationbarState extends State<Notificationbar> {
                 BlocListener(
                   bloc: blocRegisNotify,
                   listener: (_, StateBloc state) {
-                    CheckLogState.check(context,
-                        state: state,
-                       );
+                    CheckLogState.check(context, state: state,success: (){
+                      Navigator.pop(context);
+                    });
                   },
                   child: BasicDialogAction(
                     title: Text(

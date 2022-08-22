@@ -5,7 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/api.dart';
+import '../../../config/path/share_pref_path.dart';
+import '../../../config/share_pref.dart';
 import '../../../models/model_answer.dart';
+import '../../../models/model_user.dart';
 
 class BlocUserAnswer extends Bloc<EventBloc, StateBloc> {
   BlocUserAnswer() : super(StateBloc());
@@ -33,9 +36,12 @@ class BlocUserAnswer extends Bloc<EventBloc, StateBloc> {
         req['page'] = event.page;
 
         var res = await Api.postAsync(endPoint: ApiPath.getAnswerByUser, req: req);
-
+        var userData = await SharedPrefs.readString(SharePrefsKeys.user);
+        ModelUser? user = ModelUser.fromJson(userData);
         if (res['code'] == 1) {
           for (var item in res['data']) {
+            item['avatar_path'] = user.avatarPath;
+            item['avatar_name'] = user.avatarName;
             Answer model = Answer.fromJson(item);
             list.add(model);
           }

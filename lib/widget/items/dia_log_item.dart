@@ -47,7 +47,6 @@ class DialogItem {
               ? FlatButton(
                   onPressed: () async {
                     if (logout) {
-
                       await SharePrefsKeys.removeAllKey();
                       user.userID = 0;
                       user.iskyc=false;
@@ -73,6 +72,49 @@ class DialogItem {
               "Đóng",
               style: StyleApp.textStyle400(
                   color: checkErr ? Colors.red : ColorApp.main),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static showPayMent({
+    required BuildContext context,
+    required String title,
+    required String msg,
+    Function()? onTap,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          title,
+          style: StyleApp.textStyle700( color: ColorApp.black, fontSize: 20),
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          msg,
+          style: StyleApp.textStyle400(),
+          textAlign: TextAlign.left,
+        ),
+        actions: [
+          onTap != null ?  FlatButton(
+            onPressed: onTap,
+            child: Text(
+              "Xác nhận",
+              style: StyleApp.textStyle400(
+                  color: ColorApp.blue6D),
+            ),
+          ) : const SizedBox(),
+          FlatButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "Đóng",
+              style: StyleApp.textStyle400(
+                  color: ColorApp.main),
             ),
           ),
         ],

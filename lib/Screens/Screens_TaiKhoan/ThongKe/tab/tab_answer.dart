@@ -87,6 +87,7 @@ class _TabAnswerState extends State<TabAnswer> {
                                 (index) => AnswerCard(
                                   model: list[index],
                                   listUserIdAnswer: [],
+                                  hasShow: true,
                                   isUser: false,
                                 ),
                               ),

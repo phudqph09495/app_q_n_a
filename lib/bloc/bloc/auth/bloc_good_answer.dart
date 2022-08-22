@@ -14,12 +14,14 @@ class BlocGoodAnswer extends Bloc<EventBloc, StateBloc> {
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
-    if (event is GetData) {
+    if (event is GoodAnswer) {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
         req['id'] = event.id;
-        var res = await Api.postAsync(endPoint: ApiPath.goodAnswer, req: req);
+        req['ratings'] = event.ratings;
+        req['price_tip'] = event.price_tip;
+        var res = await Api.postAsync(endPoint: ApiPath.goodAnswer, req: req,user: true);
         if (res['code'] == 1) {
           yield LoadSuccess();
         } else {
