@@ -262,17 +262,17 @@ class Answer {
 }
 
 class Images2 {
-  String? id;
-  String? questionId;
+  int? id;
+  int? questionId;
   String? path;
   String? name;
   String? displayName;
-  String? height;
-  String? width;
-  String? order;
-  String? createdAt;
-  String? isAvatar;
-  String? answerId;
+  int? height;
+  int? width;
+  int? order;
+  int? createdAt;
+  int? isAvatar;
+  int? answerId;
 
   Images2(
       {this.id,
