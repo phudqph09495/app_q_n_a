@@ -119,16 +119,16 @@ class Question {
 }
 
 class Images {
-  String? id;
-  String? questionId;
+  int? id;
+  int? questionId;
   String? path;
   String? name;
   String? displayName;
-  String? height;
-  String? width;
-  String? order;
-  String? createdAt;
-  String? isAvatar;
+  int? height;
+  int? width;
+  int? order;
+  int? createdAt;
+  int? isAvatar;
   String? answerId;
 
   Images(
