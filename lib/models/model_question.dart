@@ -70,8 +70,8 @@ class ModelQuestion {
   dynamic avatarName;
   String? className;
   String? subjectName;
-  String? countImages;
-  String? countAnswer;
+  int? countImages;
+  int? countAnswer;
   String? userCountQuestion;
 
   Map<String, dynamic> toJson() {

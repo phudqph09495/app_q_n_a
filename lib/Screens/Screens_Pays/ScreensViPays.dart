@@ -192,7 +192,7 @@ class _ViTienState extends State<ViTien> {
                                       style: StyleApp.textStyle400(),
                                     ),
                                     Text(
-                                      "Số sau trước: ${Const.convertPrice(model.userBuyMoneyAfter)}",
+                                      "Số dư sau: ${Const.convertPrice(model.userBuyMoneyAfter)}",
                                       style: StyleApp.textStyle400(),
                                     ),
                                   ],
