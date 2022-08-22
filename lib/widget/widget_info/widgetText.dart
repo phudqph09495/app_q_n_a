@@ -5,7 +5,6 @@ import 'package:app_q_n_a/models/model_user.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
 import '../../bloc/bloc/auth/bloc_get_wallet.dart';
 import '../../bloc/bloc/auth/bloc_waller_history.dart';
@@ -25,12 +24,11 @@ class ItemAccount extends StatefulWidget {
 }
 
 class _ItemAccountState extends State<ItemAccount> {
-  BlocGetWallet blocGetWallet=BlocGetWallet();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    blocGetWallet.add(GetData());
+    context.read<BlocGetWallet>().add(GetData());
   }
   @override
   Widget build(BuildContext context) {
@@ -115,8 +113,7 @@ class _ItemAccountState extends State<ItemAccount> {
                     style: StyleApp.textStyle700(
                         color: ColorApp.black, fontSize: 16),
                   ),
-                  BlocBuilder(
-                    bloc: blocGetWallet,
+                  BlocBuilder<BlocGetWallet, StateBloc>(
                       builder: (_, state) {
                         final coin =
                         state is LoadSuccess ? state.data as int : 0;

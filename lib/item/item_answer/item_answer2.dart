@@ -81,6 +81,7 @@ class _AnswerCardState extends State<AnswerCard> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     // getUserId();
     groupValue = Const.convertNumber(widget.model.status).round() == 2
         ? 2
@@ -123,8 +124,8 @@ class _AnswerCardState extends State<AnswerCard> {
     );
   }
   _buildAnswer(){
-    if(widget.user_id == user_id || widget.listUserIdAnswer.contains(user_id.toString())){
-      if(widget.model.status == "3" || DateTime.now().millisecondsSinceEpoch >= widget.deadLine || widget.model.userId == user_id.toString()){
+    if(widget.user_id == user_id || widget.listUserIdAnswer.contains(user_id.toString())||widget.model.status == "3" || DateTime.now().millisecondsSinceEpoch >= widget.deadLine || widget.model.userId == user_id.toString()){
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -238,7 +239,9 @@ class _AnswerCardState extends State<AnswerCard> {
                       value: 2,
                       groupValue: groupValue,
                       onChanged: (val) async {
+
                         _payment();
+
                       },
                     )
                         : const SizedBox(),
@@ -276,13 +279,13 @@ class _AnswerCardState extends State<AnswerCard> {
             ),
           ],
         );
-      }
+
     }
     return const SizedBox();
   }
 
   _payment() async {
-    if (widget.model.userId == user_id) {
+    if (widget.user_id == user_id) {
       Const.checkLogin(
         context,
         nextPage: () {
@@ -297,7 +300,7 @@ class _AnswerCardState extends State<AnswerCard> {
                   blocGoodAnswer.add(GetData(id: widget.model.id));
                 });
           } else {
-            if (widget.model.userId == widget.user_id.toString()) {
+            if (widget.model.userId == user_id.toString()) {
               DialogItem.showMsg(
                   context: context,
                   title: "Lỗi",

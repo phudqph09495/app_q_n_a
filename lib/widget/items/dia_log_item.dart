@@ -38,7 +38,7 @@ class DialogItem {
           onTap != null ?  FlatButton(
             onPressed: onTap,
             child: Text(
-              "Về trang chủ",
+              "Xác nhận",
               style: StyleApp.textStyle400(
                   color: ColorApp.blue6D),
             ),
