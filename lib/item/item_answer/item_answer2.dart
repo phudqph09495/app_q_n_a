@@ -51,6 +51,7 @@ class AnswerCard extends StatefulWidget {
   int index;
   Function()? refresh;
   List<String> listUserIdAnswer;
+  String? ispaid;
 
   AnswerCard({
     required this.model,
@@ -62,6 +63,7 @@ class AnswerCard extends StatefulWidget {
     this.index = 0,
     this.refresh,
     required this.listUserIdAnswer,
+    this.ispaid
   });
 
   @override
@@ -219,6 +221,11 @@ class _AnswerCardState extends State<AnswerCard> {
                                     context: context,
                                     title: "Lỗi",
                                     msg: "Đây không phải câu hỏi của bạn");
+                              }else if(widget.ispaid=='1'){
+                                DialogItem.showMsg(
+                                    context: context,
+                                    title: "Lỗi",
+                                    msg: "Câu hỏi đã được trả thưởng");
                               }
                            else _payment();
                             },
@@ -494,7 +501,7 @@ class _AnswerCardState extends State<AnswerCard> {
                       Navigator.pop(context);
                       String priceText = "";
                       if(textTip.text.isNotEmpty){
-                        textTip.text
+                  priceText= textTip.text
                             .replaceAll(".", "")
                             .substring(
                             0, textTip.text.replaceAll(".", "").length - 2);

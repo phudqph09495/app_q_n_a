@@ -153,6 +153,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             user_id: model.question!.userId,
                             deadLine: Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,
                             index: index,
+                            ispaid:widget.modelQuestion.isComplete ,
                           );
                         },
                       ),
