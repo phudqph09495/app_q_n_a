@@ -127,7 +127,7 @@ class _AnswerCardState extends State<AnswerCard> {
         widget.listUserIdAnswer.contains(user_id.toString())) {
       if (widget.model.status == "3" ||
           DateTime.now().millisecondsSinceEpoch >= widget.deadLine ||
-          widget.model.userId == user_id.toString()) {
+          widget.model.userId == user_id.toString() || widget.user_id == user_id) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -214,7 +214,13 @@ class _AnswerCardState extends State<AnswerCard> {
                             value: 2,
                             groupValue: groupValue,
                             onChanged: (val) async {
-                              _payment();
+                              if(user_id!=widget.user_id){
+                                DialogItem.showMsg(
+                                    context: context,
+                                    title: "Lỗi",
+                                    msg: "Đây không phải câu hỏi của bạn");
+                              }
+                           else _payment();
                             },
                           )
                         : const SizedBox(),
@@ -318,6 +324,7 @@ class _AnswerCardState extends State<AnswerCard> {
         },
       );
     }
+
   }
 
   _showDataReport() {

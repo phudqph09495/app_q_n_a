@@ -8,6 +8,7 @@ import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_login.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
+import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
 import 'package:app_q_n_a/models/model_user.dart';
 import 'package:app_q_n_a/validator.dart';
@@ -152,9 +153,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     msg: "Đăng nhập thành công",
                     success: () async {
                       await SharePrefsKeys.seveUserKey(user);
+                  await    SharedPrefs.saveString("pass", password.text);
                       context.read<BLocLocalUser>().getUser();
                       context.read<BlocGetWallet>().add(GetData());
                       context.read<BlocCheckLogin>().add(GetData());
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(

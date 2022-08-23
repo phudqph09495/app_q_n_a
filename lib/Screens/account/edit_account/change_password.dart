@@ -26,8 +26,9 @@ class _ChangePassState extends State<ChangePass> {
   TextEditingController password2 = TextEditingController();
   final keyForm = GlobalKey<FormState>();
   BlocChangPass bloc = BlocChangPass();
-  ChangePassword() {
-    if (keyForm.currentState!.validate()) {
+  ChangePassword() async {
+    var passii=await(SharedPrefs.readString("pass"));
+    if (keyForm.currentState!.validate()&&password.text==passii) {
       bloc.add(
         ChagePassIsLogin(
           passwordre: password1.text,
@@ -35,6 +36,7 @@ class _ChangePassState extends State<ChangePass> {
         ),
       );
     }
+    else CustomToast.showToast(context: context, msg: "Mật khẩu cũ không đúng");
   }
 
   @override
