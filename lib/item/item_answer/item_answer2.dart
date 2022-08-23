@@ -53,18 +53,17 @@ class AnswerCard extends StatefulWidget {
   List<String> listUserIdAnswer;
   String? ispaid;
 
-  AnswerCard({
-    required this.model,
-    this.user_id,
-    this.showAnswer = false,
-    this.isUser = true,
-    this.hasShow = false,
-    this.deadLine = 0,
-    this.index = 0,
-    this.refresh,
-    required this.listUserIdAnswer,
-    this.ispaid
-  });
+  AnswerCard(
+      {required this.model,
+      this.user_id,
+      this.showAnswer = false,
+      this.isUser = true,
+      this.hasShow = false,
+      this.deadLine = 0,
+      this.index = 0,
+      this.refresh,
+      required this.listUserIdAnswer,
+      this.ispaid});
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
@@ -116,7 +115,8 @@ class _AnswerCardState extends State<AnswerCard> {
           ItemUser(
             username: widget.model.username ?? "",
             time: widget.model.createdAt ?? "",
-            image: widget.model.avatar_path.toString() + widget.model.avatar_name.toString(),
+            image: widget.model.avatar_path.toString() +
+                widget.model.avatar_name.toString(),
           ),
           _buildAnswer(),
         ],
@@ -129,7 +129,8 @@ class _AnswerCardState extends State<AnswerCard> {
         widget.listUserIdAnswer.contains(user_id.toString())) {
       if (widget.model.status == "3" ||
           DateTime.now().millisecondsSinceEpoch >= widget.deadLine ||
-          widget.model.userId == user_id.toString() || widget.user_id == user_id) {
+          widget.model.userId == user_id.toString() ||
+          widget.user_id == user_id) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -185,53 +186,50 @@ class _AnswerCardState extends State<AnswerCard> {
                       ),
                 Expanded(
                   child: BlocListener(
-                    bloc: blocGoodAnswer,
-                    listener: (_, StateBloc state) {
-                      CheckLogState.check(context,
-                          state: state,
-                          msg: "Trả tiền thành công", success: () {
-                        groupValue = 2;
-                        context.read<BlocGetWallet>().add(GetData());
-                        widget.refresh!();
-                      });
-                    },
-                    child: groupValue != 2
-                        ? RadioListTile(
-                            visualDensity: const VisualDensity(
-                              horizontal: VisualDensity.minimumDensity,
-                              vertical: VisualDensity.minimumDensity,
-                            ),
-                            selectedTileColor: Colors.green,
-                            activeColor: Colors.green,
-                            contentPadding: EdgeInsets.zero,
-                            dense: true,
-                            toggleable: true,
-                            title: Text(
-                              groupValue == 2 ? 'Đã trả tiền' : "Trả tiền",
-                              style: StyleApp.textStyle500(
-                                  color: groupValue == 2
-                                      ? Colors.green
-                                      : Colors.orange),
-                            ),
-                            value: 2,
-                            groupValue: groupValue,
-                            onChanged: (val) async {
-                              if(user_id!=widget.user_id){
-                                DialogItem.showMsg(
-                                    context: context,
-                                    title: "Lỗi",
-                                    msg: "Đây không phải câu hỏi của bạn");
-                              }else if(widget.ispaid=='1'){
-                                DialogItem.showMsg(
-                                    context: context,
-                                    title: "Lỗi",
-                                    msg: "Câu hỏi đã được trả thưởng");
-                              }
-                           else _payment();
-                            },
-                          )
-                        : const SizedBox(),
-                  ),
+                      bloc: blocGoodAnswer,
+                      listener: (_, StateBloc state) {
+                        CheckLogState.check(context,
+                            state: state,
+                            msg: "Trả tiền thành công", success: () {
+                          groupValue = 2;
+                          context.read<BlocGetWallet>().add(GetData());
+                          widget.refresh!();
+                        });
+                      },
+                      child: RadioListTile(
+                        visualDensity: const VisualDensity(
+                          horizontal: VisualDensity.minimumDensity,
+                          vertical: VisualDensity.minimumDensity,
+                        ),
+                        selectedTileColor: Colors.green,
+                        activeColor: Colors.green,
+                        contentPadding: EdgeInsets.zero,
+                        dense: true,
+                        toggleable: true,
+                        title: Text(
+                          groupValue == 2 ? 'Đã trả tiền' : "Trả tiền",
+                          style: StyleApp.textStyle500(
+                              color: groupValue == 2
+                                  ? Colors.green
+                                  : Colors.orange),
+                        ),
+                        value: 2,
+                        groupValue: groupValue,
+                        onChanged: (val) async {
+                          if (user_id != widget.user_id) {
+                            DialogItem.showMsg(
+                                context: context,
+                                title: "Lỗi",
+                                msg: "Đây không phải câu hỏi của bạn");
+                          } else if (widget.ispaid == '1') {
+                            DialogItem.showMsg(
+                                context: context,
+                                title: "Lỗi",
+                                msg: "Câu hỏi đã được trả thưởng");
+                          } else
+                            _payment();
+                        },
+                      )),
                 ),
                 !widget.isUser ? const SizedBox() : const SizedBox(width: 10),
                 !widget.isUser
@@ -264,7 +262,7 @@ class _AnswerCardState extends State<AnswerCard> {
         );
       }
     }
-    if(widget.hasShow){
+    if (widget.hasShow) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -295,10 +293,10 @@ class _AnswerCardState extends State<AnswerCard> {
           ),
           listImages.isNotEmpty
               ? BuildImageAns(
-            listImages: listImages,
-            maxWight: 100,
-            mainAxisExtent: 100,
-          )
+                  listImages: listImages,
+                  maxWight: 100,
+                  mainAxisExtent: 100,
+                )
               : const SizedBox(),
         ],
       );
@@ -331,7 +329,6 @@ class _AnswerCardState extends State<AnswerCard> {
         },
       );
     }
-
   }
 
   _showDataReport() {
@@ -500,10 +497,8 @@ class _AnswerCardState extends State<AnswerCard> {
                     onPressed: () {
                       Navigator.pop(context);
                       String priceText = "";
-                      if(textTip.text.isNotEmpty){
-                  priceText= textTip.text
-                            .replaceAll(".", "")
-                            .substring(
+                      if (textTip.text.isNotEmpty) {
+                        priceText = textTip.text.replaceAll(".", "").substring(
                             0, textTip.text.replaceAll(".", "").length - 2);
                       }
                       int priceTip = Const.convertNumber(priceText).round();

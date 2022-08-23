@@ -64,6 +64,7 @@ class _TabAnswerState extends State<TabAnswer> {
           builder: (_, StateBloc state) {
             final list =
                 state is LoadSuccess ? state.data as List<Answer> : <Answer>[];
+
             final length = state is LoadSuccess ? state.checkLength : false;
             final hasMore = state is LoadSuccess ? state.hasMore : false;
             return ItemLoadPage(
@@ -85,11 +86,11 @@ class _TabAnswerState extends State<TabAnswer> {
                               children: List.generate(
                                 list.length,
                                 (index) => AnswerCard(
-                                  model: list[index],
-                                  listUserIdAnswer: [],
-                                  hasShow: true,
-                                  isUser: false,
-                                ),
+                                    model: list[index],
+                                    listUserIdAnswer: [],
+                                    hasShow: true,
+                                    isUser: false,
+                                  ),
                               ),
                             ),
                             ItemLoadMore(
