@@ -52,6 +52,8 @@ class AnswerCard extends StatefulWidget {
   Function()? refresh;
   List<String> listUserIdAnswer;
   String? ispaid;
+  Function()? openQues;
+
 
   AnswerCard(
       {required this.model,
@@ -63,7 +65,8 @@ class AnswerCard extends StatefulWidget {
       this.index = 0,
       this.refresh,
       required this.listUserIdAnswer,
-      this.ispaid});
+      this.ispaid,
+      this.openQues});
 
   @override
   State<AnswerCard> createState() => _AnswerCardState();
@@ -98,28 +101,31 @@ class _AnswerCardState extends State<AnswerCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(bottom: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          !widget.isUser
-              ? const SizedBox()
-              : Text(
-                  'Trả lời',
-                  style: StyleApp.textStyle700(
-                      fontSize: 20, color: ColorApp.black),
-                ),
-          ItemUser(
-            username: widget.model.username ?? "",
-            time: widget.model.createdAt ?? "",
-            image: widget.model.avatar_path.toString() +
-                widget.model.avatar_name.toString(),
-          ),
-          _buildAnswer(),
-        ],
+    return InkWell(
+      onTap: widget.openQues,
+      child: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.only(bottom: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            !widget.isUser
+                ? const SizedBox()
+                : Text(
+                    'Trả lời',
+                    style: StyleApp.textStyle700(
+                        fontSize: 20, color: ColorApp.black),
+                  ),
+            ItemUser(
+              username: widget.model.username ?? "",
+              time: widget.model.createdAt ?? "",
+              image: widget.model.avatar_path.toString() +
+                  widget.model.avatar_name.toString(),
+            ),
+            _buildAnswer(),
+          ],
+        ),
       ),
     );
   }

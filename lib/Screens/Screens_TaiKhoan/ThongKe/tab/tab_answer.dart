@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/ThongKe/tab/answer_screen_tab.dart';
 import 'package:app_q_n_a/Screens/answer_screen.dart';
 import 'package:app_q_n_a/bloc/bloc/thong_ke/bloc_user_answer.dart';
 import 'package:app_q_n_a/bloc/bloc/thong_ke/bloc_user_qusetion.dart';
@@ -90,6 +91,13 @@ class _TabAnswerState extends State<TabAnswer> {
                                     listUserIdAnswer: [],
                                     hasShow: true,
                                     isUser: false,
+                                  openQues: (){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AnswerScreenTab(quesID: int.parse(list[index].questionId??'0'))));
+                                  },
                                   ),
                               ),
                             ),
