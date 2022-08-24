@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app_q_n_a/Screens/forgot_password.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
+import 'package:app_q_n_a/Screens/sign_up.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_login.dart';
@@ -140,6 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       )),
                 ],
               ),
+              SizedBox(height: 10,),
               BlocListener(
                 bloc: bloc,
                 listener: (_, StateBloc state) {
@@ -177,38 +179,38 @@ class _LoginScreenState extends State<LoginScreen> {
                     radius: 30),
               ),
               const SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Button1(
-                      border:
-                      Border.all(color: ColorApp.orangeF2, width: 0.5),
-                      width: 175,
-                      ontap: () {},
-                      icon: true,
-                      imagePath: 'images/Google.png',
-                      textColor: Colors.black,
-                      textButton: 'Google',
-                      colorButton: Colors.white,
-                      radius: 30),
-                  Button1(
-                      border:
-                      Border.all(color: ColorApp.orangeF2, width: 0.5),
-                      width: 175,
-                      ontap: () {},
-                      icon: true,
-                      imagePath: 'images/Facebook.png',
-                      textColor: Colors.black,
-                      textButton: 'Facebook',
-                      colorButton: Colors.white,
-                      radius: 30),
-                ],
-              ),
-              const SizedBox(
                 height: 20,
               ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Button1(
+              //         border:
+              //         Border.all(color: ColorApp.orangeF2, width: 0.5),
+              //         width: 175,
+              //         ontap: () {},
+              //         icon: true,
+              //         imagePath: 'images/Google.png',
+              //         textColor: Colors.black,
+              //         textButton: 'Google',
+              //         colorButton: Colors.white,
+              //         radius: 30),
+              //     Button1(
+              //         border:
+              //         Border.all(color: ColorApp.orangeF2, width: 0.5),
+              //         width: 175,
+              //         ontap: () {},
+              //         icon: true,
+              //         imagePath: 'images/Facebook.png',
+              //         textColor: Colors.black,
+              //         textButton: 'Facebook',
+              //         colorButton: Colors.white,
+              //         radius: 30),
+              //   ],
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -219,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    RegistrationScreen()));
+                                    SignUpScreen()));
                       },
                       child: Text(
                         'Đăng ký ngay',

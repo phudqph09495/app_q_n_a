@@ -1,8 +1,12 @@
+import 'package:app_q_n_a/Screens/account/edit_account/edit_profile.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/config/next_page.dart';
+import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/models/model_user.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/widget/items/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
@@ -24,13 +28,13 @@ class ItemAccount extends StatefulWidget {
 }
 
 class _ItemAccountState extends State<ItemAccount> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     context.read<BlocGetWallet>().add(GetData());
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
@@ -108,53 +112,35 @@ class _ItemAccountState extends State<ItemAccount> {
                   ),
                   Text(
                     // Const.checkStringNull(id),
-                    'Id thành viên: $userID',
+                    'Id : $userID',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: StyleApp.textStyle700(
                         color: ColorApp.black, fontSize: 16),
                   ),
-                  BlocBuilder<BlocGetWallet, StateBloc>(
-                      builder: (_, state) {
-                        final coin =
-                        state is LoadSuccess ? state.data as int : 0;
-                      return Text(
-                        'VNĐ: ${Const.convertPrice(coin)} ',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: StyleApp.textStyle700(
-                            color: ColorApp.red, fontSize: 16),
-                      );
-                    }
-                  ),
+                  BlocBuilder<BlocGetWallet, StateBloc>(builder: (_, state) {
+                    final coin = state is LoadSuccess ? state.data as int : 0;
+                    return Text(
+                      'VNĐ: ${Const.convertPrice(coin)} ',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: StyleApp.textStyle700(
+                          color: ColorApp.red, fontSize: 16),
+                    );
+                  }),
                 ],
               ),
             ),
             iskyc
-                ? Row(
-                    children: [
-                      Image.asset(
-                        ImagePath.kyc,
-                        height: 40,
-                        width: 40,
-                      ),
-                      Text(
-                        'Đã KYC',
-                        style: StyleApp.textStyle400(),
-                      )
-                    ],
-                  )
-                : Row(
-                    children: [
-                      const Icon(
-                        Icons.report_gmailerrorred,
-                        color: Colors.red,
-                      ),
-                      Text(
-                        'Chưa KYC',
-                        style: StyleApp.textStyle400(),
-                      )
-                    ],
+                ? SizedBox()
+                : Button1(
+                    colorButton: ColorApp.blue6D,
+                    textColor: ColorApp.whiteF0,
+                    textButton: "Bạn muốn trả lời",
+                    ontap: () {
+                      PageNavigator.next(context: context, page: EditProfile());
+                      CustomToast.showToast(context: context, msg: 'Nhập đủ thông tin để có thể trả lời');
+                    },
                   )
           ],
         ),

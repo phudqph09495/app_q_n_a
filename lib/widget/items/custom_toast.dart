@@ -9,6 +9,7 @@ class CustomToast {
       required String msg,
       IconData? iconData,
       bool hasIcon = false,
+        int duration=2,
       ToastGravity gravity = ToastGravity.BOTTOM}) {
     FToast fToast = FToast();
     fToast.init(context);
@@ -57,7 +58,7 @@ class CustomToast {
     fToast.showToast(
       child: toast,
       gravity: gravity,
-      toastDuration: Duration(seconds: 2),
+      toastDuration: Duration(seconds: duration),
     );
   }
 }

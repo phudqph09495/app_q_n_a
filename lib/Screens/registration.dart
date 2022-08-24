@@ -4,6 +4,8 @@ import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
+import 'package:app_q_n_a/item/dropdown/Dropdown1.dart';
+import 'package:app_q_n_a/models/model_local.dart';
 import 'package:app_q_n_a/models/model_user.dart';
 import 'package:app_q_n_a/widget/items/custom_toast.dart';
 import 'package:app_q_n_a/widget/items/dia_log_item.dart';
@@ -12,11 +14,13 @@ import 'package:app_q_n_a/item/dropdown_button.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
 import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 import '../bloc/state_bloc.dart';
 import '../item/button.dart';
 import '../item/input_text.dart';
 import '../styles/init_style.dart';
 import 'package:toast/toast.dart';
+import '../widget/items/item_input.dart';
 import 'login.dart';
 
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_registrantion.dart';
@@ -34,17 +38,36 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController confirm = TextEditingController();
+  TextEditingController work = TextEditingController();
   BlocRegistrantion bloc = BlocRegistrantion();
   final keyForm = GlobalKey<FormState>();
+  String? role;
+  String? roleStr;
 
+  bool isInput = false;
+
+  TextEditingController userNameBank = TextEditingController();
+  TextEditingController bankName = TextEditingController();
+  TextEditingController bankNumber = TextEditingController();
+  TextEditingController cccd=TextEditingController();
   RegistrationVoid() async {
     if (keyForm.currentState!.validate()) {
+      if(role=="2"){
       bloc.add(AddDataRegistrantion(
           username: username.text,
           email: email.text,
           phone: phone.text,
           password: password.text,
           register_by: EnumRegistrantion.phone.toString()));
+         }else if(role=="1"&&userNameBank.text.isNotEmpty&&bankName.text.isNotEmpty&&bankNumber.text.isNotEmpty){
+        //bloc.add.....
+        print(username.text);
+        print(email.text);
+        print(phone.text);
+        print(userNameBank.text);
+        print(bankName.text);
+        print(bankNumber);
+      }
     }
   }
 
@@ -103,6 +126,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           SizedBox(
                             height: 15,
                           ),
+                          DropDown2(
+                            pad: 47,
+                            hint: 'Chọn vai trò của bạn',
+                            listItem: [
+                              ModelLocal(id: "1", name: "Người trả lời"),
+                              ModelLocal(id: "2", name: "Người hỏi")
+                            ],
+                            onChanged: (value) {
+                              role = value.id;
+                              print(role);
+
+                              role = value.id;
+                              if (role == "1") {
+                                _showbank();
+                              }
+                              if(role=="2"){
+                                userNameBank.clear();
+                                bankName.clear();
+                                bankNumber.clear();
+                              }
+                            },
+                            value: roleStr,
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
                           InputText1(
                             label: "Họ và tên",
                             controller: username,
@@ -152,6 +201,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             width: double.infinity,
                             validator: (val) {
                               return ValidatorApp.checkEmail(text: val);
+                            },
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          InputText1(
+                            label: "Công việc",
+                            controller: work,
+                            borderColor: ColorApp.main.withOpacity(0.2),
+                            hasLeading: true,
+                            iconData: Icons.work_outline,
+                            obscureText: false,
+                            hasPass: false,
+                            radius: 10,
+                            width: double.infinity,
+                            validator: (val) {
+                              return ValidatorApp.checkNull(
+                                  text: val, isTextFiled: true);
                             },
                           ),
                           SizedBox(
@@ -233,5 +300,69 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ],
           ),
         ));
+  }
+
+  _showbank() {
+    return showPlatformDialog(
+        context: context,
+        builder: (context) => BasicDialogAlert(
+              title: Text("Nhập đầy đủ thông tin để trở thành người trả lời"),
+              content: Container(
+                height: 350,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      itemInput(
+                        title: "Tên chủ tài khoản ngân hàng",
+                        hint: "Viết hoa và không có dấu",
+                        readOnly: isInput,
+                        controller: userNameBank,
+                      ),
+                      itemInput(
+                        title: "Tên ngân hàng",
+                        hint: "Nhập tên ngân hàng",
+                        readOnly: isInput,
+                        controller: bankName,
+                      ),
+                      itemInput(
+                        title: "Số tài khoản",
+                        hint: "Nhập số tài khoản",
+                        readOnly: isInput,
+                        controller: bankNumber,
+                      ),
+                      itemInput(
+                        title: "Số Căn cước công dân",
+                        hint: "Nhập số CCCD hoặc chứng minh thư",
+                        readOnly: isInput,
+                        controller: cccd,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              actions: <Widget>[
+                BasicDialogAction(
+                  title: Text(
+                    "Xác nhận",
+                    style: StyleApp.textStyle500(color: Colors.blue),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                BasicDialogAction(
+                  title: Text(
+                    "Trở lại",
+                    style: StyleApp.textStyle500(color: Colors.red),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    userNameBank.clear();
+                    bankName.clear();
+                    bankNumber.clear();
+                  },
+                ),
+              ],
+            ));
   }
 }

@@ -127,13 +127,24 @@ class AddDataRegistrantion extends EventBloc {
   String username;
   String password;
   String email;
-
+String? bankName;
+String? bankNumber;
+String? userNameBank;
+String? work;
+String? role;
+String? cccd;
   AddDataRegistrantion({
     required this.username,
     required this.email,
     required this.phone,
     required this.password,
     required this.register_by,
+    this.bankNumber,
+    this.bankName,
+    this.userNameBank,
+    this.work,
+    this.role,
+    this.cccd
   });
 }
 

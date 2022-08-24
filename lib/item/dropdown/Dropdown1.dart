@@ -11,6 +11,7 @@ class DropDown2 extends StatefulWidget {
   double radius;
   Color? colorBorder;
   Function(String)? validator;
+  double pad;
   DropDown2(
       {required this.listItem,
       required this.hint,
@@ -19,7 +20,7 @@ class DropDown2 extends StatefulWidget {
       this.filled = true,
       this.radius = 10,
       this.colorBorder,
-      this.validator});
+      this.validator,this.pad=10});
 
   @override
   _DropDown2State createState() => _DropDown2State();
@@ -68,7 +69,7 @@ class _DropDown2State extends State<DropDown2> {
             borderSide: const BorderSide(color: Colors.red, width: 0.5),
 
           ),
-          contentPadding:const EdgeInsets.symmetric(horizontal: 10,)),
+          contentPadding: EdgeInsets.only(left: widget.pad,right: 10)),
       items: List.generate(
         widget.listItem.length,
         (index) => DropdownMenuItem(
