@@ -133,6 +133,7 @@ String? userNameBank;
 String? work;
 String? role;
 String? cccd;
+
   AddDataRegistrantion({
     required this.username,
     required this.email,

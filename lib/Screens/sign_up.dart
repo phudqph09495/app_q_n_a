@@ -1,9 +1,17 @@
+import 'package:app_q_n_a/bloc/bloc/signUp/bloc_signup_hoi.dart';
+import 'package:app_q_n_a/bloc/bloc/signUp/bloc_signup_tl.dart';
+import 'package:app_q_n_a/bloc/check_log_state.dart';
+import 'package:app_q_n_a/bloc/event_bloc.dart';
+import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toast/toast.dart';
+
+enum EnumRegistrantion { username, phone }
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -14,56 +22,76 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final keyFormHoi = GlobalKey<FormState>();
   final keyFormTraLoi = GlobalKey<FormState>();
 
-
   TextEditingController usernameHoi = TextEditingController();
   TextEditingController phoneHoi = TextEditingController();
   TextEditingController passwordHoi = TextEditingController();
   TextEditingController emailHoi = TextEditingController();
   TextEditingController confirmHoi = TextEditingController();
 
-  clearHoi(){
-    usernameHoi.clear();
-    phoneHoi.clear();
-    passwordHoi.clear();
-    emailHoi.clear();
-    confirmHoi.clear();
-  }
-
-  TextEditingController workTL = TextEditingController();
   TextEditingController usernameTL = TextEditingController();
   TextEditingController phoneTL = TextEditingController();
   TextEditingController passwordTL = TextEditingController();
   TextEditingController emailTL = TextEditingController();
   TextEditingController confirmTL = TextEditingController();
-
-
+  TextEditingController workTL = TextEditingController();
   TextEditingController userNameBank = TextEditingController();
   TextEditingController bankName = TextEditingController();
   TextEditingController bankNumber = TextEditingController();
-  TextEditingController cccd=TextEditingController();
+  TextEditingController cccd = TextEditingController();
 
+  BlocSignUpHoi blocSignUpHoi = BlocSignUpHoi();
+  BlocSignUpTL blocSignUpTL = BlocSignUpTL();
 
-  int tab=0;
+  signUpHoi() {
+    if (keyFormHoi.currentState!.validate()) {
+      print('object');
+      blocSignUpHoi.add(AddDataRegistrantion(
+          username: usernameHoi.text,
+          email: emailHoi.text,
+          phone: phoneHoi.text,
+          password: passwordHoi.text,
+          register_by: EnumRegistrantion.phone.toString()));
+    }
+  }
+
+  signUpTL() {
+    if (keyFormTraLoi.currentState!.validate()) {
+      print('object');
+      blocSignUpTL.add(AddDataRegistrantion(
+          username: usernameTL.text,
+          email: emailTL.text,
+          phone: phoneTL.text,
+          password: passwordTL.text,
+          register_by: EnumRegistrantion.phone.toString(),
+          bankName: bankName.text,
+          bankNumber: bankNumber.text,
+          userNameBank: userNameBank.text,
+          work: workTL.text,
+          cccd: cccd.text));
+    }
+  }
+
+  int tab = 0;
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
-      bottomSheet: Button1(
-          border: Border.all(
-              color: ColorApp.orangeF2, width: 0.5),
-          style: false,
-          fontSize: 18,
-          radius: 30,
-          colorButton: ColorApp.orangeF2,
-          textColor: Colors.white,
-          textButton: 'Đăng ký'),
+      // bottomSheet:
+      // Button1(
+      //     border: Border.all(
+      //         color: ColorApp.orangeF2, width: 0.5),
+      //     style: false,
+      //     fontSize: 18,
+      //     radius: 30,
+      //     colorButton: ColorApp.orangeF2,
+      //     textColor: Colors.white,
+      //     textButton: 'Đăng ký'),
       backgroundColor: ColorApp.whiteF7,
       body: SafeArea(
         child: Stack(
           alignment: Alignment.topLeft,
           children: <Widget>[
             SingleChildScrollView(
-              reverse: true,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
                 child: Center(
@@ -87,21 +115,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(
                         height: 15,
                       ),
-
                       DefaultTabController(
                           length: 2,
                           child: Column(
                             children: <Widget>[
                               Container(
-                                child: TabBar(
-                                  onTap: (int val){
-                                    tab=val;
-                                    print(tab);
-                                    if(val==1){
-                                      clearHoi();
-                                    }
-
-                                  },
+                                child: const TabBar(
                                   labelColor: Colors.green,
                                   unselectedLabelColor: Colors.black,
                                   tabs: [
@@ -110,18 +129,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ],
                                 ),
                               ),
-                              SingleChildScrollView(
-                                child: Container(
-                                    height: 400, //height of TabBarView
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            top: BorderSide(
-                                                color: Colors.grey, width: 0.5))),
-                                    child: TabBarView(children: <Widget>[
-                                      _Nguoihoi(),
-                                      _NguoiTraloi()
-                                    ])),
-                              )
+                              Container(
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height, //height of TabBarView
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Colors.grey, width: 0.5))),
+                                  child: TabBarView(children: <Widget>[
+                                    _Nguoihoi(),
+                                    _NguoiTraloi()
+                                  ]))
                             ],
                           ))
                     ],
@@ -143,13 +162,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   _Nguoihoi() {
     return SingleChildScrollView(
-      reverse: true,
       child: Form(
         key: keyFormHoi,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 20,
+            ),
             InputText1(
               label: "Họ và tên",
               controller: usernameHoi,
@@ -161,11 +182,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               radius: 10,
               width: double.infinity,
               validator: (val) {
-                return ValidatorApp.checkNull(
-                    text: val, isTextFiled: true);
+                return ValidatorApp.checkNull(text: val, isTextFiled: true);
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             InputText1(
@@ -183,7 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 return ValidatorApp.checkPhone(text: val);
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             InputText1(
@@ -234,15 +254,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
               width: double.infinity,
               validator: (val) {
                 return ValidatorApp.checkPass(
-                    text: val,
-                    isSign: true,
-                    text2: passwordHoi.text);
+                    text: val, isSign: true, text2: passwordHoi.text);
               },
             ),
             SizedBox(
               height: 15,
             ),
-
+            BlocListener(
+              bloc: blocSignUpHoi,
+              listener: (_,StateBloc state){
+                CheckLogState.check(
+                  context,
+                  state: state,
+                  msg: "Đăng ký tài khoản thành công",
+                  success: () {
+                    Navigator.pop(context);
+                  },
+                );
+              },
+              child: Button1(
+                  ontap: signUpHoi,
+                  border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                  style: false,
+                  fontSize: 18,
+                  radius: 30,
+                  colorButton: ColorApp.orangeF2,
+                  textColor: Colors.white,
+                  textButton: 'Đăng ký'),
+            ),
           ],
         ),
       ),
@@ -250,14 +289,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   _NguoiTraloi() {
-    return  SingleChildScrollView(
-
+    return SingleChildScrollView(
       child: Form(
         key: keyFormTraLoi,
         child: Column(
-
           children: [
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             InputText1(
               label: "Họ và tên",
               controller: usernameTL,
@@ -269,8 +308,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               radius: 10,
               width: double.infinity,
               validator: (val) {
-                return ValidatorApp.checkNull(
-                    text: val, isTextFiled: true);
+                return ValidatorApp.checkNull(text: val, isTextFiled: true);
               },
             ),
             SizedBox(
@@ -323,8 +361,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               radius: 10,
               width: double.infinity,
               validator: (val) {
-                return ValidatorApp.checkNull(
-                    text: val, isTextFiled: true);
+                return ValidatorApp.checkNull(text: val, isTextFiled: true);
               },
             ),
             SizedBox(
@@ -360,9 +397,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               width: double.infinity,
               validator: (val) {
                 return ValidatorApp.checkPass(
-                    text: val,
-                    isSign: true,
-                    text2: passwordTL.text);
+                    text: val, isSign: true, text2: passwordTL.text);
               },
             ),
             SizedBox(
@@ -379,8 +414,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               radius: 10,
               width: double.infinity,
               validator: (val) {
-                return ValidatorApp.checkNull(
-                    text: val, isTextFiled: true);
+                return ValidatorApp.checkNull(text: val, isTextFiled: true);
               },
             ),
             SizedBox(
@@ -397,8 +431,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               radius: 10,
               width: double.infinity,
               validator: (val) {
-                return ValidatorApp.checkNull(
-                    text: val, isTextFiled: true);
+                return ValidatorApp.checkNull(text: val, isTextFiled: true);
               },
             ),
             SizedBox(
@@ -415,8 +448,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               radius: 10,
               width: double.infinity,
               validator: (val) {
-                return ValidatorApp.checkNull(
-                    text: val, isTextFiled: true);
+                return ValidatorApp.checkNull(text: val, isTextFiled: true);
               },
             ),
             SizedBox(
@@ -433,14 +465,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
               radius: 10,
               width: double.infinity,
               validator: (val) {
-                return ValidatorApp.checkNull(
-                    text: val, isTextFiled: true);
+                return ValidatorApp.checkNull(text: val, isTextFiled: true);
               },
             ),
             SizedBox(
               height: 15,
             ),
-
+            BlocListener(
+              bloc: blocSignUpTL,
+              listener: (_,StateBloc state){
+                CheckLogState.check(
+                  context,
+                  state: state,
+                  msg: "Đăng ký tài khoản thành công",
+                  success: () {
+                    Navigator.pop(context);
+                  },
+                );
+              },
+              child: Button1(
+                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                style: false,
+                fontSize: 18,
+                radius: 30,
+                colorButton: ColorApp.orangeF2,
+                textColor: Colors.white,
+                textButton: 'Đăng ký',
+                ontap: signUpTL,
+              ),
+            ),
           ],
         ),
       ),

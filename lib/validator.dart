@@ -13,7 +13,7 @@ class ValidatorApp {
     } else if (text.length < 6) {
       return "Mật khẩu phải lớn hơn 6 lý tự";
     } else if (text != text2 && isSign) {
-      return "Mật khẩu mật khẩu không khớp";
+      return "Mật khẩu không khớp";
     } else {
       return null;
     }

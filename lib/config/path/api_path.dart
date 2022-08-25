@@ -10,6 +10,12 @@ class ApiPath {
   static const blockUser = "/app/user/block-user";
   static const page = "/app/home/get-content-page";
 
+
+
+  ///sign-up
+ static const signupHoi="";
+ static const signupTL="";
+
   /// vi tri
   static const province = "/app/home/get-option-provinces";
   static const district = "/app/home/get-option-districts";
