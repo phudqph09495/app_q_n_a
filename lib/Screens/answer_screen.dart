@@ -54,25 +54,39 @@ class _AnswerScreenState extends State<AnswerScreen> {
   int end = 0;
   int now = 0;
   bool isPass = false;
-
+  int user_id=user.userID;
   Future<void> onRefresh() async {
+
     bloc.add(getAns(question_id: int.parse(widget.modelQuestion.id ?? '0')));
+
   }
 
+  String txtTraloi='';
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    now = DateTime.now().millisecondsSinceEpoch;
     onRefresh();
      end = Const.convertNumber(widget.modelQuestion.deadline).round() * 1000;
+
+    if(end > now && widget.modelQuestion.isComplete!='1' ){
+      txtTraloi='Viết câu trả lời';
+    }
+    else if(widget.modelQuestion.isComplete=='1'){
+      txtTraloi='Đã trả thưởng';
+    }
+    else if(end<now){
+      txtTraloi='Đã hết thời gian trả lời';
+    }
+
 
   }
 
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
-    now = DateTime.now().millisecondsSinceEpoch;
+
     return Scaffold(backgroundColor: ColorApp.whiteF0,
       bottomNavigationBar: Container(
         color: Colors.white,
@@ -86,7 +100,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
             height: 40,
             style: false,
             textButton:
-            end > now && !isPass ? 'Viết câu trả lời' : 'Đã hết thời gian trả lời',
+            txtTraloi,
             ontap: end > now && !isPass ? _send : null,
         ),
       ),
@@ -172,8 +186,8 @@ class _AnswerScreenState extends State<AnswerScreen> {
   _send() async {
     Const.checkLogin(context, nextPage: () async {
       now = DateTime.now().millisecondsSinceEpoch;
-      var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
-      if(user_id != widget.modelQuestion.userId && end > now && !isPass &&user.iskyc){
+
+      if(user_id.toString() != widget.modelQuestion.userId && end > now && !isPass &&user.iskyc){
         PageNavigator.next(context: context, page: Add_Answer_Screen(
           user_id: user_id,
           question_id: int.parse(widget.modelQuestion.id ?? '0'),
@@ -184,7 +198,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
         if(end <= now){
           err = "Đã hết thời gian trả lời câu hỏi";
         }
-        if(user_id == widget.modelQuestion.userId){
+        if(user_id.toString() == widget.modelQuestion.userId){
           err = "Bạn không thể trả lời câu hỏi của mình";
         }
         if(isPass){

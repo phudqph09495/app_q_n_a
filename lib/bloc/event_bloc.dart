@@ -308,3 +308,9 @@ class RegisNotify extends EventBloc {
 
   RegisNotify({this.subject_id});
 }
+class ResetP extends EventBloc {
+String email;
+
+  ResetP({required this.email});
+}
+

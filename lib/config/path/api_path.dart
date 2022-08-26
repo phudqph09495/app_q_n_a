@@ -15,6 +15,7 @@ class ApiPath {
   ///sign-up
 
  static const signupTL="/app/user/register-supporter";
+ static const reset="/app/home/request-password-reset";
 
   /// vi tri
   static const province = "/app/home/get-option-provinces";
