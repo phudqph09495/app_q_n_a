@@ -8,6 +8,7 @@ import 'package:app_q_n_a/Screens/Screens_TaiKhoan/rules.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
 import 'package:app_q_n_a/Screens/account/bank/screen_create_bank.dart';
 import 'package:app_q_n_a/Screens/account/edit_account/edit_profile.dart';
+import 'package:app_q_n_a/Screens/account/edit_account/sp_signup.dart';
 import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/Screens/registration.dart';
@@ -24,6 +25,7 @@ import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/main.dart';
 import 'package:app_q_n_a/models/model_page.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:app_q_n_a/widget/items/custom_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -292,7 +294,25 @@ class _BodyProductState extends State<BodyProduct> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LoginScreen()));
-                      })
+                      }),
+              SizedBox(height: 15,),
+              user.iskyc
+                  ? SizedBox()
+                  : Button1(
+                radius: 5,
+                fontSize: 18,
+                height: 40,
+                style: false,
+                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                colorButton: ColorApp.orangeF2,
+                textColor: Colors.white,
+                textButton: "Đăng ký người trả lời",
+                ontap: () {
+                  PageNavigator.next(context: context, page: SupporterSignUp ());
+                  CustomToast.showToast(context: context, msg: 'Nhập đủ thông tin để có thể trả lời');
+                },
+              )
+
             ],
           ),
         );

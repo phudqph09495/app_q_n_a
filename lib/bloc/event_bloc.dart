@@ -122,11 +122,11 @@ class UpdateProfile extends EventBloc {
 }
 
 class AddDataRegistrantion extends EventBloc {
-  String phone;
+  String? phone;
   String? register_by;
-  String username;
-  String password;
-  String email;
+  String? username;
+  String? password;
+  String? email;
   String? bankName;
   String? bankNumber;
   String? userNameBank;
@@ -137,10 +137,10 @@ class AddDataRegistrantion extends EventBloc {
   int? district_id;
 
   AddDataRegistrantion(
-      {required this.username,
-      required this.email,
-      required this.phone,
-      required this.password,
+      { this.username,
+       this.email,
+       this.phone,
+       this.password,
        this.register_by,
       this.bankNumber,
       this.bankName,

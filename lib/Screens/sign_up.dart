@@ -125,11 +125,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             children: <Widget>[
                               Container(
                                 child: TabBar(
+
+                                  indicatorColor: ColorApp.orangeF2,
+                                  unselectedLabelStyle:
+                                  StyleApp.textStyle500(color: ColorApp.grey82, fontSize: 16),
                                   onTap: (val) {
                                     tab = val;
                                   },
-                                  labelColor: Colors.green,
-                                  unselectedLabelColor: Colors.black,
+                                  labelColor: ColorApp.orangeF2,
+                                  unselectedLabelColor: ColorApp.grey82,
                                   tabs: [
                                     Tab(text: 'Người hỏi'),
                                     Tab(text: 'Người trả lời'),
@@ -360,7 +364,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 15,
             ),
             InputText1(
-              label: "Công việc",
+              label: "Nghề nghiệp",
               controller: workTL,
               borderColor: ColorApp.main.withOpacity(0.2),
               hasLeading: true,
@@ -521,7 +525,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               controller: bankNumber,
               borderColor: ColorApp.main.withOpacity(0.2),
               hasLeading: true,
-              iconData: Icons.numbers_outlined,
+              iconData: Icons.credit_card_outlined,
               obscureText: false,
               hasPass: false,
               radius: 10,

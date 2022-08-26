@@ -13,8 +13,8 @@ class ApiPath {
 
 
   ///sign-up
- static const signupHoi="";
- static const signupTL="";
+
+ static const signupTL="/app/user/register-supporter";
 
   /// vi tri
   static const province = "/app/home/get-option-provinces";

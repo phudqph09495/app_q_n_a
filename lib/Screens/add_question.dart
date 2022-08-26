@@ -127,17 +127,12 @@ class _AddQuestionState extends State<AddQuestion> {
         doneStyle: StyleApp.textStyle700(fontSize: 18),
       ),
       onConfirm: (date) {
-        if (date.millisecondsSinceEpoch >
-            (DateTime.now().millisecondsSinceEpoch + (60000 * 10))) {
+
           dateTime = date;
 
           deadline.text = Const.formatTime(date.millisecondsSinceEpoch,
               format: "HH:mm  dd/MM/yyyy");
-        } else {
-          CustomToast.showToast(
-              context: context,
-              msg: "Deadline phải lớn hơn thời gian tạo câu hỏi 10 phút");
-        }
+
       },
       currentTime: dateTime,
       locale: LocaleType.vi,

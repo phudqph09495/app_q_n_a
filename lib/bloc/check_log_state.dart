@@ -10,6 +10,7 @@ class CheckLogState {
       String? msg,
       bool isShowMsg = true,
       bool isShowDlg = false,
+        int duration=2,
       Function()? ontap,
       Function()? success}) {
     if (state is Loading) {
@@ -18,7 +19,7 @@ class CheckLogState {
     if (state is LoadSuccess) {
       DialogItem.hideLoading(context: context);
       isShowMsg
-          ? CustomToast.showToast(context: context, msg: msg ?? state.data)
+          ? CustomToast.showToast(context: context, msg: msg ?? state.data,duration:duration )
           : null;
       isShowDlg
           ? DialogItem.showMsg(

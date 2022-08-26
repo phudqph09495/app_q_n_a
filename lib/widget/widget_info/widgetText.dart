@@ -131,17 +131,7 @@ class _ItemAccountState extends State<ItemAccount> {
                 ],
               ),
             ),
-            iskyc
-                ? SizedBox()
-                : Button1(
-                    colorButton: ColorApp.blue6D,
-                    textColor: ColorApp.whiteF0,
-                    textButton: "Bạn muốn trả lời",
-                    ontap: () {
-                      PageNavigator.next(context: context, page: EditProfile());
-                      CustomToast.showToast(context: context, msg: 'Nhập đủ thông tin để có thể trả lời');
-                    },
-                  )
+
           ],
         ),
       );

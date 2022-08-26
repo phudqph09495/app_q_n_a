@@ -140,7 +140,9 @@ class ScreenProfile extends StatelessWidget {
                         content: Const.formatTime((user.birthday ?? 0) * 1000)),
                     _buidRow(
                         title: "Địa chỉ:",
-                        content: Const.checkStringNull(user.address)),
+                        content: Const.checkStringNull('${user.address} ${user.districtName} ${user.provinceName}')),
+                    _buidRow(title: "Vai trò", content: user.isKyc==true?'Người trả lời':'Người hỏi'),
+                    _buidRow(title: "Số CCCD:", content: user.cmt==null?'Chưa cập nhật':user.cmt)
                     // Padding(
                     //   padding: EdgeInsets.all(17),
                     //   child: Column(
