@@ -55,29 +55,8 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: BlocListener(
-        bloc: blocSpSignup,
-        listener: (_, StateBloc state) {
-          CheckLogState.check(context,
-              state: state,
-              msg:
-                  "Đăng ký thành công. Admin sẽ kiểm tra trong thời gian sớm nhất",
-          duration: 3,
-          success: (){
-            Navigator.pop(context);
-          })
-          ;
-        },
-        child: Button1(
-            ontap: spSignup,
-            border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-            style: false,
-            fontSize: 18,
-            radius: 30,
-            colorButton: ColorApp.orangeF2,
-            textColor: Colors.white,
-            textButton: 'Đăng ký người trả lời'),
-      ),
+
+
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
         backgroundColor: ColorApp.whiteF0,
@@ -97,7 +76,7 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
+        reverse: true,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 15),
           child: Form(
@@ -241,7 +220,31 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
                   },
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 30,
+
+                ),
+                BlocListener(
+                  bloc: blocSpSignup,
+                  listener: (_, StateBloc state) {
+                    CheckLogState.check(context,
+                        state: state,
+                        msg:
+                        "Đăng ký thành công. Admin sẽ kiểm tra trong thời gian sớm nhất",
+                        duration: 3,
+                        success: (){
+                          Navigator.pop(context);
+                        })
+                    ;
+                  },
+                  child: Button1(
+                      ontap: spSignup,
+                      border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                      style: false,
+                      fontSize: 18,
+                      radius: 30,
+                      colorButton: ColorApp.orangeF2,
+                      textColor: Colors.white,
+                      textButton: 'Đăng ký người trả lời'),
                 ),
               ],
             ),
