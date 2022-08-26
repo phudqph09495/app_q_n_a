@@ -1,10 +1,14 @@
-import 'package:app_q_n_a/bloc/bloc/signUp/bloc_signup_hoi.dart';
-import 'package:app_q_n_a/bloc/bloc/signUp/bloc_signup_tl.dart';
+import 'package:app_q_n_a/bloc/bloc/address/bloc_districts.dart';
+import 'package:app_q_n_a/bloc/bloc/address/bloc_provices.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_registrantion.dart';
+
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/item/button.dart';
+import 'package:app_q_n_a/item/dropdown/Dropdown1.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
+import 'package:app_q_n_a/models/model_local.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/validator.dart';
 import 'package:flutter/material.dart';
@@ -39,35 +43,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController bankNumber = TextEditingController();
   TextEditingController cccd = TextEditingController();
 
-  BlocSignUpHoi blocSignUpHoi = BlocSignUpHoi();
-  BlocSignUpTL blocSignUpTL = BlocSignUpTL();
+  BlocRegistrantion blocRegistrantionHoi = BlocRegistrantion();
+  BlocRegistrantion blocRegistrantionTL = BlocRegistrantion();
 
-  signUpHoi() {
+  BlocProvinces blocProvinces = BlocProvinces()..add(GetData());
+  BlocDistricts blocDistricts = BlocDistricts();
+
+  ModelLocal? province;
+  ModelLocal? district;
+
+  String provinceID = '0';
+  String districtID = '0';
+
+  SignUpVoid() async {
     if (keyFormHoi.currentState!.validate()) {
-      print('object');
-      blocSignUpHoi.add(AddDataRegistrantion(
-          username: usernameHoi.text,
-          email: emailHoi.text,
-          phone: phoneHoi.text,
-          password: passwordHoi.text,
-          register_by: EnumRegistrantion.phone.toString()));
+      blocRegistrantionHoi.add(AddDataRegistrantion(
+        username: usernameHoi.text,
+        email: emailHoi.text,
+        phone: phoneHoi.text,
+        password: passwordHoi.text,
+        role: tab.toString(),
+      ));
     }
   }
 
-  signUpTL() {
+  SignUpVoidTl() async {
     if (keyFormTraLoi.currentState!.validate()) {
-      print('object');
-      blocSignUpTL.add(AddDataRegistrantion(
+      blocRegistrantionTL.add(AddDataRegistrantion(
           username: usernameTL.text,
           email: emailTL.text,
           phone: phoneTL.text,
           password: passwordTL.text,
-          register_by: EnumRegistrantion.phone.toString(),
-          bankName: bankName.text,
-          bankNumber: bankNumber.text,
-          userNameBank: userNameBank.text,
+          role: tab.toString(),
+          cccd: cccd.text,
+          province_id: int.parse(provinceID),
+          district_id: int.parse(districtID),
           work: workTL.text,
-          cccd: cccd.text));
+          bankNumber: bankNumber.text,
+          bankName: bankName.text,
+          userNameBank: userNameBank.text));
     }
   }
 
@@ -76,16 +90,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
-      // bottomSheet:
-      // Button1(
-      //     border: Border.all(
-      //         color: ColorApp.orangeF2, width: 0.5),
-      //     style: false,
-      //     fontSize: 18,
-      //     radius: 30,
-      //     colorButton: ColorApp.orangeF2,
-      //     textColor: Colors.white,
-      //     textButton: 'Đăng ký'),
       backgroundColor: ColorApp.whiteF7,
       body: SafeArea(
         child: Stack(
@@ -120,7 +124,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                child: const TabBar(
+                                child: TabBar(
+                                  onTap: (val) {
+                                    tab = val;
+                                  },
                                   labelColor: Colors.green,
                                   unselectedLabelColor: Colors.black,
                                   tabs: [
@@ -129,18 +136,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                  height: MediaQuery.of(context)
-                                      .size
-                                      .height, //height of TabBarView
-                                  decoration: const BoxDecoration(
-                                      border: Border(
-                                          top: BorderSide(
-                                              color: Colors.grey, width: 0.5))),
-                                  child: TabBarView(children: <Widget>[
-                                    _Nguoihoi(),
-                                    _NguoiTraloi()
-                                  ]))
+                              SingleChildScrollView(
+                                child: Container(
+                                    height: 1100, //height of TabBarView
+                                    decoration: const BoxDecoration(
+                                        border: Border(
+                                            top: BorderSide(
+                                                color: Colors.grey,
+                                                width: 0.5))),
+                                    child: TabBarView(children: <Widget>[
+                                      _Nguoihoi(),
+                                      _NguoiTraloi()
+                                    ])),
+                              )
                             ],
                           ))
                     ],
@@ -261,8 +269,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 15,
             ),
             BlocListener(
-              bloc: blocSignUpHoi,
-              listener: (_,StateBloc state){
+              bloc: blocRegistrantionHoi,
+              listener: (_, StateBloc state) {
                 CheckLogState.check(
                   context,
                   state: state,
@@ -273,7 +281,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 );
               },
               child: Button1(
-                  ontap: signUpHoi,
+                  ontap: SignUpVoid,
                   border: Border.all(color: ColorApp.orangeF2, width: 0.5),
                   style: false,
                   fontSize: 18,
@@ -290,6 +298,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   _NguoiTraloi() {
     return SingleChildScrollView(
+      physics: NeverScrollableScrollPhysics(),
       child: Form(
         key: keyFormTraLoi,
         child: Column(
@@ -405,7 +414,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             InputText1(
               label: "Nhập CCCD",
-              controller: usernameTL,
+              controller: cccd,
               borderColor: ColorApp.main.withOpacity(0.2),
               hasLeading: true,
               iconData: Icons.person_outline,
@@ -417,6 +426,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 return ValidatorApp.checkNull(text: val, isTextFiled: true);
               },
             ),
+            SizedBox(
+              height: 15,
+            ),
+            BlocBuilder(
+                bloc: blocProvinces,
+                builder: (context, state) {
+                  final list = state is LoadSuccess
+                      ? state.data as List<ModelLocal>
+                      : <ModelLocal>[];
+                  return DropDown2(
+                    validator: (val) {
+                      return ValidatorApp.checkNull(
+                          text: val, isTextFiled: true);
+                    },
+                    pad: 47,
+                    listItem: list,
+                    hint: "Chọn tỉnh/thành phố",
+                    onChanged: (val) {
+                      province = val;
+                      provinceID = val.id;
+                      blocDistricts.add(GetData(
+                        id: val.id,
+                      ));
+                    },
+                    value: province,
+                  );
+                }),
+            SizedBox(
+              height: 15,
+            ),
+            BlocBuilder(
+                bloc: blocDistricts,
+                builder: (context, state) {
+                  final list = state is LoadSuccess
+                      ? state.data as List<ModelLocal>
+                      : <ModelLocal>[];
+                  return DropDown2(
+                    validator: (val) {
+                      return ValidatorApp.checkNull(
+                          text: val, isTextFiled: true);
+                    },
+                    pad: 47,
+                    listItem: list,
+                    hint: "Chọn quận/huyện",
+                    onChanged: (val) {
+                      district = val;
+                      districtID = val.id;
+                    },
+                    value: district,
+                  );
+                }),
             SizedBox(
               height: 15,
             ),
@@ -472,27 +532,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 15,
             ),
             BlocListener(
-              bloc: blocSignUpTL,
-              listener: (_,StateBloc state){
+              bloc: blocRegistrantionTL,
+              listener: (_, StateBloc state) {
                 CheckLogState.check(
                   context,
                   state: state,
-                  msg: "Đăng ký tài khoản thành công",
+                  msg: "Đăng ký tài khoản thành công Supporter",
                   success: () {
                     Navigator.pop(context);
                   },
                 );
               },
               child: Button1(
-                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                style: false,
-                fontSize: 18,
-                radius: 30,
-                colorButton: ColorApp.orangeF2,
-                textColor: Colors.white,
-                textButton: 'Đăng ký',
-                ontap: signUpTL,
-              ),
+                  ontap: SignUpVoidTl,
+                  border: Border.all(color: ColorApp.orangeF2, width: 0.5),
+                  style: false,
+                  fontSize: 18,
+                  radius: 30,
+                  colorButton: ColorApp.orangeF2,
+                  textColor: Colors.white,
+                  textButton: 'Đăng ký'),
             ),
           ],
         ),
