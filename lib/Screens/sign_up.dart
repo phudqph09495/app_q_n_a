@@ -413,6 +413,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 15,
             ),
             InputText1(
+              keyboardType: TextInputType.number,
               label: "Nhập CCCD",
               controller: cccd,
               borderColor: ColorApp.main.withOpacity(0.2),
@@ -515,6 +516,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 15,
             ),
             InputText1(
+              keyboardType: TextInputType.number,
               label: "Nhập số tài khoản ngân hàng",
               controller: bankNumber,
               borderColor: ColorApp.main.withOpacity(0.2),
