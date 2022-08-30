@@ -182,7 +182,7 @@ Widget QuestionTile(
                             children: [
                               Text("${Const.convertNumber(modelQuestion.userCountQuestion).round()} (câu hỏi)."),
                               Text("${Const.convertNumber(modelQuestion.count_gift_to_user).round()} (trả thưởng)."),
-                              Text("${Const.convertNumber(modelQuestion.countAnswer).round()} (trả lời)."),
+                              Text("${Const.convertNumber(modelQuestion.userCountAnswer).round()} (trả lời)."),
                             ],
                           ),
                         ),

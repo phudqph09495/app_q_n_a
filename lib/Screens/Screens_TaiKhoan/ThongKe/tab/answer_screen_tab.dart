@@ -101,7 +101,7 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                     color: Colors.black
                 ),
                 title: Text(
-                  '${modelAnswer.question!.subjectId ?? 'Lĩnh vực khác'} - ${modelAnswer.question!.classId} - ${Const.convertNumber(modelAnswer.question!.priceGift)} đ',
+                  '${modelAnswer.subjectName ?? 'Lĩnh vực khác'} - ${modelAnswer.className} - ${Const.convertNumber(modelAnswer.question!.priceGift)} đ',
                   style: StyleApp.textStyle700(fontSize: 18,),
                 ),
               ),
@@ -113,7 +113,7 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                   },
                   success: RefreshIndicator(
                     onRefresh: onRefresh,
-                    child: modelAnswer.question == null ? const SizedBox() : SingleChildScrollView(
+                    child:  SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,8 +140,8 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                                     );
                                   },
                                   child: ItemUser(username:
-                                    "username",
-                                    image:'',
+                                    modelAnswer.userName??'',
+                                    image:modelAnswer.avatarPath1.toString()+modelAnswer.avatarName1.toString(),
                                     // widget.modelQuestion.avatarPath.toString() + widget.modelQuestion.avatarName.toString(),
                                     time: modelAnswer.question!.createdAt.toString() ?? "",
                                     onTap: (){

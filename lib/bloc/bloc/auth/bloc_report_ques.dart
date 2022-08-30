@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 late String loi;
 
-class BlocReport extends Bloc<EventBloc, StateBloc> {
-  BlocReport() : super(StateBloc());
+class BlocReportQuestion extends Bloc<EventBloc, StateBloc> {
+  BlocReportQuestion() : super(StateBloc());
 
   @override
   Stream<StateBloc> mapEventToState(EventBloc event) async* {
@@ -20,7 +20,8 @@ class BlocReport extends Bloc<EventBloc, StateBloc> {
         req['id'] = event.id;
         req['content'] = event.content;
 
-        var res = await Api.postAsync(endPoint: ApiPath.reportAnswer, req: req);
+        var res = await Api.postAsync(endPoint: ApiPath.reportQuestion, req: req);
+        print(res);
 
         if (res['code'] == 1) {
           yield LoadSuccess();
@@ -34,8 +35,10 @@ class BlocReport extends Bloc<EventBloc, StateBloc> {
           yield LoadFail(error: loi);
         }
       } on DioError catch (e) {
+
         yield LoadFail(error: e.error.error);
       } catch (e) {
+        print(e);
         yield LoadFail(error: e.toString());
       }
     }

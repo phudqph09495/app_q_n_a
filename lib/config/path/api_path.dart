@@ -51,6 +51,9 @@ class ApiPath {
   ///answer
   static const addAnswer = "/app/question/add-answer";
   static const reportAnswer = "/app/question/report-answer";
+  static const reportQuestion = "/app/question/report-question";
+
+
 
   ///address
   static const getProvinces = "/app/home/get-option-provinces";

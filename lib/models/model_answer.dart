@@ -1,19 +1,39 @@
 class ModelAnswer {
+  String? avatarPath1;
+  String? avatarName1;
+  String? className;
+  String? subjectName;
+  String? userName;
   Question? question;
   List<Images>? images;
   List<Answer>? answer;
   String? countAnswer;
   List<String>? listUseridAnswer;
 
-  ModelAnswer({this.question, this.images, this.answer, this.countAnswer, this.listUseridAnswer});
+  ModelAnswer({
+    this.question,
+    this.images,
+    this.answer,
+    this.countAnswer,
+    this.listUseridAnswer,
+    this.avatarPath1,
+    this.avatarName1,
+    this.className,
+    this.subjectName,
+    this.userName,
+  });
 
   ModelAnswer.fromJson(Map<String, dynamic> json) {
+    avatarPath1 = json['avatar_path'];
+    avatarName1 = json['avatar_name'];
+    className = json['class_name'];
+    subjectName = json['subject_name'];
+    userName = json['user_name'];
     images = <Images>[];
     answer = <Answer>[];
     listUseridAnswer = <String>[];
-    question = json['question'] != null
-        ? Question.fromJson(json['question'])
-        : null;
+    question =
+        json['question'] != null ? Question.fromJson(json['question']) : null;
     if (json['images'] != null) {
       json['images'].forEach((v) {
         images!.add(Images.fromJson(v));
@@ -30,6 +50,11 @@ class ModelAnswer {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['avatar_path'] = this.avatarPath1;
+    data['avatar_name'] = this.avatarName1;
+    data['class_name'] = this.className;
+    data['subject_name'] = this.subjectName;
+    data['user_name'] = this.userName;
     if (this.question != null) {
       data['question'] = this.question!.toJson();
     }
@@ -193,7 +218,6 @@ class Answer {
   List<Images2>? images;
   List<Items>? items;
 
-
   Answer(
       {this.id,
       this.answer,
@@ -206,9 +230,10 @@ class Answer {
       this.countReport,
       this.parentId,
       this.username,
-        this.ratings,
+      this.ratings,
       this.images,
-        this.avatar_name,this.avatar_path,
+      this.avatar_name,
+      this.avatar_path,
       this.items});
 
   Answer.fromJson(Map<String, dynamic> json) {
@@ -222,20 +247,18 @@ class Answer {
     status = json['status'];
     userId = json['user_id'];
     isImages = json['is_images'];
-    ratings=json['ratings'];
+    ratings = json['ratings'];
     countReport = json['count_report'];
     parentId = json['parent_id'];
     username = json['username'];
     avatar_name = json['avatar_name'];
     avatar_path = json['avatar_path'];
     if (json['images'] != null) {
-
       json['images'].forEach((v) {
         images!.add(new Images2.fromJson(v));
       });
     }
     if (json['items'] != null) {
-
       json['items'].forEach((v) {
         items!.add(new Items.fromJson(v));
       });
@@ -251,7 +274,7 @@ class Answer {
     data['question_id'] = this.questionId;
     data['status'] = this.status;
     data['user_id'] = this.userId;
-    data['ratings']=this.ratings;
+    data['ratings'] = this.ratings;
     data['is_images'] = this.isImages;
     data['count_report'] = this.countReport;
     data['parent_id'] = this.parentId;
@@ -283,16 +306,16 @@ class Images2 {
 
   Images2(
       {this.id,
-        this.questionId,
-        this.path,
-        this.name,
-        this.displayName,
-        this.height,
-        this.width,
-        this.order,
-        this.createdAt,
-        this.isAvatar,
-        this.answerId});
+      this.questionId,
+      this.path,
+      this.name,
+      this.displayName,
+      this.height,
+      this.width,
+      this.order,
+      this.createdAt,
+      this.isAvatar,
+      this.answerId});
 
   Images2.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -324,7 +347,6 @@ class Images2 {
     return data;
   }
 }
-
 
 class Items {
   String? id;

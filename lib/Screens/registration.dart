@@ -207,7 +207,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             height: 15,
                           ),
                           InputText1(
-                            label: "Công việc",
+                            label: "Nghề nghiệp",
                             controller: work,
                             borderColor: ColorApp.main.withOpacity(0.2),
                             hasLeading: true,

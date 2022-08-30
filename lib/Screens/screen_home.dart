@@ -1,7 +1,9 @@
 import 'package:app_q_n_a/Screens/home.dart';
 import 'package:app_q_n_a/Screens/login.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_check_login.dart';
+
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
+
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Screens_Notification/notification.dart';
 import '../styles/init_style.dart';
 import 'Screens_TaiKhoan/body_product.dart';
+
 
 class ScreenHome extends StatefulWidget {
   @override
@@ -26,6 +29,9 @@ class _ScreenHomeState extends State<ScreenHome> {
     super.initState();
     context.read<BlocCheckLogin>().add(GetData());
     context.read<BlocGetWallet>().add(GetData());
+
+
+
   }
 
   @override
@@ -58,7 +64,7 @@ class _ScreenHomeState extends State<ScreenHome> {
         unselectedItemColor: ColorApp.black,
         unselectedLabelStyle:
             StyleApp.textStyle400(color: ColorApp.black, fontSize: 12),
-        items: const [
+        items:  [
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.home), label: "Trang chủ"),
           BottomNavigationBarItem(

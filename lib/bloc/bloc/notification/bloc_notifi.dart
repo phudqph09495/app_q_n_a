@@ -10,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../config/api.dart';
 import '../../../config/path/share_pref_path.dart';
 import '../../../models/model_question.dart';
-
 class BlocNotifi extends Bloc<EventBloc, StateBloc> {
   BlocNotifi() : super(StateBloc());
   List<ModelNotifi> list = [];
@@ -27,6 +26,7 @@ class BlocNotifi extends Bloc<EventBloc, StateBloc> {
           list.clear();
         }
         if (event.loadMore) {
+
           yield LoadSuccess(
             data: list,
             hasMore: true,
@@ -42,6 +42,8 @@ class BlocNotifi extends Bloc<EventBloc, StateBloc> {
             ModelNotifi model = ModelNotifi.fromJson(item);
             list.add(model);
           }
+
+
           yield LoadSuccess(
             data: list,
             hasMore: false,

@@ -93,7 +93,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
         padding: const EdgeInsets.all(10),
         child: Button1(
             colorButton:
-            end > now && !isPass? ColorApp.orangeF2 : Colors.grey.withOpacity(0.5),
+            txtTraloi=='Viết câu trả lời'? ColorApp.orangeF2 : Colors.grey.withOpacity(0.5),
             textColor: ColorApp.whiteF0,
             radius: 30,
             fontSize: 18,
