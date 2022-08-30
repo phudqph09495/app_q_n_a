@@ -296,22 +296,20 @@ class _BodyProductState extends State<BodyProduct> {
                                 builder: (context) => LoginScreen()));
                       }),
               SizedBox(height: 15,),
-              user.iskyc
-                  ? SizedBox()
-                  : Button1(
+          !user.iskyc? Button1(
                 radius: 5,
                 fontSize: 18,
                 height: 40,
                 style: false,
-                border: Border.all(color: ColorApp.orangeF2, width: 0.5),
-                colorButton: ColorApp.orangeF2,
+                border: Border.all(color:user.statusUser==0? ColorApp.orangeF2:ColorApp.grey82.withOpacity(0.5), width: 0.5),
+                colorButton:user.statusUser==0? ColorApp.orangeF2:ColorApp.grey82,
                 textColor: Colors.white,
-                textButton: "Đăng ký người trả lời",
+                textButton:user.statusUser==0? "Đăng ký người trả lời":"Bạn đã đăng ký người trả lời",
                 ontap: () {
-                  PageNavigator.next(context: context, page: SupporterSignUp ());
-                  CustomToast.showToast(context: context, msg: 'Nhập đủ thông tin để có thể trả lời');
+                  user.statusUser==0?   PageNavigator.next(context: context, page: SupporterSignUp ()):null;
+                  CustomToast.showToast(context: context, msg:user.statusUser==0? 'Nhập đủ thông tin để có thể trả lời':'Admin sẽ duyệt trong thời gian sớm nhất');
                 },
-              )
+              ) :SizedBox()
 
             ],
           ),

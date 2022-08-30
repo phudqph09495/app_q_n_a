@@ -1,6 +1,7 @@
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_check_login.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -48,6 +49,7 @@ class DialogItem {
                   onPressed: () async {
                     if (logout) {
                       await SharePrefsKeys.removeAllKey();
+                      SharedPrefs.remove("pass");
                       user.userID = 0;
                       user.iskyc=false;
                       context.read<BlocCheckLogin>().add(GetData());

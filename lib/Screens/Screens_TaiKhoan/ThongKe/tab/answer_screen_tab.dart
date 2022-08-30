@@ -142,7 +142,6 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                                   child: ItemUser(username:
                                     modelAnswer.userName??'',
                                     image:modelAnswer.avatarPath1.toString()+modelAnswer.avatarName1.toString(),
-                                    // widget.modelQuestion.avatarPath.toString() + widget.modelQuestion.avatarName.toString(),
                                     time: modelAnswer.question!.createdAt.toString() ?? "",
                                     onTap: (){
                                       blocSaveQuestion.add(GetData(

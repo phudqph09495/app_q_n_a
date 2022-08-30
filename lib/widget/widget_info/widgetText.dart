@@ -3,6 +3,8 @@ import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/config/next_page.dart';
+import 'package:app_q_n_a/config/path/share_pref_path.dart';
+import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:app_q_n_a/models/model_user.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
@@ -21,6 +23,7 @@ import '../../../bloc/state_bloc.dart';
 
 int userID = 0;
 bool iskyc = false;
+int statusUser=0;
 
 class ItemAccount extends StatefulWidget {
   @override
@@ -33,14 +36,20 @@ class _ItemAccountState extends State<ItemAccount> {
     // TODO: implement initState
     super.initState();
     context.read<BlocGetWallet>().add(GetData());
+
   }
+
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
       ModelUser user = snapshot ?? ModelUser();
       userID = user.id ?? 0;
-      iskyc = user.isKyc ?? false;
+      statusUser=user.isSupporter??0;
+      if(statusUser==1) iskyc=true;
+      print(statusUser);
+
+
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(
@@ -128,6 +137,7 @@ class _ItemAccountState extends State<ItemAccount> {
                           color: ColorApp.red, fontSize: 16),
                     );
                   }),
+
                 ],
               ),
             ),

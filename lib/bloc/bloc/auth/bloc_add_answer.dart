@@ -32,7 +32,7 @@ class BlocAddAnswer extends Bloc<EventBloc, StateBloc> {
         }
         var res = await Api.postAsync(endPoint: ApiPath.addAnswer, req: req);
 
-
+print(res);
         if (res['code'] == 1) {
           yield LoadSuccess();
         } else {
