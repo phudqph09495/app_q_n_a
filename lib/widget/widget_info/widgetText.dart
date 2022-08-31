@@ -26,9 +26,13 @@ bool iskyc = false;
 int statusUser=0;
 
 class ItemAccount extends StatefulWidget {
+
+
   @override
   State<ItemAccount> createState() => _ItemAccountState();
 }
+
+
 
 class _ItemAccountState extends State<ItemAccount> {
   @override
@@ -36,16 +40,19 @@ class _ItemAccountState extends State<ItemAccount> {
     // TODO: implement initState
     super.initState();
     context.read<BlocGetWallet>().add(GetData());
-    context.read<BlocGetUser>().add(GetData());
 
+    context.read<BlocGetUser>().add(GetData());
   }
+
+
+
 
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
 
-
+      context.read<BlocGetUser>().add(GetData());
       ModelUser user = snapshot ?? ModelUser();
       userID = user.id ?? 0;
 

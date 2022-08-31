@@ -51,6 +51,7 @@ class DialogItem {
                       await SharePrefsKeys.removeAllKey();
                       SharedPrefs.remove("pass");
                       user.userID = 0;
+                      user.statusUser=0;
                       user.iskyc=false;
                       context.read<BlocCheckLogin>().add(GetData());
                       context.read<BLocLocalUser>().getUser();
