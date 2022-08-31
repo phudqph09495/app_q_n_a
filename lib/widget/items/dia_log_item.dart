@@ -52,6 +52,7 @@ class DialogItem {
                       SharedPrefs.remove("pass");
                       user.userID = 0;
                       user.iskyc=false;
+                      user.statusUser=0;
                       context.read<BlocCheckLogin>().add(GetData());
                       context.read<BLocLocalUser>().getUser();
                       Navigator.pop(context);

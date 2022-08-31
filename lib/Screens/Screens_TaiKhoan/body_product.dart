@@ -128,11 +128,6 @@ class _BodyProductState extends State<BodyProduct> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
     ToastContext().init(context);
     return Scaffold(
       backgroundColor: ColorApp.whiteF7,

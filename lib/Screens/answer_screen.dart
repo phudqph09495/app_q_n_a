@@ -147,7 +147,7 @@ context.read<BlocGetAnswer>().add(getAns(question_id: int.parse(widget.modelQues
                         height: 5,
                       ),
                       QuestionCard(
-                        modelQuestion: widget.modelQuestion,
+
                         modelAnswer: model,
                       ),
                       const SizedBox(
@@ -205,7 +205,7 @@ context.read<BlocGetAnswer>().add(getAns(question_id: int.parse(widget.modelQues
           err = "Câu hỏi đã được trả thưởng";
         }
         if(user.iskyc==false){
-          err="Thông tin của bạn chưa xác thực nên không thể thực hiện thao tác này ";
+          err="Bạn chưa phải là người trả lời nên không thể thực hiện thao tác này. Để trở thành người trả lời hãy đăng ký nhé";
         }
         DialogItem.showMsg(context: context, title: "Lỗi", msg: err);
       }

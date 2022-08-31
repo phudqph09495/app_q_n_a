@@ -40,13 +40,13 @@ import '../../models/model_answer.dart';
 
 class QuestionCard extends StatefulWidget {
   ModelAnswer modelAnswer;
-  ModelQuestion modelQuestion;
+
   bool isSave;
 
   QuestionCard({
     this.isSave = false,
     required this.modelAnswer,
-    required this.modelQuestion,
+
   });
 
   @override
@@ -102,12 +102,12 @@ class _QuestionCardState extends State<QuestionCard> {
             height: 10,
           ),
           ItemCountDown(
-              time: Const.convertNumber(widget.modelQuestion.deadline).round() *
+              time: Const.convertNumber(widget.modelAnswer.question!.deadline).round() *
                   1000),
           const SizedBox(
             height: 10,
           ),
-          Text(widget.modelQuestion.question ?? "", style: StyleApp.textStyle500(),),
+          Text(widget.modelAnswer.question!.question ?? "", style: StyleApp.textStyle500(),),
           const SizedBox(
             height: 10,
           ),
@@ -121,7 +121,7 @@ class _QuestionCardState extends State<QuestionCard> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ReadMoreText(
-                  widget.modelQuestion.description ?? "",
+                  widget.modelAnswer.question!.description ?? "",
                   trimLines: 3,
                   colorClickableText: ColorApp.orangeF01,
                   trimMode: TrimMode.Line,
@@ -182,9 +182,9 @@ class _QuestionCardState extends State<QuestionCard> {
                     onPressed: () {
                       Navigator.pop(context);
                       if (textReport.text.isNotEmpty) {
-                        print(widget.modelQuestion.id);
+                        print(widget.modelAnswer.question!.id);
                         blocReport.add(reportANS(
-                            id: Const.convertNumber(widget.modelQuestion.id).round(),
+                            id: Const.convertNumber(widget.modelAnswer.question!.id).round(),
                             content: textReport.text));
                       } else {
                         DialogItem.showMsg(

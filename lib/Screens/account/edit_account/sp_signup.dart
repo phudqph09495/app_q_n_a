@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/supporter/bloc_sp_sign.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/item/input/text_filed.dart';
@@ -232,7 +233,13 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
                         "Đăng ký thành công. Admin sẽ kiểm tra trong thời gian sớm nhất",
                         duration: 3,
                         success: (){
-                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ScreenHome(),
+                            ),
+                          );
+
                         })
                     ;
                   },

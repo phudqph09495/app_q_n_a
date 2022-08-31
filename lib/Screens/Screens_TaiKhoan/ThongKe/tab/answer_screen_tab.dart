@@ -140,76 +140,80 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                           //   modelAnswer: model,
                           // ),
 
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            color: Colors.white,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                BlocListener(
-                                  bloc: blocSaveQuestion,
-                                  listener: (_,StateBloc state){
-                                    CheckLogState.check(context, state: state,
-                                        msg: "Lưu câu hỏi thành công"
-                                    );
-                                  },
-                                  child: ItemUser(username:
-                                    modelAnswer.userName??'',
-                                    image:modelAnswer.avatarPath1.toString()+modelAnswer.avatarName1.toString(),
-                                    time: modelAnswer.question!.createdAt.toString() ?? "",
-                                    onTap: (){
-                                      blocSaveQuestion.add(GetData(
-                                          id:modelAnswer.question!.id.toString()
-                                      ));
-                                    },
-                                    isSHowSave: true,
-                                  ),
+                          // Container(
+                          //   padding: const EdgeInsets.all(10),
+                          //   color: Colors.white,
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                          //     children: [
+                          //       BlocListener(
+                          //         bloc: blocSaveQuestion,
+                          //         listener: (_,StateBloc state){
+                          //           CheckLogState.check(context, state: state,
+                          //               msg: "Lưu câu hỏi thành công"
+                          //           );
+                          //         },
+                          //         child: ItemUser(username:
+                          //           modelAnswer.userName??'',
+                          //           image:modelAnswer.avatarPath1.toString()+modelAnswer.avatarName1.toString(),
+                          //           time: modelAnswer.question!.createdAt.toString() ?? "",
+                          //           onTap: (){
+                          //             blocSaveQuestion.add(GetData(
+                          //                 id:modelAnswer.question!.id.toString()
+                          //             ));
+                          //           },
+                          //           isSHowSave: true,
+                          //         ),
+                          //
+                          //       ),
+                          //       const SizedBox(
+                          //         height: 10,
+                          //       ),
+                          //       ItemCountDown(
+                          //           time: Const.convertNumber(modelAnswer.question!.deadline).round() *
+                          //               1000),
+                          //       const SizedBox(
+                          //         height: 10,
+                          //       ),const SizedBox(
+                          //         height: 10,
+                          //       ),
+                          //       Text(modelAnswer.question!.question ?? "", style: StyleApp.textStyle500(),),
+                          //       const SizedBox(
+                          //         height: 10,
+                          //       ),
+                          //       Container(
+                          //         decoration: BoxDecoration(
+                          //             color: ColorApp.whiteF0,
+                          //             borderRadius: BorderRadius.circular(5)),
+                          //         alignment: Alignment.center,
+                          //         padding: const EdgeInsets.all(10),
+                          //         child: Column(
+                          //           crossAxisAlignment: CrossAxisAlignment.stretch,
+                          //           children: [
+                          //             ReadMoreText(
+                          //               modelAnswer.question!.description ?? "",
+                          //               trimLines: 3,
+                          //               colorClickableText: ColorApp.orangeF01,
+                          //               trimMode: TrimMode.Line,
+                          //               trimCollapsedText: 'Xem thêm',
+                          //               trimExpandedText: 'Ẩn bớt',
+                          //               style: StyleApp.textStyle500(fontSize: 16),
+                          //             ),
+                          //             listImages.isNotEmpty
+                          //                 ? BuildImageAns(listImages: listImages)
+                          //                 : const SizedBox(),
+                          //             const SizedBox(
+                          //               height: 10,
+                          //             ),
+                          //           ],
+                          //         ),
+                          //       )
+                          //     ],
+                          //   ),
+                          // ),
+                          QuestionCard(
 
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                ItemCountDown(
-                                    time: Const.convertNumber(modelAnswer.question!.deadline).round() *
-                                        1000),
-                                const SizedBox(
-                                  height: 10,
-                                ),const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(modelAnswer.question!.question ?? "", style: StyleApp.textStyle500(),),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: ColorApp.whiteF0,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                                    children: [
-                                      ReadMoreText(
-                                        modelAnswer.question!.description ?? "",
-                                        trimLines: 3,
-                                        colorClickableText: ColorApp.orangeF01,
-                                        trimMode: TrimMode.Line,
-                                        trimCollapsedText: 'Xem thêm',
-                                        trimExpandedText: 'Ẩn bớt',
-                                        style: StyleApp.textStyle500(fontSize: 16),
-                                      ),
-                                      listImages.isNotEmpty
-                                          ? BuildImageAns(listImages: listImages)
-                                          : const SizedBox(),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                            modelAnswer: modelAnswer,
                           ),
                           const SizedBox(
                             height: 10,
