@@ -38,6 +38,7 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
   int end = 0;
   int now = 0;
   bool isPass = false;
+  int user_id=user.userID;
   BlocGetAnswer blocGetAnswer = BlocGetAnswer();
   BlocSaveQuestion blocSaveQuestion = BlocSaveQuestion();
   Future<void> onRefresh() async {
@@ -61,6 +62,7 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
 
           if(state is LoadSuccess) {
              modelAnswer=state.data as ModelAnswer;
+             print(modelAnswer.question!.isComplete);
             List<String> listImages = [];
             if (modelAnswer.images!.isNotEmpty) {
               for (var image in modelAnswer.images!) {
@@ -75,7 +77,19 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
 
               }
             }
-            end = Const.convertNumber(modelAnswer.question!.deadline).round() * 1000;
+             end = Const.convertNumber(modelAnswer.question!.deadline).round() * 1000;
+            String txtTraloi='';
+             if(end > now && !isPass ){
+               txtTraloi='Viết câu trả lời';
+             }
+             else if(isPass){
+               txtTraloi='Đã trả thưởng';
+             }
+             else if(end<now){
+               txtTraloi='Đã hết thời gian trả lời';
+             }
+
+
             return   Scaffold(
               backgroundColor: ColorApp.whiteF0,
               bottomNavigationBar: Container(
@@ -83,15 +97,15 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                 padding: const EdgeInsets.all(10),
                 child: Button1(
                   colorButton:
-                  end > now && !isPass? ColorApp.orangeF2 : Colors.grey.withOpacity(0.5),
+                  txtTraloi=='Viết câu trả lời'? ColorApp.orangeF2 : Colors.grey.withOpacity(0.5),
                   textColor: ColorApp.whiteF0,
                   radius: 30,
                   fontSize: 18,
                   height: 40,
                   style: false,
                   textButton:
-                  end > now && !isPass ? 'Viết câu trả lời' : 'Đã hết thời gian trả lời',
-                  ontap: end > now && !isPass ? _send : null,
+                 txtTraloi,
+                  ontap: _send,
                 ),
               ),
               appBar: AppBar(
@@ -243,8 +257,8 @@ return Container();
   _send() async {
     Const.checkLogin(context, nextPage: () async {
       now = DateTime.now().millisecondsSinceEpoch;
-      var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
-      if(user_id != modelAnswer.question!.userId.toString() && end > now && !isPass &&user.iskyc){
+
+      if(user_id.toString()!= modelAnswer.question!.userId.toString() && end > now && !isPass &&user.iskyc){
         PageNavigator.next(context: context, page: Add_Answer_Screen(
           user_id: user_id,
           question_id: modelAnswer.question!.id??0 ,

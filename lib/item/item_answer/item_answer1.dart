@@ -86,13 +86,13 @@ class _QuestionCardState extends State<QuestionCard> {
               msg: "Lưu câu hỏi thành công"
               );
             },
-            child: ItemUser(username: widget.modelQuestion.username ?? "",
-            image: widget.modelQuestion.avatarPath.toString() +
-                widget.modelQuestion.avatarName.toString(),
-              time: widget.modelQuestion.createdAt ?? "",
+            child: ItemUser(username: widget.modelAnswer.userName ?? "",
+            image: widget.modelAnswer.avatarPath1.toString() +
+                widget.modelAnswer.avatarName1.toString(),
+              time: widget.modelAnswer.question!.createdAt.toString() ?? "",
               onTap: (){
                 blocSaveQuestion.add(GetData(
-                  id: widget.modelQuestion.id
+                  id:widget.modelAnswer.question!.id.toString()
                 ));
               },
               isSHowSave: true,

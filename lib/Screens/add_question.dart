@@ -70,7 +70,7 @@ class _AddQuestionState extends State<AddQuestion> {
   int moneyId = 0;
 
   AddQuesVoid() async {
-    if (keyForm.currentState!.validate()) {
+    if (keyForm.currentState!.validate()&&(description.text!=''||imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
       String priceText = money.text
           .replaceAll(".", "")
@@ -86,6 +86,10 @@ class _AddQuestionState extends State<AddQuestion> {
         question: ques.text,
         images: imageFiles,
       ));
+    }
+
+    else{
+      CustomToast.showToast(context: context, msg: 'Bạn phải nhập nội dung hoặc hình ảnh');
     }
   }
 

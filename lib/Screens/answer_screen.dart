@@ -51,6 +51,7 @@ class AnswerScreen extends StatefulWidget {
 class _AnswerScreenState extends State<AnswerScreen> {
   BlocGetAnswer bloc = BlocGetAnswer();
 
+  ModelAnswer model=ModelAnswer();
   int end = 0;
   int now = 0;
   bool isPass = false;
@@ -58,7 +59,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
   Future<void> onRefresh() async {
 
     bloc.add(getAns(question_id: int.parse(widget.modelQuestion.id ?? '0')));
-
+context.read<BlocGetAnswer>().add(getAns(question_id: int.parse(widget.modelQuestion.id ?? '0')));
   }
 
   String txtTraloi='';
@@ -101,7 +102,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
             style: false,
             textButton:
             txtTraloi,
-            ontap: end > now && !isPass ? _send : null,
+            ontap: _send,
         ),
       ),
       appBar: AppBar(
@@ -119,7 +120,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
         bloc: bloc,
         listener: (_,StateBloc state){
           if(state is LoadSuccess){
-            final model =state.data as ModelAnswer;
+            model =state.data as ModelAnswer;
             for (var element in model.answer!) {
               if(element.status == "2"){
                 isPass = true;
@@ -130,7 +131,6 @@ class _AnswerScreenState extends State<AnswerScreen> {
         },
         builder: (_, StateBloc state) {
           final model = state is LoadSuccess ? state.data as ModelAnswer : ModelAnswer();
-
           return ItemLoadPage(
               state: state,
               onTapErr: () {
@@ -167,7 +167,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             user_id: model.question!.userId,
                             deadLine: Const.convertNumber(widget.modelQuestion.deadline).round() * 1000,
                             index: index,
-                            ispaid:widget.modelQuestion.isComplete ,
+                            ispaid:model.question!.isComplete.toString() ,
                           );
                         },
                       ),

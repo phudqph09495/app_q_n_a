@@ -515,6 +515,7 @@ class _AnswerCardState extends State<AnswerCard> {
                           price_tip: priceTip,
                         ),
                       );
+                      widget.refresh;
                     },
                     style: ElevatedButton.styleFrom(primary: Colors.green),
                     child: Text(
