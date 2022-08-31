@@ -36,6 +36,7 @@ class _ItemAccountState extends State<ItemAccount> {
     // TODO: implement initState
     super.initState();
     context.read<BlocGetWallet>().add(GetData());
+    context.read<BlocGetUser>().add(GetData());
 
   }
 
@@ -43,11 +44,11 @@ class _ItemAccountState extends State<ItemAccount> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
+
+
       ModelUser user = snapshot ?? ModelUser();
       userID = user.id ?? 0;
-      statusUser=user.isSupporter??0;
-      if(statusUser==1) iskyc=true;
-      print(statusUser);
+
 
 
       return Container(
@@ -136,6 +137,12 @@ class _ItemAccountState extends State<ItemAccount> {
                       style: StyleApp.textStyle700(
                           color: ColorApp.red, fontSize: 16),
                     );
+                  }),
+                  BlocBuilder<BlocGetUser, StateBloc>(builder: (_, state) {
+                    final userModel = state is LoadSuccess ? state.data as ModelUser:ModelUser();
+                    statusUser=userModel.isSupporter??0;
+                    if(statusUser==1) iskyc=true;
+                    return SizedBox();
                   }),
 
                 ],

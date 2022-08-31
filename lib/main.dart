@@ -12,6 +12,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'bloc/bloc/auth/bloc_check_login.dart';
+import 'bloc/bloc/auth/bloc_get_user.dart';
 import 'bloc/bloc/auth/bloc_get_wallet.dart';
 import 'bloc/bloc/auth/bloc_getquestion.dart';
 import 'config/path/share_pref_path.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => BlocGetQuestion()),
         BlocProvider(create: (_) => BLocLocalUser()..getUser()),
         BlocProvider(create: (_) => BlocGetWallet()..add(GetData())),
+        BlocProvider(create: (_) => BlocGetUser()..add(GetData())),
       ],
       child: MultiProvider(
         providers: [
