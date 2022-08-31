@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_TaiKhoan/ThongKe/tab/answer_screen_tab.dart';
 import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/button.dart';
@@ -28,10 +29,13 @@ Widget QuestionTile(
 
   return InkWell(
     onTap: () {
-      PageNavigator.next(
-        context: context,
-        page: AnswerScreen(
-          modelQuestion: modelQuestion,
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>AnswerScreenTab(quesID: int.parse(modelQuestion.id??'0'))
+          //     AnswerScreen(
+          //   modelQuestion: modelQuestion,
+          // ),
         ),
       );
     },
@@ -183,6 +187,8 @@ Widget QuestionTile(
                               Text("${Const.convertNumber(modelQuestion.userCountQuestion).round()} (câu hỏi)."),
                               Text("${Const.convertNumber(modelQuestion.count_gift_to_user).round()} (trả thưởng)."),
                               Text("${Const.convertNumber(modelQuestion.userCountAnswer).round()} (trả lời)."),
+                              Text("${Const.convertNumber(modelQuestion.userCountMyGift).round()} (nhận thưởng)."),
+
                             ],
                           ),
                         ),
@@ -201,9 +207,10 @@ Widget QuestionTile(
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AnswerScreen(
-                          modelQuestion: modelQuestion,
-                        ),
+                        builder: (context) =>AnswerScreenTab(quesID: int.parse(modelQuestion.id??'0'))
+                        //     AnswerScreen(
+                        //   modelQuestion: modelQuestion,
+                        // ),
                       ),
                     );
                   },

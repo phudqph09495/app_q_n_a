@@ -43,6 +43,11 @@ class _ItemAccountState extends State<ItemAccount> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
+<<<<<<< Updated upstream
+=======
+      context.read<BlocGetWallet>().add(GetData());
+      context.read<BlocGetUser>().add(GetData());
+>>>>>>> Stashed changes
       ModelUser user = snapshot ?? ModelUser();
       userID = user.id ?? 0;
       statusUser=user.isSupporter??0;
