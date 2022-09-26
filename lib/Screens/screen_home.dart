@@ -39,7 +39,7 @@ class _ScreenHomeState extends State<ScreenHome> {
     return Scaffold(
       body: BlocBuilder<BlocCheckLogin, StateBloc>(
           builder: (context, StateBloc state) {
-        final check = state is LoadSuccess ? state.data as bool : false;
+    final     check = state is LoadSuccess ? state.data as bool : false;
         return IndexedStack(
           index: index,
           children: [
@@ -70,7 +70,7 @@ class _ScreenHomeState extends State<ScreenHome> {
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.bell), label: "Thông báo"),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.person), label: "Tài khoản"),
+              icon: Icon(CupertinoIcons.person), label:"Tài khoản"),
         ],
       ),
     );

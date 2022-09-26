@@ -89,7 +89,7 @@ class _QuestionCardState extends State<QuestionCard> {
             child: ItemUser(username: widget.modelAnswer.userName ?? "",
             image: widget.modelAnswer.avatarPath1.toString() +
                 widget.modelAnswer.avatarName1.toString(),
-              time: widget.modelAnswer.question!.createdAt.toString() ?? "",
+              time: widget.modelAnswer.question!.createdAt.toString(),
               onTap: (){
                 blocSaveQuestion.add(GetData(
                   id:widget.modelAnswer.question!.id.toString()

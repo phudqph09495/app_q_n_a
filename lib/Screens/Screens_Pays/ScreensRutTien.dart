@@ -34,8 +34,10 @@ class _RutTienState extends State<RutTien> {
           listener: (_, StateBloc state) {
             CheckLogState.check(context,
                 state: state,
-                msg: state is LoadSuccess ? state.data : "Thành công",
+                duration: 5,
+                msg: "Tạo phiếu rút tiền thành công. Vui lòng chờ admin xác thực",
                 success: () {
+              Money.clear();
               blocGetWallet.add(GetData());
             });
           },

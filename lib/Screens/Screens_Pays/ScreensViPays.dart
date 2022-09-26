@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_waller_history.dart';
+import 'package:app_q_n_a/bloc/bloc/wallet/bloc_treo.dart';
 import 'package:app_q_n_a/config/const.dart';
 import 'package:app_q_n_a/item/load_image.dart';
 import 'package:app_q_n_a/models/model_wallet.dart';
@@ -14,8 +15,11 @@ import '../../bloc/event_bloc.dart';
 import '../../config/path/share_pref_path.dart';
 import '../../config/share_pref.dart';
 import '../../item/button.dart';
+import '../../models/ModelTreo.dart';
 import '../../styles/colors.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
+
+import '../Screens_TaiKhoan/ThongKe/tab/answer_screen_tab.dart';
 
 class ViTien extends StatefulWidget {
   @override
@@ -24,6 +28,7 @@ class ViTien extends StatefulWidget {
 
 class _ViTienState extends State<ViTien> {
   BlocWalletHistory blocWalletHistory = BlocWalletHistory()..add(getHistory());
+  BlocTreo blocTreo = BlocTreo()..add(getHistory());
 
   @override
   void initState() {
@@ -46,8 +51,13 @@ class _ViTienState extends State<ViTien> {
             border: Border.all(color: ColorApp.orangeF2),
             textButton: 'Trang chủ',
             ontap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ScreenHome()));
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ScreenHome(),
+                ),
+                (route) => false,
+              );
             }),
       ),
       backgroundColor: ColorApp.whiteF0,
@@ -85,7 +95,7 @@ class _ViTienState extends State<ViTien> {
                   BlocBuilder<BlocGetWallet, StateBloc>(builder: (_, state) {
                     final coin = state is LoadSuccess ? state.data as int : 0;
                     return Button1(
-                      width: 190,
+                      width: 250,
                       height: 60,
                       radius: 10,
                       fontSize: 20,
@@ -99,6 +109,7 @@ class _ViTienState extends State<ViTien> {
               ),
             ),
             _buildItem(),
+            _buildItem2()
           ],
         ),
       ),
@@ -159,13 +170,13 @@ class _ViTienState extends State<ViTien> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           Const.formatTime(
                                               Const.convertNumber(
-                                                  model.createdAt)
-                                                  .round() *
+                                                          model.createdAt)
+                                                      .round() *
                                                   1000,
                                               format: "HH:mm dd/MM/yyyy"),
                                           style: StyleApp.textStyle400(),
@@ -196,6 +207,121 @@ class _ViTienState extends State<ViTien> {
                                       style: StyleApp.textStyle400(),
                                     ),
                                   ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              );
+            }
+            return Container();
+          }),
+    );
+  }
+
+  _buildItem2() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      decoration: const BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey, width: 0.5))),
+      child: BlocBuilder(
+          bloc: blocTreo,
+          builder: (_, state) {
+            if (state is LoadSuccess) {
+              final listTreo = state.data as List<ModelTreo>;
+              return Card(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ExpansionTile(
+                    title: const Text(
+                      'Tiền đang treo',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    iconColor: ColorApp.orangeF2,
+                    collapsedIconColor: Colors.black,
+                    children: List.generate(listTreo.length, (index) {
+                      // DataHistory model = history.data![index];
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: Colors.grey, width: 0.5))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              ImagesPath.withdraw,
+                              width: 70,
+                              height: 70,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: InkWell(
+                                  onTap: () {
+                                    if(listTreo[index].questionId != null){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => AnswerScreenTab(
+                                            quesID: int.parse(listTreo[index].questionId ?? '0'),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        listTreo[index].note ?? "Đang cập nhật",
+                                        style: StyleApp.textStyle700(),
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            Const.formatTime(
+                                                Const.convertNumber(
+                                                            listTreo[index]
+                                                                .createdAt)
+                                                        .round() *
+                                                    1000,
+                                                format: "HH:mm dd/MM/yyyy"),
+                                            style: StyleApp.textStyle400(),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              '${Const.convertPrice(listTreo[index].money)} đ',
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.right,
+                                              style: StyleApp.textStyle400(
+                                                  color: ColorApp.orangeF01),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

@@ -8,7 +8,8 @@ import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/question_list.dart';
 import 'package:app_q_n_a/models/model_question.dart';
-
+import 'package:app_q_n_a/widget/items/custom_toast.dart';
+import '../../widget/widget_info/widgetText.dart' as user;
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/widget/items/item_load_page.dart';
 import 'package:flutter/material.dart';
@@ -28,17 +29,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int page = 1;
   ScrollController controller = ScrollController();
+
   Future<void> onRefresh() async {
     page = 1;
     isUser = true;
     context.read<BlocGetQuestion>().add(
           GetData(
-              cat_id: keySearchid,
-              subject_id: keySearchid1,
-              class_id: keySearchid2,
-              isUser: isUser,
-              cleanList: true,
-              page: page,
+            cat_id: keySearchid,
+            subject_id: keySearchid1,
+            class_id: keySearchid2,
+            isUser: isUser,
+            cleanList: true,
+            page: page,
           ),
         );
   }
@@ -58,19 +60,19 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     onRefresh();
     controller.addListener(() {
-      if(controller.position.pixels == controller.position.maxScrollExtent){
+      if (controller.position.pixels == controller.position.maxScrollExtent) {
         page++;
         print(isUser);
         context.read<BlocGetQuestion>().add(
-          GetData(
-            cat_id: keySearchid,
-            subject_id: keySearchid1,
-            class_id: keySearchid2,
-            isUser: isUser,
-            loadMore: true,
-            page: page,
-          ),
-        );
+              GetData(
+                cat_id: keySearchid,
+                subject_id: keySearchid1,
+                class_id: keySearchid2,
+                isUser: isUser,
+                loadMore: true,
+                page: page,
+              ),
+            );
       }
     });
   }
@@ -81,7 +83,12 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         floatingActionButton: ElevatedButton(
           onPressed: () {
-            PageNavigator.next(context: context, page: AddQuestion());
+            if (user.userID != 0) {
+              PageNavigator.next(context: context, page: AddQuestion());
+            } else
+              CustomToast.showToast(
+                  context: context,
+                  msg: "Bạn phải đăng nhập để thực hiện hành động này");
           },
           style: ElevatedButton.styleFrom(
             primary: ColorApp.orangeF0,
@@ -136,8 +143,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: ColorApp.whiteF7,
                       border: Border.all(color: Colors.black, width: 0.5)),
-                  child: FlatButton(
-                      height: 35,
+                  child: TextButton(
+                      style: TextButton.styleFrom(minimumSize: Size(50, 80)),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Filter()));
@@ -158,26 +165,28 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           centerTitle: false,
           actions: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0)),
-                padding: const EdgeInsets.all(5),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
-              },
-              child: const Icon(
-                Icons.search,
-                color: ColorApp.black,
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SearchScreen()));
+                    },
+                    icon: const Icon(
+                      Icons.search,
+                      color: ColorApp.black,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 15),
           ],
         ),
         body: RefreshIndicator(
@@ -189,7 +198,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 keySearch1 = state.keySearch1;
                 keySearch2 = state.keySearch2;
               }
-              final list = state is LoadSuccess ? state.data as List<ModelQuestion> : <ModelQuestion>[];
+              final list = state is LoadSuccess
+                  ? state.data as List<ModelQuestion>
+                  : <ModelQuestion>[];
               final length = state is LoadSuccess ? state.checkLength : false;
               final hasMore = state is LoadSuccess ? state.hasMore : false;
               return ItemLoadPage(
@@ -211,29 +222,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 10),
                     Expanded(
-                      child:list.isEmpty
+                      child: list.isEmpty
                           ? ItemListEmpty()
-                          :  SingleChildScrollView(
-                        controller: controller,
-                        padding:const EdgeInsets.symmetric(horizontal: 10,),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: List.generate(
-                                  list.length,
-                                      (index) => QuestionTile(context,
-                                      modelQuestion: list[index])),
+                          : SingleChildScrollView(
+                              controller: controller,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: List.generate(
+                                        list.length,
+                                        (index) => QuestionTile(context,
+                                            modelQuestion: list[index])),
+                                  ),
+                                  ItemLoadMore(
+                                    hasMore: hasMore,
+                                    length: length,
+                                  ),
+                                ],
+                              ),
                             ),
-                            ItemLoadMore(
-                              hasMore: hasMore,
-                              length: length,
-                            ),
-                          ],
-                        ),
-                      ),
-
                     ),
                   ],
                 ),

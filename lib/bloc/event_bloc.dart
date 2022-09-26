@@ -222,7 +222,6 @@ class addAnsForm extends EventBloc {
 
 class getAns extends EventBloc {
   int question_id;
-
   getAns({
     required this.question_id,
   });

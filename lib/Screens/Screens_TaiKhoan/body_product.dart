@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_Pays/ScreensRutTien.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/Screens_Pays.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/dieuKhoan.dart';
@@ -41,6 +42,7 @@ import '../../widget/widget_info/widgetText.dart' as user;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import '../Screens_Notification/screens_news.dart';
+import '../Screens_Pays/ScreensNapTien.dart';
 import '../account/screen_profile.dart';
 import 'ThongKe/ThongKe.dart';
 
@@ -113,8 +115,19 @@ class _BodyProductState extends State<BodyProduct> {
           iconData: Icons.wallet,
           title: "Ví điện tử",
           onTap: () {
-            showModalBottomSheet(
-                context: context, builder: (context) => ScreensPays());
+            PageNavigator.next(context: context, page: ViTien());
+          }),
+      TitleAccount(
+          iconData: Icons.add_card_outlined,
+          title: "Nạp tiền",
+          onTap: () {
+            PageNavigator.next(context: context, page: NapTien());
+          }),
+      TitleAccount(
+          iconData: Icons.credit_card_outlined,
+          title: "Rút tiền",
+          onTap: () {
+            PageNavigator.next(context: context, page: RutTien());
           }),
       TitleAccount(
         iconData: CupertinoIcons.chart_bar_alt_fill,

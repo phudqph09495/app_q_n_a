@@ -72,8 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Text(
                 'Đăng nhập',
-                style: StyleApp.textStyle700(
-                    fontSize: 30, color: ColorApp.red),
+                style: StyleApp.textStyle700(fontSize: 30, color: ColorApp.red),
               ),
               const SizedBox(
                 height: 20,
@@ -89,8 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 radius: 10,
                 width: double.infinity,
                 validator: (val) {
-                  return ValidatorApp.checkNull(
-                      text: val, isTextFiled: true);
+                  return ValidatorApp.checkNull(text: val, isTextFiled: true);
                 },
               ),
               const SizedBox(
@@ -119,6 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onChanged: (val) {
                         setState(() {
                           checkedValue = val!;
+                          print(checkedValue);
                         });
                       }),
                   Text(
@@ -128,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     width: 60,
                   ),
-                  FlatButton(
+                  TextButton(
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -141,7 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       )),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               BlocListener(
                 bloc: bloc,
                 listener: (_, StateBloc state) {
@@ -155,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     msg: "Đăng nhập thành công",
                     success: () async {
                       await SharePrefsKeys.seveUserKey(user);
-                  await    SharedPrefs.saveString("pass", password.text);
+                      await SharedPrefs.saveString("pass", password.text);
                       context.read<BLocLocalUser>().getUser();
                       context.read<BlocGetWallet>().add(GetData());
                       context.read<BlocCheckLogin>().add(GetData());
@@ -168,8 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 },
                 child: Button1(
-                    border:
-                    Border.all(color: ColorApp.orangeF2, width: 0.5),
+                    border: Border.all(color: ColorApp.orangeF2, width: 0.5),
                     style: false,
                     fontSize: 18,
                     ontap: LoginVoid,
@@ -215,13 +215,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Bạn chưa có tài khoản?'),
-                  FlatButton(
+                  TextButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    SignUpScreen()));
+                                builder: (context) => SignUpScreen()));
                       },
                       child: Text(
                         'Đăng ký ngay',

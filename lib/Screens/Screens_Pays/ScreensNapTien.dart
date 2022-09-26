@@ -19,6 +19,7 @@ import '../../bloc/state_bloc.dart';
 import '../../config/const.dart';
 import '../../item/button.dart';
 import '../../models/model_taonganhang.dart';
+import 'package:app_q_n_a/widget/widget_info/widgetText.dart' as user;
 
 class NapTien extends StatefulWidget {
   const NapTien({Key? key}) : super(key: key);
@@ -135,6 +136,15 @@ class _NapTienState extends State<NapTien> {
                     ],
                   );
                 }),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(
+             "Nội dung thanh toán: HD${user.userID}",
+              style: StyleApp.textStyle400(fontSize: 16),
+            ),
+          ),
+        ),
             const SizedBox(
               height: 10,
             ),
