@@ -8,7 +8,8 @@ import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/item/question_list.dart';
 import 'package:app_q_n_a/models/model_question.dart';
-
+import 'package:app_q_n_a/widget/items/custom_toast.dart';
+import '../../widget/widget_info/widgetText.dart' as user;
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/widget/items/item_load_page.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,10 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         floatingActionButton: ElevatedButton(
           onPressed: () {
-            PageNavigator.next(context: context, page: AddQuestion());
+       if(user.userID!=0)  {
+              PageNavigator.next(context: context, page: AddQuestion());
+            }
+       else CustomToast.showToast(context: context, msg: "Bạn phải đăng nhập để thực hiện hành động này");
           },
           style: ElevatedButton.styleFrom(
             primary: ColorApp.orangeF0,
@@ -136,8 +140,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: ColorApp.whiteF7,
                       border: Border.all(color: Colors.black, width: 0.5)),
-                  child: FlatButton(
-                      height: 35,
+                  child: TextButton(
+                      style: TextButton.styleFrom(minimumSize: Size(50, 80)),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Filter()));

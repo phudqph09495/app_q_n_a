@@ -34,25 +34,6 @@ class Button1 extends StatefulWidget {
 }
 
 class _Button1State extends State<Button1> {
-  List<Color> _colors = <Color>[
-    ColorApp.black,
-    ColorApp.orangeF0,
-    ColorApp.orangeF01,
-    ColorApp.blue3D,
-    ColorApp.whiteF7,
-  ];
-  int _currentColorIndex = 0;
-  void _incrementColorIndex() {
-    setState(() {
-      if (_currentColorIndex < _colors.length - 1) {
-        _currentColorIndex++;
-      } else {
-        _currentColorIndex = 0;
-      }
-
-      widget.colorButton = _colors[_currentColorIndex];
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,14 +46,10 @@ class _Button1State extends State<Button1> {
         border: widget.border,
       ),
       alignment: Alignment.center,
-      child: FlatButton(
+      child: TextButton(
         onPressed: widget.ontap,
-        // onLongPress: () {
-        //   setState(() {
-        //     _incrementColorIndex();
-        //   });
-        // },
-        height: widget.height,
+
+       style: TextButton.styleFrom(minimumSize: Size(80, widget.height),padding: EdgeInsets.symmetric(vertical: 5,horizontal: 5)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,38 +68,4 @@ class _Button1State extends State<Button1> {
   }
 }
 
-// Widget Button1({
-//   String? imagePath,
-//   bool icon = false,
-//   Function()? ontap,
-//   double height = 50,
-//   double? width,
-//   required Color colorButton,
-//   double radius = 5,
-//   Border? border,
-//   required Color textColor,
-//   required String textButton,
-// }) {
-//   return Container(
-//     height: height,
-//     width: width,
-//     decoration: BoxDecoration(
-//       borderRadius: BorderRadius.circular(radius),
-//       color: colorButton,
-//       border: border,
-//     ),
-//     alignment: Alignment.center,
-//     child: FlatButton(onPressed: ontap,
-//       height: height,
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           icon ? Image.asset(imagePath!) : SizedBox(),
-//           Text(textButton,
-//               style: StyleApp.textStyle600(fontSize: 16, color: textColor)),
-//         ],
-//       ),
-//     ),
-//   );
-// }
+

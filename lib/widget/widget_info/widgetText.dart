@@ -45,14 +45,9 @@ class _ItemAccountState extends State<ItemAccount> {
   Widget build(BuildContext context) {
     return BlocBuilder<BLocLocalUser, ModelUser?>(builder: (context, snapshot) {
       context.read<BlocGetUser>().add(GetData());
-
-
+      context.read<BlocGetWallet>().add(GetData());
       ModelUser user = snapshot ?? ModelUser();
       userID = user.id ?? 0;
-
-      print(statusUser);
-
-
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(

@@ -36,7 +36,7 @@ class DialogItem {
           textAlign: TextAlign.left,
         ),
         actions: [
-          onTap != null ?  FlatButton(
+          onTap != null ?  TextButton(
             onPressed: onTap,
             child: Text(
               "Xác nhận",
@@ -45,7 +45,7 @@ class DialogItem {
             ),
           ) : const SizedBox(),
           login || logout
-              ? FlatButton(
+              ? TextButton(
                   onPressed: () async {
                     if (logout) {
                       await SharePrefsKeys.removeAllKey();
@@ -67,7 +67,7 @@ class DialogItem {
                   ),
                 )
               : const SizedBox(),
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -102,7 +102,7 @@ class DialogItem {
           textAlign: TextAlign.left,
         ),
         actions: [
-          onTap != null ?  FlatButton(
+          onTap != null ?  TextButton(
             onPressed: onTap,
             child: Text(
               "Xác nhận",
@@ -110,7 +110,7 @@ class DialogItem {
                   color: ColorApp.blue6D),
             ),
           ) : const SizedBox(),
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
             },

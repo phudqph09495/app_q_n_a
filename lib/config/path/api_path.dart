@@ -48,6 +48,8 @@ class ApiPath {
   static const getWalletSub = "/app/user/get-wallet-sub";
   static const getWalletAdd = "/app/user/get-wallet-add";
 
+  static const treo= "/app/wallet/history-treo";
+
   ///answer
   static const addAnswer = "/app/question/add-answer";
   static const reportAnswer = "/app/question/report-answer";

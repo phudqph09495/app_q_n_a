@@ -45,7 +45,7 @@ class ItemNotifi1 extends StatelessWidget {
                         modelNews.avatarName.toString(),
                     height: 120,
                     width: 90,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),

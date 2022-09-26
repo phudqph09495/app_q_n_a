@@ -128,13 +128,13 @@ class ModelUser {
   int? countQuestion;
   int? birthday;
   int? countReport;
-  dynamic work;
+  String? work;
   int? isSupporter;
   String? provinceName;
   String? districtName;
   dynamic address2;
   bool? isKyc;
-  int? wallet;
+  num? wallet;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

@@ -116,7 +116,7 @@ class ScreenCreateBank extends StatelessWidget {
                     msg: "Vui lòng nhập đầy đủ thông tin");
               }
             },
-            style: ElevatedButton.styleFrom(primary: ColorApp.orangeF2),
+            style: ElevatedButton.styleFrom(primary: ColorApp.orangeF2,minimumSize: Size(80, 50)),
             child: Text(
               "Xác nhận",
               style: StyleApp.textStyle400(color: Colors.white, fontSize: 16),

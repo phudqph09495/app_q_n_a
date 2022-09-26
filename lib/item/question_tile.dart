@@ -118,21 +118,8 @@ Widget QuestionTile(
                     ),
                   ),
                 ),
-                Const.convertNumber(modelQuestion.priceGift) <= 0
-                    ? Container(
-                        margin: const EdgeInsets.only(left: 10),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 2),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border:
-                                Border.all(color: Colors.green, width: 0.5)),
-                        child: Text(
-                          "Câu hỏi free",
-                          style: StyleApp.textStyle500(color: Colors.green),
-                        ),
-                      )
-                    : Container(
+
+                     Container(
                         margin: const EdgeInsets.only(left: 10),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 2),
