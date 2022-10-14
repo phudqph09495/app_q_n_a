@@ -51,13 +51,8 @@ class _ViTienState extends State<ViTien> {
             border: Border.all(color: ColorApp.orangeF2),
             textButton: 'Trang chủ',
             ontap: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ScreenHome(),
-                ),
-                (route) => false,
-              );
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ScreenHome()));
             }),
       ),
       backgroundColor: ColorApp.whiteF0,
@@ -267,16 +262,14 @@ class _ViTienState extends State<ViTien> {
                                 padding: const EdgeInsets.only(left: 10),
                                 child: InkWell(
                                   onTap: () {
-                                    if(listTreo[index].questionId != null){
-                                      Navigator.push(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => AnswerScreenTab(
-                                            quesID: int.parse(listTreo[index].questionId ?? '0'),
-                                          ),
-                                        ),
-                                      );
-                                    }
+                                            builder: (context) =>
+                                                AnswerScreenTab(
+                                                  quesID: int.parse(listTreo[index]
+                                                      .questionId??'0'),
+                                                )));
                                   },
                                   child: Column(
                                     crossAxisAlignment:
@@ -308,7 +301,7 @@ class _ViTienState extends State<ViTien> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              '${Const.convertPrice(listTreo[index].money)} đ',
+                                              '${listTreo[index].money} đ',
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.right,
                                               style: StyleApp.textStyle400(
