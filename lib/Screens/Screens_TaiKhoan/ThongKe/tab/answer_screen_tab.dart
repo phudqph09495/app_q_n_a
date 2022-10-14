@@ -64,7 +64,6 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
         String txtTraloi = '';
         if (state is LoadSuccess) {
           modelAnswer = state.data as ModelAnswer;
-          print(modelAnswer.question!.isComplete);
           List<String> listImages = [];
           if (modelAnswer.images!.isNotEmpty) {
             for (var image in modelAnswer.images!) {
@@ -88,7 +87,6 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
           } else if (end < now) {
             txtTraloi = 'Đã hết thời gian trả lời';
           }
-
         }
         return Scaffold(
           backgroundColor: ColorApp.whiteF0,
@@ -113,7 +111,7 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
             backgroundColor: ColorApp.whiteF0,
             iconTheme: const IconThemeData(color: Colors.black),
             title: Text(
-              '${modelAnswer.subjectName ?? 'Lĩnh vực khác'} - ${modelAnswer.className} - ${Const.convertNumber(modelAnswer.question!.priceGift)} đ',
+              '${modelAnswer.subjectName ?? 'Lĩnh vực khác'} - ${modelAnswer.className} - ${Const.convertNumber(modelAnswer.question?.priceGift ?? "0")} đ',
               style: StyleApp.textStyle700(
                 fontSize: 18,
               ),
@@ -216,7 +214,7 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                     const SizedBox(
                       height: 10,
                     ),
-                    modelAnswer.answer!.isEmpty
+                    (modelAnswer.answer ?? []).isEmpty
                         ? Text(
                       "Chưa có người trả lời\ncho câu hỏi này",
                       textAlign: TextAlign.center,
@@ -225,13 +223,13 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                         : ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: modelAnswer.answer!.length,
+                      itemCount: (modelAnswer.answer ?? []).length,
                       itemBuilder: (context, index) {
                         return AnswerCard(
                           refresh: onRefresh,
                           listUserIdAnswer:
                           modelAnswer.listUseridAnswer ?? [],
-                          model: modelAnswer.answer![index],
+                          model: (modelAnswer.answer ?? [])[index],
                           user_id: modelAnswer.question!.userId,
                           deadLine: Const.convertNumber(
                               modelAnswer.question!.deadline)
