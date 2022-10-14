@@ -162,22 +162,30 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           centerTitle: false,
           actions: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0)),
-                padding: const EdgeInsets.all(5),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
-              },
-              child: const Icon(
-                Icons.search,
-                color: ColorApp.black,
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: TextButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0)),
+                      padding: const EdgeInsets.all(5),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SearchScreen()));
+                    },
+                    child: const Icon(
+                      Icons.search,
+                      color: ColorApp.black,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               width: 10,
