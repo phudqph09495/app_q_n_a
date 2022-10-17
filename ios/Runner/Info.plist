@@ -49,13 +49,15 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs location access when open to search for projects closest to you.</string>
+	<key>NSCameraUsageDescription</key>
+    <string>The app needs camera access to scan the order's QR code</string>
+    <key>NSContactsUsageDescription</key>
+    <string>The app needs contact access permission to update shipping address information.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>The app needs location permissions to find the nearest post office.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Need microphone access for uploading videos</string>
+    <string>The application needs Micro access to search for products.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Photo library access is required to save photos</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>recognize speech</string>
+    <string>The app needs image permissions to upload profile pictures.</string>
 </dict>
 </plist>
