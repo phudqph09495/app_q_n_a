@@ -7,6 +7,8 @@ import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/path/image_path.dart';
 import 'package:app_q_n_a/provider/image_provider.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,9 +29,16 @@ void main() async {
   if (checkLogin != true) {
     SharePrefsKeys.removeAllKey();
   }
-  runApp(MyApp(
-    checkLogin: checkLogin,
-  ));
+  runApp(
+      DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => MyApp(
+          checkLogin: checkLogin,
+        ), // Wrap your app
+      ));
+  //     MyApp(
+  //   checkLogin: checkLogin,
+  // ));
 }
 
 class MyApp extends StatelessWidget {
@@ -51,6 +60,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ImageAppProvider()..setImage()),
         ],
         child: MaterialApp(
+          useInheritedMediaQuery: true,
+          builder: DevicePreview.appBuilder,
           theme: ThemeData(
             unselectedWidgetColor: ColorApp.orangeF2,
             iconTheme:const  IconThemeData(

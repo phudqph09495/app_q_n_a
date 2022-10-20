@@ -54,7 +54,6 @@ class AnswerCard extends StatefulWidget {
   String? ispaid;
   Function()? openQues;
 
-
   AnswerCard(
       {required this.model,
       this.user_id,
@@ -339,6 +338,7 @@ class _AnswerCardState extends State<AnswerCard> {
 
   _showDataReport() {
     textReport.clear();
+
     showBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -398,6 +398,7 @@ class _AnswerCardState extends State<AnswerCard> {
 
   _showDataTip() {
     textTip.clear();
+
     showBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -442,16 +443,36 @@ class _AnswerCardState extends State<AnswerCard> {
                       itemBuilder: (_, index) => OutlinedButton(
                         onPressed: () {
                           textTip.text =
-                              Const.convertPrice(list[index].id) + " đ";
+                              Const.convertPrice(list[index].id) + " Sao";
                         },
                         style: OutlinedButton.styleFrom(
                             primary: Colors.green.shade200,
                             side: BorderSide(
                               color: Colors.green.shade200,
                             )),
-                        child: Text(
-                          list[index].name.toString(),
-                          style: StyleApp.textStyle500(color: Colors.green),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              list[index].id.toString(),
+                              style: StyleApp.textStyle500(color: Colors.green),
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (Rect bounds) => RadialGradient(
+                                center: Alignment.topCenter,
+                                stops: [0.7, 1],
+                                colors: [
+                                  ColorApp.whiteF0,
+                                  Colors.yellow,
+                                ],
+                              ).createShader(bounds),
+                              child: Icon(
+                                Icons.star,
+                                size: 17,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -462,7 +483,7 @@ class _AnswerCardState extends State<AnswerCard> {
                   CurrencyTextInputFormatter(
                     locale: 'vi',
                     decimalDigits: 0,
-                    symbol: 'đ',
+                    symbol: 'Sao',
                   ),
                 ],
                 keyboardType: TextInputType.number,
@@ -505,7 +526,7 @@ class _AnswerCardState extends State<AnswerCard> {
                       String priceText = "";
                       if (textTip.text.isNotEmpty) {
                         priceText = textTip.text.replaceAll(".", "").substring(
-                            0, textTip.text.replaceAll(".", "").length - 2);
+                            0, textTip.text.replaceAll(".", "").length - 4);
                       }
                       int priceTip = Const.convertNumber(priceText).round();
                       blocGoodAnswer.add(

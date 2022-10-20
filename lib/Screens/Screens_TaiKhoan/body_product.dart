@@ -1,3 +1,4 @@
+import 'package:app_q_n_a/Screens/Screens_Pays/ScreensNapTien.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensRutTien.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/Screens_Pays.dart';
@@ -42,7 +43,6 @@ import '../../widget/widget_info/widgetText.dart' as user;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import '../Screens_Notification/screens_news.dart';
-import '../Screens_Pays/ScreensNapTien.dart';
 import '../account/screen_profile.dart';
 import 'ThongKe/ThongKe.dart';
 
@@ -119,13 +119,13 @@ class _BodyProductState extends State<BodyProduct> {
           }),
       TitleAccount(
           iconData: Icons.add_card_outlined,
-          title: "Nạp tiền",
+          title: "Nạp sao ",
           onTap: () {
             PageNavigator.next(context: context, page: NapTien());
           }),
       TitleAccount(
           iconData: Icons.credit_card_outlined,
-          title: "Rút tiền",
+          title: "Rút sao",
           onTap: () {
             PageNavigator.next(context: context, page: RutTien());
           }),

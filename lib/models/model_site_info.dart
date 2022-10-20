@@ -23,32 +23,34 @@ class ModelSiteInfo {
   String? copyright;
   String? questionPrice;
   String? bankAdmin;
+  String? unitVoucher;
 
   ModelSiteInfo(
       {this.id,
-      this.title,
-      this.logo,
-      this.favicon,
-      this.footerLogo,
-      this.avatar,
-      this.email,
-      this.phone,
-      this.hotline,
-      this.address,
-      this.metaKeywords,
-      this.metaDescription,
-      this.createdAt,
-      this.updatedAt,
-      this.goldPrice,
-      this.iframe,
-      this.liveChat,
-      this.company,
-      this.numberAuth,
-      this.emailRif,
-      this.otp,
-      this.copyright,
-      this.questionPrice,
-      this.bankAdmin});
+        this.title,
+        this.logo,
+        this.favicon,
+        this.footerLogo,
+        this.avatar,
+        this.email,
+        this.phone,
+        this.hotline,
+        this.address,
+        this.metaKeywords,
+        this.metaDescription,
+        this.createdAt,
+        this.updatedAt,
+        this.goldPrice,
+        this.iframe,
+        this.liveChat,
+        this.company,
+        this.numberAuth,
+        this.emailRif,
+        this.otp,
+        this.copyright,
+        this.questionPrice,
+        this.unitVoucher,
+        this.bankAdmin});
 
   ModelSiteInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -75,6 +77,7 @@ class ModelSiteInfo {
     copyright = json['copyright'];
     questionPrice = json['question_price'];
     bankAdmin = json['bank_admin'];
+    unitVoucher=json['unit_voucher'];
   }
 
   Map<String, dynamic> toJson() {
@@ -103,6 +106,7 @@ class ModelSiteInfo {
     data['copyright'] = this.copyright;
     data['question_price'] = this.questionPrice;
     data['bank_admin'] = this.bankAdmin;
+    data['unit_voucher']=this.unitVoucher;
     return data;
   }
 }

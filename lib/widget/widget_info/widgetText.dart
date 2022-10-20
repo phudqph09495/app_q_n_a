@@ -127,12 +127,31 @@ class _ItemAccountState extends State<ItemAccount> {
                   ),
                   BlocBuilder<BlocGetWallet, StateBloc>(builder: (_, state) {
                     final coin = state is LoadSuccess ? state.data as int : 0;
-                    return Text(
-                      'VNĐ: ${Const.convertPrice(coin)} ',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: StyleApp.textStyle700(
-                          color: ColorApp.red, fontSize: 16),
+                    return Row(
+                      children: [
+                        Text(
+                          'Sao: ${Const.convertPrice(coin)} ',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: StyleApp.textStyle700(
+                              color: ColorApp.red, fontSize: 16),
+                        ),
+                        ShaderMask(
+                          blendMode: BlendMode.srcIn,
+                          shaderCallback: (Rect bounds) => RadialGradient(
+                            center: Alignment.topCenter,
+                            stops: [1, 1],
+                            colors: [
+                              ColorApp.whiteF0,
+                              Colors.yellow,
+                            ],
+                          ).createShader(bounds),
+                          child: Icon(
+                            Icons.star,
+                            size: 20,
+                          ),
+                        ),
+                      ],
                     );
                   }),
                   BlocBuilder<BlocGetUser, StateBloc>(builder: (_, state) {

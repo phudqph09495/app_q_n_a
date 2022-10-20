@@ -110,11 +110,32 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
             centerTitle: true,
             backgroundColor: ColorApp.whiteF0,
             iconTheme: const IconThemeData(color: Colors.black),
-            title: Text(
-              '${modelAnswer.subjectName ?? 'Lĩnh vực khác'} - ${modelAnswer.className} - ${Const.convertNumber(modelAnswer.question?.priceGift ?? "0")} đ',
-              style: StyleApp.textStyle700(
-                fontSize: 18,
-              ),
+            title: Row(
+              children: [
+                Text(
+                  '${modelAnswer.subjectName ?? 'Lĩnh vực khác'} - ${modelAnswer.className} - ${Const.convertNumber(modelAnswer.question?.priceGift ?? "0")} ',
+                  style: StyleApp.textStyle700(
+                    fontSize: 18,
+                  ),
+
+                ),
+                ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (Rect bounds) => RadialGradient(
+                    center: Alignment.topCenter,
+
+                    stops: [0.7,1 ],
+                    colors: [
+                      ColorApp.whiteF7,
+                      Colors.yellow,
+                    ],
+                  ).createShader(bounds),
+                  child: Icon(
+                    Icons.star,
+                    size: 17,
+                  ),
+                ),
+              ],
             ),
           ),
           body: ItemLoadPage(
@@ -216,31 +237,31 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
                     ),
                     (modelAnswer.answer ?? []).isEmpty
                         ? Text(
-                      "Chưa có người trả lời\ncho câu hỏi này",
-                      textAlign: TextAlign.center,
-                      style: StyleApp.textStyle400(),
-                    )
+                            "Chưa có người trả lời\ncho câu hỏi này",
+                            textAlign: TextAlign.center,
+                            style: StyleApp.textStyle400(),
+                          )
                         : ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: (modelAnswer.answer ?? []).length,
-                      itemBuilder: (context, index) {
-                        return AnswerCard(
-                          refresh: onRefresh,
-                          listUserIdAnswer:
-                          modelAnswer.listUseridAnswer ?? [],
-                          model: (modelAnswer.answer ?? [])[index],
-                          user_id: modelAnswer.question!.userId,
-                          deadLine: Const.convertNumber(
-                              modelAnswer.question!.deadline)
-                              .round() *
-                              1000,
-                          index: index,
-                          ispaid: modelAnswer.question!.isComplete
-                              .toString(),
-                        );
-                      },
-                    ),
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: (modelAnswer.answer ?? []).length,
+                            itemBuilder: (context, index) {
+                              return AnswerCard(
+                                refresh: onRefresh,
+                                listUserIdAnswer:
+                                    modelAnswer.listUseridAnswer ?? [],
+                                model: (modelAnswer.answer ?? [])[index],
+                                user_id: modelAnswer.question!.userId,
+                                deadLine: Const.convertNumber(
+                                            modelAnswer.question!.deadline)
+                                        .round() *
+                                    1000,
+                                index: index,
+                                ispaid:
+                                    modelAnswer.question!.isComplete.toString(),
+                              );
+                            },
+                          ),
                     const SizedBox(
                       height: 10,
                     )

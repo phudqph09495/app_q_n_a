@@ -14,6 +14,7 @@ class Button1 extends StatefulWidget {
   Border? border;
   Color textColor;
   bool style;
+  bool sao;
   String textButton;
   Button1(
       {this.height = 50,
@@ -27,6 +28,7 @@ class Button1 extends StatefulWidget {
       this.imagePath,
       this.radius = 5,
       this.fontSize = 14,
+        this.sao=false,
       this.style = true});
 
   @override
@@ -52,7 +54,7 @@ class _Button1State extends State<Button1> {
        style: TextButton.styleFrom(minimumSize: Size(80, widget.height),padding: EdgeInsets.symmetric(vertical: 5,horizontal: 5)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             widget.icon ? Image.asset(widget.imagePath!) : SizedBox(),
             Text(widget.textButton,
@@ -61,6 +63,21 @@ class _Button1State extends State<Button1> {
                         fontSize: widget.fontSize, color: widget.textColor)
                     : StyleApp.textStyle900(
                         fontSize: widget.fontSize, color: widget.textColor)),
+            widget.sao?   ShaderMask(
+              blendMode: BlendMode.srcIn,
+              shaderCallback: (Rect bounds) => RadialGradient(
+                center: Alignment.topCenter,
+                stops: [0.7, 1],
+                colors: [
+                  Colors.white,
+                  Colors.yellow,
+                ],
+              ).createShader(bounds),
+              child: Icon(
+                Icons.star,
+                size: 25,
+              ),
+            ):SizedBox(),
           ],
         ),
       ),

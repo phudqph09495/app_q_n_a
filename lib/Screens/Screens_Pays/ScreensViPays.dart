@@ -90,13 +90,14 @@ class _ViTienState extends State<ViTien> {
                   BlocBuilder<BlocGetWallet, StateBloc>(builder: (_, state) {
                     final coin = state is LoadSuccess ? state.data as int : 0;
                     return Button1(
+                      sao: true,
                       width: 250,
                       height: 60,
                       radius: 10,
                       fontSize: 20,
                       colorButton: ColorApp.orangeF2,
                       textColor: Colors.white,
-                      textButton: '${Const.convertPrice(coin)} Đ',
+                      textButton: '${Const.convertPrice(coin)} ',
                       style: false,
                     );
                   }),
@@ -180,12 +181,32 @@ class _ViTienState extends State<ViTien> {
                                           width: 10,
                                         ),
                                         Expanded(
-                                          child: Text(
-                                            '${model.moneyText} đ',
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.right,
-                                            style: StyleApp.textStyle400(
-                                                color: ColorApp.orangeF01),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                '${model.moneyText} ',
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.right,
+                                                style: StyleApp.textStyle400(
+                                                    color: ColorApp.orangeF01),
+                                              ),
+                                              ShaderMask(
+                                                blendMode: BlendMode.srcIn,
+                                                shaderCallback: (Rect bounds) => RadialGradient(
+                                                  center: Alignment.topCenter,
+
+                                                  stops: [0.7,1 ],
+                                                  colors: [
+                                                    ColorApp.whiteF0,
+                                                    Colors.yellow,
+                                                  ],
+                                                ).createShader(bounds),
+                                                child: Icon(
+                                                  Icons.star,
+                                                  size: 17,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -300,13 +321,34 @@ class _ViTienState extends State<ViTien> {
                                             width: 10,
                                           ),
                                           Expanded(
-                                            child: Text(
-                                              '${listTreo[index].money} đ',
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.right,
-                                              style: StyleApp.textStyle400(
-                                                  color: ColorApp.orangeF01),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '${listTreo[index].money} ',
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.right,
+                                                  style: StyleApp.textStyle400(
+                                                      color: ColorApp.orangeF01),
+                                                ),
+                                                ShaderMask(
+                                                  blendMode: BlendMode.srcIn,
+                                                  shaderCallback: (Rect bounds) => RadialGradient(
+                                                    center: Alignment.topCenter,
+
+                                                    stops: [0.7,1 ],
+                                                    colors: [
+                                                      ColorApp.whiteF0,
+                                                      Colors.yellow,
+                                                    ],
+                                                  ).createShader(bounds),
+                                                  child: Icon(
+                                                    Icons.star,
+                                                    size: 17,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
+
                                           ),
                                         ],
                                       ),

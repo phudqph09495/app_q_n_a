@@ -67,7 +67,7 @@ class _RutTienState extends State<RutTien> {
         backgroundColor: ColorApp.whiteF0,
         centerTitle: true,
         title: Text(
-          'Rút tiền',
+          'Rút sao',
           style: StyleApp.textStyle700(fontSize: 16),
         ),
         leading: IconButton(
@@ -98,19 +98,19 @@ class _RutTienState extends State<RutTien> {
                 builder: (_, state) {
                   final coin = state is LoadSuccess ? state.data as int : 0;
                   return Button1(
-                    width: 190,
+                    width: 190,sao: true,
                     height: 60,
                     radius: 10,
                     fontSize: 20,
                     colorButton: ColorApp.orangeF2,
                     textColor: Colors.white,
-                    textButton: '${Const.convertPrice(coin)} Đ',
+                    textButton: '${Const.convertPrice(coin)} ',
                     style: false,
                   );
                 }),
             const SizedBox(height: 15),
             const Text(
-              'Số tiền rút',
+              'Số sao rút',
               style: TextStyle(color: Colors.black, fontSize: 16),
             ),
             const SizedBox(

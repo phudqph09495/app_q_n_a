@@ -12,9 +12,9 @@ import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
-import 'package:app_q_n_a/Screens/Screens_TaiKhoan/body_product.dart' as Body;
-import '../Screens/answer_screen.dart';
+
 import '../models/model_question.dart';
+import 'package:app_q_n_a/Screens/home.dart' as home;
 
 Widget QuestionTile(
   BuildContext context, {
@@ -127,9 +127,31 @@ Widget QuestionTile(
                             borderRadius: BorderRadius.circular(5),
                             border:
                                 Border.all(color: Colors.green, width: 0.5)),
-                        child: Text(
-                          Const.convertPrice(modelQuestion.priceGift) + 'đ',
-                          style: StyleApp.textStyle500(color: Colors.green),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              Const.convertPrice(modelQuestion.priceGift),
+                              style: StyleApp.textStyle500(color: Colors.green),
+                            ),
+
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (Rect bounds) => RadialGradient(
+                                center: Alignment.topCenter,
+
+                                stops: [0.7,1 ],
+                                colors: [
+                                  ColorApp.whiteF0,
+                                  Colors.yellow,
+                                ],
+                              ).createShader(bounds),
+                              child: Icon(
+                                Icons.star,
+                                size: 17,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
               ],

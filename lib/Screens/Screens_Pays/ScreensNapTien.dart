@@ -5,7 +5,7 @@ import 'package:app_q_n_a/bloc/bloc/wallet/bloc_site_info.dart';
 import 'package:app_q_n_a/bloc/bloc/wallet/price_by_coin.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/item/input/text_filed3.dart';
-import 'package:app_q_n_a/models/model_site_info.dart';
+
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,11 @@ import '../../bloc/event_bloc.dart';
 import '../../bloc/state_bloc.dart';
 import '../../config/const.dart';
 import '../../item/button.dart';
+import '../../models/model_site_info.dart';
 import '../../models/model_taonganhang.dart';
 import 'package:app_q_n_a/widget/widget_info/widgetText.dart' as user;
+
+
 
 class NapTien extends StatefulWidget {
   const NapTien({Key? key}) : super(key: key);
@@ -35,6 +38,7 @@ class _NapTienState extends State<NapTien> {
   PriceByCoin priceByCoin = PriceByCoin();
   BlocSiteInfo blocSiteInfo = BlocSiteInfo()..add(GetData());
   BlocAddMoney blocAddMoney = BlocAddMoney();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +47,7 @@ class _NapTienState extends State<NapTien> {
         backgroundColor: ColorApp.whiteF0,
         centerTitle: true,
         title: Text(
-          'Nạp tiền',
+          'Nạp sao',
           style: StyleApp.textStyle700(fontSize: 16),
         ),
         leading: IconButton(
@@ -99,7 +103,7 @@ class _NapTienState extends State<NapTien> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              'Số tiền nạp',
+              'Số sao nạp',
               style: TextStyle(color: Colors.black, fontSize: 16),
             ),
             const SizedBox(
@@ -108,7 +112,7 @@ class _NapTienState extends State<NapTien> {
             InputText3(
               keyboardType: TextInputType.number,
               controller: Money,
-              hint: 'Nhập số tiền cần nạp',
+              hint: 'Nhập số sao cần nạp',
               radius: 5,
               onChanged: (val) {
                 priceByCoin.getPrice(val.isEmpty ? 0 : int.parse(val));
@@ -128,7 +132,7 @@ class _NapTienState extends State<NapTien> {
                       ),
                       Expanded(
                         child: Text(
-                          '${Const.convertPrice(snapshot)} đ',
+                          '${Const.convertPrice(int.parse(snapshot.toString())*1000)} đ',
                           style: StyleApp.textStyle700(
                               fontSize: 16, color: Colors.red),
                         ),

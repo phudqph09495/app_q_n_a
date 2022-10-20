@@ -68,13 +68,12 @@ class _AddQuestionState extends State<AddQuestion> {
 
   String free = '';
   int moneyId = 0;
-
   AddQuesVoid() async {
     if (keyForm.currentState!.validate()&&(description.text!=''||imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
       String priceText = money.text
           .replaceAll(".", "")
-          .substring(0, money.text.replaceAll(".", "").length - 2);
+          .substring(0, money.text.replaceAll(".", "").length-4);
       int price = Const.convertNumber(priceText).round();
       bloc.add(addQuesForm(
         user_id: user_id ?? -1,
@@ -296,17 +295,39 @@ class _AddQuestionState extends State<AddQuestion> {
                         itemBuilder: (_, index) => OutlinedButton(
                           onPressed: () {
                             money.text =
-                                Const.convertPrice(list[index].id) + " đ";
+                                Const.convertPrice(list[index].id) + " Sao";
                           },
                           style: OutlinedButton.styleFrom(
                               primary: Colors.green.shade200,
                               side: BorderSide(
                                 color: Colors.green.shade200,
                               )),
-                          child: Text(
-                            list[index].name.toString(),
-                            style: StyleApp.textStyle500(color: Colors.green),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                list[index].id.toString(),
+                                style: StyleApp.textStyle500(color: Colors.green),
+                              ),
+                              ShaderMask(
+                                blendMode: BlendMode.srcIn,
+                                shaderCallback: (Rect bounds) => RadialGradient(
+                                  center: Alignment.topCenter,
+
+                                  stops: [0.7,1 ],
+                                  colors: [
+                                    ColorApp.whiteF0,
+                                    Colors.yellow,
+                                  ],
+                                ).createShader(bounds),
+                                child: Icon(
+                                  Icons.star,
+                                  size: 17,
+                                ),
+                              ),
+                            ],
                           ),
+
                         ),
                       );
                     }),
@@ -316,7 +337,7 @@ class _AddQuestionState extends State<AddQuestion> {
                     CurrencyTextInputFormatter(
                       locale: 'vi',
                       decimalDigits: 0,
-                      symbol: 'đ',
+                      symbol: 'Sao',
                     ),
                   ],
                   keyboardType: TextInputType.number,
