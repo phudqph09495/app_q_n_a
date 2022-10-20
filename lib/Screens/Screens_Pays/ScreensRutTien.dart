@@ -35,7 +35,7 @@ class _RutTienState extends State<RutTien> {
             CheckLogState.check(context,
                 state: state,
                 duration: 5,
-                msg: "Tạo phiếu rút tiền thành công. Vui lòng chờ admin xác thực",
+                msg: "Tạo phiếu rút thành công. Vui lòng chờ admin xác thực",
                 success: () {
               Money.clear();
               blocGetWallet.add(GetData());

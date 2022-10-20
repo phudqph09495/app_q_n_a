@@ -132,7 +132,7 @@ class _NapTienState extends State<NapTien> {
                       ),
                       Expanded(
                         child: Text(
-                          '${Const.convertPrice(int.parse(snapshot.toString())*1000)} đ',
+                          '${Const.convertPrice(int.parse(snapshot.toString()))} đ',
                           style: StyleApp.textStyle700(
                               fontSize: 16, color: Colors.red),
                         ),
