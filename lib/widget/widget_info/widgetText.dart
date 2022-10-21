@@ -128,6 +128,7 @@ class _ItemAccountState extends State<ItemAccount> {
                   BlocBuilder<BlocGetWallet, StateBloc>(builder: (_, state) {
                     final coin = state is LoadSuccess ? state.data as int : 0;
                     return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Sao: ${Const.convertPrice(coin)} ',
