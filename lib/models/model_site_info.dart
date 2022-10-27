@@ -24,6 +24,7 @@ class ModelSiteInfo {
   String? questionPrice;
   String? bankAdmin;
   String? unitVoucher;
+  String? bankImgQr;
 
   ModelSiteInfo(
       {this.id,
@@ -50,6 +51,7 @@ class ModelSiteInfo {
         this.copyright,
         this.questionPrice,
         this.unitVoucher,
+        this.bankImgQr,
         this.bankAdmin});
 
   ModelSiteInfo.fromJson(Map<String, dynamic> json) {
@@ -78,6 +80,7 @@ class ModelSiteInfo {
     questionPrice = json['question_price'];
     bankAdmin = json['bank_admin'];
     unitVoucher=json['unit_voucher'];
+    bankImgQr=json['bank_img_qr'];
   }
 
   Map<String, dynamic> toJson() {
@@ -107,6 +110,7 @@ class ModelSiteInfo {
     data['question_price'] = this.questionPrice;
     data['bank_admin'] = this.bankAdmin;
     data['unit_voucher']=this.unitVoucher;
+    data['bank_img_qr']=this.bankImgQr;
     return data;
   }
 }

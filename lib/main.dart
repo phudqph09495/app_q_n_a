@@ -1,6 +1,7 @@
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_version.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/get_token.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
@@ -29,16 +30,16 @@ void main() async {
   if (checkLogin != true) {
     SharePrefsKeys.removeAllKey();
   }
-  runApp(
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => MyApp(
-          checkLogin: checkLogin,
-        ), // Wrap your app
-      ));
-  //     MyApp(
-  //   checkLogin: checkLogin,
-  // ));
+   runApp(
+  //     DevicePreview(
+  //       enabled: !kReleaseMode,
+  //       builder: (context) => MyApp(
+  //         checkLogin: checkLogin,
+  //       ), // Wrap your app
+  //     ));
+      MyApp(
+    checkLogin: checkLogin,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => BLocLocalUser()..getUser()),
         BlocProvider(create: (_) => BlocGetWallet()..add(GetData())),
         BlocProvider(create: (_) => BlocGetUser()..add(GetData())),
+        BlocProvider(create: (_) => BlocCheckVersion()..checkData()),
       ],
       child: MultiProvider(
         providers: [

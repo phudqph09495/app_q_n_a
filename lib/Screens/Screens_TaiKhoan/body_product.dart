@@ -1,47 +1,33 @@
+import 'dart:io';
+
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensNapTien.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensRutTien.dart';
 import 'package:app_q_n_a/Screens/Screens_Pays/ScreensViPays.dart';
-import 'package:app_q_n_a/Screens/Screens_Pays/Screens_Pays.dart';
-import 'package:app_q_n_a/Screens/Screens_TaiKhoan/dieuKhoan.dart';
-import 'package:app_q_n_a/Screens/Screens_TaiKhoan/lienHe.dart';
 import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question2_saved.dart';
-import 'package:app_q_n_a/Screens/Screens_TaiKhoan/question_saved.dart';
-import 'package:app_q_n_a/Screens/Screens_TaiKhoan/rules.dart';
-import 'package:app_q_n_a/Screens/Screens_TaiKhoan/user_manual.dart';
 import 'package:app_q_n_a/Screens/account/bank/screen_create_bank.dart';
-import 'package:app_q_n_a/Screens/account/edit_account/edit_profile.dart';
 import 'package:app_q_n_a/Screens/account/edit_account/sp_signup.dart';
-import 'package:app_q_n_a/Screens/add_question.dart';
 import 'package:app_q_n_a/Screens/login.dart';
-import 'package:app_q_n_a/Screens/registration.dart';
-import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_page.dart';
-import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_remove_user.dart';
+import 'package:app_q_n_a/bloc/bloc/auth/bloc_version.dart';
+import 'package:app_q_n_a/bloc/check_version.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
 import 'package:app_q_n_a/config/next_page.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/item/button.dart';
-import 'package:app_q_n_a/item/load_image.dart';
-import 'package:app_q_n_a/main.dart';
 import 'package:app_q_n_a/models/model_page.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/widget/items/custom_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:toast/toast.dart';
 import '../../Screens/account/item/bottom_sheet.dart';
 import '../../bloc/bloc/auth/bloc_check_login.dart';
 import '../../bloc/check_log_state.dart';
-import '../../config/const.dart';
 import '../../widget/items/dia_log_item.dart';
 import '../../widget/widget_info/widgetText.dart' as user;
-import 'package:url_launcher/url_launcher.dart';
-import 'package:share/share.dart';
 import '../Screens_Notification/screens_news.dart';
 import '../account/screen_profile.dart';
 import 'ThongKe/ThongKe.dart';
@@ -112,24 +98,6 @@ class _BodyProductState extends State<BodyProduct> {
         },
       ),
       TitleAccount(
-          iconData: Icons.wallet,
-          title: "Ví điện tử",
-          onTap: () {
-            PageNavigator.next(context: context, page: ViTien());
-          }),
-      TitleAccount(
-          iconData: Icons.add_card_outlined,
-          title: "Nạp sao ",
-          onTap: () {
-            PageNavigator.next(context: context, page: NapTien());
-          }),
-      TitleAccount(
-          iconData: Icons.credit_card_outlined,
-          title: "Rút sao",
-          onTap: () {
-            PageNavigator.next(context: context, page: RutTien());
-          }),
-      TitleAccount(
         iconData: CupertinoIcons.chart_bar_alt_fill,
         title: "Thống kê",
         onTap: () {
@@ -176,14 +144,67 @@ class _BodyProductState extends State<BodyProduct> {
                       style: StyleApp.textStyle700(
                           color: ColorApp.black, fontSize: 16),
                     ),
-                    children: List.generate(
-                      titleAccount.length,
-                      (index) => _buildItem(
-                        title: titleAccount[index].title,
-                        iconData: titleAccount[index].iconData,
-                        onTap: titleAccount[index].onTap,
+                    children: [
+                      ...List.generate(
+                        titleAccount.length,
+                            (index) => _buildItem(
+                          title: titleAccount[index].title,
+                          iconData: titleAccount[index].iconData,
+                          onTap: titleAccount[index].onTap,
+                        ),
                       ),
-                    ),
+                      Platform.isAndroid ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _buildItem(
+                              iconData: Icons.wallet,
+                              title: "Ví điện tử",
+                              onTap: () {
+                                PageNavigator.next(context: context, page: ViTien());
+                              }),
+                          _buildItem(
+                              iconData: Icons.add_card_outlined,
+                              title: "Nạp sao",
+                              onTap: () async {
+                                PageNavigator.next(context: context, page: NapTien());
+                              }),
+                          _buildItem(
+                              iconData: Icons.credit_card_outlined,
+                              title: "Rút sao",
+                              onTap: () {
+                                PageNavigator.next(context: context, page: RutTien());
+                              }),
+                        ],
+                      ) :
+                      BlocBuilder<BlocCheckVersion, bool>(
+                        builder: (context,bool snapshot) {
+                          if(!snapshot) return const SizedBox();
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              _buildItem(
+                                  iconData: Icons.wallet,
+                                  title: "Ví điện tử",
+                                  onTap: () {
+                                    PageNavigator.next(context: context, page: ViTien());
+                                  }),
+                              _buildItem(
+                                  iconData: Icons.add_card_outlined,
+                                  title: "Nạp sao",
+                                  onTap: () async {
+                                    PageNavigator.next(context: context, page: NapTien());
+                                  }),
+                              _buildItem(
+                                  iconData: Icons.credit_card_outlined,
+                                  title: "Rút sao",
+                                  onTap: () {
+                                    PageNavigator.next(context: context, page: RutTien());
+                                  }),
+                            ],
+                          );
+                        }
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -323,7 +344,6 @@ class _BodyProductState extends State<BodyProduct> {
                   CustomToast.showToast(context: context, msg:user.statusUser==0? 'Nhập đủ thông tin để có thể trả lời':'Admin sẽ duyệt trong thời gian sớm nhất');
                 },
               ) :SizedBox()
-
             ],
           ),
         );

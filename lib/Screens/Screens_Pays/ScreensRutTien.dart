@@ -119,7 +119,7 @@ class _RutTienState extends State<RutTien> {
             InputText3(
               keyboardType: TextInputType.number,
               controller: Money,
-              hint: 'Nhập số tiền cần rút',
+              hint: 'Nhập số sao cần rút cần rút',
               radius: 5,
             ),
           ],

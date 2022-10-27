@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/check_version.dart';
 import 'Screens_Notification/notification.dart';
 import '../styles/init_style.dart';
 import 'Screens_TaiKhoan/body_product.dart';
@@ -29,9 +30,7 @@ class _ScreenHomeState extends State<ScreenHome> {
     super.initState();
     context.read<BlocCheckLogin>().add(GetData());
     context.read<BlocGetWallet>().add(GetData());
-
-
-
+    CheckVersion.check(context, ios: "com.app.hotrohoctap", android: "com.app.hotrohoctap");
   }
 
   @override

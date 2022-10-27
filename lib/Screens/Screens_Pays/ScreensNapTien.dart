@@ -5,6 +5,7 @@ import 'package:app_q_n_a/bloc/bloc/wallet/bloc_site_info.dart';
 import 'package:app_q_n_a/bloc/bloc/wallet/price_by_coin.dart';
 import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/item/input/text_filed3.dart';
+import 'package:app_q_n_a/item/load_image.dart';
 
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/widget/items/dia_log_item.dart';
@@ -140,7 +141,7 @@ class _NapTienState extends State<NapTien> {
                     ],
                   );
                 }),
-        Card(
+            Card(
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Text(
@@ -149,6 +150,25 @@ class _NapTienState extends State<NapTien> {
             ),
           ),
         ),
+            const SizedBox(
+              height: 10,
+            ),
+            Card(
+              margin: EdgeInsets.zero,
+              child: _Cammera(),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+
+            image != null
+                ? ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.file(
+                File(image!.path),
+              ),
+            )
+                : const SizedBox(),
             const SizedBox(
               height: 10,
             ),
@@ -164,36 +184,39 @@ class _NapTienState extends State<NapTien> {
               builder: (_, StateBloc state) {
                 if (state is LoadSuccess) {
                   final model = state.data as ModelSiteInfo;
-                  return Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        model.bankAdmin ?? "",
-                        style: StyleApp.textStyle400(fontSize: 16),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            model.bankAdmin ?? "",
+                            style: StyleApp.textStyle400(fontSize: 16),
+                          ),
+                        ),
                       ),
-                    ),
+                      if(model.bankImgQr != null)
+                        ...[
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'hoặc thanh toán qua ví MOMO',
+                            style: StyleApp.textStyle400(fontSize: 16),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Card(
+                            child: Image.network(model.bankImgQr ?? ""),
+                          ),
+                      ]
+                    ],
                   );
                 }
                 return const SizedBox();
               },
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            image != null
-                ? ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image.file(
-                      File(image!.path),
-                    ),
-                  )
-                : const SizedBox(),
-            const SizedBox(
-              height: 10,
-            ),
-            Card(
-              margin: EdgeInsets.zero,
-              child: _Cammera(),
             ),
             const SizedBox(
               height: 10,
