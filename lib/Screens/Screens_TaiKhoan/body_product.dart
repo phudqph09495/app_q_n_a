@@ -85,12 +85,6 @@ class _BodyProductState extends State<BodyProduct> {
                 context: context, builder: (context) => BottomSheetAccount());
           }),
       TitleAccount(
-          iconData: Icons.account_balance,
-          title: "Ngân hàng",
-          onTap: () {
-            PageNavigator.next(context: context, page: ScreenCreateBank());
-          }),
-      TitleAccount(
         iconData: CupertinoIcons.bookmark_solid,
         title: "Câu hỏi đã lưu",
         onTap: () {
@@ -147,63 +141,19 @@ class _BodyProductState extends State<BodyProduct> {
                     children: [
                       ...List.generate(
                         titleAccount.length,
-                            (index) => _buildItem(
+                        (index) => _buildItem(
                           title: titleAccount[index].title,
                           iconData: titleAccount[index].iconData,
                           onTap: titleAccount[index].onTap,
                         ),
                       ),
-                      Platform.isAndroid ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          _buildItem(
-                              iconData: Icons.wallet,
-                              title: "Ví điện tử",
-                              onTap: () {
-                                PageNavigator.next(context: context, page: ViTien());
-                              }),
-                          _buildItem(
-                              iconData: Icons.add_card_outlined,
-                              title: "Nạp sao",
-                              onTap: () async {
-                                PageNavigator.next(context: context, page: NapTien());
-                              }),
-                          _buildItem(
-                              iconData: Icons.credit_card_outlined,
-                              title: "Rút sao",
-                              onTap: () {
-                                PageNavigator.next(context: context, page: RutTien());
-                              }),
-                        ],
-                      ) :
-                      BlocBuilder<BlocCheckVersion, bool>(
-                        builder: (context,bool snapshot) {
-                          if(!snapshot) return const SizedBox();
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              _buildItem(
-                                  iconData: Icons.wallet,
-                                  title: "Ví điện tử",
-                                  onTap: () {
-                                    PageNavigator.next(context: context, page: ViTien());
-                                  }),
-                              _buildItem(
-                                  iconData: Icons.add_card_outlined,
-                                  title: "Nạp sao",
-                                  onTap: () async {
-                                    PageNavigator.next(context: context, page: NapTien());
-                                  }),
-                              _buildItem(
-                                  iconData: Icons.credit_card_outlined,
-                                  title: "Rút sao",
-                                  onTap: () {
-                                    PageNavigator.next(context: context, page: RutTien());
-                                  }),
-                            ],
-                          );
-                        }
-                      ),
+                      Platform.isAndroid
+                          ? BuildItemWallet()
+                          : BlocBuilder<BlocCheckVersion, bool>(
+                              builder: (context, bool snapshot) {
+                              if (!snapshot) return const SizedBox();
+                              return BuildItemWallet();
+                            }),
                     ],
                   ),
                 ),
@@ -246,10 +196,13 @@ class _BodyProductState extends State<BodyProduct> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               onTap: () {
-                                PageNavigator.next(context: context, page: ScreensNew(
-                                  title: list[index].title ?? "Thông báo",
-                                  des: list[index].description ?? "Đang cập nhật",
-                                ));
+                                PageNavigator.next(
+                                    context: context,
+                                    page: ScreensNew(
+                                      title: list[index].title ?? "Thông báo",
+                                      des: list[index].description ??
+                                          "Đang cập nhật",
+                                    ));
                               },
                             ),
                           ),
@@ -296,6 +249,40 @@ class _BodyProductState extends State<BodyProduct> {
                         ),
                       ),
                     ),
+              !user.iskyc
+                  ? Button1(
+                radius: 5,
+                fontSize: 18,
+                height: 40,
+                style: false,
+                border: Border.all(
+                    color: user.statusUser == 0
+                        ? ColorApp.orangeF2
+                        : ColorApp.grey82.withOpacity(0.5),
+                    width: 0.5),
+                colorButton: user.statusUser == 0
+                    ? ColorApp.orangeF2
+                    : ColorApp.grey82,
+                textColor: Colors.white,
+                textButton: user.statusUser == 0
+                    ? "Đăng ký người trả lời"
+                    : "Bạn đã đăng ký người trả lời",
+                ontap: () {
+                  user.statusUser == 0
+                      ? PageNavigator.next(
+                      context: context, page: SupporterSignUp())
+                      : null;
+                  CustomToast.showToast(
+                      context: context,
+                      msg: user.statusUser == 0
+                          ? 'Nhập đủ thông tin để có thể trả lời'
+                          : 'Admin sẽ duyệt trong thời gian sớm nhất');
+                },
+              )
+                  : const SizedBox(),
+              const SizedBox(
+                height: 15,
+              ),
               isLogin
                   ? Button1(
                       border: Border.all(color: ColorApp.orangeF2, width: 0.5),
@@ -329,25 +316,51 @@ class _BodyProductState extends State<BodyProduct> {
                             MaterialPageRoute(
                                 builder: (context) => LoginScreen()));
                       }),
-              SizedBox(height: 15,),
-          !user.iskyc? Button1(
-                radius: 5,
-                fontSize: 18,
-                height: 40,
-                style: false,
-                border: Border.all(color:user.statusUser==0? ColorApp.orangeF2:ColorApp.grey82.withOpacity(0.5), width: 0.5),
-                colorButton:user.statusUser==0? ColorApp.orangeF2:ColorApp.grey82,
-                textColor: Colors.white,
-                textButton:user.statusUser==0? "Đăng ký người trả lời":"Bạn đã đăng ký người trả lời",
-                ontap: () {
-                  user.statusUser==0?   PageNavigator.next(context: context, page: SupporterSignUp ()):null;
-                  CustomToast.showToast(context: context, msg:user.statusUser==0? 'Nhập đủ thông tin để có thể trả lời':'Admin sẽ duyệt trong thời gian sớm nhất');
-                },
-              ) :SizedBox()
+              const SizedBox(
+                height: 15,
+              ),
+
             ],
           ),
         );
       }),
+    );
+  }
+
+  BuildItemWallet(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _buildItem(
+            iconData: Icons.account_balance,
+            title: "Ngân hàng",
+            onTap: () {
+              PageNavigator.next(
+                  context: context,
+                  page: ScreenCreateBank());
+            }),
+        _buildItem(
+            iconData: Icons.wallet,
+            title: "Ví điện tử",
+            onTap: () {
+              PageNavigator.next(
+                  context: context, page: ViTien());
+            }),
+        _buildItem(
+            iconData: Icons.add_card_outlined,
+            title: "Nạp sao",
+            onTap: () async {
+              PageNavigator.next(
+                  context: context, page: NapTien());
+            }),
+        _buildItem(
+            iconData: Icons.credit_card_outlined,
+            title: "Rút sao",
+            onTap: () {
+              PageNavigator.next(
+                  context: context, page: RutTien());
+            }),
+      ],
     );
   }
 

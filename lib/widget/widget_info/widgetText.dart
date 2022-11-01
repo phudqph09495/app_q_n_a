@@ -139,7 +139,7 @@ class _ItemAccountState extends State<ItemAccount> {
                         ),
                         ShaderMask(
                           blendMode: BlendMode.srcIn,
-                          shaderCallback: (Rect bounds) => RadialGradient(
+                          shaderCallback: (Rect bounds) => const RadialGradient(
                             center: Alignment.topCenter,
                             stops: [1, 1],
                             colors: [
@@ -147,7 +147,7 @@ class _ItemAccountState extends State<ItemAccount> {
                               Colors.yellow,
                             ],
                           ).createShader(bounds),
-                          child: Icon(
+                          child: const Icon(
                             Icons.star,
                             size: 20,
                           ),

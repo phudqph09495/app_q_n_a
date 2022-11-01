@@ -32,7 +32,9 @@ Widget QuestionTile(
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>AnswerScreenTab(quesID: int.parse(modelQuestion.id??'0'))
+          builder: (context) => AnswerScreenTab(
+            quesID: int.parse(modelQuestion.id ?? '0'),
+          ),
           //     AnswerScreen(
           //   modelQuestion: modelQuestion,
           // ),
@@ -118,42 +120,38 @@ Widget QuestionTile(
                     ),
                   ),
                 ),
-
-                     Container(
-                        margin: const EdgeInsets.only(left: 10),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 2),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border:
-                                Border.all(color: Colors.green, width: 0.5)),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              Const.convertPrice(modelQuestion.priceGift),
-                              style: StyleApp.textStyle500(color: Colors.green),
-                            ),
-
-                            ShaderMask(
-                              blendMode: BlendMode.srcIn,
-                              shaderCallback: (Rect bounds) => RadialGradient(
-                                center: Alignment.topCenter,
-
-                                stops: [0.7,1 ],
-                                colors: [
-                                  ColorApp.whiteF0,
-                                  Colors.yellow,
-                                ],
-                              ).createShader(bounds),
-                              child: Icon(
-                                Icons.star,
-                                size: 17,
-                              ),
-                            ),
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: Colors.green, width: 0.5)),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        Const.convertPrice(modelQuestion.priceGift),
+                        style: StyleApp.textStyle500(color: Colors.green),
+                      ),
+                      ShaderMask(
+                        blendMode: BlendMode.srcIn,
+                        shaderCallback: (Rect bounds) => const RadialGradient(
+                          center: Alignment.topCenter,
+                          stops: [0.7, 1],
+                          colors: [
+                            ColorApp.whiteF0,
+                            Colors.yellow,
                           ],
+                        ).createShader(bounds),
+                        child: const Icon(
+                          Icons.star,
+                          size: 17,
                         ),
                       ),
+                    ],
+                  ),
+                ),
               ],
             ),
             ItemCountDown(
@@ -193,11 +191,14 @@ Widget QuestionTile(
                             crossAxisAlignment: WrapCrossAlignment.start,
                             spacing: 5,
                             children: [
-                              Text("${Const.convertNumber(modelQuestion.userCountQuestion).round()} (câu hỏi)."),
-                              Text("${Const.convertNumber(modelQuestion.count_gift_to_user).round()} (trả thưởng)."),
-                              Text("${Const.convertNumber(modelQuestion.userCountAnswer).round()} (trả lời)."),
-                              Text("${Const.convertNumber(modelQuestion.userCountMyGift).round()} (nhận thưởng)."),
-
+                              Text(
+                                  "${Const.convertNumber(modelQuestion.userCountQuestion).round()} (câu hỏi)."),
+                              Text(
+                                  "${Const.convertNumber(modelQuestion.count_gift_to_user).round()} (trả thưởng)."),
+                              Text(
+                                  "${Const.convertNumber(modelQuestion.userCountAnswer).round()} (trả lời)."),
+                              Text(
+                                  "${Const.convertNumber(modelQuestion.userCountMyGift).round()} (nhận thưởng)."),
                             ],
                           ),
                         ),
@@ -216,11 +217,12 @@ Widget QuestionTile(
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>AnswerScreenTab(quesID: int.parse(modelQuestion.id??'0'))
-                        //     AnswerScreen(
-                        //   modelQuestion: modelQuestion,
-                        // ),
-                      ),
+                          builder: (context) => AnswerScreenTab(
+                              quesID: int.parse(modelQuestion.id ?? '0'))
+                          //     AnswerScreen(
+                          //   modelQuestion: modelQuestion,
+                          // ),
+                          ),
                     );
                   },
                 ),

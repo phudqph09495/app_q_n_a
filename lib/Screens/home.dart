@@ -29,17 +29,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int page = 1;
   ScrollController controller = ScrollController();
+
   Future<void> onRefresh() async {
     page = 1;
     isUser = true;
     context.read<BlocGetQuestion>().add(
           GetData(
-              cat_id: keySearchid,
-              subject_id: keySearchid1,
-              class_id: keySearchid2,
-              isUser: isUser,
-              cleanList: true,
-              page: page,
+            cat_id: keySearchid,
+            subject_id: keySearchid1,
+            class_id: keySearchid2,
+            isUser: isUser,
+            cleanList: true,
+            page: page,
           ),
         );
   }
@@ -59,19 +60,19 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     onRefresh();
     controller.addListener(() {
-      if(controller.position.pixels == controller.position.maxScrollExtent){
+      if (controller.position.pixels == controller.position.maxScrollExtent) {
         page++;
         print(isUser);
         context.read<BlocGetQuestion>().add(
-          GetData(
-            cat_id: keySearchid,
-            subject_id: keySearchid1,
-            class_id: keySearchid2,
-            isUser: isUser,
-            loadMore: true,
-            page: page,
-          ),
-        );
+              GetData(
+                cat_id: keySearchid,
+                subject_id: keySearchid1,
+                class_id: keySearchid2,
+                isUser: isUser,
+                loadMore: true,
+                page: page,
+              ),
+            );
       }
     });
   }
@@ -82,10 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         floatingActionButton: ElevatedButton(
           onPressed: () {
-       if(user.userID!=0)  {
+            if (user.userID != 0) {
               PageNavigator.next(context: context, page: AddQuestion());
+            } else {
+              CustomToast.showToast(
+                  context: context,
+                  msg: "Bạn phải đăng nhập để thực hiện hành động này");
             }
-       else CustomToast.showToast(context: context, msg: "Bạn phải đăng nhập để thực hiện hành động này");
           },
           style: ElevatedButton.styleFrom(
             primary: ColorApp.orangeF0,
@@ -176,8 +180,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(5),
                     ),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SearchScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchScreen()));
                     },
                     child: const Icon(
                       Icons.search,
@@ -201,7 +207,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 keySearch1 = state.keySearch1;
                 keySearch2 = state.keySearch2;
               }
-              final list = state is LoadSuccess ? state.data as List<ModelQuestion> : <ModelQuestion>[];
+              final list = state is LoadSuccess
+                  ? state.data as List<ModelQuestion>
+                  : <ModelQuestion>[];
               final length = state is LoadSuccess ? state.checkLength : false;
               final hasMore = state is LoadSuccess ? state.hasMore : false;
               return ItemLoadPage(
@@ -223,29 +231,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 10),
                     Expanded(
-                      child:list.isEmpty
+                      child: list.isEmpty
                           ? ItemListEmpty()
-                          :  SingleChildScrollView(
-                        controller: controller,
-                        padding:const EdgeInsets.symmetric(horizontal: 10,),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: List.generate(
-                                  list.length,
-                                      (index) => QuestionTile(context,
-                                      modelQuestion: list[index])),
+                          : SingleChildScrollView(
+                              controller: controller,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: List.generate(
+                                        list.length,
+                                        (index) => QuestionTile(context,
+                                            modelQuestion: list[index])),
+                                  ),
+                                  ItemLoadMore(
+                                    hasMore: hasMore,
+                                    length: length,
+                                  ),
+                                ],
+                              ),
                             ),
-                            ItemLoadMore(
-                              hasMore: hasMore,
-                              length: length,
-                            ),
-                          ],
-                        ),
-                      ),
-
                     ),
                   ],
                 ),

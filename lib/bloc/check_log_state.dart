@@ -10,7 +10,7 @@ class CheckLogState {
       String? msg,
       bool isShowMsg = true,
       bool isShowDlg = false,
-        int duration=2,
+      int duration = 2,
       Function()? ontap,
       Function()? success}) {
     if (state is Loading) {
@@ -19,7 +19,8 @@ class CheckLogState {
     if (state is LoadSuccess) {
       DialogItem.hideLoading(context: context);
       isShowMsg
-          ? CustomToast.showToast(context: context, msg: msg ?? state.data,duration:duration )
+          ? CustomToast.showToast(
+              context: context, msg: msg ?? state.data, duration: duration)
           : null;
       isShowDlg
           ? DialogItem.showMsg(
@@ -34,7 +35,14 @@ class CheckLogState {
     }
     if (state is LoadFail) {
       DialogItem.hideLoading(context: context);
-      DialogItem.showMsg(context: context, title: "Lỗi", msg: state.error);
+
+      DialogItem.showMsg(
+        context: context,
+        title: "Lỗi",
+        msg: state.error.contains("tiền")
+            ? state.error.replaceAll("tiền", "sao")
+            : state.error,
+      );
     }
   }
 }

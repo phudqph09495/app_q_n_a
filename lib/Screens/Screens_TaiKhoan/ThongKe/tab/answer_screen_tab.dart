@@ -113,7 +113,7 @@ class _AnswerScreenTabState extends State<AnswerScreenTab> {
             title: Row(
               children: [
                 Text(
-                  '${modelAnswer.subjectName ?? 'Lĩnh vực khác'} - ${modelAnswer.className} - ${Const.convertNumber(modelAnswer.question?.priceGift ?? "0")} ',
+                  '${modelAnswer.subjectName ?? 'Lĩnh vực khác'} - ${modelAnswer.className} - ${Const.convertPrice(modelAnswer.question?.priceGift ?? "0")} ',
                   style: StyleApp.textStyle700(
                     fontSize: 18,
                   ),

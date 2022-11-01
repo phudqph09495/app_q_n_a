@@ -68,12 +68,14 @@ class _AddQuestionState extends State<AddQuestion> {
 
   String free = '';
   int moneyId = 0;
+
   AddQuesVoid() async {
-    if (keyForm.currentState!.validate()&&(description.text!=''||imageFiles.isNotEmpty)) {
+    if (keyForm.currentState!.validate() &&
+        (description.text != '' || imageFiles.isNotEmpty)) {
       var user_id = await (SharedPrefs.readString(SharePrefsKeys.user_id));
       String priceText = money.text
           .replaceAll(".", "")
-          .substring(0, money.text.replaceAll(".", "").length-4);
+          .substring(0, money.text.replaceAll(".", "").length - 4);
       int price = Const.convertNumber(priceText).round();
       bloc.add(addQuesForm(
         user_id: user_id ?? -1,
@@ -85,10 +87,9 @@ class _AddQuestionState extends State<AddQuestion> {
         question: ques.text,
         images: imageFiles,
       ));
-    }
-
-    else{
-      CustomToast.showToast(context: context, msg: 'Bạn phải nhập nội dung hoặc hình ảnh');
+    } else {
+      CustomToast.showToast(
+          context: context, msg: 'Bạn phải nhập nội dung hoặc hình ảnh');
     }
   }
 
@@ -130,12 +131,10 @@ class _AddQuestionState extends State<AddQuestion> {
         doneStyle: StyleApp.textStyle700(fontSize: 18),
       ),
       onConfirm: (date) {
+        dateTime = date;
 
-          dateTime = date;
-
-          deadline.text = Const.formatTime(date.millisecondsSinceEpoch,
-              format: "HH:mm  dd/MM/yyyy");
-
+        deadline.text = Const.formatTime(date.millisecondsSinceEpoch,
+            format: "HH:mm  dd/MM/yyyy");
       },
       currentTime: dateTime,
       locale: LocaleType.vi,
@@ -151,22 +150,24 @@ class _AddQuestionState extends State<AddQuestion> {
           child: BlocListener(
             bloc: bloc,
             listener: (_, StateBloc state) {
-              CheckLogState.check(context,
-                  state: state,
-                  msg: "Thêm câu hỏi thành công",
-                  isShowMsg: false,
-                  success: () {
-                    context.read<BlocGetWallet>().add(GetData());
-                  },
-                  isShowDlg: true,
-                  ontap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ScreenHome(),
-                      ),
-                    );
-                  });
+              if(state is LoadSuccess){
+                context.read<BlocGetWallet>().add(GetData());
+              }
+              CheckLogState.check(
+                context,
+                state: state,
+                msg: "Thêm câu hỏi thành công",
+                isShowMsg: false,
+                isShowDlg: true,
+                ontap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ScreenHome(),
+                    ),
+                  );
+                },
+              );
             },
             child: Button1(
                 colorButton: ColorApp.orangeF2,
@@ -298,36 +299,37 @@ class _AddQuestionState extends State<AddQuestion> {
                                 Const.convertPrice(list[index].id) + " Sao";
                           },
                           style: OutlinedButton.styleFrom(
-                              primary: Colors.green.shade200,
-                              side: BorderSide(
-                                color: Colors.green.shade200,
-                              )),
+                            primary: Colors.green.shade200,
+                            side: BorderSide(
+                              color: Colors.green.shade200,
+                            ),
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                list[index].id.toString(),
-                                style: StyleApp.textStyle500(color: Colors.green),
+                                Const.convertPrice(list[index].id),
+                                style:
+                                    StyleApp.textStyle500(color: Colors.green),
                               ),
                               ShaderMask(
                                 blendMode: BlendMode.srcIn,
-                                shaderCallback: (Rect bounds) => RadialGradient(
+                                shaderCallback: (Rect bounds) =>
+                                    const RadialGradient(
                                   center: Alignment.topCenter,
-
-                                  stops: [0.7,1 ],
+                                  stops: [0.7, 1],
                                   colors: [
                                     ColorApp.whiteF0,
                                     Colors.yellow,
                                   ],
                                 ).createShader(bounds),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.star,
                                   size: 17,
                                 ),
                               ),
                             ],
                           ),
-
                         ),
                       );
                     }),
@@ -347,7 +349,7 @@ class _AddQuestionState extends State<AddQuestion> {
                     return ValidatorApp.checkNull(text: val, isTextFiled: true);
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
@@ -382,7 +384,7 @@ class _AddQuestionState extends State<AddQuestion> {
                     return buildImage();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 70,
                 ),
               ],
