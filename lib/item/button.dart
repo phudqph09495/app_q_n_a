@@ -28,7 +28,7 @@ class Button1 extends StatefulWidget {
       this.imagePath,
       this.radius = 5,
       this.fontSize = 14,
-        this.sao=false,
+      this.sao = false,
       this.style = true});
 
   @override
@@ -36,7 +36,6 @@ class Button1 extends StatefulWidget {
 }
 
 class _Button1State extends State<Button1> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,11 +49,12 @@ class _Button1State extends State<Button1> {
       alignment: Alignment.center,
       child: TextButton(
         onPressed: widget.ontap,
-
-       style: TextButton.styleFrom(minimumSize: Size(80, widget.height),padding: EdgeInsets.symmetric(vertical: 5,horizontal: 5)),
+        style: TextButton.styleFrom(
+            minimumSize: Size(80, widget.height),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             widget.icon ? Image.asset(widget.imagePath!) : SizedBox(),
             Text(widget.textButton,
@@ -63,26 +63,26 @@ class _Button1State extends State<Button1> {
                         fontSize: widget.fontSize, color: widget.textColor)
                     : StyleApp.textStyle900(
                         fontSize: widget.fontSize, color: widget.textColor)),
-            widget.sao?   ShaderMask(
-              blendMode: BlendMode.srcIn,
-              shaderCallback: (Rect bounds) => RadialGradient(
-                center: Alignment.topCenter,
-                stops: [0.7, 1],
-                colors: [
-                  Colors.white,
-                  Colors.yellow,
-                ],
-              ).createShader(bounds),
-              child: Icon(
-                Icons.star,
-                size: 25,
-              ),
-            ):SizedBox(),
+            widget.sao
+                ? ShaderMask(
+                    blendMode: BlendMode.srcIn,
+                    shaderCallback: (Rect bounds) => const RadialGradient(
+                      center: Alignment.topCenter,
+                      stops: [0.7, 1],
+                      colors: [
+                        Colors.white,
+                        Colors.yellow,
+                      ],
+                    ).createShader(bounds),
+                    child: Icon(
+                      Icons.star,
+                      size: 25,
+                    ),
+                  )
+                : SizedBox(),
           ],
         ),
       ),
     );
   }
 }
-
-

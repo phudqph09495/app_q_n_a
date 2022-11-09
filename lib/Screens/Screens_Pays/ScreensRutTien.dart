@@ -97,8 +97,10 @@ class _RutTienState extends State<RutTien> {
                 bloc: blocGetWallet,
                 builder: (_, state) {
                   final coin = state is LoadSuccess ? state.data as int : 0;
+
                   return Button1(
-                    width: 190,sao: true,
+                    width: 190,
+                    sao: true,
                     height: 60,
                     radius: 10,
                     fontSize: 20,

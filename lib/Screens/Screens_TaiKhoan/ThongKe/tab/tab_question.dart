@@ -4,12 +4,15 @@ import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/widget/items/item_load_page.dart';
-import 'package:app_q_n_a/widget/items/item_loadmore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/state_bloc.dart';
-import '../../../../item/question_tile.dart';
+import '../../../../config/path/string_path.dart';
+import '../../../../styles/init_style.dart';
 
 class TabQuestion extends StatefulWidget {
   @override
@@ -21,13 +24,11 @@ class _TabQuestionState extends State<TabQuestion> {
 
   ScrollController _controller = ScrollController();
   int page = 1;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     onRefresh();
-    loadmore();
   }
 
   Future<void> onRefresh() async {
@@ -69,28 +70,29 @@ class _TabQuestionState extends State<TabQuestion> {
                 onTapErr: () {
                   onRefresh();
                 },
-                success: list.isEmpty
-                    ? ItemListEmpty()
-                    : SingleChildScrollView(
-                        controller: _controller,
-                        padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: List.generate(
-                                  list.length,
-                                  (index) => QuestionTile(context,
-                                      modelQuestion: list[index])),
-                            ),
-                            ItemLoadMore(
-                              hasMore: hasMore,
-                              length: length,
-                            ),
-                          ],
+                success: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Text(
+                          length
+                              ? StringPath.loadFull
+                              : hasMore
+                                  ? StringPath.loading
+                                  : "",
+                          textAlign: TextAlign.center,
+                          style: StyleApp.textStyle400(),
                         ),
-                      ));
+                      ),
+                    ],
+                  ),
+                ));
           }),
     );
   }

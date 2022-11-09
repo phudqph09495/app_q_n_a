@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: ColorApp.whiteF0,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          toolbarHeight: 110,
+          toolbarHeight: 115,
           backgroundColor: ColorApp.whiteF0,
           elevation: 0,
           flexibleSpace: Padding(
@@ -137,15 +137,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  height: 35,
-                  width: 160,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: ColorApp.whiteF7,
-                      border: Border.all(color: Colors.black, width: 0.5)),
-                  child: TextButton(
-                      style: TextButton.styleFrom(minimumSize: Size(50, 80)),
+                Row(
+                  children: [
+                    OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: ColorApp.black49),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7))),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Filter()));
@@ -153,13 +151,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(Icons.menu_open),
+                          const Icon(Icons.menu_open),
                           Text(
                             '  Lọc câu hỏi',
                             style: StyleApp.textStyle700(fontSize: 16),
                           )
                         ],
-                      )),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
