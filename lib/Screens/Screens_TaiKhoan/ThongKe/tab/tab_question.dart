@@ -2,6 +2,7 @@ import 'package:app_q_n_a/bloc/bloc/thong_ke/bloc_user_qusetion.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/config/path/share_pref_path.dart';
 import 'package:app_q_n_a/config/share_pref.dart';
+import 'package:app_q_n_a/item/item_answer/item_answer1.dart';
 import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/widget/items/item_load_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/state_bloc.dart';
 import '../../../../config/path/string_path.dart';
+import '../../../../item/question_tile.dart';
 import '../../../../styles/init_style.dart';
 
 class TabQuestion extends StatefulWidget {
@@ -24,6 +26,7 @@ class _TabQuestionState extends State<TabQuestion> {
 
   ScrollController _controller = ScrollController();
   int page = 1;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -76,7 +79,13 @@ class _TabQuestionState extends State<TabQuestion> {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [],
+                        children: List.generate(
+                          list.length,
+                          (index) => QuestionTile(
+                            context,
+                            modelQuestion: list[index],
+                          ),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20),
