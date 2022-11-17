@@ -61,10 +61,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 40,
               ),
               Image.asset(
-                'images/backg.png',
+                'images/backg2.png',
                 width: 230,
                 height: 88,
-                fit: BoxFit.fitHeight,
                 alignment: Alignment.centerLeft,
               ),
               const SizedBox(

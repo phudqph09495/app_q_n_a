@@ -303,9 +303,9 @@ class Rating extends EventBloc {
 }
 
 class RegisNotify extends EventBloc {
-  int? subject_id;
+  String subject_id;
 
-  RegisNotify({this.subject_id});
+  RegisNotify({required this.subject_id});
 }
 class ResetP extends EventBloc {
 String email;

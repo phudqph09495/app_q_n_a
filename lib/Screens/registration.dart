@@ -106,10 +106,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             height: 40,
                           ),
                           Image.asset(
-                            'images/backg.png',
+                            'images/backg2.png',
                             width: 222,
                             height: 88,
-                            fit: BoxFit.fitHeight,
                             alignment: Alignment.centerLeft,
                           ),
                           SizedBox(

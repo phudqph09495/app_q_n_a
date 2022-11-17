@@ -6,6 +6,8 @@ import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_wallet.dart';
 
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/bloc/state_bloc.dart';
+import 'package:app_q_n_a/main.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +32,25 @@ class _ScreenHomeState extends State<ScreenHome> {
     super.initState();
     context.read<BlocCheckLogin>().add(GetData());
     context.read<BlocGetWallet>().add(GetData());
+    FirebaseMessaging.instance.getToken().then((value) => print(value));
+    listenToNotification();
     CheckVersion.check(context, ios: "com.app.hotrohoctap", android: "com.app.hotrohoctap");
+  }
+
+  void listenToNotification() async {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print(message.toMap());
+      flutterLocalNotificationsPlugin.cancelAll();
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      flutterLocalNotificationsPlugin.cancelAll();
+    });
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) async {
+      if (message != null) {}
+      flutterLocalNotificationsPlugin.cancelAll();
+    });
   }
 
   @override

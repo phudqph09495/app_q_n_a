@@ -147,6 +147,28 @@ class _BodyProductState extends State<BodyProduct> {
                           onTap: titleAccount[index].onTap,
                         ),
                       ),
+                      _buildItem(
+                          iconData: Icons.account_balance,
+                          title: "Ngân hàng",
+                          onTap: () {
+                            PageNavigator.next(
+                                context: context,
+                                page: ScreenCreateBank());
+                          }),
+                      _buildItem(
+                          iconData: Icons.wallet,
+                          title: "Ví điện tử",
+                          onTap: () {
+                            PageNavigator.next(
+                                context: context, page: ViTien());
+                          }),
+                      _buildItem(
+                          iconData: Icons.credit_card_outlined,
+                          title: "Rút sao",
+                          onTap: () {
+                            PageNavigator.next(
+                                context: context, page: RutTien());
+                          }),
                       Platform.isAndroid
                           ? BuildItemWallet()
                           : BlocBuilder<BlocCheckVersion, bool>(
@@ -332,34 +354,13 @@ class _BodyProductState extends State<BodyProduct> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _buildItem(
-            iconData: Icons.account_balance,
-            title: "Ngân hàng",
-            onTap: () {
-              PageNavigator.next(
-                  context: context,
-                  page: ScreenCreateBank());
-            }),
-        _buildItem(
-            iconData: Icons.wallet,
-            title: "Ví điện tử",
-            onTap: () {
-              PageNavigator.next(
-                  context: context, page: ViTien());
-            }),
-        _buildItem(
             iconData: Icons.add_card_outlined,
             title: "Nạp sao",
             onTap: () async {
               PageNavigator.next(
                   context: context, page: NapTien());
             }),
-        _buildItem(
-            iconData: Icons.credit_card_outlined,
-            title: "Rút sao",
-            onTap: () {
-              PageNavigator.next(
-                  context: context, page: RutTien());
-            }),
+
       ],
     );
   }

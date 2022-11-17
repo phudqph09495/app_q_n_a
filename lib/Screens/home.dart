@@ -131,7 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Image.asset(
                   'images/backg2.png',
                   height: 45,
-                  fit: BoxFit.fitHeight,
                   alignment: Alignment.centerLeft,
                 ),
                 const SizedBox(

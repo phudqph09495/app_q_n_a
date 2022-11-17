@@ -17,7 +17,7 @@ class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
-        req['email'] = event.email;
+        //req['email'] = event.email;
         req['username'] = event.username;
         req['phone'] = event.phone;
         req['password'] = event.password;
@@ -34,9 +34,7 @@ class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
         req1['SignupForm'] = req;
         req1['supporter']=event.role;
         var res = await Api.postAsync(endPoint: ApiPath.signin, req: req1);
-print(res);
-print(req);
-print(req1['supporter']);
+
         if (res['code'] == 1) {
           ModelUser model = ModelUser.fromJson(res['data']);
           yield LoadSuccess(
