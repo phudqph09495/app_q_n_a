@@ -32,6 +32,7 @@ class Notificationbar extends StatefulWidget {
 class _NotificationbarState extends State<Notificationbar> {
   BlocGetSub blocGetSub = BlocGetSub();
   BlocRegisNotify blocRegisNotify = BlocRegisNotify();
+  String listId = "";
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,13 @@ class _NotificationbarState extends State<Notificationbar> {
       child: BlocListener(
         bloc: blocRegisNotify,
         listener: (_, StateBloc state) {
-          CheckLogState.check(context, state: state);
+          CheckLogState.check(
+            context,
+            state: state,
+            success: () async {
+              await SharedPrefs.saveString(SharePrefsKeys.notifiSub, listId);
+            }
+          );
         },
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -66,62 +73,11 @@ class _NotificationbarState extends State<Notificationbar> {
             bloc: blocGetSub,
             listener: (context, state) {
               if (state is LoadSuccess) {
-                DialogItem.hideLoading(context: context);
                 final list = state.data as List<ModelLocal>;
-                showDialog(
-                  context: context,
-                  builder: (context) => MultiSelectDialog(
-                    items: List.generate(
-                      list.length,
-                      (index) => MultiSelectItem(
-                        list[index],
-                        list[index].name ?? "",
-                      ),
-                    ),
-                    initialValue: [],
-                    title: Text(
-                      "Đăng ký nhận thông báo",
-                      textAlign: TextAlign.center,
-                      style: StyleApp.textStyle600(fontSize: 18),
-                    ),
-                    itemsTextStyle: StyleApp.textStyle400(),
-                    selectedItemsTextStyle:
-                        StyleApp.textStyle400(color: ColorApp.orangeF8),
-                    selectedColor: ColorApp.orangeF8,
-                    height: MediaQuery.of(context).size.width * 0.7,
-                    cancelText: Text(
-                      "Đóng",
-                      style: StyleApp.textStyle400(color: Colors.red),
-                    ),
-                    confirmText: Text(
-                      "Xác nhận",
-                      style: StyleApp.textStyle400(color: ColorApp.orangeF8),
-                    ),
-                    onConfirm: (val) async {
-                      final checkLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
-                      if (val.isNotEmpty && checkLogin == true) {
-                        String listId = "";
-                        for(var item in val){
-                         ModelLocal data = item as ModelLocal;
-                          listId = listId + "${data.id  ?? ""} ";
-                        }
-                        print(listId);
-                        blocRegisNotify.add(
-                          RegisNotify(
-                            subject_id: listId,
-                          ),
-                        );
-                      } else if (user.iskyc == false) {
-                        CustomToast.showToast(
-                            context: context,
-                            msg:
-                                "Bạn cần xác thực thông tin để thực hiện thao tác này");
-                      } else if (val.isEmpty) {
-                        CustomToast.showToast(
-                            context: context, msg: "Chọn một môn để đăng ký");
-                      }
-                    },
-                  ),
+                final listSub = state.dataSub as List<ModelLocal>;
+                regisNotify(
+                  list: list,
+                  listSub: listSub,
                 );
               }
               if (state is LoadFail) {
@@ -158,75 +114,63 @@ class _NotificationbarState extends State<Notificationbar> {
     );
   }
 
-  regisNotify() {
-    int? monval;
-    String? mon;
-    showPlatformDialog(
-        context: context,
-        builder: (context) => BasicDialogAlert(
-              title: const Text("Nhận thông báo"),
-              content: BlocBuilder(
-                bloc: blocGetSub,
-                builder: (context, state) {
-                  if (state is LoadSuccess) {
-                    final list = state.data as List<ModelLocal>;
-                    return MultiSelectDialog(
-                      items: List.generate(
-                        list.length,
-                        (index) => MultiSelectItem(
-                          list[index],
-                          list[index].name ?? "",
-                        ),
-                      ),
-                      initialValue: [],
-                    );
-                  }
-                  if (state is Loading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return const SizedBox();
-                },
+  regisNotify({
+    List<ModelLocal> list = const [],
+    List<ModelLocal> listSub = const [],
+  }) {
+    DialogItem.hideLoading(context: context);
+    print(listSub);
+    showDialog(
+      context: context,
+      builder: (context) => MultiSelectDialog(
+        items: List.generate(
+          list.length,
+          (index) => MultiSelectItem(
+            list[index],
+            list[index].name ?? "",
+          ),
+        ),
+        initialValue: listSub,
+        title: Text(
+          "Đăng ký nhận thông báo",
+          textAlign: TextAlign.center,
+          style: StyleApp.textStyle600(fontSize: 18),
+        ),
+        itemsTextStyle: StyleApp.textStyle400(),
+        selectedItemsTextStyle: StyleApp.textStyle400(color: ColorApp.orangeF8),
+        selectedColor: ColorApp.orangeF8,
+        height: MediaQuery.of(context).size.width * 0.7,
+        cancelText: Text(
+          "Đóng",
+          style: StyleApp.textStyle400(color: Colors.red),
+        ),
+        confirmText: Text(
+          "Xác nhận",
+          style: StyleApp.textStyle400(color: ColorApp.orangeF8),
+        ),
+        onConfirm: (val) async {
+          final checkLogin = await SharedPrefs.readBool(SharePrefsKeys.login);
+          if (val.isNotEmpty && checkLogin == true) {
+            listId = "";
+            for (var item in val) {
+              ModelLocal data = item as ModelLocal;
+              listId = listId + "${data.id ?? ""} ";
+            }
+            blocRegisNotify.add(
+              RegisNotify(
+                subject_id: listId,
               ),
-              actions: <Widget>[
-                BlocListener(
-                  bloc: blocRegisNotify,
-                  listener: (_, StateBloc state) {
-                    CheckLogState.check(context, state: state, success: () {
-                      Navigator.pop(context);
-                    });
-                  },
-                  child: BasicDialogAction(
-                    title: Text(
-                      "Xác nhận",
-                      style: StyleApp.textStyle500(color: Colors.blue),
-                    ),
-                    onPressed: () {
-                      if ((monval != null) && (user.iskyc)) {
-                        blocRegisNotify.add(RegisNotify(subject_id: "monval"));
-                      } else if (user.iskyc == false) {
-                        CustomToast.showToast(
-                            context: context,
-                            msg:
-                                "Bạn cần xác thực thông tin để thực hiện thao tác này");
-                      } else if (monval == null) {
-                        CustomToast.showToast(
-                            context: context, msg: "Chọn một môn để đăng ký");
-                      }
-                    },
-                  ),
-                ),
-                BasicDialogAction(
-                  title: Text(
-                    "Trở lại",
-                    style: StyleApp.textStyle500(color: Colors.red),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ));
+            );
+          } else if (user.iskyc == false) {
+            CustomToast.showToast(
+                context: context,
+                msg: "Bạn cần xác thực thông tin để thực hiện thao tác này");
+          } else if (val.isEmpty) {
+            CustomToast.showToast(
+                context: context, msg: "Chọn một môn để đăng ký");
+          }
+        },
+      ),
+    );
   }
 }

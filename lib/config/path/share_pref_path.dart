@@ -11,16 +11,18 @@ class SharePrefsKeys {
   static String phone = "phone";
   static String email = "email";
   static String location = "location";
-  static String isSuppoter="is_supporter";
+  static String isSuppoter = "is_supporter";
+  static String notifiSub = "notify_subjects";
 
   static seveUserKey(ModelUser model) async {
     SharedPrefs.saveBool(SharePrefsKeys.login, true);
     SharedPrefs.saveString(SharePrefsKeys.user_id, model.id);
+    SharedPrefs.saveString(SharePrefsKeys.notifiSub, model.notify_subjects);
     SharedPrefs.saveString(SharePrefsKeys.user_token, model.tokenApp);
     SharedPrefs.saveString(SharePrefsKeys.name, model.username);
     SharedPrefs.saveString(SharePrefsKeys.phone, model.phone);
     SharedPrefs.saveString(SharePrefsKeys.email, model.email);
-    SharedPrefs.saveString(SharePrefsKeys.isSuppoter,model.isSupporter);
+    SharedPrefs.saveString(SharePrefsKeys.isSuppoter, model.isSupporter);
     SharedPrefs.saveString(SharePrefsKeys.avatar,
         model.avatarPath.toString() + model.avatarName.toString());
     SharedPrefs.saveString(SharePrefsKeys.user, model.toJson());

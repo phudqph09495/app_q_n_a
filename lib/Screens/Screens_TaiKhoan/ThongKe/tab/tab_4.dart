@@ -86,7 +86,7 @@ class _Tab4State extends State<Tab4> {
 
                                   time: list[index].createdAt,
                                   price: list[index].money,
-                                  note: list[index].note ?? "Trả tiền trả lời đúng câu hỏi",
+                                  note: list[index].note ?? "Trả Sao trả lời đúng câu hỏi",
                                 )),
                       ),
                       ItemLoadMore(

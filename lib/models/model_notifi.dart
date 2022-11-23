@@ -22,6 +22,7 @@ class ModelNotifi {
       this.unread, 
       this.createdAt, 
       this.updatedAt, 
+      this.object_id,
       this.recipientRealId,});
 
   ModelNotifi.fromJson(dynamic json) {
@@ -35,6 +36,7 @@ class ModelNotifi {
     unread = json['unread'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    object_id = json['object_id'];
     recipientRealId = json['recipient_real_id'];
   }
   String? id;
@@ -47,6 +49,7 @@ class ModelNotifi {
   String? unread;
   String? createdAt;
   String? updatedAt;
+  String? object_id;
   dynamic recipientRealId;
 
   Map<String, dynamic> toJson() {
@@ -61,6 +64,7 @@ class ModelNotifi {
     map['unread'] = unread;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
+    map['object_id'] = object_id;
     map['recipient_real_id'] = recipientRealId;
     return map;
   }

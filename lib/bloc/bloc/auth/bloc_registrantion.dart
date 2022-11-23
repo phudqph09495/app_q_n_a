@@ -17,22 +17,22 @@ class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
       yield Loading();
       try {
         Map<String, dynamic> req = Map();
-        //req['email'] = event.email;
+        req['email'] = event.email;
         req['username'] = event.username;
         req['phone'] = event.phone;
         req['password'] = event.password;
 
-        req['cmt']=event.cccd;
-        req['province_id']=event.province_id;
-        req['district_id']=event.district_id;
-        req['work']=event.work;
-        req['bank_name']=event.bankName;
-        req['bank_code']=event.bankNumber;
-        req['bank_username']=event.userNameBank;
+        req['cmt'] = event.cccd;
+        req['province_id'] = event.province_id;
+        req['district_id'] = event.district_id;
+        req['work'] = event.work;
+        req['bank_name'] = event.bankName;
+        req['bank_code'] = event.bankNumber;
+        req['bank_username'] = event.userNameBank;
 
         Map<String, dynamic> req1 = Map();
         req1['SignupForm'] = req;
-        req1['supporter']=event.role;
+        req1['supporter'] = event.role;
         var res = await Api.postAsync(endPoint: ApiPath.signin, req: req1);
 
         if (res['code'] == 1) {

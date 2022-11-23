@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:app_q_n_a/Screens/forgot_password.dart';
-import 'package:app_q_n_a/Screens/registration.dart';
 import 'package:app_q_n_a/Screens/screen_home.dart';
 import 'package:app_q_n_a/Screens/sign_up.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_user_local.dart';
@@ -17,6 +16,7 @@ import 'package:flutter/material.dart';
 import '../bloc/bloc/auth/bloc_check_login.dart';
 import '../bloc/check_log_state.dart';
 import '../item/button.dart';
+import '../path/image_path.dart';
 import '../styles/init_style.dart';
 import 'package:toast/toast.dart';
 
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 40,
               ),
               Image.asset(
-                'images/backg2.png',
+                ImagesPath.imageLogo,
                 width: 230,
                 height: 88,
                 alignment: Alignment.centerLeft,

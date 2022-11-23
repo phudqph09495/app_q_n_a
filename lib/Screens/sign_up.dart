@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toast/toast.dart';
 
+import '../path/image_path.dart';
+
 enum EnumRegistrantion { username, phone }
 
 class SignUpScreen extends StatefulWidget {
@@ -29,13 +31,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController usernameHoi = TextEditingController();
   TextEditingController phoneHoi = TextEditingController();
   TextEditingController passwordHoi = TextEditingController();
-  //TextEditingController emailHoi = TextEditingController();
+  TextEditingController emailHoi = TextEditingController();
   TextEditingController confirmHoi = TextEditingController();
 
   TextEditingController usernameTL = TextEditingController();
   TextEditingController phoneTL = TextEditingController();
   TextEditingController passwordTL = TextEditingController();
-  //TextEditingController emailTL = TextEditingController();
+  TextEditingController emailTL = TextEditingController();
   TextEditingController confirmTL = TextEditingController();
   TextEditingController workTL = TextEditingController();
   TextEditingController userNameBank = TextEditingController();
@@ -59,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (keyFormHoi.currentState!.validate()) {
       blocRegistrantionHoi.add(AddDataRegistrantion(
         username: usernameHoi.text,
-        //email: emailHoi.text,
+        email: emailHoi.text,
         phone: phoneHoi.text,
         password: passwordHoi.text,
         role: tab.toString(),
@@ -71,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (keyFormTraLoi.currentState!.validate()) {
       blocRegistrantionTL.add(AddDataRegistrantion(
           username: usernameTL.text,
-          //email: emailTL.text,
+          email: emailTL.text,
           phone: phoneTL.text,
           password: passwordTL.text,
           role: tab.toString(),
@@ -113,7 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'images/backg2.png',
+                              ImagesPath.imageLogo,
                               width: 222,
                               height: 88,
                               alignment: Alignment.center,
@@ -229,24 +231,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(
               height: 15,
             ),
-            // InputText1(
-            //   keyboardType: TextInputType.emailAddress,
-            //   label: "Email",
-            //   controller: emailHoi,
-            //   borderColor: ColorApp.main.withOpacity(0.2),
-            //   hasLeading: true,
-            //   iconData: Icons.email_outlined,
-            //   obscureText: false,
-            //   hasPass: false,
-            //   radius: 10,
-            //   width: double.infinity,
-            //   validator: (val) {
-            //     return ValidatorApp.checkEmail(text: val);
-            //   },
-            // ),
-            // SizedBox(
-            //   height: 15,
-            // ),
+            InputText1(
+              keyboardType: TextInputType.emailAddress,
+              label: "Email",
+              controller: emailHoi,
+              borderColor: ColorApp.main.withOpacity(0.2),
+              hasLeading: true,
+              iconData: Icons.email_outlined,
+              obscureText: false,
+              hasPass: false,
+              radius: 10,
+              width: double.infinity,
+            ),
+            SizedBox(
+              height: 15,
+            ),
             InputText1(
               label: "Mật khẩu",
               controller: passwordHoi,
@@ -356,24 +355,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(
               height: 15,
             ),
-            // InputText1(
-            //   keyboardType: TextInputType.emailAddress,
-            //   label: "Email",
-            //   controller: emailTL,
-            //   borderColor: ColorApp.main.withOpacity(0.2),
-            //   hasLeading: true,
-            //   iconData: Icons.email_outlined,
-            //   obscureText: false,
-            //   hasPass: false,
-            //   radius: 10,
-            //   width: double.infinity,
-            //   validator: (val) {
-            //     return ValidatorApp.checkEmail(text: val);
-            //   },
-            // ),
-            // SizedBox(
-            //   height: 15,
-            // ),
+            InputText1(
+              keyboardType: TextInputType.emailAddress,
+              label: "Email",
+              controller: emailTL,
+              borderColor: ColorApp.main.withOpacity(0.2),
+              hasLeading: true,
+              iconData: Icons.email_outlined,
+              obscureText: false,
+              hasPass: false,
+              radius: 10,
+              width: double.infinity,
+            ),
+            SizedBox(
+              height: 15,
+            ),
             InputText1(
               label: "Nghề nghiệp",
               controller: workTL,
@@ -456,7 +452,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return ValidatorApp.checkNull(
                           text: val, isTextFiled: true);
                     },
-                    pad: 47,
+                    iconData: Icons.location_city,
                     listItem: list,
                     hint: "Chọn tỉnh/thành phố",
                     onChanged: (val) {
@@ -483,7 +479,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return ValidatorApp.checkNull(
                           text: val, isTextFiled: true);
                     },
-                    pad: 47,
+                    iconData: Icons.location_city,
                     listItem: list,
                     hint: "Chọn quận/huyện",
                     onChanged: (val) {

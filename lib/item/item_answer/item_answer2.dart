@@ -195,7 +195,7 @@ class _AnswerCardState extends State<AnswerCard> {
                       listener: (_, StateBloc state) {
                         CheckLogState.check(context,
                             state: state,
-                            msg: "Trả tiền thành công", success: () {
+                            msg: "Trả Sao thành công", success: () {
                           groupValue = 2;
                           context.read<BlocGetWallet>().add(GetData());
                           widget.refresh!();
@@ -212,7 +212,7 @@ class _AnswerCardState extends State<AnswerCard> {
                         dense: true,
                         toggleable: true,
                         title: Text(
-                          groupValue == 2 ? 'Đã trả tiền' : "Trả tiền",
+                          groupValue == 2 ? 'Đã trả Sao' : "Trả Sao",
                           style: StyleApp.textStyle500(
                               color: groupValue == 2
                                   ? Colors.green
@@ -328,7 +328,7 @@ class _AnswerCardState extends State<AnswerCard> {
               DialogItem.showMsg(
                   context: context,
                   title: "Lỗi",
-                  msg: "Bạn không thể tự trả tiền cho chính mình");
+                  msg: "Bạn không thể tự trả Sao cho chính mình");
             }
           }
         },

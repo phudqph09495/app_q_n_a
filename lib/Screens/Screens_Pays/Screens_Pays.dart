@@ -24,7 +24,7 @@ class _ScreensPaysState extends State<ScreensPays> {
         children: [
           ListTile(
             title: Text(
-              "Nạp tiền",
+              "Nạp Sao",
               style: StyleApp.textStyle500(color: ColorApp.black),
             ),
             onTap: () {
@@ -34,7 +34,7 @@ class _ScreensPaysState extends State<ScreensPays> {
           ),
           ListTile(
             title: Text(
-              "Rút Tiền",
+              "Rút Sao",
               style: StyleApp.textStyle500(color: ColorApp.black),
             ),
             onTap: () {
@@ -44,7 +44,7 @@ class _ScreensPaysState extends State<ScreensPays> {
           ),
           ListTile(
             title: Text(
-              "Ví Tiền",
+              "Ví Sao",
               style: StyleApp.textStyle500(color: ColorApp.black),
             ),
             onTap: () {

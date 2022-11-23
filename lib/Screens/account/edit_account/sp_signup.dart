@@ -131,7 +131,7 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
                           return ValidatorApp.checkNull(
                               text: val, isTextFiled: true);
                         },
-                        pad: 47,
+                        //pad: 47,
                         listItem: list,
                         hint: "Chọn tỉnh/thành phố",
                         onChanged: (val) {
@@ -158,7 +158,7 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
                           return ValidatorApp.checkNull(
                               text: val, isTextFiled: true);
                         },
-                        pad: 47,
+                        //pad: 47,
                         listItem: list,
                         hint: "Chọn quận/huyện",
                         onChanged: (val) {

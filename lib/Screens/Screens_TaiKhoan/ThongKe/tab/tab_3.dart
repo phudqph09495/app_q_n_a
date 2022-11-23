@@ -85,7 +85,7 @@ class _Tab3State extends State<Tab3> {
                                 (index) => ItemTab(
                                   time: list[index].createdAt,
                                   price: list[index].money,
-                                  note: list[index].note ?? "Cộng tiền trả lời đúng câu hỏi",
+                                  note: list[index].note ?? "Cộng Sao trả lời đúng câu hỏi",
                                 ),
                         ),
                       ),

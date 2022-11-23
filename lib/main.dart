@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 import 'bloc/bloc/auth/bloc_check_login.dart';
@@ -24,22 +25,24 @@ import 'bloc/bloc/auth/bloc_getquestion.dart';
 import 'config/path/share_pref_path.dart';
 import 'config/share_pref.dart';
 import 'item/button/button2.dart';
+import 'path/image_path.dart';
+
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await SharedPrefs.init();
   AndroidInitializationSettings initializationSettingsAndroid =
-  const AndroidInitializationSettings('@mipmap/ic_launcher');
+      const AndroidInitializationSettings('@mipmap/ic_launcher');
 
   const DarwinInitializationSettings initializationSettingsDarwin =
-  DarwinInitializationSettings(
+      DarwinInitializationSettings(
     requestAlertPermission: true,
     requestBadgePermission: true,
     requestSoundPermission: true,
@@ -64,13 +67,13 @@ void main() async {
   if (checkLogin != true) {
     SharePrefsKeys.removeAllKey();
   }
-   runApp(
-  //     DevicePreview(
-  //       enabled: !kReleaseMode,
-  //       builder: (context) => MyApp(
-  //         checkLogin: checkLogin,
-  //       ), // Wrap your app
-  //     ));
+  runApp(
+      //     DevicePreview(
+      //       enabled: !kReleaseMode,
+      //       builder: (context) => MyApp(
+      //         checkLogin: checkLogin,
+      //       ), // Wrap your app
+      //     ));
       MyApp(
     checkLogin: checkLogin,
   ));
@@ -78,7 +81,9 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   bool? checkLogin;
+
   MyApp({this.checkLogin});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -95,73 +100,78 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => ImageAppProvider()..setImage()),
         ],
-        child: MaterialApp(
-          useInheritedMediaQuery: true,
-          builder: DevicePreview.appBuilder,
-          theme: ThemeData(
-            unselectedWidgetColor: ColorApp.orangeF2,
-            iconTheme:const  IconThemeData(
-              color: Colors.black
-            )
-          ),
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('vi'),
-          ],
-          locale: const Locale('vi'),
-          home: BlocBuilder<GetToken, StateBloc>(
+        child: OverlaySupport.global(
+          child: MaterialApp(
+            useInheritedMediaQuery: true,
+            builder: DevicePreview.appBuilder,
+            theme: ThemeData(
+                unselectedWidgetColor: ColorApp.orangeF2,
+                iconTheme: const IconThemeData(color: Colors.black)),
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('vi'),
+            ],
+            locale: const Locale('vi'),
+            home: BlocBuilder<GetToken, StateBloc>(
               builder: (context, StateBloc state) {
-            if (state is Loading) {
-              return Scaffold(
-                body: Center(
-                  child: Image.asset(ImagePath.logo, width: 100, height: 100),
-                ),
-              );
-            }
-            if (state is LoadFail) {
-              return Scaffold(
-                body: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  decoration: const BoxDecoration(
-                      gradient: ColorApp.linearGradientMain),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(ImagePath.loadError),
-                      const SizedBox(height: 10),
-                      Text(
-                        state.error,
-                        style: StyleApp.textStyle500(color: Colors.white),
-                        textAlign: TextAlign.center,
+                if (state is Loading) {
+                  return Scaffold(
+                    body: Center(
+                      child: Image.asset(
+                        ImagesPath.imageLogo,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.width * 0.8,
+                        fit: BoxFit.fitWidth,
                       ),
-                      const SizedBox(height: 20),
-                      Button2(
-                        title: "Tải lại",
-                        radius: 10,
-                        onTap: () {
-                          context.read<GetToken>().add(GetData());
-                        },
-                        border: Border.all(color: Colors.white, width: 1),
-                        width: 100,
-                        textColor: Colors.white,
-                        bgColor: Colors.transparent,
+                    ),
+                  );
+                }
+                if (state is LoadFail) {
+                  return Scaffold(
+                    body: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      decoration: const BoxDecoration(
+                          gradient: ColorApp.linearGradientMain),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(ImagePath.loadError),
+                          const SizedBox(height: 10),
+                          Text(
+                            state.error,
+                            style: StyleApp.textStyle500(color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 20),
+                          Button2(
+                            title: "Tải lại",
+                            radius: 10,
+                            onTap: () {
+                              context.read<GetToken>().add(GetData());
+                            },
+                            border: Border.all(color: Colors.white, width: 1),
+                            width: 100,
+                            textColor: Colors.white,
+                            bgColor: Colors.transparent,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              );
-            }
-            return ScreenHome();
-          }),
+                    ),
+                  );
+                }
+                return ScreenHome();
+              },
+            ),
+          ),
         ),
       ),
     );

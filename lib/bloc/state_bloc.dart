@@ -5,6 +5,7 @@ class Loading extends StateBloc {}
 class LoadSuccess extends StateBloc {
   String? mess;
   dynamic data;
+  dynamic dataSub;
   String? keySearch;
   String? keySearch1;
   String? keySearch2;
@@ -21,6 +22,7 @@ class LoadSuccess extends StateBloc {
 
   LoadSuccess({
     this.data,
+    this.dataSub,
     this.hasMore = false,
     this.checkLength = false,
     this.code,

@@ -91,7 +91,7 @@ class _NapTienState extends State<NapTien> {
                   context: context,
                   title: "Lỗi",
                   msg:
-                      "Vui lòng nhập số tiền nạp và ảnh xác thực giao dịch thành công từ ngân hàng",
+                      "Vui lòng nhập số Sao nạp và ảnh xác thực giao dịch thành công từ ngân hàng",
                 );
               }
             },
@@ -250,7 +250,7 @@ class _NapTienState extends State<NapTien> {
               child: Column(
                 children: const [
                   Text(
-                    'Ảnh giao dịch thàng công trên mobile , hoặc nạp tiền từ ngân hàng',
+                    'Ảnh giao dịch thàng công trên mobile , hoặc nạp Sao từ ngân hàng',
                     style: TextStyle(color: ColorApp.black, fontSize: 14),
                   ),
                 ],

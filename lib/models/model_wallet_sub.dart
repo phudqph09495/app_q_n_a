@@ -1,7 +1,7 @@
 /// id : "17"
 /// user_id : "7434"
 /// money : "0.00"
-/// note : "Chuyển tiền câu trả lời đúng cho câu hỏi #15"
+/// note : "Chuyển Sao câu trả lời đúng cho câu hỏi #15"
 /// admin_id : "1"
 /// created_at : "1659059512"
 /// wallet : "0"
