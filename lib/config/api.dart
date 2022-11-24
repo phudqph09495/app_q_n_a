@@ -80,7 +80,7 @@ class Api {
           headers: headers,
         ),
       );
-      print(res);
+    
       if(res.data['code'] == 1){
         return res.data;
       }

@@ -33,13 +33,12 @@ class BlocRegistrantion extends Bloc<EventBloc, StateBloc> {
         Map<String, dynamic> req1 = Map();
         req1['SignupForm'] = req;
         req1['supporter'] = event.role;
+
+        print(req1);
         var res = await Api.postAsync(endPoint: ApiPath.signin, req: req1);
 
         if (res['code'] == 1) {
-          ModelUser model = ModelUser.fromJson(res['data']);
-          yield LoadSuccess(
-            data: model,
-          );
+          yield LoadSuccess();
         } else {
           yield LoadFail(error: res['message'] ?? "Lỗi kết nối");
         }

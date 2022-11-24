@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:app_q_n_a/Screens/home.dart';
-import 'package:app_q_n_a/bloc/bloc/auth/bloc_get_answer.dart';
 import 'package:app_q_n_a/bloc/bloc/auth/bloc_getquestion.dart';
 import 'package:app_q_n_a/bloc/bloc/question/get_cat_bloc.dart';
 import 'package:app_q_n_a/bloc/bloc/question/get_class_bloc.dart';
 import 'package:app_q_n_a/bloc/bloc/question/get_sub_bloc.dart';
-import 'package:app_q_n_a/bloc/check_log_state.dart';
 import 'package:app_q_n_a/bloc/event_bloc.dart';
 import 'package:app_q_n_a/item/gridView/grid_view_2.dart';
 import 'package:app_q_n_a/models/model_local.dart';
@@ -14,11 +11,8 @@ import 'package:app_q_n_a/models/model_question.dart';
 import 'package:app_q_n_a/styles/init_style.dart';
 import 'package:app_q_n_a/widget/items/dia_log_item.dart';
 import 'package:flutter/material.dart';
-import 'package:app_q_n_a/item/radio_list_tile.dart';
-import 'package:app_q_n_a/item/grid_view.dart';
 import 'package:app_q_n_a/item/button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 import '../bloc/state_bloc.dart';
 bool isUser = false;
