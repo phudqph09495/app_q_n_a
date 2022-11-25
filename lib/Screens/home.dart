@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../item/question_tile.dart';
+import '../path/image_path.dart';
 import '../widget/items/item_loadmore.dart';
 import 'add_question.dart';
 
@@ -129,10 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 12,
                 ),
                 Image.asset(
-                  'images/backg2.png',
-                  height: 45,
-                  fit: BoxFit.fitHeight,
-                  alignment: Alignment.centerLeft,
+                  ImagesPath.imageLogo,
+                  width: 150,
+                  fit: BoxFit.fitWidth,
                 ),
                 const SizedBox(
                   height: 10,

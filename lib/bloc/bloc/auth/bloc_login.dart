@@ -4,6 +4,7 @@ import 'package:app_q_n_a/config/api.dart';
 import 'package:app_q_n_a/config/path/api_path.dart';
 import 'package:app_q_n_a/models/model_user.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BlocLogin extends Bloc<EventBloc, StateBloc> {
@@ -19,8 +20,14 @@ class BlocLogin extends Bloc<EventBloc, StateBloc> {
         req['password'] = event.password;
         Map<String, dynamic> req1 = Map();
         req1['LoginForm'] = req;
+        String? device_token;
+        try {
+          device_token = await FirebaseMessaging.instance.getToken();
+        } catch (e) {
+          device_token = null;
+        }
+        req1["device_id"] = device_token;
         var res = await Api.postAsync(endPoint: ApiPath.login, req: req1);
-        print(res);
         if (res['code'] == 1) {
           ModelUser model = ModelUser.fromJson(res['data']);
           yield LoadSuccess(

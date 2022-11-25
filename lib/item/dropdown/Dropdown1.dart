@@ -9,9 +9,11 @@ class DropDown2 extends StatefulWidget {
   bool filled;
   ValueChanged onChanged;
   double radius;
+  IconData? iconData;
   Color? colorBorder;
   Function(String)? validator;
   double pad;
+
   DropDown2(
       {required this.listItem,
       required this.hint,
@@ -20,7 +22,9 @@ class DropDown2 extends StatefulWidget {
       this.filled = true,
       this.radius = 10,
       this.colorBorder,
-      this.validator,this.pad=10});
+      this.iconData,
+      this.validator,
+      this.pad = 15});
 
   @override
   _DropDown2State createState() => _DropDown2State();
@@ -51,25 +55,28 @@ class _DropDown2State extends State<DropDown2> {
         ),
       ),
       decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide:
-                BorderSide(color: Colors.black.withOpacity(0.2), width: 0.5),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide: const BorderSide(color: ColorApp.orangeF2, width: 0.5),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide: const BorderSide(color: Colors.red, width: 0.5),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            borderSide: const BorderSide(color: Colors.red, width: 0.5),
-
-          ),
-          contentPadding: EdgeInsets.only(left: widget.pad,right: 10)),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.radius),
+          borderSide:
+              BorderSide(color: Colors.black.withOpacity(0.2), width: 0.5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.radius),
+          borderSide: const BorderSide(color: ColorApp.orangeF2, width: 0.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.radius),
+          borderSide: const BorderSide(color: Colors.red, width: 0.5),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.radius),
+          borderSide: const BorderSide(color: Colors.red, width: 0.5),
+        ),
+        prefixIcon: widget.iconData == null ? null : Icon(widget.iconData),
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: EdgeInsets.only(left: widget.pad, right: 15),
+      ),
       items: List.generate(
         widget.listItem.length,
         (index) => DropdownMenuItem(

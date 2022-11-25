@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toast/toast.dart';
 
+import '../path/image_path.dart';
+
 enum EnumRegistrantion { username, phone }
 
 class SignUpScreen extends StatefulWidget {
@@ -86,85 +88,95 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   int tab = 0;
+
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
-    return Scaffold(
-      backgroundColor: ColorApp.whiteF7,
-      body: SafeArea(
-        child: Stack(
+    double paddingTop = MediaQuery.of(context).padding.top;
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: ColorApp.whiteF7,
+        body: Stack(
           alignment: Alignment.topLeft,
           children: <Widget>[
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'images/backg.png',
-                        width: 222,
-                        height: 88,
-                        fit: BoxFit.fitHeight,
-                        alignment: Alignment.centerLeft,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Đăng ký',
-                        style: StyleApp.textStyle700(
-                            fontSize: 30, color: ColorApp.red),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      DefaultTabController(
-                          length: 2,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: TabBar(
-
-                                  indicatorColor: ColorApp.orangeF2,
-                                  unselectedLabelStyle:
-                                  StyleApp.textStyle500(color: ColorApp.grey82, fontSize: 16),
-                                  onTap: (val) {
-                                    tab = val;
-                                  },
-                                  labelColor: ColorApp.orangeF2,
-                                  unselectedLabelColor: ColorApp.grey82,
-                                  tabs: [
-                                    Tab(text: 'Người hỏi'),
-                                    Tab(text: 'Người trả lời'),
-                                  ],
-                                ),
-                              ),
-                              SingleChildScrollView(
-                                child: Container(
-                                    height: 1100, //height of TabBarView
-                                    decoration: const BoxDecoration(
-                                        border: Border(
-                                            top: BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.5))),
-                                    child: TabBarView(children: <Widget>[
-                                      _Nguoihoi(),
-                                      _NguoiTraloi()
-                                    ])),
-                              )
+            NestedScrollView(
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return [
+                  SliverToBoxAdapter(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(
+                          height: paddingTop + 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              ImagesPath.imageLogo,
+                              width: 222,
+                              height: 88,
+                              alignment: Alignment.center,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Đăng ký',
+                          textAlign: TextAlign.center,
+                          style: StyleApp.textStyle700(
+                              fontSize: 30, color: ColorApp.red),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            border: Border(
+                                bottom:
+                                    BorderSide(color: Colors.grey.shade100)),
+                          ),
+                          child: TabBar(
+                            indicatorColor: ColorApp.orangeF2,
+                            unselectedLabelStyle: StyleApp.textStyle500(
+                                color: ColorApp.grey82, fontSize: 16),
+                            onTap: (val) {
+                              tab = val;
+                            },
+                            labelColor: ColorApp.orangeF2,
+                            unselectedLabelColor: ColorApp.grey82,
+                            tabs: const [
+                              Tab(text: 'Người hỏi'),
+                              Tab(text: 'Người trả lời'),
                             ],
-                          ))
-                    ],
-                  ),
-                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ];
+              },
+              body: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  _Nguoihoi(),
+                  _NguoiTraloi(),
+                ],
               ),
             ),
-            IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+            Positioned(
+              top: paddingTop,
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
             ),
           ],
         ),
@@ -174,6 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   _Nguoihoi() {
     return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Form(
         key: keyFormHoi,
         child: Column(
@@ -229,9 +242,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               hasPass: false,
               radius: 10,
               width: double.infinity,
-              validator: (val) {
-                return ValidatorApp.checkEmail(text: val);
-              },
             ),
             SizedBox(
               height: 15,
@@ -302,7 +312,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   _NguoiTraloi() {
     return SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Form(
         key: keyFormTraLoi,
         child: Column(
@@ -356,9 +366,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               hasPass: false,
               radius: 10,
               width: double.infinity,
-              validator: (val) {
-                return ValidatorApp.checkEmail(text: val);
-              },
             ),
             SizedBox(
               height: 15,
@@ -445,7 +452,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return ValidatorApp.checkNull(
                           text: val, isTextFiled: true);
                     },
-                    pad: 47,
+                    iconData: Icons.location_city,
                     listItem: list,
                     hint: "Chọn tỉnh/thành phố",
                     onChanged: (val) {
@@ -472,7 +479,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return ValidatorApp.checkNull(
                           text: val, isTextFiled: true);
                     },
-                    pad: 47,
+                    iconData: Icons.location_city,
                     listItem: list,
                     hint: "Chọn quận/huyện",
                     onChanged: (val) {

@@ -42,7 +42,8 @@ class ModelUser {
       this.provinceName, 
       this.districtName, 
       this.address2,
-      this.isKyc, 
+      this.notify_subjects,
+      this.isKyc,
       this.wallet,});
 
   ModelUser.fromJson(dynamic json) {
@@ -56,6 +57,7 @@ class ModelUser {
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    notify_subjects = json['notify_subjects'];
     address = json['address'];
     provinceId = json['province_id'];
     districtId = json['district_id'];
@@ -129,6 +131,7 @@ class ModelUser {
   int? birthday;
   int? countReport;
   String? work;
+  String? notify_subjects;
   int? isSupporter;
   String? provinceName;
   String? districtName;
@@ -175,6 +178,7 @@ class ModelUser {
     map['count_question'] = countQuestion;
     map['birthday'] = birthday;
     map['count_report'] = countReport;
+    map['notify_subjects'] = notify_subjects;
     map['work'] = work;
     map['is_supporter'] = isSupporter;
     map['province_name'] = provinceName;

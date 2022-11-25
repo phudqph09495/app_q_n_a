@@ -65,6 +65,7 @@ class Api {
       headers['Content-Type'] = "application/json";
       if (isToken) {
         var token = await SharedPrefs.readString(SharePrefsKeys.user_token);
+        print(token);
         headers['token'] = token;
       }
       var user_id = await SharedPrefs.readString(SharePrefsKeys.user_id);
@@ -79,14 +80,12 @@ class Api {
           headers: headers,
         ),
       );
-
-
+    
       if(res.data['code'] == 1){
         return res.data;
       }
       if(res.data['code'] == 0){
-       // throw "Code: ${res.data['code']} => ${res.data['error']}";
-        throw res.data['error'];
+        throw res.data['error'] ?? res.data['message'];
       }
       if(res.data['code'] != 0 || res.data['code'] != 1){
         throw res.data['message'];

@@ -1,7 +1,7 @@
 class ImagesPath {
   static const defultAvatar =
       "https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg";
-  static const imageLogo = "images/logo.png";
+  static const imageLogo = "images/LOGO_DONE.png";
   static const imageCheck = "images/icon_check.png";
   static const imageUser = "images/icon_user.png";
   static const imageHuyChuong = "images/icon_huy_chuong.png";

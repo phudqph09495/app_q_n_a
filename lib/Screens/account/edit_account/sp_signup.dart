@@ -56,8 +56,6 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
       backgroundColor: ColorApp.whiteF0,
       appBar: AppBar(
         backgroundColor: ColorApp.whiteF0,
@@ -131,7 +129,7 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
                           return ValidatorApp.checkNull(
                               text: val, isTextFiled: true);
                         },
-                        pad: 47,
+                        iconData: Icons.location_city,
                         listItem: list,
                         hint: "Chọn tỉnh/thành phố",
                         onChanged: (val) {
@@ -158,7 +156,7 @@ class _SupporterSignUpState extends State<SupporterSignUp> {
                           return ValidatorApp.checkNull(
                               text: val, isTextFiled: true);
                         },
-                        pad: 47,
+                        iconData: Icons.location_city,
                         listItem: list,
                         hint: "Chọn quận/huyện",
                         onChanged: (val) {

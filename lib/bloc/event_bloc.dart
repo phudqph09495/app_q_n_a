@@ -136,20 +136,21 @@ class AddDataRegistrantion extends EventBloc {
   int? province_id;
   int? district_id;
 
-  AddDataRegistrantion(
-      { this.username,
-       this.email,
-       this.phone,
-       this.password,
-       this.register_by,
-      this.bankNumber,
-      this.bankName,
-      this.userNameBank,
-      this.work,
-      this.role,
-      this.cccd,
-      this.province_id,
-      this.district_id});
+  AddDataRegistrantion({
+    this.username,
+    this.email,
+    this.phone,
+    this.password,
+    this.register_by,
+    this.bankNumber,
+    this.bankName,
+    this.userNameBank,
+    this.work,
+    this.role,
+    this.cccd,
+    this.province_id,
+    this.district_id,
+  });
 }
 
 class loginApp extends EventBloc {
@@ -222,6 +223,7 @@ class addAnsForm extends EventBloc {
 
 class getAns extends EventBloc {
   int question_id;
+
   getAns({
     required this.question_id,
   });
@@ -303,13 +305,13 @@ class Rating extends EventBloc {
 }
 
 class RegisNotify extends EventBloc {
-  int? subject_id;
+  String subject_id;
 
-  RegisNotify({this.subject_id});
+  RegisNotify({required this.subject_id});
 }
+
 class ResetP extends EventBloc {
-String email;
+  String email;
 
   ResetP({required this.email});
 }
-

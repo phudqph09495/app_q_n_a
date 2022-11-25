@@ -26,11 +26,11 @@ class BlocAddMoney extends Bloc<EventBloc, StateBloc> {
 
         if (res['code'] == 1) {
           yield LoadSuccess(
-            data: "Tạo phiếu nạp tiền thành công",
+            data: "Tạo phiếu nạp sao thành công",
           );
         } else {
           yield LoadFail(
-              error: res['error'] ?? "Tạo phiếu nạp tiền không thành công");
+              error: res['error'] ?? "Tạo phiếu nạp Sao không thành công");
         }
       } on DioError catch (e) {
         yield LoadFail(error: e.error.error ?? "Lỗi kết nối");

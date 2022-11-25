@@ -10,6 +10,7 @@ import '../../Screens/Screens_Notification/screens_news.dart';
 import '../../bloc/event_bloc.dart';
 import '../../bloc/state_bloc.dart';
 import '../../models/model_news.dart';
+import '../../widget/notifi/notifi.dart';
 
 class ItemNotifi1 extends StatelessWidget {
   ModelNews modelNews;
@@ -24,7 +25,6 @@ class ItemNotifi1 extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         onTap: () {
-
           PageNavigator.next(context: context, page: ScreensNew(
             title: modelNews.title ?? "Thông báo",
             des: modelNews.description ?? "Đang cập nhật",

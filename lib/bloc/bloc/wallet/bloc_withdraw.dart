@@ -18,13 +18,14 @@ class BlocWithDraw extends Bloc<EventBloc, StateBloc> {
         Map<String, dynamic> req = {};
         req["money"] = event.keyword;
         var res = await Api.postAsync(endPoint: ApiPath.getPhieuTien, req: req);
+        print(res);
         if (res['code'] == 1) {
           yield LoadSuccess(
-            data: "Tạo phiếu rút tiền thành công",
+            data: "Tạo phiếu rút Sao thành công",
           );
         } else {
           yield LoadFail(
-              error: res['error'] ?? "Tạo phiếu rút tiền không thành công");
+              error: res['error'] ?? "Tạo phiếu rút Sao không thành công");
         }
       } on DioError catch (e) {
         yield LoadFail(error: e.error.error ?? "Lỗi kết nối");

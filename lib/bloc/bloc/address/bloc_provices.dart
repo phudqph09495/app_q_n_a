@@ -20,7 +20,7 @@ class BlocProvinces extends Bloc<EventBloc, StateBloc> {
           req: {},
         );
         if (res['code'] == 1) {
-          res['data'].forEach((k,v){
+          res['data'].forEach((k, v) {
             ModelLocal model = ModelLocal(
               id: k.toString(),
               name: v.toString(),
@@ -40,8 +40,7 @@ class BlocProvinces extends Bloc<EventBloc, StateBloc> {
             error: e.error.error ??
                 "Lỗi. Vui lòng liên hệ với Admin để được hỗ trợ.");
       } catch (e) {
-        yield LoadFail(
-            error: e.toString());
+        yield LoadFail(error: e.toString());
       }
     }
   }

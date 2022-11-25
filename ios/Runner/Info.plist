@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>App Q N A</string>
+	<string>Hotrohoctap</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,47 +19,59 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.58884457913-f3pg4mes4o39shgt2tn8atmmu1ntb9ej</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>The app needs camera access to scan the order's QR code</string>
+	<key>NSContactsUsageDescription</key>
+	<string>The app needs contact access permission to update shipping address information.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The app needs location permissions to find the nearest post office.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>The application needs Micro access to search for products.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>The app needs image permissions to upload profile pictures.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>io.flutter.embedded_views_preview</key>
-    <true/>
-    <key>NSCameraUsageDescription</key>
-    <string>This app needs camera access to scan QR codes</string>
-    <key>UISupportedInterfaceOrientations</key>
-    <array>
-        <string>UIInterfaceOrientationPortrait</string>
-    	<string>UIInterfaceOrientationLandscapeLeft</string>
-    	<string>UIInterfaceOrientationLandscapeRight</string>
-    </array>
-    <key>UISupportedInterfaceOrientations~ipad</key>
-    <array>
-    	<string>UIInterfaceOrientationPortrait</string>
-    	<string>UIInterfaceOrientationPortraitUpsideDown</string>
-    	<string>UIInterfaceOrientationLandscapeLeft</string>
-    	<string>UIInterfaceOrientationLandscapeRight</string>
-    </array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-    <string>The app needs camera access to scan the order's QR code</string>
-    <key>NSContactsUsageDescription</key>
-    <string>The app needs contact access permission to update shipping address information.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>The app needs location permissions to find the nearest post office.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>The application needs Micro access to search for products.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>The app needs image permissions to upload profile pictures.</string>
 </dict>
 </plist>

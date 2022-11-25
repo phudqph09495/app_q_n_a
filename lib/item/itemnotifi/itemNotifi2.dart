@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/bloc/notification/bloc_read_notifi.dart';
 import '../../bloc/event_bloc.dart';
 import '../../config/const.dart';
+import '../../widget/notifi/notifi.dart';
 
 class Notification2 extends StatefulWidget {
   ModelNotifi modelNotifi ;
@@ -28,10 +29,10 @@ class _Notification2State extends State<Notification2> {
       onTap: (){
         bloc.add(GetData(id: widget.modelNotifi.id));
         widget.modelNotifi.unread = "0";
-        PageNavigator.next(context: context, page: ScreensNew(
-          title: widget.modelNotifi.title ?? "Thông báo",
-          des: widget.modelNotifi.description ?? "Đang cập nhật",
-        ));
+        FirebaseSendNotifi.nextPage(
+          context,
+          model: widget.modelNotifi,
+        );
         setState((){});
       },
       child:  BlocListener(
@@ -43,7 +44,7 @@ class _Notification2State extends State<Notification2> {
             border: const Border(
               bottom: BorderSide(color: Colors.grey, width:0.5),
             ),
-            color: widget.modelNotifi.unread == "1" ?  ColorApp.orangeF0.withOpacity(0.2) : Colors.white
+            color: widget.modelNotifi.unread == "1" ?  ColorApp.orangeF0.withOpacity(0.05) : Colors.white
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

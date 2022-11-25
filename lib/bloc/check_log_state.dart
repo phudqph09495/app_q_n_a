@@ -39,8 +39,8 @@ class CheckLogState {
       DialogItem.showMsg(
         context: context,
         title: "Lỗi",
-        msg: state.error.contains("tiền")
-            ? state.error.replaceAll("tiền", "sao")
+        msg: state.error.contains("Sao")
+            ? state.error.replaceAll("Sao", "sao")
             : state.error,
       );
     }

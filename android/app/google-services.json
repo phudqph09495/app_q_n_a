@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "58884457913",
+    "project_id": "hoidap-e12e2",
+    "storage_bucket": "hoidap-e12e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58884457913:android:1486295dc27128d81c2268",
+        "android_client_info": {
+          "package_name": "com.app.hotrohoctap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58884457913-12q4amubjd1n302t3snir58i2ijue189.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzkJhCkqYHgLRqSY-Y1UjDa8kdBVqxEjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58884457913-12q4amubjd1n302t3snir58i2ijue189.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "58884457913-f3pg4mes4o39shgt2tn8atmmu1ntb9ej.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.hotrohoctap"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

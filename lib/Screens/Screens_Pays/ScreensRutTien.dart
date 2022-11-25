@@ -56,7 +56,7 @@ class _RutTienState extends State<RutTien> {
                 DialogItem.showMsg(
                     context: context,
                     title: "Lỗi",
-                    msg: "Vui lòng nhập sô tiền cần rút");
+                    msg: "Vui lòng nhập sô Sao cần rút");
               }
             },
           ),
