@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:58884457913:android:1486295dc27128d81c2268",
+        "mobilesdk_app_id": "1:58884457913:android:815bdba585285e671c2268",
         "android_client_info": {
-          "package_name": "com.app.hotrohoctap"
+          "package_name": "vn.com.hotrohoctap"
         }
       },
       "oauth_client": [
